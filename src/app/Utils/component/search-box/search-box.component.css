@@ -1,0 +1,16 @@
+.search-results {
+  margin-top: 10px;
+  padding: 8px;
+  background: #f5f5f5;
+  border-radius: 70px;
+  width: 300px;
+}
+.user-info {
+  flex: 1;
+}
+mat-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+

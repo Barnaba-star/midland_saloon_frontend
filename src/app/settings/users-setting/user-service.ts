@@ -1,0 +1,69 @@
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { environment } from '../../Utils/enviroments/environment';
+import { Observable } from 'rxjs/internal/Observable';
+import { PageableParam, Response, ResponseList, ResponsePage } from '../../Utils/models/responces';
+import { AssignUserRoleDTO, UserAndAttachmentDTO, UserDTO } from './user-model';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class UserService {
+    constructor(private http:HttpClient){}
+    private baseURL = environment.baseApiUrl
+    private attachmentUrl = `${this.baseURL}/attachment`
+    private branchUrl: string = `${this.baseURL}/branch`;
+    private roleURL: string = `${this.baseURL}/role`;
+    private userURL: string = `${this.baseURL}/userSetting`;
+
+
+saveProfilePic(file:FormData):Observable<Response<any>>{
+  return this.http.post<Response<any>>(`${this.attachmentUrl}/saveAttachment`, file);
+}
+
+saveUser(userDTO:UserDTO):Observable<Response<any>>{
+  return this.http.post<Response<any>>(`${this.userURL}/saveUser`, userDTO);
+}
+
+findBranchList():Observable<ResponseList<any>>{
+ return this.http.get<ResponseList<any>>(`${this.branchUrl}/findBranchList`)
+}
+
+findRoles():Observable<ResponseList<any>>{
+  return this.http.get<ResponseList<any>>(`${this.roleURL}/findRoles`)
+}
+
+findUserProfilePic(userUID:string):Observable<Response<any>>{
+  return this.http.get<Response<any>>(`${this.attachmentUrl}/findUserForProfile/${userUID}`)
+}
+
+findBranchByUID(branchUID:string):Observable<Response<any>>{
+return this.http.get<Response<any>>(`${this.branchUrl}/findBranchByUID/${branchUID}`);
+}
+
+findUserPage(params: PageableParam): Observable<ResponsePage<any>> {
+    return this.http.post<ResponsePage<any>>(`${this.userURL}/findUserPAGE`, params);
+}
+
+findUsers(params: PageableParam): Observable<ResponsePage<any>> {
+    return this.http.post<ResponsePage<any>>(`${this.userURL}/findUsers`, params);
+}
+
+deleteUser(userUID:string):Observable<Response<any>>{
+  return this.http.post<Response<any>>(`${this.userURL}/deleteUser/${userUID}`, null)
+}
+
+findRoleByBranch():Observable<ResponseList<any>> {
+  return this.http.get<ResponseList<any>>(`${this.roleURL}/findRoleByBranch`);
+}
+
+findUserByUID(userUID:string):Observable<Response<any>>{
+  return this.http.get<Response<any>>(`${this.userURL}/findUserByUID/${userUID}`)
+}
+
+assignOrUnAssignUserRole(assignUserRoleDTO:AssignUserRoleDTO):Observable<Response<any>>{
+  return this.http.post<Response<any>>(`${this.userURL}/assignOrUnAssignUserRole`, assignUserRoleDTO)
+}
+
+
+}

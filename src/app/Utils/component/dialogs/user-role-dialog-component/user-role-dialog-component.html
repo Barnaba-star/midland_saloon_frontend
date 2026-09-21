@@ -1,0 +1,64 @@
+<h2 mat-dialog-title>
+  {{ 'USER_ROLE_DIALOG.TITLE' | translate }}
+</h2>
+
+<mat-dialog-content>
+
+  <p>
+    {{ 'USER_ROLE_DIALOG.USER_LABEL' | translate }}
+    <strong>
+      {{ data.user.firstName }}
+      {{ data.user.lastName }}
+    </strong>
+  </p>
+
+  <mat-form-field
+    appearance="outline"
+    style="width: 100%;">
+
+    <mat-label>{{ 'COMMON.ROLES' | translate }}</mat-label>
+
+    <mat-select
+      [(ngModel)]="selectedRoleUIDs"
+      multiple>
+
+      <mat-option
+        *ngFor="let role of roles"
+        [value]="role.uid">
+
+        {{ role.name }}
+
+        <span *ngIf="role.code">
+          ({{ role.code }})
+        </span>
+
+      </mat-option>
+
+    </mat-select>
+
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+
+  <button
+    mat-button
+    type="button"
+    (click)="cancel()">
+
+    {{ 'COMMON.CANCEL' | translate }}
+
+  </button>
+
+  <button
+    mat-raised-button
+    color="primary"
+    type="button"
+    (click)="save()">
+
+    {{ 'COMMON.SAVE' | translate }}
+
+  </button>
+
+</mat-dialog-actions>

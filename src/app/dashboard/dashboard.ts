@@ -1,0 +1,63 @@
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { IconRegistryService } from '../Utils/services/icon-registry.service';
+import { Router, RouterModule } from '@angular/router';
+import { MatDivider } from "@angular/material/divider";
+import { TitleComponent } from "../Utils/component/title/title.component";
+import { Authentication } from '../Utils/services/authentication';
+import { TranslatePipe } from '@ngx-translate/core';
+
+@Component({
+    selector: 'app-dashboard',
+    imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, RouterModule, TranslatePipe],
+    templateUrl: './dashboard.html',
+    styleUrls: ['./dashboard.css']
+})
+export class Dashboard {
+constructor(private iconRegistry: IconRegistryService, private route:Router, private visibility:Authentication){}
+
+get fullName(): string {
+  return this.visibility.getFullName() || this.visibility.getUsername();
+}
+
+logout() {
+  this.visibility.stopHeartbeat();
+  this.visibility.removeToken();
+  this.route.navigate(['login']);
+}
+
+cards = [
+   {
+    title: 'DASHBOARD.CARD_POS_TITLE',
+    icon: 'saloon',
+    img: 'assets/icons/saloon.png',
+    description: 'DASHBOARD.CARD_POS_DESC',
+    route: '/pos/saloonSetting',
+    roles: ['ROOT', 'REG OFFICER', 'MANAGER', 'ADMIN', 'STAFF']
+  },
+  {
+    title: 'DASHBOARD.CARD_SETTING_TITLE',
+    icon: 'register',
+    img: 'assets/icons/personnel.svg',
+    description: 'DASHBOARD.CARD_SETTING_DESC',
+    route: '/settings',
+    roles: ['ROOT', 'REG OFFICER', 'ADMIN', 'STAFF']
+  },
+
+];
+
+goTo(route: string) {
+  this.route.navigate([route]);
+}
+
+get filteredCards() {
+  return this.cards.filter(card =>
+    card.roles.some(role => this.visibility.hasRole(role))
+  );
+}
+
+}

@@ -1,0 +1,319 @@
+<app-title2
+[titleHeader]="'NODE_SETTING_PAGE.TITLE'"
+[actions]=getTitled(titleActions)
+[activeAction]="selectedNode"
+(customButtonClick)="onAction($event)"
+></app-title2>
+
+@switch (selectedNode) {
+
+@case ('NODE_SETTING_PAGE.ADD_BRANCH_TAB') {
+
+  <div class="info-card12">
+
+    <!-- ADD BRANCH HEADER -->
+    <div class="branch-form-header">
+
+      <div class="branch-form-title">
+
+        <div class="branch-form-icon">
+          <mat-icon>account_tree</mat-icon>
+        </div>
+
+        <div class="branch-form-text">
+
+          <h2>
+            {{ 'NODE_SETTING_PAGE.ADD_NEW_BRANCH_TITLE' | translate }}
+          </h2>
+
+          <p>
+            {{ 'NODE_SETTING_PAGE.ADD_NEW_BRANCH_DESC' | translate }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="branch-form-badge">
+
+        <mat-icon>add_business</mat-icon>
+
+        <span>
+          {{ 'NODE_SETTING_PAGE.NEW_BRANCH_BADGE' | translate }}
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <!-- FORM -->
+    <div class="branch-form-content">
+<app-form3
+  [fields]="nodeFormField"
+  [formTitle]="formTitle"
+  (submitForm)="onSubmit($event)"
+></app-form3>
+
+
+    </div>
+
+  </div>
+
+}
+
+@case ('NODE_SETTING_PAGE.MANAGE_BRANCH_TAB' ) {
+<div class="info-card12">
+
+  <!-- HEADER -->
+  <div class="table-header">
+
+  <div class="branch-title">
+
+  <h2>
+    {{ 'NODE_SETTING_PAGE.BRANCH_HEADING' | translate }}
+    <span class="branch-count-circle">
+      {{ branch.length }}
+    </span>
+    {{ 'NODE_SETTING_PAGE.REGISTERED_SUFFIX' | translate }}
+  </h2>
+
+</div>
+
+
+    <div class="branch-count">
+      <mat-icon>account_tree</mat-icon>
+      <span>{{ branch.length }}</span>
+    </div>
+
+  </div>
+
+
+  <!-- TABLE -->
+  <div class="branch-table-wrapper">
+
+    <table class="branch-table">
+
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_BRANCH' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_CODE' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_CATEGORY' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_REGION' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_PHONE' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_STATUS' | translate }}</th>
+          <th>{{ 'NODE_SETTING_PAGE.COL_ACTIONS' | translate }}</th>
+        </tr>
+      </thead>
+
+
+      <tbody>
+
+        <tr
+          *ngFor="let item of branch; let i = index"
+        >
+
+          <!-- NUMBER -->
+          <td>
+            <span class="row-number">
+              {{ i + 1 }}
+            </span>
+          </td>
+
+
+          <!-- BRANCH -->
+          <td>
+
+            <div class="branch-info">
+
+              <div class="branch-icon">
+                <mat-icon>business</mat-icon>
+              </div>
+
+              <div class="branch-details">
+
+                <strong>
+                  {{ item.branchName| uppercase }}
+                </strong>
+
+                <span>
+                  {{ item.address || ('NODE_SETTING_PAGE.NO_ADDRESS' | translate) | lowercase }}
+                </span>
+
+              </div>
+
+            </div>
+
+          </td>
+
+
+          <!-- CODE -->
+          <td>
+
+            <span class="branch-code">
+              {{ item.branchCode | uppercase}}
+            </span>
+
+          </td>
+
+
+          <!-- CATEGORY -->
+          <td>
+
+            <span class="category-badge">
+              {{ item.branchCategory | uppercase}}
+            </span>
+
+          </td>
+
+          <!-- REGION -->
+          <td>
+
+            <div class="region-cell">
+
+              <mat-icon>location_on</mat-icon>
+
+              <span>
+                {{ item.region | uppercase}}
+              </span>
+
+            </div>
+
+          </td>
+
+
+          <!-- PHONE -->
+          <td>
+
+            <div class="phone-cell">
+
+              <mat-icon>phone</mat-icon>
+
+              <span>
+                {{ item.phone || ('COMMON.NA' | translate) }}
+              </span>
+
+            </div>
+
+          </td>
+
+
+          <!-- STATUS -->
+          <td>
+
+            <span
+              class="status-badge"
+              [class.active]="item.status === 'Active'"
+              [class.inactive]="item.status !== 'Active'"
+            >
+
+              <span class="status-dot"></span>
+
+              {{ item.status | uppercase}}
+
+            </span>
+
+          </td>
+
+<!-- ACTIONS -->
+<td class="action-column">
+  <div class="action-buttons">
+
+    <!-- EDIT -->
+    <button
+      type="button"
+      class="action-btn edit-btn"
+      [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_EDIT' | translate"
+      (click)="editItem(item)"
+    >
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <!-- DELETE -->
+    <button
+      type="button"
+      class="action-btn delete-btn"
+      [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_DELETE' | translate"
+      (click)="deleteItem(item)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+
+    <!-- MORE -->
+    <button
+      type="button"
+      class="action-btn more-btn"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_MORE' | translate"
+      (click)="moreActions(item)"
+    >
+      <mat-icon>more_vert</mat-icon>
+    </button>
+
+  </div>
+</td>
+
+
+
+        </tr>
+
+
+        <!-- EMPTY -->
+        <tr *ngIf="branch.length === 0">
+
+          <td
+            colspan="8"
+            class="empty-row"
+          >
+
+            <mat-icon>
+              business
+            </mat-icon>
+
+            <strong>
+              {{ 'NODE_SETTING_PAGE.EMPTY_TITLE' | translate }}
+            </strong>
+
+            <span>
+              {{ 'NODE_SETTING_PAGE.EMPTY_TEXT' | translate }}
+            </span>
+
+          </td>
+
+        </tr>
+
+      </tbody>
+
+    </table>
+    <div class="branch-pagination">
+
+  <div class="pagination-info">
+    {{ 'NODE_SETTING_PAGE.SHOWING_LABEL' | translate }}
+    <strong>{{ branch.length }}</strong>
+    {{ 'NODE_SETTING_PAGE.BRANCHES_LABEL' | translate }}
+  </div>
+
+  <mat-paginator
+    [length]="totalBranches"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="[5, 10, 20, 50]"
+    (page)="onBranchPageChange($event)"
+    showFirstLastButtons>
+  </mat-paginator>
+
+</div>
+
+
+  </div>
+
+</div>
+
+
+  }
+
+
+}

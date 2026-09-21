@@ -1,0 +1,70 @@
+<app-title2
+[titleHeader]="'CONFIGURATION_PAGE.TITLE'"
+[actions]=getTitled(titleActions)
+[activeAction]="selectedConfiguration"
+(customButtonClick)="onAction($event)"
+ ></app-title2>
+
+@switch (selectedConfiguration) {
+
+@case ('CONFIGURATION_PAGE.EMAIL') {
+      <div class="action-container">
+      <mat-icon class="empty-icon bounce">email</mat-icon>
+      <h3>{{ 'CONFIGURATION_PAGE.EMAIL_EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'CONFIGURATION_PAGE.EMAIL_EMPTY_TEXT' | translate }}</p>
+</div>
+}
+
+@case ('CONFIGURATION_PAGE.SMS') {
+      <div class="action-container">
+      <mat-icon class="empty-icon bounce">sms</mat-icon>
+      <h3>{{ 'CONFIGURATION_PAGE.SMS_EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'CONFIGURATION_PAGE.SMS_EMPTY_TEXT' | translate }}</p>
+</div>
+}
+
+@case ('CONFIGURATION_PAGE.NOTIFICATION') {
+      <div class="action-container">
+      <mat-icon class="empty-icon bounce">notifications</mat-icon>
+      <h3>{{ 'CONFIGURATION_PAGE.NOTIFICATION_EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'CONFIGURATION_PAGE.NOTIFICATION_EMPTY_TEXT' | translate }}</p>
+</div>
+}
+
+@case ('CONFIGURATION_PAGE.AUDIT_LOGS') {
+      <div class="action-container">
+      <mat-icon class="empty-icon bounce">fact_check</mat-icon>
+      <h3>{{ 'CONFIGURATION_PAGE.AUDIT_EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'CONFIGURATION_PAGE.AUDIT_EMPTY_TEXT' | translate }}</p>
+</div>
+}
+
+@default {
+<div class="configuration-card">
+
+  <div class="configuration-row header">
+    <h2>{{ 'CONFIGURATION_PAGE.MGMT_TITLE' | translate }}</h2>
+  </div>
+
+  <div class="configuration-row">
+    <strong>{{ 'COMMON.PURPOSE' | translate }}</strong>
+    <p>
+      {{ 'CONFIGURATION_PAGE.PURPOSE_TEXT' | translate }}
+    </p>
+  </div>
+
+  <div class="configuration-row">
+    <strong>{{ 'COMMON.WHAT_YOU_CAN_DO' | translate }}</strong>
+    <p [innerHTML]="'CONFIGURATION_PAGE.WHAT_YOU_CAN_DO_LIST' | translate"></p>
+  </div>
+
+  <div class="configuration-row">
+    <strong>{{ 'COMMON.NOTE' | translate }}</strong>
+    <p>
+      {{ 'CONFIGURATION_PAGE.NOTE_TEXT' | translate }}
+    </p>
+  </div>
+
+</div>
+}
+}
