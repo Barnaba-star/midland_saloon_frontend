@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, TitleComponent } from '../../Utils/component/title/title.component';
 import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,7 +12,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
-import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 import { MatCardModule } from '@angular/material/card';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormField } from '../../Utils/models/form-field';
@@ -33,10 +33,11 @@ import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delet
 import { UserProfileDialogComponent } from '../../Utils/component/dialogs/user-profile-dialog-component/user-profile-dialog-component';
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
 import { AlertService } from '../../Utils/services/alert';
-import { DialogComponent } from '../../Utils/component/dialog/dialog';
+import { SelectStaffDialogComponent } from '../../Utils/component/dialogs/select-staff-dialog-component/select-staff-dialog-component';
 import { Service } from '../service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
 
 @Component({
   selector: 'app-users-setting',
@@ -58,9 +59,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     Title2,
     TranslatePipe,
     MatTooltipModule,
+    SearchBoxComponent,
   ],
   templateUrl: './users-setting.html',
   styleUrls: ['./users-setting.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UsersSetting implements OnInit {
   @ViewChild('branchFormComponent') branchFormComponent!: FormTWO;
@@ -92,9 +95,9 @@ export class UsersSetting implements OnInit {
 
   selectedUser = '';
   titleActions = [
-    { icon: 'manage', title: 'USERS_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'REG OFFICER'] },
+    { icon: 'manage', title: 'USERS_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER'] },
 
-    { icon: 'manage', title: 'USERS_SETTING_PAGE.ONLINE_TAB', roles: ['ROOT', 'REG OFFICER'] }
+    { icon: 'manage', title: 'USERS_SETTING_PAGE.ONLINE_TAB', roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER'] }
   ];
 
   onAction(action: string) {
@@ -114,57 +117,46 @@ export class UsersSetting implements OnInit {
   personalProfile: Boolean = false;
 addUser(): void {
 
-  this.personnelDetails = false;
-  this.personalProfile = true;
-
-  this.translate.get('USERS_SETTING_PAGE.FORM_TITLE_REGISTER').subscribe(formTitle => {
-    this.openAddUserDialog(formTitle);
+  const dialogRef = this.dialog.open(SelectStaffDialogComponent, {
+    width: '560px',
+    maxWidth: '95vw',
   });
-}
 
-private openAddUserDialog(formTitle: string): void {
+  dialogRef.afterClosed().subscribe((staff) => {
 
-  const dialogREF = this.dialog.open(DialogComponent, {
-    width: '1200px',
-    data: {
-      fields: this.userParticularFields,
-      formTitle
+    if (!staff) {
+      return;
     }
-  });
-
- dialogREF.afterClosed().subscribe(result => {
-  if (result) {
-    console.log('DIALOG RESULT:', result);
 
     const userDTO: UserDTO = {
-      firstName: result.firstName,
-      middleName: result.middleName,
-      lastName: result.lastName,
-      email: result.email,
-      phone: result.phone,
-      dob: result.dob,
-      branch: result.branch,
-      gender: result.gender,
-      address:result.address
+      firstName: staff.firstName,
+      middleName: staff.middleName,
+      lastName: staff.lastName,
+      gender: staff.gender,
+      dob: staff.dateOfBirth,
+      phone: staff.phoneNumber,
+      email: staff.email,
+      address: staff.address,
+      branch: this.visibility.getBranchUID(),
     };
 
     this.userService.saveUser(userDTO).subscribe({
       next: (res) => {
         if (res.data) {
           this.alert.show('success', 'User Added');
-          this.user = [res.data, ...this.user];
+          this.pageIndex = 0;
           this.findUsers();
-          this.cdr.detectChanges();
+        } else {
+          this.alert.show('error', res.message || 'Failed to add user');
         }
+        this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error saving user:', err);
-        this.alert.show('error', 'Failed to add user');
+        this.alert.show('error', err?.error?.message || 'Failed to add user');
       }
     });
-  }
-});
-
+  });
 }
 
   getTitled(title: TitleAction[]): TitleAction[] {
@@ -304,6 +296,7 @@ private openAddUserDialog(formTitle: string): void {
         if (roleField) {
           roleField.options = optionsForRole;
         }
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.log('Roles Found', error);
@@ -323,6 +316,7 @@ private openAddUserDialog(formTitle: string): void {
         if (branchField) {
           branchField.options = optionsForBranch;
         }
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.log('Roles Found', error);
@@ -342,11 +336,18 @@ private openAddUserDialog(formTitle: string): void {
   };
 
 users: any[] = [];
+
+pageIndex = 0;
+pageSize = 5;
+totalElements = 0;
+searchTerm = '';
+
 findUsers(): void {
 
   const params: PageableParam = {
-    page: 0,
-    size: 100,
+    searchParam: this.searchTerm,
+    page: this.pageIndex,
+    size: this.pageSize,
     sortBy: 'createdAt',
     direction: 'DESC',
   };
@@ -356,8 +357,9 @@ findUsers(): void {
     next: (res) => {
 
       this.users = res?.data ?? [];
+      this.totalElements = res?.totalElements ?? 0;
 
-      console.log('Users Found:', this.users);
+      console.log('Users Found:', this.users, 'Total:', this.totalElements);
 
       this.cdr.detectChanges();
     },
@@ -367,11 +369,32 @@ findUsers(): void {
       console.error('Error Found:', error);
 
       this.users = [];
+      this.totalElements = 0;
 
       this.cdr.detectChanges();
     },
 
   });
+}
+
+onPageChange(event: PageEvent): void {
+
+  this.pageIndex = event.pageIndex;
+  this.pageSize = event.pageSize;
+
+  this.findUsers();
+}
+
+/*
+ * Matokeo mapya yana kurasa zake - kubaki page ya zamani kunaweza
+ * kuonyesha ukurasa tupu, kwa hiyo tunarudi mwanzo kila utafutaji.
+ */
+onSearch(term: string): void {
+
+  this.searchTerm = term;
+  this.pageIndex = 0;
+
+  this.findUsers();
 }
 
 
@@ -420,7 +443,14 @@ const dialogRef = this.dialog.open(
         console.log('User Deleted:', res);
         this.alert.show('success', 'User Deleted')
 
+        // ukifuta mtu wa mwisho kwenye ukurasa, rudi ukurasa uliopita
+        if (this.users.length === 1 && this.pageIndex > 0) {
+          this.pageIndex--;
+        }
+
         this.findUsers();
+
+        this.cdr.markForCheck();
 
       },
 
@@ -517,12 +547,16 @@ moreUser(user: any): void {
 
           this.openRoleDialog(user);
 
+          this.cdr.markForCheck();
+
         },
 
         error: (error) => {
           console.error('USER ROLE ERROR:', error);
         }
       });
+
+      this.cdr.markForCheck();
     },
 
     error: (error) => {
@@ -591,6 +625,7 @@ findOnlineUsers() {
     error: (error) => {
       console.error('Error Occurred:', error);
       this.onlineUsers = [];
+      this.cdr.markForCheck();
     }
   });
 }

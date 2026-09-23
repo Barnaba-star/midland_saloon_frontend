@@ -393,6 +393,60 @@ app-form{
 
 
 /* =====================================================
+   HEADER ACTIONS (Add Branch + count)
+===================================================== */
+
+.table-header-actions {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* app-search-box ni inline kwa default - bila hili haipati upana wowote. */
+.table-header-actions app-search-box {
+  display: block;
+  width: 260px;
+}
+
+.add-branch-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  height: 40px;
+
+  padding: 0 16px;
+
+  gap: 8px;
+
+  border: 1px solid #cddcff;
+  border-radius: 10px;
+
+  background: #eef2ff;
+  color: #1d4ed8;
+
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.add-branch-btn:hover {
+  background: #e0e7ff;
+}
+
+.add-branch-btn mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+
+/* =====================================================
    COUNT BADGE
 ===================================================== */
 
@@ -1271,6 +1325,34 @@ app-form{
 .delete-btn:hover {
   background: #fef2f2;
   border-color: #fecaca;
+}
+
+/* SUBSCRIPTION */
+.subscription-btn {
+  color: #16a34a;
+}
+
+.subscription-btn:hover {
+  background: #f0fdf4;
+  border-color: #bbf7d0;
+}
+
+.add-user-btn {
+  color: #2563eb;
+}
+
+.add-user-btn:hover {
+  background: #eff6ff;
+  border-color: #bfdbfe;
+}
+
+.assign-role-btn {
+  color: #7c3aed;
+}
+
+.assign-role-btn:hover {
+  background: #f5f3ff;
+  border-color: #ddd6fe;
 }
 
 /* MORE */

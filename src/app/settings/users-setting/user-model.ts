@@ -21,7 +21,7 @@ export interface UserDTO {
   lastName?: string;
   middleName?:string;
   email?: string;
-  phone?: number;
+  phone?: number | string;
   gender?: string;
   dob?: Date | string;
   address?: string;

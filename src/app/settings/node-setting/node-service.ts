@@ -18,6 +18,10 @@ saveBranch(branchDTO: BranchDTO):Observable<Response<any>>{
 return this.http.post<Response<any>>(`${this.baseUrl}/saveBranch`, branchDTO);
 }
 
+saveBranchSubscription(branchDTO: BranchDTO):Observable<Response<any>>{
+return this.http.post<Response<any>>(`${this.api}/setting/saveBranchSubscription`, branchDTO);
+}
+
 findBranchByUID(branchUID:string):Observable<Response<any>>{
  return this.http.get<Response<any>>(`${this.baseUrl}/findBranchByUID/${branchUID}`)
 }

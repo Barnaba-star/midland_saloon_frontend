@@ -7,62 +7,6 @@
 
 @switch (selectedNode) {
 
-@case ('NODE_SETTING_PAGE.ADD_BRANCH_TAB') {
-
-  <div class="info-card12">
-
-    <!-- ADD BRANCH HEADER -->
-    <div class="branch-form-header">
-
-      <div class="branch-form-title">
-
-        <div class="branch-form-icon">
-          <mat-icon>account_tree</mat-icon>
-        </div>
-
-        <div class="branch-form-text">
-
-          <h2>
-            {{ 'NODE_SETTING_PAGE.ADD_NEW_BRANCH_TITLE' | translate }}
-          </h2>
-
-          <p>
-            {{ 'NODE_SETTING_PAGE.ADD_NEW_BRANCH_DESC' | translate }}
-          </p>
-
-        </div>
-
-      </div>
-
-
-      <div class="branch-form-badge">
-
-        <mat-icon>add_business</mat-icon>
-
-        <span>
-          {{ 'NODE_SETTING_PAGE.NEW_BRANCH_BADGE' | translate }}
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <!-- FORM -->
-    <div class="branch-form-content">
-<app-form3
-  [fields]="nodeFormField"
-  [formTitle]="formTitle"
-  (submitForm)="onSubmit($event)"
-></app-form3>
-
-
-    </div>
-
-  </div>
-
-}
-
 @case ('NODE_SETTING_PAGE.MANAGE_BRANCH_TAB' ) {
 <div class="info-card12">
 
@@ -81,11 +25,31 @@
 
 </div>
 
+  <div class="table-header-actions">
+
+    <!-- SEARCH -->
+    <app-search-box
+      (searchChange)="onSearch($event)"
+      [placeholder]="'NODE_SETTING_PAGE.SEARCH_PLACEHOLDER'"
+    ></app-search-box>
+
+    <!-- ADD BRANCH -->
+    <button
+      type="button"
+      class="add-branch-btn"
+      [title]="'NODE_SETTING_PAGE.TOOLTIP_ADD_BRANCH' | translate"
+      (click)="openAddBranchDialog()"
+    >
+      <mat-icon>add</mat-icon>
+      <span>{{ 'NODE_SETTING_PAGE.FORM_TITLE_REGISTER' | translate }}</span>
+    </button>
 
     <div class="branch-count">
       <mat-icon>account_tree</mat-icon>
       <span>{{ branch.length }}</span>
     </div>
+
+  </div>
 
   </div>
 
@@ -241,6 +205,36 @@
       (click)="deleteItem(item)"
     >
       <mat-icon>delete</mat-icon>
+    </button>
+
+    <!-- SUBSCRIPTION -->
+    <button
+      type="button"
+      class="action-btn subscription-btn"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_SUBSCRIPTION' | translate"
+      (click)="openSubscriptionDialog(item)"
+    >
+      <mat-icon>payments</mat-icon>
+    </button>
+
+    <!-- ADD USER -->
+    <button
+      type="button"
+      class="action-btn add-user-btn"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_ADD_USER' | translate"
+      (click)="addUserToBranch(item)"
+    >
+      <mat-icon>person_add</mat-icon>
+    </button>
+
+    <!-- ASSIGN ROLE -->
+    <button
+      type="button"
+      class="action-btn assign-role-btn"
+      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_ASSIGN_ROLE' | translate"
+      (click)="assignRoleToBranchUser(item)"
+    >
+      <mat-icon>admin_panel_settings</mat-icon>
     </button>
 
     <!-- MORE -->

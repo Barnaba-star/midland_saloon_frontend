@@ -9,6 +9,12 @@ address?: string;
 phone?: string;
 status?: string;
 description?: string;
+openSubscription?: string;
+closeSubscription?: string;
+subscriptionAmount?: number;
+subscriptionDays?: number;
+subscriptionStatus?: string;
+subscriptionPhoneNumber?: string;
 }
 export interface BranchDTO{
 uid?:string;
@@ -21,4 +27,10 @@ address?: string;
 phone?: string;
 status?: string;
 description?: string;
+openSubscription?: string;
+closeSubscription?: string;
+subscriptionAmount?: number;
+subscriptionDays?: number;
+subscriptionStatus?: string;
+subscriptionPhoneNumber?: string;
 }

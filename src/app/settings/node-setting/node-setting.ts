@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction } from "../../Utils/component/title/title.component";
 import { FormField } from '../../Utils/models/form-field';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,35 +22,27 @@ import { MatStepper } from '@angular/material/stepper';
 import { Title2 } from "../../Utils/component/title2/title2";
 import { CommonModule } from '@angular/common';
 import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Form3 } from '../../Utils/component/form3/form3';
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
 import { error } from 'console';
 import { ConfirmDeleteDialogComponent } from '../../Utils/component/dialogs/confirm-delete-dialog-component/confirm-delete-dialog-component';
 import { UserViewDialogComponent } from '../../Utils/component/dialogs/user-view-dialog-component/user-view-dialog-component';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { UserService } from '../users-setting/user-service';
+import { AssignUserRoleDTO, UserDTO } from '../users-setting/user-model';
+import { SelectUserDialogComponent } from '../../Utils/component/dialogs/select-user-dialog-component/select-user-dialog-component';
+import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
+import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
 
 @Component({
   selector: 'app-node-setting',
-  imports: [MatIconModule,  MatStepperModule,  MatCardModule, Title2, CommonModule, MatPaginator, Form3, TranslatePipe, MatTooltipModule],
+  imports: [MatIconModule,  MatStepperModule,  MatCardModule, Title2, CommonModule, MatPaginator, TranslatePipe, MatTooltipModule, SearchBoxComponent],
   templateUrl: './node-setting.html',
   styleUrl: './node-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NodeSetting implements OnInit{
-constructor(private dialog:MatDialog, private visibility:Authentication, private nodeService:NodeService, private alertService:AlertService, private cdr: ChangeDetectorRef, private translate: TranslateService) {
-
-  // .get() waits for the translation file to finish loading, unlike
-  // .instant() which returns the raw key if called too early (e.g.
-  // right after a hard refresh, before en.json/sw.json has loaded).
-  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_REGISTER').subscribe(text => {
-    this.formTitle = text;
-    this.cdr.markForCheck();
-  });
-
-  this.translate.onLangChange.subscribe(() => {
-    this.formTitle = this.translate.instant('NODE_SETTING_PAGE.FORM_TITLE_REGISTER');
-    this.cdr.markForCheck();
-  });
+constructor(private dialog:MatDialog, private visibility:Authentication, private nodeService:NodeService, private alertService:AlertService, private cdr: ChangeDetectorRef, private translate: TranslateService, private userService: UserService) {
 }
 
 @ViewChild('stepper')
@@ -69,8 +61,7 @@ this.loadBranches();
 
 selectedNode = '';
 titleActions = [
-    { icon: 'add', title: 'NODE_SETTING_PAGE.ADD_BRANCH_TAB', roles: ['ROOT'] },
-    { icon: 'more', title: 'NODE_SETTING_PAGE.MANAGE_BRANCH_TAB', roles: ['ROOT', 'REG OFFICER'] }
+    { icon: 'more', title: 'NODE_SETTING_PAGE.MANAGE_BRANCH_TAB', roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER'] }
 ];
 onAction(action: string) {
     this.selectedNode = action;
@@ -82,6 +73,171 @@ onAction(action: string) {
 getTitled(title:TitleAction[]):TitleAction[]{
 return this.visibility.filteredTitleActions(title);
 }
+//*************************************** ADD USER TO A BRANCH******************************************************/
+// Same user fields as Settings > Users, minus the branch picker - the
+// branch is whichever row the button was clicked on.
+userFormField: FormField[] = [
+  { name: 'firstName', type: 'text', placeholder: 'Enter first name', required: true },
+  { name: 'middleName', type: 'text', placeholder: 'Enter middle name', required: true },
+  { name: 'lastName', type: 'text', placeholder: 'Enter last name', required: true },
+  {
+    name: 'gender',
+    type: 'select',
+    placeholder: 'Gender',
+    required: true,
+    options: [
+      { label: 'Male', value: 'Male' },
+      { label: 'Female', value: 'Female' },
+    ],
+  },
+  { name: 'dob', type: 'date', placeholder: 'DOB', required: true },
+  { name: 'email', type: 'text', placeholder: 'Enter email address', required: true },
+  { name: 'address', type: 'text', placeholder: 'Enter  address', required: true },
+  { name: 'phone', type: 'number', placeholder: 'Enter phone number', required: true },
+];
+
+addUserToBranch(item: any): void {
+
+  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_ADD_USER', { branch: item?.branchName ?? '' })
+    .subscribe(formTitle => {
+
+      const dialogRef = this.dialog.open(DialogComponent, {
+        width: '1200px',
+        data: {
+          fields: this.userFormField,
+          formTitle,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (!result) {
+          return;
+        }
+
+        const userDTO: UserDTO = {
+          firstName: result.firstName,
+          middleName: result.middleName,
+          lastName: result.lastName,
+          email: result.email,
+          phone: result.phone,
+          dob: result.dob,
+          gender: result.gender,
+          address: result.address,
+          branch: item.uid,
+        };
+
+        this.userService.saveUser(userDTO).subscribe({
+          next: (res) => {
+            if (res.data) {
+              this.alertService.show('success', 'User Added');
+            } else {
+              this.alertService.show('error', res.message || 'Failed to add user');
+            }
+          },
+          error: (err) => {
+            console.error('Error saving user:', err);
+            this.alertService.show('error', err?.error?.message || 'Failed to add user');
+          },
+        });
+      });
+    });
+}
+
+//*************************************** ASSIGN ROLE TO A BRANCH USER******************************************************/
+// Pick one of this branch's users, then pick the roles they should hold.
+// findAllUsersWithBranchAndRoles already returns each user's current
+// roles, so those come back pre-ticked.
+assignRoleToBranchUser(item: any): void {
+
+  this.nodeService.findAllUsersWithBranchAndRoles(item.uid).subscribe({
+
+    next: (res) => {
+
+      const users = res.data || [];
+
+      if (users.length === 0) {
+        this.alertService.show('error', 'No users in this branch');
+        return;
+      }
+
+      const selectRef = this.dialog.open(SelectUserDialogComponent, {
+        width: '460px',
+        maxWidth: '95vw',
+        data: {
+          users,
+          subtitle: item?.branchName,
+        },
+      });
+
+      selectRef.afterClosed().subscribe((user) => {
+        if (user) {
+          this.openRoleDialog(user);
+        }
+      });
+    },
+
+    error: (error) => {
+      console.error('Error fetching branch users:', error);
+      this.alertService.show('error', 'Error when Fetching Users');
+    },
+  });
+}
+
+private openRoleDialog(user: any): void {
+
+  this.userService.findRoles().subscribe({
+
+    next: (roleRes) => {
+
+      const roles = roleRes.data || [];
+      const selectedRoleUIDs = (user.roles || []).map((role: any) => role.uid);
+
+      const dialogRef = this.dialog.open(UserRoleDialogComponent, {
+        width: '500px',
+        maxWidth: '95vw',
+        autoFocus: false,
+        data: {
+          user,
+          roles,
+          selectedRoleUIDs,
+        },
+      });
+
+      dialogRef.afterClosed().subscribe(result => {
+
+        if (!result) {
+          return;
+        }
+
+        const assignUserRoleDTO: AssignUserRoleDTO = {
+          userUID: result.userUID,
+          roleUIDS: result.roleUIDs,
+        };
+
+        this.userService.assignOrUnAssignUserRole(assignUserRoleDTO).subscribe({
+          next: (res) => {
+            if (res.data) {
+              this.alertService.show('success', 'Role Assigned');
+            } else {
+              this.alertService.show('error', res.message || 'Failed to assign role');
+            }
+          },
+          error: (err) => {
+            console.error('Error assigning role:', err);
+            this.alertService.show('error', err?.error?.message || 'Failed to assign role');
+          },
+        });
+      });
+    },
+
+    error: (error) => {
+      console.error('Error fetching roles:', error);
+      this.alertService.show('error', 'Error when Fetching Roles');
+    },
+  });
+}
+
 //*************************************** ADD NEW NODE LIST******************************************************/
 nodeFormField: FormField[] = [
 {
@@ -168,7 +324,6 @@ branchDetailForm !: FormGroup;
 
 
 andBranch:Boolean=false;
-formTitle = '';
 
 onSubmit(event: any): void {
   console.log('Payload:', event);
@@ -182,6 +337,26 @@ onSubmit(event: any): void {
     status:event.status
   }
   this.saveBranch(branchDTO);
+}
+
+openAddBranchDialog(): void {
+
+  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_REGISTER').subscribe(formTitle => {
+
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '1200px',
+      data: {
+        fields: this.nodeFormField,
+        formTitle,
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.onSubmit(result);
+      }
+    });
+  });
 }
 
 
@@ -258,11 +433,12 @@ branch: Branch[] = [];
 pageIndex = 0;
 pageSize = 10;
 totalBranches = 0;
+searchTerm = '';
 loadBranches(): void {
 
   const params: PageableParam = {
 
-    searchParam: 'Barnaba',
+    searchParam: this.searchTerm,
 
     page: this.pageIndex,
 
@@ -304,6 +480,19 @@ onBranchPageChange(event: PageEvent): void {
   this.pageIndex = event.pageIndex;
 
   this.pageSize = event.pageSize;
+
+  this.loadBranches();
+}
+
+/*
+ * Matokeo mapya yana kurasa zake - kubaki page ya zamani kunaweza
+ * kuonyesha ukurasa tupu, kwa hiyo tunarudi mwanzo kila utafutaji.
+ */
+onSearch(term: string): void {
+
+  this.searchTerm = term;
+
+  this.pageIndex = 0;
 
   this.loadBranches();
 }
@@ -407,6 +596,83 @@ private openEditDialog(item: any, formTitle: string): void {
   });
 }
 
+
+subscriptionFormField: FormField[] = [
+  {
+    name: 'subscriptionAmount',
+    label: 'Subscription Amount (per month)',
+    placeholder: 'e.g. 50000',
+    type: 'number',
+    required: true,
+    min: 0
+  },
+  {
+    name: 'closeSubscription',
+    label: 'Subscription End Date',
+    type: 'date',
+    required: true
+  }
+];
+
+openSubscriptionDialog(item: any): void {
+
+  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_SUBSCRIPTION').subscribe(formTitle => {
+
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '600px',
+      data: {
+        fields: this.subscriptionFormField,
+        formTitle,
+        formData: {
+          subscriptionAmount: item.subscriptionAmount,
+          closeSubscription: item.closeSubscription
+        },
+        uid: item.uid
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result) {
+
+        const branchDTO: BranchDTO = {
+          uid: item.uid,
+          subscriptionAmount: result.subscriptionAmount,
+          closeSubscription: result.closeSubscription
+        };
+
+        this.nodeService.saveBranchSubscription(branchDTO).subscribe({
+
+          next: (res) => {
+
+            if (res.data) {
+
+              const index = this.branch.findIndex(b => b.uid === res.data.uid);
+
+              if (index !== -1) {
+                this.branch[index] = res.data;
+                this.cdr.detectChanges();
+              }
+
+              this.alertService.show('success', 'Branch Subscription Saved');
+
+            } else {
+              this.alertService.show('error', res.message || 'Error when Saving Branch Subscription');
+            }
+          },
+
+          error: () => {
+            this.alertService.show('error', 'Error when Saving Branch Subscription');
+          }
+
+        });
+
+      }
+
+    });
+
+  });
+}
 
 moreActions(item: any): void {
 

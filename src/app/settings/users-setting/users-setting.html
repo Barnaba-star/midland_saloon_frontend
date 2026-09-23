@@ -134,12 +134,19 @@
       <p>{{ 'USERS_SETTING_PAGE.SYSTEM_USERS_SUBTITLE' | translate }}</p>
     </div>
 
+ <div class="users-header-actions">
+
+  <app-search-box
+    (searchChange)="onSearch($event)"
+    [placeholder]="'USERS_SETTING_PAGE.SEARCH_PLACEHOLDER'"
+  ></app-search-box>
+
  <div class="users-count">
 
   <mat-icon>people</mat-icon>
 
   <span>
-    {{ users.length }} {{ 'USERS_SETTING_PAGE.USERS_SUFFIX' | translate }}
+    {{ totalElements }} {{ 'USERS_SETTING_PAGE.USERS_SUFFIX' | translate }}
   </span>
 
   <button
@@ -151,6 +158,8 @@
     <mat-icon>add</mat-icon>
     <span>{{ 'USERS_SETTING_PAGE.ADD_USER_BTN' | translate }}</span>
   </button>
+
+</div>
 
 </div>
 
@@ -183,7 +192,7 @@
 
           <!-- NUMBER -->
           <td class="index">
-            {{ i + 1 }}
+            {{ pageIndex * pageSize + i + 1 }}
           </td>
 
 
@@ -339,14 +348,19 @@
           <td>
 
             <div class="action-buttons">
-                <button
+
+              <!-- ASSIGN ROLE -->
+              <button
                 type="button"
-                class="action-button view-button"
+                class="action-button role-button"
                 [matTooltip]="'USERS_SETTING_PAGE.TOOLTIP_ASSIGN_ROLE' | translate"
                 (click)="moreUser(user)"
               >
-                <mat-icon>more</mat-icon>
+                <mat-icon>badge</mat-icon>
+                <span>{{ 'USERS_SETTING_PAGE.BTN_ASSIGN_ROLE' | translate }}</span>
               </button>
+
+
               <!-- VIEW -->
               <button
                 type="button"
@@ -355,6 +369,7 @@
                 (click)="profileClick(user)"
               >
                 <mat-icon>visibility</mat-icon>
+                <span>{{ 'USERS_SETTING_PAGE.BTN_VIEW_USER' | translate }}</span>
               </button>
 
 
@@ -366,6 +381,7 @@
                 (click)="deleteUser(user)"
               >
                 <mat-icon>delete_outline</mat-icon>
+                <span>{{ 'USERS_SETTING_PAGE.BTN_DELETE_USER' | translate }}</span>
               </button>
 
             </div>
@@ -398,6 +414,19 @@
       </tbody>
 
     </table>
+
+  </div>
+
+  <div class="pagination-wrapper">
+
+    <mat-paginator
+      [length]="totalElements"
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [pageSizeOptions]="[5, 10, 20, 50, 100]"
+      [showFirstLastButtons]="true"
+      (page)="onPageChange($event)">
+    </mat-paginator>
 
   </div>
 
