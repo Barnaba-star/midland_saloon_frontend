@@ -557,7 +557,13 @@
     "TOOLTIP_ASSIGN_ROLE": "Assign Role To Branch User",
     "FORM_TITLE_ADD_USER": "Add User To {{branch}}",
     "FORM_TITLE_SUBSCRIPTION": "Branch Subscription",
-    "SEARCH_PLACEHOLDER": "Search branches..."
+    "SEARCH_PLACEHOLDER": "Search branches...",
+    "LABEL_EDIT": "Edit",
+    "LABEL_DELETE": "Delete",
+    "LABEL_SUBSCRIPTION": "Subscription",
+    "LABEL_ADD_USER": "Add user",
+    "LABEL_ASSIGN_ROLE": "Assign role",
+    "LABEL_MORE": "More"
   },
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "System Permissions Setting",

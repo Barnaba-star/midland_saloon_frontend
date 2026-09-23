@@ -194,6 +194,7 @@
       (click)="editItem(item)"
     >
       <mat-icon>edit</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_EDIT' | translate }}</span>
     </button>
 
     <!-- DELETE -->
@@ -205,6 +206,7 @@
       (click)="deleteItem(item)"
     >
       <mat-icon>delete</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_DELETE' | translate }}</span>
     </button>
 
     <!-- SUBSCRIPTION -->
@@ -215,6 +217,7 @@
       (click)="openSubscriptionDialog(item)"
     >
       <mat-icon>payments</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_SUBSCRIPTION' | translate }}</span>
     </button>
 
     <!-- ADD USER -->
@@ -225,6 +228,7 @@
       (click)="addUserToBranch(item)"
     >
       <mat-icon>person_add</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_ADD_USER' | translate }}</span>
     </button>
 
     <!-- ASSIGN ROLE -->
@@ -235,6 +239,7 @@
       (click)="assignRoleToBranchUser(item)"
     >
       <mat-icon>admin_panel_settings</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_ASSIGN_ROLE' | translate }}</span>
     </button>
 
     <!-- MORE -->
@@ -245,6 +250,7 @@
       (click)="moreActions(item)"
     >
       <mat-icon>more_vert</mat-icon>
+      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_MORE' | translate }}</span>
     </button>
 
   </div>

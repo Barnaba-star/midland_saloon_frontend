@@ -1278,16 +1278,20 @@ app-form{
 
 .action-buttons {
   display: flex;
+  flex-wrap: wrap;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 6px;
 }
 
 .action-btn {
-  width: 34px;
+  /* Icon plus a short label. The full wording stays in the tooltip - six
+     buttons carrying "Assign Role To Branch User" would push the row far
+     wider than the screen. */
   height: 34px;
   min-width: 34px;
-  padding: 0;
+  padding: 0 11px;
+  gap: 6px;
 
   display: inline-flex;
   align-items: center;
@@ -1302,9 +1306,29 @@ app-form{
 }
 
 .action-btn mat-icon {
-  font-size: 18px;
-  width: 18px;
-  height: 18px;
+  font-size: 17px;
+  width: 17px;
+  height: 17px;
+}
+
+.action-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+}
+
+/* Below this the labels cost more than they earn, so the buttons go back
+   to icons and the tooltip carries the meaning. */
+@media (max-width: 1280px) {
+  .action-btn {
+    padding: 0;
+    width: 34px;
+  }
+
+  .action-label {
+    display: none;
+  }
 }
 
 /* EDIT */

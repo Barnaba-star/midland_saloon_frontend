@@ -786,12 +786,13 @@
 }
 
 .action-btn {
-  width: 34px;
+  /* Icon plus its label; View/Edit/Delete are short enough to carry both. */
   height: 34px;
 
   margin-right: 5px;
 
-  padding: 0;
+  padding: 0 11px;
+  gap: 6px;
 
   display: inline-flex;
 
@@ -819,6 +820,29 @@
 
 .action-btn:last-child {
   margin-right: 0;
+}
+
+.action-btn .material-icons {
+  font-size: 17px;
+}
+
+.action-label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+  white-space: nowrap;
+}
+
+/* Narrow screens go back to icons only; the title attribute still explains. */
+@media (max-width: 1024px) {
+  .action-btn {
+    width: 34px;
+    padding: 0;
+  }
+
+  .action-label {
+    display: none;
+  }
 }
 
 .action-btn:hover {

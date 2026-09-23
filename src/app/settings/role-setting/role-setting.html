@@ -147,6 +147,7 @@
     (click)="moreRole(item)"
     >
     <span class="material-icons">visibility</span>
+    <span class="action-label">{{ 'ROLE_SETTING_PAGE.TOOLTIP_VIEW' | translate }}</span>
   </button>
 
   <button
@@ -155,6 +156,7 @@
     [title]="'ROLE_SETTING_PAGE.TOOLTIP_EDIT' | translate"
     (click)="editRole(item)">
     <span class="material-icons">edit</span>
+    <span class="action-label">{{ 'ROLE_SETTING_PAGE.TOOLTIP_EDIT' | translate }}</span>
   </button>
 
   <button
@@ -163,6 +165,7 @@
     [title]="'ROLE_SETTING_PAGE.TOOLTIP_DELETE' | translate"
     (click)="deleteRole(item)">
     <span class="material-icons">delete</span>
+    <span class="action-label">{{ 'ROLE_SETTING_PAGE.TOOLTIP_DELETE' | translate }}</span>
   </button>
 
 </td>

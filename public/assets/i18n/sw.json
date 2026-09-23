@@ -557,7 +557,13 @@
     "TOOLTIP_ASSIGN_ROLE": "Panga Jukumu la Mtumiaji wa Tawi",
     "FORM_TITLE_ADD_USER": "Ongeza Mtumiaji kwenye {{branch}}",
     "FORM_TITLE_SUBSCRIPTION": "Malipo ya Huduma ya Tawi",
-    "SEARCH_PLACEHOLDER": "Tafuta matawi..."
+    "SEARCH_PLACEHOLDER": "Tafuta matawi...",
+    "LABEL_EDIT": "Hariri",
+    "LABEL_DELETE": "Futa",
+    "LABEL_SUBSCRIPTION": "Malipo",
+    "LABEL_ADD_USER": "Mtumiaji",
+    "LABEL_ASSIGN_ROLE": "Jukumu",
+    "LABEL_MORE": "Zaidi"
   },
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Ruhusa za Mfumo",
