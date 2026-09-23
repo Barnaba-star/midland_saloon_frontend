@@ -294,12 +294,65 @@ app-form{
 
 }
 
-.empty-icon {
-  font-size: 90px;
-  width: 90px;
-  height: 90px;
-  color: rgba(182, 150, 109, 0.95);
-  margin-bottom: 10px;
+/* =====================================================
+   EMPTY STATE
+===================================================== */
+
+.empty-state {
+  min-height: 280px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+  padding: 40px 24px;
+
+  box-sizing: border-box;
+}
+
+.empty-icon-badge {
+  width: 72px;
+  height: 72px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: #f1f5f9;
+  color: #94a3b8;
+
+  margin-bottom: 16px;
+}
+
+.empty-icon-badge mat-icon {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
+}
+
+.empty-state h3 {
+  margin: 0 0 6px;
+
+  color: #344054;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.empty-state p {
+  margin: 0;
+
+  color: #94a3b8;
+  font-size: 14px;
+  line-height: 1.5;
+  max-width: 380px;
+}
+
+.empty-state-add-service-btn {
+  margin-top: 24px;
 }
 
 .action-container h3 {
@@ -1059,6 +1112,44 @@ app-form{
   color: #98a2b3;
 
   font-size: 11px;
+}
+
+
+/* =========================
+   ADD USER BUTTON
+========================= */
+
+.add-user-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  margin-left: 12px;
+
+  padding: 9px 16px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #14315d;
+  color: #ffffff;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: filter 0.15s ease;
+}
+
+.add-user-btn:hover {
+  filter: brightness(1.1);
+}
+
+.add-user-btn mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
 }
 
 

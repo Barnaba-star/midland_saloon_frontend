@@ -54,18 +54,20 @@
   </button>
 
 
-  <!-- CLOSED STORES -->
-  <button
-    mat-flat-button
-    color="primary"
-    type="button"
-    class="store-action-btn store-action-btn-closed"
-    [title]="'STORE_PAGE.CLOSED_STORES_TOOLTIP' | translate"
-    (click)="findClosedStorePage()"
-  >
-    <mat-icon>lock</mat-icon>
-    <span>{{ 'STORE_PAGE.CLOSED_STORES' | translate }}</span>
-  </button>
+  <!-- CLOSED STORES (CEO and above + MANAGER) -->
+  @if (canSeeClosedStores) {
+    <button
+      mat-flat-button
+      color="primary"
+      type="button"
+      class="store-action-btn store-action-btn-closed"
+      [title]="'STORE_PAGE.CLOSED_STORES_TOOLTIP' | translate"
+      (click)="findClosedStorePage()"
+    >
+      <mat-icon>lock</mat-icon>
+      <span>{{ 'STORE_PAGE.CLOSED_STORES' | translate }}</span>
+    </button>
+  }
 
 </div>
 
@@ -399,8 +401,10 @@
         </div>
       }
       @if (storeDataSource.length === 0 && storeOpenDataSource.length === 0) {
-        <div class="action-container">
-          <mat-icon class="empty-icon" svgIcon="store"></mat-icon>
+        <div class="empty-state">
+          <div class="empty-icon-badge">
+            <mat-icon svgIcon="store"></mat-icon>
+          </div>
           <h3>{{ 'STORE_PAGE.EMPTY_TITLE' | translate }}</h3>
           <p>{{ 'STORE_PAGE.EMPTY_TEXT' | translate }}</p>
         </div>

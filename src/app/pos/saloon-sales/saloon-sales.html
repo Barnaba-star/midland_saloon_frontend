@@ -774,15 +774,13 @@
         *ngIf="salesOpenByStatus.length === 0"
       >
 
-        <div class="empty-icon">
-
-          <i class="bi bi-receipt"></i>
-
+        <div class="empty-icon-badge">
+          <mat-icon svgIcon="payment2"></mat-icon>
         </div>
 
-        <h4>
+        <h3>
           {{ 'SALES_PAGE.EMPTY_TRANSACTIONS_TITLE' | translate }}
-        </h4>
+        </h3>
 
         <p>
           {{ 'SALES_PAGE.EMPTY_TRANSACTIONS_TEXT' | translate }}

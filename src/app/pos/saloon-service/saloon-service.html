@@ -225,9 +225,13 @@
 }
 
     @if(saloonServiceDataSource.length === 0){
-       <mat-icon class="empty-icon bounce" svgIcon="more"></mat-icon>
-       <h3>{{ 'SERVICE_PAGE.EMPTY_TITLE' | translate }}</h3>
-       <p>{{ 'SERVICE_PAGE.EMPTY_TEXT' | translate }}</p>
+       <div class="empty-state">
+         <div class="empty-icon-badge">
+           <mat-icon svgIcon="more"></mat-icon>
+         </div>
+         <h3>{{ 'SERVICE_PAGE.EMPTY_TITLE' | translate }}</h3>
+         <p>{{ 'SERVICE_PAGE.EMPTY_TEXT' | translate }}</p>
+       </div>
     }
 
     </div>

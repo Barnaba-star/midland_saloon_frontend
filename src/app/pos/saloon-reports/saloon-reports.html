@@ -78,7 +78,8 @@
 
                   <!-- TABLE BODY -->
                   <tbody>
-                    <tr *ngFor="let report of filteredReports; let i = index">
+                    @for (report of filteredReports; track report.uid; let i = $index) {
+                    <tr>
                       <!-- NUMBER -->
                       <td class="text-center">
                         <span class="text-muted">
@@ -238,18 +239,19 @@
                         </div>
                       </td>
                     </tr>
+                    }
 
                     <!-- EMPTY -->
                     <tr *ngIf="filteredReports.length === 0">
-                      <td colspan="8" class="text-center py-5">
+                      <td colspan="8">
                         <div class="empty-state">
-                          <i class="bi bi-inbox fs-1 text-muted"></i>
+                          <div class="empty-icon-badge">
+                            <mat-icon svgIcon="report"></mat-icon>
+                          </div>
 
-                          <h6 class="mt-3">{{ 'REPORTS_PAGE.EMPTY_REPORTS_TITLE' | translate }}</h6>
+                          <h3>{{ 'REPORTS_PAGE.EMPTY_REPORTS_TITLE' | translate }}</h3>
 
-                          <p class="text-muted mb-0">
-                            {{ 'REPORTS_PAGE.EMPTY_REPORTS_TEXT' | translate }}
-                          </p>
+                          <p>{{ 'REPORTS_PAGE.EMPTY_REPORTS_TEXT' | translate }}</p>
                         </div>
                       </td>
                     </tr>
@@ -313,15 +315,16 @@
                     </button>
 
                     <!-- PAGES -->
+                    @for (page of pageNumbers; track page) {
                     <button
                       type="button"
-                      *ngFor="let page of [].constructor(totalPages); let i = index"
                       class="pagination-btn page-number"
-                      [class.active]="currentPage === i"
-                      (click)="goToPage(i)"
+                      [class.active]="currentPage === page"
+                      (click)="goToPage(page)"
                     >
-                      {{ i + 1 }}
+                      {{ page + 1 }}
                     </button>
+                    }
 
                     <!-- NEXT -->
                     <button
@@ -340,9 +343,13 @@
         </div>
       }
       @if (saloonReports.length === 0 && reportForToday === false) {
-        <mat-icon class="empty-icon bounce" svgIcon="history"></mat-icon>
-        <h3>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TITLE' | translate }}</h3>
-        <p>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TEXT' | translate }}</p>
+        <div class="empty-state">
+          <div class="empty-icon-badge">
+            <mat-icon svgIcon="history"></mat-icon>
+          </div>
+          <h3>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TITLE' | translate }}</h3>
+          <p>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TEXT' | translate }}</p>
+        </div>
       }
       @if (reportForToday === true) {
         <div class="revenue-report-wrapper">
@@ -1813,9 +1820,9 @@
         } @else {
           <!-- EMPTY -->
 
-          <div class="income-empty">
-            <div class="empty-icon">
-              <mat-icon> account_balance_wallet </mat-icon>
+          <div class="empty-state">
+            <div class="empty-icon-badge">
+              <mat-icon svgIcon="payment2"></mat-icon>
             </div>
 
             <h3>{{ 'REPORTS_PAGE.EMPTY_FINANCIAL_TITLE' | translate }}</h3>

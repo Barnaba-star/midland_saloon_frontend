@@ -31,6 +31,16 @@
 
             <span class="count-label"> {{ 'SETTING_PAGE.USERS_LABEL' | translate }} </span>
           </div>
+
+          <button
+            type="button"
+            class="add-user-btn"
+            [matTooltip]="'SETTING_PAGE.TOOLTIP_ADD_USER' | translate"
+            (click)="addUser()"
+          >
+            <mat-icon>person_add</mat-icon>
+            {{ 'SETTING_PAGE.ADD_USER_BTN' | translate }}
+          </button>
         </div>
 
         <!-- Table -->
@@ -98,7 +108,7 @@
                   <!-- Actions -->
                   <td class="actions-column">
                     <div class="user-actions">
-                      <button type="button" mat-icon-button [matTooltip]="'SETTING_PAGE.TOOLTIP_VIEW_USER' | translate">
+                      <button type="button" mat-icon-button [matTooltip]="'SETTING_PAGE.TOOLTIP_VIEW_USER' | translate" (click)="onViewUser(user)">
                         <mat-icon>visibility</mat-icon>
                       </button>
 
@@ -193,8 +203,10 @@
       </div>
     }
     @if (userDataSource.length === 0) {
-      <div class="action-container">
-        <mat-icon class="empty-icon bounce" svgIcon="person2"> </mat-icon>
+      <div class="empty-state">
+        <div class="empty-icon-badge">
+          <mat-icon svgIcon="person2"></mat-icon>
+        </div>
 
         <h3>{{ 'SETTING_PAGE.EMPTY_USERS_TITLE' | translate }}</h3>
         <p>{{ 'SETTING_PAGE.EMPTY_USERS_TEXT' | translate }}</p>
@@ -261,15 +273,6 @@
             </button>
           </div>
         </div>
-      }
-
-      @if (saloonServiceAddForm === true) {
-        <app-form3
-          [formTitle]="'SERVICE.ADD' | translate"
-          [fields]="serviceFields"
-          (submitForm)="submitServiceForm($event)"
-        >
-        </app-form3>
       }
 
      @if (serviceDataSource.data.length > 0) {
@@ -445,17 +448,17 @@
 
                 <mat-menu #serviceMenu="matMenu" panelClass="service-menu-panel">
 
-                  <button mat-menu-item>
+                  <button mat-menu-item type="button" (click)="onViewRecord(service)">
                     <mat-icon>visibility</mat-icon>
                     <span>{{ 'COMMON.VIEW' | translate }}</span>
                   </button>
 
-                  <button mat-menu-item>
+                  <button mat-menu-item type="button" (click)="onEditRecord(service)">
                     <mat-icon svgIcon="edit"></mat-icon>
                     <span>{{ 'COMMON.EDIT' | translate }}</span>
                   </button>
 
-                  <button mat-menu-item class="delete-action">
+                  <button mat-menu-item type="button" class="delete-action" (click)="onDeleteRecord(service)">
                     <mat-icon svgIcon="delete"></mat-icon>
                     <span>{{ 'COMMON.DELETE' | translate }}</span>
                   </button>
@@ -560,21 +563,24 @@
 }
 
       @if (serviceDataSource.data.length === 0 && saloonServiceAddForm === false && saloonServiceInfo === false) {
-        <div class="action-container">
-          <mat-icon class="empty-icon bounce" svgIcon="service"></mat-icon>
+        <div class="empty-state">
+          <div class="empty-icon-badge">
+            <mat-icon svgIcon="service"></mat-icon>
+          </div>
           <h3>{{ 'SETTING_PAGE.EMPTY_SERVICES_TITLE' | translate }}</h3>
           <p>{{ 'SETTING_PAGE.EMPTY_SERVICES_TEXT' | translate }}</p>
+
+          <button
+            mat-flat-button
+            type="button"
+            class="add-service-btn empty-state-add-service-btn"
+            (click)="onAddService()">
+            <mat-icon>add</mat-icon>
+            <span>{{ 'SERVICE.ADD' | translate }}</span>
+          </button>
         </div>
       }
 
-      @if (saloonServiceDelete === true) {
-        <app-delete-dialog
-          [message]="'COMMON.CONFIRM_DELETE' | translate"
-          (confirm)="onConfirmDeleteRecord()"
-          (cancel)="onCancelDelete()"
-        >
-        </app-delete-dialog>
-      }
     </div>
   }
 
@@ -882,8 +888,10 @@
 
       }
       @if (commissionDataSource.length === 0 && addCommission !== true) {
-        <div class="action-container">
-          <mat-icon class="empty-icon bounce" svgIcon="commission"></mat-icon>
+        <div class="empty-state">
+          <div class="empty-icon-badge">
+            <mat-icon svgIcon="commission"></mat-icon>
+          </div>
           <h3>{{ 'SETTING_PAGE.EMPTY_COMMISSION_TITLE' | translate }}</h3>
           <p>{{ 'SETTING_PAGE.EMPTY_COMMISSION_TEXT' | translate }}</p>
         </div>

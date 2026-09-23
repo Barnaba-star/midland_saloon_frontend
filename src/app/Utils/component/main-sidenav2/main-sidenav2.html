@@ -170,9 +170,19 @@
 
   <!-- CENTER: BRANCH NAME -->
   <div class="header-center">
-    <div class="branch-name-center">
+    <div
+      class="branch-name-center"
+      [matTooltip]="
+        subscriptionStatus
+          ? (subscriptionBadgeLabel | translate) + (subscriptionEndDate ? (' · ' + (('MENU.SUBSCRIPTION_VALID_UNTIL' | translate) + ' ' + (subscriptionEndDate | date: 'dd/MM/yyyy'))) : '')
+          : ''
+      "
+    >
       <mat-icon svgIcon="office"></mat-icon>
       <span>{{ branchName }}</span>
+      @if (subscriptionStatus) {
+        <span [class]="subscriptionDotClass"></span>
+      }
     </div>
   </div>
 
@@ -282,6 +292,47 @@
 
               <mat-icon>
                 account_circle
+              </mat-icon>
+
+            </div>
+
+
+            <mat-divider></mat-divider>
+
+
+            <!-- SUBSCRIPTION STATUS -->
+            @if (subscriptionStatus) {
+              <div class="profileItems sub-status-row">
+
+                <div [class]="subscriptionBadgeClass">
+                  <span class="sub-badge-dot"></span>
+                  <span>{{ subscriptionBadgeLabel | translate }}</span>
+                </div>
+
+                @if (subscriptionEndDate) {
+                  <span class="sub-status-date">
+                    {{ 'MENU.SUBSCRIPTION_VALID_UNTIL' | translate }} {{ subscriptionEndDate | date: 'dd/MM/yyyy' }}
+                  </span>
+                }
+
+              </div>
+
+              <mat-divider></mat-divider>
+            }
+
+
+            <!-- SUBSCRIBE -->
+            <div
+              class="profileItems"
+              (click)="openSubscribeDialog()"
+            >
+
+              <span>
+                {{ 'COMMON.SUBSCRIBE' | translate }}
+              </span>
+
+              <mat-icon>
+                payments
               </mat-icon>
 
             </div>

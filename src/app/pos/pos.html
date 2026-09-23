@@ -1,13 +1,42 @@
 <app-main-sidenav2 [menuItems]=this.getItems(menuItems) >
   <router-outlet></router-outlet>
   @if(isHome===true){
- @switch (isHome) {
 
-@default {
+    <div class="pos-home">
 
-}
+      <div class="pos-home-intro">
+        <h1>{{ 'POS_HOME.WELCOME' | translate }}{{ fullName ? ', ' + fullName : '' }}</h1>
+        <p>{{ 'POS_HOME.SUBTITLE' | translate }}</p>
+      </div>
 
-}
+      <div class="pos-home-grid">
+        <mat-card
+          class="pos-home-card"
+          *ngFor="let card of filteredHomeCards"
+          (click)="goTo(card.route)"
+          tabindex="0"
+          (keyup.enter)="goTo(card.route)"
+        >
+          <div class="pos-home-icon">
+            <mat-icon [svgIcon]="card.icon"></mat-icon>
+          </div>
+
+          <mat-card-header>
+            <h4>{{ card.title | translate }}</h4>
+          </mat-card-header>
+
+          <mat-card-content>
+            <p>{{ card.description | translate }}</p>
+          </mat-card-content>
+
+          <div class="pos-home-cta">
+            <span>{{ 'POS_HOME.OPEN' | translate }}</span>
+            <mat-icon>arrow_forward</mat-icon>
+          </div>
+        </mat-card>
+      </div>
+
+    </div>
 
   }
 </app-main-sidenav2>

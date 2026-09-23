@@ -193,3 +193,63 @@ mat-dialog-actions {
     height: 18px;
   }
 }
+
+/* Assigned roles */
+.assigned-roles {
+  display: flex;
+  flex-direction: column;
+
+  margin-bottom: 18px;
+}
+
+.role-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.role-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+
+  padding: 4px 6px 4px 12px;
+
+  border: 1px solid #d1d5db;
+  border-radius: 999px;
+
+  background: #f9fafb;
+  color: #374151;
+
+  font-size: 13px;
+}
+
+.chip-remove {
+  width: 20px;
+  height: 20px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 50%;
+
+  background: transparent;
+  color: #6b7280;
+
+  cursor: pointer;
+
+  transition: all 0.2s ease;
+}
+
+.chip-remove:hover {
+  background: #fee2e2;
+  color: #b91c1c;
+}
+
+.chip-remove mat-icon {
+  font-size: 14px;
+  width: 14px;
+  height: 14px;
+}

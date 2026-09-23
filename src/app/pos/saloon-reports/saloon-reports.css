@@ -267,13 +267,6 @@
 }
 
 
-/* EMPTY */
-
-.empty-state {
-  padding: 20px;
-}
-
-
 /* REPORT COUNT */
 
 .report-count .badge {
@@ -3911,16 +3904,6 @@
 }
 
 /* =========================
-   EMPTY STATE
-========================= */
-
-.empty-state {
-  text-align: center !important;
-  padding: 40px !important;
-  color: #94a3b8 !important;
-}
-
-/* =========================
    ANIMATION
 ========================= */
 
@@ -4465,8 +4448,16 @@
   color: #555;
   white-space: nowrap;
 }
+/* =====================================================
+   EMPTY STATE (shared) - one look for every "no data" state
+   on this page: Overview, Income, Commission, Store, Stock,
+   Service. Replaces several conflicting .empty-state /
+   .empty-icon definitions that used to disagree with each
+   other (different padding, some !important, some sizes).
+===================================================== */
+
 .empty-state {
-  min-height: 60vh;
+  min-height: 280px;
 
   display: flex;
   flex-direction: column;
@@ -4474,33 +4465,48 @@
   justify-content: center;
 
   text-align: center;
-  padding: 40px 20px;
+  padding: 40px 24px;
 
   box-sizing: border-box;
 }
 
-.empty-icon {
-  width: 90px;
-  height: 90px;
-  margin-bottom: 20px;
+.empty-icon-badge {
+  width: 72px;
+  height: 72px;
 
-  opacity: 0.7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 20px;
+
+  background: #f1f5f9;
+  color: #94a3b8;
+
+  margin-bottom: 16px;
+}
+
+.empty-icon-badge mat-icon {
+  font-size: 34px;
+  width: 34px;
+  height: 34px;
 }
 
 .empty-state h3 {
-  margin: 0 0 8px;
+  margin: 0 0 6px;
 
   color: #344054;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .empty-state p {
   margin: 0;
 
-  color: #667085;
+  color: #94a3b8;
   font-size: 14px;
   line-height: 1.5;
+  max-width: 380px;
 }
 
 .report-actions {
@@ -5625,73 +5631,11 @@
 
 
 /* =====================================================
-   EMPTY STATE
+   EMPTY STATE - shared canonical style for every report
+   tab on this page (Overview, Income, Commission, Store,
+   Stock, Service). See "EMPTY STATE (shared)" block below
+   for .empty-state / .empty-icon-badge.
 ===================================================== */
-
-.income-empty {
-  min-height: 300px;
-
-  display: flex;
-
-  flex-direction: column;
-
-  align-items: center;
-
-  justify-content: center;
-
-  text-align: center;
-
-  padding: 40px;
-}
-
-
-.empty-icon {
-  width: 65px;
-  height: 65px;
-
-  display: flex;
-
-  align-items: center;
-
-  justify-content: center;
-
-  border-radius: 18px;
-
-  background: #f1f5f9;
-
-  color: #94a3b8;
-
-  margin-bottom: 15px;
-}
-
-
-.empty-icon mat-icon {
-  font-size: 32px;
-
-  width: 32px;
-
-  height: 32px;
-}
-
-
-.income-empty h3 {
-  margin: 0;
-
-  color: #334155;
-
-  font-size: 17px;
-
-  font-weight: 800;
-}
-
-
-.income-empty p {
-  margin: 7px 0 0;
-
-  color: #94a3b8;
-
-  font-size: 13px;
-}
 
 
 /* =====================================================
@@ -6664,9 +6608,12 @@
   background: #ffffff;
 }
 
-.empty-icon {
-  width: 48px !important;
-  height: 48px !important;
+/* Scoped to this compact card widget so it doesn't fight with the page's
+   main 90px .empty-icon (a bare !important here used to force EVERY
+   .empty-icon on the page down to 48px, including the big full-page ones). */
+.no-records-message .empty-icon {
+  width: 48px;
+  height: 48px;
   color: #94a3b8;
   opacity: 0.75;
 }
