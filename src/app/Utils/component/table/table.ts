@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, ViewChild, TemplateRef, SimpleChanges } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, ViewChild, TemplateRef, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -30,7 +30,8 @@ export interface TableColumn {
     selector: 'app-table',
     imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatInputModule, MatCheckboxModule],
     templateUrl: './table.html',
-    styleUrls: ['./table.css']
+    styleUrls: ['./table.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableComponent implements OnInit, AfterViewInit {
  @Input() columns: TableColumn[] = [];

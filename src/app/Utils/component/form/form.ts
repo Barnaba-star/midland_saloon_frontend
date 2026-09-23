@@ -4,7 +4,9 @@ import {
   Output,
   EventEmitter,
   OnInit,
+  OnDestroy,
   ChangeDetectorRef,
+  ChangeDetectionStrategy,
 } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -21,7 +23,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { MatRadioModule } from '@angular/material/radio';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { FormField, FieldOption } from '../../models/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -48,9 +50,15 @@ import { TranslatePipe } from '@ngx-translate/core';
         TranslatePipe,
     ],
     templateUrl: './form.html',
-    styleUrl: './form.css'
+    styleUrl: './form.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class FormComponent implements OnInit {
+export class FormComponent implements OnInit, OnDestroy {
+  // The onChange listeners below outlive nothing else: these form components are
+  // rebuilt every time a dialog opens, so their valueChanges subscriptions have
+  // to be closed with the component.
+  private destroy$ = new Subject<void>();
+
 [x: string]: any;
 
   @Input() fields: any[] = [];
@@ -82,9 +90,12 @@ export class FormComponent implements OnInit {
       
 
       if (field.onChange) {
-        control.valueChanges.subscribe((value) => {
-          field.onChange(value);
-        });
+        control.valueChanges
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((value) => {
+            field.onChange(value);
+            this.cdRef.markForCheck();
+          });
       }
 
       group[field.name] = control;
@@ -229,6 +240,7 @@ shouldSpanFullWidth(type: string): boolean {
 patchForm(formData: any) {
   if (this.form && formData) {
     this.form.patchValue(formData);
+    this.cdRef.markForCheck();
   }
 }
 
@@ -248,5 +260,11 @@ shouldShowField(field: FormField): boolean {
 
 
 
+
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
 
 }

@@ -1,4 +1,5 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -29,9 +30,14 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatNativeDateModule
   ],
   templateUrl: './dialog-stepper.html',
-  styleUrl: './dialog-stepper.css'
+  styleUrl: './dialog-stepper.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DialogStepper implements OnInit {
+export class DialogStepper implements OnInit, OnDestroy {
+
+  // Rebuilt on every dialog open, so the currency formatter below has to be
+  // closed with the component.
+  private destroy$ = new Subject<void>();
 
   stepForms: FormGroup[] = [];
   picker!: MatDatepickerPanel<MatDatepickerControl<any>, any, any>;
@@ -39,7 +45,8 @@ export class DialogStepper implements OnInit {
   constructor(
     @Inject(MAT_DIALOG_DATA) public data: { fields: FormField[], formTitle: string },
     private fb: FormBuilder,
-    private dialogRef: MatDialogRef<DialogStepper>
+    private dialogRef: MatDialogRef<DialogStepper>,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit(): void {
@@ -51,7 +58,9 @@ export class DialogStepper implements OnInit {
 
       // Jika ni currency field (amount), attach valueChanges listener
       if (field.name.toLowerCase() === 'amount') {
-        control.get(field.name)?.valueChanges.subscribe(value => {
+        control.get(field.name)?.valueChanges
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(value => {
           if (!value) return;
 
           // Ondoa comma zilizopo
@@ -66,6 +75,7 @@ export class DialogStepper implements OnInit {
 
           // Update form control bila ku-trigger loop
           control.get(field.name)?.setValue(formatted, { emitEvent: false });
+          this.cdr.markForCheck();
         });
       }
 
@@ -81,5 +91,10 @@ export class DialogStepper implements OnInit {
 
   onCancel() {
     this.dialogRef.close();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 }

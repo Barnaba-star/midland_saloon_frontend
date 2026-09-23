@@ -9,6 +9,8 @@ import {
   Output,
   SimpleChanges,
   ViewChild,
+  ChangeDetectionStrategy,
+  ChangeDetectorRef,
 } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -46,6 +48,7 @@ export interface Breadcrumb {
   ],
   templateUrl: './title2.html',
   styleUrl: './title2.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Title2 implements AfterViewInit, OnChanges {
 
@@ -74,6 +77,7 @@ export class Title2 implements AfterViewInit, OnChanges {
     private location: Location,
     private priv: PreviousRouteService,
     private auth: Authentication,
+    private cdr: ChangeDetectorRef,
   ) { }
 
 
@@ -160,16 +164,26 @@ export class Title2 implements AfterViewInit, OnChanges {
 
     const el = this.actionsListRef?.nativeElement;
 
-    if (!el) {
-      this.hasOverflowStart = false;
-      this.hasOverflowEnd = false;
+    let start = false;
+    let end = false;
+
+    if (el) {
+      const maxScroll = el.scrollWidth - el.clientWidth;
+      start = el.scrollLeft > 4;
+      end = maxScroll > 4 && el.scrollLeft < maxScroll - 4;
+    }
+
+    if (start === this.hasOverflowStart && end === this.hasOverflowEnd) {
+      // Nothing moved. Marking the view anyway would schedule another pass,
+      // and pages pass [actions] straight from a method call - so that pass
+      // would hand us a fresh array, fire ngOnChanges, and land right back
+      // here. That loop is what NG0103 reports.
       return;
     }
 
-    const maxScroll = el.scrollWidth - el.clientWidth;
-
-    this.hasOverflowStart = el.scrollLeft > 4;
-    this.hasOverflowEnd = maxScroll > 4 && el.scrollLeft < maxScroll - 4;
+    this.hasOverflowStart = start;
+    this.hasOverflowEnd = end;
+    this.cdr.markForCheck();
   }
 
 }

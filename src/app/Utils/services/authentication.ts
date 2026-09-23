@@ -31,7 +31,9 @@ private profilePicURL = `${this.baseURL}/attachment`
 
 setToken(token: string): void {
     this.cookieService.set('jwt_token', token, 7, '/');
-
+    // A different user means different roles, so anything filtered against
+    // the old token has to go.
+    this.clearRoleCaches();
   }
  getToken(): string {
   const rawToken = this.cookieService.get('jwt_token');
@@ -41,6 +43,12 @@ setToken(token: string): void {
 
 removeToken(): void {
   this.cookieService.delete('jwt_token');
+  this.clearRoleCaches();
+}
+
+private clearRoleCaches(): void {
+  this.filteredMenuCache = new WeakMap<SidenavItem[], SidenavItem[]>();
+  this.filteredTitleCache = new WeakMap<TitleAction[], TitleAction[]>();
 }
 
 getUsername(): string {
@@ -181,8 +189,22 @@ getPersonnelName():string{
 
 
 
+// Both of these are called straight from templates, so they run on every
+// change detection pass. Returning a fresh array each time made every pass
+// look like a changed @Input to the component being fed - which is what sent
+// app-title2 into an endless ngOnChanges loop (NG0103). The result only
+// depends on the caller's own (fixed) array and the roles in the token, so
+// it is cached against that array.
+private filteredMenuCache = new WeakMap<SidenavItem[], SidenavItem[]>();
+private filteredTitleCache = new WeakMap<TitleAction[], TitleAction[]>();
+
 filteredMenuItems(menuItems:SidenavItem[]): SidenavItem[] {
-  return menuItems
+  const cached = this.filteredMenuCache.get(menuItems);
+  if (cached) {
+    return cached;
+  }
+
+  const filtered = menuItems
     .filter(item =>
       !item.roles || item.roles.some(role => this.hasRole(role))
     )
@@ -195,12 +217,23 @@ filteredMenuItems(menuItems:SidenavItem[]): SidenavItem[] {
     .filter(item =>
       !item.children || item.children.length > 0 || item.route
     );
+
+  this.filteredMenuCache.set(menuItems, filtered);
+  return filtered;
 }
 
 filteredTitleActions(titles: TitleAction[]): TitleAction[] {
-  return titles.filter(title =>
+  const cached = this.filteredTitleCache.get(titles);
+  if (cached) {
+    return cached;
+  }
+
+  const filtered = titles.filter(title =>
     !title.roles || title.roles.some(role => this.hasRole(role))
   );
+
+  this.filteredTitleCache.set(titles, filtered);
+  return filtered;
 }
 
 loadProfilePic(uid: string):Observable<Response<any>>{

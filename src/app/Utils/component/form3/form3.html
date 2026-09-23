@@ -80,7 +80,7 @@
             </mat-form-field>
 
             <!-- ================================================== TEXTAREA =================================================== -->
-            <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" class="w-100" style="height:30px">
+            <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" class="w-100 textarea-field">
               <img
                 *ngIf="field.icon"
                 matPrefix
@@ -90,7 +90,7 @@
               />
               <textarea
                 matInput
-                [rows]="field.rows || 1"
+                [rows]="field.rows || 4"
                 [formControlName]="field.name"
                 [placeholder]="field.placeholder || field.label || 'Enter description'"
               ></textarea>

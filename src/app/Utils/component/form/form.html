@@ -35,8 +35,8 @@
           </mat-form-field>
 
           <!-- Textarea -->
-          <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" class="w-100" style="margin-top: 20px;">
-            <textarea matInput [formControlName]="field.name" [placeholder]="field.placeholder || field.label"></textarea>
+          <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" class="w-100 textarea-field">
+            <textarea matInput [rows]="field.rows || 4" [formControlName]="field.name" [placeholder]="field.placeholder || field.label"></textarea>
             <mat-hint *ngIf="field.required && form.get(field.name)?.invalid && form.get(field.name)?.touched">
               This field is required.
             </mat-hint>

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { ActionMenuComponent } from "../action-menu-component/action-menu-component";
 import { MatMenuModule } from "@angular/material/menu";
@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   styleUrls: ['./recordtable.css'],
   standalone: true,
   imports: [CommonModule, MatIconModule,  MatMenuModule, TranslatePipe],
-
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class RecordtableComponent {
 @Input() columns: {
@@ -65,10 +65,6 @@ this.deleteRecord.emit(row);
 
 onOpenDoc(row: any){
 this.openDoc.emit(row);
-}
-
-getIndex(row: any): number {
-  return this.data.indexOf(row) + 1;
 }
 
 openMenuRow: any = null;

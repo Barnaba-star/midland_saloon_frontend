@@ -31,13 +31,17 @@
  {{ (column.header || column.field) | uppercase }}
 
 </th>
-      <td
+      <ng-template matCellDef let-row>
+
+@let cellValue = getNestedValue(row, column.field);
+@let cellColor = column.cellColors?.[cellValue];
+
+<td
 mat-cell
-*matCellDef="let row"
 
-[style.background]="column.cellColors?.[getNestedValue(row,column.field)]?.background"
+[style.background]="cellColor?.background"
 
-[style.color]="column.cellColors?.[getNestedValue(row,column.field)]?.color">
+[style.color]="cellColor?.color">
 
 <div class="cell-content">
 
@@ -46,14 +50,14 @@ mat-cell
 
 <mat-icon
 [svgIcon]="column.icon"
-[style.color]="column.iconColor || column.cellColors?.[getNestedValue(row,column.field)]?.color">
+[style.color]="column.iconColor || cellColor?.color">
 </mat-icon>
 
 }
 
 
 <span>
-{{ getNestedValue(row,column.field) }}
+{{ cellValue }}
 </span>
 
 
@@ -62,7 +66,7 @@ mat-cell
 
 <mat-icon
 [svgIcon]="column.icon"
-[style.color]="column.iconColor || column.cellColors?.[getNestedValue(row,column.field)]?.color">
+[style.color]="column.iconColor || cellColor?.color">
 </mat-icon>
 
 }
@@ -71,6 +75,8 @@ mat-cell
 </div>
 
 </td>
+
+    </ng-template>
 
     </ng-container>
 

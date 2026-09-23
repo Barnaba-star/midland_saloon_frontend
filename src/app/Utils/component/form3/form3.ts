@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, Input, Output, EventEmitter, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import {
   ReactiveFormsModule,
   FormBuilder,
@@ -14,7 +14,7 @@ import { MatInputModule } from '@angular/material/input';
 import { FormControl } from '@angular/forms';
 import { startWith, map } from 'rxjs/operators';
 import { MatRadioModule } from '@angular/material/radio';
-import { Observable } from 'rxjs';
+import { Observable, Subject, takeUntil } from 'rxjs';
 import { FormField, FieldOption } from '../../models/form-field';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
@@ -43,8 +43,14 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
   templateUrl: './form3.html',
   styleUrl: './form3.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class Form3 implements OnInit {
+export class Form3 implements OnInit, OnDestroy {
+  // The onChange listeners below outlive nothing else: these form components are
+  // rebuilt every time a dialog opens, so their valueChanges subscriptions have
+  // to be closed with the component.
+  private destroy$ = new Subject<void>();
+
   [x: string]: any;
 
   @Input() fields: FormField[] = [];
@@ -78,9 +84,12 @@ export class Form3 implements OnInit {
       const control = this.fb.control(initialValue, validators);
 
       if (field.onChange) {
-        control.valueChanges.subscribe((value) => {
-          field.onChange?.(value);
-        });
+        control.valueChanges
+          .pipe(takeUntil(this.destroy$))
+          .subscribe((value) => {
+            field.onChange?.(value);
+            this.cdRef.markForCheck();
+          });
       }
 
       group[field.name] = control;
@@ -222,6 +231,7 @@ export class Form3 implements OnInit {
   patchForm(formData: any) {
     if (this.form && formData) {
       this.form.patchValue(formData);
+      this.cdRef.markForCheck();
     }
   }
 
@@ -237,4 +247,10 @@ export class Form3 implements OnInit {
     // 3️⃣ Vinginevyo, ionekane kawaida
     return true;
   }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
 }

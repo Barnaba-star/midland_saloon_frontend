@@ -119,7 +119,16 @@ button[type="submit"]:hover {
 .button-group {
   display: flex;
   gap: 1rem;
-  margin-top: 8px;
+  margin-top: 24px;
+}
+
+.textarea-field {
+  margin-bottom: 8px;
+}
+
+.textarea-field textarea {
+  min-height: 72px;
+  resize: vertical;
 }
 
 .fab-button {
