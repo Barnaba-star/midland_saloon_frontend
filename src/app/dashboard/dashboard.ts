@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -15,7 +15,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-dashboard',
     imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, RouterModule, TranslatePipe],
     templateUrl: './dashboard.html',
-    styleUrls: ['./dashboard.css']
+    styleUrls: ['./dashboard.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class Dashboard {
 constructor(private iconRegistry: IconRegistryService, private route:Router, private visibility:Authentication){}
@@ -37,7 +38,7 @@ cards = [
     img: 'assets/icons/saloon.png',
     description: 'DASHBOARD.CARD_POS_DESC',
     route: '/pos/saloonSetting',
-    roles: ['ROOT', 'REG OFFICER', 'MANAGER', 'ADMIN', 'STAFF']
+    roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER']
   },
   {
     title: 'DASHBOARD.CARD_SETTING_TITLE',
@@ -45,7 +46,7 @@ cards = [
     img: 'assets/icons/personnel.svg',
     description: 'DASHBOARD.CARD_SETTING_DESC',
     route: '/settings',
-    roles: ['ROOT', 'REG OFFICER', 'ADMIN', 'STAFF']
+    roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER']
   },
 
 ];

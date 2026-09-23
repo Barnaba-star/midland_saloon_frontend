@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ interface ShortcutRow {
   imports: [MatIconModule, TranslatePipe],
   templateUrl: './help-dialog-component.html',
   styleUrl: './help-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HelpDialogComponent {
 

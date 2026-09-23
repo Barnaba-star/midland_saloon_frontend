@@ -1,11 +1,9 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from "../../Utils/component/title2/title2";
 import { Authentication } from '../../Utils/services/authentication';
 import { MatIconModule } from "@angular/material/icon";
 import { FormField } from '../../Utils/models/form-field';
-import { Form3 } from "../../Utils/component/form3/form3";
 import { CommissionDTO, SaloonServiceData, SaloonServiceDTO, UserTableData } from '../SaloonModel';
-import { SaloonService } from '../saloon-service/saloon-service';
 import { ServiceSaloonMethod } from '../service-saloon-method';
 import { AlertService } from '../../Utils/services/alert';
 import { RecordtableComponent } from "../../Utils/component/recordtable/recordtable";
@@ -14,9 +12,14 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TableComponent } from "../../Utils/component/table/table";
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
+import { ServiceDetailsDialogComponent } from '../../Utils/component/dialogs/service-details-dialog-component/service-details-dialog-component';
 import { EditCommissionDialogComponent } from '../../Utils/component/dialogs/edit-commission-dialog-component/edit-commission-dialog-component';
 import { error } from 'console';
-import { DeleteDialogComponent } from "../../Utils/component/delete-dialog/delete-dialog";
+import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delete-confirmation-component/delete-confirmation-component';
+import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
+import { SelectStaffDialogComponent } from '../../Utils/component/dialogs/select-staff-dialog-component/select-staff-dialog-component';
+import { UserService } from '../../settings/users-setting/user-service';
+import { AssignUserRoleDTO, UserDTO } from '../../settings/users-setting/user-model';
 import { CommonModule, DecimalPipe, UpperCasePipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -41,9 +44,10 @@ export interface SaloonServiceEntity {
 
 @Component({
   selector: 'app-saloon-setting',
-  imports: [Title2, MatIconModule, Form3, RecordtableComponent, DeleteDialogComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
+  imports: [Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonSetting implements OnInit{
 // Templates can't see the global `Math` object directly — expose it
@@ -59,16 +63,14 @@ throw new Error('Method not implemented.');
 
   saloonServiceInfo:Boolean=false;
   saloonServiceAddForm:Boolean=false;
-  saloonServiceDelete:Boolean=false;
   constructor(
     private visibility: Authentication, private service: ServiceSaloonMethod, private alertService: AlertService, private cdr: ChangeDetectorRef,
-    private dialog:MatDialog, private saloonService:ServiceSaloonMethod
+    private dialog:MatDialog, private saloonService:ServiceSaloonMethod, private userService: UserService
   ) { }
   ngOnInit(): void {
     this.selectedSetting='SALON.SERVICE'
       this.saloonServiceInfo=false;
   this.saloonServiceAddForm=false;
-  this.saloonServiceDelete=false;
   this.serviceDataSource.data=[];
   this.findSaloonServicePage();
   this.addCommission=false;
@@ -78,18 +80,18 @@ throw new Error('Method not implemented.');
     {
       icon: 'person2',
       title: 'SALON.STAFF',
-      roles: ['ROOT']
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER']
     },
     {
       icon: 'service',
       title: 'SALON.SERVICE',
-      roles: ['ROOT']
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER']
     },
 
     {
       icon: 'commission',
       title: 'SALON.COMMISSION',
-      roles: ['ROOT']
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER']
     }
   ];
 
@@ -102,7 +104,6 @@ throw new Error('Method not implemented.');
  if (action === 'SALON.SERVICE') {
   this.saloonServiceInfo=false;
   this.saloonServiceAddForm=false;
-  this.saloonServiceDelete=false;
   this.serviceDataSource.data=[];
   this.findSaloonServicePage();
   this.addCommission=false;
@@ -278,9 +279,23 @@ serviceColumns: {
   }
 ];
 onAddService(){
-  this.saloonServiceAddForm=true;
   this.saloonServiceInfo=false;
-  this.serviceDataSource.data=[];
+  const dialogRef = this.dialog.open(DialogComponent, {
+    width: '720px',
+    maxWidth: '95vw',
+    autoFocus: false,
+    data: {
+      formTitle: 'Add Service',
+      fields: this.serviceFields,
+    },
+  });
+
+  dialogRef.afterClosed().subscribe((data) => {
+    if (data) {
+      this.submitServiceForm(data);
+    }
+    this.cdr.markForCheck();
+  });
 }
 submitServiceForm(data: any) {
     this.saloonServiceAddForm=false;
@@ -299,9 +314,9 @@ submitServiceForm(data: any) {
     next: (response) => {
       if(response){
         this.alertService.show('success', 'Service saved successfully!');
-        this.saloonServiceEntity = response.data;
-        this.cdr.detectChanges();
-        console.log('Service saved successfully:', this.saloonServiceEntity);
+        this.findSaloonServicePage();
+        console.log('Service saved successfully:', response.data);
+        this.cdr.markForCheck();
       }
     },
     error: (error) => {
@@ -312,7 +327,11 @@ submitServiceForm(data: any) {
 
 
    onViewRecord(row: any) {
-    console.log('View record:', row);
+    this.dialog.open(ServiceDetailsDialogComponent, {
+      width: '480px',
+      maxWidth: '95vw',
+      data: row,
+    });
    }
 
    param:PageableParam = {
@@ -394,7 +413,7 @@ nextPage() {
         const dialogRef = this.dialog.open(DialogComponent, {
           width: '1200px',
           data: {
-            formTitle: 'Update Staff',
+            formTitle: 'Update Service',
             fields: this.serviceFieldsEdit,
             formData: [row],
           },
@@ -418,12 +437,8 @@ nextPage() {
                   next: (response) => {
                     if(response){
                       this.alertService.show('success', 'Service Updated successfully!');
-                      const index =   this.serviceDataSource.data.findIndex(service=> service.uid === response.data.uid);
-                      if(index !== -1){
-                        this.serviceDataSource.data[index]=response.data;
-                        this.serviceDataSource.data = [...this.serviceDataSource.data];
-                        this.cdr.detectChanges();
-                      }
+                      this.findSaloonServicePage();
+                      this.cdr.markForCheck();
                     }
                   },
                   error: (error) => {
@@ -435,29 +450,30 @@ nextPage() {
 
    }
    onDeleteRecord(row:any){
-   console.log('Delete record:', row);
-    this.serviceEditUID='';
-    this.serviceEditUID=row.uid;
-    this.saloonServiceDelete=true;
+    const dialogRef = this.dialog.open(DeleteConfirmationComponent, {
+      width: '420px',
+      maxWidth: '95vw',
+      disableClose: true,
+      data: {
+        itemName: row.serviceName || row.serviceCode || 'Service',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed: boolean) => {
+      if (confirmed) {
+        this.deleteService(row.uid);
+      }
+    });
    }
 
-   onCancelDelete(){
-    this.saloonServiceDelete=false;
-   }
-    onConfirmDeleteRecord() {
-    this.saloonServiceDelete = false;
-    this.service.deleteServiceSaloonByUID(this.serviceEditUID).subscribe({
+    private deleteService(serviceUID: string): void {
+    this.service.deleteServiceSaloonByUID(serviceUID).subscribe({
       next:(res)=>{
         if(res){
           console.log('Service Deleted Successfully', res.data);
-          const index = this.serviceDataSource.data.findIndex(service=> service.uid === res.data.uid);
-          if(index !== -1){
-            this.serviceDataSource.data.splice(index, 1);
-            this.serviceDataSource.data = [...this.serviceDataSource.data];
-            this.cdr.detectChanges();
-            this.alertService.show('success', 'Service successfully Deleted');
-            this.serviceEditUID='';
-          }
+          this.alertService.show('success', 'Service successfully Deleted');
+          this.findSaloonServicePage();
+          this.cdr.markForCheck();
         }
       },
       error:(error)=>{
@@ -768,6 +784,10 @@ userDataSource: UserTableData[] = [];findUserPageByBranch() {
 
           username: user.username || '--',
 
+          firstName: user.firstName,
+
+          lastName: user.lastName,
+
           fullName: [
             user.firstName,
             user.middleName,
@@ -802,7 +822,164 @@ userDataSource: UserTableData[] = [];findUserPageByBranch() {
   });
 }
 
+addUser(): void {
+
+  const dialogRef = this.dialog.open(SelectStaffDialogComponent, {
+    width: '560px',
+    maxWidth: '95vw',
+  });
+
+  dialogRef.afterClosed().subscribe((staff) => {
+
+    if (!staff) {
+      return;
+    }
+
+    const userDTO: UserDTO = {
+      firstName: staff.firstName,
+      middleName: staff.middleName,
+      lastName: staff.lastName,
+      gender: staff.gender,
+      dob: staff.dateOfBirth,
+      phone: staff.phoneNumber,
+      email: staff.email,
+      address: staff.address,
+      branch: this.visibility.getBranchUID(),
+    };
+
+    this.userService.saveUser(userDTO).subscribe({
+
+      next: (res) => {
+        if (res.data) {
+          this.alertService.show('success', 'User Added');
+          this.findUserPageByBranch();
+          this.cdr.markForCheck();
+        }
+      },
+
+      error: (err) => {
+        this.alertService.show('error', err?.error?.message || 'Failed to add user');
+      }
+    });
+  });
 }
 
+roles: any[] = [];
+userRoles: any[] = [];
+selectedRoleUIDs: string[] = [];
 
+// What roles the currently logged-in user is allowed to grant, based on
+// their own role. ROOT can assign anything; everyone else can only hand
+// out roles below their own rank.
+private getAssignableRoleNames(): string[] {
 
+  if (this.visibility.hasRole('ROOT')) {
+    return ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'];
+  }
+  if (this.visibility.hasRole('DIRECTOR')) {
+    return ['STAFF', 'MANAGER', 'CEO', 'CASHIER'];
+  }
+  if (this.visibility.hasRole('CEO')) {
+    return ['CASHIER', 'MANAGER'];
+  }
+  if (this.visibility.hasRole('STAFF')) {
+    return ['CEO', 'CASHIER', 'MANAGER'];
+  }
+
+  return [];
+}
+
+onViewUser(user: UserTableData): void {
+
+  this.userService.findUserByUID(user.uid).subscribe({
+
+    next: (userRes) => {
+
+      this.userRoles = Array.isArray(userRes.data)
+        ? userRes.data
+        : [userRes.data];
+
+      const currentRoleUIDs = this.userRoles
+        .map((userRole: any) => userRole?.roleUID)
+        .filter(Boolean);
+
+      this.userService.findRoleByBranch().subscribe({
+
+        next: (roleRes) => {
+
+          const assignableRoleNames = this.getAssignableRoleNames();
+          const allRoles = roleRes.data || [];
+
+          // Only offer roles the viewer is allowed to grant - but never
+          // hide a role the user already has, otherwise saving would
+          // silently strip a role the viewer isn't even allowed to touch.
+          this.roles = allRoles.filter((role: any) =>
+            assignableRoleNames.includes(role.name) ||
+            currentRoleUIDs.includes(role.uid)
+          );
+
+          this.selectedRoleUIDs = this.roles
+            .filter((role: any) => currentRoleUIDs.includes(role.uid))
+            .map((role: any) => role.uid);
+
+          this.openRoleDialog(user);
+
+          this.cdr.markForCheck();
+        },
+
+        error: (err) => {
+          console.error('Error fetching roles:', err);
+        }
+      });
+
+      this.cdr.markForCheck();
+    },
+
+    error: (err) => {
+      console.error('Error fetching user roles:', err);
+    }
+  });
+}
+
+openRoleDialog(user: UserTableData): void {
+
+  const dialogRef = this.dialog.open(UserRoleDialogComponent, {
+    width: '500px',
+    maxWidth: '95vw',
+    autoFocus: false,
+
+    data: {
+      user: user,
+      roles: this.roles,
+      selectedRoleUIDs: [...this.selectedRoleUIDs]
+    }
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+
+    if (result) {
+
+      const assignUserRoleDTO: AssignUserRoleDTO = {
+        userUID: result.userUID,
+        roleUIDS: result.roleUIDs
+      };
+
+      this.userService.assignOrUnAssignUserRole(assignUserRoleDTO).subscribe({
+
+        next: (res) => {
+          if (res.data) {
+            this.alertService.show('success', 'Role Assigned');
+            this.findUserPageByBranch();
+            this.cdr.markForCheck();
+          }
+        },
+
+        error: (err) => {
+          this.alertService.show('error', err?.error?.message || 'Failed to update role');
+        }
+      });
+    }
+  });
+}
+
+}

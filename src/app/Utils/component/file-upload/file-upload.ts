@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon } from "@angular/material/icon";
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -6,7 +6,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     selector: 'app-file-upload',
     templateUrl: './file-upload.html',
     styleUrls: ['./file-upload.css'],
-    imports: [MatIcon, MatTooltipModule]
+    imports: [MatIcon, MatTooltipModule],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FileUploadComponent {
 

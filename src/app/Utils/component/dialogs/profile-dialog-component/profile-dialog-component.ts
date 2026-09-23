@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
@@ -19,6 +19,7 @@ export interface ProfileDialogData {
   imports: [MatIconModule, TranslatePipe],
   templateUrl: './profile-dialog-component.html',
   styleUrl: './profile-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProfileDialogComponent {
 
@@ -36,6 +37,7 @@ export class ProfileDialogComponent {
     private userService: UserService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   get avatarUrl(): string | null {
@@ -72,6 +74,8 @@ export class ProfileDialogComponent {
     }
 
     this.previewUrl = URL.createObjectURL(file);
+
+    this.cdr.markForCheck();
   }
 
   save(): void {
@@ -111,6 +115,8 @@ export class ProfileDialogComponent {
         console.error('Error uploading profile picture:', error);
 
         this.errorMessageKey = 'PROFILE_DIALOG.UPLOAD_FAILED';
+
+        this.cdr.markForCheck();
       },
     });
   }

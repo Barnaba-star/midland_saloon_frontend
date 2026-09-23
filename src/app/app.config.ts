@@ -1,5 +1,6 @@
 import {
   ApplicationConfig,
+  ErrorHandler,
   provideBrowserGlobalErrorListeners,
   provideZonelessChangeDetection
 } from '@angular/core';
@@ -24,11 +25,15 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './Utils/inteceptor/auth-interceptor';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { StatusInterceptor } from './Utils/inteceptor/status-interceptor';
+import { GlobalErrorHandler } from './Utils/handlers/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
   providers: [
 
     provideBrowserGlobalErrorListeners(),
+
+    // Everything Angular throws gets recorded under Settings > Errors.
+    { provide: ErrorHandler, useClass: GlobalErrorHandler },
 
     provideZonelessChangeDetection(),
     provideNativeDateAdapter(),

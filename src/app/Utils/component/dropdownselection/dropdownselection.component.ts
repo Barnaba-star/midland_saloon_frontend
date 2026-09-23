@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -6,7 +6,8 @@ import { FormsModule } from '@angular/forms';
   selector: 'app-dropdownselection',
   imports: [CommonModule, FormsModule],
   templateUrl: './dropdownselection.component.html',
-  styleUrl: './dropdownselection.component.css'
+  styleUrl: './dropdownselection.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DropdownselectionComponent {
  @Input() label: string = 'Select Option';

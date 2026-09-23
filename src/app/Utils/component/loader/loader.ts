@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { LoaderService } from '../../services/loader-service';
 
@@ -10,7 +10,8 @@ import { LoaderService } from '../../services/loader-service';
     CommonModule
   ],
   templateUrl: './loader.html',
-  styleUrls: ['./loader.css']
+  styleUrls: ['./loader.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class LoaderComponent implements OnInit {
 
@@ -18,7 +19,8 @@ export class LoaderComponent implements OnInit {
 
 
   constructor(
-    private loaderService: LoaderService
+    private loaderService: LoaderService,
+    private cdr: ChangeDetectorRef
   ){}
 
 
@@ -28,6 +30,7 @@ export class LoaderComponent implements OnInit {
     .subscribe(state => {
 
       this.loading = state;
+      this.cdr.markForCheck();
 
     });
 

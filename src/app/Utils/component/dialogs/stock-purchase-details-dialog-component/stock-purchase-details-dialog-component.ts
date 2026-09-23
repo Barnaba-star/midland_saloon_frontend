@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatDialogModule, MatIconModule, CommonModule, TranslatePipe],
   templateUrl: './stock-purchase-details-dialog-component.html',
   styleUrl: './stock-purchase-details-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StockPurchaseDetailsDialogComponent {
 

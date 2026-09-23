@@ -1,12 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'action-menu',
   imports:[CommonModule],
   standalone: true,
   templateUrl: './action-menu-component.html',
-  styleUrls: ['./action-menu-component.css']
+  styleUrls: ['./action-menu-component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionMenuComponent {
 

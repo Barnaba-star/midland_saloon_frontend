@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,6 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatIconModule, MatButtonModule, TranslatePipe],
   templateUrl: './landing.html',
   styleUrl: './landing.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Landing {
   currentYear = new Date().getFullYear();

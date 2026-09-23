@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { CommonModule } from '@angular/common';
@@ -26,6 +26,7 @@ export interface TitleAction {
   imports: [MatToolbarModule, CommonModule, MatIcon,  MatSelectModule],
   templateUrl: './title.component.html',
   styleUrl: './title.component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TitleComponent implements OnInit {
   @Input() titleHeader: string = '';

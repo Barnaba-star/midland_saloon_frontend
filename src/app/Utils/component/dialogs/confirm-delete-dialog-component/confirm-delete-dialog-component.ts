@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -8,6 +8,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatIconModule, TranslatePipe],
   templateUrl: './confirm-delete-dialog-component.html',
   styleUrl: './confirm-delete-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ConfirmDeleteDialogComponent {
 

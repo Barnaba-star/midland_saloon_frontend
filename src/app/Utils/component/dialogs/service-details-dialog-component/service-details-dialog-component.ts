@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { DecimalPipe } from '@angular/common';
@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatIconModule, DecimalPipe, TranslatePipe],
   templateUrl: './service-details-dialog-component.html',
   styleUrl: './service-details-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ServiceDetailsDialogComponent {
 

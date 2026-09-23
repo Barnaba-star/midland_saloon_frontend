@@ -1,11 +1,12 @@
-import { Component, ContentChildren, QueryList, TemplateRef, AfterContentInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, ContentChildren, QueryList, TemplateRef, AfterContentInit, Input, EventEmitter, Output, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
     selector: 'app-resizable-panel',
     imports: [CommonModule],
     templateUrl: './resizable-panel.html',
-    styleUrls: ['./resizable-panel.css']
+    styleUrls: ['./resizable-panel.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResizablePanel {
    @ContentChildren(TemplateRef) items!: QueryList<TemplateRef<any>>;

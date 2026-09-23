@@ -1,5 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Authentication } from '../../Utils/services/authentication';
+import { POS_FULL_ACCESS_ROLES } from '../pos-role.guard';
 import { TitleAction } from '../../Utils/component/title/title.component';
 import { Title2 } from '../../Utils/component/title2/title2';
 import { MatIcon } from '@angular/material/icon';
@@ -20,6 +21,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   imports: [Title2, MatIcon, DecimalPipe, UpperCasePipe, TranslatePipe],
   templateUrl: './saloon-store.html',
   styleUrl: './saloon-store.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonStore implements OnInit{
   staffFields: any;
@@ -44,9 +46,15 @@ export class SaloonStore implements OnInit{
     {
       icon: 'setting',
       title: 'STORE.MANAGE',
-      roles: ['ROOT'],
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'],
     },
   ];
+
+  // Store buttons: CEO (and above) and MANAGER see all three - available,
+  // in use and closed. CASHIER only sees available + in use.
+  get canSeeClosedStores(): boolean {
+    return [...POS_FULL_ACCESS_ROLES, 'MANAGER'].some(role => this.visibility.hasRole(role));
+  }
 
   getTitled(title: TitleAction[]): TitleAction[] {
     return this.visibility.filteredTitleActions(title);
@@ -141,6 +149,7 @@ export class SaloonStore implements OnInit{
           if (serviceField) {
             serviceField.options = options;
           }
+          this.cdr.markForCheck();
         }
       },
 
@@ -169,6 +178,7 @@ export class SaloonStore implements OnInit{
           this.loadSaloonStorePage();
 
           console.log('Response Data', res.data);
+          this.cdr.markForCheck();
         }
       },
 
@@ -218,6 +228,7 @@ export class SaloonStore implements OnInit{
           this.cdr.detectChanges();
         } else {
           this.storeDataSource = [];
+          this.cdr.markForCheck();
         }
       },
 
@@ -277,6 +288,7 @@ export class SaloonStore implements OnInit{
           }
           this.deleteStore = false;
           this.storeRecord = {};
+          this.cdr.markForCheck();
         }
       },
 
@@ -445,6 +457,7 @@ export class SaloonStore implements OnInit{
               console.log('Open Stores Found:', res.data);
         } else {
           this.storeDataSource = [];
+          this.cdr.markForCheck();
         }
       },
 

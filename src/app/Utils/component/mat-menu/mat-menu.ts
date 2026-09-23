@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
@@ -18,7 +18,8 @@ export type MatMenuItem ={
   standalone:true,
   imports: [MatButtonModule, MatMenuModule, MatIconModule, CommonModule, MatDivider],
   templateUrl: './mat-menu.html',
-  styleUrl: './mat-menu.css'
+  styleUrl: './mat-menu.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MatMenuComponent {
 

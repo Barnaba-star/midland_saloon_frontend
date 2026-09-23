@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter  } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -20,7 +20,8 @@ export interface MenuItem {
   standalone: true,
   imports: [RouterModule, MatListModule, MatIconModule, MatToolbarModule, MatSidenavModule, CommonModule],
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css']
+  styleUrls: ['./sidenav.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidenavComponent {
   imagePath: string = '';

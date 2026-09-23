@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, EventEmitter, Inject, Input, Output, QueryList, TemplateRef, ViewChildren } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Inject, Input, Output, QueryList, TemplateRef, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -24,7 +24,8 @@ import { FormComponent } from '../form/form';
 
 ],
   templateUrl: './workflow-dialog.html',
-  styleUrl: './workflow-dialog.css'
+  styleUrl: './workflow-dialog.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class WorkflowDialog implements AfterViewInit {
   @ViewChildren(FormComponent) forms!: QueryList<FormComponent>;

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, Input, TemplateRef, EventEmitter, Output, ViewChildren, QueryList, AfterViewInit } from '@angular/core';
+import { Component, Inject, Input, TemplateRef, EventEmitter, Output, ViewChildren, QueryList, AfterViewInit, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
 import { FormComponent } from '../form/form';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -31,7 +31,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     TranslatePipe,
 ],
     templateUrl: './dialog.html',
-    styleUrls: ['./dialog.css']
+    styleUrls: ['./dialog.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DialogComponent implements AfterViewInit {
   @ViewChildren(FormComponent) forms!: QueryList<FormComponent>;

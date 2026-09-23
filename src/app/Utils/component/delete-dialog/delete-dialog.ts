@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatIcon, MatIconModule } from "@angular/material/icon";
 import { TranslatePipe } from '@ngx-translate/core';
 
@@ -7,7 +7,8 @@ import { TranslatePipe } from '@ngx-translate/core';
     selector: 'app-delete-dialog',
     imports: [CommonModule, MatIconModule, TranslatePipe],
     templateUrl: './delete-dialog.html',
-    styleUrls: ['./delete-dialog.css']
+    styleUrls: ['./delete-dialog.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteDialogComponent {
   @Input() message: string = 'Are you sure you want to delete this item?';

@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
 
 
@@ -15,7 +15,8 @@ interface MenuItem {
   selector: 'app-sidebar',
   templateUrl: './sidebar-component.html',
   styleUrls: ['./sidebar-component.css'],
-  imports: [MatIconModule, CommonModule]
+  imports: [MatIconModule, CommonModule],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {
   @Input() menuItems: MenuItem[] = [];   // projectable menu items

@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
@@ -14,7 +14,8 @@ import { environment } from '../../enviroments/environment';
   selector: 'app-main-sidenav',
   templateUrl: './main-sidenav-component.html',
   styleUrls: ['./main-sidenav-component.css'],
-  imports: [MatIcon, CommonModule, MatDivider]
+  imports: [MatIcon, CommonModule, MatDivider],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 
 export class MainSidenavComponent implements OnInit {

@@ -160,6 +160,8 @@ export interface UserTableData {
   uid: string;
   username: string;
   fullName: string;
+  firstName?: string;
+  lastName?: string;
   roleName: string;
   branchName: string;
 }

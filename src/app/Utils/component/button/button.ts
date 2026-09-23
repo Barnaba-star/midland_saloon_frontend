@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 
@@ -7,7 +7,8 @@ import { MatIconModule } from '@angular/material/icon';
     selector: 'app-button',
     templateUrl: './button.html',
     imports: [MatButtonModule, MatIconModule, CommonModule],
-    styleUrls: ['./button.css']
+    styleUrls: ['./button.css'],
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ButtonComponent {
   @Input() label: string = 'Click';

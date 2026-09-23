@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
@@ -12,6 +12,7 @@ import { AlertService } from '../../../services/alert';
   imports: [MatIconModule, FormsModule, TranslatePipe],
   templateUrl: './change-password-dialog-component.html',
   styleUrl: './change-password-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ChangePasswordDialogComponent {
 
@@ -31,6 +32,7 @@ export class ChangePasswordDialogComponent {
     private loginService: LoginService,
     private alertService: AlertService,
     private translate: TranslateService,
+    private cdr: ChangeDetectorRef,
   ) { }
 
   get canSave(): boolean {
@@ -72,6 +74,7 @@ export class ChangePasswordDialogComponent {
 
         if (!res?.data) {
           this.errorMessage = res?.message || this.translate.instant('CHANGE_PASSWORD_DIALOG.FAILED');
+          this.cdr.markForCheck();
           return;
         }
 
@@ -88,6 +91,8 @@ export class ChangePasswordDialogComponent {
           error?.error?.message ||
           (typeof error?.error === 'string' ? error.error : null) ||
           this.translate.instant('CHANGE_PASSWORD_DIALOG.FAILED');
+
+        this.cdr.markForCheck();
       },
     });
   }

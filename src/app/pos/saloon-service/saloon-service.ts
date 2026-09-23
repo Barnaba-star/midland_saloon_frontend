@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from "../../Utils/component/title2/title2";
 import { Authentication } from '../../Utils/services/authentication';
 import { MatIconModule } from "@angular/material/icon";
@@ -16,6 +16,7 @@ import { DecimalPipe } from '@angular/common';
   imports: [Title2, MatIconModule, TranslatePipe, MatTooltipModule, DecimalPipe],
   templateUrl: './saloon-service.html',
   styleUrl: './saloon-service.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonService implements OnInit{
   constructor(
@@ -37,7 +38,7 @@ export class SaloonService implements OnInit{
     {
       icon: 'more',
       title: 'SERVICE.MANAGE',
-      roles: ['ROOT']
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER']
     },
 
 

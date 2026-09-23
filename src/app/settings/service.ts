@@ -24,4 +24,8 @@ export class Service {
       return this.http.get<ResponseList<any>>(`${this.settingURL}/findOnlineUsers`)
     }
 
+    updateSubscription(payload: { mobileNetwork: string; phoneNumber: string; months: number }):Observable<Response<any>>{
+      return this.http.post<Response<any>>(`${this.settingURL}/updateSubscription`, payload)
+    }
+
 }

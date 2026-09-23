@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction } from "../../Utils/component/title/title.component";
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
 import { FormField } from '../../Utils/models/form-field';
@@ -27,6 +27,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
   imports: [MatIconModule, Title2, DatePipe,UpperCasePipe, MatPaginatorModule, TranslatePipe],
   templateUrl: './role-setting.html',
   styleUrl: './role-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class RoleSetting implements OnInit{
 constructor(private dialog:MatDialog, private visibility:Authentication, private branchService:NodeService, private roleService:RoleService,
@@ -51,7 +52,7 @@ private cdr:ChangeDetectorRef,  private loaderService: LoaderService, private tr
   }
 selectedRoleRole = '';
 titleActions = [
-    { icon: 'manage', title: 'ROLE_SETTING_PAGE.MANAGE_TAB',  roles: ['ROOT'] },
+    { icon: 'manage', title: 'ROLE_SETTING_PAGE.MANAGE_TAB',  roles: ['ROOT', 'STAFF', 'DIRECTOR'] },
 
 ];
 
@@ -81,19 +82,7 @@ roleFormField: FormField[] = [
     type: 'select',
     required: true,
     options: [
-      { label: 'Restaurant', value: 'RESTAURANT' },
-      { label: 'Bar', value: 'BAR' },
       { label: 'Saloon', value: 'SALOON' },
-      { label: 'Café', value: 'CAFE' },
-      { label: 'Fast Food', value: 'FAST_FOOD' },
-      { label: 'Food Court', value: 'FOOD_COURT' },
-      { label: 'Bakery', value: 'BAKERY' },
-      { label: 'Pub', value: 'PUB' },
-      { label: 'Lounge', value: 'LOUNGE' },
-      { label: 'Hotel', value: 'HOTEL' },
-      { label: 'Guest House', value: 'GUEST_HOUSE' },
-      { label: 'Catering', value: 'CATERING' },
-      { label: 'Other', value: 'OTHER' }
     ]
   },
 

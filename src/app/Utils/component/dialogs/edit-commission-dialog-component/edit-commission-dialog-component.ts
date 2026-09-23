@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -17,6 +17,7 @@ interface CommissionRow {
   imports: [CommonModule, FormsModule, DecimalPipe, MatIconModule, MatButtonModule],
   templateUrl: './edit-commission-dialog-component.html',
   styleUrl: './edit-commission-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class EditCommissionDialogComponent {
   serviceName: string;

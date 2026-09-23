@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Inject, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Inject, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormField } from '../../models/form-field';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
@@ -20,7 +20,8 @@ import { FormComponent } from "../form/form";
   imports: [MatDialogModule, CommonModule, MatStepperModule, ReactiveFormsModule, MatNativeDateModule,
             MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, MatDatepickerModule, FormsModule, FormComponent],
   templateUrl: './stepper-form-component.html',
-  styleUrl: './stepper-form-component.css'
+  styleUrl: './stepper-form-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StepperDialogComponent implements OnInit {
   formGroups: FormGroup[] = [];

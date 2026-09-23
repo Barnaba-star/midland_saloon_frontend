@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject, Input, TemplateRef } from '@angular/core';
+import { Component, Inject, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 
 @Component({
@@ -7,7 +7,8 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
   standalone:true,
   imports: [MatDialogModule, CommonModule],
   templateUrl: './reusable-dialog-component.html',
-  styleUrls: ['./reusable-dialog-component.css']
+  styleUrls: ['./reusable-dialog-component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReusableDialogComponent {
   @Input() showCloseButton: boolean = true;

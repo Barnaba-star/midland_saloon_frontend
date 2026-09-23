@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from '../../Utils/component/title2/title2';
 import { Authentication } from '../../Utils/services/authentication';
 import { MatIconModule } from '@angular/material/icon';
@@ -50,6 +50,7 @@ interface PaymentSummaryDisplay {
 ],
   templateUrl: './saloon-sales.html',
   styleUrl: './saloon-sales.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonSales implements OnInit{
   constructor(
@@ -72,12 +73,12 @@ export class SaloonSales implements OnInit{
     {
       icon: 'add',
       title: 'SALES.ADD',
-      roles: ['ROOT'],
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'],
     },
     {
       icon: 'history',
       title: 'SALES.MANAGE',
-      roles: ['ROOT'],
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'],
     },
   ];
 
@@ -194,6 +195,7 @@ findSaloonSalesList(sale: SalesOpened) {
       );
 
       this.openSaleDetailsDialog();
+      this.cdr.markForCheck();
     },
 
     error: (error) => {
@@ -206,6 +208,7 @@ findSaloonSalesList(sale: SalesOpened) {
 
       // bado unaweza kufungua dialog kuonyesha hakuna services
       this.openSaleDetailsDialog();
+      this.cdr.markForCheck();
     },
   });
 }
@@ -247,6 +250,7 @@ openSaleDetailsDialog() {
       this.proceedToPayment();
     }
 
+    this.cdr.markForCheck();
   });
 }
 
@@ -301,6 +305,8 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
           this.selectedPaymentMethod =
             result.paymentMethod;
         }
+
+        this.cdr.markForCheck();
       });
     },
 
@@ -425,6 +431,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
           }));
         }
         console.log('Staff Options:', staffField?.options);
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error Occurred', error);
@@ -445,6 +452,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
           }));
         }
         console.log('Service Options:', serviceField?.options);
+        this.cdr.markForCheck();
       },
       error: (error) => {
         console.error('Error Occurred', error);
@@ -575,6 +583,7 @@ openSpecificDatePicker(): void {
 
   setTimeout(() => {
     this.filterDatePicker.open();
+    this.cdr.markForCheck();
   });
 }
 

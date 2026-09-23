@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -19,7 +19,8 @@ export interface StatusDialogData {
     styleUrls: ['./status-dialog.css'],
     host: {
         '[class.error-dialog]': 'data.status === "error"' // 👈 hapa
-    }
+    },
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class StatusDialogComponent {
   constructor(

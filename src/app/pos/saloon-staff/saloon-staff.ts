@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from '../../Utils/component/title2/title2';
 import { Authentication } from '../../Utils/services/authentication';
 import { MatIconModule } from '@angular/material/icon';
@@ -32,6 +32,7 @@ import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delet
   ],
   templateUrl: './saloon-staff.html',
   styleUrl: './saloon-staff.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonStaff implements OnInit{
   constructor(
@@ -54,12 +55,12 @@ export class SaloonStaff implements OnInit{
     {
       icon: 'add',
       title: 'STAFF.ADD',
-      roles: ['ROOT'],
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'],
     },
     {
       icon: 'more',
       title: 'STAFF.MANAGE',
-      roles: ['ROOT'],
+      roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'],
     },
   ];
 

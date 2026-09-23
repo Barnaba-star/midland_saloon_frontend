@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleComponent } from "../../Utils/component/title/title.component";
 import { MatDialog } from '@angular/material/dialog';
 import { MatSelectModule } from "@angular/material/select";
@@ -20,13 +20,14 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [ MatSelectModule, MatCheckboxModule, MatIconModule, CommonModule, MatFormFieldModule, MatSelectModule, MatDividerModule, Title2, TranslatePipe],
   templateUrl: './permission-setting.html',
   styleUrl: './permission-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PermissionSetting implements OnInit {
 
   permissions: any[] = [];
   selectedPermission = '';
   titleActions = [
-    { icon: 'more', title: 'PERMISSION_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'REG OFFICER'] },
+    { icon: 'more', title: 'PERMISSION_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER'] },
   ];
 
   constructor(
@@ -60,6 +61,7 @@ findRoles(): void {
     next: (response) => {
       this.roles = response?.data || [];
       console.log('Roles Found', this.roles)
+      this.cdr.markForCheck();
     }
   });
 }
@@ -76,6 +78,7 @@ findDistinctModules():void{
   next:(response)=>{
     this.modules = response?.data || [];
   //  console.log('Permissions Found', response);
+    this.cdr.markForCheck();
 
   },
   error:(error)=>{

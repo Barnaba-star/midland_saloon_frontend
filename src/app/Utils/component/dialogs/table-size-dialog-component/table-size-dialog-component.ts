@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
@@ -11,6 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatDatepickerModule, MatDialogModule, MatInputModule, FormsModule, DatePipe, CommonModule, TranslatePipe],
   templateUrl: './table-size-dialog-component.html',
   styleUrl: './table-size-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TableSizeDialogComponent {
 

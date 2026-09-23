@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,6 +20,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, ReactiveFormsModule, CommonModule, TranslatePipe],
   templateUrl: './login.html',
   styleUrl: './login.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class Login implements OnInit {
 private api = environment.baseApiUrl
@@ -67,8 +68,14 @@ onSubmit() {
         // Start heartbeat
         this.auth.startHeartbeat();
 
-        // Navigate
-        this.route.navigate(['/dashboard']);
+        // ROOT/STAFF/DIRECTOR manage the system - they land on the Dashboard
+        // and pick where to go (including Settings). CEO/MANAGER/CASHIER are
+        // branch-operational roles - they skip the Dashboard entirely and go
+        // straight into POS. A user holding any system-management role wins
+        // if they somehow hold both kinds.
+        const systemRoles = ['ROOT', 'STAFF', 'DIRECTOR'];
+        const landing = systemRoles.some(role => this.auth.hasRole(role)) ? '/dashboard' : '/pos';
+        this.route.navigate([landing]);
 
         this.cdr.detectChanges();
       },

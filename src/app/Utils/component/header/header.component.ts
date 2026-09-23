@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from "@angular/material/form-field";
@@ -13,7 +13,8 @@ import { ActivatedRoute, Route, Router, RouterModule } from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatFormFieldModule, MatSidenavModule, RouterModule, MatDivider]
+  imports: [CommonModule, MatIconModule, MatFormFieldModule, MatSidenavModule, RouterModule, MatDivider],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {
 

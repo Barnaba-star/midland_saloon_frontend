@@ -1,14 +1,16 @@
 import {
   ChangeDetectionStrategy,
+  ChangeDetectorRef,
   Component,
   ElementRef,
   HostListener,
   Input,
+  OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
 
-import { AsyncPipe } from '@angular/common';
+import { AsyncPipe, DatePipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
@@ -22,7 +24,7 @@ import {
   TranslateService,
 } from '@ngx-translate/core';
 
-import { map, Observable } from 'rxjs';
+import { interval, map, Observable, Subscription } from 'rxjs';
 
 import { UserService } from '../../../settings/users-setting/user-service';
 import { environment } from '../../enviroments/environment';
@@ -33,6 +35,7 @@ import { GlobalSearchService, SearchItem } from '../../services/global-search';
 import { HelpDialogComponent } from '../dialogs/help-dialog-component/help-dialog-component';
 import { ProfileDialogComponent } from '../dialogs/profile-dialog-component/profile-dialog-component';
 import { ChangePasswordDialogComponent } from '../dialogs/change-password-dialog-component/change-password-dialog-component';
+import { SubscribeDialogComponent } from '../dialogs/subscribe-dialog-component/subscribe-dialog-component';
 import { SystemSettingService } from '../../services/system-setting';
 
 import { SidenavItem } from '../main-sidenav-component/model';
@@ -48,6 +51,7 @@ import { SidenavItem } from '../main-sidenav-component/model';
     MatTooltipModule,
     TranslatePipe,
     AsyncPipe,
+    DatePipe,
     FormsModule,
   ],
 
@@ -56,7 +60,7 @@ import { SidenavItem } from '../main-sidenav-component/model';
   templateUrl: './main-sidenav2.html',
   styleUrl: './main-sidenav2.css',
 })
-export class MainSidenav2 implements OnInit {
+export class MainSidenav2 implements OnInit, OnDestroy {
 
   // ============================================================
   // USER INFORMATION
@@ -74,6 +78,14 @@ export class MainSidenav2 implements OnInit {
   branchUID = '';
   branchName = '';
   branchCategory = '';
+  subscriptionStatus = '';
+  subscriptionEndDate: string | null = null;
+
+  // Monthly price for this branch. Kept so the subscribe dialog can check the
+  // total against the provider's minimum BEFORE sending - below it, Snippe
+  // answers with its own raw English text, which used to reach the customer.
+  subscriptionAmount: number | null = null;
+  private subscriptionPollSub?: Subscription;
 
   fullName = '';
   email = '';
@@ -158,6 +170,7 @@ export class MainSidenav2 implements OnInit {
     private globalSearch: GlobalSearchService,
     private dialog: MatDialog,
     private systemSettingService: SystemSettingService,
+    private cdr: ChangeDetectorRef,
   ) {
 
     this.notifications$ = this.notificationService.notifications$;
@@ -232,6 +245,10 @@ export class MainSidenav2 implements OnInit {
     if (this.isMobileView) {
       this.isOpen = false;
     }
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptionPollSub?.unsubscribe();
   }
 
 
@@ -330,6 +347,8 @@ export class MainSidenav2 implements OnInit {
             'Profile Path:',
             this.profilePic
           );
+
+          this.cdr.markForCheck();
         }
 
       },
@@ -368,6 +387,19 @@ export class MainSidenav2 implements OnInit {
         this.branchCategory =
           res.data.branchCategory;
 
+        this.subscriptionStatus =
+          res.data.subscriptionStatus || '';
+
+        this.subscriptionEndDate =
+          res.data.closeSubscription || null;
+
+        this.subscriptionAmount =
+          res.data.subscriptionAmount ?? null;
+
+        this.cdr.markForCheck();
+
+        this.startSubscriptionStatusPolling();
+
       },
 
       error: (error) => {
@@ -380,6 +412,54 @@ export class MainSidenav2 implements OnInit {
       }
 
     });
+  }
+
+  get subscriptionBadgeClass(): string {
+    switch (this.subscriptionStatus) {
+      case 'ACTIVE': return 'sub-badge active';
+      case 'FREE': return 'sub-badge free';
+      case 'PENDING': return 'sub-badge pending';
+      case 'FAILED': return 'sub-badge failed';
+      case 'EXPIRED': return 'sub-badge failed';
+      default: return 'sub-badge unknown';
+    }
+  }
+
+  get subscriptionDotClass(): string {
+    switch (this.subscriptionStatus) {
+      case 'ACTIVE': return 'sub-dot active';
+      case 'FREE': return 'sub-dot free';
+      case 'PENDING': return 'sub-dot pending';
+      case 'FAILED': return 'sub-dot failed';
+      case 'EXPIRED': return 'sub-dot failed';
+      default: return 'sub-dot unknown';
+    }
+  }
+
+  get subscriptionBadgeLabel(): string {
+    switch (this.subscriptionStatus) {
+      case 'ACTIVE': return 'MENU.SUBSCRIPTION_ACTIVE';
+      case 'FREE': return 'MENU.SUBSCRIPTION_FREE';
+      case 'PENDING': return 'MENU.SUBSCRIPTION_PENDING';
+      case 'FAILED': return 'MENU.SUBSCRIPTION_FAILED';
+      case 'EXPIRED': return 'MENU.SUBSCRIPTION_EXPIRED';
+      default: return 'MENU.SUBSCRIPTION_UNKNOWN';
+    }
+  }
+
+  // Snippe confirms payment via webhook on their own server, not to the
+  // browser, so the only way this badge finds out the branch got paid (or
+  // that an ACTIVE/FREE period quietly lapsed while someone was mid-session)
+  // is by asking our backend again periodically. Runs for as long as the
+  // sidenav is alive - cleaned up in ngOnDestroy.
+  private startSubscriptionStatusPolling(): void {
+
+    if (this.subscriptionPollSub || !this.branchUID) {
+      return;
+    }
+
+    this.subscriptionPollSub = interval(60000)
+      .subscribe(() => this.findBranchByUID(this.branchUID));
   }
 
 
@@ -395,6 +475,7 @@ export class MainSidenav2 implements OnInit {
 
         if (res.data?.logoImage) {
           this.logoUrl = `${environment.baseApiUrl}/uploads/${res.data.logoImage}`;
+          this.cdr.markForCheck();
         }
       },
 
@@ -425,6 +506,8 @@ export class MainSidenav2 implements OnInit {
         if (res.data?.logoImage) {
           this.logoUrl = `${environment.baseApiUrl}/uploads/${res.data.logoImage}`;
         }
+
+        this.cdr.markForCheck();
       },
 
       error: (error) => {
@@ -432,6 +515,8 @@ export class MainSidenav2 implements OnInit {
         input.value = '';
 
         console.error('Error uploading system logo:', error);
+
+        this.cdr.markForCheck();
       },
     });
   }
@@ -775,6 +860,7 @@ export class MainSidenav2 implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       if (result?.profilePic) {
         this.profilePic = result.profilePic;
+        this.cdr.markForCheck();
       }
     });
   }
@@ -786,6 +872,24 @@ export class MainSidenav2 implements OnInit {
     this.dialog.open(ChangePasswordDialogComponent, {
       width: '420px',
       maxWidth: '95vw',
+    });
+  }
+
+  openSubscribeDialog(): void {
+
+    this.profile = false;
+
+    const dialogRef = this.dialog.open(SubscribeDialogComponent, {
+      width: '420px',
+      maxWidth: '95vw',
+      data: { subscriptionAmount: this.subscriptionAmount },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      if (this.branchUID) {
+        this.findBranchByUID(this.branchUID);
+      }
+      this.startSubscriptionStatusPolling();
     });
   }
 

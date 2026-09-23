@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTooltipModule } from '@angular/material/tooltip';
 
@@ -6,7 +6,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     selector: 'app-fab-button',
     imports: [MatTooltipModule, MatIconModule],
     templateUrl: './fab-button.html',
-    styleUrl: './fab-button.css'
+    styleUrl: './fab-button.css',
+    changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FabButtonComponent {
   @Input() icon: string = '';

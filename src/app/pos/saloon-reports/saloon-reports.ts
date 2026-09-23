@@ -1,5 +1,6 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Authentication } from '../../Utils/services/authentication';
+import { POS_FULL_ACCESS_ROLES } from '../pos-role.guard';
 import { TitleAction } from '../../Utils/component/title/title.component';
 import { Title2 } from "../../Utils/component/title2/title2";
 import { MatIcon } from "@angular/material/icon";
@@ -48,38 +49,48 @@ export class SaloonReports implements OnInit{
     private visibility: Authentication, private saloonService:ServiceSaloonMethod, private cdr:ChangeDetectorRef, private alert:AlertService, private dialog:MatDialog
   ) { }
   ngOnInit(): void {
-    this.selectedReport ='REPORTS.SERVICE'
-
-      this.filter = 'DAY';
-      this.findSaloonRevenueReport();
-      this.findSaloonRevenueByService();
+    // Open on the first tab this role can actually see: CEO and above land
+    // on Service as before, MANAGER/CASHIER (who can't see Service) land on
+    // Staff.
+    const visible = this.getTitled(this.titleActions).map(action => action.title);
+    const defaultTab = ['REPORTS.SERVICE', 'REPORTS.STAFF'].find(tab => visible.includes(tab)) ?? visible[0];
+    if (defaultTab) {
+      this.onAction(defaultTab);
+    }
   }
   selectedReport = '';
+  // Who sees which tab inside Report ("Matumizi" for MANAGER/CASHIER):
+  //   CEO     -> every tab
+  //   MANAGER -> Staff report + Store + Stock & Purchase
+  //   CASHIER -> Staff report + Store
+  // Frontend visibility only - the backend @PreAuthorize checks are the
+  // real security boundary.
+  private readonly fullAccessRoles = POS_FULL_ACCESS_ROLES;
   titleActions: TitleAction[] = [
          {
       icon: 'stock',
       title: 'REPORTS.STOCK',
-      roles: ['ROOT']
+      roles: [...this.fullAccessRoles, 'MANAGER']
     },
        {
       icon: 'payment2',
       title: 'REPORTS.INCOME',
-      roles: ['ROOT']
+      roles: this.fullAccessRoles
     },
       {
       icon: 'store',
       title: 'REPORTS.STORE',
-      roles: ['ROOT']
+      roles: [...this.fullAccessRoles, 'MANAGER', 'CASHIER']
     },
     {
       icon: 'person2',
       title: 'REPORTS.STAFF',
-      roles: ['ROOT']
+      roles: [...this.fullAccessRoles, 'MANAGER', 'CASHIER']
     },
     {
       icon: 'service',
       title: 'REPORTS.SERVICE',
-      roles: ['ROOT']
+      roles: this.fullAccessRoles
     },
 
   ];
@@ -146,6 +157,11 @@ pageSize: number = 5;
 
 totalElements: number = 0;
 totalPages: number = 0;
+
+// Rebuilt whenever totalPages changes. The template used to call
+// [].constructor(totalPages), which allocated a fresh array on every
+// change detection pass and so could never be tracked.
+pageNumbers: number[] = [];
 
 isLoading: boolean = false;
 
@@ -295,6 +311,7 @@ findSaloonReportsPage(): void {
       this.totalPages =
         response.totalPages ??
         Math.ceil(this.totalElements / this.pageSize);
+      this.pageNumbers = Array.from({ length: this.totalPages }, (_, i) => i);
 
       this.isLoading = false;
 
@@ -312,7 +329,10 @@ findSaloonReportsPage(): void {
       this.filteredReports = [];
       this.totalElements = 0;
       this.totalPages = 0;
+      this.pageNumbers = [];
       this.isLoading = false;
+
+      this.cdr.markForCheck();
     }
 
   });
@@ -501,6 +521,8 @@ findSaloonRevenueReport(): void {
       );
 
       this.revenueReportToday = null;
+
+      this.cdr.markForCheck();
     }
 
   });
@@ -530,6 +552,8 @@ findSaloonRevenueByService(): void {
       );
 
       this.revenueByService = [];
+
+      this.cdr.markForCheck();
     }
 
   });
@@ -882,6 +906,7 @@ findServiceEntityUIDList(): void {
         this.storeOpenList = [];
         this.serviceEntityUIDS = [];
         console.log('No open stores found');
+        this.cdr.markForCheck();
       }
     },
     error: (error) => {
@@ -896,6 +921,8 @@ findServiceEntityUIDList(): void {
         'error',
         'Error Occurred when fetching Service Entity UIDs'
       );
+
+      this.cdr.markForCheck();
     }
   });
 }
@@ -1118,6 +1145,8 @@ selectIncomeExpenseFilter(filter: string): void {
 
         this.incomeExpenses = [];
 
+        this.cdr.markForCheck();
+
       }
 
     });
@@ -1255,6 +1284,7 @@ getStockAndPurchaseByFilter(filter: string): void {
       error: (error) => {
         console.error('Error occurred', error);
         this.stockAndPurchaseReports = [];
+        this.cdr.markForCheck();
       }
     });
 }
@@ -1453,6 +1483,8 @@ payStockPurchase(stock: any): void {
     this.stockPaymentAmount = null;
 
     this.stockPaymentDescription = '';
+
+    this.cdr.markForCheck();
 
   });
 }

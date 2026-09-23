@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Title2 } from '../../Utils/component/title2/title2';
 import { TitleAction } from '../../Utils/component/title/title.component';
 import { Authentication } from '../../Utils/services/authentication';
@@ -23,6 +23,7 @@ export interface TableSize {
   imports: [Title2, CommonModule, TranslatePipe],
   templateUrl: './storage-setting.html',
   styleUrl: './storage-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class StorageSetting  implements OnInit{
   constructor(private visibility:Authentication, private service:Service, private cdr:ChangeDetectorRef, private dialog:MatDialog){}
@@ -40,7 +41,7 @@ export class StorageSetting  implements OnInit{
     }
 
  titleActions = [
-     { icon: 'more', title: 'STORAGE_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'REG OFFICER'] }
+     { icon: 'more', title: 'STORAGE_SETTING_PAGE.MANAGE_TAB', roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER'] }
  ];
 
  getTitled(title:TitleAction[]):TitleAction[]{
@@ -77,6 +78,10 @@ getTableSizes() {
           : null;
 
         console.log('Table Sizes:', this.tableSizes);
+
+        // detectChanges() above runs before the totals are worked out, so the
+        // view still has to be marked once everything is assigned.
+        this.cdr.markForCheck();
       }
     },
 

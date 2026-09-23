@@ -2,7 +2,8 @@ import {
   Component,
   OnInit,
   ChangeDetectorRef,
-  OnDestroy
+  OnDestroy,
+  ChangeDetectionStrategy
 } from '@angular/core';
 import { AlertService } from '../../services/alert';
 import { AlertType } from '../../services/alert';
@@ -14,7 +15,8 @@ import { Subject, takeUntil } from 'rxjs';
   templateUrl: './alert.html',
   imports: [CommonModule],
   standalone: true,
-  styleUrls: ['./alert.css']
+  styleUrls: ['./alert.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class AlertComponent implements OnInit, OnDestroy {
 

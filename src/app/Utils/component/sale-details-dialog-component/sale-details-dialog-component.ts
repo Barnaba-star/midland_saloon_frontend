@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import {
   MAT_DIALOG_DATA,
   MatDialogRef
@@ -18,6 +18,7 @@ import { DecimalPipe } from '@angular/common';
 
   templateUrl: './sale-details-dialog-component.html',
   styleUrl: './sale-details-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SaleDetailsDialogComponent {
 

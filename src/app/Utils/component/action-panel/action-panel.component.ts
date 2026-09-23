@@ -4,7 +4,8 @@ import {
   ElementRef,
   AfterViewInit,
   Output,
-  EventEmitter
+  EventEmitter,
+  ChangeDetectionStrategy
 } from '@angular/core';
 
 @Component({
@@ -14,7 +15,8 @@ import {
       <ng-content></ng-content>
     </div>
   `,
-  styleUrls: ['./action-panel.component.css']
+  styleUrls: ['./action-panel.component.css'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ActionPanelComponent implements AfterViewInit {
   @ContentChild('clickableParagraph') paragraphRef!: ElementRef;

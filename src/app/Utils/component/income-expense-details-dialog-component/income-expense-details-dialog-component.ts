@@ -1,5 +1,5 @@
 import { CommonModule, DatePipe, DecimalPipe } from '@angular/common';
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogActions, MatDialogContent, MatDialogRef } from '@angular/material/dialog';
 import { MatIcon } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -9,6 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
   imports: [MatIcon, DecimalPipe, DatePipe, CommonModule, MatDialogActions, MatDialogContent, TranslatePipe],
   templateUrl: './income-expense-details-dialog-component.html',
   styleUrl: './income-expense-details-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class IncomeExpenseDetailsDialogComponent {
 

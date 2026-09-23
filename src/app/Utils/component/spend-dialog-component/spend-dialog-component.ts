@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core';
+import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialogActions, MatDialogContent } from '@angular/material/dialog';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatError, MatFormField, MatSelectModule } from '@angular/material/select';
@@ -12,6 +12,7 @@ import { MatIcon } from '@angular/material/icon';
     MatFormFieldModule, MatIcon],
   templateUrl: './spend-dialog-component.html',
   styleUrl: './spend-dialog-component.css',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SpendDialogComponent {
 
