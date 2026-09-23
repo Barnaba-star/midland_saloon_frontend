@@ -15,12 +15,34 @@ import {
 
 import { tap } from 'rxjs';
 
+import { ErrorLogService } from '../services/error-log-service';
+
+/** The body as it was about to be sent, so a failure can be traced back to it. */
+const serialiseBody = (body: unknown): string | undefined => {
+  if (body === null || body === undefined) {
+    return undefined;
+  }
+  if (typeof body === 'string') {
+    return body;
+  }
+  // FormData and Blob carry file bytes - not worth sending, not readable anyway.
+  if (body instanceof FormData || body instanceof Blob) {
+    return '[binary body]';
+  }
+  try {
+    return JSON.stringify(body);
+  } catch {
+    return undefined;
+  }
+};
+
 export const StatusInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
   next: HttpHandlerFn
 ) => {
 
   const dialog = inject(MatDialog);
+  const errorLogService = inject(ErrorLogService);
 
   /*
    * ============================================================
@@ -103,6 +125,29 @@ export const StatusInterceptor: HttpInterceptorFn = (
         console.error('🔥 Backend Error Object:', error);
 
         const status = error?.status;
+
+        /*
+         * ======================================================
+         * 2b. REPORT UNREACHABLE-BACKEND FAILURES
+         * ======================================================
+         *
+         * Status 0 means no response at all - backend down, DNS,
+         * CORS, timeout. Those never reach GlobalExceptionHandler,
+         * so this is the only place they can be recorded.
+         * Anything with a real status code was already logged
+         * server-side; reporting it here too would file it twice.
+         */
+
+        if (status === 0 && !errorLogService.isReportingUrl(error?.url)) {
+          errorLogService.reportClientError({
+            level: 'ERROR',
+            message: error?.message ?? 'Backend unreachable',
+            exceptionType: 'HttpErrorResponse',
+            path: error?.url ?? req.url,
+            httpMethod: req.method,
+            payload: serialiseBody(req.body)
+          });
+        }
 
         /*
          * ======================================================
