@@ -1320,7 +1320,7 @@ app-form{
 
 /* Below this the labels cost more than they earn, so the buttons go back
    to icons and the tooltip carries the meaning. */
-@media (max-width: 1280px) {
+@media (max-width: 1024px) {
   .action-btn {
     padding: 0;
     width: 34px;
@@ -1351,33 +1351,11 @@ app-form{
   border-color: #fecaca;
 }
 
-/* SUBSCRIPTION */
-.subscription-btn {
-  color: #16a34a;
-}
 
-.subscription-btn:hover {
-  background: #f0fdf4;
-  border-color: #bbf7d0;
-}
 
-.add-user-btn {
-  color: #2563eb;
-}
 
-.add-user-btn:hover {
-  background: #eff6ff;
-  border-color: #bfdbfe;
-}
 
-.assign-role-btn {
-  color: #7c3aed;
-}
 
-.assign-role-btn:hover {
-  background: #f5f3ff;
-  border-color: #ddd6fe;
-}
 
 /* MORE */
 .more-btn {

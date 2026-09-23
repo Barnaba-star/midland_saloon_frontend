@@ -209,49 +209,42 @@
       <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_DELETE' | translate }}</span>
     </button>
 
-    <!-- SUBSCRIPTION -->
-    <button
-      type="button"
-      class="action-btn subscription-btn"
-      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_SUBSCRIPTION' | translate"
-      (click)="openSubscriptionDialog(item)"
-    >
-      <mat-icon>payments</mat-icon>
-      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_SUBSCRIPTION' | translate }}</span>
-    </button>
-
-    <!-- ADD USER -->
-    <button
-      type="button"
-      class="action-btn add-user-btn"
-      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_ADD_USER' | translate"
-      (click)="addUserToBranch(item)"
-    >
-      <mat-icon>person_add</mat-icon>
-      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_ADD_USER' | translate }}</span>
-    </button>
-
-    <!-- ASSIGN ROLE -->
-    <button
-      type="button"
-      class="action-btn assign-role-btn"
-      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_ASSIGN_ROLE' | translate"
-      (click)="assignRoleToBranchUser(item)"
-    >
-      <mat-icon>admin_panel_settings</mat-icon>
-      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_ASSIGN_ROLE' | translate }}</span>
-    </button>
-
     <!-- MORE -->
     <button
       type="button"
       class="action-btn more-btn"
+      [matMenuTriggerFor]="branchMenu"
       [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_MORE' | translate"
-      (click)="moreActions(item)"
     >
       <mat-icon>more_vert</mat-icon>
       <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_MORE' | translate }}</span>
     </button>
+
+    <!-- The three branch-admin actions live in here rather than on the row:
+         inside a menu they can carry their full wording. -->
+    <mat-menu #branchMenu="matMenu" class="branch-action-menu">
+
+      <button mat-menu-item type="button" (click)="openSubscriptionDialog(item)">
+        <mat-icon>payments</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.TOOLTIP_SUBSCRIPTION' | translate }}</span>
+      </button>
+
+      <button mat-menu-item type="button" (click)="addUserToBranch(item)">
+        <mat-icon>person_add</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.TOOLTIP_ADD_USER' | translate }}</span>
+      </button>
+
+      <button mat-menu-item type="button" (click)="assignRoleToBranchUser(item)">
+        <mat-icon>admin_panel_settings</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.TOOLTIP_ASSIGN_ROLE' | translate }}</span>
+      </button>
+
+      <button mat-menu-item type="button" (click)="moreActions(item)">
+        <mat-icon>visibility</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.MENU_VIEW_USER' | translate }}</span>
+      </button>
+
+    </mat-menu>
 
   </div>
 </td>

@@ -563,7 +563,8 @@
     "LABEL_SUBSCRIPTION": "Subscription",
     "LABEL_ADD_USER": "Add user",
     "LABEL_ASSIGN_ROLE": "Assign role",
-    "LABEL_MORE": "More"
+    "LABEL_MORE": "More",
+    "MENU_VIEW_USER": "View branch user"
   },
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "System Permissions Setting",

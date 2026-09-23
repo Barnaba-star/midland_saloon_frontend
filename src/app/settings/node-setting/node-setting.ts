@@ -28,6 +28,7 @@ import { ConfirmDeleteDialogComponent } from '../../Utils/component/dialogs/conf
 import { UserViewDialogComponent } from '../../Utils/component/dialogs/user-view-dialog-component/user-view-dialog-component';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatMenuModule } from '@angular/material/menu';
 import { UserService } from '../users-setting/user-service';
 import { AssignUserRoleDTO, UserDTO } from '../users-setting/user-model';
 import { SelectUserDialogComponent } from '../../Utils/component/dialogs/select-user-dialog-component/select-user-dialog-component';
@@ -36,7 +37,7 @@ import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.
 
 @Component({
   selector: 'app-node-setting',
-  imports: [MatIconModule,  MatStepperModule,  MatCardModule, Title2, CommonModule, MatPaginator, TranslatePipe, MatTooltipModule, SearchBoxComponent],
+  imports: [MatIconModule,  MatStepperModule,  MatCardModule, Title2, CommonModule, MatPaginator, TranslatePipe, MatTooltipModule, MatMenuModule, SearchBoxComponent],
   templateUrl: './node-setting.html',
   styleUrl: './node-setting.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

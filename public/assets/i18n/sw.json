@@ -563,7 +563,8 @@
     "LABEL_SUBSCRIPTION": "Malipo",
     "LABEL_ADD_USER": "Mtumiaji",
     "LABEL_ASSIGN_ROLE": "Jukumu",
-    "LABEL_MORE": "Zaidi"
+    "LABEL_MORE": "Zaidi",
+    "MENU_VIEW_USER": "Tazama mtumiaji wa tawi"
   },
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Ruhusa za Mfumo",
