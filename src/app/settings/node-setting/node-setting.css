@@ -1377,3 +1377,28 @@ app-form{
 .action-btn:disabled mat-icon {
   color: #b5b5b5 !important;
 }
+
+
+/* =========================
+   ROW ACTION MENU
+========================= */
+
+/* Delete is the one item that cannot be undone, so it is coloured and
+   separated from everything above it. ::ng-deep is needed because the menu
+   panel is rendered in an overlay, outside this component's view. */
+::ng-deep .branch-action-menu .menu-item-danger {
+  color: #dc2626;
+  border-top: 1px solid #f1f5f9;
+}
+
+::ng-deep .branch-action-menu .menu-item-danger .mat-icon {
+  color: #dc2626;
+}
+
+::ng-deep .branch-action-menu .menu-item-danger:hover:not([disabled]) {
+  background: #fef2f2;
+}
+
+::ng-deep .branch-action-menu .mat-mdc-menu-item .mat-icon {
+  margin-right: 10px;
+}

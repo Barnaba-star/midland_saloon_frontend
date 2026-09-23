@@ -185,30 +185,6 @@
 <td class="action-column">
   <div class="action-buttons">
 
-    <!-- EDIT -->
-    <button
-      type="button"
-      class="action-btn edit-btn"
-      [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
-      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_EDIT' | translate"
-      (click)="editItem(item)"
-    >
-      <mat-icon>edit</mat-icon>
-      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_EDIT' | translate }}</span>
-    </button>
-
-    <!-- DELETE -->
-    <button
-      type="button"
-      class="action-btn delete-btn"
-      [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
-      [matTooltip]="'NODE_SETTING_PAGE.TOOLTIP_DELETE' | translate"
-      (click)="deleteItem(item)"
-    >
-      <mat-icon>delete</mat-icon>
-      <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_DELETE' | translate }}</span>
-    </button>
-
     <!-- MORE -->
     <button
       type="button"
@@ -220,9 +196,20 @@
       <span class="action-label">{{ 'NODE_SETTING_PAGE.LABEL_MORE' | translate }}</span>
     </button>
 
-    <!-- The three branch-admin actions live in here rather than on the row:
-         inside a menu they can carry their full wording. -->
+    <!-- Every row action lives in here. On the row they were six icons
+         competing for width; in a menu each one carries its full wording.
+         The ROOT branch is the platform's own, so it cannot be edited or
+         deleted - same guard the row buttons used to carry. -->
     <mat-menu #branchMenu="matMenu" class="branch-action-menu">
+
+      <button
+        mat-menu-item
+        type="button"
+        [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
+        (click)="editItem(item)">
+        <mat-icon>edit</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.TOOLTIP_EDIT' | translate }}</span>
+      </button>
 
       <button mat-menu-item type="button" (click)="openSubscriptionDialog(item)">
         <mat-icon>payments</mat-icon>
@@ -242,6 +229,17 @@
       <button mat-menu-item type="button" (click)="moreActions(item)">
         <mat-icon>visibility</mat-icon>
         <span>{{ 'NODE_SETTING_PAGE.MENU_VIEW_USER' | translate }}</span>
+      </button>
+
+      <!-- Destructive, so it sits apart from the rest. -->
+      <button
+        mat-menu-item
+        type="button"
+        class="menu-item-danger"
+        [disabled]="item.branchCode?.toUpperCase() === 'ROOT'"
+        (click)="deleteItem(item)">
+        <mat-icon>delete</mat-icon>
+        <span>{{ 'NODE_SETTING_PAGE.TOOLTIP_DELETE' | translate }}</span>
       </button>
 
     </mat-menu>
