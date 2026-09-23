@@ -2,7 +2,6 @@
   "APP": {
     "TITLE": "Mfumo wa Usimamizi wa Wanafunzi"
   },
-
   "COMMON": {
     "SAVE": "Hifadhi",
     "UPDATE": "Sasisha",
@@ -107,10 +106,12 @@
     "EXIT_FULLSCREEN": "Toka Skrini Nzima",
     "DARK_MODE": "Hali ya Giza",
     "LIGHT_MODE": "Hali ya Mwanga",
-    "BREADCRUMB": "Njia ya Kurasa"
+    "BREADCRUMB": "Njia ya Kurasa",
+    "LOADING": "Inapakia...",
+    "SUBSCRIBE": "Lipia Huduma",
+    "CONFIRM_DELETION": "Thibitisha kufuta",
+    "SELECT_OPTION": "Chagua chaguo"
   },
-
-
   "MENU": {
     "HOME": "Nyumbani",
     "STAFF": "Watumishi",
@@ -119,7 +120,15 @@
     "REPORT": "Ripoti",
     "LOGOUT": "Toka",
     "STORE": "Store",
-    "SALES": "Mauzo"
+    "SALES": "Mauzo",
+    "EXPENSES": "Matumizi",
+    "SUBSCRIPTION_ACTIVE": "Huduma inatumika",
+    "SUBSCRIPTION_FREE": "Majaribio bure",
+    "SUBSCRIPTION_PENDING": "Malipo yanasubiri",
+    "SUBSCRIPTION_FAILED": "Malipo yameshindikana",
+    "SUBSCRIPTION_EXPIRED": "Muda wa huduma umeisha",
+    "SUBSCRIPTION_UNKNOWN": "Hali ya huduma haijulikani",
+    "SUBSCRIPTION_VALID_UNTIL": "Inaisha tarehe"
   },
   "SALON": {
     "OFFICE": "Ofisi",
@@ -129,31 +138,30 @@
     "SERVICE": "Huduma",
     "COMMISSION": "Kamisheni"
   },
-   "SERVICE":{
-    "ADD":"Ongeza Huduma",
-    "MANAGE":"Simamia Huduma"
+  "SERVICE": {
+    "ADD": "Ongeza Huduma",
+    "MANAGE": "Simamia Huduma"
   },
-    "STAFF":{
-    "ADD":"Sajili Mhudumu",
-    "MANAGE":"Simamia Mhudumu"
+  "STAFF": {
+    "ADD": "Sajili Mhudumu",
+    "MANAGE": "Simamia Mhudumu"
   },
-   "SALES":{
-    "ADD":"Mauzo Mapya",
-    "MANAGE":"Historia ya Mauzo"
+  "SALES": {
+    "ADD": "Mauzo Mapya",
+    "MANAGE": "Historia ya Mauzo"
   },
-   "REPORTS":{
-    "STAFF":"Ripoti ya Watumishi",
-    "SERVICE":"Ripoti ya Huduma",
-    "COMMISSION":"Commission",
-    "STORE":"Store",
-    "INCOME":"Mapato & Matumizi",
-    "STOCK":"Manunuzi"
+  "REPORTS": {
+    "STAFF": "Ripoti ya Watumishi",
+    "SERVICE": "Ripoti ya Huduma",
+    "COMMISSION": "Commission",
+    "STORE": "Store",
+    "INCOME": "Mapato & Matumizi",
+    "STOCK": "Manunuzi"
   },
-    "STORE":{
-    "ADD":"Ongeza Kwenye Store",
-    "MANAGE":"Simamia Store"
+  "STORE": {
+    "ADD": "Ongeza Kwenye Store",
+    "MANAGE": "Simamia Store"
   },
-
   "COMMISSION_BREAKDOWN": {
     "SERVICE": "Huduma",
     "PRICE": "Bei",
@@ -174,7 +182,6 @@
     "ACTIONS": "Vitendo",
     "PERCENTAGE": "Asilimia"
   },
-
   "STAFF_PAGE": {
     "FORM_TITLE_ADD": "Ongeza Mhudumu Mpya",
     "MANAGEMENT_TITLE": "Usimamizi wa Wahudumu",
@@ -193,7 +200,6 @@
     "NOT_FOUND_TITLE": "Hakuna Mhudumu",
     "NOT_FOUND_TEXT": "Tafadhali ongeza Mhudumu ili kuendelea."
   },
-
   "SALES_PAGE": {
     "BILLS_IN_PROGRESS": "Bili Zinazoendelea",
     "OPEN_BILL": "Fungua Bill",
@@ -217,7 +223,6 @@
     "EMPTY_TRANSACTIONS_TITLE": "Hakuna miamala iliyopatikana",
     "EMPTY_TRANSACTIONS_TEXT": "Hakuna miamala ya mauzo kwa tarehe uliyochagua."
   },
-
   "SERVICE_PAGE": {
     "TITLE": "Huduma za Saluni",
     "SUBTITLE": "Simamia na fuatilia huduma zote zinazotolewa",
@@ -229,7 +234,6 @@
     "EMPTY_TITLE": "Hakuna Huduma Iliyopatikana",
     "EMPTY_TEXT": "Tafadhali ongeza huduma ya saluni ili kuendelea."
   },
-
   "SETTING_PAGE": {
     "USER_MGMT_TITLE": "Usimamizi wa Watumiaji",
     "USER_MGMT_SUBTITLE": "Simamia watumiaji wa mfumo, majukumu na matawi waliyopangiwa",
@@ -243,19 +247,16 @@
     "TOOLTIP_DELETE_USER": "Futa Mtumiaji",
     "EMPTY_USERS_TITLE": "Hakuna Mipangilio ya Mtumiaji",
     "EMPTY_USERS_TEXT": "Tafadhali ongeza mipangilio ya mtumiaji ili kuendelea.",
-
     "INFO_DESC": "Anzisha tawi jipya la mfumo kusajili taasisi, kampuni, tawi au shirika kwenye mfumo wenye watumiaji wengi.",
     "BEFORE_YOU_CONTINUE": "Kabla ya kuendelea",
     "BEFORE_YOU_CONTINUE_DESC": "Hakikisha una taarifa za msingi za taasisi, ikiwa ni pamoja na jina lake, msimbo wa kipekee, na maelezo mafupi.",
     "WHAT_HAPPENS_NEXT": "Nini kinafuata?",
     "WHAT_HAPPENS_NEXT_DESC": "Baada ya kubofya <b>Ongeza Node</b>, fomu ya usajili itafunguka ambapo unaweza kuweka taarifa za tawi na kuzihifadhi kwenye mfumo.",
-
     "TABLE_SUBTITLE": "Simamia huduma na bei za saluni yako",
     "COL_STORE_USAGE": "Matumizi ya Store",
     "UNNAMED_SERVICE": "Huduma Isiyo na Jina",
     "EMPTY_SERVICES_TITLE": "Hakuna Huduma Iliyopatikana",
     "EMPTY_SERVICES_TEXT": "Tafadhali ongeza huduma ya saluni ili ionekane hapa.",
-
     "ADD_COMMISSION_BTN": "Ongeza Kamisheni",
     "MANAGE_COMMISSIONS_BTN": "Simamia Kamisheni",
     "CHOOSE_SERVICE": "Chagua Huduma",
@@ -267,9 +268,10 @@
     "TOOLTIP_DELETE_COMMISSION": "Futa Kamisheni",
     "SERVICE_COMMISSION_LABEL": "Kamisheni ya Huduma",
     "EMPTY_COMMISSION_TITLE": "Hakuna Kumbukumbu za Kamisheni",
-    "EMPTY_COMMISSION_TEXT": "Tafadhali weka mipangilio ya kamisheni ya huduma ili ionekane hapa."
+    "EMPTY_COMMISSION_TEXT": "Tafadhali weka mipangilio ya kamisheni ya huduma ili ionekane hapa.",
+    "ADD_USER_BTN": "Ongeza Mtumiaji",
+    "TOOLTIP_ADD_USER": "Ongeza mtumiaji kwenye tawi hili"
   },
-
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Ongeza Bidhaa ya Store",
     "MGMT_TITLE": "Usimamizi wa Store",
@@ -299,7 +301,6 @@
     "EMPTY_TITLE": "Hakuna Kumbukumbu za Store",
     "EMPTY_TEXT": "Hakuna kumbukumbu za store za kuonyesha kwa uchaguzi huu."
   },
-
   "REPORTS_PAGE": {
     "SERVICE_REPORT_LABEL": "RIPOTI YA HUDUMA",
     "COMPLETED_SERVICES": "Huduma Zilizokamilika",
@@ -318,7 +319,6 @@
     "REVENUE_BY_SERVICE": "Mapato kwa Huduma",
     "NO_REVENUE_TITLE": "Hakuna Mapato Yaliyopatikana",
     "NO_REVENUE_TEXT": "Hakuna kumbukumbu ya mapato kwa kipindi hiki.",
-
     "STAFF_REPORT_LABEL": "RIPOTI YA WATUMISHI",
     "STAFF_COMMISSION_TITLE": "Kamisheni na Malipo ya Wahudumu",
     "COL_STAFF": "Mhudumu",
@@ -331,7 +331,6 @@
     "AMOUNT_PLACEHOLDER": "Weka kiasi cha malipo",
     "DESCRIPTION_PLACEHOLDER": "Weka maelezo ya malipo...",
     "CONFIRM_PAYMENT_BTN": "Thibitisha Malipo",
-
     "STORE_REPORT_LABEL": "RIPOTI YA STORE",
     "STORE_USAGE_TITLE": "Matumizi ya Store na Kamisheni",
     "CLOSED_STORES_LABEL": "Store Zilizofungwa",
@@ -349,7 +348,6 @@
     "EMPTY_STORE_REPORT_TITLE": "Hakuna Ripoti ya Store",
     "EMPTY_STORE_REPORT_TEXT": "Tafadhali badilisha tarehe au chujio ili kupata ripoti za store.",
     "PAGE_OF_PAGES": "Ukurasa {{page}} kati ya {{total}}",
-
     "FINANCIAL_REPORT_LABEL": "RIPOTI YA FEDHA",
     "INCOME_EXPENSES_TITLE": "Mapato na Matumizi",
     "TRACK_DESC": "Fuatilia mapato na matumizi yako kwa kila kipindi",
@@ -365,7 +363,6 @@
     "SPEND_BTN": "Tumia",
     "EMPTY_FINANCIAL_TITLE": "Hakuna Kumbukumbu za Fedha",
     "EMPTY_FINANCIAL_TEXT": "Hakuna kumbukumbu za mapato au matumizi kwa kipindi ulichochagua.",
-
     "STOCK_REPORT_LABEL": "RIPOTI YA MANUNUZI",
     "STOCK_PURCHASE_REPORT_TITLE": "Ripoti ya Manunuzi",
     "SERVICE_LABEL": "HUDUMA",
@@ -386,7 +383,6 @@
     "EMPTY_STOCK_TITLE": "Hakuna Ripoti ya Manunuzi",
     "EMPTY_STOCK_TEXT": "Tafadhali badilisha chujio ili kupata kumbukumbu za manunuzi."
   },
-
   "ROLE_DETAILS_DIALOG": {
     "TITLE": "Maelezo ya Wajibu",
     "SUBTITLE": "Taarifa za wajibu na ruhusa zilizopangwa",
@@ -394,7 +390,6 @@
     "NO_DESCRIPTION": "Hakuna maelezo",
     "NO_PERMISSIONS": "Hakuna ruhusa zilizopangwa"
   },
-
   "STOCK_PURCHASE_DIALOG": {
     "TITLE": "Maelezo ya Manunuzi",
     "DEFAULT_LABEL": "Manunuzi",
@@ -408,7 +403,6 @@
     "NO_DESCRIPTIONS_TITLE": "Hakuna maelezo yaliyopatikana",
     "NO_DESCRIPTIONS_TEXT": "Hakuna maelezo yaliyorekodiwa kwa manunuzi haya."
   },
-
   "INCOME_EXPENSE_DIALOG": {
     "REMAINING_BALANCE": "Salio Lililobaki",
     "WEEK_START": "Mwanzo wa Wiki",
@@ -417,7 +411,6 @@
     "NO_SPENDING_TITLE": "Bado hakuna matumizi",
     "NO_SPENDING_TEXT": "Hakuna miamala ya matumizi iliyorekodiwa kwa {{name}}."
   },
-
   "LOGIN": {
     "WELCOME_BACK": "Karibu tena",
     "SUBTITLE": "Ingia ili kuendelea na Midland Solutions",
@@ -428,7 +421,6 @@
     "SIGNING_IN": "Inaingia…",
     "SIGN_IN": "Ingia"
   },
-
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",
     "HERO_TITLE_LINE1": "Endesha biashara yako",
@@ -473,7 +465,6 @@
     "CTA_SUBTITLE": "Ingia kwenye eneo lako la kazi na uendelee pale ulipoishia.",
     "ALL_RIGHTS_RESERVED": "Haki zote zimehifadhiwa."
   },
-
   "DASHBOARD": {
     "WELCOME": "Karibu",
     "INTRO_SUBTITLE": "Chagua moduli ili kuanza.",
@@ -483,7 +474,6 @@
     "CARD_SETTING_TITLE": "Mipangilio",
     "CARD_SETTING_DESC": "Simamia mipangilio ya mfumo."
   },
-
   "SETTINGS_MENU": {
     "SYSTEM": "Mfumo",
     "ROLE": "Jukumu",
@@ -491,36 +481,49 @@
     "USERS": "Watumiaji",
     "PERMISSIONS": "Ruhusa",
     "CONFIG": "Mipangilio",
-    "STORAGE": "Hifadhi"
+    "STORAGE": "Hifadhi",
+    "COMMISSION": "Kamisheni",
+    "ERRORS": "Makosa"
   },
-
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
     "PURPOSE_TEXT": "Moduli ya Mipangilio inawawezesha wasimamizi kupanga na kusimamia vipengele vikuu vya programu, usalama, watumiaji, mifumo ya kazi, na mapendeleo ya mfumo.",
     "WHAT_YOU_CAN_DO_LIST": "• Simamia matawi na taarifa za taasisi.<br>• Panga watumiaji, majukumu, na ruhusa.<br>• Weka mifumo ya kazi na taratibu za idhini.<br>• Simamia arifa na mapendeleo ya mfumo.<br>• Panga muunganiko na mipangilio mingine ya kiutawala.",
     "NOTE_TEXT": "Mabadiliko yanayofanyika katika sehemu hii yanaweza kuathiri mfumo mzima. Wasimamizi walioidhinishwa pekee ndio wanapaswa kubadilisha mipangilio ya mfumo ili kuhakikisha usalama, uthabiti, na uendeshaji sahihi wa programu."
   },
-
   "CONFIGURATION_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
-    "EMAIL": "Barua pepe",
-    "SMS": "SMS",
-    "NOTIFICATION": "Arifa",
-    "AUDIT_LOGS": "Kumbukumbu za Ukaguzi",
-    "EMAIL_EMPTY_TITLE": "Mipangilio ya Barua pepe Haijapatikana",
-    "EMAIL_EMPTY_TEXT": "Tafadhali tengeneza mipangilio ya barua pepe ili kuendelea.",
-    "SMS_EMPTY_TITLE": "Mipangilio ya SMS Haijapatikana",
-    "SMS_EMPTY_TEXT": "Tafadhali tengeneza mipangilio ya SMS ili kuendelea.",
-    "NOTIFICATION_EMPTY_TITLE": "Mipangilio ya Arifa Haijapatikana",
-    "NOTIFICATION_EMPTY_TEXT": "Tafadhali tengeneza mipangilio ya arifa ili kuendelea.",
-    "AUDIT_EMPTY_TITLE": "Mipangilio ya Kumbukumbu za Ukaguzi Haijapatikana",
-    "AUDIT_EMPTY_TEXT": "Tafadhali tengeneza mipangilio ya kumbukumbu za ukaguzi ili kuendelea.",
     "MGMT_TITLE": "Usimamizi wa Mipangilio",
     "PURPOSE_TEXT": "Usimamizi wa Mipangilio unawawezesha wasimamizi kupanga na kudumisha mipangilio ya mfumo mzima inayodhibiti tabia, usalama, na uendeshaji wa programu.",
     "WHAT_YOU_CAN_DO_LIST": "• Panga mipangilio ya barua pepe.<br>• Panga mipangilio ya SMS.<br>• Simamia mapendeleo ya arifa.<br>• Angalia na simamia kumbukumbu za ukaguzi.<br>• Badilisha tabia ya mfumo.<br>• Hifadhi na sasisha mipangilio ya mfumo.",
-    "NOTE_TEXT": "Mipangilio ya mfumo huathiri mfumo mzima. Mabadiliko yanapaswa kufanywa na wasimamizi walioidhinishwa pekee ili kuhakikisha uthabiti wa mfumo, usalama, na uendeshaji sahihi."
+    "NOTE_TEXT": "Mipangilio ya mfumo huathiri mfumo mzima. Mabadiliko yanapaswa kufanywa na wasimamizi walioidhinishwa pekee ili kuhakikisha uthabiti wa mfumo, usalama, na uendeshaji sahihi.",
+    "GENERAL": "Kwa Ujumla",
+    "GENERAL_SUBTITLE": "Namba za mfumo mzima zinazodhibiti malipo, vikao na matunzo.",
+    "SECTION_BILLING": "Kamisheni na usajili",
+    "SECTION_SECURITY": "Usalama",
+    "SECTION_MAINTENANCE": "Matunzo",
+    "COMMISSION_RATE": "Kiwango cha kamisheni (%)",
+    "COMMISSION_RATE_HINT": "Sehemu ya kila malipo ya usajili inayolipwa kwa mfanyakazi aliyesajili tawi. Mabadiliko haya yanahusu malipo yajayo pekee.",
+    "TRIAL_DAYS": "Majaribio ya bure (siku)",
+    "TRIAL_DAYS_HINT": "Muda ambao tawi jipya linaweza kutumia mfumo kabla halijaanza kulipa.",
+    "GRACE_PERIOD_DAYS": "Siku za neema",
+    "GRACE_PERIOD_DAYS_HINT": "Siku za ziada ambazo tawi linaweza kuendelea kuingia baada ya usajili wake kuisha. 0 inalizuia mara moja.",
+    "MINIMUM_PAYMENT": "Malipo ya chini kabisa (TZS)",
+    "MINIMUM_PAYMENT_HINT": "Kiasi kidogo kabisa cha malipo ya usajili kinachoweza kukusanywa.",
+    "DEFAULT_PLAN_PRICE": "Bei ya kawaida ya mpango (TZS)",
+    "DEFAULT_PLAN_PRICE_HINT": "Hujazwa kiotomatiki kwa kila tawi jipya. 0 maana yake hakuna kiasi cha kawaida.",
+    "DEFAULT_PLAN_LENGTH": "Urefu wa kawaida wa mpango (siku)",
+    "DEFAULT_PLAN_LENGTH_HINT": "Hujazwa kiotomatiki kwa kila tawi jipya.",
+    "SESSION_LENGTH": "Urefu wa kikao (masaa)",
+    "SESSION_LENGTH_HINT": "Muda ambao mtumiaji anabaki ameingia kabla hajaingia tena.",
+    "ERROR_RETENTION": "Hifadhi makosa kwa (siku)",
+    "ERROR_RETENTION_HINT": "Muda ambao kosa linabaki kwenye Mipangilio > Makosa.",
+    "ERROR_PURGE": "Futa makosa baada ya (siku)",
+    "ERROR_PURGE_HINT": "Wakati makosa yaliyoondolewa yanafutwa kabisa. Lazima iwe sawa au kubwa kuliko thamani ya juu.",
+    "SAVE_BTN": "Hifadhi",
+    "RESET_BTN": "Rudisha",
+    "LOADING": "Inapakia mipangilio..."
   },
-
   "NODE_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Tawi",
     "ADD_BRANCH_TAB": "Ongeza Tawi",
@@ -547,9 +550,15 @@
     "BRANCHES_LABEL": "matawi",
     "FORM_TITLE_REGISTER": "Sajili Tawi",
     "FORM_TITLE_UPDATE": "Sasisha Tawi",
-    "DELETE_TITLE": "Futa Tawi"
+    "DELETE_TITLE": "Futa Tawi",
+    "TOOLTIP_ADD_BRANCH": "Sajili tawi jipya",
+    "TOOLTIP_SUBSCRIPTION": "Simamia Malipo ya Huduma",
+    "TOOLTIP_ADD_USER": "Ongeza Mtumiaji kwenye Tawi",
+    "TOOLTIP_ASSIGN_ROLE": "Panga Jukumu la Mtumiaji wa Tawi",
+    "FORM_TITLE_ADD_USER": "Ongeza Mtumiaji kwenye {{branch}}",
+    "FORM_TITLE_SUBSCRIPTION": "Malipo ya Huduma ya Tawi",
+    "SEARCH_PLACEHOLDER": "Tafuta matawi..."
   },
-
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Ruhusa za Mfumo",
     "MANAGE_TAB": "Simamia Ruhusa",
@@ -568,7 +577,6 @@
     "WHAT_YOU_CAN_DO_LIST": "• Tengeneza ruhusa mpya.<br>• Angalia ruhusa zote zinazopatikana.<br>• Sasisha taarifa za ruhusa.<br>• Panga ruhusa kwa majukumu.<br>• Washa au zima ruhusa.<br>• Panga ruhusa kwa moduli.",
     "NOTE_TEXT": "Ruhusa huamua vitendo ambavyo watumiaji wanaweza kufanya. Kwa kawaida hupangwa kwa majukumu, na watumiaji hurithi ruhusa kupitia majukumu waliyopangiwa."
   },
-
   "ROLE_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Jukumu",
     "MANAGE_TAB": "Simamia Majukumu",
@@ -592,7 +600,6 @@
     "DELETE_TITLE": "Futa Jukumu",
     "ALERT_DELETED": "Jukumu Limefutwa"
   },
-
   "STORAGE_SETTING_PAGE": {
     "TITLE": "Hifadhi",
     "MANAGE_TAB": "Simamia Hifadhi",
@@ -609,7 +616,6 @@
     "ACTION_BTN": "Kitendo",
     "EMPTY_TEXT": "Hakuna taarifa za ukubwa wa jedwali zinazopatikana."
   },
-
   "TABLE_SIZE_DIALOG": {
     "TITLE": "Futa Data ya Jedwali",
     "DATE_LABEL": "Futa data kuanzia tarehe hii kurudi nyuma",
@@ -617,7 +623,6 @@
     "WARNING_SUFFIX": "na kabla yake itafutwa.",
     "DELETE_DATA_BTN": "Futa Data"
   },
-
   "USERS_SETTING_PAGE": {
     "TITLE": "Mipangilio ya Mtumiaji",
     "MANAGE_TAB": "Simamia Watumiaji",
@@ -651,20 +656,24 @@
     "EMPTY_USERS_TITLE": "Hakuna watumiaji waliopatikana",
     "EMPTY_USERS_TEXT": "Hakuna watumiaji wanaopatikana.",
     "FORM_TITLE_REGISTER": "Sajili Mtumiaji",
-    "DELETE_TITLE": "Futa Mtumiaji"
+    "DELETE_TITLE": "Futa Mtumiaji",
+    "BTN_ASSIGN_ROLE": "Panga Jukumu",
+    "BTN_VIEW_USER": "Tazama",
+    "BTN_DELETE_USER": "Futa",
+    "SEARCH_PLACEHOLDER": "Tafuta watumiaji..."
   },
-
   "USER_PROFILE_DIALOG": {
     "PERSONAL_INFO": "Taarifa Binafsi",
     "ACCOUNT_INFO": "Taarifa za Akaunti",
     "BRANCH_INFO": "Taarifa za Tawi"
   },
-
   "USER_ROLE_DIALOG": {
     "TITLE": "Panga Majukumu ya Mtumiaji",
-    "USER_LABEL": "Mtumiaji:"
+    "USER_LABEL": "Mtumiaji:",
+    "ASSIGNED_LABEL": "Majukumu aliyopewa",
+    "NO_ROLES": "Hajapewa jukumu lolote",
+    "REMOVE_ROLE": "Ondoa jukumu"
   },
-
   "USER_VIEW_DIALOG": {
     "DEFAULT_TITLE": "Watumiaji wa Tawi",
     "BRANCH_CODE_LABEL": "Msimbo wa Tawi:",
@@ -686,7 +695,6 @@
     "FOOTER_SUFFIX_SINGULAR": "mtumiaji katika tawi hili",
     "FOOTER_SUFFIX_PLURAL": "watumiaji katika tawi hili"
   },
-
   "NOTIFICATIONS": {
     "TITLE": "Arifa",
     "MARK_ALL_READ": "Weka zote kama zimesomwa",
@@ -696,13 +704,11 @@
     "NEW_SALE_TITLE": "Mauzo Mapya",
     "NEW_SALE_MESSAGE": "Mauzo {{code}} yamekamilika — Tshs {{amount}}."
   },
-
   "SEARCH": {
     "OPEN": "Tafuta",
     "PLACEHOLDER": "Tafuta kurasa... (Ctrl+K)",
     "NO_RESULTS": "Hakuna ukurasa unaolingana."
   },
-
   "HELP": {
     "TITLE": "Msaada",
     "SUBTITLE": "Vidokezo vya haraka vya kutumia mfumo huu",
@@ -718,7 +724,6 @@
     "ICON_REFRESH": "Onyesha upya — pakia upya ukurasa",
     "CONTACT_TEXT": "Unahitaji msaada zaidi? Wasiliana na msimamizi wa mfumo wako."
   },
-
   "PROFILE_DIALOG": {
     "TITLE": "Wasifu Wangu",
     "CHANGE_PHOTO": "Badilisha Picha",
@@ -727,11 +732,9 @@
     "UPDATED": "Picha ya wasifu imesasishwa kwa mafanikio.",
     "UPLOAD_FAILED": "Imeshindwa kupakia picha. Tafadhali jaribu tena."
   },
-
   "MAIN_LOGO": {
     "CHANGE": "Badilisha Logo ya Kampuni"
   },
-
   "CHANGE_PASSWORD_DIALOG": {
     "TITLE": "Badilisha Nenosiri",
     "SUBTITLE": "Chagua nenosiri imara ambalo hujawahi kulitumia hapo awali.",
@@ -742,5 +745,188 @@
     "TOO_SHORT": "Nenosiri lazima liwe na herufi 6 au zaidi.",
     "UPDATED": "Nenosiri limebadilishwa kwa mafanikio.",
     "FAILED": "Imeshindwa kubadilisha nenosiri. Tafadhali jaribu tena."
+  },
+  "POS_HOME": {
+    "WELCOME": "Karibu",
+    "SUBTITLE": "Chagua sehemu ili uanze",
+    "OPEN": "Fungua",
+    "SALES_DESC": "Rekodi mauzo na chapisha risiti",
+    "STAFF_DESC": "Simamia wafanyakazi na mahudhurio yao",
+    "SERVICE_DESC": "Simamia huduma zinazotolewa kwenye tawi hili",
+    "STORE_DESC": "Fuatilia bidhaa, manunuzi na hifadhi",
+    "REPORT_DESC": "Angalia ripoti za mauzo, wafanyakazi na bidhaa",
+    "EXPENSES_DESC": "Angalia ripoti za matumizi ya wafanyakazi na duka",
+    "SETTING_DESC": "Weka mipangilio ya tawi hili"
+  },
+  "SELECT_STAFF_DIALOG": {
+    "TITLE": "Chagua Mfanyakazi",
+    "SUBTITLE": "Chagua mfanyakazi ili umtengenezee akaunti ya mtumiaji",
+    "SEARCH_PLACEHOLDER": "Tafuta kwa jina au namba ya simu",
+    "EMPTY": "Hakuna mfanyakazi aliyepatikana",
+    "ENTER_MANUALLY": "Jaza taarifa mwenyewe",
+    "DETAILS_TITLE": "Taarifa za Mtumiaji",
+    "DETAILS_SUBTITLE": "Hakiki taarifa kabla ya kuhifadhi"
+  },
+  "SELECT_USER_DIALOG": {
+    "TITLE": "Chagua Mtumiaji",
+    "SUBTITLE": "Chagua mtumiaji ili uendelee",
+    "SEARCH_PLACEHOLDER": "Tafuta kwa jina au jina la mtumiaji",
+    "EMPTY": "Hakuna mtumiaji aliyepatikana"
+  },
+  "USER_FIELDS": {
+    "FIRST_NAME": "Jina la Kwanza",
+    "MIDDLE_NAME": "Jina la Kati",
+    "LAST_NAME": "Jina la Mwisho",
+    "GENDER": "Jinsia",
+    "MALE": "Mwanaume",
+    "FEMALE": "Mwanamke",
+    "DOB": "Tarehe ya Kuzaliwa",
+    "PHONE": "Simu",
+    "EMAIL": "Barua pepe",
+    "ADDRESS": "Anwani"
+  },
+  "SUBSCRIBE_DIALOG": {
+    "TITLE": "Lipia Huduma",
+    "SUBTITLE": "Lipa kwa simu ili tawi hili liendelee kutumika",
+    "NETWORK": "Mtandao wa Simu",
+    "NETWORK_PLACEHOLDER": "Chagua mtandao",
+    "PHONE": "Namba ya Simu",
+    "MONTHS": "Muda",
+    "MONTH": "mwezi",
+    "MONTHS_LABEL": "miezi",
+    "SUBMIT": "Lipa Sasa",
+    "INITIATED": "Ombi la malipo limetumwa. Thibitisha kwenye simu yako.",
+    "FAILED": "Malipo yameshindikana. Tafadhali jaribu tena.",
+    "NO_NETWORK": "Hakuna mtandao. Angalia muunganisho wako kisha ujaribu tena.",
+    "MIN_AMOUNT": "Jumla ni TSh {{total}}, chini ya kiwango cha chini cha TSh {{min}}. Chagua miezi mingi zaidi."
+  },
+  "MONTHS": {
+    "JANUARY": "Januari",
+    "FEBRUARY": "Februari",
+    "MARCH": "Machi",
+    "APRIL": "Aprili",
+    "MAY": "Mei",
+    "JUNE": "Juni",
+    "JULY": "Julai",
+    "AUGUST": "Agosti",
+    "SEPTEMBER": "Septemba",
+    "OCTOBER": "Oktoba",
+    "NOVEMBER": "Novemba",
+    "DECEMBER": "Desemba"
+  },
+  "COMMISSION_PAGE": {
+    "TITLE": "Kamisheni ya Wafanyakazi",
+    "HEADING": "Kamisheni ya Matawi",
+    "SUBHEADING": "Kila mfanyakazi amepata kiasi gani kutoka matawi aliyosajili",
+    "MONTH": "Mwezi",
+    "YEAR": "Mwaka",
+    "TOTAL_COLLECTED": "Zilizoingia mwezi huu",
+    "TOTAL_COMMISSION": "Kamisheni inayodaiwa",
+    "EARNING_STAFF": "Wanaopata",
+    "OF": "kati ya",
+    "COL_STAFF": "Mfanyakazi",
+    "COL_REGISTERED": "Matawi",
+    "COL_PAID": "Yamelipa",
+    "COL_COLLECTED": "Zilizoingia (TSh)",
+    "COL_COMMISSION": "Kamisheni (TSh)",
+    "COL_BRANCH": "Tawi",
+    "COL_DATE": "Tarehe ya malipo",
+    "COL_MONTHS": "Miezi",
+    "COL_AMOUNT": "Kiasi (TSh)",
+    "COL_RATE": "Kiwango",
+    "TOOLTIP_PAID": "Matawi yaliyolipa katika mwezi uliochaguliwa",
+    "EMPTY_TITLE": "Bado hakuna kamisheni",
+    "EMPTY_TEXT": "Hakuna mfanyakazi mwenye tawi lililolipa mwezi huu.",
+    "TOTAL_OUTSTANDING": "Bado inadaiwa",
+    "COL_STATUS": "Malipo",
+    "STATUS_PAID": "Imelipwa",
+    "BTN_PAY": "Lipa",
+    "ALREADY_PAID": "tayari imelipwa",
+    "PAID_ON": "Ililipwa",
+    "TOOLTIP_PAY": "Rekodi kamisheni hii kama imelipwa",
+    "PAID_SUCCESS": "Kamisheni imerekodiwa kuwa imelipwa",
+    "PAID_FAILED": "Imeshindikana kurekodi malipo",
+    "BTN_BRANCHES": "Matawi",
+    "TOOLTIP_BRANCHES": "Ona ni matawi gani yake yamelipa na yapi hayajalipa",
+    "HEADING_MINE": "Kamisheni Yangu",
+    "SUBHEADING_MINE": "Umepata kiasi gani kutoka matawi uliyoyasajili",
+    "STATUS_OWED": "Inadaiwa",
+    "SEARCH_PLACEHOLDER": "Tafuta wafanyakazi..."
+  },
+  "PAY_COMMISSION_DIALOG": {
+    "TITLE": "Lipa Kamisheni",
+    "MESSAGE": "Thibitisha kwamba mfanyakazi huyu amelipwa. Kiasi kinahesabiwa na mfumo, hakiwezi kubadilishwa hapa.",
+    "STAFF": "Mfanyakazi",
+    "PERIOD": "Kipindi",
+    "BRANCHES": "Matawi yaliyolipa",
+    "AMOUNT": "Kiasi",
+    "NOTE": "Maelezo (si lazima)",
+    "NOTE_PLACEHOLDER": "mf. nimetuma kwa simu",
+    "CONFIRM": "Thibitisha Malipo"
+  },
+  "STAFF_BRANCHES_DIALOG": {
+    "TITLE": "Mchanganuo wa Matawi",
+    "PAID_COUNT": "Yamelipa",
+    "UNPAID_COUNT": "Hayajalipa",
+    "COMMISSION": "kamisheni",
+    "PAYMENTS": "malipo",
+    "NOT_PAID": "Haijalipa",
+    "UNTIL": "hadi",
+    "EMPTY": "Mfanyakazi huyu hajasajili tawi lolote bado.",
+    "DELETED": "limefutwa",
+    "DELETED_HINT": "Tawi hili limeondolewa, lakini lililipa mwezi huu kwa hiyo kamisheni bado inahesabika.",
+    "STATUS_ACTIVE": "Linatumika",
+    "STATUS_FREE": "Majaribio bure",
+    "STATUS_PENDING": "Malipo yanasubiri",
+    "STATUS_FAILED": "Malipo yameshindikana",
+    "STATUS_EXPIRED": "Muda umeisha",
+    "STATUS_UNKNOWN": "Hakuna mpango"
+  },
+  "ERROR_SETTING_PAGE": {
+    "TITLE": "Makosa",
+    "MANAGE_TAB": "Kumbukumbu ya Makosa",
+    "MGMT_TITLE": "Makosa ya Mfumo",
+    "MGMT_SUBTITLE": "Kila kilichokwama, kutoka backend na kwenye kivinjari.",
+    "REFRESH_BTN": "Onyesha upya",
+    "CLEAR_BTN": "Futa yote",
+    "CLEAR_CONFIRM_TEXT": "Futa orodha yote ya makosa?",
+    "LAST_DAY": "Saa 24 zilizopita",
+    "LAST_WEEK": "Siku 7 zilizopita",
+    "TOTAL": "Jumla yaliyoonyeshwa",
+    "SOURCE_ALL": "Vyanzo vyote",
+    "SOURCE_BACKEND": "Backend",
+    "SOURCE_FRONTEND": "Frontend",
+    "LEVEL_ALL": "Viwango vyote",
+    "LEVEL_ERROR": "Kosa",
+    "LEVEL_WARN": "Onyo",
+    "COL_TIME": "Muda",
+    "COL_LEVEL": "Kiwango",
+    "COL_SOURCE": "Chanzo",
+    "COL_TYPE": "Aina",
+    "COL_MESSAGE": "Ujumbe",
+    "COL_PATH": "Njia",
+    "COL_USER": "Mtumiaji",
+    "COL_ACTION": "Kitendo",
+    "VIEW_BTN": "Angalia",
+    "EMPTY_TEXT": "Hakuna makosa yaliyorekodiwa.",
+    "CLEAR_CONFIRM_TITLE": "Futa kumbukumbu ya makosa?",
+    "CLEAR_CONFIRM_ACTION": "Futa yote"
+  },
+  "ERROR_DETAIL_DIALOG": {
+    "TITLE": "Maelezo ya kosa",
+    "TIME": "Muda",
+    "TYPE": "Aina",
+    "PATH": "Njia",
+    "USER": "Mtumiaji",
+    "BRANCH": "Tawi",
+    "USER_AGENT": "Kivinjari",
+    "MESSAGE": "Ujumbe",
+    "STACK_TRACE": "Stack trace",
+    "COPY_BTN": "Nakili maelezo",
+    "COPIED": "Imenakiliwa",
+    "QUERY": "Query",
+    "PAYLOAD": "Payload iliyotumwa",
+    "COPY_PAYLOAD": "Nakili payload",
+    "NO_PAYLOAD": "Hakuna payload iliyotumwa na request hii."
   }
 }
