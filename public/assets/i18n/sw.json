@@ -1195,5 +1195,29 @@
     "SHOWN_ONCE": "Inaonekana hapa tu. Ikipotea, tuma nyingine kutoka kwenye orodha ya watumiaji.",
     "COPY": "Nakili",
     "COPIED": "Imenakiliwa"
+  },
+  "BRANCH_DIALOG": {
+    "ADD_TITLE": "Sajili tawi",
+    "EDIT_TITLE": "Badilisha tawi",
+    "CATEGORY_LABEL": "Aina",
+    "NAME_LABEL": "Jina la tawi",
+    "NAME_PLACEHOLDER": "mfano Midland Solutions",
+    "NAME_REQUIRED": "Weka jina la tawi.",
+    "REGION_LABEL": "Mkoa",
+    "REGION_PLACEHOLDER": "Tafuta mkoa",
+    "REGION_LOADING": "Inapakia mikoa...",
+    "REGION_HINT": "Namba ya tawi hutengenezwa kutoka mkoa. Mikoa hutoka Settings > Mikoa.",
+    "REGION_NO_MATCH": "Hakuna mkoa wenye jina hilo.",
+    "REGION_REQUIRED": "Chagua mkoa kwenye orodha.",
+    "REGION_FAILED": "Mikoa haikuweza kupakiwa, kwa hiyo tawi haliwezi kusajiliwa sasa.",
+    "PHONE_LABEL": "Simu",
+    "PHONE_PLACEHOLDER": "0712 000 000",
+    "ADDRESS_LABEL": "Anuani",
+    "ADDRESS_PLACEHOLDER": "Mtaa, kata au alama ya karibu",
+    "ADDRESS_HINT": "Mkoa umeshaandikwa hapo juu - hapa ni mahali tawi linapopatikana.",
+    "DESCRIPTION_LABEL": "Maelezo",
+    "DESCRIPTION_PLACEHOLDER": "Chochote cha kuzingatia kuhusu tawi hili",
+    "STATUS_LABEL": "Hali",
+    "REGISTER_BTN": "Sajili"
   }
 }

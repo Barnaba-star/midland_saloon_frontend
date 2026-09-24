@@ -34,6 +34,7 @@ import { AssignUserRoleDTO, UserDTO } from '../users-setting/user-model';
 import { SelectUserDialogComponent } from '../../Utils/component/dialogs/select-user-dialog-component/select-user-dialog-component';
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
 import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
+import { BranchDialogComponent } from '../../Utils/component/dialogs/branch-dialog-component/branch-dialog-component';
 import { ActivationCodeDialogComponent } from '../../Utils/component/dialogs/activation-code-dialog-component/activation-code-dialog-component';
 
 @Component({
@@ -285,84 +286,7 @@ private openRoleDialog(user: any): void {
 }
 
 //*************************************** ADD NEW NODE LIST******************************************************/
-nodeFormField: FormField[] = [
-{
-    name: 'uid',
-    label: 'UID',
-    type: 'text',
-    hidden: true,
-    required: false
-  },
-  {
-    name: 'branchName',
-    placeholder: 'Branch Name',
-    type: 'text',
-    required: true,
 
-  },
-
-
- {
-    name: 'branchCategory',
-    placeholder: 'Branch Category',
-    type: 'select',
-    required: true,
-    options: [
-      { label: 'Saloon', value: 'Saloon' },
-      { label: 'Real Estate', value: 'Real Estate' },
-      { label: 'Restaurant', value: 'Restaurant' },
-      { label: 'Bar', value: 'Bar' }
-    ],
-
-  },
- {
-    name: 'region',
-    placeholder: 'Region',
-    type: 'select',
-    required: true,
-    options: [
-      { label: 'Dodoma', value: 'Dodoma' },
-      { label: 'Dar es Salaam', value: 'Dar es Salaam' },
-      { label: 'Morogoro', value: 'Morogoro' }
-    ],
-
-  },
-  {
-    name: 'address',
-    placeholder: 'Address',
-    type: 'text',
-    rows: 3,
-    required: false,
-
-  },
-
-  {
-    name: 'phone',
-    placeholder: 'Phone Number',
-    type: 'text',
-    required: false,
-
-  },
-  {
-    name: 'status',
-    placeholder: 'Status',
-    type: 'select',
-    required: true,
-    options: [
-      { label: 'Active', value: 'Active' },
-      { label: 'Inactive', value: 'Not Active' }
-    ],
-
-  },
-  {
-    name: 'description',
-    placeholder: 'Branch Description',
-    type: 'textarea',
-    rows: 4,
-    required: false,
-
-  }
-];
 
 branchForm ! : FormGroup;
 branchDetailForm !: FormGroup;
@@ -387,21 +311,16 @@ onSubmit(event: any): void {
 
 openAddBranchDialog(): void {
 
-  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_REGISTER').subscribe(formTitle => {
+  const dialogRef = this.dialog.open(BranchDialogComponent, {
+    width: '640px',
+    maxWidth: '95vw',
+    autoFocus: false,
+  });
 
-    const dialogRef = this.dialog.open(DialogComponent, {
-      width: '1200px',
-      data: {
-        fields: this.nodeFormField,
-        formTitle,
-      },
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.onSubmit(result);
-      }
-    });
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      this.onSubmit(result);
+    }
   });
 }
 
@@ -587,24 +506,28 @@ private openDeleteDialog(item: any, translations: Record<string, string>): void 
 
 
 
-editItem(item: any): void {
-  console.log('Edit item:', item);
-
-  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_UPDATE').subscribe(formTitle => {
-    this.openEditDialog(item, formTitle);
-  });
+/**
+ * Rows hold both "Active" and "ACTIVE" - the old form wrote one casing and
+ * something else wrote the other - so an exact match against "Active"
+ * showed live branches as inactive. The dialog writes one way now; this
+ * reads both, for the rows already stored.
+ */
+isActive(status: string | null | undefined): boolean {
+  return (status || '').trim().toUpperCase() === 'ACTIVE';
 }
 
-private openEditDialog(item: any, formTitle: string): void {
+editItem(item: any): void {
+  // The dialog carries its own title now, so there is nothing to look up.
+  this.openEditDialog(item);
+}
 
-  const dialogRef = this.dialog.open(DialogComponent, {
-    width: '1200px',
-    data: {
-      fields: this.nodeFormField,
-      formTitle,
-      formData: item,
-      uid: item.uid
-    }
+private openEditDialog(item: any): void {
+
+  const dialogRef = this.dialog.open(BranchDialogComponent, {
+    width: '640px',
+    maxWidth: '95vw',
+    autoFocus: false,
+    data: { branch: item },
   });
 
   dialogRef.afterClosed().subscribe(result => {

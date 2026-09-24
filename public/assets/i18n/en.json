@@ -1195,5 +1195,29 @@
     "SHOWN_ONCE": "Shown only here. If it is lost, send a new one from the user list.",
     "COPY": "Copy",
     "COPIED": "Copied"
+  },
+  "BRANCH_DIALOG": {
+    "ADD_TITLE": "Register a branch",
+    "EDIT_TITLE": "Edit branch",
+    "CATEGORY_LABEL": "Category",
+    "NAME_LABEL": "Branch name",
+    "NAME_PLACEHOLDER": "e.g. Midland Solutions",
+    "NAME_REQUIRED": "Give the branch a name.",
+    "REGION_LABEL": "Region",
+    "REGION_PLACEHOLDER": "Search for a region",
+    "REGION_LOADING": "Loading regions...",
+    "REGION_HINT": "The branch code is built from the region. Regions come from Settings > Regions.",
+    "REGION_NO_MATCH": "No region by that name.",
+    "REGION_REQUIRED": "Pick a region from the list.",
+    "REGION_FAILED": "The regions could not be loaded, so a branch cannot be registered right now.",
+    "PHONE_LABEL": "Phone",
+    "PHONE_PLACEHOLDER": "0712 000 000",
+    "ADDRESS_LABEL": "Address",
+    "ADDRESS_PLACEHOLDER": "Street, ward or a nearby landmark",
+    "ADDRESS_HINT": "The region is already recorded above - this is where the branch is found.",
+    "DESCRIPTION_LABEL": "Description",
+    "DESCRIPTION_PLACEHOLDER": "Anything worth noting about this branch",
+    "STATUS_LABEL": "Status",
+    "REGISTER_BTN": "Register"
   }
 }

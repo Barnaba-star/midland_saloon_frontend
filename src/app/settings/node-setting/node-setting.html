@@ -169,8 +169,8 @@
 
             <span
               class="status-badge"
-              [class.active]="item.status === 'Active'"
-              [class.inactive]="item.status !== 'Active'"
+              [class.active]="isActive(item.status)"
+              [class.inactive]="!isActive(item.status)"
             >
 
               <span class="status-dot"></span>
