@@ -28,4 +28,13 @@ export class Service {
       return this.http.post<Response<any>>(`${this.settingURL}/updateSubscription`, payload)
     }
 
+    /**
+     * Paying from the login screen, where there is no token yet. The
+     * credentials go with the request because the caller has none; the
+     * backend re-checks them exactly as a login would.
+     */
+    payExpiredSubscription(payload: { username: string; password: string; mobileNetwork: string; phoneNumber: string; months: number }):Observable<Response<any>>{
+      return this.http.post<Response<any>>(`${this.baseURL}/authentication/paySubscription`, payload)
+    }
+
 }

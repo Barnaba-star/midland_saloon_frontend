@@ -419,7 +419,9 @@
     "SHOW_PASSWORD": "Onyesha nenosiri",
     "HIDE_PASSWORD": "Ficha nenosiri",
     "SIGNING_IN": "Inaingia…",
-    "SIGN_IN": "Ingia"
+    "SIGN_IN": "Ingia",
+    "EXPIRED_HELP": "Muda wa huduma umeisha. Unaweza kulipa sasa kwa simu kisha uingie moja kwa moja.",
+    "SUBSCRIBE_BTN": "Lipa sasa"
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",

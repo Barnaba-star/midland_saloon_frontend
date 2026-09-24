@@ -142,3 +142,65 @@ input.mat-input-element:-webkit-autofill {
   box-shadow: 0 0 0px 1000px transparent inset !important;
   -webkit-text-fill-color: inherit !important;
 }
+
+
+/* ============================================================
+   EXPIRED SUBSCRIPTION
+   ============================================================
+   Shown only when login failed because the branch has lapsed - the one
+   failure here the customer can act on. */
+
+.login-expired {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: #fffbeb;
+  border: 1px solid #fde68a;
+  border-radius: 12px;
+}
+
+.login-expired p {
+  margin: 0;
+  color: #78350f;
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+.subscribe-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 40px;
+  padding: 0 18px;
+  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
+  border: 1px solid #0f172a;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.16s ease, box-shadow 0.16s ease, transform 0.08s ease;
+}
+
+.subscribe-btn:hover {
+  background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
+}
+
+.subscribe-btn:active {
+  transform: translateY(1px);
+}
+
+.subscribe-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.28);
+}
+
+.subscribe-btn mat-icon {
+  width: 17px;
+  height: 17px;
+  font-size: 17px;
+}

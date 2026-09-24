@@ -7,6 +7,8 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconRegistryService } from '../Utils/services/icon-registry.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material/dialog';
+import { SubscribeDialogComponent } from '../Utils/component/dialogs/subscribe-dialog-component/subscribe-dialog-component';
 import { CommonModule } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient } from '@angular/common/http';
@@ -31,7 +33,7 @@ private baseUrl: string = `${this.api}/authentication/login`;
   submitting = false;
 
   constructor(private iconRegistry: IconRegistryService, private route:Router, private cookie:CookieService,
-  private http:HttpClient, private alert: AlertService, private auth:Authentication,  private cdr: ChangeDetectorRef) {
+  private http:HttpClient, private alert: AlertService, private auth:Authentication,  private cdr: ChangeDetectorRef, private dialog: MatDialog) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -81,7 +83,19 @@ onSubmit() {
       },
 
       error: (err) => {
-        this.loginError = err.error;
+        // A lapsed subscription is answered with a structured body so it can
+        // be told apart from a wrong password - it is the one failure the
+        // customer can fix from this screen.
+        const body = err?.error;
+        if (body && body.code === 'SUBSCRIPTION_EXPIRED') {
+          this.loginError = body.message;
+          this.expiredBranchName = body.branchName ?? '';
+          this.expiredMonthlyAmount = body.monthlyAmount ?? null;
+          this.subscriptionExpired = true;
+        } else {
+          this.loginError = typeof body === 'string' ? body : (body?.message ?? '');
+          this.subscriptionExpired = false;
+        }
 
         this.auth.removeToken();
 
@@ -94,6 +108,31 @@ onSubmit() {
     });
   }
 }
+
+  // Set when login fails because the branch has lapsed, so the screen can
+  // offer a way to pay instead of leaving the customer stuck.
+  subscriptionExpired = false;
+  expiredBranchName = '';
+  expiredMonthlyAmount: number | null = null;
+
+  openSubscribeDialog(): void {
+    const dialogRef = this.dialog.open(SubscribeDialogComponent, {
+      width: '520px',
+      maxWidth: '95vw',
+      data: {
+        subscriptionAmount: this.expiredMonthlyAmount,
+        // No token exists yet, so the backend verifies these again.
+        credentials: {
+          username: this.loginForm.value.username,
+          password: this.loginForm.value.password,
+        },
+      },
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.cdr.markForCheck();
+    });
+  }
 
   get username() { return this.loginForm.get('username'); }
   get password() { return this.loginForm.get('password'); }

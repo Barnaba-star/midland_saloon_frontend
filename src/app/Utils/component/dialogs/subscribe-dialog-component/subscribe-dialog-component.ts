@@ -13,6 +13,11 @@ interface NetworkOption {
 
 interface SubscribeDialogData {
   subscriptionAmount: number | null;
+  /**
+   * Present only when the dialog is opened from the login screen. There is no
+   * token in that case, so the backend re-checks these instead.
+   */
+  credentials?: { username: string; password: string };
 }
 
 /**
@@ -54,7 +59,7 @@ export class SubscribeDialogComponent {
     private alertService: AlertService,
     private translate: TranslateService,
     private cdr: ChangeDetectorRef,
-    @Optional() @Inject(MAT_DIALOG_DATA) private data: SubscribeDialogData | null,
+    @Optional() @Inject(MAT_DIALOG_DATA) public data: SubscribeDialogData | null,
   ) { }
 
   // Null when the branch has no plan configured, or when the dialog was
@@ -112,11 +117,24 @@ export class SubscribeDialogComponent {
 
     this.saving = true;
 
-    this.service.updateSubscription({
-      mobileNetwork: this.mobileNetwork,
-      phoneNumber: this.phoneNumber.trim(),
-      months: this.months as number,
-    }).subscribe({
+    // Two ways in: from inside the app with a token, or from the login
+    // screen where the subscription has lapsed and there is none yet. Same
+    // form, same pricing, same outcome - only the endpoint differs.
+    const request$ = this.data?.credentials
+      ? this.service.payExpiredSubscription({
+          username: this.data.credentials.username,
+          password: this.data.credentials.password,
+          mobileNetwork: this.mobileNetwork,
+          phoneNumber: this.phoneNumber.trim(),
+          months: this.months as number,
+        })
+      : this.service.updateSubscription({
+          mobileNetwork: this.mobileNetwork,
+          phoneNumber: this.phoneNumber.trim(),
+          months: this.months as number,
+        });
+
+    request$.subscribe({
 
       next: (res) => {
 
