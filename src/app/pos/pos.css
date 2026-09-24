@@ -467,24 +467,182 @@
   width: 100%;
 }
 
-.dash-row-charts,
-.dash-row-cards {
+.dash-row-charts {
   margin-top: 4px;
 }
 
-/* The card grid was capped at 900px and its cards pinned to 260px, which
-   left the row half empty once it stood on its own. Let them share the
-   full width instead, wrapping to as many per line as fit. */
-.dash-row-cards .pos-home-grid {
+
+
+
+/* ============================================================
+   CHART GRID - two rows of three
+   ============================================================ */
+
+.dash-row-charts {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  max-width: none;
-  width: 100%;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  align-items: start;
+}
+
+.dash-row-charts .dash-panel {
+  margin-bottom: 0;
+  min-width: 0;
+}
+
+/* Three to a row leaves each panel narrow, so the bar labels give up some
+   width to keep the bars readable. */
+.dash-row-charts .bar-row {
+  grid-template-columns: minmax(70px, 110px) 1fr auto;
+  gap: 8px;
+}
+
+.dash-row-charts .bar-value {
+  font-size: 11px;
+}
+
+.dash-row-charts .bar-value small {
+  display: block;
+}
+
+
+/* ---------- trend axes ---------- */
+
+.chart-frame {
+  display: flex;
+  gap: 8px;
+}
+
+/* Tick labels are HTML, not SVG text: the plot is stretched to fill its box,
+   which would squash anything drawn inside it. */
+.y-axis {
+  display: flex;
+  flex: 0 0 auto;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 180px;
+  padding-bottom: 22px;
+  box-sizing: border-box;
+  color: #94a3b8;
+  font-size: 10px;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.chart-frame .chart-wrap {
+  flex: 1;
+  min-width: 0;
+}
+
+.x-axis {
+  position: relative;
+  height: 15px;
+  margin-top: 2px;
+}
+
+.x-axis span {
+  position: absolute;
+  transform: translateX(-50%);
+  color: #94a3b8;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.x-axis span:first-child { transform: none; }
+.x-axis span:last-child { transform: translateX(-100%); }
+
+.axis-caption {
+  display: block;
+  margin-top: 8px;
+  color: #94a3b8;
+  font-size: 10.5px;
+}
+
+
+/* ---------- ring ---------- */
+
+.donut-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
   gap: 16px;
 }
 
-.dash-row-cards .pos-home-card {
-  width: auto;
-  max-width: none;
+.donut {
+  flex: 0 0 auto;
+  width: 118px;
+  height: 118px;
+  /* Start each arc at twelve o'clock rather than three. */
+  transform: rotate(-90deg);
+}
+
+.donut-track {
+  fill: none;
+  stroke: #f1f5f9;
+  stroke-width: 13;
+}
+
+.donut-slice {
+  fill: none;
+  stroke-width: 13;
+  /* A surface-coloured cap leaves a 2px gap between neighbouring arcs. */
+  stroke-linecap: butt;
+}
+
+.donut-legend {
+  flex: 1;
+  min-width: 130px;
   margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.donut-legend li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 12px;
+}
+
+.swatch {
+  flex: 0 0 auto;
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+}
+
+.legend-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  color: var(--viz-ink);
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.legend-value {
+  color: var(--viz-ink);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+
+.legend-value small {
+  display: block;
+  color: var(--viz-ink-soft);
+  font-weight: 500;
+}
+
+
+@media (max-width: 1400px) {
+  .dash-row-charts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 900px) {
+  .dash-row-charts {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }

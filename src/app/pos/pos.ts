@@ -6,7 +6,6 @@ import { SidenavItem } from '../Utils/component/main-sidenav-component/model';
 import { Authentication } from '../Utils/services/authentication';
 import { MainSidenav2 } from '../Utils/component/main-sidenav2/main-sidenav2';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { POS_FULL_ACCESS_ROLES } from './pos-role.guard';
@@ -14,7 +13,7 @@ import { ServiceSaloonMethod } from './service-saloon-method';
 
 @Component({
   selector: 'app-pos',
-  imports:  [CommonModule, RouterModule, MainSidenav2, MatCardModule, MatIconModule, TranslatePipe],
+  imports:  [CommonModule, RouterModule, MainSidenav2, MatIconModule, TranslatePipe],
   templateUrl: './pos.html',
   styleUrl: './pos.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -124,63 +123,6 @@ return this.visibility.filteredMenuItems(menu);
     }
   }
 
-  // Quick-access cards shown on the POS "home" screen (bare /pos, before
-  // any sub-section is picked). Mirrors the Dashboard's card pattern.
-  homeCards = [
-    {
-      title: 'MENU.SALES',
-      description: 'POS_HOME.SALES_DESC',
-      icon: 'payment2',
-      route: '/pos/saloonSales',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.STAFF',
-      description: 'POS_HOME.STAFF_DESC',
-      icon: 'person',
-      route: '/pos/saloonStaff',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.SERVICE',
-      description: 'POS_HOME.SERVICE_DESC',
-      icon: 'service',
-      route: '/pos/saloonService',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.STORE',
-      description: 'POS_HOME.STORE_DESC',
-      icon: 'store',
-      route: '/pos/saloonStore',
-      roles: this.allRoles,
-    },
-    {
-      title: this.reportLabel,
-      description: this.reportLabel === 'MENU.REPORT' ? 'POS_HOME.REPORT_DESC' : 'POS_HOME.EXPENSES_DESC',
-      icon: 'report',
-      route: '/pos/saloonReports',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.SETTING',
-      description: 'POS_HOME.SETTING_DESC',
-      icon: 'setting',
-      route: '/pos/saloonSetting',
-      roles: this.fullAccessRoles,
-    },
-  ];
-
-  get filteredHomeCards() {
-    return this.homeCards.filter(card =>
-      card.roles.some(role => this.visibility.hasRole(role))
-    );
-  }
-
-  goTo(route: string): void {
-    this.router.navigate([route]);
-  }
-
   get fullName(): string {
     return this.visibility.getFullName() || this.visibility.getUsername();
   }
@@ -214,6 +156,24 @@ return this.visibility.filteredMenuItems(menu);
   staffRows: { name: string; earned: number; services: number; percent: number }[] = [];
   stockRows: { label: string; total: number; paid: number; remaining: number; percent: number }[] = [];
   stockTotals = { total: 0, paid: 0, remaining: 0 };
+
+  /**
+   * Three slices, not eleven: a ring only reads as parts of a whole while the
+   * parts stay countable. The eleven buckets are grouped into who the money
+   * ends up with - the staff who did the work, the owner, and the cost of
+   * running the place.
+   *
+   * Colours are the first three categorical slots, which clear every
+   * separation gate on the all-pairs list. Each slice is labelled with its
+   * share, so identity never rests on colour alone.
+   */
+  donutSlices: { label: string; amount: number; percent: number; dash: string; offset: number; color: string }[] = [];
+  donutTotal = 0;
+  readonly donutCircumference = 2 * Math.PI * 42;
+
+  /** Axis ticks for the trend, rendered as HTML beside the plot. */
+  trendYTicks: string[] = [];
+  trendXTicks: { label: string; percent: number }[] = [];
 
   // The trend chart's drawing box. Fixed viewBox, scaled by CSS - so the
   // maths stays in one coordinate system whatever the screen width.
@@ -311,7 +271,9 @@ return this.visibility.filteredMenuItems(menu);
         // Not folded: every bucket a service price is split into is worth
         // seeing by name. Rolling eight of them into "Other" was hiding
         // exactly the ones being asked about - electricity, water, loan.
-        this.splitBars = this.toBars(this.toSplit(response?.data), 0);
+        const split = this.toSplit(response?.data);
+        this.splitBars = this.toBars(split, 0);
+        this.buildDonut(split);
         this.cdr.markForCheck();
       },
       error: () => {
@@ -393,6 +355,36 @@ return this.visibility.filteredMenuItems(menu);
     };
   }
 
+  private buildDonut(split: { label: string; amount: number }[]): void {
+    const pick = (key: string) => split.find(r => r.label === key)?.amount ?? 0;
+    const staff = pick('POS_HOME.SPLIT_STAFF');
+    const owner = pick('POS_HOME.SPLIT_OWNER');
+    const costs = split.reduce((sum, r) => sum + r.amount, 0) - staff - owner;
+
+    const groups = [
+      { label: 'POS_HOME.GROUP_STAFF', amount: staff, color: '#2a78d6' },
+      { label: 'POS_HOME.GROUP_OWNER', amount: owner, color: '#eb6834' },
+      { label: 'POS_HOME.GROUP_COSTS', amount: Math.max(costs, 0), color: '#1baf7a' }
+    ].filter(g => g.amount > 0);
+
+    this.donutTotal = groups.reduce((sum, g) => sum + g.amount, 0);
+
+    let consumed = 0;
+    this.donutSlices = groups.map(g => {
+      const share = this.donutTotal > 0 ? g.amount / this.donutTotal : 0;
+      const length = share * this.donutCircumference;
+      const slice = {
+        ...g,
+        percent: Math.round(share * 100),
+        dash: `${length.toFixed(2)} ${(this.donutCircumference - length).toFixed(2)}`,
+        // Negative offset walks each arc forward from twelve o'clock.
+        offset: -consumed
+      };
+      consumed += length;
+      return slice;
+    });
+  }
+
   private buildTrend(rows: any[]): void {
     this.trendPoints = [];
     this.trendPath = '';
@@ -428,6 +420,39 @@ return this.visibility.filteredMenuItems(menu);
     const first = this.trendPoints[0];
     const last = this.trendPoints[this.trendPoints.length - 1];
     this.trendArea = `${this.trendPath} L${last.x.toFixed(1)},${baseline} L${first.x.toFixed(1)},${baseline} Z`;
+
+    // Axis labels live in HTML, not in the SVG: the plot is stretched to fit
+    // its box (preserveAspectRatio="none"), which would squash any text drawn
+    // inside it.
+    this.trendYTicks = [this.shortMoney(max), this.shortMoney(max / 2), '0'];
+
+    const tickCount = Math.min(5, rows.length);
+    this.trendXTicks = [];
+    for (let i = 0; i < tickCount; i++) {
+      const index = Math.round((i / (tickCount - 1 || 1)) * (rows.length - 1));
+      this.trendXTicks.push({
+        label: this.shortDate(rows[index].date),
+        percent: rows.length > 1 ? (index / (rows.length - 1)) * 100 : 0
+      });
+    }
+  }
+
+  /** 1.2M / 340K / 900 - an axis has no room for full figures. */
+  private shortMoney(value: number): string {
+    if (value >= 1_000_000) {
+      return (value / 1_000_000).toFixed(1).replace(/\.0$/, '') + 'M';
+    }
+    if (value >= 1_000) {
+      return Math.round(value / 1_000) + 'K';
+    }
+    return String(Math.round(value));
+  }
+
+  private shortDate(value: any): string {
+    const date = new Date(value);
+    return isNaN(date.getTime())
+      ? String(value ?? '')
+      : `${date.getDate()}/${date.getMonth() + 1}`;
   }
 
   onTrendHover(point: { x: number; y: number; date: string; amount: number } | null): void {

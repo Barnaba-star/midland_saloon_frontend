@@ -794,7 +794,13 @@
     "STOCK_TOTAL": "imetengwa",
     "STOCK_PAID": "imelipwa",
     "STOCK_REMAINING": "inadaiwa",
-    "STOCK_LEFT_SHORT": "imebaki"
+    "STOCK_LEFT_SHORT": "imebaki",
+    "YOUR_BRANCH": "Tawi lako",
+    "DONUT_TITLE": "Pesa inamfikia nani",
+    "GROUP_STAFF": "Wafanyakazi",
+    "GROUP_OWNER": "Mwenye saluni",
+    "GROUP_COSTS": "Gharama za uendeshaji",
+    "AXIS_CAPTION": "Tarehe (siku/mwezi) dhidi ya mapato kwa TZS"
   },
   "SELECT_STAFF_DIALOG": {
     "TITLE": "Chagua Mfanyakazi",

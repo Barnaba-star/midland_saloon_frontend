@@ -5,8 +5,7 @@
     <div class="pos-home">
 
       <div class="pos-home-intro">
-        <h1>{{ 'POS_HOME.WELCOME' | translate }}{{ fullName ? ', ' + fullName : '' }}</h1>
-        <p>{{ 'POS_HOME.SUBTITLE' | translate }}</p>
+        <h1>{{ summary?.branchName || ('POS_HOME.YOUR_BRANCH' | translate) }}</h1>
       </div>
 
       <!-- ============ ROW 1 - THE NUMBERS ============ -->
@@ -57,11 +56,17 @@
         <div class="dash-panel">
           <div class="panel-head">
             <h3>{{ 'POS_HOME.TREND_TITLE' | translate }}</h3>
-            <span class="panel-note">{{ 'POS_HOME.TREND_NOTE' | translate }}</span>
+            <span class="panel-note">{{ summary?.branchName || ('POS_HOME.YOUR_BRANCH' | translate) }}</span>
           </div>
 
           @if (trendPoints.length) {
-            <div class="chart-wrap">
+            <div class="chart-frame">
+              <div class="y-axis">
+                @for (tick of trendYTicks; track $index) {
+                  <span>{{ tick }}</span>
+                }
+              </div>
+              <div class="chart-wrap">
               <svg
                 class="trend-chart"
                 [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight"
@@ -96,7 +101,15 @@
                   <span class="tip-value">{{ money(hoveredPoint.amount) }} TZS</span>
                 </div>
               }
+              </div>
             </div>
+
+            <div class="x-axis">
+              @for (tick of trendXTicks; track $index) {
+                <span [style.left.%]="tick.percent">{{ tick.label }}</span>
+              }
+            </div>
+            <span class="axis-caption">{{ 'POS_HOME.AXIS_CAPTION' | translate }}</span>
           } @else {
             <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
           }
@@ -146,6 +159,46 @@
               <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
             }
           </div>
+
+
+        <!-- ============ HEADLINE SPLIT (ring) ============ -->
+        <div class="dash-panel">
+          <div class="panel-head">
+            <h3>{{ 'POS_HOME.DONUT_TITLE' | translate }}</h3>
+            <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
+          </div>
+
+          @if (donutSlices.length) {
+            <div class="donut-wrap">
+              <svg class="donut" viewBox="0 0 100 100" role="img"
+                   [attr.aria-label]="'POS_HOME.DONUT_TITLE' | translate">
+                <circle class="donut-track" cx="50" cy="50" r="42"></circle>
+                @for (slice of donutSlices; track slice.label) {
+                  <circle
+                    class="donut-slice"
+                    cx="50" cy="50" r="42"
+                    [attr.stroke]="slice.color"
+                    [attr.stroke-dasharray]="slice.dash"
+                    [attr.stroke-dashoffset]="slice.offset"></circle>
+                }
+              </svg>
+
+              <!-- The legend carries the labels and shares, so no slice
+                   depends on its colour to be identified. -->
+              <ul class="donut-legend">
+                @for (slice of donutSlices; track slice.label) {
+                  <li>
+                    <span class="swatch" [style.background]="slice.color"></span>
+                    <span class="legend-label">{{ slice.label | translate }}</span>
+                    <span class="legend-value">{{ slice.percent }}%<small>{{ money(slice.amount) }}</small></span>
+                  </li>
+                }
+              </ul>
+            </div>
+          } @else {
+            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+          }
+        </div>
 
 
         <!-- ============ STAFF ============ -->
@@ -209,36 +262,7 @@
       }
 
 
-      <!-- ============ ROW 3 - WHERE TO GO NEXT ============ -->
-      <section class="dash-row dash-row-cards">
-        <div class="pos-home-grid">
-          @for (card of filteredHomeCards; track card.route) {
-            <mat-card
-              class="pos-home-card"
-              (click)="goTo(card.route)"
-              tabindex="0"
-              (keyup.enter)="goTo(card.route)"
-            >
-              <div class="pos-home-icon">
-                <mat-icon [svgIcon]="card.icon"></mat-icon>
-              </div>
 
-              <mat-card-header>
-                <h4>{{ card.title | translate }}</h4>
-              </mat-card-header>
-
-              <mat-card-content>
-                <p>{{ card.description | translate }}</p>
-              </mat-card-content>
-
-              <div class="pos-home-cta">
-                <span>{{ 'POS_HOME.OPEN' | translate }}</span>
-                <mat-icon>arrow_forward</mat-icon>
-              </div>
-            </mat-card>
-          }
-        </div>
-      </section>
 
 
     </div>

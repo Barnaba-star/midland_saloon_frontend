@@ -794,7 +794,13 @@
     "STOCK_TOTAL": "set aside",
     "STOCK_PAID": "paid",
     "STOCK_REMAINING": "still owed",
-    "STOCK_LEFT_SHORT": "left"
+    "STOCK_LEFT_SHORT": "left",
+    "YOUR_BRANCH": "Your branch",
+    "DONUT_TITLE": "Who the money reaches",
+    "GROUP_STAFF": "Staff",
+    "GROUP_OWNER": "Owner",
+    "GROUP_COSTS": "Running costs",
+    "AXIS_CAPTION": "Date (day/month) against revenue in TZS"
   },
   "SELECT_STAFF_DIALOG": {
     "TITLE": "Select Staff",
