@@ -1072,6 +1072,11 @@
     "COL_EARNS": "Earns",
     "COL_PAID": "Paid",
     "COL_OUTSTANDING": "Outstanding",
-    "NO_RECIPIENTS": "Nobody holds this role."
+    "NO_RECIPIENTS": "Nobody holds this role.",
+    "PAY_BTN": "Pay",
+    "PAID_LABEL": "Paid",
+    "PAY_CONFIRM_TITLE": "Record this payout?",
+    "PAY_CONFIRM_TEXT": "This records that the share has been handed over. It does not send any money.",
+    "PAY_FAILED": "The payout could not be recorded."
   }
 }

@@ -125,6 +125,31 @@ export class PaymentService {
     );
   }
 
+  /**
+   * Records that one person's share for a month has been handed over. No money
+   * moves - this only writes the payout down.
+   *
+   * Refusals come back as HTTP 200 with a null data and the reason in message,
+   * so the caller tells the two apart by whether data is there.
+   */
+  payShare(role: string, uid: string, year?: number, month?: number, note?: string): Observable<Response<string>> {
+    let params = new HttpParams();
+    if (year != null) {
+      params = params.set('year', year);
+    }
+    if (month != null) {
+      params = params.set('month', month);
+    }
+    if (note != null && note !== '') {
+      params = params.set('note', note);
+    }
+    return this.http.post<Response<string>>(
+      `${this.paymentUrl}/payShare/${role}/${uid}`,
+      {},
+      { params }
+    );
+  }
+
   findBalance(): Observable<Response<number | null>> {
     return this.http.get<Response<number | null>>(`${this.paymentUrl}/findBalance`);
   }

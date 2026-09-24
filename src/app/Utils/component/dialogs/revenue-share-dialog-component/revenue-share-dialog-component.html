@@ -117,9 +117,33 @@
                         <!-- What is still owed is the figure to act on, so it carries the weight. -->
                         <span class="recipient-figure">
                           <span class="recipient-figure-label">{{ 'REVENUE_SHARE_DIALOG.COL_OUTSTANDING' | translate }}</span>
-                          <span class="recipient-figure-value recipient-outstanding">{{ recipient.outstanding | number }}</span>
+                          <span
+                            class="recipient-figure-value recipient-outstanding"
+                            [class.recipient-outstanding-clear]="recipient.outstanding === 0">
+                            {{ recipient.outstanding | number }}
+                          </span>
                         </span>
 
+                      </div>
+
+                      <!-- Only what is still owed can be handed over; once it is
+                           nil the row says so instead of offering the button. -->
+                      <div class="recipient-action">
+                        @if (recipient.outstanding > 0) {
+                          <button
+                            type="button"
+                            class="pay-btn"
+                            [disabled]="isPaying(recipient.uid)"
+                            (click)="payShare(row.role, recipient)">
+                            <mat-icon svgIcon="pay"></mat-icon>
+                            <span>{{ 'REVENUE_SHARE_DIALOG.PAY_BTN' | translate }}</span>
+                          </button>
+                        } @else {
+                          <span class="paid-flag">
+                            <mat-icon svgIcon="success"></mat-icon>
+                            <span>{{ 'REVENUE_SHARE_DIALOG.PAID_LABEL' | translate }}</span>
+                          </span>
+                        }
                       </div>
 
                     </div>

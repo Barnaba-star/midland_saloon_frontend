@@ -1,9 +1,11 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PaymentService, RevenueShareDTO, ShareRecipientDTO } from '../../../../settings/payment-setting/payment-service';
+import { ComfirmDialogComponent } from '../../comfirm-dialog/comfirm-dialog';
+import { AlertService } from '../../../services/alert';
 
 /** One line of the split: what it is called, its share, and what that comes to. */
 interface ShareRow {
@@ -53,10 +55,18 @@ export class RevenueShareDialogComponent implements OnInit {
   private recipientsByRole = new Map<string, ShareRecipientDTO[]>();
   recipientsLoadingRole: string | null = null;
 
+  /**
+   * The one person whose payout is being written down, so only their button
+   * goes dead while the rest of the list stays usable.
+   */
+  payingUid: string | null = null;
+
   constructor(
     public dialogRef: MatDialogRef<RevenueShareDialogComponent>,
     private paymentService: PaymentService,
     private translate: TranslateService,
+    private dialog: MatDialog,
+    private alertService: AlertService,
     private cdr: ChangeDetectorRef
   ) {
     const now = new Date();
@@ -116,6 +126,7 @@ export class RevenueShareDialogComponent implements OnInit {
   private onFilterChange(): void {
     this.expandedRole = null;
     this.recipientsLoadingRole = null;
+    this.payingUid = null;
     this.recipientsByRole.clear();
     this.load();
   }
@@ -244,6 +255,80 @@ export class RevenueShareDialogComponent implements OnInit {
       && this.recipientsLoadingRole !== role
       && this.recipientsByRole.has(role)
       && this.recipientsByRole.get(role)!.length === 0;
+  }
+
+  /** True only for the row whose payout is in flight, so one button at a time goes dead. */
+  isPaying(uid: string): boolean {
+    return this.payingUid === uid;
+  }
+
+  /**
+   * Writes down that a share has been handed over. Nothing is sent to anybody -
+   * this only records it, which is why the confirmation says so in as many words.
+   *
+   * The button is not hidden for non-ROOT users: the backend is the one that
+   * decides who may record a DIRECTOR or ROOT payout, and its refusal is shown
+   * as it came.
+   */
+  payShare(role: string | null, recipient: ShareRecipientDTO): void {
+    if (!role || !recipient || this.payingUid) {
+      return;
+    }
+
+    const dialogRef = this.dialog.open(ComfirmDialogComponent, {
+      width: '460px',
+      data: {
+        title: 'REVENUE_SHARE_DIALOG.PAY_CONFIRM_TITLE',
+        message: 'REVENUE_SHARE_DIALOG.PAY_CONFIRM_TEXT',
+        confirmLabel: 'REVENUE_SHARE_DIALOG.PAY_BTN'
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((confirmed) => {
+      if (!confirmed) {
+        return;
+      }
+      this.sendPayShare(role, recipient.uid);
+    });
+  }
+
+  private sendPayShare(role: string, uid: string): void {
+    this.payingUid = uid;
+    this.cdr.markForCheck();
+
+    this.paymentService
+      .payShare(role, uid, this.selectedYear, this.selectedMonth)
+      .subscribe({
+        next: (response) => {
+          this.payingUid = null;
+
+          // Everything comes back as 200, so a refusal is told apart by having
+          // no data - the reason is in the message.
+          if (!response?.data) {
+            this.cdr.markForCheck();
+            this.alertService.show(
+              'error',
+              response?.message || this.translate.instant('REVENUE_SHARE_DIALOG.PAY_FAILED')
+            );
+            return;
+          }
+
+          this.alertService.show('success', response.data);
+
+          // The held list still has the old paid and outstanding figures, so it
+          // is dropped before the row is fetched again - otherwise the numbers
+          // would not move.
+          this.recipientsByRole.delete(role);
+          this.loadRecipients(role);
+          // The totals at the top count payouts too.
+          this.load();
+        },
+        error: () => {
+          // The interceptor already said what went wrong.
+          this.payingUid = null;
+          this.cdr.markForCheck();
+        }
+      });
   }
 
   /** How wide the little proportion bar should be, capped so it can never overflow. */
