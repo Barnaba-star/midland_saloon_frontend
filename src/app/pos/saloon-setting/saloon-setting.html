@@ -203,14 +203,11 @@
       </div>
     }
     @if (userDataSource.length === 0) {
-      <div class="empty-state">
-        <div class="empty-icon-badge">
-          <mat-icon svgIcon="person2"></mat-icon>
-        </div>
-
-        <h3>{{ 'SETTING_PAGE.EMPTY_USERS_TITLE' | translate }}</h3>
-        <p>{{ 'SETTING_PAGE.EMPTY_USERS_TEXT' | translate }}</p>
-      </div>
+      <app-empty-state
+        icon="team"
+        title="SETTING_PAGE.EMPTY_USERS_TITLE"
+        text="SETTING_PAGE.EMPTY_USERS_TEXT"
+      />
     }
   }
 
@@ -563,22 +560,20 @@
 }
 
       @if (serviceDataSource.data.length === 0 && saloonServiceAddForm === false && saloonServiceInfo === false) {
-        <div class="empty-state">
-          <div class="empty-icon-badge">
-            <mat-icon svgIcon="service"></mat-icon>
-          </div>
-          <h3>{{ 'SETTING_PAGE.EMPTY_SERVICES_TITLE' | translate }}</h3>
-          <p>{{ 'SETTING_PAGE.EMPTY_SERVICES_TEXT' | translate }}</p>
-
+        <app-empty-state
+          icon="service"
+          title="SETTING_PAGE.EMPTY_SERVICES_TITLE"
+          text="SETTING_PAGE.EMPTY_SERVICES_TEXT"
+        >
           <button
             mat-flat-button
             type="button"
-            class="add-service-btn empty-state-add-service-btn"
+            class="add-service-btn"
             (click)="onAddService()">
             <mat-icon>add</mat-icon>
             <span>{{ 'SERVICE.ADD' | translate }}</span>
           </button>
-        </div>
+        </app-empty-state>
       }
 
     </div>
@@ -888,13 +883,11 @@
 
       }
       @if (commissionDataSource.length === 0 && addCommission !== true) {
-        <div class="empty-state">
-          <div class="empty-icon-badge">
-            <mat-icon svgIcon="commission"></mat-icon>
-          </div>
-          <h3>{{ 'SETTING_PAGE.EMPTY_COMMISSION_TITLE' | translate }}</h3>
-          <p>{{ 'SETTING_PAGE.EMPTY_COMMISSION_TEXT' | translate }}</p>
-        </div>
+        <app-empty-state
+          icon="commission"
+          title="SETTING_PAGE.EMPTY_COMMISSION_TITLE"
+          text="SETTING_PAGE.EMPTY_COMMISSION_TEXT"
+        />
       }
     </div>
   }

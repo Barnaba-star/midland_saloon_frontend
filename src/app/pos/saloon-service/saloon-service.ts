@@ -9,11 +9,13 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ServiceDetailsDialogComponent } from '../../Utils/component/dialogs/service-details-dialog-component/service-details-dialog-component';
 import { DecimalPipe } from '@angular/common';
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
 @Component({
   selector: 'app-saloon-service',
-  imports: [Title2, MatIconModule, TranslatePipe, MatTooltipModule, DecimalPipe],
+  imports: [
+    EmptyStateComponent,Title2, MatIconModule, TranslatePipe, MatTooltipModule, DecimalPipe],
   templateUrl: './saloon-service.html',
   styleUrl: './saloon-service.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

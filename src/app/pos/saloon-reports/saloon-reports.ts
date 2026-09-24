@@ -23,6 +23,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { error } from 'console';
 import { IncomeExpenseDetailsDialogComponent } from '../../Utils/component/income-expense-details-dialog-component/income-expense-details-dialog-component';
 import { StockPurchaseDetailsDialogComponent } from '../../Utils/component/dialogs/stock-purchase-details-dialog-component/stock-purchase-details-dialog-component';
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
 
@@ -31,7 +32,8 @@ import { StockPurchaseDetailsDialogComponent } from '../../Utils/component/dialo
 @Component({
   selector: 'app-saloon-reports',
   standalone: true,
-  imports: [Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
+  imports: [
+    EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,

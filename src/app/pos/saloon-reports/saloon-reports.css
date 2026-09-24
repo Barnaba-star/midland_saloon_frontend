@@ -1,10 +1,4 @@
-.empty-icon {
-  font-size: 90px;
-  width: 90px;
-  height: 90px;
-  color: rgb(65, 62, 88);
-  margin-bottom: 10px;
-}
+
 .action-container {
   width: 100%;
   height: 80vh;
@@ -4448,66 +4442,6 @@
   color: #555;
   white-space: nowrap;
 }
-/* =====================================================
-   EMPTY STATE (shared) - one look for every "no data" state
-   on this page: Overview, Income, Commission, Store, Stock,
-   Service. Replaces several conflicting .empty-state /
-   .empty-icon definitions that used to disagree with each
-   other (different padding, some !important, some sizes).
-===================================================== */
-
-.empty-state {
-  min-height: 280px;
-
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
-  text-align: center;
-  padding: 40px 24px;
-
-  box-sizing: border-box;
-}
-
-.empty-icon-badge {
-  width: 72px;
-  height: 72px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 20px;
-
-  background: #f1f5f9;
-  color: #94a3b8;
-
-  margin-bottom: 16px;
-}
-
-.empty-icon-badge mat-icon {
-  font-size: 34px;
-  width: 34px;
-  height: 34px;
-}
-
-.empty-state h3 {
-  margin: 0 0 6px;
-
-  color: #344054;
-  font-size: 18px;
-  font-weight: 700;
-}
-
-.empty-state p {
-  margin: 0;
-
-  color: #94a3b8;
-  font-size: 14px;
-  line-height: 1.5;
-  max-width: 380px;
-}
 
 .report-actions {
   width: 100%;
@@ -5976,35 +5910,6 @@
   text-align: center;
   height: 120px;
 }
-.no-records-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  padding: 20px 15px;
-  margin-top: 12px;
-  border-radius: 10px;
-  background: #fafafa;
-  border: 1px solid #eeeeee;
-}
-
-.no-records-message .empty-icon {
-  width: 32px;
-  height: 32px;
-  opacity: 0.65;
-}
-
-.no-records-content h3 {
-  margin: 0 0 4px;
-  font-size: 17px;
-  font-weight: 600;
-}
-
-.no-records-content p {
-  margin: 0;
-  font-size: 15px;
-  color: #888;
-}
 
 
 
@@ -6594,51 +6499,6 @@
 
 
 /* =========================================================
-   EMPTY STATE
-========================================================= */
-
-.no-records-message {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 15px;
-  min-height: 125px;
-  padding: 18px 20px;
-  border-top: 1px solid #edf1f5;
-  background: #ffffff;
-}
-
-/* Scoped to this compact card widget so it doesn't fight with the page's
-   main 90px .empty-icon (a bare !important here used to force EVERY
-   .empty-icon on the page down to 48px, including the big full-page ones). */
-.no-records-message .empty-icon {
-  width: 48px;
-  height: 48px;
-  color: #94a3b8;
-  opacity: 0.75;
-}
-
-.no-records-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-}
-
-.no-records-content h3 {
-  margin: 0;
-  color: #344054;
-  font-size: 14px;
-  font-weight: 700;
-}
-
-.no-records-content p {
-  margin: 0;
-  color: #98a2b3;
-  font-size: 11px;
-}
-
-
-/* =========================================================
    RESPONSIVE
 ========================================================= */
 
@@ -6706,16 +6566,6 @@
     padding: 0 11px;
   }
 
-  .no-records-message {
-    min-height: 105px;
-    padding: 14px;
-  }
-
-  .empty-icon {
-    width: 40px !important;
-    height: 40px !important;
-  }
-
 }
 
 
@@ -6731,18 +6581,6 @@
 
   .selected-period {
     font-size: 11px;
-  }
-
-  .no-records-message {
-    gap: 10px;
-  }
-
-  .no-records-content h3 {
-    font-size: 12px;
-  }
-
-  .no-records-content p {
-    font-size: 10px;
   }
 
 }

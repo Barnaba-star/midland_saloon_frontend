@@ -14,11 +14,13 @@ import { DecimalPipe, UpperCasePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
 @Component({
   selector: 'app-saloon-bookings',
-  imports: [Title2, MatIcon, DecimalPipe, UpperCasePipe, TranslatePipe],
+  imports: [
+    EmptyStateComponent,Title2, MatIcon, DecimalPipe, UpperCasePipe, TranslatePipe],
   templateUrl: './saloon-store.html',
   styleUrl: './saloon-store.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

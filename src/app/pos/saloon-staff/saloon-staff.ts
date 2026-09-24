@@ -18,11 +18,13 @@ import { MatTableDataSource } from '@angular/material/table';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { StaffDetailsDialogComponent } from '../../Utils/component/dialogs/staff-details-dialog-component/staff-details-dialog-component';
 import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delete-confirmation-component/delete-confirmation-component';
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 @Component({
   selector: 'app-saloon-staff',
   standalone: true,
   imports: [
+    EmptyStateComponent,
     Title2,
     MatIconModule,
     Form3,

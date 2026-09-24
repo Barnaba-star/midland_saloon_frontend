@@ -111,7 +111,7 @@
             </div>
             <span class="axis-caption">{{ 'POS_HOME.AXIS_CAPTION' | translate }}</span>
           } @else {
-            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            <app-empty-state compact icon="payment2" title="POS_HOME.NO_DATA" />
           }
         </div>
 
@@ -137,7 +137,7 @@
               }
             </div>
           } @else {
-              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+              <app-empty-state compact icon="service" title="POS_HOME.NO_DATA" />
             }
           </div>
 
@@ -176,7 +176,7 @@
               </ul>
             </div>
           } @else {
-            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            <app-empty-state compact icon="commission" title="POS_HOME.NO_DATA" />
           }
         </div>
 
@@ -198,7 +198,7 @@
                 }
               </div>
             } @else {
-              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+              <app-empty-state compact icon="pay" title="POS_HOME.NO_DATA" />
             }
           </div>
 
@@ -230,7 +230,7 @@
               }
             </div>
           } @else {
-            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            <app-empty-state compact icon="stock" title="POS_HOME.NO_DATA" />
           }
         </div>
 

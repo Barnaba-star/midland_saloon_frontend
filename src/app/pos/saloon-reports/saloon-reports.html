@@ -244,15 +244,11 @@
                     <!-- EMPTY -->
                     <tr *ngIf="filteredReports.length === 0">
                       <td colspan="8">
-                        <div class="empty-state">
-                          <div class="empty-icon-badge">
-                            <mat-icon svgIcon="report"></mat-icon>
-                          </div>
-
-                          <h3>{{ 'REPORTS_PAGE.EMPTY_REPORTS_TITLE' | translate }}</h3>
-
-                          <p>{{ 'REPORTS_PAGE.EMPTY_REPORTS_TEXT' | translate }}</p>
-                        </div>
+                        <app-empty-state
+                          icon="report"
+                          title="REPORTS_PAGE.EMPTY_REPORTS_TITLE"
+                          text="REPORTS_PAGE.EMPTY_REPORTS_TEXT"
+                        />
                       </td>
                     </tr>
                   </tbody>
@@ -343,13 +339,11 @@
         </div>
       }
       @if (saloonReports.length === 0 && reportForToday === false) {
-        <div class="empty-state">
-          <div class="empty-icon-badge">
-            <mat-icon svgIcon="history"></mat-icon>
-          </div>
-          <h3>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TITLE' | translate }}</h3>
-          <p>{{ 'REPORTS_PAGE.EMPTY_SERVICE_REPORT_TEXT' | translate }}</p>
-        </div>
+        <app-empty-state
+          icon="service"
+          title="REPORTS_PAGE.EMPTY_SERVICE_REPORT_TITLE"
+          text="REPORTS_PAGE.EMPTY_SERVICE_REPORT_TEXT"
+        />
       }
       @if (reportForToday === true) {
         <div class="revenue-report-wrapper">
@@ -685,15 +679,11 @@
             </div>
           </div>
           } @else {
-            <div class="no-records-message">
-              <mat-icon class="empty-icon" svgIcon="report"></mat-icon>
-
-              <div class="no-records-content">
-                <h3>{{ 'REPORTS_PAGE.NO_REVENUE_TITLE' | translate }}</h3>
-
-                <p>{{ 'REPORTS_PAGE.NO_REVENUE_TEXT' | translate }}</p>
-              </div>
-            </div>
+            <app-empty-state
+              icon="payment2"
+              title="REPORTS_PAGE.NO_REVENUE_TITLE"
+              text="REPORTS_PAGE.NO_REVENUE_TEXT"
+            />
           }
         </div>
       }
@@ -1059,15 +1049,11 @@
             <!-- =========================
                NO RECORD FOUND
           ========================== -->
-            <div class="no-records-message">
-              <mat-icon class="empty-icon" svgIcon="commission"></mat-icon>
-
-              <div class="no-records-content">
-                <h3>{{ 'REPORTS_PAGE.EMPTY_COMMISSION_REPORT_TITLE' | translate }}</h3>
-
-                <p>{{ 'REPORTS_PAGE.EMPTY_COMMISSION_REPORT_TEXT' | translate }}</p>
-              </div>
-            </div>
+            <app-empty-state
+              icon="commission"
+              title="REPORTS_PAGE.EMPTY_COMMISSION_REPORT_TITLE"
+              text="REPORTS_PAGE.EMPTY_COMMISSION_REPORT_TEXT"
+            />
           }
 
           <!-- =========================
@@ -1531,15 +1517,11 @@
           </tbody>
         </table>
         } @else {
-          <div class="no-records-message">
-            <mat-icon class="empty-icon" svgIcon="store"></mat-icon>
-
-            <div class="no-records-content">
-              <h3>{{ 'REPORTS_PAGE.EMPTY_STORE_REPORT_TITLE' | translate }}</h3>
-
-              <p>{{ 'REPORTS_PAGE.EMPTY_STORE_REPORT_TEXT' | translate }}</p>
-            </div>
-          </div>
+          <app-empty-state
+            icon="store"
+            title="REPORTS_PAGE.EMPTY_STORE_REPORT_TITLE"
+            text="REPORTS_PAGE.EMPTY_STORE_REPORT_TEXT"
+          />
         }
       </div>
       <div class="pagination">
@@ -1820,15 +1802,11 @@
         } @else {
           <!-- EMPTY -->
 
-          <div class="empty-state">
-            <div class="empty-icon-badge">
-              <mat-icon svgIcon="payment2"></mat-icon>
-            </div>
-
-            <h3>{{ 'REPORTS_PAGE.EMPTY_FINANCIAL_TITLE' | translate }}</h3>
-
-            <p>{{ 'REPORTS_PAGE.EMPTY_FINANCIAL_TEXT' | translate }}</p>
-          </div>
+          <app-empty-state
+            icon="payment2"
+            title="REPORTS_PAGE.EMPTY_FINANCIAL_TITLE"
+            text="REPORTS_PAGE.EMPTY_FINANCIAL_TEXT"
+          />
         }
       </div>
     </div>
@@ -2562,15 +2540,11 @@
             <!-- =========================
                EMPTY STATE
           ========================== -->
-            <div class="no-records-message">
-              <mat-icon class="empty-icon" svgIcon="commission"></mat-icon>
-
-              <div class="no-records-content">
-                <h3>{{ 'REPORTS_PAGE.EMPTY_STOCK_TITLE' | translate }}</h3>
-
-                <p>{{ 'REPORTS_PAGE.EMPTY_STOCK_TEXT' | translate }}</p>
-              </div>
-            </div>
+            <app-empty-state
+              icon="stock"
+              title="REPORTS_PAGE.EMPTY_STOCK_TITLE"
+              text="REPORTS_PAGE.EMPTY_STOCK_TEXT"
+            />
           }
         </div>
       </div>

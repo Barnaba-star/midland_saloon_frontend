@@ -10,10 +10,12 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { POS_FULL_ACCESS_ROLES } from './pos-role.guard';
 import { ServiceSaloonMethod } from './service-saloon-method';
+import { EmptyStateComponent } from '../Utils/component/empty-state/empty-state';
 
 @Component({
   selector: 'app-pos',
-  imports:  [CommonModule, RouterModule, MainSidenav2, MatIconModule, TranslatePipe],
+  imports:  [
+    EmptyStateComponent,CommonModule, RouterModule, MainSidenav2, MatIconModule, TranslatePipe],
   templateUrl: './pos.html',
   styleUrl: './pos.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

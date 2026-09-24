@@ -121,13 +121,11 @@
             }
 
             @if (salesOpenedList.length === 0) {
-              <div class="empty-sales">
-                <mat-icon class="empty-icon" svgIcon="history"> </mat-icon>
-
-                <h3>{{ 'SALES_PAGE.EMPTY_TITLE' | translate }}</h3>
-
-                <p>{{ 'SALES_PAGE.EMPTY_TEXT' | translate }}</p>
-              </div>
+              <app-empty-state
+                icon="payment"
+                title="SALES_PAGE.EMPTY_TITLE"
+                text="SALES_PAGE.EMPTY_TEXT"
+              />
             }
           </div>
         </div>
@@ -769,24 +767,12 @@
            EMPTY STATE
       ====================================================== -->
 
-      <div
-        class="empty-state"
+      <app-empty-state
         *ngIf="salesOpenByStatus.length === 0"
-      >
-
-        <div class="empty-icon-badge">
-          <mat-icon svgIcon="payment2"></mat-icon>
-        </div>
-
-        <h3>
-          {{ 'SALES_PAGE.EMPTY_TRANSACTIONS_TITLE' | translate }}
-        </h3>
-
-        <p>
-          {{ 'SALES_PAGE.EMPTY_TRANSACTIONS_TEXT' | translate }}
-        </p>
-
-      </div>
+        icon="payment2"
+        title="SALES_PAGE.EMPTY_TRANSACTIONS_TITLE"
+        text="SALES_PAGE.EMPTY_TRANSACTIONS_TEXT"
+      />
 
     </div>
 

@@ -225,13 +225,11 @@
 }
 
     @if(saloonServiceDataSource.length === 0){
-       <div class="empty-state">
-         <div class="empty-icon-badge">
-           <mat-icon svgIcon="more"></mat-icon>
-         </div>
-         <h3>{{ 'SERVICE_PAGE.EMPTY_TITLE' | translate }}</h3>
-         <p>{{ 'SERVICE_PAGE.EMPTY_TEXT' | translate }}</p>
-       </div>
+       <app-empty-state
+         icon="service"
+         title="SERVICE_PAGE.EMPTY_TITLE"
+         text="SERVICE_PAGE.EMPTY_TEXT"
+       />
     }
 
     </div>

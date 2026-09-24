@@ -17,6 +17,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { SaleDetailsDialogComponent } from '../../Utils/component/sale-details-dialog-component/sale-details-dialog-component';
 import { ViewChild } from '@angular/core';
 import { TranslatePipe } from '@ngx-translate/core';
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
 interface PaymentSummary {
@@ -32,6 +33,7 @@ interface PaymentSummaryDisplay {
 @Component({
   selector: 'app-saloon-sales',
   imports: [
+    EmptyStateComponent,
     MatIconModule,
     Title2,
     FormsModule,

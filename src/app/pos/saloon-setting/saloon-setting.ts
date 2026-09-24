@@ -28,6 +28,7 @@ import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatButtonModule } from "@angular/material/button";
+import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 export interface SaloonServiceEntity {
   uid?: string;
@@ -45,7 +46,8 @@ export interface SaloonServiceEntity {
 
 @Component({
   selector: 'app-saloon-setting',
-  imports: [Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
+  imports: [
+    EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

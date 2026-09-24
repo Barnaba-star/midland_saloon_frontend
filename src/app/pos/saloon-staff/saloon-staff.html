@@ -235,13 +235,11 @@
       }
 
       @if (saloonStaffDataSource.data.length === 0) {
-        <div class="empty-state">
-          <div class="empty-icon-badge">
-            <mat-icon svgIcon="person2"></mat-icon>
-          </div>
-          <h3>{{ 'STAFF_PAGE.NOT_FOUND_TITLE' | translate }}</h3>
-          <p>{{ 'STAFF_PAGE.NOT_FOUND_TEXT' | translate }}</p>
-        </div>
+        <app-empty-state
+          icon="team"
+          title="STAFF_PAGE.NOT_FOUND_TITLE"
+          text="STAFF_PAGE.NOT_FOUND_TEXT"
+        />
       }
     </div>
   }
