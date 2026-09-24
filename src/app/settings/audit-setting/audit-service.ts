@@ -28,6 +28,14 @@ export interface AuditSummary {
   activeUsers: number;
 }
 
+/** How much is held, and how much of it is old enough to be removed. */
+export interface AuditStorage {
+  total: number;
+  olderThan30: number;
+  olderThan90: number;
+  olderThan365: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class AuditService {
 
@@ -56,5 +64,21 @@ export class AuditService {
 
   findAuditSummary(): Observable<Response<AuditSummary>> {
     return this.http.get<Response<AuditSummary>>(`${this.auditUrl}/findAuditSummary`);
+  }
+
+  findAuditStorage(): Observable<Response<AuditStorage>> {
+    return this.http.get<Response<AuditStorage>>(`${this.auditUrl}/findAuditStorage`);
+  }
+
+  /**
+   * Removes everything older than `days`, which the backend refuses to take
+   * below 30. The count removed comes back in `data`.
+   */
+  purgeAuditLog(days: number): Observable<Response<number>> {
+    return this.http.post<Response<number>>(
+      `${this.auditUrl}/purgeAuditLog`,
+      {},
+      { params: { days } }
+    );
   }
 }

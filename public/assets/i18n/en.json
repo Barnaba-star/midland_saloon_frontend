@@ -1009,7 +1009,10 @@
     "COL_DURATION": "Duration",
     "COL_VIEW": "View",
     "VIEW_BTN": "View",
-    "EMPTY_TEXT": "No activity recorded."
+    "EMPTY_TEXT": "No activity recorded.",
+    "OLDER_THAN_90": "Older than 90 days",
+    "PURGE_BTN": "Remove old",
+    "PURGE_SUCCESS": "Removed {{count}} entries."
   },
   "AUDIT_DETAIL_DIALOG": {
     "TITLE": "Activity detail",
@@ -1156,6 +1159,16 @@
     "CODE_PLACEHOLDER": "MWA",
     "CODE_HINT": "The code MWA produces MWA-001, MWA-002 and so on.",
     "SAVE_BTN": "Save",
+    "CANCEL": "Cancel"
+  },
+  "PURGE_AUDIT_DIALOG": {
+    "TITLE": "Remove old entries",
+    "OLDER_THAN": "Older than",
+    "DAYS": "days",
+    "ENTRIES": "entries",
+    "PERMANENT": "This cannot be undone.",
+    "PROTECTED": "The last 30 days can never be removed.",
+    "PURGE_BTN": "Remove",
     "CANCEL": "Cancel"
   }
 }

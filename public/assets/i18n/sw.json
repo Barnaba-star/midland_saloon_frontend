@@ -1009,7 +1009,10 @@
     "COL_DURATION": "Muda uliotumika",
     "COL_VIEW": "Angalia",
     "VIEW_BTN": "Angalia",
-    "EMPTY_TEXT": "Hakuna matendo yaliyorekodiwa."
+    "EMPTY_TEXT": "Hakuna matendo yaliyorekodiwa.",
+    "OLDER_THAN_90": "Zilizozidi siku 90",
+    "PURGE_BTN": "Futa za zamani",
+    "PURGE_SUCCESS": "Zimefutwa {{count}}."
   },
   "AUDIT_DETAIL_DIALOG": {
     "TITLE": "Maelezo ya kitendo",
@@ -1156,6 +1159,16 @@
     "CODE_PLACEHOLDER": "MWA",
     "CODE_HINT": "Code ya MWA inazalisha MWA-001, MWA-002 n.k.",
     "SAVE_BTN": "Hifadhi",
+    "CANCEL": "Ghairi"
+  },
+  "PURGE_AUDIT_DIALOG": {
+    "TITLE": "Futa kumbukumbu za zamani",
+    "OLDER_THAN": "Zilizozidi",
+    "DAYS": "siku",
+    "ENTRIES": "kumbukumbu",
+    "PERMANENT": "Hili haliwezi kutenduliwa.",
+    "PROTECTED": "Siku 30 za mwisho haziwezi kufutwa kamwe.",
+    "PURGE_BTN": "Futa",
     "CANCEL": "Ghairi"
   }
 }

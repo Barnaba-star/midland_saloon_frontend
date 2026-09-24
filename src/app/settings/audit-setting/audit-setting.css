@@ -64,6 +64,35 @@
   background: #1f2937;
 }
 
+/* Outlined rather than filled red: it sits beside Refresh, and a solid red
+   button there would read as the main thing to do on the page. */
+.purge-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 38px;
+  padding: 0 18px;
+  background: #ffffff;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  color: #b91c1c;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.purge-btn:hover:not(:disabled) {
+  background: #fef2f2;
+  border-color: #fca5a5;
+}
+
+.purge-btn:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
 
 /* =========================
    SUMMARY

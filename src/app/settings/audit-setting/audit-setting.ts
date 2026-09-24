@@ -1,12 +1,14 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Title2 } from '../../Utils/component/title2/title2';
 import { TitleAction } from '../../Utils/component/title/title.component';
 import { Authentication } from '../../Utils/services/authentication';
+import { AlertService } from '../../Utils/services/alert';
 import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
 import { AuditDetailDialogComponent } from '../../Utils/component/dialogs/audit-detail-dialog-component/audit-detail-dialog-component';
+import { PurgeAuditDialogComponent } from '../../Utils/component/dialogs/purge-audit-dialog-component/purge-audit-dialog-component';
 import { AuditLog, AuditService } from './audit-service';
 
 @Component({
@@ -22,13 +24,16 @@ export class AuditSetting implements OnInit {
     private visibility: Authentication,
     private auditService: AuditService,
     private cdr: ChangeDetectorRef,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private alert: AlertService,
+    private translate: TranslateService
   ) {}
 
   ngOnInit(): void {
     this.audits = 'AUDIT_SETTING_PAGE.MANAGE_TAB';
     this.loadAudits();
     this.loadSummary();
+    this.loadStorage();
   }
 
   titleAction: string = 'AUDIT_SETTING_PAGE.TITLE';
@@ -51,6 +56,13 @@ export class AuditSetting implements OnInit {
   lastDayCount = 0;
   lastWeekCount = 0;
   activeUsersCount = 0;
+
+  /** How much is old enough to be removed; all zero until storage loads. */
+  storageTotal = 0;
+  olderThan30Count = 0;
+  olderThan90Count = 0;
+  olderThan365Count = 0;
+  purging = false;
 
   /** '' means "everything". */
   outcomeFilter = '';
@@ -109,6 +121,25 @@ export class AuditSetting implements OnInit {
     });
   }
 
+  loadStorage() {
+    this.auditService.findAuditStorage().subscribe({
+      next: (response) => {
+        this.storageTotal = response.data?.total ?? 0;
+        this.olderThan30Count = response.data?.olderThan30 ?? 0;
+        this.olderThan90Count = response.data?.olderThan90 ?? 0;
+        this.olderThan365Count = response.data?.olderThan365 ?? 0;
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.storageTotal = 0;
+        this.olderThan30Count = 0;
+        this.olderThan90Count = 0;
+        this.olderThan365Count = 0;
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
   /** A new term is a new result set, so it always starts from the first page. */
   onSearchChange(term: string) {
     this.searchParam = term;
@@ -134,6 +165,64 @@ export class AuditSetting implements OnInit {
     this.currentPage = 0;
     this.loadAudits();
     this.loadSummary();
+    this.loadStorage();
+  }
+
+  /** Nothing to offer when nothing is old enough to go. */
+  get canPurge(): boolean {
+    return this.olderThan90Count > 0;
+  }
+
+  openPurge() {
+    const dialogRef = this.dialog.open(PurgeAuditDialogComponent, {
+      width: '460px',
+      maxWidth: '95vw',
+      data: {
+        total: this.storageTotal,
+        olderThan30: this.olderThan30Count,
+        olderThan90: this.olderThan90Count,
+        olderThan365: this.olderThan365Count
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((days: number | undefined) => {
+
+      if (!days) {
+        return;
+      }
+
+      this.purging = true;
+      this.cdr.markForCheck();
+
+      this.auditService.purgeAuditLog(days).subscribe({
+        next: (response) => {
+          this.purging = false;
+
+          // The call answers 200 either way, so success is read off `data`.
+          // Zero removed is still a success - there was simply nothing there.
+          if (typeof response?.data === 'number') {
+            this.alert.show(
+              'success',
+              this.translate.instant('AUDIT_SETTING_PAGE.PURGE_SUCCESS', { count: response.data })
+            );
+            this.currentPage = 0;
+            this.loadAudits();
+            this.loadSummary();
+            this.loadStorage();
+          } else {
+            this.alert.show('error', response?.message || '');
+          }
+
+          this.cdr.markForCheck();
+        },
+        error: (error) => {
+          this.purging = false;
+          console.error('Audit purge error:', error);
+          this.alert.show('error', error?.error?.message || '');
+          this.cdr.markForCheck();
+        }
+      });
+    });
   }
 
   openDetail(auditLog: AuditLog) {

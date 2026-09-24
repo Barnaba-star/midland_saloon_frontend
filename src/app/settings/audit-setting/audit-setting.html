@@ -21,6 +21,13 @@
           <button type="button" class="refresh-btn" (click)="refresh()">
             {{ 'AUDIT_SETTING_PAGE.REFRESH_BTN' | translate }}
           </button>
+
+          <!-- Offered only when something is actually old enough to remove. -->
+          @if (canPurge) {
+            <button type="button" class="purge-btn" [disabled]="purging" (click)="openPurge()">
+              {{ 'AUDIT_SETTING_PAGE.PURGE_BTN' | translate }}
+            </button>
+          }
         </div>
 
       </div>
@@ -43,6 +50,11 @@
         <div class="summary-card">
           <span class="summary-label">{{ 'AUDIT_SETTING_PAGE.ACTIVE_USERS' | translate }}</span>
           <span class="summary-value">{{ activeUsersCount }}</span>
+        </div>
+
+        <div class="summary-card">
+          <span class="summary-label">{{ 'AUDIT_SETTING_PAGE.OLDER_THAN_90' | translate }}</span>
+          <span class="summary-value">{{ olderThan90Count }}</span>
         </div>
 
       </div>
