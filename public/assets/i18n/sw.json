@@ -1225,7 +1225,7 @@
     "TITLE": "Payroll",
     "MANAGE_TAB": "Payroll",
     "MGMT_TITLE": "Orodha ya malipo ya mwezi",
-    "MGMT_SUBTITLE": "Kila mtu anadai kiasi gani kutokana na mapato ya usajili wa mwezi huu. Chapisha uipeleke benki.",
+    "MGMT_SUBTITLE": "Jinsi mapato ya usajili ya mwezi yanavyogawanyika, na kila mtu anadai kiasi gani. Chapisha uipeleke benki.",
     "MONTH": "Mwezi",
     "YEAR": "Mwaka",
     "PRINT": "Chapisha",
@@ -1236,7 +1236,7 @@
     "COL_ROLE": "Nafasi",
     "COL_PHONE": "Simu",
     "COL_ACCOUNT": "Namba ya akaunti",
-    "COL_AMOUNT": "Kiasi (TZS)",
+    "COL_AMOUNT": "Kulipwa (TZS)",
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
@@ -1247,6 +1247,12 @@
     "NOBODY_OWED": "Hakuna anayedai chochote mwezi huu. Ama hakuna tawi lililolipa, ama wote wameshalipwa.",
     "LOAD_FAILED": "Payroll haikuweza kupakiwa. Tafadhali jaribu tena.",
     "PREPARED_BY": "Imeandaliwa na",
-    "APPROVED_BY": "Imeidhinishwa na"
+    "APPROVED_BY": "Imeidhinishwa na",
+    "MONTH_REVENUE": "Mapato ya mwezi",
+    "FROM_PAYMENTS": "kutoka malipo {{count}} ya matawi",
+    "OPERATING": "Uendeshaji",
+    "COL_EARNED": "Amepata",
+    "COL_PAID": "Amelipwa",
+    "SETTLED": "amelipwa"
   }
 }

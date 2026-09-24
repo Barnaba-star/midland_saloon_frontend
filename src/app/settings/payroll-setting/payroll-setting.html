@@ -72,6 +72,48 @@
 
           <div class="sheet">
 
+            @if (payroll.share) {
+              <div class="split">
+
+                <div class="split-revenue">
+                  <span class="split-revenue-label">{{ 'PAYROLL_PAGE.MONTH_REVENUE' | translate }}</span>
+                  <span class="split-revenue-value">{{ payroll.share.revenue | number }} <small>TZS</small></span>
+                  <span class="split-revenue-meta">
+                    {{ 'PAYROLL_PAGE.FROM_PAYMENTS' | translate: { count: payroll.share.payments } }}
+                  </span>
+                </div>
+
+                <div class="split-parts">
+
+                  <div class="split-part">
+                    <span class="part-label">{{ 'PAYROLL_PAGE.ROLE_ROOT' | translate }}</span>
+                    <span class="part-pct">{{ sharedPercent(payroll.share.rootPercent, payroll.share.rootCount) }}</span>
+                    <span class="part-amount">{{ payroll.share.rootAmount | number }}</span>
+                  </div>
+
+                  <div class="split-part">
+                    <span class="part-label">{{ 'PAYROLL_PAGE.ROLE_DIRECTOR' | translate }}</span>
+                    <span class="part-pct">{{ sharedPercent(payroll.share.directorPercent, payroll.share.directorCount) }}</span>
+                    <span class="part-amount">{{ payroll.share.directorAmount | number }}</span>
+                  </div>
+
+                  <div class="split-part">
+                    <span class="part-label">{{ 'PAYROLL_PAGE.ROLE_STAFF' | translate }}</span>
+                    <span class="part-pct">{{ payroll.share.staffPercent }}%</span>
+                    <span class="part-amount">{{ payroll.share.staffAmount | number }}</span>
+                  </div>
+
+                  <div class="split-part running">
+                    <span class="part-label">{{ 'PAYROLL_PAGE.OPERATING' | translate }}</span>
+                    <span class="part-pct"></span>
+                    <span class="part-amount">{{ payroll.share.operatingAmount | number }}</span>
+                  </div>
+
+                </div>
+
+              </div>
+            }
+
             <div class="sheet-header">
 
               <div>
@@ -110,6 +152,8 @@
                     @if (hasAccountNumbers) {
                       <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT' | translate }}</th>
                     }
+                    <th class="col-amount">{{ 'PAYROLL_PAGE.COL_EARNED' | translate }}</th>
+                    <th class="col-amount">{{ 'PAYROLL_PAGE.COL_PAID' | translate }}</th>
                     <th class="col-amount">{{ 'PAYROLL_PAGE.COL_AMOUNT' | translate }}</th>
                   </tr>
                 </thead>
@@ -128,14 +172,24 @@
                         @if (hasAccountNumbers) {
                           <td class="col-phone">{{ line.accountNumber || '—' }}</td>
                         }
-                        <td class="col-amount">{{ line.toPay | number }}</td>
+                        <td class="col-amount">{{ line.earned | number }}</td>
+                        <td class="col-amount muted">{{ line.paid | number }}</td>
+                        <td class="col-amount" [class.settled]="line.toPay <= 0">
+                          @if (line.toPay > 0) {
+                            {{ line.toPay | number }}
+                          } @else {
+                            {{ 'PAYROLL_PAGE.SETTLED' | translate }}
+                          }
+                        </td>
                       </tr>
                     }
 
                     <tr class="subtotal-row">
-                      <td [attr.colspan]="hasAccountNumbers ? 5 : 4">
+                      <td [attr.colspan]="hasAccountNumbers ? 6 : 5">
                         {{ 'PAYROLL_PAGE.SUBTOTAL' | translate: { role: roleLabel(group.role) } }}
                       </td>
+                      <td class="col-amount">{{ group.earned | number }}</td>
+                      <td class="col-amount"></td>
                       <td class="col-amount">{{ group.total | number }}</td>
                     </tr>
 
@@ -144,9 +198,10 @@
 
                 <tfoot>
                   <tr class="total-row">
-                    <td [attr.colspan]="hasAccountNumbers ? 5 : 4">
+                    <td [attr.colspan]="hasAccountNumbers ? 6 : 5">
                       {{ 'PAYROLL_PAGE.TOTAL' | translate }}
                     </td>
+                    <td class="col-amount muted">{{ payroll.totalEarned | number }}</td>
                     <td class="col-amount">{{ payroll.totalToPay | number }} TZS</td>
                   </tr>
                 </tfoot>

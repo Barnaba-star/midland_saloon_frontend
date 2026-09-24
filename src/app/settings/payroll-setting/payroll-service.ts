@@ -19,13 +19,33 @@ export interface PayrollLine {
   toPay: number;
 }
 
+/** How the month divided before it was broken down by person. */
+export interface RevenueShare {
+  revenue: number;
+  payments: number;
+  staffPercent: number;
+  staffAmount: number;
+  directorPercent: number;
+  directorCount: number;
+  directorAmount: number;
+  rootPercent: number;
+  rootCount: number;
+  rootAmount: number;
+  operatingAmount: number;
+}
+
 export interface Payroll {
   year: number;
   month: number;
   generatedAt: string;
   revenue: number;
+  /** The split the lines come from, so the totals can be checked. */
+  share: RevenueShare | null;
+  totalEarned: number;
   totalToPay: number;
   recipients: number;
+  /** How many are already settled in full. */
+  settled: number;
   /** A bank needs a number; this says how many are missing one. */
   missingPhone: number;
   lines: PayrollLine[];

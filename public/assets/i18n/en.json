@@ -1225,7 +1225,7 @@
     "TITLE": "Payroll",
     "MANAGE_TAB": "Payroll",
     "MGMT_TITLE": "Monthly payment schedule",
-    "MGMT_SUBTITLE": "What each person is still owed from the month's subscription income. Print it to take to the bank.",
+    "MGMT_SUBTITLE": "How the month's subscription income divides, and what each person is still owed. Print it to take to the bank.",
     "MONTH": "Month",
     "YEAR": "Year",
     "PRINT": "Print",
@@ -1236,7 +1236,7 @@
     "COL_ROLE": "Role",
     "COL_PHONE": "Phone",
     "COL_ACCOUNT": "Account number",
-    "COL_AMOUNT": "Amount (TZS)",
+    "COL_AMOUNT": "To pay (TZS)",
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
@@ -1247,6 +1247,12 @@
     "NOBODY_OWED": "Nobody is owed anything for this month. Either no branch paid, or everyone has already been settled.",
     "LOAD_FAILED": "The payroll could not be loaded. Please try again.",
     "PREPARED_BY": "Prepared by",
-    "APPROVED_BY": "Approved by"
+    "APPROVED_BY": "Approved by",
+    "MONTH_REVENUE": "Month's income",
+    "FROM_PAYMENTS": "from {{count}} branch payment(s)",
+    "OPERATING": "Running costs",
+    "COL_EARNED": "Earned",
+    "COL_PAID": "Paid",
+    "SETTLED": "settled"
   }
 }

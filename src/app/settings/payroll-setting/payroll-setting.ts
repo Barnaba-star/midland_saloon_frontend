@@ -24,6 +24,9 @@ interface PayrollRow extends PayrollLine {
 interface PayrollGroup {
   role: string;
   lines: PayrollRow[];
+  /** What the month gave this role. */
+  earned: number;
+  /** What is left to send it. */
   total: number;
 }
 
@@ -150,10 +153,11 @@ export class PayrollSetting implements OnInit {
     for (const line of lines) {
       let group = groups.length ? groups[groups.length - 1] : null;
       if (!group || group.role !== line.role) {
-        group = { role: line.role, lines: [], total: 0 };
+        group = { role: line.role, lines: [], earned: 0, total: 0 };
         groups.push(group);
       }
       group.lines.push({ ...line, no: ++no });
+      group.earned += line.earned;
       group.total += line.toPay;
     }
     return groups;
@@ -162,6 +166,15 @@ export class PayrollSetting implements OnInit {
   /** Shown only once there is something to show it for. */
   get hasAccountNumbers(): boolean {
     return (this.payroll?.lines ?? []).some(line => !!line.accountNumber);
+  }
+
+  /**
+   * A role's percentage, and - when more than one person holds it - that it
+   * is divided rather than repeated. Matches the Payments screen, which says
+   * the same thing the same way.
+   */
+  sharedPercent(percent: number, holders: number): string {
+    return holders > 1 ? `${percent}% \u00f7 ${holders}` : `${percent}%`;
   }
 
   roleLabel(role: string): string {
