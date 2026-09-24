@@ -1075,7 +1075,14 @@
     "NO_RECIPIENTS": "Hakuna mwenye cheo hiki.",
     "PAY_BTN": "Lipa",
     "PAID_LABEL": "Imelipwa",
-    "PAY_FAILED": "Malipo haya hayakuweza kurekodiwa."
+    "PAY_FAILED": "Malipo haya hayakuweza kurekodiwa.",
+    "PAY_RECORDED": "Imerekodiwa {{amount}} TZS.",
+    "ALREADY_PAID": "Fungu hili tayari limelipwa mwezi huu.",
+    "NOTHING_EARNED": "Hakuna kilichopatikana kwa fungu hili mwezi huu.",
+    "MORE_THAN_OWED": "Hicho ni zaidi ya anachodai.",
+    "INVALID_AMOUNT": "Weka kiasi kikubwa kuliko sifuri.",
+    "NOT_ALLOWED": "Huruhusiwi kurekodi malipo haya.",
+    "NOT_IN_ROLE": "Mtu huyu hana tena cheo hicho."
   },
   "PAY_SHARE_DIALOG": {
     "TITLE": "Rekodi malipo",

@@ -1075,7 +1075,14 @@
     "NO_RECIPIENTS": "Nobody holds this role.",
     "PAY_BTN": "Pay",
     "PAID_LABEL": "Paid",
-    "PAY_FAILED": "The payout could not be recorded."
+    "PAY_FAILED": "The payout could not be recorded.",
+    "PAY_RECORDED": "Recorded {{amount}} TZS.",
+    "ALREADY_PAID": "This share has already been paid for this month.",
+    "NOTHING_EARNED": "Nothing was earned for this share this month.",
+    "MORE_THAN_OWED": "That is more than is owed.",
+    "INVALID_AMOUNT": "Enter an amount greater than zero.",
+    "NOT_ALLOWED": "You are not allowed to record this payout.",
+    "NOT_IN_ROLE": "This person no longer holds that role."
   },
   "PAY_SHARE_DIALOG": {
     "TITLE": "Record a payout",

@@ -136,7 +136,7 @@ export class PaymentService {
    * part of it instead - the backend refuses anything above the outstanding
    * figure rather than quietly trimming it.
    */
-  payShare(role: string, uid: string, year?: number, month?: number, note?: string, amount?: number): Observable<Response<string>> {
+  payShare(role: string, uid: string, year?: number, month?: number, note?: string, amount?: number): Observable<Response<number>> {
     let params = new HttpParams();
     if (year != null) {
       params = params.set('year', year);
@@ -150,7 +150,7 @@ export class PaymentService {
     if (amount != null) {
       params = params.set('amount', amount);
     }
-    return this.http.post<Response<string>>(
+    return this.http.post<Response<number>>(
       `${this.paymentUrl}/payShare/${role}/${uid}`,
       {},
       { params }

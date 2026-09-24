@@ -306,32 +306,56 @@ export class RevenueShareDialogComponent implements OnInit {
           this.payingUid = null;
 
           // Everything comes back as 200, so a refusal is told apart by having
-          // no data - the reason is in the message.
-          if (!response?.data) {
+          // no data. What comes back is a code, never a sentence - the wording
+          // belongs here, where it is translated.
+          const recorded = response?.data;
+          if (typeof recorded !== 'number' || recorded <= 0) {
             this.cdr.markForCheck();
-            this.alertService.show(
-              'error',
-              response?.message || this.translate.instant('REVENUE_SHARE_DIALOG.PAY_FAILED')
-            );
+            this.alertService.show('error', this.messageForCode(response?.message));
             return;
           }
 
-          this.alertService.show('success', response.data);
+          // Applied to the row in hand rather than refetched: the only things
+          // that moved are this person's paid and outstanding, and the server
+          // has just told us by exactly how much. A round trip would show the
+          // same numbers a moment later.
+          this.applyPayment(role, uid, recorded);
 
-          // The held list still has the old paid and outstanding figures, so it
-          // is dropped before the row is fetched again - otherwise the numbers
-          // would not move.
-          this.recipientsByRole.delete(role);
-          this.loadRecipients(role);
-          // The totals at the top count payouts too.
-          this.load();
+          this.alertService.show('success', this.translate.instant('REVENUE_SHARE_DIALOG.PAY_RECORDED', {
+            amount: recorded.toLocaleString('en-US')
+          }));
+          this.cdr.markForCheck();
         },
         error: () => {
-          // The interceptor already said what went wrong.
           this.payingUid = null;
+          this.alertService.show('error', this.messageForCode(null));
           this.cdr.markForCheck();
         }
       });
+  }
+
+  /** Moves one person's figures without going back to the server. */
+  private applyPayment(role: string, uid: string, paid: number): void {
+    const list = this.recipientsByRole.get(role);
+    if (!list) {
+      return;
+    }
+    this.recipientsByRole.set(role, list.map(person =>
+      person.uid === uid
+        ? { ...person, paid: person.paid + paid, outstanding: Math.max(0, person.outstanding - paid) }
+        : person
+    ));
+  }
+
+  /**
+   * The backend answers in codes so this screen can say it in the reader's
+   * language. An unrecognised code still gets a sentence rather than showing
+   * the code itself.
+   */
+  private messageForCode(code: string | null | undefined): string {
+    const known = ['ALREADY_PAID', 'NOTHING_EARNED', 'MORE_THAN_OWED', 'INVALID_AMOUNT', 'NOT_ALLOWED', 'NOT_IN_ROLE'];
+    const key = code && known.includes(code) ? code : 'PAY_FAILED';
+    return this.translate.instant('REVENUE_SHARE_DIALOG.' + key);
   }
 
   /** How wide the little proportion bar should be, capped so it can never overflow. */

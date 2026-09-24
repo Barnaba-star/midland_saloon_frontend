@@ -66,7 +66,10 @@ export const StatusInterceptor: HttpInterceptorFn = (
     req.url.includes('/authentication/login') ||
     // The subscribe dialog shows the reason inside itself; a popup over it
     // said the same thing twice.
-    req.url.includes('/authentication/paySubscription');
+    req.url.includes('/authentication/paySubscription') ||
+    // The payout dialog reports its own outcome, in its own words. The
+    // backend answers here in codes, which a popup would show raw.
+    req.url.includes('/payment/payShare');
 
 
   /*
