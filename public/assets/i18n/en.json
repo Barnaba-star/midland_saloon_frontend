@@ -492,7 +492,8 @@
     "STORAGE": "Storage",
     "COMMISSION": "Commission",
     "ERRORS": "Errors",
-    "AUDIT": "Audit Log"
+    "AUDIT": "Audit Log",
+    "PAYMENTS": "Payments"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -1022,5 +1023,31 @@
     "NO_PAYLOAD": "No payload was sent with this request.",
     "COPY_BTN": "Copy details",
     "COPIED": "Copied"
+  },
+  "PAYMENT_SETTING_PAGE": {
+    "TITLE": "Payments",
+    "RECEIVED_TAB": "Received",
+    "UNRESOLVED_TAB": "Unresolved",
+    "MGMT_TITLE": "Subscription payments",
+    "MGMT_SUBTITLE": "Money received from branches, and the payments still waiting to be settled.",
+    "REFRESH_BTN": "Refresh",
+    "TOTAL_PAYMENTS": "Payments received",
+    "TOTAL_AMOUNT": "Total received",
+    "BALANCE": "Snippe balance",
+    "BALANCE_UNAVAILABLE": "Unavailable",
+    "COL_DATE": "Date",
+    "COL_BRANCH": "Branch",
+    "COL_AMOUNT": "Amount",
+    "COL_MONTHS": "Months",
+    "COL_COMMISSION": "Commission",
+    "COL_STAFF": "Staff",
+    "COL_REFERENCE": "Reference",
+    "COL_STATUS": "Status",
+    "COL_REASON": "Reason",
+    "COL_ACTION": "Action",
+    "RECONCILE_BTN": "Check with Snippe",
+    "EMPTY_TEXT": "No payments received yet.",
+    "EMPTY_UNRESOLVED": "No unresolved payments.",
+    "THIS_MONTH": "This month"
   }
 }

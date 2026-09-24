@@ -492,7 +492,8 @@
     "STORAGE": "Hifadhi",
     "COMMISSION": "Kamisheni",
     "ERRORS": "Makosa",
-    "AUDIT": "Kumbukumbu za Matendo"
+    "AUDIT": "Kumbukumbu za Matendo",
+    "PAYMENTS": "Malipo"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -1022,5 +1023,31 @@
     "NO_PAYLOAD": "Hakuna payload iliyotumwa na request hii.",
     "COPY_BTN": "Nakili maelezo",
     "COPIED": "Imenakiliwa"
+  },
+  "PAYMENT_SETTING_PAGE": {
+    "TITLE": "Malipo",
+    "RECEIVED_TAB": "Yaliyoingia",
+    "UNRESOLVED_TAB": "Yasiyotatuliwa",
+    "MGMT_TITLE": "Malipo ya usajili",
+    "MGMT_SUBTITLE": "Fedha zilizopokelewa kutoka matawi, na malipo ambayo bado hayajakamilika.",
+    "REFRESH_BTN": "Onyesha upya",
+    "TOTAL_PAYMENTS": "Malipo yaliyoingia",
+    "TOTAL_AMOUNT": "Jumla iliyoingia",
+    "BALANCE": "Salio la Snippe",
+    "BALANCE_UNAVAILABLE": "Haipatikani",
+    "COL_DATE": "Tarehe",
+    "COL_BRANCH": "Tawi",
+    "COL_AMOUNT": "Kiasi",
+    "COL_MONTHS": "Miezi",
+    "COL_COMMISSION": "Commission",
+    "COL_STAFF": "Staff",
+    "COL_REFERENCE": "Reference",
+    "COL_STATUS": "Hali",
+    "COL_REASON": "Sababu",
+    "COL_ACTION": "Kitendo",
+    "RECONCILE_BTN": "Hakiki na Snippe",
+    "EMPTY_TEXT": "Hakuna malipo yaliyoingia bado.",
+    "EMPTY_UNRESOLVED": "Hakuna malipo yasiyotatuliwa.",
+    "THIS_MONTH": "Mwezi huu"
   }
 }

@@ -105,6 +105,12 @@ menuItems: SidenavItem[] = [
         icon: 'history',
         route: '/settings/audit',
         roles: this.manageRoles
+      },
+      {
+        label: 'SETTINGS_MENU.PAYMENTS',
+        icon: 'payment',
+        route: '/settings/payments',
+        roles: this.manageRoles
       }
 ];
 

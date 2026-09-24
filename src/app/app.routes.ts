@@ -53,6 +53,11 @@ export const routes: Routes = [
         canActivate: [settingsManageGuard],
         loadComponent: () => import('./settings/audit-setting/audit-setting').then(m => m.AuditSetting)
       },
+      {
+        path: 'payments',
+        canActivate: [settingsManageGuard],
+        loadComponent: () => import('./settings/payment-setting/payment-setting').then(m => m.PaymentSetting)
+      },
     ]
   },
 {
