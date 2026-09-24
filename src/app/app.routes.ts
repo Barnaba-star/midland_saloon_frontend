@@ -65,6 +65,13 @@ export const routes: Routes = [
         loadComponent: () => import('./settings/expiring-setting/expiring-setting').then(m => m.ExpiringSetting)
       },
       {
+        // Who gets paid what this month, in the shape it goes to a bank.
+        // Same gate as Payments: it is the same money, listed by person.
+        path: 'payroll',
+        canActivate: [settingsManageGuard],
+        loadComponent: () => import('./settings/payroll-setting/payroll-setting').then(m => m.PayrollSetting)
+      },
+      {
         // Regions are platform-wide settings, not a branch's own.
         path: 'regions',
         canActivate: [settingsRootOnlyGuard],

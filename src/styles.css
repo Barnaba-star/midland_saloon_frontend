@@ -149,3 +149,52 @@ body {
   padding: 0 !important;
   overflow: hidden !important;
 }
+
+
+/* =====================================================
+   PRINTING
+
+   One page in this app is meant to leave it on paper: the payroll, which
+   is carried to a bank. The sheet marks itself with .print-area; everything
+   else on screen - side nav, header, filters, buttons - is framing that
+   does not belong on the page.
+
+   visibility rather than display: hiding an ancestor with display:none
+   would take the sheet with it, since the sheet lives inside the same
+   layout it is being lifted out of. Keeping visibility lets one descendant
+   stay visible while its ancestors do not.
+===================================================== */
+
+@media print {
+
+  body * {
+    visibility: hidden;
+  }
+
+  .print-area,
+  .print-area * {
+    visibility: visible;
+  }
+
+  .print-area {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Backgrounds and borders on the sheet carry meaning - the rules under a
+     total, for one - so they are asked for rather than left to the
+     browser's ink-saving default. */
+  .print-area * {
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+}

@@ -497,7 +497,8 @@
     "AUDIT": "Kumbukumbu za Matendo",
     "PAYMENTS": "Malipo",
     "EXPIRING": "Matawi yanayoisha",
-    "REGIONS": "Mikoa"
+    "REGIONS": "Mikoa",
+    "PAYROLL": "Payroll"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -1219,5 +1220,33 @@
     "DESCRIPTION_PLACEHOLDER": "Chochote cha kuzingatia kuhusu tawi hili",
     "STATUS_LABEL": "Hali",
     "REGISTER_BTN": "Sajili"
+  },
+  "PAYROLL_PAGE": {
+    "TITLE": "Payroll",
+    "MANAGE_TAB": "Payroll",
+    "MGMT_TITLE": "Orodha ya malipo ya mwezi",
+    "MGMT_SUBTITLE": "Kila mtu anadai kiasi gani kutokana na mapato ya usajili wa mwezi huu. Chapisha uipeleke benki.",
+    "MONTH": "Mwezi",
+    "YEAR": "Mwaka",
+    "PRINT": "Chapisha",
+    "SHEET_TITLE": "ORODHA YA MALIPO",
+    "GENERATED": "Imetengenezwa",
+    "RECIPIENTS": "Watu",
+    "COL_NAME": "Jina kamili",
+    "COL_ROLE": "Nafasi",
+    "COL_PHONE": "Simu",
+    "COL_ACCOUNT": "Namba ya akaunti",
+    "COL_AMOUNT": "Kiasi (TZS)",
+    "ROLE_ROOT": "Root",
+    "ROLE_DIRECTOR": "Director",
+    "ROLE_STAFF": "Staff",
+    "SUBTOTAL": "Jumla ya {{role}}",
+    "TOTAL": "Jumla ya kulipa",
+    "NO_PHONE": "hana namba",
+    "MISSING_PHONE": "Kati ya hawa, {{count}} hawana namba ya simu. Benki itahitaji namba kabla ya kutuma chochote.",
+    "NOBODY_OWED": "Hakuna anayedai chochote mwezi huu. Ama hakuna tawi lililolipa, ama wote wameshalipwa.",
+    "LOAD_FAILED": "Payroll haikuweza kupakiwa. Tafadhali jaribu tena.",
+    "PREPARED_BY": "Imeandaliwa na",
+    "APPROVED_BY": "Imeidhinishwa na"
   }
 }

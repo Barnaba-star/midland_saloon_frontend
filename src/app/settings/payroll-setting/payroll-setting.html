@@ -1,0 +1,180 @@
+<app-title2
+  [titleHeader]="'PAYROLL_PAGE.TITLE'"
+  (customButtonClick)="onAction($event)"
+  [actions]="getTitled(titleActions)"
+  [activeAction]="tab"
+></app-title2>
+
+@switch (tab) {
+  @case ('PAYROLL_PAGE.MANAGE_TAB') {
+
+    <div class="payroll-container">
+
+      <!-- Controls. None of this belongs on the printed sheet. -->
+      <div class="payroll-controls">
+
+        <div class="control-text">
+          <h2>{{ 'PAYROLL_PAGE.MGMT_TITLE' | translate }}</h2>
+          <p>{{ 'PAYROLL_PAGE.MGMT_SUBTITLE' | translate }}</p>
+        </div>
+
+        <div class="control-fields">
+
+          <label class="filter-field">
+            <span class="filter-label">{{ 'PAYROLL_PAGE.MONTH' | translate }}</span>
+            <select class="filter-select" [value]="selectedMonth" (change)="onMonthChange($any($event.target).value)">
+              @for (month of months; track month.value) {
+                <option [value]="month.value">{{ month.label }}</option>
+              }
+            </select>
+          </label>
+
+          <label class="filter-field">
+            <span class="filter-label">{{ 'PAYROLL_PAGE.YEAR' | translate }}</span>
+            <select class="filter-select" [value]="selectedYear" (change)="onYearChange($any($event.target).value)">
+              @for (year of years; track year) {
+                <option [value]="year">{{ year }}</option>
+              }
+            </select>
+          </label>
+
+          <button
+            type="button"
+            class="print-btn"
+            [disabled]="!payroll || payroll.recipients === 0"
+            (click)="print()">
+            <mat-icon svgIcon="report"></mat-icon>
+            <span>{{ 'PAYROLL_PAGE.PRINT' | translate }}</span>
+          </button>
+
+        </div>
+
+      </div>
+
+
+      @if (loading) {
+        <p class="state-note">{{ 'COMMON.LOADING' | translate }}</p>
+      } @else if (failed) {
+        <p class="state-note error">{{ 'PAYROLL_PAGE.LOAD_FAILED' | translate }}</p>
+      } @else if (payroll) {
+
+        <!-- A bank needs a number to send to. Better said here than found
+             out at the counter. -->
+        @if (payroll.missingPhone > 0) {
+          <div class="warn-banner">
+            <mat-icon svgIcon="warning"></mat-icon>
+            <span>{{ 'PAYROLL_PAGE.MISSING_PHONE' | translate: { count: payroll.missingPhone } }}</span>
+          </div>
+        }
+
+        <!-- Everything inside print-area is what reaches the paper. -->
+        <div class="print-area">
+
+          <div class="sheet">
+
+            <div class="sheet-header">
+
+              <div>
+                <h1 class="sheet-title">{{ 'PAYROLL_PAGE.SHEET_TITLE' | translate }}</h1>
+                <p class="sheet-period">{{ periodLabel }}</p>
+              </div>
+
+              <div class="sheet-meta">
+                <span class="meta-row">
+                  <span class="meta-label">{{ 'PAYROLL_PAGE.GENERATED' | translate }}</span>
+                  <span class="meta-value">{{ payroll.generatedAt | date:'dd/MM/yyyy HH:mm' }}</span>
+                </span>
+                <span class="meta-row">
+                  <span class="meta-label">{{ 'PAYROLL_PAGE.RECIPIENTS' | translate }}</span>
+                  <span class="meta-value">{{ payroll.recipients }}</span>
+                </span>
+              </div>
+
+            </div>
+
+
+            @if (payroll.recipients === 0) {
+
+              <p class="sheet-empty">{{ 'PAYROLL_PAGE.NOBODY_OWED' | translate }}</p>
+
+            } @else {
+
+              <table class="sheet-table">
+
+                <thead>
+                  <tr>
+                    <th class="col-no">#</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_NAME' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_ROLE' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_PHONE' | translate }}</th>
+                    @if (hasAccountNumbers) {
+                      <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT' | translate }}</th>
+                    }
+                    <th class="col-amount">{{ 'PAYROLL_PAGE.COL_AMOUNT' | translate }}</th>
+                  </tr>
+                </thead>
+
+                <tbody>
+                  @for (group of groups; track group.role) {
+
+                    @for (line of group.lines; track line.uid) {
+                      <tr>
+                        <td class="col-no">{{ line.no }}</td>
+                        <td class="col-name">{{ line.name }}</td>
+                        <td>{{ roleLabel(line.role) }}</td>
+                        <td class="col-phone" [class.missing]="!line.phone">
+                          {{ line.phone || ('PAYROLL_PAGE.NO_PHONE' | translate) }}
+                        </td>
+                        @if (hasAccountNumbers) {
+                          <td class="col-phone">{{ line.accountNumber || '—' }}</td>
+                        }
+                        <td class="col-amount">{{ line.toPay | number }}</td>
+                      </tr>
+                    }
+
+                    <tr class="subtotal-row">
+                      <td [attr.colspan]="hasAccountNumbers ? 5 : 4">
+                        {{ 'PAYROLL_PAGE.SUBTOTAL' | translate: { role: roleLabel(group.role) } }}
+                      </td>
+                      <td class="col-amount">{{ group.total | number }}</td>
+                    </tr>
+
+                  }
+                </tbody>
+
+                <tfoot>
+                  <tr class="total-row">
+                    <td [attr.colspan]="hasAccountNumbers ? 5 : 4">
+                      {{ 'PAYROLL_PAGE.TOTAL' | translate }}
+                    </td>
+                    <td class="col-amount">{{ payroll.totalToPay | number }} TZS</td>
+                  </tr>
+                </tfoot>
+
+              </table>
+
+
+              <!-- A sheet that authorises money needs somewhere to say who
+                   authorised it. -->
+              <div class="sheet-signatures">
+                <div class="signature">
+                  <span class="signature-line"></span>
+                  <span class="signature-label">{{ 'PAYROLL_PAGE.PREPARED_BY' | translate }}</span>
+                </div>
+                <div class="signature">
+                  <span class="signature-line"></span>
+                  <span class="signature-label">{{ 'PAYROLL_PAGE.APPROVED_BY' | translate }}</span>
+                </div>
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      }
+
+    </div>
+  }
+}

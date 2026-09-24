@@ -497,7 +497,8 @@
     "AUDIT": "Audit Log",
     "PAYMENTS": "Payments",
     "EXPIRING": "Expiring branches",
-    "REGIONS": "Regions"
+    "REGIONS": "Regions",
+    "PAYROLL": "Payroll"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -1219,5 +1220,33 @@
     "DESCRIPTION_PLACEHOLDER": "Anything worth noting about this branch",
     "STATUS_LABEL": "Status",
     "REGISTER_BTN": "Register"
+  },
+  "PAYROLL_PAGE": {
+    "TITLE": "Payroll",
+    "MANAGE_TAB": "Payroll",
+    "MGMT_TITLE": "Monthly payment schedule",
+    "MGMT_SUBTITLE": "What each person is still owed from the month's subscription income. Print it to take to the bank.",
+    "MONTH": "Month",
+    "YEAR": "Year",
+    "PRINT": "Print",
+    "SHEET_TITLE": "PAYMENT SCHEDULE",
+    "GENERATED": "Generated",
+    "RECIPIENTS": "People",
+    "COL_NAME": "Full name",
+    "COL_ROLE": "Role",
+    "COL_PHONE": "Phone",
+    "COL_ACCOUNT": "Account number",
+    "COL_AMOUNT": "Amount (TZS)",
+    "ROLE_ROOT": "Root",
+    "ROLE_DIRECTOR": "Director",
+    "ROLE_STAFF": "Staff",
+    "SUBTOTAL": "{{role}} subtotal",
+    "TOTAL": "Total to pay",
+    "NO_PHONE": "no number",
+    "MISSING_PHONE": "{{count}} of these have no phone number on file. A bank will need one before it can send anything.",
+    "NOBODY_OWED": "Nobody is owed anything for this month. Either no branch paid, or everyone has already been settled.",
+    "LOAD_FAILED": "The payroll could not be loaded. Please try again.",
+    "PREPARED_BY": "Prepared by",
+    "APPROVED_BY": "Approved by"
   }
 }

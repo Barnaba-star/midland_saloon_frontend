@@ -1,0 +1,179 @@
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { Title2 } from '../../Utils/component/title2/title2';
+import { TitleAction } from '../../Utils/component/title/title.component';
+import { Authentication } from '../../Utils/services/authentication';
+import { Payroll, PayrollLine, PayrollService } from './payroll-service';
+
+/** A month the filter can pick, already named in the language in use. */
+interface MonthOption {
+  value: number;
+  label: string;
+}
+
+/** A line with its place on the sheet. */
+interface PayrollRow extends PayrollLine {
+  /** Runs 1..n across the whole sheet, not restarting per role - a bank
+      counts the rows it is given, not the rows in a section. */
+  no: number;
+}
+
+/** One role's lines, with its own subtotal. */
+interface PayrollGroup {
+  role: string;
+  lines: PayrollRow[];
+  total: number;
+}
+
+/**
+ * The month's share-out as a sheet to hand to a bank.
+ *
+ * It shows what is still owed rather than what was earned. The two are the
+ * same until somebody is paid, and after that the difference is the whole
+ * point: a schedule listing what people earned would pay the settled ones a
+ * second time.
+ */
+@Component({
+  selector: 'app-payroll-setting',
+  imports: [Title2, CommonModule, MatIconModule, TranslatePipe],
+  templateUrl: './payroll-setting.html',
+  styleUrl: './payroll-setting.css',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class PayrollSetting implements OnInit {
+
+  constructor(
+    private visibility: Authentication,
+    private payrollService: PayrollService,
+    private translate: TranslateService,
+    private cdr: ChangeDetectorRef,
+  ) {}
+
+  titleActions = [
+    { icon: 'pay', title: 'PAYROLL_PAGE.MANAGE_TAB', roles: ['ROOT', 'DIRECTOR'] }
+  ];
+
+  tab = '';
+
+  payroll: Payroll | null = null;
+  groups: PayrollGroup[] = [];
+  loading = true;
+  failed = false;
+
+  months: MonthOption[] = [];
+  years: number[] = [];
+  selectedMonth = new Date().getMonth() + 1;
+  selectedYear = new Date().getFullYear();
+
+  ngOnInit(): void {
+    this.tab = 'PAYROLL_PAGE.MANAGE_TAB';
+    this.buildPeriodOptions();
+    this.load();
+  }
+
+  getTitled(title: TitleAction[]): TitleAction[] {
+    return this.visibility.filteredTitleActions(title);
+  }
+
+  onAction(action: string): void {
+    this.tab = action;
+  }
+
+  private buildPeriodOptions(): void {
+    const lang = this.translate.getCurrentLang() || this.translate.getFallbackLang() || 'en';
+    let formatter: Intl.DateTimeFormat;
+    try {
+      formatter = new Intl.DateTimeFormat(lang, { month: 'long' });
+    } catch {
+      // An unknown tag would throw; English month names beat none.
+      formatter = new Intl.DateTimeFormat('en', { month: 'long' });
+    }
+
+    const months: MonthOption[] = [];
+    for (let m = 1; m <= 12; m++) {
+      months.push({ value: m, label: formatter.format(new Date(2000, m - 1, 1)) });
+    }
+    this.months = months;
+
+    // Nothing was earned before the platform existed, so the list starts at
+    // this year and only grows backwards as years pass.
+    const thisYear = new Date().getFullYear();
+    this.years = [thisYear, thisYear - 1, thisYear - 2];
+  }
+
+  onMonthChange(value: string): void {
+    this.selectedMonth = Number(value);
+    this.load();
+  }
+
+  onYearChange(value: string): void {
+    this.selectedYear = Number(value);
+    this.load();
+  }
+
+  private load(): void {
+
+    this.loading = true;
+    this.failed = false;
+    // The old sheet belongs to another month, so it goes rather than sitting
+    // under a heading that no longer describes it.
+    this.payroll = null;
+    this.groups = [];
+
+    this.payrollService.findPayroll(this.selectedYear, this.selectedMonth).subscribe({
+
+      next: (res) => {
+        this.loading = false;
+        this.payroll = res?.data ?? null;
+        this.groups = this.groupByRole(this.payroll?.lines ?? []);
+        this.cdr.markForCheck();
+      },
+
+      error: () => {
+        this.loading = false;
+        this.failed = true;
+        this.cdr.markForCheck();
+      },
+    });
+  }
+
+  /**
+   * The backend already returns the lines in role order, so this only has to
+   * cut them where the role changes - no sorting, and no second opinion about
+   * what order the roles come in.
+   */
+  private groupByRole(lines: PayrollLine[]): PayrollGroup[] {
+    const groups: PayrollGroup[] = [];
+    let no = 0;
+    for (const line of lines) {
+      let group = groups.length ? groups[groups.length - 1] : null;
+      if (!group || group.role !== line.role) {
+        group = { role: line.role, lines: [], total: 0 };
+        groups.push(group);
+      }
+      group.lines.push({ ...line, no: ++no });
+      group.total += line.toPay;
+    }
+    return groups;
+  }
+
+  /** Shown only once there is something to show it for. */
+  get hasAccountNumbers(): boolean {
+    return (this.payroll?.lines ?? []).some(line => !!line.accountNumber);
+  }
+
+  roleLabel(role: string): string {
+    return this.translate.instant(`PAYROLL_PAGE.ROLE_${role}`);
+  }
+
+  get periodLabel(): string {
+    const month = this.months.find(m => m.value === this.selectedMonth);
+    return `${month ? month.label : this.selectedMonth} ${this.selectedYear}`;
+  }
+
+  print(): void {
+    window.print();
+  }
+}
