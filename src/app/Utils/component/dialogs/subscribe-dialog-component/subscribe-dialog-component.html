@@ -48,7 +48,12 @@
           [class.active]="months === m"
           (click)="months = m"
         >
-          {{ m }} {{ m === 1 ? ('SUBSCRIBE_DIALOG.MONTH' | translate) : ('SUBSCRIBE_DIALOG.MONTHS_LABEL' | translate) }}
+          <span class="chip-months">
+            {{ m }} {{ m === 1 ? ('SUBSCRIBE_DIALOG.MONTH' | translate) : ('SUBSCRIBE_DIALOG.MONTHS_LABEL' | translate) }}
+          </span>
+          @if (amountFor(m); as chipAmount) {
+            <span class="chip-amount">{{ chipAmount }}</span>
+          }
         </button>
       }
     </div>

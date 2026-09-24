@@ -45,6 +45,18 @@ export class SubscribeDialogComponent {
 
   monthOptions = [1, 3, 6, 12];
 
+  /**
+   * What each choice costs, so the price is on the button being pressed
+   * rather than only in the total underneath it. Null when the branch has no
+   * plan configured - there is no figure to show and none worth inventing.
+   */
+  amountFor(months: number): string | null {
+    if (!this.monthlyAmount) {
+      return null;
+    }
+    return (this.monthlyAmount * months).toLocaleString('en-US') + ' TZS';
+  }
+
   mobileNetwork = '';
   phoneNumber = '';
   months: number | null = null;
