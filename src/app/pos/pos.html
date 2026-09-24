@@ -9,6 +9,146 @@
         <p>{{ 'POS_HOME.SUBTITLE' | translate }}</p>
       </div>
 
+      <!-- ============ BRANCH DASHBOARD ============ -->
+
+      <!-- Four numbers, not four charts: a single figure reads faster as a
+           figure than as a one-slice chart. -->
+      <div class="dash-tiles">
+
+        <div class="dash-tile">
+          <span class="tile-label">{{ 'POS_HOME.TODAY_REVENUE' | translate }}</span>
+          <span class="tile-value">{{ money(summary?.todayRevenue) }}<small>TZS</small></span>
+          @if (revenueChange !== null) {
+            <!-- Arrow and number carry the meaning; the colour only reinforces
+                 it, so this still reads without colour vision. -->
+            <span class="tile-change" [class.up]="revenueChange > 0" [class.down]="revenueChange < 0">
+              <mat-icon>{{ revenueChange >= 0 ? 'arrow_upward' : 'arrow_downward' }}</mat-icon>
+              {{ revenueChange > 0 ? '+' : '' }}{{ revenueChange }}%
+              <span class="tile-change-note">{{ 'POS_HOME.VS_YESTERDAY' | translate }}</span>
+            </span>
+          }
+        </div>
+
+        <div class="dash-tile" [class.needs-action]="summary?.pendingBillsCount > 0">
+          <span class="tile-label">{{ 'POS_HOME.PENDING_BILLS' | translate }}</span>
+          <span class="tile-value">{{ summary?.pendingBillsCount || 0 }}</span>
+          <span class="tile-sub">{{ money(summary?.pendingBillsAmount) }} TZS</span>
+        </div>
+
+        <div class="dash-tile">
+          <span class="tile-label">{{ 'POS_HOME.SERVICES_TODAY' | translate }}</span>
+          <span class="tile-value">{{ summary?.servicesSoldToday || 0 }}</span>
+        </div>
+
+        <div class="dash-tile">
+          <span class="tile-label">{{ 'POS_HOME.OPEN_STORES' | translate }}</span>
+          <span class="tile-value">{{ summary?.openStores || 0 }}<small>/ {{ summary?.totalStores || 0 }}</small></span>
+        </div>
+
+      </div>
+
+
+      @if (seesMoney) {
+
+        <!-- ============ REVENUE TREND ============ -->
+        <div class="dash-panel">
+          <div class="panel-head">
+            <h3>{{ 'POS_HOME.TREND_TITLE' | translate }}</h3>
+            <span class="panel-note">{{ 'POS_HOME.TREND_NOTE' | translate }}</span>
+          </div>
+
+          @if (trendPoints.length) {
+            <div class="chart-wrap">
+              <svg
+                class="trend-chart"
+                [attr.viewBox]="'0 0 ' + chartWidth + ' ' + chartHeight"
+                preserveAspectRatio="none"
+                role="img"
+                [attr.aria-label]="'POS_HOME.TREND_TITLE' | translate">
+
+                <path class="trend-area" [attr.d]="trendArea"></path>
+                <path class="trend-line" [attr.d]="trendPath"></path>
+
+                @if (hoveredPoint) {
+                  <line
+                    class="trend-crosshair"
+                    [attr.x1]="hoveredPoint.x" [attr.x2]="hoveredPoint.x"
+                    [attr.y1]="12" [attr.y2]="chartHeight - 22"></line>
+                  <circle class="trend-dot" [attr.cx]="hoveredPoint.x" [attr.cy]="hoveredPoint.y" r="4.5"></circle>
+                }
+
+                <!-- Hit targets are wider than the marks so a day is easy to land on. -->
+                @for (point of trendPoints; track point.date) {
+                  <rect
+                    class="trend-hit"
+                    [attr.x]="point.x - 6" y="0" width="12" [attr.height]="chartHeight"
+                    (mouseenter)="onTrendHover(point)"
+                    (mouseleave)="onTrendHover(null)"></rect>
+                }
+              </svg>
+
+              @if (hoveredPoint) {
+                <div class="chart-tooltip" [style.left.%]="(hoveredPoint.x / chartWidth) * 100">
+                  <span class="tip-date">{{ hoveredPoint.date | date: 'dd/MM/yyyy' }}</span>
+                  <span class="tip-value">{{ money(hoveredPoint.amount) }} TZS</span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+          }
+        </div>
+
+
+        <!-- ============ TWO RANKED BAR CHARTS ============ -->
+        <div class="dash-columns">
+
+          <div class="dash-panel">
+            <div class="panel-head">
+              <h3>{{ 'POS_HOME.BY_SERVICE_TITLE' | translate }}</h3>
+              <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
+            </div>
+
+            @if (serviceBars.length) {
+              <div class="bar-list">
+                @for (bar of serviceBars; track bar.label) {
+                  <div class="bar-row">
+                    <span class="bar-label">{{ bar.label.startsWith('POS_HOME.') ? (bar.label | translate) : bar.label }}</span>
+                    <span class="bar-track"><span class="bar-fill" [style.width.%]="bar.percent"></span></span>
+                    <span class="bar-value">{{ money(bar.amount) }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            }
+          </div>
+
+          <div class="dash-panel">
+            <div class="panel-head">
+              <h3>{{ 'POS_HOME.SPLIT_TITLE' | translate }}</h3>
+              <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
+            </div>
+
+            @if (splitBars.length) {
+              <div class="bar-list">
+                @for (bar of splitBars; track bar.label) {
+                  <div class="bar-row">
+                    <span class="bar-label">{{ bar.label | translate }}</span>
+                    <span class="bar-track"><span class="bar-fill" [style.width.%]="bar.percent"></span></span>
+                    <span class="bar-value">{{ money(bar.amount) }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            }
+          </div>
+
+        </div>
+      }
+
+
       <div class="pos-home-grid">
         <mat-card
           class="pos-home-card"

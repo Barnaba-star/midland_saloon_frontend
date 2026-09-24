@@ -250,4 +250,15 @@ findRoleByBranch():Observable<ResponseList<any>> {
   return this.http.get<ResponseList<any>>(`${this.roleURL}/findRoleByBranch`);
 }
 
+/***
+ * POS-HOME-DASHBOARD
+ */
+
+findBranchDashboard(): Observable<Response<any>> {
+  return this.http.get<Response<any>>(`${this.saloonURL}/findBranchDashboard`);
+}
+
+findRevenueTrend(days: number): Observable<ResponseList<any>> {
+  return this.http.get<ResponseList<any>>(`${this.saloonURL}/findRevenueTrend/${days}`);
+}
 }
