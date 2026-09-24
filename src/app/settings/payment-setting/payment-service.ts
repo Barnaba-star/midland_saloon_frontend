@@ -45,6 +45,8 @@ export interface RevenueShareDTO {
   directorCount: number;
   directorAmount: number;
   rootPercent: number;
+  /** How many hold the role, so the screen can say the share is split. */
+  rootCount: number;
   rootAmount: number;
   operatingAmount: number;
 }

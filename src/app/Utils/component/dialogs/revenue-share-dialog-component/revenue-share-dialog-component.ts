@@ -160,6 +160,15 @@ export class RevenueShareDialogComponent implements OnInit {
     });
   }
 
+  /**
+   * A role's share, and - when more than one person holds it - that it is
+   * divided rather than repeated. With a single holder the division is
+   * noise, so it is left off.
+   */
+  private sharedPercent(percent: number, holders: number): string {
+    return holders > 1 ? `${percent}% ÷ ${holders}` : `${percent}%`;
+  }
+
   private buildRows(share: RevenueShareDTO | null): ShareRow[] {
     if (!share) {
       return [];
@@ -177,7 +186,9 @@ export class RevenueShareDialogComponent implements OnInit {
         label: 'REVENUE_SHARE_DIALOG.DIRECTORS',
         amount: share.directorAmount || 0,
         color: '#eb6834',
-        percentText: `${share.directorPercent}% × ${share.directorCount}`,
+        // "20% ÷ 2", not "20% × 2": one share for the role, divided. The
+        // multiplication sign said the opposite of what happens.
+        percentText: this.sharedPercent(share.directorPercent, share.directorCount),
         remainder: false,
         role: 'DIRECTOR'
       },
@@ -185,7 +196,7 @@ export class RevenueShareDialogComponent implements OnInit {
         label: 'REVENUE_SHARE_DIALOG.ROOT',
         amount: share.rootAmount || 0,
         color: '#1baf7a',
-        percentText: `${share.rootPercent}%`,
+        percentText: this.sharedPercent(share.rootPercent, share.rootCount),
         remainder: false,
         role: 'ROOT'
       },
