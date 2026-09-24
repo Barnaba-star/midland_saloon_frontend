@@ -40,16 +40,7 @@ private readonly settingsRoles = SETTINGS_ROLES;
 private readonly manageRoles = SETTINGS_MANAGE_ROLES;
 private readonly rootOnlyRoles = SETTINGS_ROOT_ONLY_ROLES;
 menuItems: SidenavItem[] = [
-  {
-    label: 'SETTINGS_MENU.SYSTEM',
-    icon: 'workflow',
-    roles: this.settingsRoles,
-    children: [
-
-
-    ]
-  },
-     {
+      {
         label: 'SETTINGS_MENU.ROLE',
         icon: 'role',
         route: '/settings/role',

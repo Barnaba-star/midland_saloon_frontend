@@ -483,7 +483,6 @@
     "CARD_SETTING_DESC": "Manage system settings."
   },
   "SETTINGS_MENU": {
-    "SYSTEM": "System",
     "ROLE": "Role",
     "BRANCH": "Branch",
     "USERS": "Users",
