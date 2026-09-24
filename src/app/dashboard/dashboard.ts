@@ -37,7 +37,9 @@ cards = [
     icon: 'saloon',
     img: 'assets/icons/saloon.png',
     description: 'DASHBOARD.CARD_POS_DESC',
-    route: '/pos/saloonSetting',
+    // Open POS on its own home - the branch dashboard - rather than dropping
+    // straight into one section of it.
+    route: '/pos',
     roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER']
   },
   {

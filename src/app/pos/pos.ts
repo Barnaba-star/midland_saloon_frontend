@@ -63,6 +63,10 @@ menuItems: SidenavItem[] = [
   {
     label: 'MENU.HOME',
     icon: 'home',
+    // Bare /pos is the branch dashboard. Without a route this item rendered
+    // but did nothing, so there was no way back to it once you had opened a
+    // section.
+    route: '/pos',
     roles: this.allRoles
   },
   {
