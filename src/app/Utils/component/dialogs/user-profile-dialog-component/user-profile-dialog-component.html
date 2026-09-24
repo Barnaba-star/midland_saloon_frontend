@@ -177,6 +177,11 @@
            profile. Shown so whoever prepares the payroll can see who has
            not filled it in yet. -->
       <div class="info-item">
+        <span>{{ 'PROFILE_DIALOG.BANK_NAME' | translate }}</span>
+        <strong>{{ user.bankName || '-' }}</strong>
+      </div>
+
+      <div class="info-item">
         <span>{{ 'PROFILE_DIALOG.ACCOUNT_NUMBER' | translate }}</span>
         <strong>{{ user.accountNumber || '-' }}</strong>
       </div>

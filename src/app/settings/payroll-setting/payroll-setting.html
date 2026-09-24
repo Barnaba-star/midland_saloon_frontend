@@ -157,6 +157,7 @@
                     <th>{{ 'PAYROLL_PAGE.COL_ROLE' | translate }}</th>
                     <th>{{ 'PAYROLL_PAGE.COL_PHONE' | translate }}</th>
                     @if (hasAccountNumbers) {
+                      <th>{{ 'PAYROLL_PAGE.COL_BANK' | translate }}</th>
                       <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT' | translate }}</th>
                     }
                     <th class="col-amount">{{ 'PAYROLL_PAGE.COL_EARNED' | translate }}</th>
@@ -177,7 +178,10 @@
                           {{ line.phone || ('PAYROLL_PAGE.NO_PHONE' | translate) }}
                         </td>
                         @if (hasAccountNumbers) {
-                          <td class="col-phone">{{ line.accountNumber || '—' }}</td>
+                          <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
+                          <td class="col-phone" [class.missing]="!line.accountNumber">
+                            {{ line.accountNumber || '—' }}
+                          </td>
                         }
                         <td class="col-amount">{{ line.earned | number }}</td>
                         <td class="col-amount muted">{{ line.paid | number }}</td>
@@ -192,7 +196,7 @@
                     }
 
                     <tr class="subtotal-row">
-                      <td [attr.colspan]="hasAccountNumbers ? 6 : 5">
+                      <td [attr.colspan]="hasAccountNumbers ? 6 : 4">
                         {{ 'PAYROLL_PAGE.SUBTOTAL' | translate: { role: roleLabel(group.role) } }}
                       </td>
                       <td class="col-amount">{{ group.earned | number }}</td>
@@ -205,7 +209,7 @@
 
                 <tfoot>
                   <tr class="total-row">
-                    <td [attr.colspan]="hasAccountNumbers ? 6 : 5">
+                    <td [attr.colspan]="hasAccountNumbers ? 7 : 5">
                       {{ 'PAYROLL_PAGE.TOTAL' | translate }}
                     </td>
                     <td class="col-amount muted">{{ payroll.totalEarned | number }}</td>

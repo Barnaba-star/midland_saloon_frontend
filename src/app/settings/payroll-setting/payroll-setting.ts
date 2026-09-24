@@ -163,9 +163,9 @@ export class PayrollSetting implements OnInit {
     return groups;
   }
 
-  /** Shown only once there is something to show it for. */
+  /** Shown only once there is something to show them for. */
   get hasAccountNumbers(): boolean {
-    return (this.payroll?.lines ?? []).some(line => !!line.accountNumber);
+    return (this.payroll?.lines ?? []).some(line => !!line.accountNumber || !!line.bankName);
   }
 
   /**

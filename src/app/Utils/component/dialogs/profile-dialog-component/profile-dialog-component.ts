@@ -36,8 +36,25 @@ export class ProfileDialogComponent {
    * happen, and they are the only one who can be sure of it.
    */
   accountNumber = '';
+  bankName = '';
   private savedAccountNumber = '';
+  private savedBankName = '';
   savingAccount = false;
+  accountError: string | null = null;
+
+  /**
+   * Suggestions, not a list to pick from. Typing "CR" offers CRDB without
+   * refusing a bank that is not here - the regions field taught us what a
+   * closed list typed into a component costs when reality has more entries
+   * than the list does.
+   */
+  readonly bankSuggestions = [
+    'CRDB Bank', 'NMB Bank', 'NBC Bank', 'Exim Bank', 'Stanbic Bank',
+    'Absa Bank', 'Equity Bank', 'Diamond Trust Bank', 'Azania Bank',
+    'Tanzania Commercial Bank', 'Access Bank', 'KCB Bank', 'I&M Bank',
+    'Bank of Africa', 'Mkombozi Commercial Bank', 'Amana Bank',
+    'NCBA Bank', 'Standard Chartered', 'Ecobank', 'GTBank',
+  ];
 
   private static readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
   private static readonly MAX_SIZE_BYTES = 10 * 1024 * 1024;
@@ -56,10 +73,12 @@ export class ProfileDialogComponent {
 
   /** Read fresh rather than passed in: the sidenav does not carry it. */
   private loadAccountNumber(): void {
-    this.userService.findMyAccountNumber().subscribe({
+    this.userService.findMyBankDetails().subscribe({
       next: (res) => {
-        this.accountNumber = res?.data || '';
+        this.accountNumber = res?.data?.accountNumber || '';
+        this.bankName = res?.data?.bankName || '';
         this.savedAccountNumber = this.accountNumber;
+        this.savedBankName = this.bankName;
         this.cdr.markForCheck();
       },
       // Leaving it blank is honest - better than showing nothing and
@@ -69,25 +88,43 @@ export class ProfileDialogComponent {
   }
 
   get accountChanged(): boolean {
-    return this.accountNumber.trim() !== this.savedAccountNumber.trim();
+    return this.accountNumber.trim() !== this.savedAccountNumber.trim()
+        || this.bankName.trim() !== this.savedBankName.trim();
   }
 
-  saveAccountNumber(): void {
+  saveBankDetails(): void {
 
     const uid = this.auth.getUserUID();
     if (!uid || this.savingAccount) {
       return;
     }
 
+    const number = this.accountNumber.trim();
+    const bank = this.bankName.trim();
+
+    // One without the other cannot be paid to. Caught here so it is said
+    // next to the empty box rather than as a code from the server.
+    if (!!number !== !!bank) {
+      this.accountError = this.translate.instant('PROFILE_DIALOG.ACCOUNT_INCOMPLETE');
+      return;
+    }
+
+    this.accountError = null;
     this.savingAccount = true;
 
-    this.userService.saveAccountNumber(uid, this.accountNumber.trim() || null).subscribe({
+    this.userService.saveBankDetails(uid, {
+      accountNumber: number || null,
+      bankName: bank || null,
+    }).subscribe({
 
       next: (res) => {
         this.savingAccount = false;
         if (res?.data === 'SAVED') {
-          this.savedAccountNumber = this.accountNumber.trim();
+          this.savedAccountNumber = number;
+          this.savedBankName = bank;
           this.alertService.show('success', this.translate.instant('PROFILE_DIALOG.ACCOUNT_SAVED'));
+        } else if (res?.data === 'INCOMPLETE') {
+          this.accountError = this.translate.instant('PROFILE_DIALOG.ACCOUNT_INCOMPLETE');
         } else {
           this.alertService.show('error', this.translate.instant('PROFILE_DIALOG.ACCOUNT_FAILED'));
         }

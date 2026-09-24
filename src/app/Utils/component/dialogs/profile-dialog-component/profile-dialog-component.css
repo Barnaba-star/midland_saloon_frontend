@@ -289,3 +289,19 @@
   font-size: 11.5px;
   line-height: 1.45;
 }
+
+/* The bank sits above the number and carries no save button of its own -
+   the two are saved together, because one without the other cannot be
+   paid to. */
+.bank-input {
+  font-family: inherit;
+  font-weight: 600;
+  letter-spacing: normal;
+  margin-bottom: 4px;
+}
+
+.account-error {
+  color: #b42318;
+  font-size: 11.5px;
+  line-height: 1.45;
+}

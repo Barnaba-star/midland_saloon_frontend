@@ -64,6 +64,28 @@
   <!-- Where the monthly payroll sends this person's share. Theirs to set. -->
   <div class="account-section">
 
+    <label class="account-label" for="bankName">
+      {{ 'PROFILE_DIALOG.BANK_NAME' | translate }}
+    </label>
+
+    <input
+      id="bankName"
+      type="text"
+      class="account-input bank-input"
+      list="bankSuggestions"
+      [(ngModel)]="bankName"
+      [placeholder]="'PROFILE_DIALOG.BANK_PLACEHOLDER' | translate"
+      maxlength="100"
+      autocomplete="off" />
+
+    <!-- Suggestions only. A bank that is not here is still typed in. -->
+    <datalist id="bankSuggestions">
+      @for (bank of bankSuggestions; track bank) {
+        <option [value]="bank"></option>
+      }
+    </datalist>
+
+
     <label class="account-label" for="accountNumber">
       {{ 'PROFILE_DIALOG.ACCOUNT_NUMBER' | translate }}
     </label>
@@ -82,7 +104,7 @@
         type="button"
         class="account-save"
         [disabled]="!accountChanged || savingAccount"
-        (click)="saveAccountNumber()">
+        (click)="saveBankDetails()">
         @if (savingAccount) {
           <mat-icon class="spin">autorenew</mat-icon>
         } @else {
@@ -90,6 +112,10 @@
         }
       </button>
     </div>
+
+    @if (accountError) {
+      <span class="account-error">{{ accountError }}</span>
+    }
 
     <span class="account-hint">{{ 'PROFILE_DIALOG.ACCOUNT_HINT' | translate }}</span>
 

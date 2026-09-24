@@ -535,3 +535,11 @@
     gap: 24px;
   }
 }
+
+/* A detail the transfer needs and does not have. Marked wherever it is
+   missing, not only in the phone column. */
+.sheet-table td.missing {
+  color: #b54708;
+  font-family: inherit;
+  font-style: italic;
+}

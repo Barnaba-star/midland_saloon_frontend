@@ -766,9 +766,12 @@
     "UPLOAD_FAILED": "Failed to upload the image. Please try again.",
     "ACCOUNT_NUMBER": "Bank account number",
     "ACCOUNT_PLACEHOLDER": "e.g. 0150123456789",
-    "ACCOUNT_HINT": "Where your share of the monthly payroll is sent. Only you can set this.",
+    "ACCOUNT_HINT": "Where your share of the monthly payroll is sent. Only you can set this, and both parts are needed.",
     "ACCOUNT_SAVED": "Account number saved.",
-    "ACCOUNT_FAILED": "Could not save the account number. Please try again."
+    "ACCOUNT_FAILED": "Could not save the account number. Please try again.",
+    "BANK_NAME": "Bank",
+    "BANK_PLACEHOLDER": "e.g. CRDB Bank",
+    "ACCOUNT_INCOMPLETE": "Give both the bank and the account number - one without the other cannot be paid to."
   },
   "MAIN_LOGO": {
     "CHANGE": "Change Company Logo"
@@ -1259,6 +1262,7 @@
     "COL_EARNED": "Earned",
     "COL_PAID": "Paid",
     "SETTLED": "settled",
-    "MISSING_ACCOUNT": "{{count}} of the people owed money have no account number. They must add it from their own profile before a transfer can be instructed."
+    "MISSING_ACCOUNT": "{{count}} of the people owed money have incomplete bank details. They must add the bank and account number from their own profile before a transfer can be instructed.",
+    "COL_BANK": "Bank"
   }
 }

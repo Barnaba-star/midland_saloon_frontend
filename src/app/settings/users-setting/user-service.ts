@@ -5,6 +5,12 @@ import { Observable } from 'rxjs/internal/Observable';
 import { PageableParam, Response, ResponseList, ResponsePage } from '../../Utils/models/responces';
 import { AssignUserRoleDTO, UserAndAttachmentDTO, UserDTO } from './user-model';
 
+/** Where somebody's payroll money is sent. Both parts, or neither. */
+export interface BankDetails {
+  accountNumber: string | null;
+  bankName: string | null;
+}
+
 @Injectable({
   providedIn: 'root',
 })
@@ -25,17 +31,17 @@ saveUser(userDTO:UserDTO):Observable<Response<any>>{
   return this.http.post<Response<any>>(`${this.userURL}/saveUser`, userDTO);
 }
 
-/** The caller's own account number - findUserByUID needs VIEW_USER. */
-findMyAccountNumber():Observable<Response<string>>{
-  return this.http.get<Response<string>>(`${this.userURL}/findMyAccountNumber`);
+/** The caller's own bank details - findUserByUID needs VIEW_USER. */
+findMyBankDetails():Observable<Response<BankDetails>>{
+  return this.http.get<Response<BankDetails>>(`${this.userURL}/findMyBankDetails`);
 }
 
 /**
  * Where this person's payroll money is sent. Anyone may set their own; the
  * backend refuses somebody else's without SAVE_USER.
  */
-saveAccountNumber(userUID:string, accountNumber:string|null):Observable<Response<string>>{
-  return this.http.post<Response<string>>(`${this.userURL}/saveAccountNumber/${userUID}`, { accountNumber });
+saveBankDetails(userUID:string, details:BankDetails):Observable<Response<string>>{
+  return this.http.post<Response<string>>(`${this.userURL}/saveBankDetails/${userUID}`, details);
 }
 
 /** A fresh one-time code by SMS, for an account that has not signed in yet. */

@@ -11,8 +11,9 @@ export interface PayrollLine {
   role: string;
   name: string;
   phone: string | null;
-  /** Not collected anywhere yet; the column appears once it is. */
+  /** Set by its owner, from their own profile. */
   accountNumber: string | null;
+  bankName: string | null;
   earned: number;
   paid: number;
   /** What the bank is being asked to send. */
