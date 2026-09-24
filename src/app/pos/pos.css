@@ -24,105 +24,9 @@
   font-size: 14px;
 }
 
-.pos-home-grid {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  justify-content: center;
-  max-width: 900px;
-}
-
-.pos-home-card {
-  position: relative;
-  width: 260px;
-  border-radius: var(--radius-md, 14px);
-  overflow: hidden;
-  padding: 24px;
-  background: var(--color-surface, #ffffff);
-  box-shadow: var(--shadow-sm, 0 1px 3px rgba(15, 23, 42, 0.08));
-  border: 1px solid var(--color-border, #e5e7eb);
-  cursor: pointer;
-  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
-}
-
-.pos-home-card:hover,
-.pos-home-card:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: var(--shadow-md, 0 8px 20px rgba(15, 23, 42, 0.12));
-  border-color: var(--color-primary, #14315d);
-  outline: none;
-}
-
-.pos-home-icon {
-  width: 52px;
-  height: 52px;
-  border-radius: var(--radius-sm, 10px);
-  background: linear-gradient(135deg, var(--color-primary, #14315d), var(--color-accent, #c9a227));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 16px;
-}
-
-.pos-home-icon mat-icon {
-  color: #ffffff;
-  width: 26px;
-  height: 26px;
-  font-size: 26px;
-}
-
-.pos-home-card mat-card-header {
-  padding: 0;
-  margin-bottom: 6px;
-}
-
-.pos-home-card mat-card-header h4 {
-  margin: 0;
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--color-text, #172033);
-}
-
-.pos-home-card mat-card-content {
-  padding: 0;
-}
-
-.pos-home-card mat-card-content p {
-  margin: 0;
-  font-size: 13px;
-  line-height: 1.5;
-  color: var(--color-text-muted, #667085);
-}
-
-.pos-home-cta {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  margin-top: 18px;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--color-primary, #14315d);
-}
-
-.pos-home-cta mat-icon {
-  font-size: 16px;
-  width: 16px;
-  height: 16px;
-  transition: transform 0.18s ease;
-}
-
-.pos-home-card:hover .pos-home-cta mat-icon {
-  transform: translateX(3px);
-}
-
 @media (max-width: 600px) {
   .pos-home {
     padding: 32px 16px 48px;
-  }
-
-  .pos-home-card {
-    width: 100%;
-    max-width: 340px;
   }
 }
 
@@ -255,16 +159,6 @@
 .panel-note {
   color: var(--viz-ink-soft);
   font-size: 12px;
-}
-
-.dash-columns {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 18px;
-}
-
-.dash-columns .dash-panel {
-  margin-bottom: 18px;
 }
 
 .dash-empty {
@@ -401,10 +295,6 @@
 @media (max-width: 1100px) {
   .dash-tiles {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .dash-columns {
-    grid-template-columns: minmax(0, 1fr);
   }
 }
 
