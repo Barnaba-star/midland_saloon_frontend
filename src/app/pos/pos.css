@@ -480,9 +480,15 @@
 
 .dash-row-charts {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
   align-items: start;
+}
+
+/* The trend, the eleven-bucket breakdown and the stock table each carry too
+   many labels to share a row - they take the full width. */
+.dash-row-charts .panel-full {
+  grid-column: 1 / -1;
 }
 
 .dash-row-charts .dash-panel {
@@ -490,19 +496,10 @@
   min-width: 0;
 }
 
-/* Three to a row leaves each panel narrow, so the bar labels give up some
-   width to keep the bars readable. */
-.dash-row-charts .bar-row {
-  grid-template-columns: minmax(70px, 110px) 1fr auto;
-  gap: 8px;
-}
-
-.dash-row-charts .bar-value {
-  font-size: 11px;
-}
-
-.dash-row-charts .bar-value small {
-  display: block;
+/* Full-width panels have room for a proper label column again. */
+.dash-row-charts .panel-full .bar-row {
+  grid-template-columns: minmax(120px, 200px) 1fr auto;
+  gap: 11px;
 }
 
 
@@ -635,14 +632,65 @@
 }
 
 
-@media (max-width: 1400px) {
-  .dash-row-charts {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
 @media (max-width: 900px) {
   .dash-row-charts {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+
+/* ---------- vertical columns ---------- */
+
+.column-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  height: 200px;
+  padding-top: 4px;
+}
+
+.column-item {
+  display: flex;
+  flex: 1;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  height: 100%;
+}
+
+/* Every column is labelled with its figure, so the chart reads without
+   measuring anything against an axis. */
+.column-value {
+  color: var(--viz-ink);
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.column-track {
+  display: flex;
+  flex: 1;
+  align-items: flex-end;
+  width: 100%;
+  max-width: 46px;
+}
+
+.column-fill {
+  width: 100%;
+  min-height: 3px;
+  background: var(--viz-series);
+  /* Rounded at the top, square where it meets the baseline. */
+  border-radius: 6px 6px 0 0;
+}
+
+.column-label {
+  width: 100%;
+  overflow: hidden;
+  color: var(--viz-ink-soft);
+  font-size: 11px;
+  text-align: center;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }

@@ -53,7 +53,7 @@
       <section class="dash-row dash-row-charts">
 
         <!-- ============ REVENUE TREND ============ -->
-        <div class="dash-panel">
+        <div class="dash-panel panel-full">
           <div class="panel-head">
             <h3>{{ 'POS_HOME.TREND_TITLE' | translate }}</h3>
             <span class="panel-note">{{ summary?.branchName || ('POS_HOME.YOUR_BRANCH' | translate) }}</span>
@@ -124,42 +124,22 @@
               <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
             </div>
 
-            @if (serviceBars.length) {
-              <div class="bar-list">
-                @for (bar of serviceBars; track bar.label) {
-                  <div class="bar-row">
-                    <span class="bar-label">{{ bar.label.startsWith('POS_HOME.') ? (bar.label | translate) : bar.label }}</span>
-                    <span class="bar-track"><span class="bar-fill" [style.width.%]="bar.percent"></span></span>
-                    <span class="bar-value">{{ money(bar.amount) }}</span>
+            @if (serviceColumns.length) {
+            <div class="column-chart">
+              @for (col of serviceColumns; track col.label) {
+                <div class="column-item" [attr.title]="col.label.startsWith('POS_HOME.') ? null : col.label">
+                  <span class="column-value">{{ money(col.amount) }}</span>
+                  <div class="column-track">
+                    <div class="column-fill" [style.height.%]="col.percent"></div>
                   </div>
-                }
-              </div>
-            } @else {
-              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
-            }
-          </div>
-
-          <div class="dash-panel">
-            <div class="panel-head">
-              <h3>{{ 'POS_HOME.SPLIT_TITLE' | translate }}</h3>
-              <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
+                  <span class="column-label">{{ col.label.startsWith('POS_HOME.') ? (col.label | translate) : col.label }}</span>
+                </div>
+              }
             </div>
-
-            @if (splitBars.length) {
-              <div class="bar-list">
-                @for (bar of splitBars; track bar.label) {
-                  <div class="bar-row">
-                    <span class="bar-label">{{ bar.label | translate }}</span>
-                    <span class="bar-track"><span class="bar-fill" [style.width.%]="bar.percent"></span></span>
-                    <span class="bar-value">{{ money(bar.amount) }}</span>
-                  </div>
-                }
-              </div>
-            } @else {
+          } @else {
               <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
             }
           </div>
-
 
         <!-- ============ HEADLINE SPLIT (ring) ============ -->
         <div class="dash-panel">
@@ -201,34 +181,30 @@
         </div>
 
 
-        <!-- ============ STAFF ============ -->
-        <div class="dash-panel">
-          <div class="panel-head">
-            <h3>{{ 'POS_HOME.STAFF_TITLE' | translate }}</h3>
-            <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
-          </div>
-
-          @if (staffRows.length) {
-            <div class="bar-list">
-              @for (row of staffRows; track row.name) {
-                <div class="bar-row">
-                  <span class="bar-label">{{ row.name }}</span>
-                  <span class="bar-track"><span class="bar-fill" [style.width.%]="row.percent"></span></span>
-                  <span class="bar-value">
-                    {{ money(row.earned) }}
-                    <small>· {{ row.services }} {{ 'POS_HOME.SERVICES_SHORT' | translate }}</small>
-                  </span>
-                </div>
-              }
+          <div class="dash-panel panel-full">
+            <div class="panel-head">
+              <h3>{{ 'POS_HOME.SPLIT_TITLE' | translate }}</h3>
+              <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
             </div>
-          } @else {
-            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
-          }
-        </div>
+
+            @if (splitBars.length) {
+              <div class="bar-list">
+                @for (bar of splitBars; track bar.label) {
+                  <div class="bar-row">
+                    <span class="bar-label">{{ bar.label | translate }}</span>
+                    <span class="bar-track"><span class="bar-fill" [style.width.%]="bar.percent"></span></span>
+                    <span class="bar-value">{{ money(bar.amount) }}</span>
+                  </div>
+                }
+              </div>
+            } @else {
+              <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+            }
+          </div>
 
 
         <!-- ============ STOCK AND PURCHASE ============ -->
-        <div class="dash-panel">
+        <div class="dash-panel panel-full">
           <div class="panel-head">
             <h3>{{ 'POS_HOME.STOCK_TITLE' | translate }}</h3>
             <span class="panel-note">{{ 'POS_HOME.THIS_WEEK' | translate }}</span>

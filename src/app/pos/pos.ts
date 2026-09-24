@@ -151,9 +151,13 @@ return this.visibility.filteredMenuItems(menu);
   trendMax = 0;
   hoveredPoint: { x: number; y: number; date: string; amount: number } | null = null;
 
-  serviceBars: { label: string; amount: number; percent: number }[] = [];
+  /**
+   * Vertical columns rather than bars: the services are few and their names
+   * short, and standing them up beside each other makes the drop from the
+   * top seller to the rest easier to see at a glance.
+   */
+  serviceColumns: { label: string; amount: number; percent: number }[] = [];
   splitBars: { label: string; amount: number; percent: number }[] = [];
-  staffRows: { name: string; earned: number; services: number; percent: number }[] = [];
   stockRows: { label: string; total: number; paid: number; remaining: number; percent: number }[] = [];
   stockTotals = { total: 0, paid: 0, remaining: 0 };
 
@@ -222,35 +226,19 @@ return this.visibility.filteredMenuItems(menu);
 
     this.saloonService.findCurrentSaloonRevenueByService('MONTH').subscribe({
       next: (response) => {
-        this.serviceBars = this.toBars(
+        this.serviceColumns = this.toBars(
           (response?.data ?? []).map((row: any) => ({
             label: row.serviceName ?? row.serviceCode ?? '-',
             // The projection carries the eleven buckets, not a total, so a
             // service's revenue is their sum.
             amount: this.sumBuckets(row)
-          }))
+          })),
+          6
         );
         this.cdr.markForCheck();
       },
       error: () => {
-        this.serviceBars = [];
-        this.cdr.markForCheck();
-      }
-    });
-
-    this.saloonService.findStaffEarnings().subscribe({
-      next: (response) => {
-        const rows = (response?.data ?? []).map((row: any) => ({
-          name: [row.firstName, row.lastName].filter(Boolean).join(' ') || '-',
-          earned: Number(row.earned ?? 0),
-          services: Number(row.servicesDone ?? 0)
-        }));
-        const max = rows.reduce((m: number, r: any) => Math.max(m, r.earned), 0);
-        this.staffRows = rows.map((r: any) => ({ ...r, percent: max > 0 ? (r.earned / max) * 100 : 0 }));
-        this.cdr.markForCheck();
-      },
-      error: () => {
-        this.staffRows = [];
+        this.serviceColumns = [];
         this.cdr.markForCheck();
       }
     });
