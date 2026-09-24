@@ -99,6 +99,12 @@ menuItems: SidenavItem[] = [
         icon: 'warning',
         route: '/settings/errors',
         roles: this.manageRoles
+      },
+      {
+        label: 'SETTINGS_MENU.AUDIT',
+        icon: 'history',
+        route: '/settings/audit',
+        roles: this.manageRoles
       }
 ];
 

@@ -487,7 +487,8 @@
     "CONFIG": "Mipangilio",
     "STORAGE": "Hifadhi",
     "COMMISSION": "Kamisheni",
-    "ERRORS": "Makosa"
+    "ERRORS": "Makosa",
+    "AUDIT": "Kumbukumbu za Matendo"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -976,5 +977,46 @@
     "PAYLOAD": "Payload iliyotumwa",
     "COPY_PAYLOAD": "Nakili payload",
     "NO_PAYLOAD": "Hakuna payload iliyotumwa na request hii."
+  },
+  "AUDIT_SETTING_PAGE": {
+    "TITLE": "Kumbukumbu za Matendo",
+    "MANAGE_TAB": "Kumbukumbu za Matendo",
+    "MGMT_TITLE": "Matendo ya Watumiaji",
+    "MGMT_SUBTITLE": "Kila mabadiliko yaliyofanyika kwenye mfumo, na nani aliyayafanya.",
+    "REFRESH_BTN": "Onyesha upya",
+    "SEARCH_PLACEHOLDER": "Tafuta kwa mtumiaji, kitendo au njia",
+    "LAST_DAY": "Saa 24 zilizopita",
+    "LAST_WEEK": "Siku 7 zilizopita",
+    "ACTIVE_USERS": "Watumiaji waliofanya mabadiliko",
+    "OUTCOME_ALL": "Matokeo yote",
+    "OUTCOME_SUCCESS": "Imefanikiwa",
+    "OUTCOME_FAILED": "Imeshindikana",
+    "COL_TIME": "Muda",
+    "COL_USER": "Mtumiaji",
+    "COL_ACTION": "Kitendo",
+    "COL_OUTCOME": "Matokeo",
+    "COL_PATH": "Njia",
+    "COL_DURATION": "Muda uliotumika",
+    "COL_VIEW": "Angalia",
+    "VIEW_BTN": "Angalia",
+    "EMPTY_TEXT": "Hakuna matendo yaliyorekodiwa."
+  },
+  "AUDIT_DETAIL_DIALOG": {
+    "TITLE": "Maelezo ya kitendo",
+    "TIME": "Muda",
+    "USER": "Mtumiaji",
+    "BRANCH": "Tawi",
+    "ACTION": "Kitendo",
+    "PATH": "Njia",
+    "QUERY": "Query",
+    "STATUS_CODE": "Msimbo wa hali",
+    "DURATION": "Muda uliotumika",
+    "IP_ADDRESS": "Anwani ya IP",
+    "USER_AGENT": "Kivinjari",
+    "PAYLOAD": "Payload iliyotumwa",
+    "COPY_PAYLOAD": "Nakili payload",
+    "NO_PAYLOAD": "Hakuna payload iliyotumwa na request hii.",
+    "COPY_BTN": "Nakili maelezo",
+    "COPIED": "Imenakiliwa"
   }
 }

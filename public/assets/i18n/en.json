@@ -487,7 +487,8 @@
     "CONFIG": "Config",
     "STORAGE": "Storage",
     "COMMISSION": "Commission",
-    "ERRORS": "Errors"
+    "ERRORS": "Errors",
+    "AUDIT": "Audit Log"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -976,5 +977,46 @@
     "PAYLOAD": "Payload sent",
     "COPY_PAYLOAD": "Copy payload",
     "NO_PAYLOAD": "No payload was sent with this request."
+  },
+  "AUDIT_SETTING_PAGE": {
+    "TITLE": "Audit Log",
+    "MANAGE_TAB": "Audit Log",
+    "MGMT_TITLE": "User Activity",
+    "MGMT_SUBTITLE": "Every change made in the system, and who made it.",
+    "REFRESH_BTN": "Refresh",
+    "SEARCH_PLACEHOLDER": "Search by user, action or path",
+    "LAST_DAY": "Last 24 hours",
+    "LAST_WEEK": "Last 7 days",
+    "ACTIVE_USERS": "Users who made changes",
+    "OUTCOME_ALL": "All outcomes",
+    "OUTCOME_SUCCESS": "Success",
+    "OUTCOME_FAILED": "Failed",
+    "COL_TIME": "Time",
+    "COL_USER": "User",
+    "COL_ACTION": "Action",
+    "COL_OUTCOME": "Outcome",
+    "COL_PATH": "Path",
+    "COL_DURATION": "Duration",
+    "COL_VIEW": "View",
+    "VIEW_BTN": "View",
+    "EMPTY_TEXT": "No activity recorded."
+  },
+  "AUDIT_DETAIL_DIALOG": {
+    "TITLE": "Activity detail",
+    "TIME": "Time",
+    "USER": "User",
+    "BRANCH": "Branch",
+    "ACTION": "Action",
+    "PATH": "Path",
+    "QUERY": "Query",
+    "STATUS_CODE": "Status code",
+    "DURATION": "Duration",
+    "IP_ADDRESS": "IP address",
+    "USER_AGENT": "Browser",
+    "PAYLOAD": "Payload sent",
+    "COPY_PAYLOAD": "Copy payload",
+    "NO_PAYLOAD": "No payload was sent with this request.",
+    "COPY_BTN": "Copy details",
+    "COPIED": "Copied"
   }
 }
