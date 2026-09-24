@@ -55,6 +55,45 @@
 
 
 /* =========================
+   MONTH FILTERS
+========================= */
+
+.header-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 14px;
+}
+
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.filter-label {
+  color: #94a3b8;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* Copied from the error settings page so the two filters look the same. */
+.filter-select {
+  height: 36px;
+  padding: 0 12px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  color: #374151;
+  font-size: 13px;
+  cursor: pointer;
+}
+
+
+/* =========================
    ICON BUTTON
 ========================= */
 
@@ -228,6 +267,138 @@
   height: 100%;
   border-radius: 999px;
   transition: width 0.25s ease;
+}
+
+
+/* =========================
+   WHO HOLDS THE SHARE
+========================= */
+
+.who-btn {
+  display: inline-flex;
+  flex: 0 0 auto;
+  align-items: center;
+  gap: 5px;
+  height: 24px;
+  padding: 0 9px;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-radius: 999px;
+  color: #64748b;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.who-btn mat-icon {
+  width: 13px;
+  height: 13px;
+  font-size: 13px;
+  line-height: 13px;
+}
+
+.who-btn:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+
+/* The open row is tinted so it is clear which list belongs to which share. */
+.who-btn-open {
+  background: #eef2ff;
+  border-color: #c7d2fe;
+  color: #4338ca;
+}
+
+.who-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.28);
+}
+
+/* Indented and ruled off, so the list reads as belonging to the row above it. */
+.recipient-list {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  margin-left: 14px;
+  padding-left: 12px;
+  border-left: 2px solid #eef2ff;
+}
+
+.recipient-note {
+  margin: 0;
+  padding: 8px 0;
+  color: #94a3b8;
+  font-size: 12px;
+}
+
+.recipient-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 8px 0;
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.recipient-row:last-child {
+  border-bottom: none;
+}
+
+.recipient-who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.recipient-name {
+  color: #0f172a;
+  font-size: 12.5px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.recipient-username {
+  color: #94a3b8;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.recipient-figures {
+  display: flex;
+  gap: 14px;
+  margin-left: auto;
+}
+
+.recipient-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 1px;
+}
+
+.recipient-figure-label {
+  color: #94a3b8;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.recipient-figure-value {
+  color: #334155;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* What is still owed is the figure somebody has to act on. */
+.recipient-outstanding {
+  color: #b45309;
+  font-weight: 700;
 }
 
 

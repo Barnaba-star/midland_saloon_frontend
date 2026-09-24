@@ -1064,6 +1064,14 @@
     "ROOT": "ROOT",
     "OPERATING": "Running costs",
     "NO_REVENUE": "Nothing came in this month.",
-    "CLOSE": "Close"
+    "CLOSE": "Close",
+    "MONTH": "Month",
+    "YEAR": "Year",
+    "LOADING": "Loading...",
+    "WHO_BTN": "Who",
+    "COL_EARNS": "Earns",
+    "COL_PAID": "Paid",
+    "COL_OUTSTANDING": "Outstanding",
+    "NO_RECIPIENTS": "Nobody holds this role."
   }
 }

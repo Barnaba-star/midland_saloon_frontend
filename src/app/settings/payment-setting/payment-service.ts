@@ -49,6 +49,18 @@ export interface RevenueShareDTO {
   operatingAmount: number;
 }
 
+/** One person holding a share-earning role, and what the month came to for them. */
+export interface ShareRecipientDTO {
+  uid: string;
+  name: string;
+  username: string;
+  /** What the month earned them. */
+  amount: number;
+  /** Only staff commission payouts are tracked today; the other roles report 0. */
+  paid: number;
+  outstanding: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
 
@@ -94,6 +106,21 @@ export class PaymentService {
     }
     return this.http.get<Response<RevenueShareDTO>>(
       `${this.paymentUrl}/findRevenueShare`,
+      { params }
+    );
+  }
+
+  /** Who holds one share-earning role - STAFF, DIRECTOR or ROOT - and what each is owed. */
+  findShareRecipients(role: string, year?: number, month?: number): Observable<ResponseList<ShareRecipientDTO>> {
+    let params = new HttpParams();
+    if (year != null) {
+      params = params.set('year', year);
+    }
+    if (month != null) {
+      params = params.set('month', month);
+    }
+    return this.http.get<ResponseList<ShareRecipientDTO>>(
+      `${this.paymentUrl}/findShareRecipients/${role}`,
       { params }
     );
   }

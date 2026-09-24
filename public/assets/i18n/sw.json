@@ -1064,6 +1064,14 @@
     "ROOT": "ROOT",
     "OPERATING": "Matumizi",
     "NO_REVENUE": "Hakuna mapato mwezi huu.",
-    "CLOSE": "Funga"
+    "CLOSE": "Funga",
+    "MONTH": "Mwezi",
+    "YEAR": "Mwaka",
+    "LOADING": "Inapakia...",
+    "WHO_BTN": "Nani",
+    "COL_EARNS": "Anapata",
+    "COL_PAID": "Amelipwa",
+    "COL_OUTSTANDING": "Anadai",
+    "NO_RECIPIENTS": "Hakuna mwenye cheo hiki."
   }
 }

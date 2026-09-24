@@ -2,8 +2,8 @@ import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@
 import { CommonModule } from '@angular/common';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
-import { TranslatePipe } from '@ngx-translate/core';
-import { PaymentService, RevenueShareDTO } from '../../../../settings/payment-setting/payment-service';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { PaymentService, RevenueShareDTO, ShareRecipientDTO } from '../../../../settings/payment-setting/payment-service';
 
 /** One line of the split: what it is called, its share, and what that comes to. */
 interface ShareRow {
@@ -14,6 +14,14 @@ interface ShareRow {
   percentText: string;
   /** Running costs are the remainder, so they sit apart from the three shares. */
   remainder: boolean;
+  /** The backend role behind the row, or null when the row is not somebody's share. */
+  role: string | null;
+}
+
+/** A month the filter can pick, already named in the language in use. */
+interface MonthOption {
+  value: number;
+  label: string;
 }
 
 @Component({
@@ -33,20 +41,94 @@ export class RevenueShareDialogComponent implements OnInit {
   /** Built from year and month so the date pipe can name the month. */
   monthDate: Date | null = null;
 
+  /** Filter state - the month being looked at. */
+  months: MonthOption[] = [];
+  years: number[] = [];
+  selectedMonth: number;
+  selectedYear: number;
+
+  /** The one row whose people are on show, or null when all are folded away. */
+  expandedRole: string | null = null;
+  /** Held per role so folding a row open twice does not fetch it twice. */
+  private recipientsByRole = new Map<string, ShareRecipientDTO[]>();
+  recipientsLoadingRole: string | null = null;
+
   constructor(
     public dialogRef: MatDialogRef<RevenueShareDialogComponent>,
     private paymentService: PaymentService,
+    private translate: TranslateService,
     private cdr: ChangeDetectorRef
-  ) {}
+  ) {
+    const now = new Date();
+    this.selectedMonth = now.getMonth() + 1;
+    this.selectedYear = now.getFullYear();
+  }
 
   ngOnInit(): void {
+    this.buildMonths();
+    this.buildYears();
+    this.load();
+  }
+
+  /** Month names come from the browser, so no twelve keys need translating. */
+  private buildMonths(): void {
+    const lang = this.translate.getCurrentLang() || this.translate.getFallbackLang() || 'en';
+    let formatter: Intl.DateTimeFormat;
+    try {
+      formatter = new Intl.DateTimeFormat(lang, { month: 'long' });
+    } catch {
+      // An unknown tag would throw; English is better than no month names.
+      formatter = new Intl.DateTimeFormat('en', { month: 'long' });
+    }
+    const months: MonthOption[] = [];
+    for (let i = 0; i < 12; i++) {
+      const label = formatter.format(new Date(2000, i, 1));
+      months.push({
+        value: i + 1,
+        label: label.charAt(0).toUpperCase() + label.slice(1)
+      });
+    }
+    this.months = months;
+  }
+
+  /** 2026 is where the books start, but a clock set earlier must still pick its own year. */
+  private buildYears(): void {
+    const current = new Date().getFullYear();
+    const first = Math.min(2026, current);
+    const years: number[] = [];
+    for (let year = first; year <= current; year++) {
+      years.push(year);
+    }
+    this.years = years;
+  }
+
+  onMonthChange(value: string): void {
+    this.selectedMonth = Number(value);
+    this.onFilterChange();
+  }
+
+  onYearChange(value: string): void {
+    this.selectedYear = Number(value);
+    this.onFilterChange();
+  }
+
+  /** A new month makes every list stale, so they are dropped rather than left to mislead. */
+  private onFilterChange(): void {
+    this.expandedRole = null;
+    this.recipientsLoadingRole = null;
+    this.recipientsByRole.clear();
     this.load();
   }
 
   load(): void {
     this.isLoading = true;
-    // No year or month: the backend answers for the month we are in.
-    this.paymentService.findRevenueShare().subscribe({
+    // While it loads the old figures go away: they belong to another month.
+    this.share = null;
+    this.rows = [];
+    this.monthDate = null;
+    this.cdr.markForCheck();
+
+    this.paymentService.findRevenueShare(this.selectedYear, this.selectedMonth).subscribe({
       next: (response) => {
         this.share = response.data ?? null;
         this.rows = this.buildRows(this.share);
@@ -77,30 +159,91 @@ export class RevenueShareDialogComponent implements OnInit {
         amount: share.staffAmount || 0,
         color: '#2a78d6',
         percentText: `${share.staffPercent}%`,
-        remainder: false
+        remainder: false,
+        role: 'STAFF'
       },
       {
         label: 'REVENUE_SHARE_DIALOG.DIRECTORS',
         amount: share.directorAmount || 0,
         color: '#eb6834',
         percentText: `${share.directorPercent}% × ${share.directorCount}`,
-        remainder: false
+        remainder: false,
+        role: 'DIRECTOR'
       },
       {
         label: 'REVENUE_SHARE_DIALOG.ROOT',
         amount: share.rootAmount || 0,
         color: '#1baf7a',
         percentText: `${share.rootPercent}%`,
-        remainder: false
+        remainder: false,
+        role: 'ROOT'
       },
       {
+        // Running costs are not anybody's share, so there is nobody to list.
         label: 'REVENUE_SHARE_DIALOG.OPERATING',
         amount: share.operatingAmount || 0,
         color: '#94a3b8',
         percentText: '',
-        remainder: true
+        remainder: true,
+        role: null
       }
     ];
+  }
+
+  /** Opens the row, or closes it if it was the one already open. */
+  toggleRecipients(role: string | null): void {
+    if (!role) {
+      return;
+    }
+    if (this.expandedRole === role) {
+      this.expandedRole = null;
+      this.cdr.markForCheck();
+      return;
+    }
+    this.expandedRole = role;
+    this.cdr.markForCheck();
+    // Only fetched when somebody asks for it, and only the first time.
+    if (!this.recipientsByRole.has(role)) {
+      this.loadRecipients(role);
+    }
+  }
+
+  private loadRecipients(role: string): void {
+    this.recipientsLoadingRole = role;
+    this.cdr.markForCheck();
+    this.paymentService.findShareRecipients(role, this.selectedYear, this.selectedMonth).subscribe({
+      next: (response) => {
+        this.recipientsByRole.set(role, response.data ?? []);
+        if (this.recipientsLoadingRole === role) {
+          this.recipientsLoadingRole = null;
+        }
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        // The interceptor already said what went wrong; an empty list reads as "nobody".
+        this.recipientsByRole.set(role, []);
+        if (this.recipientsLoadingRole === role) {
+          this.recipientsLoadingRole = null;
+        }
+        this.cdr.markForCheck();
+      }
+    });
+  }
+
+  recipientsFor(role: string | null): ShareRecipientDTO[] {
+    return (role && this.recipientsByRole.get(role)) || [];
+  }
+
+  isRecipientsLoading(role: string | null): boolean {
+    return !!role && this.recipientsLoadingRole === role;
+  }
+
+  /** Empty only counts once the fetch has come back, or it flashes "nobody" while loading. */
+  isRecipientsEmpty(role: string | null): boolean {
+    return !!role
+      && this.recipientsLoadingRole !== role
+      && this.recipientsByRole.has(role)
+      && this.recipientsByRole.get(role)!.length === 0;
   }
 
   /** How wide the little proportion bar should be, capped so it can never overflow. */

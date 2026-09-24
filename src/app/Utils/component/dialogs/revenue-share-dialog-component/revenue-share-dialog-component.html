@@ -10,6 +10,29 @@
       </button>
     </div>
 
+    <!-- Which month is being looked at. -->
+    <div class="header-filters">
+
+      <label class="filter-field">
+        <span class="filter-label">{{ 'REVENUE_SHARE_DIALOG.MONTH' | translate }}</span>
+        <select class="filter-select" [value]="selectedMonth" (change)="onMonthChange($any($event.target).value)">
+          @for (month of months; track month.value) {
+            <option [value]="month.value">{{ month.label }}</option>
+          }
+        </select>
+      </label>
+
+      <label class="filter-field">
+        <span class="filter-label">{{ 'REVENUE_SHARE_DIALOG.YEAR' | translate }}</span>
+        <select class="filter-select" [value]="selectedYear" (change)="onYearChange($any($event.target).value)">
+          @for (year of years; track year) {
+            <option [value]="year">{{ year }}</option>
+          }
+        </select>
+      </label>
+
+    </div>
+
   </div>
 
 
@@ -42,11 +65,67 @@
               }
 
               <span class="share-amount">{{ row.amount | number }} TZS</span>
+
+              <!-- Running costs are nobody's share, so that row has no button. -->
+              @if (row.role) {
+                <button
+                  type="button"
+                  class="who-btn"
+                  [class.who-btn-open]="expandedRole === row.role"
+                  (click)="toggleRecipients(row.role)"
+                  [attr.aria-expanded]="expandedRole === row.role">
+                  <mat-icon svgIcon="team"></mat-icon>
+                  <span>{{ 'REVENUE_SHARE_DIALOG.WHO_BTN' | translate }}</span>
+                </button>
+              }
             </div>
 
             @if (hasRevenue) {
               <div class="share-track">
                 <span class="share-bar" [style.width.%]="barWidth(row.amount)" [style.background]="row.color"></span>
+              </div>
+            }
+
+            @if (row.role && expandedRole === row.role) {
+              <div class="recipient-list">
+
+                @if (isRecipientsLoading(row.role)) {
+                  <p class="recipient-note">{{ 'REVENUE_SHARE_DIALOG.LOADING' | translate }}</p>
+                } @else if (isRecipientsEmpty(row.role)) {
+                  <p class="recipient-note">{{ 'REVENUE_SHARE_DIALOG.NO_RECIPIENTS' | translate }}</p>
+                } @else {
+                  @for (recipient of recipientsFor(row.role); track recipient.uid) {
+                    <div class="recipient-row">
+
+                      <div class="recipient-who">
+                        <span class="recipient-name">{{ recipient.name }}</span>
+                        <span class="recipient-username">{{ recipient.username }}</span>
+                      </div>
+
+                      <div class="recipient-figures">
+
+                        <span class="recipient-figure">
+                          <span class="recipient-figure-label">{{ 'REVENUE_SHARE_DIALOG.COL_EARNS' | translate }}</span>
+                          <span class="recipient-figure-value">{{ recipient.amount | number }}</span>
+                        </span>
+
+                        <span class="recipient-figure">
+                          <span class="recipient-figure-label">{{ 'REVENUE_SHARE_DIALOG.COL_PAID' | translate }}</span>
+                          <span class="recipient-figure-value">{{ recipient.paid | number }}</span>
+                        </span>
+
+                        <!-- What is still owed is the figure to act on, so it carries the weight. -->
+                        <span class="recipient-figure">
+                          <span class="recipient-figure-label">{{ 'REVENUE_SHARE_DIALOG.COL_OUTSTANDING' | translate }}</span>
+                          <span class="recipient-figure-value recipient-outstanding">{{ recipient.outstanding | number }}</span>
+                        </span>
+
+                      </div>
+
+                    </div>
+                  }
+                }
+
               </div>
             }
 
