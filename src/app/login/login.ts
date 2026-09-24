@@ -62,6 +62,7 @@ onSubmit() {
     ).subscribe({
       next: (res) => {
         this.loginError = '';
+        this.paymentSent = false;
         this.submitting = false;
 
         // Save token
@@ -115,6 +116,8 @@ onSubmit() {
   // Set when login fails because the branch has lapsed, so the screen can
   // offer a way to pay instead of leaving the customer stuck.
   subscriptionExpired = false;
+  /** Set once the USSD push is out, so the screen stops showing the expiry error. */
+  paymentSent = false;
   expiredBranchName = '';
   expiredMonthlyAmount: number | null = null;
 
@@ -132,7 +135,16 @@ onSubmit() {
       },
     });
 
-    dialogRef.afterClosed().subscribe(() => {
+    dialogRef.afterClosed().subscribe((initiated) => {
+      if (initiated) {
+        // The dialog closes itself two seconds after the USSD push goes out,
+        // leaving this screen behind it. Without clearing the error, what the
+        // customer is left looking at is the expiry message again - which
+        // reads as if paying had failed.
+        this.loginError = '';
+        this.subscriptionExpired = false;
+        this.paymentSent = true;
+      }
       this.cdr.markForCheck();
     });
   }

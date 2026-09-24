@@ -422,7 +422,8 @@
     "SIGN_IN": "Sign in",
     "EXPIRED_HELP": "Your subscription has run out. You can pay now with mobile money and sign in straight after.",
     "SUBSCRIBE_BTN": "Pay now",
-    "EXPIRED_TITLE": "This branch's subscription has expired."
+    "EXPIRED_TITLE": "This branch's subscription has expired.",
+    "PAYMENT_SENT": "Payment request sent. Approve it on your phone, then sign in again."
   },
   "LANDING": {
     "HERO_BADGE": "Business management, simplified",

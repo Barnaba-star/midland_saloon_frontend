@@ -62,7 +62,11 @@ export const StatusInterceptor: HttpInterceptorFn = (
    * on top of it said the same thing twice - and for an expired subscription
    * it covered the button offering the way out.
    */
-  const ownsItsErrors = req.url.includes('/authentication/login');
+  const ownsItsErrors =
+    req.url.includes('/authentication/login') ||
+    // The subscribe dialog shows the reason inside itself; a popup over it
+    // said the same thing twice.
+    req.url.includes('/authentication/paySubscription');
 
 
   /*

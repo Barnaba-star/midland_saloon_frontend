@@ -204,3 +204,32 @@ input.mat-input-element:-webkit-autofill {
   height: 17px;
   font-size: 17px;
 }
+
+
+/* Shown after the USSD push goes out - the customer authorises on their
+   phone, then signs in normally. */
+.login-sent {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 14px 16px;
+  background: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+}
+
+.login-sent mat-icon {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: #15803d;
+}
+
+.login-sent p {
+  margin: 0;
+  color: #14532d;
+  font-size: 12.5px;
+  line-height: 1.5;
+}

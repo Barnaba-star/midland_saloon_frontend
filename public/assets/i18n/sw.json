@@ -422,7 +422,8 @@
     "SIGN_IN": "Ingia",
     "EXPIRED_HELP": "Muda wa huduma umeisha. Unaweza kulipa sasa kwa simu kisha uingie moja kwa moja.",
     "SUBSCRIBE_BTN": "Lipa sasa",
-    "EXPIRED_TITLE": "Muda wa huduma wa tawi hili umeisha."
+    "EXPIRED_TITLE": "Muda wa huduma wa tawi hili umeisha.",
+    "PAYMENT_SENT": "Ombi la malipo limetumwa. Thibitisha kwenye simu yako, kisha ingia tena."
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",

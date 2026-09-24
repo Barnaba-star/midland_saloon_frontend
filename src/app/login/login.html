@@ -36,6 +36,13 @@
         <span>{{ loginError }}</span>
       </div>
 
+      @if (paymentSent) {
+        <div class="login-sent">
+          <mat-icon svgIcon="success"></mat-icon>
+          <p>{{ 'LOGIN.PAYMENT_SENT' | translate }}</p>
+        </div>
+      }
+
       @if (subscriptionExpired) {
         <!-- The one login failure the customer can fix from this screen, so
              it gets a way out rather than just an explanation. -->
