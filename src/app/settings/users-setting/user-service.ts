@@ -9,6 +9,8 @@ import { AssignUserRoleDTO, UserAndAttachmentDTO, UserDTO } from './user-model';
 export interface BankDetails {
   accountNumber: string | null;
   bankName: string | null;
+  /** The name the account is held in, which the bank checks against. */
+  accountName: string | null;
 }
 
 @Injectable({

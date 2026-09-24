@@ -37,8 +37,10 @@ export class ProfileDialogComponent {
    */
   accountNumber = '';
   bankName = '';
+  accountName = '';
   private savedAccountNumber = '';
   private savedBankName = '';
+  private savedAccountName = '';
   savingAccount = false;
   accountError: string | null = null;
 
@@ -77,8 +79,10 @@ export class ProfileDialogComponent {
       next: (res) => {
         this.accountNumber = res?.data?.accountNumber || '';
         this.bankName = res?.data?.bankName || '';
+        this.accountName = res?.data?.accountName || '';
         this.savedAccountNumber = this.accountNumber;
         this.savedBankName = this.bankName;
+        this.savedAccountName = this.accountName;
         this.cdr.markForCheck();
       },
       // Leaving it blank is honest - better than showing nothing and
@@ -89,7 +93,8 @@ export class ProfileDialogComponent {
 
   get accountChanged(): boolean {
     return this.accountNumber.trim() !== this.savedAccountNumber.trim()
-        || this.bankName.trim() !== this.savedBankName.trim();
+        || this.bankName.trim() !== this.savedBankName.trim()
+        || this.accountName.trim() !== this.savedAccountName.trim();
   }
 
   saveBankDetails(): void {
@@ -101,10 +106,12 @@ export class ProfileDialogComponent {
 
     const number = this.accountNumber.trim();
     const bank = this.bankName.trim();
+    const holder = this.accountName.trim();
 
-    // One without the other cannot be paid to. Caught here so it is said
-    // next to the empty box rather than as a code from the server.
-    if (!!number !== !!bank) {
+    // Any one alone cannot be paid to. Caught here so it is said next to the
+    // empty box rather than arriving as a code from the server.
+    const filled = [number, bank, holder].filter(Boolean).length;
+    if (filled > 0 && filled < 3) {
       this.accountError = this.translate.instant('PROFILE_DIALOG.ACCOUNT_INCOMPLETE');
       return;
     }
@@ -115,6 +122,7 @@ export class ProfileDialogComponent {
     this.userService.saveBankDetails(uid, {
       accountNumber: number || null,
       bankName: bank || null,
+      accountName: holder || null,
     }).subscribe({
 
       next: (res) => {
@@ -122,6 +130,7 @@ export class ProfileDialogComponent {
         if (res?.data === 'SAVED') {
           this.savedAccountNumber = number;
           this.savedBankName = bank;
+          this.savedAccountName = holder;
           this.alertService.show('success', this.translate.instant('PROFILE_DIALOG.ACCOUNT_SAVED'));
         } else if (res?.data === 'INCOMPLETE') {
           this.accountError = this.translate.instant('PROFILE_DIALOG.ACCOUNT_INCOMPLETE');

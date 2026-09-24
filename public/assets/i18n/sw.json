@@ -766,12 +766,14 @@
     "UPLOAD_FAILED": "Imeshindwa kupakia picha. Tafadhali jaribu tena.",
     "ACCOUNT_NUMBER": "Namba ya akaunti ya benki",
     "ACCOUNT_PLACEHOLDER": "mfano 0150123456789",
-    "ACCOUNT_HINT": "Hapa ndipo fungu lako la mwezi linapotumwa. Wewe pekee ndiye unayeweza kuiweka, na vyote viwili vinahitajika.",
+    "ACCOUNT_HINT": "Hapa ndipo fungu lako la mwezi linapotumwa. Wewe pekee ndiye unayeweza kuiweka, na vyote vitatu vinahitajika.",
     "ACCOUNT_SAVED": "Namba ya akaunti imehifadhiwa.",
     "ACCOUNT_FAILED": "Imeshindwa kuhifadhi namba ya akaunti. Tafadhali jaribu tena.",
     "BANK_NAME": "Benki",
     "BANK_PLACEHOLDER": "mfano CRDB Bank",
-    "ACCOUNT_INCOMPLETE": "Weka benki na namba ya akaunti - kimoja bila kingine hakiwezi kulipwa."
+    "ACCOUNT_INCOMPLETE": "Weka benki, jina la akaunti na namba ya akaunti - malipo yanahitaji vyote vitatu.",
+    "ACCOUNT_NAME": "Jina la akaunti",
+    "ACCOUNT_NAME_PLACEHOLDER": "Jina lilivyo kwenye akaunti"
   },
   "MAIN_LOGO": {
     "CHANGE": "Badilisha Logo ya Kampuni"
@@ -1263,6 +1265,7 @@
     "COL_PAID": "Amelipwa",
     "SETTLED": "amelipwa",
     "MISSING_ACCOUNT": "Kati ya wanaodai, {{count}} hawana taarifa kamili za benki. Lazima waweke benki na namba ya akaunti wenyewe kwenye profile zao kabla malipo hayajaagizwa.",
-    "COL_BANK": "Benki"
+    "COL_BANK": "Benki",
+    "COL_ACCOUNT_NAME": "Jina la akaunti"
   }
 }

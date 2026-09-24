@@ -14,6 +14,8 @@ export interface PayrollLine {
   /** Set by its owner, from their own profile. */
   accountNumber: string | null;
   bankName: string | null;
+  /** The name the account is held in, which the bank checks against. */
+  accountName: string | null;
   earned: number;
   paid: number;
   /** What the bank is being asked to send. */

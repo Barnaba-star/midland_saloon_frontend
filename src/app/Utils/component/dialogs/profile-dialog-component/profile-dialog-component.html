@@ -86,6 +86,20 @@
     </datalist>
 
 
+    <label class="account-label" for="accountName">
+      {{ 'PROFILE_DIALOG.ACCOUNT_NAME' | translate }}
+    </label>
+
+    <input
+      id="accountName"
+      type="text"
+      class="account-input bank-input"
+      [(ngModel)]="accountName"
+      [placeholder]="'PROFILE_DIALOG.ACCOUNT_NAME_PLACEHOLDER' | translate"
+      maxlength="150"
+      autocomplete="off" />
+
+
     <label class="account-label" for="accountNumber">
       {{ 'PROFILE_DIALOG.ACCOUNT_NUMBER' | translate }}
     </label>
