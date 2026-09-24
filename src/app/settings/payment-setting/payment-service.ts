@@ -131,8 +131,12 @@ export class PaymentService {
    *
    * Refusals come back as HTTP 200 with a null data and the reason in message,
    * so the caller tells the two apart by whether data is there.
+   *
+   * Leaving amount out settles the whole of what is owed. Sending one records
+   * part of it instead - the backend refuses anything above the outstanding
+   * figure rather than quietly trimming it.
    */
-  payShare(role: string, uid: string, year?: number, month?: number, note?: string): Observable<Response<string>> {
+  payShare(role: string, uid: string, year?: number, month?: number, note?: string, amount?: number): Observable<Response<string>> {
     let params = new HttpParams();
     if (year != null) {
       params = params.set('year', year);
@@ -142,6 +146,9 @@ export class PaymentService {
     }
     if (note != null && note !== '') {
       params = params.set('note', note);
+    }
+    if (amount != null) {
+      params = params.set('amount', amount);
     }
     return this.http.post<Response<string>>(
       `${this.paymentUrl}/payShare/${role}/${uid}`,

@@ -1075,8 +1075,20 @@
     "NO_RECIPIENTS": "Nobody holds this role.",
     "PAY_BTN": "Pay",
     "PAID_LABEL": "Paid",
-    "PAY_CONFIRM_TITLE": "Record this payout?",
-    "PAY_CONFIRM_TEXT": "This records that the share has been handed over. It does not send any money.",
     "PAY_FAILED": "The payout could not be recorded."
+  },
+  "PAY_SHARE_DIALOG": {
+    "TITLE": "Record a payout",
+    "EARNS": "Earns",
+    "PAID": "Paid",
+    "OUTSTANDING": "Outstanding",
+    "AMOUNT_LABEL": "Amount you are paying",
+    "REMAINING": "Remaining after this",
+    "FULLY_PAID": "They will be fully paid.",
+    "TOO_MUCH": "That is more than is owed.",
+    "INVALID": "Enter an amount greater than zero.",
+    "NOT_SENDING": "This records a payment. It does not send any money.",
+    "PAY_BTN": "Record payout",
+    "CANCEL": "Cancel"
   }
 }

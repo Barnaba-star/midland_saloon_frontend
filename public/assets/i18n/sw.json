@@ -1075,8 +1075,20 @@
     "NO_RECIPIENTS": "Hakuna mwenye cheo hiki.",
     "PAY_BTN": "Lipa",
     "PAID_LABEL": "Imelipwa",
-    "PAY_CONFIRM_TITLE": "Thibitisha malipo haya?",
-    "PAY_CONFIRM_TEXT": "Hii inarekodi kwamba fungu limekabidhiwa. Haitumi pesa yoyote.",
     "PAY_FAILED": "Malipo haya hayakuweza kurekodiwa."
+  },
+  "PAY_SHARE_DIALOG": {
+    "TITLE": "Rekodi malipo",
+    "EARNS": "Anapata",
+    "PAID": "Amelipwa",
+    "OUTSTANDING": "Anadai",
+    "AMOUNT_LABEL": "Kiasi unacholipa",
+    "REMAINING": "Kitakachobaki",
+    "FULLY_PAID": "Atakuwa amelipwa chote.",
+    "TOO_MUCH": "Hicho ni zaidi ya anachodai.",
+    "INVALID": "Weka kiasi kikubwa kuliko sifuri.",
+    "NOT_SENDING": "Hii inarekodi malipo. Haitumi pesa yoyote.",
+    "PAY_BTN": "Rekodi malipo",
+    "CANCEL": "Ghairi"
   }
 }

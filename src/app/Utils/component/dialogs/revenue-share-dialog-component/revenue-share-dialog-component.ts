@@ -4,7 +4,7 @@ import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dial
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { PaymentService, RevenueShareDTO, ShareRecipientDTO } from '../../../../settings/payment-setting/payment-service';
-import { ComfirmDialogComponent } from '../../comfirm-dialog/comfirm-dialog';
+import { PayShareDialogComponent } from '../pay-share-dialog-component/pay-share-dialog-component';
 import { AlertService } from '../../../services/alert';
 
 /** One line of the split: what it is called, its share, and what that comes to. */
@@ -263,8 +263,9 @@ export class RevenueShareDialogComponent implements OnInit {
   }
 
   /**
-   * Writes down that a share has been handed over. Nothing is sent to anybody -
-   * this only records it, which is why the confirmation says so in as many words.
+   * Asks how much is being handed over, then writes that down. Nothing is sent
+   * to anybody - this only records it, which is why the dialog says so in as
+   * many words.
    *
    * The button is not hidden for non-ROOT users: the backend is the one that
    * decides who may record a DIRECTOR or ROOT payout, and its refusal is shown
@@ -275,29 +276,31 @@ export class RevenueShareDialogComponent implements OnInit {
       return;
     }
 
-    const dialogRef = this.dialog.open(ComfirmDialogComponent, {
+    const dialogRef = this.dialog.open(PayShareDialogComponent, {
       width: '460px',
       data: {
-        title: 'REVENUE_SHARE_DIALOG.PAY_CONFIRM_TITLE',
-        message: 'REVENUE_SHARE_DIALOG.PAY_CONFIRM_TEXT',
-        confirmLabel: 'REVENUE_SHARE_DIALOG.PAY_BTN'
+        name: recipient.name,
+        amount: recipient.amount,
+        paid: recipient.paid,
+        outstanding: recipient.outstanding
       }
     });
 
-    dialogRef.afterClosed().subscribe((confirmed) => {
-      if (!confirmed) {
+    // Closed with nothing means it was called off; anything else is the amount.
+    dialogRef.afterClosed().subscribe((amount) => {
+      if (typeof amount !== 'number' || !(amount > 0)) {
         return;
       }
-      this.sendPayShare(role, recipient.uid);
+      this.sendPayShare(role, recipient.uid, amount);
     });
   }
 
-  private sendPayShare(role: string, uid: string): void {
+  private sendPayShare(role: string, uid: string, amount: number): void {
     this.payingUid = uid;
     this.cdr.markForCheck();
 
     this.paymentService
-      .payShare(role, uid, this.selectedYear, this.selectedMonth)
+      .payShare(role, uid, this.selectedYear, this.selectedMonth, undefined, amount)
       .subscribe({
         next: (response) => {
           this.payingUid = null;
