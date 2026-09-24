@@ -33,6 +33,11 @@ constructor(private router: Router, private route: ActivatedRoute, private cdr: 
       });
 }
   ngOnInit(): void {
+    // isHome starts true as a field default, which is not the same as being
+    // on the home view - resolve it from the route before acting on it, or
+    // opening straight into a sub-section would fetch a dashboard nobody is
+    // looking at.
+    this.checkIfHome();
     if (this.isHome) {
       this.loadDashboard();
     }
@@ -103,7 +108,16 @@ return this.visibility.filteredMenuItems(menu);
 }
 
   private checkIfHome() {
+    const wasHome = this.isHome;
     this.isHome = this.route.firstChild === null;
+
+    // This component owns the router-outlet, so it is never destroyed while
+    // moving between POS sections - ngOnInit runs once and once only. Without
+    // this, coming back to the home view would show the figures from whenever
+    // POS was first opened rather than the ones from now.
+    if (this.isHome && !wasHome) {
+      this.loadDashboard();
+    }
   }
 
   // Quick-access cards shown on the POS "home" screen (bare /pos, before
