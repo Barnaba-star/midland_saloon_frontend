@@ -423,7 +423,9 @@
     "EXPIRED_HELP": "Muda wa huduma umeisha. Unaweza kulipa sasa kwa simu kisha uingie moja kwa moja.",
     "SUBSCRIBE_BTN": "Lipa sasa",
     "EXPIRED_TITLE": "Muda wa huduma wa tawi hili umeisha.",
-    "PAYMENT_SENT": "Ombi la malipo limetumwa. Thibitisha kwenye simu yako, kisha ingia tena."
+    "PAYMENT_SENT": "Ombi la malipo limetumwa. Thibitisha kwenye simu yako, kisha ingia tena.",
+    "EXPIRED_HELP_FAILED": "Malipo yako ya mwisho hayakufanikiwa, kwa hiyo huduma haikuongezwa. Unaweza kujaribu tena hapa chini.",
+    "EXPIRED_HELP_PENDING": "Kuna malipo yanayosubiri uthibitisho kwenye simu yako. Yathibitishe kisha uingie — au anzisha mapya hapa chini."
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",

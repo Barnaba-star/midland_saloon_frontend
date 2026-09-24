@@ -423,7 +423,9 @@
     "EXPIRED_HELP": "Your subscription has run out. You can pay now with mobile money and sign in straight after.",
     "SUBSCRIBE_BTN": "Pay now",
     "EXPIRED_TITLE": "This branch's subscription has expired.",
-    "PAYMENT_SENT": "Payment request sent. Approve it on your phone, then sign in again."
+    "PAYMENT_SENT": "Payment request sent. Approve it on your phone, then sign in again.",
+    "EXPIRED_HELP_FAILED": "Your last payment did not go through, so the subscription was not renewed. You can try again below.",
+    "EXPIRED_HELP_PENDING": "A payment is waiting for your approval on your phone. Approve it, then sign in - or start a new one below."
   },
   "LANDING": {
     "HERO_BADGE": "Business management, simplified",

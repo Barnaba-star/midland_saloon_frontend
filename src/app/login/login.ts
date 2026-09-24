@@ -96,6 +96,11 @@ onSubmit() {
           this.expiredBranchName = body.branchName ?? '';
           this.expiredMonthlyAmount = body.monthlyAmount ?? null;
           this.subscriptionExpired = true;
+          // A declined payment leaves the branch on FAILED and the date
+          // untouched, so without saying so the screen just repeats "expired"
+          // and the customer is left thinking paying did nothing.
+          this.subscriptionStatus = body.subscriptionStatus ?? null;
+          this.paymentSent = false;
         } else {
           this.loginError = typeof body === 'string' ? body : (body?.message ?? '');
           this.subscriptionExpired = false;
@@ -118,6 +123,19 @@ onSubmit() {
   subscriptionExpired = false;
   /** Set once the USSD push is out, so the screen stops showing the expiry error. */
   paymentSent = false;
+  /** PENDING or FAILED from the last attempt, when there was one. */
+  subscriptionStatus: string | null = null;
+
+  /** What to tell them beyond "expired", given how the last attempt went. */
+  get expiredHelpKey(): string {
+    if (this.subscriptionStatus === 'FAILED') {
+      return 'LOGIN.EXPIRED_HELP_FAILED';
+    }
+    if (this.subscriptionStatus === 'PENDING') {
+      return 'LOGIN.EXPIRED_HELP_PENDING';
+    }
+    return 'LOGIN.EXPIRED_HELP';
+  }
   expiredBranchName = '';
   expiredMonthlyAmount: number | null = null;
 
