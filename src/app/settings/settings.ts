@@ -117,6 +117,12 @@ menuItems: SidenavItem[] = [
         icon: 'calender',
         route: '/settings/expiring',
         roles: this.settingsRoles
+      },
+      {
+        label: 'SETTINGS_MENU.REGIONS',
+        icon: 'office',
+        route: '/settings/regions',
+        roles: this.rootOnlyRoles
       }
 ];
 

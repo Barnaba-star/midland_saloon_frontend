@@ -494,7 +494,8 @@
     "ERRORS": "Makosa",
     "AUDIT": "Kumbukumbu za Matendo",
     "PAYMENTS": "Malipo",
-    "EXPIRING": "Matawi yanayoisha"
+    "EXPIRING": "Matawi yanayoisha",
+    "REGIONS": "Mikoa"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -1124,5 +1125,38 @@
     "LAPSES_TODAY": "Inaisha leo",
     "DAYS_LEFT": "Siku {{days}} zimebaki",
     "EMPTY_TEXT": "Hakuna tawi linalokaribia kuisha."
+  },
+  "REGION_SETTING_PAGE": {
+    "TITLE": "Mikoa",
+    "MANAGE_TAB": "Mikoa",
+    "MGMT_TITLE": "Mikoa",
+    "MGMT_SUBTITLE": "Mikoa ambayo matawi yamesajiliwa, na code inayotumika kuyapa namba.",
+    "REFRESH_BTN": "Onyesha upya",
+    "ADD_BTN": "Ongeza mkoa",
+    "SEARCH_PLACEHOLDER": "Tafuta kwa jina au code",
+    "TOTAL": "Jumla ya mikoa",
+    "COL_NAME": "Jina la mkoa",
+    "COL_CODE": "Code",
+    "COL_ACTION": "Kitendo",
+    "EDIT": "Hariri",
+    "DELETE": "Futa",
+    "EMPTY_TEXT": "Hakuna mkoa.",
+    "DELETE_CONFIRM_TITLE": "Futa mkoa",
+    "DELETE_CONFIRM": "Futa mkoa huu?",
+    "SAVE_SUCCESS": "Mkoa umehifadhiwa",
+    "SAVE_FAILED": "Mkoa haukuweza kuhifadhiwa",
+    "DELETE_SUCCESS": "Mkoa umefutwa",
+    "DELETE_FAILED": "Mkoa haukuweza kufutwa"
+  },
+  "REGION_DIALOG": {
+    "ADD_TITLE": "Ongeza mkoa",
+    "EDIT_TITLE": "Hariri mkoa",
+    "NAME_LABEL": "Jina la mkoa",
+    "NAME_PLACEHOLDER": "Mwanza",
+    "CODE_LABEL": "Code",
+    "CODE_PLACEHOLDER": "MWA",
+    "CODE_HINT": "Code ya MWA inazalisha MWA-001, MWA-002 n.k.",
+    "SAVE_BTN": "Hifadhi",
+    "CANCEL": "Ghairi"
   }
 }

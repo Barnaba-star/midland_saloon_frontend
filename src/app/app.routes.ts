@@ -64,6 +64,12 @@ export const routes: Routes = [
         canActivate: [settingsGuard],
         loadComponent: () => import('./settings/expiring-setting/expiring-setting').then(m => m.ExpiringSetting)
       },
+      {
+        // Regions are platform-wide settings, not a branch's own.
+        path: 'regions',
+        canActivate: [settingsRootOnlyGuard],
+        loadComponent: () => import('./settings/region-setting/region-setting').then(m => m.RegionSetting)
+      },
     ]
   },
 {

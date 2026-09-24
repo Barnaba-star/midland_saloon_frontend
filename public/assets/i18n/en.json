@@ -494,7 +494,8 @@
     "ERRORS": "Errors",
     "AUDIT": "Audit Log",
     "PAYMENTS": "Payments",
-    "EXPIRING": "Expiring branches"
+    "EXPIRING": "Expiring branches",
+    "REGIONS": "Regions"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -1124,5 +1125,38 @@
     "LAPSES_TODAY": "Lapses today",
     "DAYS_LEFT": "{{days}} days left",
     "EMPTY_TEXT": "Nothing is close to lapsing."
+  },
+  "REGION_SETTING_PAGE": {
+    "TITLE": "Regions",
+    "MANAGE_TAB": "Regions",
+    "MGMT_TITLE": "Regions",
+    "MGMT_SUBTITLE": "The regions branches are registered under, and the code each one numbers them with.",
+    "REFRESH_BTN": "Refresh",
+    "ADD_BTN": "Add region",
+    "SEARCH_PLACEHOLDER": "Search by name or code",
+    "TOTAL": "Total regions",
+    "COL_NAME": "Region name",
+    "COL_CODE": "Code",
+    "COL_ACTION": "Action",
+    "EDIT": "Edit",
+    "DELETE": "Delete",
+    "EMPTY_TEXT": "No regions.",
+    "DELETE_CONFIRM_TITLE": "Delete region",
+    "DELETE_CONFIRM": "Delete this region?",
+    "SAVE_SUCCESS": "Region saved",
+    "SAVE_FAILED": "The region could not be saved",
+    "DELETE_SUCCESS": "Region deleted",
+    "DELETE_FAILED": "The region could not be deleted"
+  },
+  "REGION_DIALOG": {
+    "ADD_TITLE": "Add region",
+    "EDIT_TITLE": "Edit region",
+    "NAME_LABEL": "Region name",
+    "NAME_PLACEHOLDER": "Mwanza",
+    "CODE_LABEL": "Code",
+    "CODE_PLACEHOLDER": "MWA",
+    "CODE_HINT": "The code MWA produces MWA-001, MWA-002 and so on.",
+    "SAVE_BTN": "Save",
+    "CANCEL": "Cancel"
   }
 }
