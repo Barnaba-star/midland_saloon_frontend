@@ -110,7 +110,8 @@
     "LOADING": "Loading...",
     "SUBSCRIBE": "Subscribe",
     "CONFIRM_DELETION": "Confirm deletion",
-    "SELECT_OPTION": "Select an option"
+    "SELECT_OPTION": "Select an option",
+    "DONE": "Done"
   },
   "MENU": {
     "HOME": "Home",
@@ -853,7 +854,8 @@
     "DOB": "Date of Birth",
     "PHONE": "Phone",
     "EMAIL": "Email",
-    "ADDRESS": "Address"
+    "ADDRESS": "Address",
+    "ROLE": "Role"
   },
   "SUBSCRIBE_DIALOG": {
     "TITLE": "Subscribe",
@@ -1181,5 +1183,17 @@
     "PROTECTED": "The last 30 days can never be removed.",
     "PURGE_BTN": "Remove",
     "CANCEL": "Cancel"
+  },
+  "ACTIVATION_CODE_DIALOG": {
+    "TITLE": "User registered",
+    "SUBTITLE": "Give them these to sign in. They will be asked to set their own password straight away.",
+    "USERNAME": "Username",
+    "CODE": "Sign-in code",
+    "EXPIRY": "The code works for {{hours}} hours.",
+    "ONE_TIME": "It works once - after that their own password takes over.",
+    "ALSO_SENT": "Also sent by SMS to {{phone}}.",
+    "SHOWN_ONCE": "Shown only here. If it is lost, send a new one from the user list.",
+    "COPY": "Copy",
+    "COPIED": "Copied"
   }
 }

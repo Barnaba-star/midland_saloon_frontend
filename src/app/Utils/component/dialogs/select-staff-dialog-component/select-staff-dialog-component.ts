@@ -1,5 +1,5 @@
-import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { ChangeDetectorRef, Component, OnInit, ChangeDetectionStrategy, Inject, Optional } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -20,11 +20,22 @@ export class SelectStaffDialogComponent implements OnInit {
   loading = false;
   errorMessage: string | null = null;
 
+  /**
+   * The roles the caller is allowed to hand out. Passed in rather than
+   * fetched here because every screen that opens this dialog has already
+   * loaded them - and because what a STAFF member may grant is narrower
+   * than the full list.
+   */
+  roles: any[] = [];
+
   constructor(
     private dialogRef: MatDialogRef<SelectStaffDialogComponent>,
     private saloonService: ServiceSaloonMethod,
     private cdr: ChangeDetectorRef,
-  ) { }
+    @Optional() @Inject(MAT_DIALOG_DATA) data: { roles?: any[] } | null,
+  ) {
+    this.roles = data?.roles ?? [];
+  }
 
   ngOnInit(): void {
     this.loadStaff();
@@ -91,6 +102,7 @@ export class SelectStaffDialogComponent implements OnInit {
       phoneNumber: staff.phoneNumber ?? '',
       email: '',
       address: '',
+      role: '',
     };
     this.step = 'details';
   }
@@ -105,6 +117,7 @@ export class SelectStaffDialogComponent implements OnInit {
       phoneNumber: '',
       email: '',
       address: '',
+      role: '',
     };
     this.step = 'details';
   }
@@ -114,7 +127,13 @@ export class SelectStaffDialogComponent implements OnInit {
   }
 
   get canSave(): boolean {
-    return !!(this.form.firstName?.trim() && this.form.lastName?.trim());
+    return !!(
+      this.form.firstName?.trim() &&
+      this.form.lastName?.trim() &&
+      // An account with no role can open nothing at all, so registering
+      // without one only produces somebody who cannot work yet.
+      (this.roles.length === 0 || this.form.role)
+    );
   }
 
   save(): void {

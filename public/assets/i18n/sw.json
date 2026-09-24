@@ -110,7 +110,8 @@
     "LOADING": "Inapakia...",
     "SUBSCRIBE": "Lipia Huduma",
     "CONFIRM_DELETION": "Thibitisha kufuta",
-    "SELECT_OPTION": "Chagua chaguo"
+    "SELECT_OPTION": "Chagua chaguo",
+    "DONE": "Nimemaliza"
   },
   "MENU": {
     "HOME": "Nyumbani",
@@ -853,7 +854,8 @@
     "DOB": "Tarehe ya Kuzaliwa",
     "PHONE": "Simu",
     "EMAIL": "Barua pepe",
-    "ADDRESS": "Anwani"
+    "ADDRESS": "Anwani",
+    "ROLE": "Role"
   },
   "SUBSCRIBE_DIALOG": {
     "TITLE": "Lipia Huduma",
@@ -1181,5 +1183,17 @@
     "PROTECTED": "Siku 30 za mwisho haziwezi kufutwa kamwe.",
     "PURGE_BTN": "Futa",
     "CANCEL": "Ghairi"
+  },
+  "ACTIVATION_CODE_DIALOG": {
+    "TITLE": "Mtumiaji amesajiliwa",
+    "SUBTITLE": "Mpe hivi ili aingie. Ataombwa kuweka neno lake la siri mara moja.",
+    "USERNAME": "Jina la kuingia",
+    "CODE": "Namba ya kuingia",
+    "EXPIRY": "Namba hii inafanya kazi kwa saa {{hours}}.",
+    "ONE_TIME": "Inatumika mara moja - baadaye neno lake la siri ndilo linachukua nafasi.",
+    "ALSO_SENT": "Pia imetumwa kwa SMS kwenda {{phone}}.",
+    "SHOWN_ONCE": "Inaonekana hapa tu. Ikipotea, tuma nyingine kutoka kwenye orodha ya watumiaji.",
+    "COPY": "Nakili",
+    "COPIED": "Imenakiliwa"
   }
 }

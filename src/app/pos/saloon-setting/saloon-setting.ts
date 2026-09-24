@@ -17,6 +17,7 @@ import { EditCommissionDialogComponent } from '../../Utils/component/dialogs/edi
 import { error } from 'console';
 import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delete-confirmation-component/delete-confirmation-component';
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
+import { ActivationCodeDialogComponent } from '../../Utils/component/dialogs/activation-code-dialog-component/activation-code-dialog-component';
 import { SelectStaffDialogComponent } from '../../Utils/component/dialogs/select-staff-dialog-component/select-staff-dialog-component';
 import { UserService } from '../../settings/users-setting/user-service';
 import { AssignUserRoleDTO, UserDTO } from '../../settings/users-setting/user-model';
@@ -824,9 +825,33 @@ userDataSource: UserTableData[] = [];findUserPageByBranch() {
 
 addUser(): void {
 
+  // The roles have to be in hand before the dialog opens: the role is
+  // chosen while registering, not in a second step afterwards, and only
+  // the ones this viewer is allowed to grant are offered.
+  this.userService.findRoleByBranch().subscribe({
+
+    next: (roleRes) => {
+      const assignableRoleNames = this.getAssignableRoleNames();
+      const roles = (roleRes.data || []).filter((role: any) =>
+        assignableRoleNames.includes(role.name)
+      );
+      this.openAddUserDialog(roles);
+    },
+
+    error: () => {
+      // Without the list the dialog would ask for a role it cannot offer,
+      // so let it through without one and fall back to Assign role.
+      this.openAddUserDialog([]);
+    },
+  });
+}
+
+private openAddUserDialog(roles: any[]): void {
+
   const dialogRef = this.dialog.open(SelectStaffDialogComponent, {
     width: '560px',
     maxWidth: '95vw',
+    data: { roles },
   });
 
   dialogRef.afterClosed().subscribe((staff) => {
@@ -844,6 +869,7 @@ addUser(): void {
       phone: staff.phoneNumber,
       email: staff.email,
       address: staff.address,
+      role: staff.role,
       branch: this.visibility.getBranchUID(),
     };
 
@@ -852,6 +878,7 @@ addUser(): void {
       next: (res) => {
         if (res.data) {
           this.alertService.show('success', 'User Added');
+          this.showActivationCode(res.data, staff.phoneNumber);
           this.findUserPageByBranch();
           this.cdr.markForCheck();
         }
@@ -871,6 +898,31 @@ selectedRoleUIDs: string[] = [];
 // What roles the currently logged-in user is allowed to grant, based on
 // their own role. ROOT can assign anything; everyone else can only hand
 // out roles below their own rank.
+
+/**
+ * Shows the one-time code to whoever just registered someone, so the person
+ * standing at the counter can sign in straight away instead of waiting on a
+ * text. It is the only moment the code is readable - it is stored hashed.
+ */
+private showActivationCode(data: any, phone?: string): void {
+
+  if (!data?.activationCode) {
+    return;
+  }
+
+  this.dialog.open(ActivationCodeDialogComponent, {
+    width: '420px',
+    maxWidth: '95vw',
+    disableClose: true,
+    data: {
+      username: data.user?.username ?? '',
+      activationCode: data.activationCode,
+      validHours: data.validHours ?? 72,
+      phone,
+    },
+  });
+}
+
 private getAssignableRoleNames(): string[] {
 
   if (this.visibility.hasRole('ROOT')) {

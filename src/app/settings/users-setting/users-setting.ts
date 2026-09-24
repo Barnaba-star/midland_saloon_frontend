@@ -34,6 +34,7 @@ import { UserProfileDialogComponent } from '../../Utils/component/dialogs/user-p
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
 import { AlertService } from '../../Utils/services/alert';
 import { SelectStaffDialogComponent } from '../../Utils/component/dialogs/select-staff-dialog-component/select-staff-dialog-component';
+import { ActivationCodeDialogComponent } from '../../Utils/component/dialogs/activation-code-dialog-component/activation-code-dialog-component';
 import { Service } from '../service';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
@@ -120,6 +121,9 @@ addUser(): void {
   const dialogRef = this.dialog.open(SelectStaffDialogComponent, {
     width: '560px',
     maxWidth: '95vw',
+    // The role is picked here, not in a second step - without one the new
+    // account can open nothing.
+    data: { roles: this.roles },
   });
 
   dialogRef.afterClosed().subscribe((staff) => {
@@ -137,6 +141,7 @@ addUser(): void {
       phone: staff.phoneNumber,
       email: staff.email,
       address: staff.address,
+      role: staff.role,
       branch: this.visibility.getBranchUID(),
     };
 
@@ -144,6 +149,7 @@ addUser(): void {
       next: (res) => {
         if (res.data) {
           this.alert.show('success', 'User Added');
+          this.showActivationCode(res.data, staff.phoneNumber);
           this.pageIndex = 0;
           this.findUsers();
         } else {
@@ -203,6 +209,31 @@ resendCode(user: any): void {
       this.resendingFor = null;
       this.alert.show('error', this.translate.instant('USERS_SETTING_PAGE.CODE_FAILED'));
       this.cdr.markForCheck();
+    },
+  });
+}
+
+
+/**
+ * Shows the one-time code to whoever just registered someone, so the person
+ * standing at the counter can sign in straight away instead of waiting on a
+ * text. It is the only moment the code is readable - it is stored hashed.
+ */
+private showActivationCode(data: any, phone?: string): void {
+
+  if (!data?.activationCode) {
+    return;
+  }
+
+  this.dialog.open(ActivationCodeDialogComponent, {
+    width: '420px',
+    maxWidth: '95vw',
+    disableClose: true,
+    data: {
+      username: data.user?.username ?? '',
+      activationCode: data.activationCode,
+      validHours: data.validHours ?? 72,
+      phone,
     },
   });
 }

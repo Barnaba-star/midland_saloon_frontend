@@ -115,6 +115,20 @@
         </div>
       </label>
 
+      @if (roles.length) {
+        <label class="field">
+          <span>{{ 'USER_FIELDS.ROLE' | translate }}</span>
+          <div class="input-wrapper">
+            <select [(ngModel)]="form.role">
+              <option value="">-</option>
+              @for (role of roles; track role.uid) {
+                <option [value]="role.uid">{{ role.name }}</option>
+              }
+            </select>
+          </div>
+        </label>
+      }
+
       <label class="field">
         <span>{{ 'USER_FIELDS.DOB' | translate }}</span>
         <div class="input-wrapper">

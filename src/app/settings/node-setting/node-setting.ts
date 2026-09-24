@@ -34,6 +34,7 @@ import { AssignUserRoleDTO, UserDTO } from '../users-setting/user-model';
 import { SelectUserDialogComponent } from '../../Utils/component/dialogs/select-user-dialog-component/select-user-dialog-component';
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
 import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
+import { ActivationCodeDialogComponent } from '../../Utils/component/dialogs/activation-code-dialog-component/activation-code-dialog-component';
 
 @Component({
   selector: 'app-node-setting',
@@ -95,9 +96,27 @@ userFormField: FormField[] = [
   { name: 'email', type: 'text', placeholder: 'Enter email address', required: true },
   { name: 'address', type: 'text', placeholder: 'Enter  address', required: true },
   { name: 'phone', type: 'number', placeholder: 'Enter phone number', required: true },
+  // Options are filled in when the dialog opens - see addUserToBranch.
+  { name: 'role', type: 'select', placeholder: 'Select role', required: true, options: [] },
 ];
 
 addUserToBranch(item: any): void {
+
+  // The role is part of registering, not a second step: without one the new
+  // account cannot open anything, so they could not start work.
+  this.userService.findRoles().subscribe({
+    next: (roleRes) => this.openAddUserToBranchDialog(item, roleRes.data || []),
+    error: () => this.openAddUserToBranchDialog(item, []),
+  });
+}
+
+private openAddUserToBranchDialog(item: any, roles: any[]): void {
+
+  const fields = this.userFormField.map(field =>
+    field.name === 'role'
+      ? { ...field, options: roles.map(role => ({ label: role.name, value: role.uid })) }
+      : field
+  );
 
   this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_ADD_USER', { branch: item?.branchName ?? '' })
     .subscribe(formTitle => {
@@ -105,7 +124,7 @@ addUserToBranch(item: any): void {
       const dialogRef = this.dialog.open(DialogComponent, {
         width: '1200px',
         data: {
-          fields: this.userFormField,
+          fields,
           formTitle,
         },
       });
@@ -125,6 +144,7 @@ addUserToBranch(item: any): void {
           dob: result.dob,
           gender: result.gender,
           address: result.address,
+          role: result.role,
           branch: item.uid,
         };
 
@@ -132,6 +152,7 @@ addUserToBranch(item: any): void {
           next: (res) => {
             if (res.data) {
               this.alertService.show('success', 'User Added');
+              this.showActivationCode(res.data, result.phone);
             } else {
               this.alertService.show('error', res.message || 'Failed to add user');
             }
@@ -181,6 +202,30 @@ assignRoleToBranchUser(item: any): void {
     error: (error) => {
       console.error('Error fetching branch users:', error);
       this.alertService.show('error', 'Error when Fetching Users');
+    },
+  });
+}
+
+/**
+ * Shows the one-time code to whoever just registered someone, so the person
+ * standing at the counter can sign in straight away instead of waiting on a
+ * text. It is the only moment the code is readable - it is stored hashed.
+ */
+private showActivationCode(data: any, phone?: string): void {
+
+  if (!data?.activationCode) {
+    return;
+  }
+
+  this.dialog.open(ActivationCodeDialogComponent, {
+    width: '420px',
+    maxWidth: '95vw',
+    disableClose: true,
+    data: {
+      username: data.user?.username ?? '',
+      activationCode: data.activationCode,
+      validHours: data.validHours ?? 72,
+      phone,
     },
   });
 }
