@@ -9,10 +9,10 @@
         <p>{{ 'POS_HOME.SUBTITLE' | translate }}</p>
       </div>
 
-      <!-- ============ BRANCH DASHBOARD ============ -->
-
+      <!-- ============ ROW 1 - THE NUMBERS ============ -->
       <!-- Four numbers, not four charts: a single figure reads faster as a
            figure than as a one-slice chart. -->
+      <section class="dash-row dash-row-tiles">
       <div class="dash-tiles">
 
         <div class="dash-tile">
@@ -46,9 +46,12 @@
         </div>
 
       </div>
+      </section>
 
 
+      <!-- ============ ROW 2 - THE CHARTS ============ -->
       @if (seesMoney) {
+      <section class="dash-row dash-row-charts">
 
         <!-- ============ REVENUE TREND ============ -->
         <div class="dash-panel">
@@ -202,7 +205,40 @@
           }
         </div>
 
+      </section>
       }
+
+
+      <!-- ============ ROW 3 - WHERE TO GO NEXT ============ -->
+      <section class="dash-row dash-row-cards">
+        <div class="pos-home-grid">
+          @for (card of filteredHomeCards; track card.route) {
+            <mat-card
+              class="pos-home-card"
+              (click)="goTo(card.route)"
+              tabindex="0"
+              (keyup.enter)="goTo(card.route)"
+            >
+              <div class="pos-home-icon">
+                <mat-icon [svgIcon]="card.icon"></mat-icon>
+              </div>
+
+              <mat-card-header>
+                <h4>{{ card.title | translate }}</h4>
+              </mat-card-header>
+
+              <mat-card-content>
+                <p>{{ card.description | translate }}</p>
+              </mat-card-content>
+
+              <div class="pos-home-cta">
+                <span>{{ 'POS_HOME.OPEN' | translate }}</span>
+                <mat-icon>arrow_forward</mat-icon>
+              </div>
+            </mat-card>
+          }
+        </div>
+      </section>
 
 
     </div>

@@ -6,6 +6,7 @@ import { SidenavItem } from '../Utils/component/main-sidenav-component/model';
 import { Authentication } from '../Utils/services/authentication';
 import { MainSidenav2 } from '../Utils/component/main-sidenav2/main-sidenav2';
 import { CommonModule } from '@angular/common';
+import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { POS_FULL_ACCESS_ROLES } from './pos-role.guard';
@@ -13,7 +14,7 @@ import { ServiceSaloonMethod } from './service-saloon-method';
 
 @Component({
   selector: 'app-pos',
-  imports:  [CommonModule, RouterModule, MainSidenav2, MatIconModule, TranslatePipe],
+  imports:  [CommonModule, RouterModule, MainSidenav2, MatCardModule, MatIconModule, TranslatePipe],
   templateUrl: './pos.html',
   styleUrl: './pos.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -121,6 +122,63 @@ return this.visibility.filteredMenuItems(menu);
     if (this.isHome && !wasHome) {
       this.loadDashboard();
     }
+  }
+
+  // Quick-access cards shown on the POS "home" screen (bare /pos, before
+  // any sub-section is picked). Mirrors the Dashboard's card pattern.
+  homeCards = [
+    {
+      title: 'MENU.SALES',
+      description: 'POS_HOME.SALES_DESC',
+      icon: 'payment2',
+      route: '/pos/saloonSales',
+      roles: this.allRoles,
+    },
+    {
+      title: 'MENU.STAFF',
+      description: 'POS_HOME.STAFF_DESC',
+      icon: 'person',
+      route: '/pos/saloonStaff',
+      roles: this.allRoles,
+    },
+    {
+      title: 'MENU.SERVICE',
+      description: 'POS_HOME.SERVICE_DESC',
+      icon: 'service',
+      route: '/pos/saloonService',
+      roles: this.allRoles,
+    },
+    {
+      title: 'MENU.STORE',
+      description: 'POS_HOME.STORE_DESC',
+      icon: 'store',
+      route: '/pos/saloonStore',
+      roles: this.allRoles,
+    },
+    {
+      title: this.reportLabel,
+      description: this.reportLabel === 'MENU.REPORT' ? 'POS_HOME.REPORT_DESC' : 'POS_HOME.EXPENSES_DESC',
+      icon: 'report',
+      route: '/pos/saloonReports',
+      roles: this.allRoles,
+    },
+    {
+      title: 'MENU.SETTING',
+      description: 'POS_HOME.SETTING_DESC',
+      icon: 'setting',
+      route: '/pos/saloonSetting',
+      roles: this.fullAccessRoles,
+    },
+  ];
+
+  get filteredHomeCards() {
+    return this.homeCards.filter(card =>
+      card.roles.some(role => this.visibility.hasRole(role))
+    );
+  }
+
+  goTo(route: string): void {
+    this.router.navigate([route]);
   }
 
   get fullName(): string {

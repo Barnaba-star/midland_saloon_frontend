@@ -456,3 +456,35 @@
     grid-template-columns: minmax(120px, 200px) 1fr auto;
   }
 }
+
+
+/* ============================================================
+   THREE ROWS
+   ============================================================
+   1 - the numbers, 2 - the charts, 3 - where to go next. */
+
+.dash-row {
+  width: 100%;
+}
+
+.dash-row-charts,
+.dash-row-cards {
+  margin-top: 4px;
+}
+
+/* The card grid was capped at 900px and its cards pinned to 260px, which
+   left the row half empty once it stood on its own. Let them share the
+   full width instead, wrapping to as many per line as fit. */
+.dash-row-cards .pos-home-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  max-width: none;
+  width: 100%;
+  gap: 16px;
+}
+
+.dash-row-cards .pos-home-card {
+  width: auto;
+  max-width: none;
+  margin: 0;
+}
