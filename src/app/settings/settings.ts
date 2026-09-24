@@ -111,6 +111,12 @@ menuItems: SidenavItem[] = [
         icon: 'payment',
         route: '/settings/payments',
         roles: this.manageRoles
+      },
+      {
+        label: 'SETTINGS_MENU.EXPIRING',
+        icon: 'calender',
+        route: '/settings/expiring',
+        roles: this.settingsRoles
       }
 ];
 

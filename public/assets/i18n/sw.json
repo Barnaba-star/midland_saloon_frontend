@@ -493,7 +493,8 @@
     "COMMISSION": "Kamisheni",
     "ERRORS": "Makosa",
     "AUDIT": "Kumbukumbu za Matendo",
-    "PAYMENTS": "Malipo"
+    "PAYMENTS": "Malipo",
+    "EXPIRING": "Matawi yanayoisha"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -1097,5 +1098,31 @@
     "NOT_SENDING": "Hii inarekodi malipo. Haitumi pesa yoyote.",
     "PAY_BTN": "Rekodi malipo",
     "CANCEL": "Ghairi"
+  },
+  "EXPIRING_SETTING_PAGE": {
+    "TITLE": "Matawi yanayoisha",
+    "MANAGE_TAB": "Matawi yanayoisha",
+    "MGMT_TITLE": "Usajili unaokaribia kuisha",
+    "MGMT_SUBTITLE": "Matawi ambayo usajili wake umekwisha isha au unakaribia kuisha.",
+    "REFRESH_BTN": "Onyesha upya",
+    "EXPIRED_COUNT": "Yamekwisha isha",
+    "SOON_COUNT": "Ndani ya siku 7",
+    "TOTAL_COUNT": "Yanayoonyeshwa",
+    "WINDOW_7": "Siku 7 zijazo",
+    "WINDOW_14": "Siku 14 zijazo",
+    "WINDOW_30": "Siku 30 zijazo",
+    "WINDOW_90": "Siku 90 zijazo",
+    "COL_BRANCH": "Tawi",
+    "COL_REGION": "Mkoa",
+    "COL_PHONE": "Simu",
+    "COL_DATE": "Tarehe ya kuisha",
+    "COL_STATUS": "Hali ya muda",
+    "COL_AMOUNT": "Bei",
+    "COL_REGISTERED_BY": "Alisajiliwa na",
+    "COL_REASON": "Sababu",
+    "LAPSED_DAYS": "Imeisha siku {{days}} zilizopita",
+    "LAPSES_TODAY": "Inaisha leo",
+    "DAYS_LEFT": "Siku {{days}} zimebaki",
+    "EMPTY_TEXT": "Hakuna tawi linalokaribia kuisha."
   }
 }

@@ -493,7 +493,8 @@
     "COMMISSION": "Commission",
     "ERRORS": "Errors",
     "AUDIT": "Audit Log",
-    "PAYMENTS": "Payments"
+    "PAYMENTS": "Payments",
+    "EXPIRING": "Expiring branches"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -1097,5 +1098,31 @@
     "NOT_SENDING": "This records a payment. It does not send any money.",
     "PAY_BTN": "Record payout",
     "CANCEL": "Cancel"
+  },
+  "EXPIRING_SETTING_PAGE": {
+    "TITLE": "Expiring branches",
+    "MANAGE_TAB": "Expiring branches",
+    "MGMT_TITLE": "Subscriptions about to lapse",
+    "MGMT_SUBTITLE": "Branches whose subscription has lapsed or is close to lapsing.",
+    "REFRESH_BTN": "Refresh",
+    "EXPIRED_COUNT": "Already lapsed",
+    "SOON_COUNT": "Within 7 days",
+    "TOTAL_COUNT": "Shown",
+    "WINDOW_7": "Next 7 days",
+    "WINDOW_14": "Next 14 days",
+    "WINDOW_30": "Next 30 days",
+    "WINDOW_90": "Next 90 days",
+    "COL_BRANCH": "Branch",
+    "COL_REGION": "Region",
+    "COL_PHONE": "Phone",
+    "COL_DATE": "Expiry date",
+    "COL_STATUS": "Time status",
+    "COL_AMOUNT": "Price",
+    "COL_REGISTERED_BY": "Registered by",
+    "COL_REASON": "Reason",
+    "LAPSED_DAYS": "Lapsed {{days}} days ago",
+    "LAPSES_TODAY": "Lapses today",
+    "DAYS_LEFT": "{{days}} days left",
+    "EMPTY_TEXT": "Nothing is close to lapsing."
   }
 }

@@ -58,6 +58,12 @@ export const routes: Routes = [
         canActivate: [settingsManageGuard],
         loadComponent: () => import('./settings/payment-setting/payment-setting').then(m => m.PaymentSetting)
       },
+      {
+        // STAFF see this one too - the backend narrows it to their own branches.
+        path: 'expiring',
+        canActivate: [settingsGuard],
+        loadComponent: () => import('./settings/expiring-setting/expiring-setting').then(m => m.ExpiringSetting)
+      },
     ]
   },
 {
