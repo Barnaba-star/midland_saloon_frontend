@@ -6,7 +6,6 @@ import { SidenavItem } from '../Utils/component/main-sidenav-component/model';
 import { Authentication } from '../Utils/services/authentication';
 import { MainSidenav2 } from '../Utils/component/main-sidenav2/main-sidenav2';
 import { CommonModule } from '@angular/common';
-import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { POS_FULL_ACCESS_ROLES } from './pos-role.guard';
@@ -14,7 +13,7 @@ import { ServiceSaloonMethod } from './service-saloon-method';
 
 @Component({
   selector: 'app-pos',
-  imports:  [CommonModule, RouterModule, MainSidenav2, MatCardModule, MatIconModule, TranslatePipe],
+  imports:  [CommonModule, RouterModule, MainSidenav2, MatIconModule, TranslatePipe],
   templateUrl: './pos.html',
   styleUrl: './pos.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -124,63 +123,6 @@ return this.visibility.filteredMenuItems(menu);
     }
   }
 
-  // Quick-access cards shown on the POS "home" screen (bare /pos, before
-  // any sub-section is picked). Mirrors the Dashboard's card pattern.
-  homeCards = [
-    {
-      title: 'MENU.SALES',
-      description: 'POS_HOME.SALES_DESC',
-      icon: 'payment2',
-      route: '/pos/saloonSales',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.STAFF',
-      description: 'POS_HOME.STAFF_DESC',
-      icon: 'person',
-      route: '/pos/saloonStaff',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.SERVICE',
-      description: 'POS_HOME.SERVICE_DESC',
-      icon: 'service',
-      route: '/pos/saloonService',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.STORE',
-      description: 'POS_HOME.STORE_DESC',
-      icon: 'store',
-      route: '/pos/saloonStore',
-      roles: this.allRoles,
-    },
-    {
-      title: this.reportLabel,
-      description: this.reportLabel === 'MENU.REPORT' ? 'POS_HOME.REPORT_DESC' : 'POS_HOME.EXPENSES_DESC',
-      icon: 'report',
-      route: '/pos/saloonReports',
-      roles: this.allRoles,
-    },
-    {
-      title: 'MENU.SETTING',
-      description: 'POS_HOME.SETTING_DESC',
-      icon: 'setting',
-      route: '/pos/saloonSetting',
-      roles: this.fullAccessRoles,
-    },
-  ];
-
-  get filteredHomeCards() {
-    return this.homeCards.filter(card =>
-      card.roles.some(role => this.visibility.hasRole(role))
-    );
-  }
-
-  goTo(route: string): void {
-    this.router.navigate([route]);
-  }
-
   get fullName(): string {
     return this.visibility.getFullName() || this.visibility.getUsername();
   }
@@ -211,6 +153,9 @@ return this.visibility.filteredMenuItems(menu);
 
   serviceBars: { label: string; amount: number; percent: number }[] = [];
   splitBars: { label: string; amount: number; percent: number }[] = [];
+  staffRows: { name: string; earned: number; services: number; percent: number }[] = [];
+  stockRows: { label: string; total: number; paid: number; remaining: number; percent: number }[] = [];
+  stockTotals = { total: 0, paid: 0, remaining: 0 };
 
   // The trend chart's drawing box. Fixed viewBox, scaled by CSS - so the
   // maths stays in one coordinate system whatever the screen width.
@@ -275,9 +220,40 @@ return this.visibility.filteredMenuItems(menu);
       }
     });
 
+    this.saloonService.findStaffEarnings().subscribe({
+      next: (response) => {
+        const rows = (response?.data ?? []).map((row: any) => ({
+          name: [row.firstName, row.lastName].filter(Boolean).join(' ') || '-',
+          earned: Number(row.earned ?? 0),
+          services: Number(row.servicesDone ?? 0)
+        }));
+        const max = rows.reduce((m: number, r: any) => Math.max(m, r.earned), 0);
+        this.staffRows = rows.map((r: any) => ({ ...r, percent: max > 0 ? (r.earned / max) * 100 : 0 }));
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.staffRows = [];
+        this.cdr.markForCheck();
+      }
+    });
+
+    this.saloonService.getStockAndPurchaseByFilter('THIS_WEEK').subscribe({
+      next: (response) => {
+        this.buildStock(response?.data ?? []);
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.buildStock([]);
+        this.cdr.markForCheck();
+      }
+    });
+
     this.saloonService.findCurrentSaloonRevenueReport('MONTH').subscribe({
       next: (response) => {
-        this.splitBars = this.toBars(this.toSplit(response?.data));
+        // Not folded: every bucket a service price is split into is worth
+        // seeing by name. Rolling eight of them into "Other" was hiding
+        // exactly the ones being asked about - electricity, water, loan.
+        this.splitBars = this.toBars(this.toSplit(response?.data), 0);
         this.cdr.markForCheck();
       },
       error: () => {
@@ -329,15 +305,34 @@ return this.visibility.filteredMenuItems(menu);
    * one "Other" row - a chart with eleven near-zero bars says less than one
    * with six real ones.
    */
-  private toBars(rows: { label: string; amount: number }[]): { label: string; amount: number; percent: number }[] {
+  private toBars(rows: { label: string; amount: number }[], limit = 8): { label: string; amount: number; percent: number }[] {
     const sorted = rows.filter(r => r.amount > 0).sort((a, b) => b.amount - a.amount);
-    const top = sorted.slice(0, 6);
-    const rest = sorted.slice(6);
+    // limit 0 means show everything.
+    const top = limit > 0 ? sorted.slice(0, limit) : sorted;
+    const rest = limit > 0 ? sorted.slice(limit) : [];
     if (rest.length) {
       top.push({ label: 'POS_HOME.OTHER', amount: rest.reduce((sum, r) => sum + r.amount, 0) });
     }
     const max = top.length ? top[0].amount : 0;
     return top.map(r => ({ ...r, percent: max > 0 ? (r.amount / max) * 100 : 0 }));
+  }
+
+  /** This week's stock money: what was set aside per service, and what is left. */
+  private buildStock(rows: any[]): void {
+    const list = (Array.isArray(rows) ? rows : []).map((row: any) => ({
+      label: row.serviceName ?? '-',
+      total: Number(row.totalAmount ?? 0),
+      paid: Number(row.payedAmount ?? 0),
+      remaining: Number(row.remainingAmount ?? 0)
+    })).filter(r => r.total > 0).sort((a, b) => b.total - a.total);
+
+    const max = list.reduce((m, r) => Math.max(m, r.total), 0);
+    this.stockRows = list.map(r => ({ ...r, percent: max > 0 ? (r.total / max) * 100 : 0 }));
+    this.stockTotals = {
+      total: list.reduce((s, r) => s + r.total, 0),
+      paid: list.reduce((s, r) => s + r.paid, 0),
+      remaining: list.reduce((s, r) => s + r.remaining, 0)
+    };
   }
 
   private buildTrend(rows: any[]): void {

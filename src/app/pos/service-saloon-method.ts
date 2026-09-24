@@ -261,4 +261,8 @@ findBranchDashboard(): Observable<Response<any>> {
 findRevenueTrend(days: number): Observable<ResponseList<any>> {
   return this.http.get<ResponseList<any>>(`${this.saloonURL}/findRevenueTrend/${days}`);
 }
+
+findStaffEarnings(): Observable<ResponseList<any>> {
+  return this.http.get<ResponseList<any>>(`${this.saloonURL}/findStaffEarnings`);
+}
 }

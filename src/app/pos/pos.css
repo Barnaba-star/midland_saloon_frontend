@@ -417,3 +417,42 @@
     grid-template-columns: minmax(70px, 100px) 1fr auto;
   }
 }
+
+
+/* ---------- stock totals strip ---------- */
+
+.stock-totals {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid var(--viz-line);
+  color: var(--viz-ink-soft);
+  font-size: 12.5px;
+}
+
+.stock-totals b {
+  color: var(--viz-ink);
+  font-size: 15px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+}
+
+/* What is still owed is the figure worth noticing. */
+.stock-remaining b {
+  color: #b45309;
+}
+
+.bar-value small {
+  color: #94a3b8;
+  font-weight: 500;
+}
+
+/* With the cards gone the panels run the full width, so the label column can
+   afford more room before the bar starts. */
+@media (min-width: 1101px) {
+  .bar-row {
+    grid-template-columns: minmax(120px, 200px) 1fr auto;
+  }
+}

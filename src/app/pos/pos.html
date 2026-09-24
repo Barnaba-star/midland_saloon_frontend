@@ -101,7 +101,6 @@
 
 
         <!-- ============ TWO RANKED BAR CHARTS ============ -->
-        <div class="dash-columns">
 
           <div class="dash-panel">
             <div class="panel-head">
@@ -145,36 +144,66 @@
             }
           </div>
 
+
+        <!-- ============ STAFF ============ -->
+        <div class="dash-panel">
+          <div class="panel-head">
+            <h3>{{ 'POS_HOME.STAFF_TITLE' | translate }}</h3>
+            <span class="panel-note">{{ 'POS_HOME.THIS_MONTH' | translate }}</span>
+          </div>
+
+          @if (staffRows.length) {
+            <div class="bar-list">
+              @for (row of staffRows; track row.name) {
+                <div class="bar-row">
+                  <span class="bar-label">{{ row.name }}</span>
+                  <span class="bar-track"><span class="bar-fill" [style.width.%]="row.percent"></span></span>
+                  <span class="bar-value">
+                    {{ money(row.earned) }}
+                    <small>· {{ row.services }} {{ 'POS_HOME.SERVICES_SHORT' | translate }}</small>
+                  </span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+          }
         </div>
+
+
+        <!-- ============ STOCK AND PURCHASE ============ -->
+        <div class="dash-panel">
+          <div class="panel-head">
+            <h3>{{ 'POS_HOME.STOCK_TITLE' | translate }}</h3>
+            <span class="panel-note">{{ 'POS_HOME.THIS_WEEK' | translate }}</span>
+          </div>
+
+          @if (stockRows.length) {
+            <div class="stock-totals">
+              <span><b>{{ money(stockTotals.total) }}</b> {{ 'POS_HOME.STOCK_TOTAL' | translate }}</span>
+              <span><b>{{ money(stockTotals.paid) }}</b> {{ 'POS_HOME.STOCK_PAID' | translate }}</span>
+              <span class="stock-remaining"><b>{{ money(stockTotals.remaining) }}</b> {{ 'POS_HOME.STOCK_REMAINING' | translate }}</span>
+            </div>
+
+            <div class="bar-list">
+              @for (row of stockRows; track row.label) {
+                <div class="bar-row">
+                  <span class="bar-label">{{ row.label }}</span>
+                  <span class="bar-track"><span class="bar-fill" [style.width.%]="row.percent"></span></span>
+                  <span class="bar-value">
+                    {{ money(row.total) }}
+                    <small>· {{ money(row.remaining) }} {{ 'POS_HOME.STOCK_LEFT_SHORT' | translate }}</small>
+                  </span>
+                </div>
+              }
+            </div>
+          } @else {
+            <p class="dash-empty">{{ 'POS_HOME.NO_DATA' | translate }}</p>
+          }
+        </div>
+
       }
 
-
-      <div class="pos-home-grid">
-        <mat-card
-          class="pos-home-card"
-          *ngFor="let card of filteredHomeCards"
-          (click)="goTo(card.route)"
-          tabindex="0"
-          (keyup.enter)="goTo(card.route)"
-        >
-          <div class="pos-home-icon">
-            <mat-icon [svgIcon]="card.icon"></mat-icon>
-          </div>
-
-          <mat-card-header>
-            <h4>{{ card.title | translate }}</h4>
-          </mat-card-header>
-
-          <mat-card-content>
-            <p>{{ card.description | translate }}</p>
-          </mat-card-content>
-
-          <div class="pos-home-cta">
-            <span>{{ 'POS_HOME.OPEN' | translate }}</span>
-            <mat-icon>arrow_forward</mat-icon>
-          </div>
-        </mat-card>
-      </div>
 
     </div>
 

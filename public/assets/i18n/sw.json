@@ -786,7 +786,15 @@
     "SPLIT_MAINTENANCE": "Matengenezo",
     "SPLIT_EMERGENCY": "Dharura",
     "SPLIT_LOAN": "Mkopo",
-    "SPLIT_OTHER": "Nyingine"
+    "SPLIT_OTHER": "Nyingine",
+    "STAFF_TITLE": "Mapato ya wafanyakazi",
+    "SERVICES_SHORT": "huduma",
+    "STOCK_TITLE": "Stock na manunuzi",
+    "THIS_WEEK": "Wiki hii",
+    "STOCK_TOTAL": "imetengwa",
+    "STOCK_PAID": "imelipwa",
+    "STOCK_REMAINING": "inadaiwa",
+    "STOCK_LEFT_SHORT": "imebaki"
   },
   "SELECT_STAFF_DIALOG": {
     "TITLE": "Chagua Mfanyakazi",

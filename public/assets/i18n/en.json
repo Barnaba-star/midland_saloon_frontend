@@ -786,7 +786,15 @@
     "SPLIT_MAINTENANCE": "Maintenance",
     "SPLIT_EMERGENCY": "Emergency",
     "SPLIT_LOAN": "Loan",
-    "SPLIT_OTHER": "Other"
+    "SPLIT_OTHER": "Other",
+    "STAFF_TITLE": "Staff earnings",
+    "SERVICES_SHORT": "services",
+    "STOCK_TITLE": "Stock and purchase",
+    "THIS_WEEK": "This week",
+    "STOCK_TOTAL": "set aside",
+    "STOCK_PAID": "paid",
+    "STOCK_REMAINING": "still owed",
+    "STOCK_LEFT_SHORT": "left"
   },
   "SELECT_STAFF_DIALOG": {
     "TITLE": "Select Staff",
