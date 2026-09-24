@@ -1250,7 +1250,6 @@
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
-    "SUBTOTAL": "Jumla ya {{role}}",
     "TOTAL": "Jumla ya kulipa",
     "NO_PHONE": "hana namba",
     "MISSING_PHONE": "Kati ya hawa, {{count}} hawana namba ya simu. Benki itahitaji namba kabla ya kutuma chochote.",

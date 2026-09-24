@@ -1250,7 +1250,6 @@
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
-    "SUBTOTAL": "{{role}} subtotal",
     "TOTAL": "Total to pay",
     "NO_PHONE": "no number",
     "MISSING_PHONE": "{{count}} of these have no phone number on file. A bank will need one before it can send anything.",

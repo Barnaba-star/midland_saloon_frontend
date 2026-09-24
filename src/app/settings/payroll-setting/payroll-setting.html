@@ -168,44 +168,31 @@
                 </thead>
 
                 <tbody>
-                  @for (group of groups; track group.role) {
-
-                    @for (line of group.lines; track line.uid) {
-                      <tr>
-                        <td class="col-no">{{ line.no }}</td>
-                        <td class="col-name">{{ line.name }}</td>
-                        <td>{{ roleLabel(line.role) }}</td>
-                        <td class="col-phone" [class.missing]="!line.phone">
-                          {{ line.phone || ('PAYROLL_PAGE.NO_PHONE' | translate) }}
-                        </td>
-                        @if (hasAccountNumbers) {
-                          <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
-                          <td [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
-                          <td class="col-phone" [class.missing]="!line.accountNumber">
-                            {{ line.accountNumber || '—' }}
-                          </td>
-                        }
-                        <td class="col-amount">{{ line.earned | number }}</td>
-                        <td class="col-amount muted">{{ line.paid | number }}</td>
-                        <td class="col-amount" [class.settled]="line.toPay <= 0">
-                          @if (line.toPay > 0) {
-                            {{ line.toPay | number }}
-                          } @else {
-                            {{ 'PAYROLL_PAGE.SETTLED' | translate }}
-                          }
-                        </td>
-                      </tr>
-                    }
-
-                    <tr class="subtotal-row">
-                      <td [attr.colspan]="hasAccountNumbers ? 7 : 4">
-                        {{ 'PAYROLL_PAGE.SUBTOTAL' | translate: { role: roleLabel(group.role) } }}
+                  @for (line of rows; track line.uid) {
+                    <tr>
+                      <td class="col-no">{{ line.no }}</td>
+                      <td class="col-name">{{ line.name }}</td>
+                      <td>{{ roleLabel(line.role) }}</td>
+                      <td class="col-phone" [class.missing]="!line.phone">
+                        {{ line.phone || ('PAYROLL_PAGE.NO_PHONE' | translate) }}
                       </td>
-                      <td class="col-amount">{{ group.earned | number }}</td>
-                      <td class="col-amount"></td>
-                      <td class="col-amount">{{ group.total | number }}</td>
+                      @if (hasAccountNumbers) {
+                        <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
+                        <td [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
+                        <td class="col-phone" [class.missing]="!line.accountNumber">
+                          {{ line.accountNumber || '—' }}
+                        </td>
+                      }
+                      <td class="col-amount">{{ line.earned | number }}</td>
+                      <td class="col-amount muted">{{ line.paid | number }}</td>
+                      <td class="col-amount" [class.settled]="line.toPay <= 0">
+                        @if (line.toPay > 0) {
+                          {{ line.toPay | number }}
+                        } @else {
+                          {{ 'PAYROLL_PAGE.SETTLED' | translate }}
+                        }
+                      </td>
                     </tr>
-
                   }
                 </tbody>
 

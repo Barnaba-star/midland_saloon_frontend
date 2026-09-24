@@ -315,7 +315,6 @@
   width: 100%;
   margin-top: 18px;
   border-collapse: collapse;
-  font-size: 13px;
 }
 
 /* Every heading and every cell starts at the same edge. Amounts are
@@ -327,20 +326,24 @@
   text-align: left;
 }
 
+/* The headings name the columns; the cells fill them. Setting the cells
+   a step below the headings keeps a long sheet scannable by its edges
+   rather than by its contents. */
 .sheet-table th {
   padding: 9px 10px;
   border-bottom: 1px solid #cbd5e1;
   color: #64748b;
-  font-size: 10.5px;
+  font-size: 12px;
   font-weight: 700;
   letter-spacing: 0.6px;
   text-transform: uppercase;
 }
 
 .sheet-table td {
-  padding: 9px 10px;
+  padding: 8px 10px;
   border-bottom: 1px solid #f1f5f9;
   color: #0f172a;
+  font-size: 11px;
 }
 
 .col-no {
@@ -356,7 +359,7 @@
    keeps them in columns. */
 .col-phone {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 12.5px;
+  font-size: 11px;
 }
 
 .col-phone.missing {
@@ -383,25 +386,18 @@
 .col-amount.settled {
   color: #12b76a;
   font-family: inherit;
-  font-size: 11.5px;
+  font-size: 10.5px;
   font-weight: 700;
 }
 
-.subtotal-row td {
-  padding-top: 7px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid #e2e8f0;
-  color: #64748b;
-  font-size: 11.5px;
-  font-weight: 600;
-}
-
+/* The one figure the sheet exists to state, so it stays above the cells
+   rather than a step below them. */
 .total-row td {
   padding-top: 13px;
   border-top: 2px solid #0f172a;
   border-bottom: none;
   color: #0f172a;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 800;
 }
 

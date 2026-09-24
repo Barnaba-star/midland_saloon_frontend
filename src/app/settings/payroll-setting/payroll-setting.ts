@@ -20,16 +20,6 @@ interface PayrollRow extends PayrollLine {
   no: number;
 }
 
-/** One role's lines, with its own subtotal. */
-interface PayrollGroup {
-  role: string;
-  lines: PayrollRow[];
-  /** What the month gave this role. */
-  earned: number;
-  /** What is left to send it. */
-  total: number;
-}
-
 /**
  * The month's share-out as a sheet to hand to a bank.
  *
@@ -61,7 +51,7 @@ export class PayrollSetting implements OnInit {
   tab = '';
 
   payroll: Payroll | null = null;
-  groups: PayrollGroup[] = [];
+  rows: PayrollRow[] = [];
   loading = true;
   failed = false;
 
@@ -123,14 +113,14 @@ export class PayrollSetting implements OnInit {
     // The old sheet belongs to another month, so it goes rather than sitting
     // under a heading that no longer describes it.
     this.payroll = null;
-    this.groups = [];
+    this.rows = [];
 
     this.payrollService.findPayroll(this.selectedYear, this.selectedMonth).subscribe({
 
       next: (res) => {
         this.loading = false;
         this.payroll = res?.data ?? null;
-        this.groups = this.groupByRole(this.payroll?.lines ?? []);
+        this.rows = this.numbered(this.payroll?.lines ?? []);
         this.cdr.markForCheck();
       },
 
@@ -143,24 +133,11 @@ export class PayrollSetting implements OnInit {
   }
 
   /**
-   * The backend already returns the lines in role order, so this only has to
-   * cut them where the role changes - no sorting, and no second opinion about
-   * what order the roles come in.
+   * The backend already returns the lines in role order, so nothing here
+   * sorts or groups them - only numbers them for the sheet.
    */
-  private groupByRole(lines: PayrollLine[]): PayrollGroup[] {
-    const groups: PayrollGroup[] = [];
-    let no = 0;
-    for (const line of lines) {
-      let group = groups.length ? groups[groups.length - 1] : null;
-      if (!group || group.role !== line.role) {
-        group = { role: line.role, lines: [], earned: 0, total: 0 };
-        groups.push(group);
-      }
-      group.lines.push({ ...line, no: ++no });
-      group.earned += line.earned;
-      group.total += line.toPay;
-    }
-    return groups;
+  private numbered(lines: PayrollLine[]): PayrollRow[] {
+    return lines.map((line, index) => ({ ...line, no: index + 1 }));
   }
 
   /** Shown only once there is something to show them for. */
