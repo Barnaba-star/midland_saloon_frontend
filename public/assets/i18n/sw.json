@@ -760,6 +760,8 @@
   "CHANGE_PASSWORD_DIALOG": {
     "TITLE": "Badilisha Nenosiri",
     "SUBTITLE": "Chagua nenosiri imara ambalo hujawahi kulitumia hapo awali.",
+    "FORCED_TITLE": "Weka nenosiri lako",
+    "FORCED_SUBTITLE": "Hii ni mara yako ya kwanza kuingia. Nenosiri ulilotumiwa kwa SMS linatumika mara moja tu - chagua lako mwenyewe ili uendelee.",
     "OLD_PASSWORD": "Nenosiri la Sasa",
     "NEW_PASSWORD": "Nenosiri Jipya",
     "CONFIRM_PASSWORD": "Thibitisha Nenosiri Jipya",

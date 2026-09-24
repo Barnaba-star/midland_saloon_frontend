@@ -116,6 +116,20 @@ hasRole(role: string): boolean {
   return roles.split(', ').includes(role);
 }
 
+/**
+ * True while the account is still on the password that was texted to it.
+ * The backend reads the same claim and refuses everything but the change
+ * itself, so this only decides where to send them - it is not the lock.
+ */
+mustChangePassword(): boolean {
+  const token = this.getToken();
+  if (!token) {
+    return false;
+  }
+  const decodedToken = this.jwtHelper.decodeToken(token);
+  return decodedToken?.mustChangePassword === true;
+}
+
 getUserUID():string{
  const token = this.getToken();
   if (!token) {

@@ -7,6 +7,7 @@ import {
 
 import { inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 import {
   StatusDialogComponent,
@@ -43,6 +44,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
 
   const dialog = inject(MatDialog);
   const errorLogService = inject(ErrorLogService);
+  const router = inject(Router);
 
   /*
    * ============================================================
@@ -69,7 +71,10 @@ export const StatusInterceptor: HttpInterceptorFn = (
     req.url.includes('/authentication/paySubscription') ||
     // The payout dialog reports its own outcome, in its own words. The
     // backend answers here in codes, which a popup would show raw.
-    req.url.includes('/payment/payShare');
+    req.url.includes('/payment/payShare') ||
+    // The change-password dialog shows its own errors inline, and on a first
+    // login it is the whole screen - a popup on top of it has nothing to add.
+    req.url.includes('/authentication/changePassword');
 
 
   /*
@@ -175,6 +180,22 @@ export const StatusInterceptor: HttpInterceptorFn = (
           status === 401 &&
           error?.url?.includes('/attachment/findUserForProfile')
         ) {
+          return;
+        }
+
+        /*
+         * ======================================================
+         * 3b. A TOKEN THAT MAY ONLY CHANGE ITS PASSWORD
+         * ======================================================
+         *
+         * The login screen already has them in the forced dialog, so
+         * nothing should be calling anything else. If something does -
+         * a stray refresh, a bookmarked page - that page can load nothing,
+         * so send them back to sign in, which puts the dialog up again.
+         */
+
+        if (status === 403 && error?.error?.code === 'PASSWORD_CHANGE_REQUIRED') {
+          router.navigate(['/login']);
           return;
         }
 

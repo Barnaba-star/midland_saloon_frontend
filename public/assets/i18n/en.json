@@ -760,6 +760,8 @@
   "CHANGE_PASSWORD_DIALOG": {
     "TITLE": "Change Password",
     "SUBTITLE": "Choose a strong password you haven't used before.",
+    "FORCED_TITLE": "Set your password",
+    "FORCED_SUBTITLE": "This is your first sign-in. The password you were sent by SMS works once - choose your own to carry on.",
     "OLD_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password",
     "CONFIRM_PASSWORD": "Confirm New Password",
