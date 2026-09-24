@@ -427,7 +427,9 @@
     "EXPIRED_HELP_FAILED": "Malipo yako ya mwisho hayakufanikiwa, kwa hiyo huduma haikuongezwa. Unaweza kujaribu tena hapa chini.",
     "EXPIRED_HELP_PENDING": "Kuna malipo yanayosubiri uthibitisho kwenye simu yako. Yathibitishe kisha uingie — au anzisha mapya hapa chini.",
     "EXPIRED_HELP_NO_BALANCE": "Malipo yamekataliwa — akaunti ya simu haikuwa na salio la kutosha. Weka salio kisha ujaribu tena hapa chini.",
-    "EXPIRED_HELP_TIMEOUT": "Malipo hayakuthibitishwa kwa wakati kwenye simu, kwa hiyo yameisha muda. Unaweza kuanzisha mapya hapa chini."
+    "EXPIRED_HELP_TIMEOUT": "Malipo hayakuthibitishwa kwa wakati kwenye simu, kwa hiyo yameisha muda. Unaweza kuanzisha mapya hapa chini.",
+    "CODE_EXPIRED": "Namba hiyo haitumiki tena. Muombe aliyekusajili akutumie nyingine.",
+    "NO_ROLE": "Akaunti yako bado haina role, kwa hiyo hakuna cha kufungua. Muombe msimamizi akupe."
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",
@@ -682,7 +684,14 @@
     "BTN_ASSIGN_ROLE": "Panga Jukumu",
     "BTN_VIEW_USER": "Tazama",
     "BTN_DELETE_USER": "Futa",
-    "SEARCH_PLACEHOLDER": "Tafuta watumiaji..."
+    "SEARCH_PLACEHOLDER": "Tafuta watumiaji...",
+    "NOT_SIGNED_IN": "HAJAINGIA",
+    "BTN_RESEND_CODE": "Tuma namba",
+    "TOOLTIP_RESEND_CODE": "Tuma namba mpya ya kuingia mara ya kwanza kwa SMS",
+    "CODE_SENT": "Namba mpya imetumwa kwa SMS.",
+    "CODE_ALREADY_ACTIVATED": "Huyu tayari ameshaweka neno lake la siri.",
+    "CODE_NO_PHONE": "Akaunti hii haina namba ya simu, hivyo namba haiwezi kutumwa.",
+    "CODE_FAILED": "Imeshindwa kutuma namba. Tafadhali jaribu tena."
   },
   "USER_PROFILE_DIALOG": {
     "PERSONAL_INFO": "Taarifa Binafsi",
@@ -761,7 +770,7 @@
     "TITLE": "Badilisha Nenosiri",
     "SUBTITLE": "Chagua nenosiri imara ambalo hujawahi kulitumia hapo awali.",
     "FORCED_TITLE": "Weka nenosiri lako",
-    "FORCED_SUBTITLE": "Hii ni mara yako ya kwanza kuingia. Nenosiri ulilotumiwa kwa SMS linatumika mara moja tu - chagua lako mwenyewe ili uendelee.",
+    "FORCED_SUBTITLE": "Namba yako imekubaliwa. Inafanya kazi mara moja tu - weka neno lako la siri ili uendelee.",
     "OLD_PASSWORD": "Nenosiri la Sasa",
     "NEW_PASSWORD": "Nenosiri Jipya",
     "CONFIRM_PASSWORD": "Thibitisha Nenosiri Jipya",

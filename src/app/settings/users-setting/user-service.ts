@@ -25,6 +25,11 @@ saveUser(userDTO:UserDTO):Observable<Response<any>>{
   return this.http.post<Response<any>>(`${this.userURL}/saveUser`, userDTO);
 }
 
+/** A fresh one-time code by SMS, for an account that has not signed in yet. */
+resendActivationCode(userUID:string):Observable<Response<string>>{
+  return this.http.post<Response<string>>(`${this.userURL}/resendActivationCode/${userUID}`, {});
+}
+
 findBranchList():Observable<ResponseList<any>>{
  return this.http.get<ResponseList<any>>(`${this.branchUrl}/findBranchList`)
 }

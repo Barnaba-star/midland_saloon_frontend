@@ -427,7 +427,9 @@
     "EXPIRED_HELP_FAILED": "Your last payment did not go through, so the subscription was not renewed. You can try again below.",
     "EXPIRED_HELP_PENDING": "A payment is waiting for your approval on your phone. Approve it, then sign in - or start a new one below.",
     "EXPIRED_HELP_NO_BALANCE": "The payment was declined - the mobile money account did not have enough balance. Top it up and try again below.",
-    "EXPIRED_HELP_TIMEOUT": "The payment was not approved in time on the phone, so it lapsed. You can start a new one below."
+    "EXPIRED_HELP_TIMEOUT": "The payment was not approved in time on the phone, so it lapsed. You can start a new one below.",
+    "CODE_EXPIRED": "That code is no longer valid. Ask whoever registered you to send a new one.",
+    "NO_ROLE": "Your account has no role yet, so there is nothing for it to open. Ask an administrator to assign one."
   },
   "LANDING": {
     "HERO_BADGE": "Business management, simplified",
@@ -682,7 +684,14 @@
     "BTN_ASSIGN_ROLE": "Assign Role",
     "BTN_VIEW_USER": "View",
     "BTN_DELETE_USER": "Delete",
-    "SEARCH_PLACEHOLDER": "Search users..."
+    "SEARCH_PLACEHOLDER": "Search users...",
+    "NOT_SIGNED_IN": "NOT SIGNED IN",
+    "BTN_RESEND_CODE": "Resend code",
+    "TOOLTIP_RESEND_CODE": "Send a new one-time sign-in code by SMS",
+    "CODE_SENT": "A new code has been sent by SMS.",
+    "CODE_ALREADY_ACTIVATED": "This person has already set their own password.",
+    "CODE_NO_PHONE": "This account has no phone number, so no code can be sent.",
+    "CODE_FAILED": "Could not send the code. Please try again."
   },
   "USER_PROFILE_DIALOG": {
     "PERSONAL_INFO": "Personal Information",
@@ -761,7 +770,7 @@
     "TITLE": "Change Password",
     "SUBTITLE": "Choose a strong password you haven't used before.",
     "FORCED_TITLE": "Set your password",
-    "FORCED_SUBTITLE": "This is your first sign-in. The password you were sent by SMS works once - choose your own to carry on.",
+    "FORCED_SUBTITLE": "Your code was accepted. It only works once - set a password of your own to carry on.",
     "OLD_PASSWORD": "Current Password",
     "NEW_PASSWORD": "New Password",
     "CONFIRM_PASSWORD": "Confirm New Password",

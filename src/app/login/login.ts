@@ -156,6 +156,16 @@ onSubmit() {
           this.subscriptionStatus = body.subscriptionStatus ?? null;
           this.paymentFailure = body.paymentFailure ?? null;
           this.paymentSent = false;
+        } else if (body && body.code === 'ACTIVATION_CODE_EXPIRED') {
+          // The code was right, or would have been - it is simply past use.
+          // Saying "wrong password" here sends them hunting for a typo in
+          // something that was never going to work again.
+          this.loginError = this.translate.instant('LOGIN.CODE_EXPIRED');
+          this.subscriptionExpired = false;
+        } else if (body && body.code === 'NO_ROLE_ASSIGNED') {
+          // Credentials are fine; nobody has said what they may do yet.
+          this.loginError = this.translate.instant('LOGIN.NO_ROLE');
+          this.subscriptionExpired = false;
         } else {
           this.loginError = typeof body === 'string' ? body : (body?.message ?? '');
           this.subscriptionExpired = false;

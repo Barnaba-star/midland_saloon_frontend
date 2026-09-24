@@ -443,6 +443,23 @@
 }
 
 
+/* Registered, but the one-time code has not been used yet. Amber rather
+   than red: it is a step still to happen, not something that went wrong. */
+
+.pending-activation {
+  padding: 4px 7px;
+
+  border-radius: 20px;
+
+  background: #fffaeb;
+
+  color: #b54708;
+
+  font-size: 8px;
+  font-weight: 700;
+}
+
+
 /* =========================
    CREATED
 ========================= */
@@ -510,6 +527,27 @@
 
 .role-button {
   color: #667085;
+}
+
+
+/* RESEND CODE */
+
+.code-button {
+  color: #667085;
+}
+
+.code-button:hover:not(:disabled) {
+  background: #fffaeb;
+
+  border-color: #fedf89;
+
+  color: #b54708;
+}
+
+.code-button:disabled {
+  opacity: 0.5;
+
+  cursor: default;
 }
 
 .role-button:hover {

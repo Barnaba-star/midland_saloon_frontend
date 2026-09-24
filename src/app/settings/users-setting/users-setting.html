@@ -329,6 +329,14 @@
                 ROOT
               </span>
 
+
+              <span
+                *ngIf="user?.mustChangePassword"
+                class="pending-activation"
+              >
+                {{ 'USERS_SETTING_PAGE.NOT_SIGNED_IN' | translate }}
+              </span>
+
             </div>
 
           </td>
@@ -358,6 +366,20 @@
               >
                 <mat-icon>badge</mat-icon>
                 <span>{{ 'USERS_SETTING_PAGE.BTN_ASSIGN_ROLE' | translate }}</span>
+              </button>
+
+
+              <!-- RESEND ACTIVATION CODE -->
+              <button
+                *ngIf="user?.mustChangePassword"
+                type="button"
+                class="action-button code-button"
+                [disabled]="resendingFor === user?.uid"
+                [matTooltip]="'USERS_SETTING_PAGE.TOOLTIP_RESEND_CODE' | translate"
+                (click)="resendCode(user)"
+              >
+                <mat-icon>sms</mat-icon>
+                <span>{{ 'USERS_SETTING_PAGE.BTN_RESEND_CODE' | translate }}</span>
               </button>
 
 

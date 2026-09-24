@@ -159,6 +159,54 @@ addUser(): void {
   });
 }
 
+/**
+ * An account that has not signed in yet is still holding the one-time code
+ * we texted it. This puts a new one on its way - for the message that never
+ * arrived, the code that went stale, or the one burned on wrong guesses.
+ */
+resendingFor: string | null = null;
+
+resendCode(user: any): void {
+
+  if (!user?.uid || this.resendingFor) {
+    return;
+  }
+
+  this.resendingFor = user.uid;
+
+  this.userService.resendActivationCode(user.uid).subscribe({
+
+    next: (res) => {
+
+      this.resendingFor = null;
+
+      // The backend answers in codes; the wording is ours, and translated.
+      const outcome = res?.data;
+
+      if (outcome === 'SENT') {
+        this.alert.show('success', this.translate.instant('USERS_SETTING_PAGE.CODE_SENT'));
+        // The clock restarted, so the row's own reading of it has to move
+        // with it rather than wait for a refresh.
+        user.activationExpiresAt = new Date().toISOString();
+      } else if (outcome === 'ALREADY_ACTIVATED' || res?.message === 'ALREADY_ACTIVATED') {
+        this.alert.show('warning', this.translate.instant('USERS_SETTING_PAGE.CODE_ALREADY_ACTIVATED'));
+      } else if (outcome === 'NO_PHONE' || res?.message === 'NO_PHONE') {
+        this.alert.show('warning', this.translate.instant('USERS_SETTING_PAGE.CODE_NO_PHONE'));
+      } else {
+        this.alert.show('error', this.translate.instant('USERS_SETTING_PAGE.CODE_FAILED'));
+      }
+
+      this.cdr.markForCheck();
+    },
+
+    error: () => {
+      this.resendingFor = null;
+      this.alert.show('error', this.translate.instant('USERS_SETTING_PAGE.CODE_FAILED'));
+      this.cdr.markForCheck();
+    },
+  });
+}
+
   getTitled(title: TitleAction[]): TitleAction[] {
     return this.visibility.filteredTitleActions(title);
   }
