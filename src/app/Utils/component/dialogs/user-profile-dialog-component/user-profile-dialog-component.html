@@ -173,6 +173,14 @@
         <strong>{{ user.address || '-' }}</strong>
       </div>
 
+      <!-- Read-only here on purpose: it is theirs to set, from their own
+           profile. Shown so whoever prepares the payroll can see who has
+           not filled it in yet. -->
+      <div class="info-item">
+        <span>{{ 'PROFILE_DIALOG.ACCOUNT_NUMBER' | translate }}</span>
+        <strong>{{ user.accountNumber || '-' }}</strong>
+      </div>
+
     </div>
 
   </div>

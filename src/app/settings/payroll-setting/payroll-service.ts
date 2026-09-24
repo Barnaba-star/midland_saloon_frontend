@@ -48,6 +48,8 @@ export interface Payroll {
   settled: number;
   /** A bank needs a number; this says how many are missing one. */
   missingPhone: number;
+  /** And how many still owed money have no account number to send it to. */
+  missingAccount: number;
   lines: PayrollLine[];
 }
 

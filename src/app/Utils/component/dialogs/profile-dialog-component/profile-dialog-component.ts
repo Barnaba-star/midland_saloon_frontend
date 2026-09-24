@@ -1,10 +1,12 @@
 import { Component, Inject, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../../../settings/users-setting/user-service';
 import { AlertService } from '../../../services/alert';
 import { environment } from '../../../enviroments/environment';
+import { Authentication } from '../../../services/authentication';
 
 export interface ProfileDialogData {
   fullName: string;
@@ -16,7 +18,7 @@ export interface ProfileDialogData {
 
 @Component({
   selector: 'app-profile-dialog-component',
-  imports: [MatIconModule, TranslatePipe],
+  imports: [MatIconModule, TranslatePipe, FormsModule],
   templateUrl: './profile-dialog-component.html',
   styleUrl: './profile-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -28,6 +30,15 @@ export class ProfileDialogComponent {
   uploading = false;
   errorMessageKey: string | null = null;
 
+  /**
+   * Where the monthly payroll sends this person's share. Theirs to set:
+   * an account number entered on somebody's behalf is a dispute waiting to
+   * happen, and they are the only one who can be sure of it.
+   */
+  accountNumber = '';
+  private savedAccountNumber = '';
+  savingAccount = false;
+
   private static readonly ALLOWED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
   private static readonly MAX_SIZE_BYTES = 10 * 1024 * 1024;
 
@@ -38,7 +49,58 @@ export class ProfileDialogComponent {
     private alertService: AlertService,
     private translate: TranslateService,
     private cdr: ChangeDetectorRef,
-  ) { }
+    private auth: Authentication,
+  ) {
+    this.loadAccountNumber();
+  }
+
+  /** Read fresh rather than passed in: the sidenav does not carry it. */
+  private loadAccountNumber(): void {
+    this.userService.findMyAccountNumber().subscribe({
+      next: (res) => {
+        this.accountNumber = res?.data || '';
+        this.savedAccountNumber = this.accountNumber;
+        this.cdr.markForCheck();
+      },
+      // Leaving it blank is honest - better than showing nothing and
+      // silently overwriting whatever is stored on the next save.
+      error: () => { },
+    });
+  }
+
+  get accountChanged(): boolean {
+    return this.accountNumber.trim() !== this.savedAccountNumber.trim();
+  }
+
+  saveAccountNumber(): void {
+
+    const uid = this.auth.getUserUID();
+    if (!uid || this.savingAccount) {
+      return;
+    }
+
+    this.savingAccount = true;
+
+    this.userService.saveAccountNumber(uid, this.accountNumber.trim() || null).subscribe({
+
+      next: (res) => {
+        this.savingAccount = false;
+        if (res?.data === 'SAVED') {
+          this.savedAccountNumber = this.accountNumber.trim();
+          this.alertService.show('success', this.translate.instant('PROFILE_DIALOG.ACCOUNT_SAVED'));
+        } else {
+          this.alertService.show('error', this.translate.instant('PROFILE_DIALOG.ACCOUNT_FAILED'));
+        }
+        this.cdr.markForCheck();
+      },
+
+      error: () => {
+        this.savingAccount = false;
+        this.alertService.show('error', this.translate.instant('PROFILE_DIALOG.ACCOUNT_FAILED'));
+        this.cdr.markForCheck();
+      },
+    });
+  }
 
   get avatarUrl(): string | null {
     return this.previewUrl || this.data.profilePic || null;

@@ -61,6 +61,41 @@
   </div>
 
 
+  <!-- Where the monthly payroll sends this person's share. Theirs to set. -->
+  <div class="account-section">
+
+    <label class="account-label" for="accountNumber">
+      {{ 'PROFILE_DIALOG.ACCOUNT_NUMBER' | translate }}
+    </label>
+
+    <div class="account-row">
+      <input
+        id="accountNumber"
+        type="text"
+        class="account-input"
+        [(ngModel)]="accountNumber"
+        [placeholder]="'PROFILE_DIALOG.ACCOUNT_PLACEHOLDER' | translate"
+        maxlength="50"
+        autocomplete="off" />
+
+      <button
+        type="button"
+        class="account-save"
+        [disabled]="!accountChanged || savingAccount"
+        (click)="saveAccountNumber()">
+        @if (savingAccount) {
+          <mat-icon class="spin">autorenew</mat-icon>
+        } @else {
+          <mat-icon svgIcon="save"></mat-icon>
+        }
+      </button>
+    </div>
+
+    <span class="account-hint">{{ 'PROFILE_DIALOG.ACCOUNT_HINT' | translate }}</span>
+
+  </div>
+
+
   <div class="dialog-footer">
 
     <button type="button" class="cancel-btn" (click)="close()">

@@ -25,6 +25,19 @@ saveUser(userDTO:UserDTO):Observable<Response<any>>{
   return this.http.post<Response<any>>(`${this.userURL}/saveUser`, userDTO);
 }
 
+/** The caller's own account number - findUserByUID needs VIEW_USER. */
+findMyAccountNumber():Observable<Response<string>>{
+  return this.http.get<Response<string>>(`${this.userURL}/findMyAccountNumber`);
+}
+
+/**
+ * Where this person's payroll money is sent. Anyone may set their own; the
+ * backend refuses somebody else's without SAVE_USER.
+ */
+saveAccountNumber(userUID:string, accountNumber:string|null):Observable<Response<string>>{
+  return this.http.post<Response<string>>(`${this.userURL}/saveAccountNumber/${userUID}`, { accountNumber });
+}
+
 /** A fresh one-time code by SMS, for an account that has not signed in yet. */
 resendActivationCode(userUID:string):Observable<Response<string>>{
   return this.http.post<Response<string>>(`${this.userURL}/resendActivationCode/${userUID}`, {});

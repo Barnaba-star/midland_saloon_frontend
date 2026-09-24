@@ -60,6 +60,13 @@
 
         <!-- A bank needs a number to send to. Better said here than found
              out at the counter. -->
+        @if (payroll.missingAccount > 0) {
+          <div class="warn-banner">
+            <mat-icon svgIcon="warning"></mat-icon>
+            <span>{{ 'PAYROLL_PAGE.MISSING_ACCOUNT' | translate: { count: payroll.missingAccount } }}</span>
+          </div>
+        }
+
         @if (payroll.missingPhone > 0) {
           <div class="warn-banner">
             <mat-icon svgIcon="warning"></mat-icon>

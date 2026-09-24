@@ -763,7 +763,12 @@
     "INVALID_TYPE": "Picha za JPEG, PNG au WEBP pekee ndizo zinaruhusiwa.",
     "TOO_LARGE": "Picha ni kubwa mno (upeo ni 10MB).",
     "UPDATED": "Picha ya wasifu imesasishwa kwa mafanikio.",
-    "UPLOAD_FAILED": "Imeshindwa kupakia picha. Tafadhali jaribu tena."
+    "UPLOAD_FAILED": "Imeshindwa kupakia picha. Tafadhali jaribu tena.",
+    "ACCOUNT_NUMBER": "Namba ya akaunti ya benki",
+    "ACCOUNT_PLACEHOLDER": "mfano 0150123456789",
+    "ACCOUNT_HINT": "Hapa ndipo fungu lako la mwezi linapotumwa. Wewe pekee ndiye unayeweza kuiweka.",
+    "ACCOUNT_SAVED": "Namba ya akaunti imehifadhiwa.",
+    "ACCOUNT_FAILED": "Imeshindwa kuhifadhi namba ya akaunti. Tafadhali jaribu tena."
   },
   "MAIN_LOGO": {
     "CHANGE": "Badilisha Logo ya Kampuni"
@@ -1253,6 +1258,7 @@
     "OPERATING": "Uendeshaji",
     "COL_EARNED": "Amepata",
     "COL_PAID": "Amelipwa",
-    "SETTLED": "amelipwa"
+    "SETTLED": "amelipwa",
+    "MISSING_ACCOUNT": "Kati ya wanaodai, {{count}} hawana namba ya akaunti. Lazima waiweke wenyewe kwenye profile zao kabla malipo hayajaagizwa."
   }
 }

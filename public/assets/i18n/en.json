@@ -763,7 +763,12 @@
     "INVALID_TYPE": "Only JPEG, PNG or WEBP images are allowed.",
     "TOO_LARGE": "Image is too large (max 10MB).",
     "UPDATED": "Profile picture updated successfully.",
-    "UPLOAD_FAILED": "Failed to upload the image. Please try again."
+    "UPLOAD_FAILED": "Failed to upload the image. Please try again.",
+    "ACCOUNT_NUMBER": "Bank account number",
+    "ACCOUNT_PLACEHOLDER": "e.g. 0150123456789",
+    "ACCOUNT_HINT": "Where your share of the monthly payroll is sent. Only you can set this.",
+    "ACCOUNT_SAVED": "Account number saved.",
+    "ACCOUNT_FAILED": "Could not save the account number. Please try again."
   },
   "MAIN_LOGO": {
     "CHANGE": "Change Company Logo"
@@ -1253,6 +1258,7 @@
     "OPERATING": "Running costs",
     "COL_EARNED": "Earned",
     "COL_PAID": "Paid",
-    "SETTLED": "settled"
+    "SETTLED": "settled",
+    "MISSING_ACCOUNT": "{{count}} of the people owed money have no account number. They must add it from their own profile before a transfer can be instructed."
   }
 }
