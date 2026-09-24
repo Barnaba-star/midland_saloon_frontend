@@ -425,7 +425,9 @@
     "EXPIRED_TITLE": "This branch's subscription has expired.",
     "PAYMENT_SENT": "Payment request sent. Approve it on your phone, then sign in again.",
     "EXPIRED_HELP_FAILED": "Your last payment did not go through, so the subscription was not renewed. You can try again below.",
-    "EXPIRED_HELP_PENDING": "A payment is waiting for your approval on your phone. Approve it, then sign in - or start a new one below."
+    "EXPIRED_HELP_PENDING": "A payment is waiting for your approval on your phone. Approve it, then sign in - or start a new one below.",
+    "EXPIRED_HELP_NO_BALANCE": "The payment was declined - the mobile money account did not have enough balance. Top it up and try again below.",
+    "EXPIRED_HELP_TIMEOUT": "The payment was not approved in time on the phone, so it lapsed. You can start a new one below."
   },
   "LANDING": {
     "HERO_BADGE": "Business management, simplified",

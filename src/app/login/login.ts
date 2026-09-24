@@ -100,6 +100,7 @@ onSubmit() {
           // untouched, so without saying so the screen just repeats "expired"
           // and the customer is left thinking paying did nothing.
           this.subscriptionStatus = body.subscriptionStatus ?? null;
+          this.paymentFailure = body.paymentFailure ?? null;
           this.paymentSent = false;
         } else {
           this.loginError = typeof body === 'string' ? body : (body?.message ?? '');
@@ -125,10 +126,23 @@ onSubmit() {
   paymentSent = false;
   /** PENDING or FAILED from the last attempt, when there was one. */
   subscriptionStatus: string | null = null;
+  /** Snippe's own wording for the decline, used to pick a message - never shown as-is. */
+  paymentFailure: string | null = null;
 
   /** What to tell them beyond "expired", given how the last attempt went. */
   get expiredHelpKey(): string {
     if (this.subscriptionStatus === 'FAILED') {
+      // The reason is matched, not printed. Snippe's wording is written for
+      // a developer reading a log, in English, and the rest of this screen
+      // is neither - so a recognised decline gets our own sentence and
+      // anything unrecognised falls back to the general one.
+      const reason = (this.paymentFailure ?? '').toLowerCase();
+      if (/insufficient|balance|funds|salio/.test(reason)) {
+        return 'LOGIN.EXPIRED_HELP_NO_BALANCE';
+      }
+      if (/timeout|timed out|expired|no response|not approved/.test(reason)) {
+        return 'LOGIN.EXPIRED_HELP_TIMEOUT';
+      }
       return 'LOGIN.EXPIRED_HELP_FAILED';
     }
     if (this.subscriptionStatus === 'PENDING') {
