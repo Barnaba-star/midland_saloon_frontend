@@ -421,7 +421,8 @@
     "SIGNING_IN": "Inaingia…",
     "SIGN_IN": "Ingia",
     "EXPIRED_HELP": "Muda wa huduma umeisha. Unaweza kulipa sasa kwa simu kisha uingie moja kwa moja.",
-    "SUBSCRIBE_BTN": "Lipa sasa"
+    "SUBSCRIBE_BTN": "Lipa sasa",
+    "EXPIRED_TITLE": "Muda wa huduma wa tawi hili umeisha."
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",

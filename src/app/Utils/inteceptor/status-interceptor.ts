@@ -57,6 +57,13 @@ export const StatusInterceptor: HttpInterceptorFn = (
     return next(req);
   }
 
+  /*
+   * The login screen shows its own message inline, under the form. A dialog
+   * on top of it said the same thing twice - and for an expired subscription
+   * it covered the button offering the way out.
+   */
+  const ownsItsErrors = req.url.includes('/authentication/login');
+
 
   /*
    * ============================================================
@@ -320,6 +327,10 @@ export const StatusInterceptor: HttpInterceptorFn = (
          * 6. OPEN ERROR DIALOG
          * ======================================================
          */
+
+        if (ownsItsErrors) {
+          return;
+        }
 
         const dialogData: StatusDialogData = {
 

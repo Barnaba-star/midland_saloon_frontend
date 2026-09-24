@@ -16,7 +16,7 @@ import { AlertService } from '../Utils/services/alert';
 import { Authentication } from '../Utils/services/authentication';
 import { environment } from '../Utils/enviroments/environment';
 import { ChangeDetectorRef } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
   imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, ReactiveFormsModule, CommonModule, TranslatePipe],
@@ -33,7 +33,7 @@ private baseUrl: string = `${this.api}/authentication/login`;
   submitting = false;
 
   constructor(private iconRegistry: IconRegistryService, private route:Router, private cookie:CookieService,
-  private http:HttpClient, private alert: AlertService, private auth:Authentication,  private cdr: ChangeDetectorRef, private dialog: MatDialog) {
+  private http:HttpClient, private alert: AlertService, private auth:Authentication,  private cdr: ChangeDetectorRef, private dialog: MatDialog, private translate: TranslateService) {
     this.loginForm = new FormGroup({
       username: new FormControl('', [Validators.required, Validators.minLength(3)]),
       password: new FormControl('', [Validators.required, Validators.minLength(3)])
@@ -88,7 +88,10 @@ onSubmit() {
         // customer can fix from this screen.
         const body = err?.error;
         if (body && body.code === 'SUBSCRIPTION_EXPIRED') {
-          this.loginError = body.message;
+          // The backend sends the code and the figures; the wording is ours,
+          // so it is translated and reads the way the rest of this screen
+          // does rather than arriving in English from a service layer.
+          this.loginError = this.translate.instant('LOGIN.EXPIRED_TITLE');
           this.expiredBranchName = body.branchName ?? '';
           this.expiredMonthlyAmount = body.monthlyAmount ?? null;
           this.subscriptionExpired = true;
