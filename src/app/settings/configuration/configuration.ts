@@ -111,6 +111,8 @@ resetPlatformSetting(): void {
 private emptySetting(): PlatformSetting {
   return {
     commissionPercent: 0,
+    directorPercent: 0,
+    rootPercent: 0,
     trialDays: 0,
     gracePeriodDays: 0,
     minimumPaymentAmount: 0,

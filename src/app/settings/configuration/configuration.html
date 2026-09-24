@@ -39,6 +39,18 @@
         </div>
 
         <div class="field">
+          <label for="directorPercent">{{ 'CONFIGURATION_PAGE.DIRECTOR_PERCENT' | translate }}</label>
+          <input id="directorPercent" type="number" [(ngModel)]="setting.directorPercent" name="directorPercent">
+          <small>{{ 'CONFIGURATION_PAGE.DIRECTOR_PERCENT_HINT' | translate }}</small>
+        </div>
+
+        <div class="field">
+          <label for="rootPercent">{{ 'CONFIGURATION_PAGE.ROOT_PERCENT' | translate }}</label>
+          <input id="rootPercent" type="number" [(ngModel)]="setting.rootPercent" name="rootPercent">
+          <small>{{ 'CONFIGURATION_PAGE.ROOT_PERCENT_HINT' | translate }}</small>
+        </div>
+
+        <div class="field">
           <label for="trialDays">{{ 'CONFIGURATION_PAGE.TRIAL_DAYS' | translate }}</label>
           <input id="trialDays" type="number" [(ngModel)]="setting.trialDays" name="trialDays">
           <small>{{ 'CONFIGURATION_PAGE.TRIAL_DAYS_HINT' | translate }}</small>

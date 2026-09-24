@@ -514,6 +514,10 @@
     "SECTION_MAINTENANCE": "Maintenance",
     "COMMISSION_RATE": "Commission rate (%)",
     "COMMISSION_RATE_HINT": "Share of each subscription payment paid to the staff member who registered the branch. Changing this affects future payments only.",
+    "DIRECTOR_PERCENT": "Director share",
+    "DIRECTOR_PERCENT_HINT": "Share of each month's income due to each director. Multiplied by how many hold the role.",
+    "ROOT_PERCENT": "ROOT share",
+    "ROOT_PERCENT_HINT": "Share of each month's income due to ROOT.",
     "TRIAL_DAYS": "Free trial (days)",
     "TRIAL_DAYS_HINT": "How long a newly registered branch can use the system before it must pay.",
     "GRACE_PERIOD_DAYS": "Grace period (days)",
@@ -1048,6 +1052,18 @@
     "RECONCILE_BTN": "Check with Snippe",
     "EMPTY_TEXT": "No payments received yet.",
     "EMPTY_UNRESOLVED": "No unresolved payments.",
-    "THIS_MONTH": "This month"
+    "THIS_MONTH": "This month",
+    "SHARE_BTN": "Revenue share"
+  },
+  "REVENUE_SHARE_DIALOG": {
+    "TITLE": "Revenue share",
+    "MONTH_REVENUE": "Income this month",
+    "PAYMENTS": "payments",
+    "STAFF": "Staff",
+    "DIRECTORS": "Directors",
+    "ROOT": "ROOT",
+    "OPERATING": "Running costs",
+    "NO_REVENUE": "Nothing came in this month.",
+    "CLOSE": "Close"
   }
 }

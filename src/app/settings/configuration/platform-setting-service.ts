@@ -12,6 +12,8 @@ export interface PlatformSetting {
   uid?: string;
 
   commissionPercent: number;
+  directorPercent: number;
+  rootPercent: number;
   trialDays: number;
   gracePeriodDays: number;
   minimumPaymentAmount: number;

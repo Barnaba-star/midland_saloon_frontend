@@ -514,6 +514,10 @@
     "SECTION_MAINTENANCE": "Matunzo",
     "COMMISSION_RATE": "Kiwango cha kamisheni (%)",
     "COMMISSION_RATE_HINT": "Sehemu ya kila malipo ya usajili inayolipwa kwa mfanyakazi aliyesajili tawi. Mabadiliko haya yanahusu malipo yajayo pekee.",
+    "DIRECTOR_PERCENT": "Fungu la mkurugenzi",
+    "DIRECTOR_PERCENT_HINT": "Fungu la kila mkurugenzi kutoka mapato ya mwezi. Linazidishwa kwa idadi yao.",
+    "ROOT_PERCENT": "Fungu la ROOT",
+    "ROOT_PERCENT_HINT": "Fungu la ROOT kutoka mapato ya mwezi.",
     "TRIAL_DAYS": "Majaribio ya bure (siku)",
     "TRIAL_DAYS_HINT": "Muda ambao tawi jipya linaweza kutumia mfumo kabla halijaanza kulipa.",
     "GRACE_PERIOD_DAYS": "Siku za neema",
@@ -1048,6 +1052,18 @@
     "RECONCILE_BTN": "Hakiki na Snippe",
     "EMPTY_TEXT": "Hakuna malipo yaliyoingia bado.",
     "EMPTY_UNRESOLVED": "Hakuna malipo yasiyotatuliwa.",
-    "THIS_MONTH": "Mwezi huu"
+    "THIS_MONTH": "Mwezi huu",
+    "SHARE_BTN": "Mgawanyo wa mapato"
+  },
+  "REVENUE_SHARE_DIALOG": {
+    "TITLE": "Mgawanyo wa mapato",
+    "MONTH_REVENUE": "Mapato ya mwezi",
+    "PAYMENTS": "malipo",
+    "STAFF": "Wafanyakazi",
+    "DIRECTORS": "Wakurugenzi",
+    "ROOT": "ROOT",
+    "OPERATING": "Matumizi",
+    "NO_REVENUE": "Hakuna mapato mwezi huu.",
+    "CLOSE": "Funga"
   }
 }

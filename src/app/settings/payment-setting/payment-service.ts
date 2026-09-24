@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../Utils/enviroments/environment';
@@ -33,6 +33,22 @@ export interface UnresolvedBranch {
   closeSubscription: string;
 }
 
+/** How one month's income is split between staff, directors, ROOT and running costs. */
+export interface RevenueShareDTO {
+  year: number;
+  month: number;
+  revenue: number;
+  payments: number;
+  staffPercent: number;
+  staffAmount: number;
+  directorPercent: number;
+  directorCount: number;
+  directorAmount: number;
+  rootPercent: number;
+  rootAmount: number;
+  operatingAmount: number;
+}
+
 @Injectable({ providedIn: 'root' })
 export class PaymentService {
 
@@ -64,6 +80,21 @@ export class PaymentService {
   findPaymentTotals(): Observable<Response<{ payments: number; totalAmount: number; totalCommission: number; thisMonth: number }>> {
     return this.http.get<Response<{ payments: number; totalAmount: number; totalCommission: number; thisMonth: number }>>(
       `${this.paymentUrl}/findPaymentTotals`
+    );
+  }
+
+  /** Both parts are optional; leaving them out asks the backend for the current month. */
+  findRevenueShare(year?: number, month?: number): Observable<Response<RevenueShareDTO>> {
+    let params = new HttpParams();
+    if (year != null) {
+      params = params.set('year', year);
+    }
+    if (month != null) {
+      params = params.set('month', month);
+    }
+    return this.http.get<Response<RevenueShareDTO>>(
+      `${this.paymentUrl}/findRevenueShare`,
+      { params }
     );
   }
 

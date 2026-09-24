@@ -1,11 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { MatDialog } from '@angular/material/dialog';
 import { TranslatePipe } from '@ngx-translate/core';
 import { Title2 } from '../../Utils/component/title2/title2';
 import { TitleAction } from '../../Utils/component/title/title.component';
 import { Authentication } from '../../Utils/services/authentication';
 import { AlertService } from '../../Utils/services/alert';
 import { PaymentService, SubscriptionPayment, UnresolvedBranch } from './payment-service';
+import { RevenueShareDialogComponent } from '../../Utils/component/dialogs/revenue-share-dialog-component/revenue-share-dialog-component';
 
 @Component({
   selector: 'app-payment-setting',
@@ -20,6 +22,7 @@ export class PaymentSetting implements OnInit {
     private visibility: Authentication,
     private paymentService: PaymentService,
     private alertService: AlertService,
+    private dialog: MatDialog,
     private cdr: ChangeDetectorRef
   ) {}
 
@@ -145,6 +148,14 @@ export class PaymentSetting implements OnInit {
     }
     this.currentPage = page;
     this.loadPayments();
+  }
+
+  /** The dialog fetches the split itself, so nothing is passed to it. */
+  openRevenueShare() {
+    this.dialog.open(RevenueShareDialogComponent, {
+      width: '560px',
+      maxHeight: '85vh'
+    });
   }
 
   refresh() {

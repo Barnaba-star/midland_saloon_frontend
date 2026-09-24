@@ -1,0 +1,75 @@
+<div class="revenue-share-dialog">
+
+  <div class="dialog-header">
+
+    <div class="header-top">
+      <h2 class="dialog-title">{{ 'REVENUE_SHARE_DIALOG.TITLE' | translate }}</h2>
+
+      <button type="button" class="icon-btn" (click)="onClose()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+        <mat-icon svgIcon="close"></mat-icon>
+      </button>
+    </div>
+
+  </div>
+
+
+  <div class="dialog-body">
+
+    @if (isLoading) {
+      <p class="state-note">{{ 'COMMON.LOADING' | translate }}</p>
+    } @else if (share) {
+
+      <!-- What came in this month, before anything is taken out of it. -->
+      <div class="revenue-head">
+        <span class="revenue-label">{{ 'REVENUE_SHARE_DIALOG.MONTH_REVENUE' | translate }}</span>
+        <span class="revenue-value">{{ share.revenue | number }} <span class="revenue-unit">TZS</span></span>
+        <span class="revenue-meta">
+          {{ monthDate | date: 'MMMM yyyy' }} &middot;
+          {{ share.payments | number }} {{ 'REVENUE_SHARE_DIALOG.PAYMENTS' | translate }}
+        </span>
+      </div>
+
+      <div class="share-list">
+
+        @for (row of rows; track row.label) {
+          <div class="share-row" [class.share-row-remainder]="row.remainder">
+
+            <div class="share-top">
+              <span class="share-name">{{ row.label | translate }}</span>
+
+              @if (row.percentText) {
+                <span class="share-percent">{{ row.percentText }}</span>
+              }
+
+              <span class="share-amount">{{ row.amount | number }} TZS</span>
+            </div>
+
+            @if (hasRevenue) {
+              <div class="share-track">
+                <span class="share-bar" [style.width.%]="barWidth(row.amount)" [style.background]="row.color"></span>
+              </div>
+            }
+
+          </div>
+        }
+
+      </div>
+
+      @if (!hasRevenue) {
+        <p class="state-note">{{ 'REVENUE_SHARE_DIALOG.NO_REVENUE' | translate }}</p>
+      }
+
+    }
+
+  </div>
+
+
+  <div class="dialog-actions">
+
+    <button type="button" class="btn btn-primary" (click)="onClose()">
+      <span>{{ 'REVENUE_SHARE_DIALOG.CLOSE' | translate }}</span>
+    </button>
+
+  </div>
+
+</div>
