@@ -63,7 +63,7 @@
         @if (payroll.missingAccount > 0) {
           <div class="warn-banner">
             <mat-icon svgIcon="warning"></mat-icon>
-            <span>{{ 'PAYROLL_PAGE.MISSING_ACCOUNT' | translate: { count: payroll.missingAccount } }}</span>
+            <span>{{ 'PAYROLL_PAGE.MISSING_ACCOUNT' | translate: { names: incompleteNames } }}</span>
           </div>
         }
 
@@ -153,16 +153,13 @@
                 <thead>
                   <tr>
                     <th class="col-no">#</th>
-                    <th>{{ 'PAYROLL_PAGE.COL_NAME' | translate }}</th>
-                    <th>{{ 'PAYROLL_PAGE.COL_ROLE' | translate }}</th>
-                    <th>{{ 'PAYROLL_PAGE.COL_PHONE' | translate }}</th>
-                    @if (hasAccountNumbers) {
-                      <th>{{ 'PAYROLL_PAGE.COL_BANK' | translate }}</th>
-                      <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT_NAME' | translate }}</th>
-                      <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT' | translate }}</th>
-                    }
-                    <th class="col-amount">{{ 'PAYROLL_PAGE.COL_EARNED' | translate }}</th>
-                    <th class="col-amount">{{ 'PAYROLL_PAGE.COL_PAID' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_BANK' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT_NAME' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_ACCOUNT' | translate }}</th>
+                    <th>{{ 'PAYROLL_PAGE.COL_BRANCH' | translate }}</th>
+                    <!-- Working, not instruction: gone from the printed page. -->
+                    <th class="col-amount col-working">{{ 'PAYROLL_PAGE.COL_EARNED' | translate }}</th>
+                    <th class="col-amount col-working">{{ 'PAYROLL_PAGE.COL_PAID' | translate }}</th>
                     <th class="col-amount">{{ 'PAYROLL_PAGE.COL_AMOUNT' | translate }}</th>
                   </tr>
                 </thead>
@@ -171,20 +168,14 @@
                   @for (line of rows; track line.uid) {
                     <tr>
                       <td class="col-no">{{ line.no }}</td>
-                      <td class="col-name">{{ line.name }}</td>
-                      <td>{{ roleLabel(line.role) }}</td>
-                      <td class="col-phone" [class.missing]="!line.phone">
-                        {{ line.phone || ('PAYROLL_PAGE.NO_PHONE' | translate) }}
+                      <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
+                      <td [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
+                      <td class="col-mono" [class.missing]="!line.accountNumber">
+                        {{ line.accountNumber || '—' }}
                       </td>
-                      @if (hasAccountNumbers) {
-                        <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
-                        <td [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
-                        <td class="col-phone" [class.missing]="!line.accountNumber">
-                          {{ line.accountNumber || '—' }}
-                        </td>
-                      }
-                      <td class="col-amount">{{ line.earned | number }}</td>
-                      <td class="col-amount muted">{{ line.paid | number }}</td>
+                      <td>{{ line.branchName || '—' }}</td>
+                      <td class="col-amount col-working muted">{{ line.earned | number }}</td>
+                      <td class="col-amount col-working muted">{{ line.paid | number }}</td>
                       <td class="col-amount" [class.settled]="line.toPay <= 0">
                         @if (line.toPay > 0) {
                           {{ line.toPay | number }}
@@ -198,15 +189,24 @@
 
                 <tfoot>
                   <tr class="total-row">
-                    <td [attr.colspan]="hasAccountNumbers ? 8 : 5">
-                      {{ 'PAYROLL_PAGE.TOTAL' | translate }}
-                    </td>
-                    <td class="col-amount muted">{{ payroll.totalEarned | number }}</td>
-                    <td class="col-amount">{{ payroll.totalToPay | number }} TZS</td>
+                    <!-- Five identity columns, whether or not the two
+                         working ones are printed - so the span holds in
+                         both, since their totals disappear with them. -->
+                    <td colspan="5">{{ 'PAYROLL_PAGE.TOTAL' | translate }}</td>
+                    <td class="col-amount col-working muted">{{ payroll.totalEarned | number }}</td>
+                    <td class="col-amount col-working muted">{{ payroll.totalPaid | number }}</td>
+                    <td class="col-amount">{{ payroll.totalToPay | number }}</td>
                   </tr>
                 </tfoot>
 
               </table>
+
+
+              <!-- The one figure the bank acts on, said on its own. -->
+              <div class="grand-total">
+                <span class="grand-total-label">{{ 'PAYROLL_PAGE.TOTAL_TO_PAY' | translate }}</span>
+                <span class="grand-total-value">{{ payroll.totalToPay | number }} <small>TZS</small></span>
+              </div>
 
 
               <!-- A sheet that authorises money needs somewhere to say who

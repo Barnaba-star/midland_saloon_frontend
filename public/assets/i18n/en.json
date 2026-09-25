@@ -1250,7 +1250,7 @@
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
-    "TOTAL": "Total to pay",
+    "TOTAL": "Totals",
     "NO_PHONE": "no number",
     "MISSING_PHONE": "{{count}} of these have no phone number on file. A bank will need one before it can send anything.",
     "NOBODY_OWED": "Nobody is owed anything for this month. Either no branch paid, or everyone has already been settled.",
@@ -1263,8 +1263,10 @@
     "COL_EARNED": "Earned",
     "COL_PAID": "Paid",
     "SETTLED": "settled",
-    "MISSING_ACCOUNT": "{{count}} of the people owed money have incomplete bank details. They must add the bank and account number from their own profile before a transfer can be instructed.",
+    "MISSING_ACCOUNT": "Incomplete bank details: {{names}}. They must add the bank, account name and account number from their own profile before a transfer can be instructed.",
     "COL_BANK": "Bank",
-    "COL_ACCOUNT_NAME": "Account name"
+    "COL_ACCOUNT_NAME": "Account name",
+    "COL_BRANCH": "Branch",
+    "TOTAL_TO_PAY": "Total amount to pay"
   }
 }

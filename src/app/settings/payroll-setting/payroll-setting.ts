@@ -140,10 +140,19 @@ export class PayrollSetting implements OnInit {
     return lines.map((line, index) => ({ ...line, no: index + 1 }));
   }
 
-  /** Shown only once there is something to show them for. */
-  get hasAccountNumbers(): boolean {
+  /**
+   * Who is holding the sheet up. Named rather than counted: the warning
+   * exists so somebody can be chased, and a number cannot be chased. The
+   * line still carries the person's name even though the sheet no longer
+   * shows a column for it - a bank reads the account name, but whoever
+   * prepares this needs to know whose row is blank.
+   */
+  get incompleteNames(): string {
     return (this.payroll?.lines ?? [])
-      .some(line => !!line.accountNumber || !!line.bankName || !!line.accountName);
+      .filter(line => line.toPay > 0)
+      .filter(line => !line.accountNumber || !line.bankName || !line.accountName)
+      .map(line => line.name)
+      .join(', ');
   }
 
   /**
@@ -153,10 +162,6 @@ export class PayrollSetting implements OnInit {
    */
   sharedPercent(percent: number, holders: number): string {
     return holders > 1 ? `${percent}% \u00f7 ${holders}` : `${percent}%`;
-  }
-
-  roleLabel(role: string): string {
-    return this.translate.instant(`PAYROLL_PAGE.ROLE_${role}`);
   }
 
   get periodLabel(): string {

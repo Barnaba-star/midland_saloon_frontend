@@ -351,19 +351,14 @@
   color: #94a3b8;
 }
 
-.col-name {
-  font-weight: 600;
-}
-
-/* Numbers are read digit by digit off this sheet, so they get a face that
-   keeps them in columns. */
-.col-phone {
+/* Account numbers are read digit by digit off this sheet, so they get a
+   face that keeps them in columns. */
+.col-mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 11px;
 }
 
-.col-phone.missing {
-  color: #b54708;
+.col-mono.missing {
   font-family: inherit;
   font-style: italic;
 }
@@ -390,8 +385,6 @@
   font-weight: 700;
 }
 
-/* The one figure the sheet exists to state, so it stays above the cells
-   rather than a step below them. */
 .total-row td {
   padding-top: 13px;
   border-top: 2px solid #0f172a;
@@ -440,10 +433,61 @@
    component's to reach.
 ========================= */
 
+/* =========================
+   THE FIGURE THE BANK ACTS ON
+========================= */
+
+.grand-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 18px;
+  padding: 14px 18px;
+  border: 2px solid #0f172a;
+  border-radius: 12px;
+}
+
+.grand-total-label {
+  color: #0f172a;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+.grand-total-value {
+  color: #0f172a;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+}
+
+.grand-total-value small {
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  color: #475569;
+}
+
+
 @media print {
 
   .payroll-container {
     padding: 0;
+  }
+
+  /* What was earned and what has already gone out are how the figure was
+     arrived at, not part of the instruction. The teller is handed the
+     amount to send and nothing to reconcile it against.
+
+     Hiding both the headings and their totals keeps the footer's colspan
+     of five correct without touching it: five identity columns plus one
+     amount is the whole row on paper. */
+  .col-working {
+    display: none;
   }
 
   .sheet {
@@ -539,8 +583,7 @@
   }
 }
 
-/* A detail the transfer needs and does not have. Marked wherever it is
-   missing, not only in the phone column. */
+/* A detail the transfer needs and does not have. */
 .sheet-table td.missing {
   color: #b54708;
   font-family: inherit;

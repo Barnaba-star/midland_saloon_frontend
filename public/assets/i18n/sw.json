@@ -1250,7 +1250,7 @@
     "ROLE_ROOT": "Root",
     "ROLE_DIRECTOR": "Director",
     "ROLE_STAFF": "Staff",
-    "TOTAL": "Jumla ya kulipa",
+    "TOTAL": "Jumla",
     "NO_PHONE": "hana namba",
     "MISSING_PHONE": "Kati ya hawa, {{count}} hawana namba ya simu. Benki itahitaji namba kabla ya kutuma chochote.",
     "NOBODY_OWED": "Hakuna anayedai chochote mwezi huu. Ama hakuna tawi lililolipa, ama wote wameshalipwa.",
@@ -1263,8 +1263,10 @@
     "COL_EARNED": "Amepata",
     "COL_PAID": "Amelipwa",
     "SETTLED": "amelipwa",
-    "MISSING_ACCOUNT": "Kati ya wanaodai, {{count}} hawana taarifa kamili za benki. Lazima waweke benki na namba ya akaunti wenyewe kwenye profile zao kabla malipo hayajaagizwa.",
+    "MISSING_ACCOUNT": "Taarifa za benki hazijakamilika: {{names}}. Lazima waweke benki, jina la akaunti na namba ya akaunti wenyewe kwenye profile zao kabla malipo hayajaagizwa.",
     "COL_BANK": "Benki",
-    "COL_ACCOUNT_NAME": "Jina la akaunti"
+    "COL_ACCOUNT_NAME": "Jina la akaunti",
+    "COL_BRANCH": "Tawi",
+    "TOTAL_TO_PAY": "Jumla ya kulipa"
   }
 }

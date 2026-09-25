@@ -11,6 +11,8 @@ export interface PayrollLine {
   role: string;
   name: string;
   phone: string | null;
+  /** Which branch they belong to. */
+  branchName: string | null;
   /** Set by its owner, from their own profile. */
   accountNumber: string | null;
   bankName: string | null;
@@ -45,6 +47,7 @@ export interface Payroll {
   /** The split the lines come from, so the totals can be checked. */
   share: RevenueShare | null;
   totalEarned: number;
+  totalPaid: number;
   totalToPay: number;
   recipients: number;
   /** How many are already settled in full. */
