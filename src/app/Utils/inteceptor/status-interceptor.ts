@@ -60,11 +60,18 @@ export const StatusInterceptor: HttpInterceptorFn = (
   }
 
   /*
+   * Screens that say things in their own words.
+   *
+   * This covers both directions. The backend answers these in codes - EMPTY,
+   * NOT_ALLOWED, SENT - which are for the screen to translate, not for a
+   * dialog to show raw. A 200 carrying one of those in `message` was popping
+   * it up as though it were news.
+   *
    * The login screen shows its own message inline, under the form. A dialog
    * on top of it said the same thing twice - and for an expired subscription
    * it covered the button offering the way out.
    */
-  const ownsItsErrors =
+  const ownsItsMessages =
     req.url.includes('/authentication/login') ||
     // The subscribe dialog shows the reason inside itself; a popup over it
     // said the same thing twice.
@@ -74,7 +81,11 @@ export const StatusInterceptor: HttpInterceptorFn = (
     req.url.includes('/payment/payShare') ||
     // The change-password dialog shows its own errors inline, and on a first
     // login it is the whole screen - a popup on top of it has nothing to add.
-    req.url.includes('/authentication/changePassword');
+    req.url.includes('/authentication/changePassword') ||
+    // Branch messages and guidance: every outcome is a code the screen
+    // has wording for, in both the success and the failure case.
+    req.url.includes('/branchMessage/') ||
+    req.url.includes('/guidance/');
 
 
   /*
@@ -110,6 +121,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
            */
 
           if (
+            !ownsItsMessages &&
             body &&
             typeof body === 'object' &&
             'message' in body &&
@@ -356,7 +368,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
          * ======================================================
          */
 
-        if (ownsItsErrors) {
+        if (ownsItsMessages) {
           return;
         }
 

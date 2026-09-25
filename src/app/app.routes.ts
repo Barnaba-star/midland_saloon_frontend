@@ -1,6 +1,7 @@
 import { Routes } from '@angular/router';
 import { posFullAccessGuard } from './pos/pos-role.guard';
 import { settingsGuard, settingsManageGuard, settingsRootOnlyGuard } from './settings/settings-role.guard';
+import { adminGuard } from './admin/admin-role.guard';
 
 export const routes: Routes = [
 
@@ -79,6 +80,23 @@ export const routes: Routes = [
       },
     ]
   },
+  {
+    // The third area. Settings is how the system is configured; this is the
+    // running of it - what branches are telling us, and what we publish back.
+    path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () => import('./admin/admin').then(m => m.Admin),
+    children: [
+      {
+        path: 'messages',
+        loadComponent: () => import('./admin/message-admin/message-admin').then(m => m.MessageAdmin)
+      },
+      {
+        path: 'guidance',
+        loadComponent: () => import('./admin/guidance-admin/guidance-admin').then(m => m.GuidanceAdmin)
+      },
+    ]
+  },
 {
   path: '',
   loadComponent: () => import('./landing/landing').then(m => m.Landing)
@@ -121,6 +139,16 @@ export const routes: Routes = [
        {
         path: 'saloonStore',
         loadComponent:()=>import('./pos/saloon-store/saloon-store').then(m=>m.SaloonStore)
+      },
+      {
+        // No guard: raising a question and reading the guidance are open to
+        // every POS role.
+        path: 'saloonSupport',
+        loadComponent:()=>import('./pos/saloon-support/saloon-support').then(m=>m.SaloonSupport)
+      },
+      {
+        path: 'saloonHelp',
+        loadComponent:()=>import('./pos/saloon-help/saloon-help').then(m=>m.SaloonHelp)
       },
 
     ]

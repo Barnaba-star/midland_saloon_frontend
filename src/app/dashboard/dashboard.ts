@@ -50,6 +50,16 @@ cards = [
     route: '/settings',
     roles: ['ROOT', 'STAFF', 'DIRECTOR', 'REG OFFICER']
   },
+  {
+    // What branches are asking, and what we publish back to them. STAFF is
+    // out: they register branches, they do not answer for the platform.
+    title: 'DASHBOARD.CARD_ADMIN_TITLE',
+    icon: 'announce',
+    img: 'assets/icons/announce.svg',
+    description: 'DASHBOARD.CARD_ADMIN_DESC',
+    route: '/admin',
+    roles: ['ROOT', 'DIRECTOR']
+  },
 
 ];
 

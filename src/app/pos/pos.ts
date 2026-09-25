@@ -105,6 +105,20 @@ menuItems: SidenavItem[] = [
     icon: 'setting',
     route: '/pos/saloonSetting',
     roles: this.fullAccessRoles
+  },
+  {
+    // Anyone at the till may need to ask something or report a problem, so
+    // this one is not narrowed to the full-access roles.
+    label: 'MENU.SUPPORT',
+    icon: 'announce',
+    route: '/pos/saloonSupport',
+    roles: this.allRoles
+  },
+  {
+    label: 'MENU.HELP',
+    icon: 'guidelines',
+    route: '/pos/saloonHelp',
+    roles: this.allRoles
   }
 ];
 
