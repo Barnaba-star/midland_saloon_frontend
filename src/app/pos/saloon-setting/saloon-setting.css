@@ -2117,3 +2117,73 @@ mat-paginator {
   }
 
 }
+
+/* =====================================================
+   USER ROW ACTIONS
+   Words beside the icons. Three unlabelled glyphs made the reader guess,
+   and on a row that can take somebody's access away guessing is the wrong
+   thing to ask for.
+===================================================== */
+
+.user-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.user-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+  background: #ffffff;
+  color: #475569;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+.user-action:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+/* Only the one that takes access away is coloured; giving it back is a
+   repair, not a warning. */
+.user-action.danger:hover:not(:disabled) {
+  border-color: #fecdca;
+  background: #fef3f2;
+  color: #b42318;
+}
+
+.user-action:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.user-action mat-icon {
+  width: 15px;
+  height: 15px;
+  font-size: 15px;
+}
+
+/* Said on the row, not only on the button that did it - otherwise the list
+   looks the same whether somebody can sign in or not. */
+.blocked-badge {
+  display: inline-block;
+  margin-right: 6px;
+  padding: 3px 8px;
+  border-radius: 999px;
+  background: #fef3f2;
+  color: #b42318;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+}

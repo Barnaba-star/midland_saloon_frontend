@@ -273,7 +273,23 @@
     "EMPTY_COMMISSION_TITLE": "Hakuna Kumbukumbu za Kamisheni",
     "EMPTY_COMMISSION_TEXT": "Tafadhali weka mipangilio ya kamisheni ya huduma ili ionekane hapa.",
     "ADD_USER_BTN": "Ongeza Mtumiaji",
-    "TOOLTIP_ADD_USER": "Ongeza mtumiaji kwenye tawi hili"
+    "TOOLTIP_ADD_USER": "Ongeza mtumiaji kwenye tawi hili",
+    "BTN_VIEW_USER": "Angalia",
+    "BTN_REVOKE_USER": "Ondoa ufikiaji",
+    "BTN_RESTORE_USER": "Rudisha ufikiaji",
+    "TOOLTIP_REVOKE_USER": "Mzuie huyu asiweze kuingia",
+    "TOOLTIP_RESTORE_USER": "Mruhusu huyu aingie tena",
+    "BLOCKED": "Hana ufikiaji",
+    "REVOKE_TITLE": "Ondoa ufikiaji?",
+    "REVOKE_MESSAGE": "{{name}} hataweza kuingia tena. Rekodi yake na kila alichofanya vinabaki - hakuna kinachofutwa - na unaweza kumrudishia wakati wowote.",
+    "RESTORE_TITLE": "Rudisha ufikiaji?",
+    "RESTORE_MESSAGE": "{{name}} ataweza kuingia tena kwa neno lake la siri la kawaida.",
+    "REVOKED": "Ufikiaji umeondolewa. Hawezi kuingia tena.",
+    "RESTORED": "Ufikiaji umerudishwa.",
+    "NOT_YOURSELF": "Huwezi kujiondolea ufikiaji wako mwenyewe.",
+    "NOT_ROOT": "Akaunti ya root haiwezi kuondolewa hapa.",
+    "USER_NOT_FOUND": "Mtu huyo hayupo tena kwenye orodha.",
+    "ACCESS_FAILED": "Haikuweza kubadilishwa. Tafadhali jaribu tena."
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Ongeza Bidhaa ya Store",
@@ -432,7 +448,8 @@
     "EXPIRED_HELP_NO_BALANCE": "Malipo yamekataliwa — akaunti ya simu haikuwa na salio la kutosha. Weka salio kisha ujaribu tena hapa chini.",
     "EXPIRED_HELP_TIMEOUT": "Malipo hayakuthibitishwa kwa wakati kwenye simu, kwa hiyo yameisha muda. Unaweza kuanzisha mapya hapa chini.",
     "CODE_EXPIRED": "Namba hiyo haitumiki tena. Muombe aliyekusajili akutumie nyingine.",
-    "NO_ROLE": "Akaunti yako bado haina role, kwa hiyo hakuna cha kufungua. Muombe msimamizi akupe."
+    "NO_ROLE": "Akaunti yako bado haina role, kwa hiyo hakuna cha kufungua. Muombe msimamizi akupe.",
+    "ACCOUNT_BLOCKED": "Akaunti hii haina ufikiaji tena. Ongea na anayesimamia tawi."
   },
   "LANDING": {
     "HERO_BADGE": "Usimamizi wa biashara, kwa urahisi",

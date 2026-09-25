@@ -162,6 +162,11 @@ onSubmit() {
           // something that was never going to work again.
           this.loginError = this.translate.instant('LOGIN.CODE_EXPIRED');
           this.subscriptionExpired = false;
+        } else if (body && body.code === 'ACCOUNT_BLOCKED') {
+          // Somebody decided this, so it should read as a decision rather
+          // than as a fault the person might try to work around.
+          this.loginError = this.translate.instant('LOGIN.ACCOUNT_BLOCKED');
+          this.subscriptionExpired = false;
         } else if (body && body.code === 'NO_ROLE_ASSIGNED') {
           // Credentials are fine; nobody has said what they may do yet.
           this.loginError = this.translate.instant('LOGIN.NO_ROLE');

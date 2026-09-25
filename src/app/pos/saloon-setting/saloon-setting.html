@@ -87,6 +87,9 @@
 
                   <!-- Role -->
                   <td>
+                    @if (user.isBlocked) {
+                      <span class="blocked-badge">{{ 'SETTING_PAGE.BLOCKED' | translate }}</span>
+                    }
                     <span class="role-badge">
                       <mat-icon>admin_panel_settings</mat-icon>
 
@@ -108,17 +111,32 @@
                   <!-- Actions -->
                   <td class="actions-column">
                     <div class="user-actions">
-                      <button type="button" mat-icon-button [matTooltip]="'SETTING_PAGE.TOOLTIP_VIEW_USER' | translate" (click)="onViewUser(user)">
+
+                      <button
+                        type="button"
+                        class="user-action"
+                        [matTooltip]="'SETTING_PAGE.TOOLTIP_VIEW_USER' | translate"
+                        (click)="onViewUser(user)"
+                      >
                         <mat-icon>visibility</mat-icon>
+                        <span>{{ 'SETTING_PAGE.BTN_VIEW_USER' | translate }}</span>
                       </button>
 
-                      <button type="button" mat-icon-button [matTooltip]="'SETTING_PAGE.TOOLTIP_EDIT_USER' | translate">
-                        <mat-icon>edit</mat-icon>
+                      <!-- Revoked, not removed: their uid is what the
+                           commission report and every payment record point
+                           at, so the row stays and the login stops. -->
+                      <button
+                        type="button"
+                        class="user-action"
+                        [class.danger]="!user.isBlocked"
+                        [disabled]="blockingUid === user.uid"
+                        [matTooltip]="(user.isBlocked ? 'SETTING_PAGE.TOOLTIP_RESTORE_USER' : 'SETTING_PAGE.TOOLTIP_REVOKE_USER') | translate"
+                        (click)="onToggleAccess(user)"
+                      >
+                        <mat-icon>{{ user.isBlocked ? 'lock_open' : 'block' }}</mat-icon>
+                        <span>{{ (user.isBlocked ? 'SETTING_PAGE.BTN_RESTORE_USER' : 'SETTING_PAGE.BTN_REVOKE_USER') | translate }}</span>
                       </button>
 
-                      <button type="button" mat-icon-button class="delete-action-icon" [matTooltip]="'SETTING_PAGE.TOOLTIP_DELETE_USER' | translate">
-                        <mat-icon>delete_outline</mat-icon>
-                      </button>
                     </div>
                   </td>
                 </tr>

@@ -22,13 +22,14 @@ import { SelectStaffDialogComponent } from '../../Utils/component/dialogs/select
 import { UserService } from '../../settings/users-setting/user-service';
 import { AssignUserRoleDTO, UserDTO } from '../../settings/users-setting/user-model';
 import { CommonModule, DecimalPipe, UpperCasePipe } from '@angular/common';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { FormsModule } from '@angular/forms';
 import { MatMenuModule } from "@angular/material/menu";
 import { MatPaginator, PageEvent } from "@angular/material/paginator";
 import { MatButtonModule } from "@angular/material/button";
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
+import { ComfirmDialogComponent } from '../../Utils/component/comfirm-dialog/comfirm-dialog';
 
 export interface SaloonServiceEntity {
   uid?: string;
@@ -68,7 +69,8 @@ throw new Error('Method not implemented.');
   saloonServiceAddForm:Boolean=false;
   constructor(
     private visibility: Authentication, private service: ServiceSaloonMethod, private alertService: AlertService, private cdr: ChangeDetectorRef,
-    private dialog:MatDialog, private saloonService:ServiceSaloonMethod, private userService: UserService
+    private dialog:MatDialog, private saloonService:ServiceSaloonMethod, private userService: UserService,
+    private translate: TranslateService
   ) { }
   ngOnInit(): void {
     this.selectedSetting='SALON.SERVICE'
@@ -801,7 +803,9 @@ userDataSource: UserTableData[] = [];findUserPageByBranch() {
 
           roleName: user.roles?.[0]?.name || '--',
 
-          branchName: user.branch?.branchName || '--'
+          branchName: user.branch?.branchName || '--',
+
+          isBlocked: user.isBlocked === true
 
         }));
 
@@ -941,6 +945,82 @@ private getAssignableRoleNames(): string[] {
   }
 
   return [];
+}
+
+/** Which row is mid-request, so its button cannot be pressed twice. */
+blockingUid: string | null = null;
+
+/**
+ * Revokes a branch user's access, or gives it back.
+ *
+ * Deliberately not a delete. Their uid is what branches.created_by, the
+ * commission payouts and the subscription payments all point at - removing
+ * the row would orphan every one of those and quietly change what people
+ * are owed. This stops the login and leaves the history standing, which is
+ * what "they no longer work here" actually means.
+ */
+onToggleAccess(user: UserTableData): void {
+
+  if (this.blockingUid) {
+    return;
+  }
+
+  const revoking = !user.isBlocked;
+
+  this.dialog.open(ComfirmDialogComponent, {
+    width: '440px',
+    maxWidth: '95vw',
+    data: {
+      title: this.translate.instant(
+        revoking ? 'SETTING_PAGE.REVOKE_TITLE' : 'SETTING_PAGE.RESTORE_TITLE'),
+      message: this.translate.instant(
+        revoking ? 'SETTING_PAGE.REVOKE_MESSAGE' : 'SETTING_PAGE.RESTORE_MESSAGE',
+        { name: user.fullName }),
+      confirmLabel: this.translate.instant(
+        revoking ? 'SETTING_PAGE.BTN_REVOKE_USER' : 'SETTING_PAGE.BTN_RESTORE_USER'),
+    },
+  }).afterClosed().subscribe(confirmed => {
+
+    if (!confirmed) {
+      return;
+    }
+
+    this.blockingUid = user.uid;
+
+    this.saloonService.setUserBlocked(user.uid, revoking).subscribe({
+
+      next: (res) => {
+        this.blockingUid = null;
+        const outcome = res?.data;
+
+        if (outcome === 'BLOCKED' || outcome === 'RESTORED') {
+          // Changed in place: refetching the page would only make it blink.
+          user.isBlocked = revoking;
+          this.alertService.show('success', this.translate.instant(
+            revoking ? 'SETTING_PAGE.REVOKED' : 'SETTING_PAGE.RESTORED'));
+        } else {
+          this.alertService.show('warning', this.accessMessage(outcome));
+        }
+        this.cdr.markForCheck();
+      },
+
+      error: () => {
+        this.blockingUid = null;
+        this.alertService.show('error', this.translate.instant('SETTING_PAGE.ACCESS_FAILED'));
+        this.cdr.markForCheck();
+      },
+    });
+  });
+}
+
+private accessMessage(code: string | undefined): string {
+  const known: Record<string, string> = {
+    NOT_YOURSELF: 'SETTING_PAGE.NOT_YOURSELF',
+    NOT_ROOT: 'SETTING_PAGE.NOT_ROOT',
+    NOT_FOUND: 'SETTING_PAGE.USER_NOT_FOUND',
+    MISSING_DATA: 'SETTING_PAGE.ACCESS_FAILED',
+  };
+  return this.translate.instant(known[code ?? ''] ?? 'SETTING_PAGE.ACCESS_FAILED');
 }
 
 onViewUser(user: UserTableData): void {

@@ -273,7 +273,23 @@
     "EMPTY_COMMISSION_TITLE": "No Commission Records Found",
     "EMPTY_COMMISSION_TEXT": "Please configure a service commission to see it listed here.",
     "ADD_USER_BTN": "Add User",
-    "TOOLTIP_ADD_USER": "Add a user to this branch"
+    "TOOLTIP_ADD_USER": "Add a user to this branch",
+    "BTN_VIEW_USER": "View",
+    "BTN_REVOKE_USER": "Revoke access",
+    "BTN_RESTORE_USER": "Restore access",
+    "TOOLTIP_REVOKE_USER": "Stop this person signing in",
+    "TOOLTIP_RESTORE_USER": "Let this person sign in again",
+    "BLOCKED": "No access",
+    "REVOKE_TITLE": "Revoke access?",
+    "REVOKE_MESSAGE": "{{name}} will no longer be able to sign in. Their record and everything they did stays - nothing is deleted - and you can give access back at any time.",
+    "RESTORE_TITLE": "Restore access?",
+    "RESTORE_MESSAGE": "{{name}} will be able to sign in again with their usual password.",
+    "REVOKED": "Access revoked. They can no longer sign in.",
+    "RESTORED": "Access restored.",
+    "NOT_YOURSELF": "You cannot revoke your own access.",
+    "NOT_ROOT": "The root account cannot be revoked from here.",
+    "USER_NOT_FOUND": "That person is no longer on the list.",
+    "ACCESS_FAILED": "That could not be changed. Please try again."
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Add Store Item",
@@ -432,7 +448,8 @@
     "EXPIRED_HELP_NO_BALANCE": "The payment was declined - the mobile money account did not have enough balance. Top it up and try again below.",
     "EXPIRED_HELP_TIMEOUT": "The payment was not approved in time on the phone, so it lapsed. You can start a new one below.",
     "CODE_EXPIRED": "That code is no longer valid. Ask whoever registered you to send a new one.",
-    "NO_ROLE": "Your account has no role yet, so there is nothing for it to open. Ask an administrator to assign one."
+    "NO_ROLE": "Your account has no role yet, so there is nothing for it to open. Ask an administrator to assign one.",
+    "ACCOUNT_BLOCKED": "This account no longer has access. Speak to whoever manages the branch."
   },
   "LANDING": {
     "HERO_BADGE": "Business management, simplified",

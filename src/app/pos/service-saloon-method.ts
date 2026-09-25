@@ -215,6 +215,15 @@ findServiceAndStoreReportPage(params: PageableParam): Observable<ResponsePage<an
 /***
  * SALOON-USERS-METHODS
  */
+/**
+ * Takes a branch user's way into the system away, or gives it back.
+ * Blocked rather than deleted: their uid is what the commission report and
+ * every payment record point at.
+ */
+setUserBlocked(userUID: string, blocked: boolean): Observable<Response<string>> {
+  return this.http.post<Response<string>>(`${this.saloonURL}/setUserBlocked/${userUID}/${blocked}`, {});
+}
+
 findUserPageByBranch(params: PageableParam): Observable<ResponsePage<any>> {
     return this.http.post<ResponsePage<any>>(`${this.saloonURL}/findUserPageByBranch`, params);
 }

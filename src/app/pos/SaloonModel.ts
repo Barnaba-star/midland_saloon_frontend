@@ -164,6 +164,9 @@ export interface UserTableData {
   lastName?: string;
   roleName: string;
   branchName: string;
+  /** True when their access has been revoked - they stay listed, they just
+   *  cannot sign in. */
+  isBlocked: boolean;
 }
 
 export interface SpendDTO {
