@@ -163,21 +163,25 @@
   border-bottom: 2px solid #0f172a;
 }
 
-/* It names the page; it is not the page. Weight and spacing carry it now
-   rather than size, so the figures below stay the loudest thing here. */
-.sheet-title {
+/* Who is instructing the payment. The largest thing on the sheet, because
+   it is the first thing a teller checks. */
+.company-name {
   margin: 0;
   color: #0f172a;
-  font-size: 14px;
+  font-size: 17px;
   font-weight: 800;
-  letter-spacing: 0.8px;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
-.sheet-period {
+/* What the sheet is, and for when. It names the page; it is not the page,
+   so weight and spacing carry it rather than size. */
+.sheet-title {
   margin: 3px 0 0;
   color: #475569;
   font-size: 12.5px;
-  font-weight: 600;
+  font-weight: 700;
+  letter-spacing: 0.4px;
 }
 
 .sheet-meta {
@@ -417,13 +421,33 @@
 }
 
 .signature {
-  width: 240px;
-  max-width: 45%;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  width: 250px;
+  max-width: 46%;
 }
 
-/* Its label belongs under its own rule, not adrift across the page. */
+/* Their captions belong under their own rules, not adrift across the page. */
 .signature-right {
   text-align: right;
+}
+
+/* Which of the two is signing. Above the rules, so it reads as a heading
+   for them rather than as a caption on one. */
+.signature-role {
+  color: #0f172a;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.6px;
+  text-transform: uppercase;
+}
+
+/* A rule to write on, and a word saying what goes there. Room above the
+   rule because a signature is written across it, not on top of it. */
+.signature-field {
+  display: block;
+  padding-top: 16px;
 }
 
 .signature-line {
@@ -432,12 +456,14 @@
   background: #94a3b8;
 }
 
-.signature-label {
+.signature-caption {
   display: block;
-  margin-top: 6px;
-  color: #64748b;
-  font-size: 11px;
+  margin-top: 5px;
+  color: #94a3b8;
+  font-size: 10px;
   font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
 }
 
 
@@ -530,6 +556,12 @@
 
   .signature-line {
     background: #000000;
+  }
+
+  /* A sheet that has to be signed twice should not start those two blocks
+     on separate pages. */
+  .sheet-signatures {
+    page-break-inside: avoid;
   }
 }
 

@@ -40,6 +40,8 @@ export interface RevenueShare {
 }
 
 export interface Payroll {
+  /** Whose payroll this is - printed at the top of the sheet. */
+  companyName: string | null;
   year: number;
   month: number;
   generatedAt: string;

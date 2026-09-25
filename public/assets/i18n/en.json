@@ -1239,7 +1239,7 @@
     "MONTH": "Month",
     "YEAR": "Year",
     "PRINT": "Print",
-    "SHEET_TITLE": "PAYMENT SCHEDULE",
+    "SHEET_TITLE": "Payroll due · {{period}}",
     "GENERATED": "Generated",
     "RECIPIENTS": "People",
     "COL_NAME": "Full name",
@@ -1267,6 +1267,8 @@
     "COL_BANK": "Bank",
     "COL_ACCOUNT_NAME": "Account name",
     "COL_BRANCH": "Branch",
-    "TOTAL_TO_PAY": "Total amount to pay"
+    "TOTAL_TO_PAY": "Total amount to pay",
+    "NAME": "Name",
+    "SIGNATURE": "Signature"
   }
 }

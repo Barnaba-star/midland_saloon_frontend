@@ -1239,7 +1239,7 @@
     "MONTH": "Mwezi",
     "YEAR": "Mwaka",
     "PRINT": "Chapisha",
-    "SHEET_TITLE": "ORODHA YA MALIPO",
+    "SHEET_TITLE": "Malipo ya mwezi · {{period}}",
     "GENERATED": "Imetengenezwa",
     "RECIPIENTS": "Watu",
     "COL_NAME": "Jina kamili",
@@ -1267,6 +1267,8 @@
     "COL_BANK": "Benki",
     "COL_ACCOUNT_NAME": "Jina la akaunti",
     "COL_BRANCH": "Tawi",
-    "TOTAL_TO_PAY": "Jumla ya kulipa"
+    "TOTAL_TO_PAY": "Jumla ya kulipa",
+    "NAME": "Jina",
+    "SIGNATURE": "Sahihi"
   }
 }

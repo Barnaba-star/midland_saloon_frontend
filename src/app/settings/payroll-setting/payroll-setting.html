@@ -124,8 +124,11 @@
             <div class="sheet-header">
 
               <div>
-                <h1 class="sheet-title">{{ 'PAYROLL_PAGE.SHEET_TITLE' | translate }}</h1>
-                <p class="sheet-period">{{ periodLabel }}</p>
+                <!-- Who is instructing the payment, then what the sheet is. -->
+                <h1 class="company-name">{{ payroll.companyName || '' }}</h1>
+                <p class="sheet-title">
+                  {{ 'PAYROLL_PAGE.SHEET_TITLE' | translate: { period: periodLabel } }}
+                </p>
               </div>
 
               <div class="sheet-meta">
@@ -212,14 +215,35 @@
               <!-- A sheet that authorises money needs somewhere to say who
                    authorised it. -->
               <div class="sheet-signatures">
+
                 <div class="signature">
-                  <span class="signature-line"></span>
-                  <span class="signature-label">{{ 'PAYROLL_PAGE.PREPARED_BY' | translate }}</span>
+                  <span class="signature-role">{{ 'PAYROLL_PAGE.PREPARED_BY' | translate }}</span>
+
+                  <span class="signature-field">
+                    <span class="signature-line"></span>
+                    <span class="signature-caption">{{ 'PAYROLL_PAGE.NAME' | translate }}</span>
+                  </span>
+
+                  <span class="signature-field">
+                    <span class="signature-line"></span>
+                    <span class="signature-caption">{{ 'PAYROLL_PAGE.SIGNATURE' | translate }}</span>
+                  </span>
                 </div>
+
                 <div class="signature signature-right">
-                  <span class="signature-line"></span>
-                  <span class="signature-label">{{ 'PAYROLL_PAGE.APPROVED_BY' | translate }}</span>
+                  <span class="signature-role">{{ 'PAYROLL_PAGE.APPROVED_BY' | translate }}</span>
+
+                  <span class="signature-field">
+                    <span class="signature-line"></span>
+                    <span class="signature-caption">{{ 'PAYROLL_PAGE.NAME' | translate }}</span>
+                  </span>
+
+                  <span class="signature-field">
+                    <span class="signature-line"></span>
+                    <span class="signature-caption">{{ 'PAYROLL_PAGE.SIGNATURE' | translate }}</span>
+                  </span>
                 </div>
+
               </div>
 
             }
