@@ -115,11 +115,11 @@
                       <button
                         type="button"
                         class="user-action"
-                        [matTooltip]="'SETTING_PAGE.TOOLTIP_VIEW_USER' | translate"
-                        (click)="onViewUser(user)"
+                        [matTooltip]="'SETTING_PAGE.TOOLTIP_ASSIGN_ROLE' | translate"
+                        (click)="onAssignRole(user)"
                       >
-                        <mat-icon>visibility</mat-icon>
-                        <span>{{ 'SETTING_PAGE.BTN_VIEW_USER' | translate }}</span>
+                        <mat-icon>badge</mat-icon>
+                        <span>{{ 'SETTING_PAGE.BTN_ASSIGN_ROLE' | translate }}</span>
                       </button>
 
                       <!-- Revoked, not removed: their uid is what the

@@ -245,7 +245,6 @@
     "COL_FULLNAME": "Full Name",
     "COL_ROLE": "Role",
     "COL_BRANCH": "Branch",
-    "TOOLTIP_VIEW_USER": "View User",
     "TOOLTIP_EDIT_USER": "Edit User",
     "TOOLTIP_DELETE_USER": "Delete User",
     "EMPTY_USERS_TITLE": "User Settings Not Found",
@@ -274,7 +273,6 @@
     "EMPTY_COMMISSION_TEXT": "Please configure a service commission to see it listed here.",
     "ADD_USER_BTN": "Add User",
     "TOOLTIP_ADD_USER": "Add a user to this branch",
-    "BTN_VIEW_USER": "View",
     "BTN_REVOKE_USER": "Revoke access",
     "BTN_RESTORE_USER": "Restore access",
     "TOOLTIP_REVOKE_USER": "Stop this person signing in",
@@ -289,7 +287,9 @@
     "NOT_YOURSELF": "You cannot revoke your own access.",
     "NOT_ROOT": "The root account cannot be revoked from here.",
     "USER_NOT_FOUND": "That person is no longer on the list.",
-    "ACCESS_FAILED": "That could not be changed. Please try again."
+    "ACCESS_FAILED": "That could not be changed. Please try again.",
+    "BTN_ASSIGN_ROLE": "Assign role",
+    "TOOLTIP_ASSIGN_ROLE": "Choose which roles this person holds"
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Add Store Item",

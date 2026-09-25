@@ -245,7 +245,6 @@
     "COL_FULLNAME": "Jina Kamili",
     "COL_ROLE": "Jukumu",
     "COL_BRANCH": "Tawi",
-    "TOOLTIP_VIEW_USER": "Tazama Mtumiaji",
     "TOOLTIP_EDIT_USER": "Hariri Mtumiaji",
     "TOOLTIP_DELETE_USER": "Futa Mtumiaji",
     "EMPTY_USERS_TITLE": "Hakuna Mipangilio ya Mtumiaji",
@@ -274,7 +273,6 @@
     "EMPTY_COMMISSION_TEXT": "Tafadhali weka mipangilio ya kamisheni ya huduma ili ionekane hapa.",
     "ADD_USER_BTN": "Ongeza Mtumiaji",
     "TOOLTIP_ADD_USER": "Ongeza mtumiaji kwenye tawi hili",
-    "BTN_VIEW_USER": "Angalia",
     "BTN_REVOKE_USER": "Ondoa ufikiaji",
     "BTN_RESTORE_USER": "Rudisha ufikiaji",
     "TOOLTIP_REVOKE_USER": "Mzuie huyu asiweze kuingia",
@@ -289,7 +287,9 @@
     "NOT_YOURSELF": "Huwezi kujiondolea ufikiaji wako mwenyewe.",
     "NOT_ROOT": "Akaunti ya root haiwezi kuondolewa hapa.",
     "USER_NOT_FOUND": "Mtu huyo hayupo tena kwenye orodha.",
-    "ACCESS_FAILED": "Haikuweza kubadilishwa. Tafadhali jaribu tena."
+    "ACCESS_FAILED": "Haikuweza kubadilishwa. Tafadhali jaribu tena.",
+    "BTN_ASSIGN_ROLE": "Weka role",
+    "TOOLTIP_ASSIGN_ROLE": "Chagua role anazoshikilia huyu"
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Ongeza Bidhaa ya Store",

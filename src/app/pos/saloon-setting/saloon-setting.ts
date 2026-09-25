@@ -1023,7 +1023,12 @@ private accessMessage(code: string | undefined): string {
   return this.translate.instant(known[code ?? ''] ?? 'SETTING_PAGE.ACCESS_FAILED');
 }
 
-onViewUser(user: UserTableData): void {
+/**
+ * Opens the role dialog. Its old name promised a view, and the button said
+ * so - but nothing here views anything. It loads the roles this branch may
+ * grant and asks which of them this person holds.
+ */
+onAssignRole(user: UserTableData): void {
 
   this.userService.findUserByUID(user.uid).subscribe({
 
