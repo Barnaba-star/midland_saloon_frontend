@@ -405,15 +405,25 @@
    SIGNATURES
 ========================= */
 
+/* One at each edge of the sheet, the way the two people sign it: whoever
+   drew it up on the left, whoever released the money on the right. They
+   sat side by side on the left before, which read as one signature block
+   rather than two parties. */
 .sheet-signatures {
   display: flex;
+  justify-content: space-between;
   gap: 48px;
   margin-top: 46px;
 }
 
 .signature {
-  flex: 1;
-  max-width: 260px;
+  width: 240px;
+  max-width: 45%;
+}
+
+/* Its label belongs under its own rule, not adrift across the page. */
+.signature-right {
+  text-align: right;
 }
 
 .signature-line {
@@ -584,8 +594,16 @@
     white-space: nowrap;
   }
 
+  /* Still one at each edge on a phone - they just share what is there
+     rather than each insisting on 240px. */
   .sheet-signatures {
-    gap: 24px;
+    gap: 20px;
+  }
+
+  .signature {
+    width: auto;
+    flex: 1;
+    max-width: none;
   }
 }
 
