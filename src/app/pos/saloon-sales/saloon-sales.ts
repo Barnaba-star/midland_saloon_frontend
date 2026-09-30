@@ -8,6 +8,7 @@ import { SaleOpenedDTO, SalesOpened, SaloonSalesDTO } from '../SaloonModel';
 import { AlertService } from '../../Utils/services/alert';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
+import { ConfirmDeleteDialogComponent } from '../../Utils/component/dialogs/confirm-delete-dialog-component/confirm-delete-dialog-component';
 import { FormsModule } from '@angular/forms';
 import { CommonModule, DecimalPipe } from '@angular/common';
 import { MatDatepicker, MatDatepickerModule } from '@angular/material/datepicker';
@@ -16,7 +17,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SaleDetailsDialogComponent } from '../../Utils/component/sale-details-dialog-component/sale-details-dialog-component';
 import { ViewChild } from '@angular/core';
-import { TranslatePipe } from '@ngx-translate/core';
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
@@ -61,6 +62,7 @@ export class SaloonSales implements OnInit{
     private alertService: AlertService,
     private dialog: MatDialog,
     private cdr: ChangeDetectorRef,
+    private translate: TranslateService,
   ) {}
   ngOnInit(): void {
     this.selectedSales='SALES.MANAGE'
@@ -414,6 +416,43 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
       });
     });
   }
+  deletingBill: string | null = null;
+
+  /** A bill opened by mistake, still at zero - asked once, then gone. */
+  deleteEmptyBill(sale: SalesOpened) {
+    if (!sale?.uid || this.deletingBill) {
+      return;
+    }
+    this.dialog.open(ConfirmDeleteDialogComponent, {
+      width: '450px',
+      data: {
+        title: this.translate.instant('SALES_PAGE.DELETE_BILL_TITLE'),
+        message: this.translate.instant('SALES_PAGE.DELETE_BILL_CONFIRM', { code: sale.salesCode }),
+        item: { ...sale, branchName: sale.salesCode, branchCode: '' },
+      },
+    }).afterClosed().subscribe((ok) => {
+      if (!ok) {
+        return;
+      }
+      this.deletingBill = sale.uid!;
+      this.cdr.detectChanges();
+      this.saloonServce.deleteEmptyBill(sale.uid!).subscribe({
+        next: (res) => {
+          this.deletingBill = null;
+          if (res?.data) {
+            this.salesOpenedList = this.salesOpenedList.filter((b) => b.uid !== sale.uid);
+            this.alertService.show('success', this.translate.instant('SALES_PAGE.BILL_DELETED', { code: sale.salesCode }));
+          }
+          this.cdr.detectChanges();
+        },
+        error: () => {
+          this.deletingBill = null;
+          this.cdr.detectChanges();
+        },
+      });
+    });
+  }
+
   onSaleSelected(sale: SalesOpened) {
     console.log('Selected Sale:', sale);
     console.log('UID:', sale.uid);

@@ -6,8 +6,9 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { IconRegistryService } from '../Utils/services/icon-registry.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
+import { BranchChoice, BranchChoiceDialogComponent } from '../Utils/component/dialogs/branch-choice-dialog-component/branch-choice-dialog-component';
 import { SubscribeDialogComponent } from '../Utils/component/dialogs/subscribe-dialog-component/subscribe-dialog-component';
 import { ChangePasswordDialogComponent } from '../Utils/component/dialogs/change-password-dialog-component/change-password-dialog-component';
 import { CommonModule } from '@angular/common';
@@ -20,7 +21,7 @@ import { ChangeDetectorRef } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'app-login',
-  imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, ReactiveFormsModule, CommonModule, TranslatePipe],
+  imports: [MatFormFieldModule, MatInputModule, MatCardModule, MatButtonModule, MatIconModule, ReactiveFormsModule, CommonModule, TranslatePipe, RouterLink],
   templateUrl: './login.html',
   styleUrl: './login.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -47,7 +48,8 @@ private baseUrl: string = `${this.api}/authentication/login`;
     const idleTime = 1 * 60 * 1000;
 
     this.idleTimer = setTimeout(() => {
-      this.route.navigate(['/landing']);
+      // The landing page is the root route; there is no '/landing'.
+      this.route.navigate(['/']);
     }, idleTime);
   }
 loginError: string = '';
@@ -93,15 +95,16 @@ private forcePasswordChange(): void {
   });
 }
 
-onSubmit() {
+/** branchUID: the branch chosen by a user of several - sent on the second try, after CHOOSE_BRANCH. */
+onSubmit(branchUID?: string) {
   if (this.loginForm.valid) {
 
     this.loginError = '';
     this.submitting = true;
 
-    this.http.post<{ token: string }>(
+    this.http.post<{ token?: string; code?: string; branches?: BranchChoice[] }>(
       this.baseUrl,
-      this.loginForm.value,
+      branchUID ? { ...this.loginForm.value, branchUID } : this.loginForm.value,
       {
         withCredentials: true
       }
@@ -111,13 +114,31 @@ onSubmit() {
         this.paymentSent = false;
         this.submitting = false;
 
+        // Several branches: they choose where to work, then the login goes again for that branch.
+        if (res.code === 'CHOOSE_BRANCH') {
+          this.dialog.open(BranchChoiceDialogComponent, {
+            width: '460px',
+            maxWidth: '95vw',
+            autoFocus: false,
+            disableClose: true,
+            data: { branches: res.branches ?? [] },
+          }).afterClosed().subscribe((chosen?: string) => {
+            if (chosen) {
+              this.onSubmit(chosen);
+            }
+            this.cdr.detectChanges();
+          });
+          this.cdr.detectChanges();
+          return;
+        }
+
         // They are in, so the "nobody is using this screen" timer has done
         // its job. Left running it would walk them off the forced
         // password-change dialog a minute later.
         clearTimeout(this.idleTimer);
 
         // Save token
-        this.auth.setToken(res.token);
+        this.auth.setToken(res.token!);
 
         // A brand new account is still on the password that was texted to it.
         // There is nothing to navigate to - the backend answers every other
@@ -166,6 +187,9 @@ onSubmit() {
           // Somebody decided this, so it should read as a decision rather
           // than as a fault the person might try to work around.
           this.loginError = this.translate.instant('LOGIN.ACCOUNT_BLOCKED');
+          this.subscriptionExpired = false;
+        } else if (body && body.code === 'BRANCH_NOT_ALLOWED') {
+          this.loginError = this.translate.instant('LOGIN.BRANCH_NOT_ALLOWED');
           this.subscriptionExpired = false;
         } else if (body && body.code === 'NO_ROLE_ASSIGNED') {
           // Credentials are fine; nobody has said what they may do yet.

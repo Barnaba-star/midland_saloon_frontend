@@ -1,10 +1,55 @@
-<div class="login-container">
-  <div class="bg-blob blob-one"></div>
-  <div class="bg-blob blob-two"></div>
+<div class="login-page">
+  <!-- ================= LEFT: the saloon (photo behind) ================= -->
+  <aside class="login-panel">
+    <a routerLink="/" class="panel-brand">
+      <img src="assets/images/midland.png" alt="Midland Saloon" class="panel-logo">
+      <span class="panel-name">Midland <em>Saloon</em></span>
+    </a>
+
+    <div class="panel-copy">
+      <span class="panel-eyebrow">{{ 'LOGIN.PANEL_EYEBROW' | translate }}</span>
+      <h2 class="panel-title">
+        {{ 'LOGIN.PANEL_LINE1' | translate }}
+        <em>{{ 'LOGIN.PANEL_LINE2' | translate }}</em>
+      </h2>
+      <div class="panel-rule" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p class="panel-sub">{{ 'LOGIN.PANEL_SUB' | translate }}</p>
+    </div>
+
+    <ul class="panel-list" aria-hidden="true">
+      <li><mat-icon>content_cut</mat-icon>{{ 'LOGIN.PANEL_POINT1' | translate }}</li>
+      <li><mat-icon>groups</mat-icon>{{ 'LOGIN.PANEL_POINT2' | translate }}</li>
+      <li><mat-icon>inventory_2</mat-icon>{{ 'LOGIN.PANEL_POINT3' | translate }}</li>
+    </ul>
+
+    <!-- Corners of the saloon, edge to edge along the panel's foot -->
+    <div class="panel-photos" aria-hidden="true">
+      <figure>
+        <img src="assets/images/saloon/barber-fade.jpg" alt="" decoding="async">
+        <figcaption>{{ 'LANDING.G_BARBER' | translate }}</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/saloon/client-smile.jpg" alt="" decoding="async">
+        <figcaption>{{ 'LANDING.G_CLIENT' | translate }}</figcaption>
+      </figure>
+      <figure>
+        <img src="assets/images/saloon/nails.jpg" alt="" decoding="async">
+        <figcaption>{{ 'LANDING.G_NAILS' | translate }}</figcaption>
+      </figure>
+    </div>
+  </aside>
+
+  <!-- ================= RIGHT: the sign-in card ================= -->
+  <main class="login-side">
+    <a routerLink="/" class="back-link">
+      <mat-icon>arrow_back</mat-icon>
+      {{ 'LOGIN.BACK' | translate }}
+    </a>
 
   <mat-card class="login-card">
     <div class="brand">
       <img src="assets/images/midland.png" alt="Midland Solutions" class="brand-logo">
+      <span class="card-eyebrow">{{ 'LOGIN.SIGN_IN' | translate }}</span>
       <h1 class="brand-title">{{ 'LOGIN.WELCOME_BACK' | translate }}</h1>
       <p class="brand-subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>
     </div>
@@ -61,4 +106,5 @@
       </button>
     </form>
   </mat-card>
+  </main>
 </div>

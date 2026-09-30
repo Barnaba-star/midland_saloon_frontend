@@ -28,3 +28,21 @@ export const adminGuard: CanActivateFn = () => {
   const router = inject(Router);
   return hasAnyRole(auth, ADMIN_ROLES) ? true : router.createUrlTree(['/pos']);
 };
+
+/** ROOT only within Admin (Regions); anyone else goes back to Admin's landing. */
+export const ADMIN_ROOT_ONLY_ROLES = ['ROOT'];
+
+export const adminRootOnlyGuard: CanActivateFn = () => {
+  const auth = inject(Authentication);
+  const router = inject(Router);
+  return hasAnyRole(auth, ADMIN_ROOT_ONLY_ROLES) ? true : router.createUrlTree([adminLandingRoute]);
+};
+
+/** Payments and Payroll inside Admin: ROOT and DIRECTOR only. */
+export const ADMIN_MANAGE_ROLES = ['ROOT', 'DIRECTOR'];
+
+export const adminManageGuard: CanActivateFn = () => {
+  const auth = inject(Authentication);
+  const router = inject(Router);
+  return hasAnyRole(auth, ADMIN_MANAGE_ROLES) ? true : router.createUrlTree([adminLandingRoute]);
+};

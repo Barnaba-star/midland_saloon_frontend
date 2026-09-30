@@ -4082,3 +4082,39 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex-basis: 27px;
   }
 }
+
+/* Delete - only on a bill still at zero: a strong red button, centred between the code and the status. */
+.bill-delete-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  margin: 0 8px;
+  padding: 7px 14px;
+  border: none;
+  border-radius: 8px;
+  background: #d92d20;
+  color: #ffffff;
+  font: inherit;
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  cursor: pointer;
+  flex-shrink: 0;
+  box-shadow: 0 2px 6px rgba(217, 45, 32, 0.35);
+  transition: background 0.15s;
+}
+
+.bill-delete-btn:hover {
+  background: #b42318;
+}
+
+.bill-delete-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.bill-delete-btn mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}

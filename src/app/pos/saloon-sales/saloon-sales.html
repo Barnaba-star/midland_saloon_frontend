@@ -36,6 +36,14 @@
                     <strong>{{ sale.salesCode }}</strong>
                   </div>
 
+                  <!-- Only while the bill reads zero; once a service is on it there is nothing to delete. -->
+                  @if (!((sale.bill || 0) > 0) && sale.paymentStatus !== 'PAID') {
+                    <button type="button" class="bill-delete-btn" (click)="deleteEmptyBill(sale)" [disabled]="deletingBill === sale.uid">
+                      <mat-icon>delete</mat-icon>
+                      <span>{{ 'COMMON.DELETE' | translate }}</span>
+                    </button>
+                  }
+
                   <div
                     class="sale-status"
                     [class.status-paid]="sale.paymentStatus === 'PAID'"

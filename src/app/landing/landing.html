@@ -1,223 +1,175 @@
 <div class="page">
-  <section class="hero-section">
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
 
-    <nav class="navbar">
-      <div class="navbar-brand">
-        <img src="assets/images/midland.png" alt="Midland Solutions Logo" class="navbar-logo">
-        <span class="navbar-name">Midland Solutions</span>
+  <!-- ================= STAGE: the barbershop behind nav and hero ================= -->
+  <div class="stage">
+    <div class="stage-photo" aria-hidden="true"></div>
+
+    <nav class="nav">
+      <div class="brand">
+        <img src="assets/images/midland.png" alt="Midland Saloon" class="brand-logo">
+        <span class="brand-name">Midland <em>Saloon</em></span>
       </div>
-      <button mat-stroked-button class="navbar-cta" (click)="goToLogin()">
+      <button type="button" class="nav-cta" (click)="goToLogin()">
         {{ 'LOGIN.SIGN_IN' | translate }}
+        <mat-icon>login</mat-icon>
       </button>
     </nav>
 
-    <div class="hero">
+    <header class="hero">
       <div class="hero-copy">
-        <span class="hero-badge">
-          <span class="badge-dot"></span>
-          {{ 'LANDING.HERO_BADGE' | translate }}
-        </span>
+        <span class="eyebrow"><i></i>{{ 'LANDING.HERO_BADGE' | translate }}</span>
         <h1 class="hero-title">
-          {{ 'LANDING.HERO_TITLE_LINE1' | translate }}<br>
-          <span class="hero-title-gradient">{{ 'LANDING.HERO_TITLE_LINE2' | translate }}</span>
+          {{ 'LANDING.HERO_TITLE_LINE1' | translate }}
+          <em>{{ 'LANDING.HERO_TITLE_LINE2' | translate }}</em>
         </h1>
-        <p class="hero-subtitle">
-          {{ 'LANDING.HERO_SUBTITLE' | translate }}
-        </p>
+        <p class="hero-sub">{{ 'LANDING.HERO_SUBTITLE' | translate }}</p>
         <div class="hero-actions">
-          <button mat-flat-button class="hero-cta" (click)="goToLogin()">
-            <span>{{ 'LANDING.GET_STARTED' | translate }}</span>
+          <button type="button" class="btn-gold" (click)="goToLogin()">
+            {{ 'LANDING.GET_STARTED' | translate }}
             <mat-icon>arrow_forward</mat-icon>
           </button>
-          <a href="#features" class="hero-secondary">
+          <a href="#visit" class="btn-ghost">
             {{ 'LANDING.SEE_INCLUDED' | translate }}
-            <mat-icon>expand_more</mat-icon>
+            <mat-icon>south</mat-icon>
           </a>
         </div>
+        <ul class="hero-meta">
+          <li><mat-icon>content_cut</mat-icon>{{ 'LANDING.HERO_META1' | translate }}</li>
+          <li><mat-icon>groups</mat-icon>{{ 'LANDING.HERO_META2' | translate }}</li>
+          <li><mat-icon>store</mat-icon>{{ 'LANDING.MULTI_BRANCH' | translate }}</li>
+        </ul>
       </div>
+    </header>
+  </div>
 
-      <div class="hero-visual">
-        <div class="mock-window">
-          <div class="mock-titlebar">
-            <span class="mock-dot dot-red"></span>
-            <span class="mock-dot dot-yellow"></span>
-            <span class="mock-dot dot-green"></span>
-          </div>
-          <div class="mock-body">
-            <div class="mock-row">
-              <div class="mock-stat stat-blue">
-                <mat-icon>point_of_sale</mat-icon>
-                <div>
-                  <span class="mock-stat-label">{{ 'LANDING.MOCK_TODAYS_SALES' | translate }}</span>
-                  <span class="mock-stat-value">{{ 'LANDING.MOCK_LIVE' | translate }}</span>
-                </div>
-              </div>
-              <div class="mock-stat stat-gold">
-                <mat-icon>groups</mat-icon>
-                <div>
-                  <span class="mock-stat-label">{{ 'LANDING.MOCK_STAFF_ONLINE' | translate }}</span>
-                  <span class="mock-stat-value">{{ 'COMMON.ACTIVE' | translate }}</span>
-                </div>
-              </div>
-            </div>
-            <div class="mock-chart">
-              <span class="bar" style="--h: 40%; --c: var(--c-blue)"></span>
-              <span class="bar" style="--h: 65%; --c: var(--c-teal)"></span>
-              <span class="bar" style="--h: 50%; --c: var(--c-gold)"></span>
-              <span class="bar" style="--h: 85%; --c: var(--c-green)"></span>
-              <span class="bar" style="--h: 60%; --c: var(--c-pink)"></span>
-              <span class="bar" style="--h: 95%; --c: var(--c-blue)"></span>
-              <span class="bar" style="--h: 70%; --c: var(--c-gold)"></span>
-            </div>
-            <div class="mock-list">
-              <div class="mock-list-item">
-                <mat-icon class="list-icon">inventory_2</mat-icon>
-                <span>{{ 'LANDING.MOCK_INVENTORY_SYNCED' | translate }}</span>
-                <mat-icon class="list-check">check_circle</mat-icon>
-              </div>
-              <div class="mock-list-item">
-                <mat-icon class="list-icon">insights</mat-icon>
-                <span>{{ 'LANDING.MOCK_REPORT_GENERATED' | translate }}</span>
-                <mat-icon class="list-check">check_circle</mat-icon>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="floating-badge badge-top">
-          <mat-icon>admin_panel_settings</mat-icon>
-          <span>{{ 'LANDING.SECURE_ACCESS' | translate }}</span>
-        </div>
-        <div class="floating-badge badge-bottom">
-          <mat-icon>store</mat-icon>
-          <span>{{ 'LANDING.MULTI_BRANCH' | translate }}</span>
-        </div>
+  <!-- ================= SERVICES BAND ================= -->
+  <div class="band" aria-hidden="true">
+    <div class="band-track">
+      @for (round of [0, 1]; track round) {
+        @for (s of serviceNames; track s) {
+          <span>{{ s | translate }}</span><i></i>
+        }
+      }
+    </div>
+  </div>
+
+  <!-- ================= THE SALOON ================= -->
+  <section class="gallery">
+    <div class="gallery-head">
+      <div>
+        <span class="eyebrow">{{ 'LANDING.GALLERY_EYEBROW' | translate }}</span>
+        <h2>{{ 'LANDING.GALLERY_TITLE' | translate }}</h2>
       </div>
+      <p>{{ 'LANDING.GALLERY_DESC' | translate }}</p>
+    </div>
+    <div class="mosaic">
+      @for (g of gallery; track g.src) {
+        <figure [class]="'tile tile-' + g.key">
+          <img [src]="g.src" [alt]="g.caption | translate" loading="lazy" decoding="async">
+          <figcaption>
+            <mat-icon>{{ g.icon }}</mat-icon>
+            <span>
+              <strong>{{ g.caption | translate }}</strong>
+              <small>{{ g.note | translate }}</small>
+            </span>
+          </figcaption>
+        </figure>
+      }
     </div>
   </section>
 
+  <!-- ================= A CLIENT'S VISIT ================= -->
+  <section class="visit" id="visit">
+    <div class="section-head">
+      <span class="eyebrow">{{ 'LANDING.STEPS_EYEBROW' | translate }}</span>
+      <h2>{{ 'LANDING.STEPS_TITLE' | translate }}</h2>
+    </div>
+
+    <!-- A gold rail: one stop per step, lined up over its photo -->
+    <div class="rail" aria-hidden="true">
+      @for (s of steps; track s.no) {
+        <span class="rail-stop"><b>{{ s.no }}</b></span>
+      }
+    </div>
+
+    <ol class="steps">
+      @for (s of steps; track s.no) {
+        <li class="step">
+          <img [src]="s.photo" alt="" loading="lazy" decoding="async">
+          <div class="step-body">
+            <span class="step-no">{{ s.no }}</span>
+            <mat-icon>{{ s.icon }}</mat-icon>
+            <h3>{{ s.title | translate }}</h3>
+            <p>{{ s.desc | translate }}</p>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <!-- ================= FEATURES ================= -->
   <section class="features" id="features">
-    <div class="features-intro">
-      <span class="section-eyebrow">{{ 'LANDING.FEATURES_EYEBROW' | translate }}</span>
-      <h2>{{ 'LANDING.FEATURES_TITLE_LINE1' | translate }}<br>{{ 'LANDING.FEATURES_TITLE_LINE2' | translate }}</h2>
+    <div class="section-head">
+      <span class="eyebrow">{{ 'LANDING.FEATURES_EYEBROW' | translate }}</span>
+      <h2>{{ 'LANDING.FEATURES_TITLE_LINE1' | translate }} {{ 'LANDING.FEATURES_TITLE_LINE2' | translate }}</h2>
       <p>{{ 'LANDING.FEATURES_SUBTITLE' | translate }}</p>
     </div>
-
-    <div class="feature-list">
-      <div class="feature-row">
-        <span class="feature-index">01</span>
-        <mat-icon class="feature-icon icon-blue">point_of_sale</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.FEATURE1_TITLE' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE1_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <span class="feature-index">02</span>
-        <mat-icon class="feature-icon icon-green">groups</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.FEATURE2_TITLE' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE2_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <span class="feature-index">03</span>
-        <mat-icon class="feature-icon icon-gold">inventory_2</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.FEATURE3_TITLE' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE3_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <span class="feature-index">04</span>
-        <mat-icon class="feature-icon icon-teal">insights</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.FEATURE4_TITLE' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE4_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <span class="feature-index">05</span>
-        <mat-icon class="feature-icon icon-pink">store</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.FEATURE5_TITLE' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE5_DESC' | translate }}</p>
-        </div>
-      </div>
-
-      <div class="feature-row">
-        <span class="feature-index">06</span>
-        <mat-icon class="feature-icon icon-navy">admin_panel_settings</mat-icon>
-        <div class="feature-text">
-          <h4 class="feature-title">{{ 'LANDING.SECURE_ACCESS' | translate }}</h4>
-          <p class="feature-description">{{ 'LANDING.FEATURE6_DESC' | translate }}</p>
-        </div>
-      </div>
+    <div class="feature-grid">
+      @for (f of features; track f.title) {
+        <article class="feature">
+          <div class="feature-photo">
+            <img [src]="f.photo" alt="" loading="lazy" decoding="async">
+            <mat-icon>{{ f.icon }}</mat-icon>
+          </div>
+          <div class="feature-body">
+            <h3>{{ f.title | translate }}</h3>
+            <p>{{ f.desc | translate }}</p>
+          </div>
+        </article>
+      }
     </div>
   </section>
 
+  <!-- ================= VALUES, over the saloon floor ================= -->
   <section class="values">
-    <div class="section-heading">
-      <span class="section-eyebrow">{{ 'LANDING.VALUES_EYEBROW' | translate }}</span>
-      <h2>{{ 'LANDING.VALUES_TITLE' | translate }}</h2>
-      <p>{{ 'LANDING.VALUES_SUBTITLE' | translate }}</p>
-    </div>
-
-    <div class="values-strip">
-      <div class="value-item">
-        <mat-icon class="value-icon icon-blue">construction</mat-icon>
-        <h4 class="value-title">{{ 'LANDING.VALUE1_TITLE' | translate }}</h4>
-        <p class="value-description">
-          {{ 'LANDING.VALUE1_DESC' | translate }}
-        </p>
+    <div class="values-inner">
+      <div class="values-head">
+        <span class="eyebrow">{{ 'LANDING.VALUES_EYEBROW' | translate }}</span>
+        <h2>{{ 'LANDING.VALUES_TITLE' | translate }}</h2>
+        <div class="gold-rule" aria-hidden="true"><span></span><i></i><span></span></div>
+        <p>{{ 'LANDING.VALUES_SUBTITLE' | translate }}</p>
       </div>
-
-      <div class="value-item">
-        <mat-icon class="value-icon icon-green">work</mat-icon>
-        <h4 class="value-title">{{ 'LANDING.VALUE2_TITLE' | translate }}</h4>
-        <p class="value-description">
-          {{ 'LANDING.VALUE2_DESC' | translate }}
-        </p>
-      </div>
-
-      <div class="value-item">
-        <mat-icon class="value-icon icon-gold">lightbulb</mat-icon>
-        <h4 class="value-title">{{ 'LANDING.VALUE3_TITLE' | translate }}</h4>
-        <p class="value-description">
-          {{ 'LANDING.VALUE3_DESC' | translate }}
-        </p>
-      </div>
-
-      <div class="value-item">
-        <mat-icon class="value-icon icon-teal">diamond</mat-icon>
-        <h4 class="value-title">{{ 'LANDING.VALUE4_TITLE' | translate }}</h4>
-        <p class="value-description">
-          {{ 'LANDING.VALUE4_DESC' | translate }}
-        </p>
+      <div class="values-grid">
+        @for (v of values; track v.title) {
+          <div class="value">
+            <mat-icon>{{ v.icon }}</mat-icon>
+            <h3>{{ v.title | translate }}</h3>
+            <p>{{ v.desc | translate }}</p>
+          </div>
+        }
       </div>
     </div>
   </section>
 
-  <section class="cta-banner">
-    <div class="glow glow-cta"></div>
-    <h2 class="cta-title">{{ 'LANDING.CTA_TITLE' | translate }}</h2>
-    <p class="cta-subtitle">{{ 'LANDING.CTA_SUBTITLE' | translate }}</p>
-    <button mat-flat-button class="cta-button" (click)="goToLogin()">
-      <span>{{ 'LANDING.GET_STARTED' | translate }}</span>
-      <mat-icon>arrow_forward</mat-icon>
-    </button>
+  <!-- ================= CTA ================= -->
+  <section class="cta">
+    <div class="cta-inner">
+      <span class="eyebrow">{{ 'LANDING.CTA_EYEBROW' | translate }}</span>
+      <h2>{{ 'LANDING.CTA_TITLE' | translate }}</h2>
+      <div class="gold-rule center" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p>{{ 'LANDING.CTA_SUBTITLE' | translate }}</p>
+      <button type="button" class="btn-gold" (click)="goToLogin()">
+        {{ 'LANDING.GET_STARTED' | translate }}
+        <mat-icon>arrow_forward</mat-icon>
+      </button>
+    </div>
   </section>
 
   <footer class="footer">
-    <div class="footer-brand">
-      <img src="assets/images/midland.png" alt="Midland Solutions Logo" class="footer-logo">
-      <span>Midland Solutions</span>
+    <div class="brand">
+      <img src="assets/images/midland.png" alt="" class="brand-logo small">
+      <span class="brand-name">Midland <em>Saloon</em></span>
     </div>
-    <span class="footer-copy">&copy; {{ currentYear }} Midland Solutions. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
+    <span>&copy; {{ currentYear }} Midland Solutions. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
   </footer>
 </div>

@@ -127,6 +127,11 @@ saveOpenSale(saleOpenedDTO: SaleOpenedDTO ):Observable<Response<any>>{
   return this.http.post<Response<any>>(`${this.saloonURL}/saveOpenSale`, saleOpenedDTO);
 }
 
+/** Takes away a bill with nothing on it; the backend refuses one that has services. */
+deleteEmptyBill(billUid: string): Observable<Response<any>> {
+  return this.http.post<Response<any>>(`${this.saloonURL}/deleteEmptyBill/${billUid}`, {});
+}
+
 salesOpenedListByStatus(filter: string): Observable<Response<any>> {
   return this.http.get<Response<any>>(`${this.saloonURL}/salesOpenedListByStatus/${filter}`);
 }
