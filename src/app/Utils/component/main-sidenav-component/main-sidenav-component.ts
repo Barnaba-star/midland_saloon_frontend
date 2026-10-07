@@ -115,7 +115,7 @@ goToLogin() {
 
 
 @Input() menuItems: SidenavItem[] = [];
-@Input() logoUrl: string = 'assets/images/login.png';
+@Input() logoUrl: string = 'assets/images/mr-saloon-logo.png';
 
 isOpen = true;
 openIndex: number | null = null;
