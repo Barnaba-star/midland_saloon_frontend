@@ -804,9 +804,11 @@
 
 .search-button:disabled {
 
-  background: var(--sx-line);
+  background: var(--sx-navy-50);
 
-  color: var(--sx-line);
+  /* Readable while it waits for a role and a module (it was line-on-line,
+     an empty grey bar). */
+  color: var(--sx-muted);
 
   cursor: not-allowed;
 

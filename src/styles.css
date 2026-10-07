@@ -146,6 +146,33 @@ body {
     padding-right: 0 !important;
   }
 
+  /* Search boxes take the whole row, so their hint isn't cut off. */
+  app-search-box {
+    display: block;
+    flex: 1 1 100%;
+    width: 100%;
+  }
+  .search-box {
+    max-width: none !important;
+  }
+
+  /* Headline figures (Settings / Admin): two even columns that fill the
+     row; an odd one out at the end takes the full width. */
+  .summary-row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px !important;
+  }
+  .summary-row > .summary-card,
+  .summary-row > .summary-tile {
+    min-width: 0 !important;
+    width: auto !important;
+    max-width: none !important;
+  }
+  .summary-row > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+
   /* Dialogs use the whole phone width. */
   .cdk-overlay-pane.mat-mdc-dialog-panel {
     max-width: calc(100vw - 16px) !important;
