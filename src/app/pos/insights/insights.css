@@ -85,6 +85,9 @@
 /* Phones: filters scroll sideways in one row, cards and KPIs stack. */
 @media (max-width: 600px) {
   .ins-top { flex-direction: column; align-items: stretch; }
+  /* The subtitle wraps instead of running off the right edge. */
+  .ins-top > div:first-child { min-width: 0; width: 100%; max-width: 100%; }
+  .ins-top p { white-space: normal; overflow-wrap: anywhere; }
   .ins-filters, .ins-sort { flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
   .ins-filters button, .ins-sort button { flex: 0 0 auto; white-space: nowrap; }
   .ins-kpis { gap: 8px; }

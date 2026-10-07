@@ -144,6 +144,11 @@ body {
   .action-container {
     padding-left: 0 !important;
     padding-right: 0 !important;
+    /* A side margin on top of width:100% pushed it past the right edge. */
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
   }
 
   /* Search boxes take the whole row, so their hint isn't cut off. */

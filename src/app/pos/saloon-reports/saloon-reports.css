@@ -7618,3 +7618,29 @@
     margin: 4px 0 0 !important;
   }
 }
+
+/* Phones: the Staff report's period buttons as two full-width columns
+   (they sat at half width with their icons clipped), the date on its own row. */
+@media (max-width: 600px) {
+  .commission-filters {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+
+  .commission-filters > .filter-btn {
+    width: 100% !important;
+    min-width: 0 !important;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: visible;
+  }
+
+  .commission-filters > :not(.filter-btn) {
+    grid-column: 1 / -1;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}
