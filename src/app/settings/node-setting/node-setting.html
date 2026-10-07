@@ -232,6 +232,12 @@
       </button>
 
       <!-- Destructive, so it sits apart from the rest. -->
+      @if (isRoot && item.branchCode?.toUpperCase() !== 'ROOT') {
+        <button mat-menu-item type="button" class="menu-item-danger" (click)="purgeBranchData(item)">
+          <mat-icon>delete_sweep</mat-icon>
+          <span>{{ 'PURGE_BRANCH.MENU' | translate }}</span>
+        </button>
+      }
       <button
         mat-menu-item
         type="button"

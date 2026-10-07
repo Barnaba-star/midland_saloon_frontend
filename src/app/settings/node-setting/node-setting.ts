@@ -35,6 +35,7 @@ import { SelectUserDialogComponent } from '../../Utils/component/dialogs/select-
 import { UserRoleDialogComponent } from '../../Utils/component/dialogs/user-role-dialog-component/user-role-dialog-component';
 import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
 import { BranchDialogComponent } from '../../Utils/component/dialogs/branch-dialog-component/branch-dialog-component';
+import { PurgeBranchDialogComponent } from '../../Utils/component/dialogs/purge-branch-dialog/purge-branch-dialog';
 import { ActivationCodeDialogComponent } from '../../Utils/component/dialogs/activation-code-dialog-component/activation-code-dialog-component';
 
 @Component({
@@ -460,6 +461,34 @@ onSearch(term: string): void {
   this.pageIndex = 0;
 
   this.loadBranches();
+}
+
+/** Only ROOT sees "wipe all branch data"; the backend enforces it too. */
+get isRoot(): boolean {
+  return this.visibility.hasRole('ROOT');
+}
+
+purgeBranchData(item: any): void {
+  const ref = this.dialog.open(PurgeBranchDialogComponent, {
+    width: '460px',
+    maxWidth: '95vw',
+    autoFocus: false,
+    data: { branchName: item.branchName, branchCode: item.branchCode },
+  });
+  ref.afterClosed().subscribe((code?: string) => {
+    if (!code) return;
+    this.nodeService.purgeBranchData(item.uid, code).subscribe({
+      next: (res) => {
+        if (res.data) {
+          const count = Object.values(res.data).reduce((a, b) => a + b, 0);
+          this.alertService.show('success', this.translate.instant('PURGE_BRANCH.DONE', { count }));
+        } else {
+          this.alertService.show('error', res.message || 'Failed');
+        }
+      },
+      error: (err) => this.alertService.show('error', err?.error?.message || 'Failed'),
+    });
+  });
 }
 
 deleteItem(item: any): void {

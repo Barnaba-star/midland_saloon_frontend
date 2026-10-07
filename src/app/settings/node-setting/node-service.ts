@@ -30,6 +30,11 @@ findBranchPage(params: PageableParam): Observable<ResponsePage<any>> {
     return this.http.post<ResponsePage<any>>(`${this.baseUrl}/findBranchPage`, params);
 }
 
+/** Wipes a branch's working data; ROOT only, confirmCode = the branch code typed back. */
+purgeBranchData(branchUID: string, confirmCode: string): Observable<Response<Record<string, number>>> {
+  return this.http.post<Response<Record<string, number>>>(`${this.baseUrl}/purgeBranchData/${branchUID}`, { confirmCode });
+}
+
 deleteBranch(branchUID:string): Observable<Response<any>>{
   return this.http.post<Response<any>>(`${this.baseUrl}/deleteBranch/${branchUID}`, null)
 }

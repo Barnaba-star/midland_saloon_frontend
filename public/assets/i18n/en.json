@@ -1690,5 +1690,17 @@
     "COL_USED": "Used",
     "COL_WEEK": "This week",
     "HINT": "Click Other Expenses to see each item. Pay from a pot in Income & Expenses or the Other Expense Report."
+  },
+  "PURGE_BRANCH": {
+    "MENU": "Wipe all branch data",
+    "TITLE": "Wipe all of this branch's data?",
+    "GOES": "What is deleted",
+    "GOES_LIST": "Sales and bills, services, stylists, store and stock, commissions, reports, cash-ups, income and expenses.",
+    "STAYS": "What stays",
+    "STAYS_LIST": "The branch itself, its users and their roles, subscription payments and the audit trail.",
+    "NO_UNDO": "This cannot be undone.",
+    "TYPE_CODE": "Type the branch code ({{code}}) to confirm",
+    "CONFIRM": "Wipe all data",
+    "DONE": "Branch data wiped ({{count}} records)."
   }
 }

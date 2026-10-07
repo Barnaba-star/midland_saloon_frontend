@@ -1690,5 +1690,17 @@
     "COL_USED": "Imetumika",
     "COL_WEEK": "Wiki hii",
     "HINT": "Bonyeza Matumizi ya Other kuona kila kitu chake. Kulipa kutoka fungu fanya kwenye Mapato & Matumizi au Ripoti ya Other."
+  },
+  "PURGE_BRANCH": {
+    "MENU": "Futa data zote za tawi",
+    "TITLE": "Futa data zote za tawi hili?",
+    "GOES": "Kitakachofutwa",
+    "GOES_LIST": "Mauzo na bili, huduma, wahudumu, store na stock, kamisheni, ripoti, cash-up, mapato na matumizi.",
+    "STAYS": "Kitakachobaki",
+    "STAYS_LIST": "Tawi lenyewe, watumiaji na majukumu yao, malipo ya usajili na kumbukumbu za ukaguzi.",
+    "NO_UNDO": "Hatua hii haiwezi kurudishwa nyuma.",
+    "TYPE_CODE": "Andika code ya tawi ({{code}}) kuthibitisha",
+    "CONFIRM": "Futa data zote",
+    "DONE": "Data za tawi zimefutwa ({{count}} kumbukumbu)."
   }
 }
