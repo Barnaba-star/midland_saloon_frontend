@@ -1060,3 +1060,19 @@
   .action-label { white-space: normal; }
   .pagination-wrapper { flex-wrap: wrap; }
 }
+
+/* Phones: one card, not a card inside a card - the outer frame's padding
+   and border only narrowed the roles table. */
+@media (max-width: 600px) {
+  .info-card12 {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .info-card12 > .table-wrapper {
+    margin: 0 !important;
+    width: 100% !important;
+  }
+}

@@ -613,3 +613,13 @@
   .pay-button { white-space: normal; }
   .branches-button { white-space: normal; }
 }
+
+/* Phones: one card, not a card inside a card. */
+@media (max-width: 600px) {
+  .info-card12 {
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+  }
+}

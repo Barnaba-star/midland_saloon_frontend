@@ -1005,7 +1005,6 @@
   .users-table-header { flex-wrap: wrap; }
   .users-header-actions { flex-wrap: wrap; }
   .users-count { flex-wrap: wrap; }
-  .user-info { flex-wrap: wrap; }
   .full-name { white-space: normal; }
   .user-email { white-space: normal; }
   .username { white-space: normal; }
@@ -1015,6 +1014,11 @@
   .users-count { flex-wrap: wrap; }
   .online-users-top { flex-wrap: wrap; }
   .online-count { flex-wrap: wrap; }
-  .user-info { flex-wrap: wrap; }
   .pagination-wrapper { flex-wrap: wrap; }
+  /* Avatar and name stay side by side; a long name wraps beside the
+     avatar instead of pushing it onto its own line. */
+  .user-info { flex-wrap: nowrap; align-items: center; }
+  .user-name-wrapper { min-width: 0; max-width: 200px; white-space: normal; }
+  .user-name-wrapper strong,
+  .user-name-wrapper small { white-space: normal; overflow-wrap: anywhere; }
 }
