@@ -38,6 +38,7 @@ import { ChangePasswordDialogComponent } from '../dialogs/change-password-dialog
 import { SubscribeDialogComponent } from '../dialogs/subscribe-dialog-component/subscribe-dialog-component';
 import { SystemSettingService } from '../../services/system-setting';
 import { AlertService } from '../../services/alert';
+import { UploadedImageService } from '../../services/uploaded-image';
 
 import { SidenavItem } from '../main-sidenav-component/model';
 
@@ -174,6 +175,7 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     private systemSettingService: SystemSettingService,
     private alertService: AlertService,
     private cdr: ChangeDetectorRef,
+    private uploadedImage: UploadedImageService,
   ) {
 
     this.notifications$ = this.notificationService.notifications$;
@@ -344,8 +346,11 @@ export class MainSidenav2 implements OnInit, OnDestroy {
 
         if (res.data?.imageName) {
 
-          this.profilePic =
-            `${environment.baseApiUrl}/uploads/${res.data.imageName}`;
+          // Through HttpClient (with the token), not a bare <img src>.
+          this.uploadedImage.load(res.data.imageName).subscribe((url) => {
+            this.profilePic = url ?? '';
+            this.cdr.markForCheck();
+          });
 
           console.log(
             'Profile Path:',
@@ -498,7 +503,8 @@ export class MainSidenav2 implements OnInit, OnDestroy {
       next: (res) => {
 
         if (res.data?.logoImage) {
-          this.logoUrl = `${environment.baseApiUrl}/uploads/${res.data.logoImage}`;
+          this.uploadedImage.forget(res.data.logoImage);
+          this.uploadedImage.load(res.data.logoImage).subscribe((url) => { this.logoUrl = url ?? ''; this.cdr.markForCheck(); });
           this.cdr.markForCheck();
         }
       },
@@ -528,7 +534,8 @@ export class MainSidenav2 implements OnInit, OnDestroy {
         input.value = '';
 
         if (res.data?.logoImage) {
-          this.logoUrl = `${environment.baseApiUrl}/uploads/${res.data.logoImage}`;
+          this.uploadedImage.forget(res.data.logoImage);
+          this.uploadedImage.load(res.data.logoImage).subscribe((url) => { this.logoUrl = url ?? ''; this.cdr.markForCheck(); });
         }
 
         this.cdr.markForCheck();
@@ -882,7 +889,14 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if (result?.profilePic) {
+      if (result?.imageName) {
+        // The new photo, fetched with the token (a bare URL would 401).
+        this.uploadedImage.forget(result.imageName);
+        this.uploadedImage.load(result.imageName).subscribe((url) => {
+          this.profilePic = url ?? '';
+          this.cdr.markForCheck();
+        });
+      } else if (result?.profilePic) {
         this.profilePic = result.profilePic;
         this.cdr.markForCheck();
       }

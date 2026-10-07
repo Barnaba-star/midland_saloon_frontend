@@ -151,7 +151,7 @@
 
             } @else {
 
-              <div class="sx-table-wrap"><table class="sheet-table">
+              <div class="sx-table-wrap"><table class="sheet-table sx-cards">
 
                 <thead>
                   <tr>
@@ -170,16 +170,16 @@
                 <tbody>
                   @for (line of rows; track line.uid) {
                     <tr>
-                      <td class="col-no">{{ line.no }}</td>
-                      <td [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
-                      <td [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
-                      <td class="col-mono" [class.missing]="!line.accountNumber">
+                      <td class="col-no sx-card-index">{{ line.no }}</td>
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_BANK' | translate" [class.missing]="!line.bankName">{{ line.bankName || '—' }}</td>
+                      <td class="sx-card-title" [class.missing]="!line.accountName">{{ line.accountName || '—' }}</td>
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_ACCOUNT' | translate" class="col-mono" [class.missing]="!line.accountNumber">
                         {{ line.accountNumber || '—' }}
                       </td>
-                      <td>{{ line.branchName || '—' }}</td>
-                      <td class="col-amount col-working muted">{{ line.earned | number }}</td>
-                      <td class="col-amount col-working muted">{{ line.paid | number }}</td>
-                      <td class="col-amount" [class.settled]="line.toPay <= 0">
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_BRANCH' | translate">{{ line.branchName || '—' }}</td>
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_EARNED' | translate" class="col-amount col-working muted">{{ line.earned | number }}</td>
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_PAID' | translate" class="col-amount col-working muted">{{ line.paid | number }}</td>
+                      <td [attr.data-label]="'PAYROLL_PAGE.COL_AMOUNT' | translate" class="col-amount" [class.settled]="line.toPay <= 0">
                         @if (line.toPay > 0) {
                           {{ line.toPay | number }}
                         } @else {

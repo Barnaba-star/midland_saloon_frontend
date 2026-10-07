@@ -205,7 +205,7 @@
                   </div>
                 } @else {
 
-                  <table class="detail-table">
+                  <table class="detail-table sx-cards">
                     <thead>
                       <tr>
                         <th>{{ 'COMMISSION_PAGE.COL_BRANCH' | translate }}</th>
@@ -219,15 +219,15 @@
                     <tbody>
                       @for (payment of staffPayments; track payment.uid) {
                         <tr>
-                          <td>
+                          <td class="sx-card-title">
                             <strong>{{ payment.branchName | uppercase }}</strong>
                             <span class="branch-code">{{ payment.branchCode }}</span>
                           </td>
-                          <td>{{ payment.paidAt | date: 'dd MMM yyyy' }}</td>
-                          <td class="num">{{ payment.months }}</td>
-                          <td class="num">{{ payment.amount | number }}</td>
-                          <td class="num">{{ payment.commissionPercent }}%</td>
-                          <td class="num commission">{{ payment.commissionAmount | number }}</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_DATE' | translate">{{ payment.paidAt | date: 'dd MMM yyyy' }}</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_MONTHS' | translate" class="num">{{ payment.months }}</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_AMOUNT' | translate" class="num">{{ payment.amount | number }}</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_RATE' | translate" class="num">{{ payment.commissionPercent }}%</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_COMMISSION' | translate" class="num commission">{{ payment.commissionAmount | number }}</td>
                         </tr>
                       }
                     </tbody>

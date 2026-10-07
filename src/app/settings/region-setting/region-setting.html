@@ -58,7 +58,7 @@
 
       <div class="table-wrapper">
 
-        <div class="sx-table-wrap"><table>
+        <div class="sx-table-wrap"><table class="region-table sx-cards">
 
           <thead>
             <tr>
@@ -74,15 +74,15 @@
             @for (region of filteredRegions; track region.uid; let i = $index) {
               <tr>
 
-                <td>{{ i + 1 }}</td>
+                <td class="sx-card-index">{{ i + 1 }}</td>
 
-                <td class="name-cell">{{ region.name }}</td>
+                <td class="name-cell sx-card-title">{{ region.name }}</td>
 
-                <td>
+                <td [attr.data-label]="'REGION_SETTING_PAGE.COL_CODE' | translate">
                   <span class="level-badge">{{ region.code }}</span>
                 </td>
 
-                <td>
+                <td class="sx-card-actions">
                   <div class="row-actions">
                     <button type="button" class="view-btn" (click)="editRegion(region)">
                       {{ 'REGION_SETTING_PAGE.EDIT' | translate }}

@@ -81,7 +81,7 @@
 
       <div class="table-wrapper">
 
-        <div class="sx-table-wrap"><table>
+        <div class="sx-table-wrap"><table class="error-table sx-cards">
 
           <thead>
             <tr>
@@ -102,13 +102,13 @@
             @for (errorLog of errorLogs; track errorLog.uid; let i = $index) {
               <tr>
 
-                <td>{{ currentPage * pageSize + i + 1 }}</td>
+                <td class="sx-card-index">{{ currentPage * pageSize + i + 1 }}</td>
 
-                <td class="time-cell">
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_TIME' | translate" class="time-cell">
                   {{ errorLog.occurredAt | date: 'dd/MM/yyyy HH:mm:ss' }}
                 </td>
 
-                <td>
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_LEVEL' | translate">
                   <span
                     class="level-badge"
                     [class.level-error]="errorLog.level === 'ERROR'"
@@ -117,25 +117,25 @@
                   </span>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_SOURCE' | translate">
                   <span class="source-badge">{{ errorLog.source }}</span>
                 </td>
 
-                <td class="type-cell" [title]="errorLog.exceptionType">
+                <td class="type-cell sx-card-title" [title]="errorLog.exceptionType">
                   {{ shortType(errorLog.exceptionType) }}
                 </td>
 
-                <td class="message-cell" [title]="errorLog.message">
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_MESSAGE' | translate" class="message-cell" [title]="errorLog.message">
                   {{ shortMessage(errorLog.message) }}
                 </td>
 
-                <td class="path-cell" [title]="errorLog.path">
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_PATH' | translate" class="path-cell" [title]="errorLog.path">
                   {{ errorLog.httpMethod }} {{ errorLog.path }}
                 </td>
 
-                <td>{{ errorLog.username || '-' }}</td>
+                <td [attr.data-label]="'ERROR_SETTING_PAGE.COL_USER' | translate">{{ errorLog.username || '-' }}</td>
 
-                <td>
+                <td class="sx-card-actions">
                   <button type="button" class="view-btn" (click)="openDetail(errorLog)">
                     {{ 'ERROR_SETTING_PAGE.VIEW_BTN' | translate }}
                   </button>

@@ -34,7 +34,7 @@
 
   <div class="table-wrapper">
 
-    <div class="sx-table-wrap"><table>
+    <div class="sx-table-wrap"><table class="storage-table sx-cards">
 
       <thead>
 
@@ -57,40 +57,40 @@
         <tr
           *ngFor="let table of tableSizes; let i = index">
 
-          <td>
+          <td class="sx-card-index">
             {{ i + 1 }}
           </td>
 
-          <td>
+          <td [attr.data-label]="'STORAGE_SETTING_PAGE.COL_SCHEMA' | translate">
             <span class="schema-badge">
               {{ table.schemaName }}
             </span>
           </td>
 
-          <td>
+          <td class="sx-card-title">
             <strong>
               {{ table.tableName }}
             </strong>
           </td>
 
-          <td>
+          <td [attr.data-label]="'STORAGE_SETTING_PAGE.COL_ROWS' | translate">
             {{ table.rowCount | number }}
           </td>
 
-          <td>
+          <td [attr.data-label]="'STORAGE_SETTING_PAGE.COL_TABLE_SIZE' | translate">
             {{ table.tableSize }}
           </td>
 
-          <td>
+          <td [attr.data-label]="'STORAGE_SETTING_PAGE.COL_INDEX_SIZE' | translate">
             {{ table.indexSize }}
           </td>
 
-          <td>
+          <td [attr.data-label]="'STORAGE_SETTING_PAGE.COL_TOTAL_SIZE' | translate">
             <strong>
               {{ table.totalSize }}
             </strong>
           </td>
-          <td>
+          <td class="sx-card-actions">
   <div class="size-cell">
 
     <button

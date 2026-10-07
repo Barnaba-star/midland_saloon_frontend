@@ -1490,7 +1490,10 @@
     gap: 6px;
     padding-left: 8px;
     padding-right: 8px;
-    overflow: hidden;
+    /* Not overflow:hidden - the profile and notification menus drop down
+       out of this bar and were being cut off (the profile menu "didn't
+       open" on phones). The bar fits because extra icons are hidden. */
+    overflow: visible;
   }
 
   .sidebar-header .left {

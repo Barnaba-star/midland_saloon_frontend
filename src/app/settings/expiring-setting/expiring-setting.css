@@ -285,3 +285,9 @@
   .phone-cell { white-space: normal; }
   .reason-cell { white-space: normal; }
 }
+@media (max-width: 600px) {
+  /* Card title: the branch name, its code on the line below. */
+  table.sx-cards > tbody > tr > td.sx-card-title > span {
+    display: block;
+  }
+}

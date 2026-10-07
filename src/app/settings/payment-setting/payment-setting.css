@@ -331,3 +331,21 @@
   .reference-cell { white-space: normal; }
   .reconcile-btn { white-space: normal; }
 }
+
+/* Phones: rows are cards; the card's title cell is not the first cell
+   here, so it is moved to the top of the card. */
+@media (max-width: 600px) {
+  table.sx-cards > tbody > tr {
+    display: flex !important;
+    flex-direction: column;
+  }
+  table.sx-cards > tbody > tr > td.sx-card-title {
+    order: -1;
+  }
+}
+@media (max-width: 600px) {
+  /* Card title: the branch name, its code on the line below. */
+  table.sx-cards > tbody > tr > td.sx-card-title > span {
+    display: block;
+  }
+}

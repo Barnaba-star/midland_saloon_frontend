@@ -68,7 +68,7 @@
 
       <div class="table-wrapper">
 
-        <div class="sx-table-wrap"><table>
+        <div class="sx-table-wrap"><table class="expiring-table sx-cards">
 
           <thead>
             <tr>
@@ -89,22 +89,22 @@
             @for (branch of branches; track branch.uid; let i = $index) {
               <tr [class.row-lapsed]="branch.daysLeft < 0">
 
-                <td>{{ i + 1 }}</td>
+                <td class="sx-card-index">{{ i + 1 }}</td>
 
-                <td class="branch-cell">
+                <td class="branch-cell sx-card-title">
                   <span class="branch-name">{{ branch.branchName }}</span>
                   <span class="branch-code">{{ branch.branchCode }}</span>
                 </td>
 
-                <td>{{ branch.region || '-' }}</td>
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_REGION' | translate">{{ branch.region || '-' }}</td>
 
-                <td class="phone-cell">{{ branch.phone || '-' }}</td>
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_PHONE' | translate" class="phone-cell">{{ branch.phone || '-' }}</td>
 
-                <td class="time-cell">
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_DATE' | translate" class="time-cell">
                   {{ branch.closeSubscription | date: 'dd/MM/yyyy' }}
                 </td>
 
-                <td>
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_STATUS' | translate">
                   @if (branch.daysLeft < 0) {
                     <span class="level-badge status-lapsed">
                       {{ 'EXPIRING_SETTING_PAGE.LAPSED_DAYS' | translate: { days: lapsedDays(branch) } }}
@@ -124,11 +124,11 @@
                   }
                 </td>
 
-                <td class="amount-cell">{{ branch.subscriptionAmount | number }} TZS</td>
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_AMOUNT' | translate" class="amount-cell">{{ branch.subscriptionAmount | number }} TZS</td>
 
-                <td>{{ branch.registeredBy || '-' }}</td>
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_REGISTERED_BY' | translate">{{ branch.registeredBy || '-' }}</td>
 
-                <td class="reason-cell" [title]="branch.lastPaymentFailure">
+                <td [attr.data-label]="'EXPIRING_SETTING_PAGE.COL_REASON' | translate" class="reason-cell" [title]="branch.lastPaymentFailure">
                   {{ branch.lastPaymentFailure || '-' }}
                 </td>
 

@@ -69,7 +69,7 @@
 
       <div class="table-wrapper">
 
-        <div class="sx-table-wrap"><table>
+        <div class="sx-table-wrap"><table class="payments-table sx-cards">
 
           <thead>
             <tr>
@@ -89,29 +89,29 @@
             @for (payment of paymentList; track payment.uid; let i = $index) {
               <tr>
 
-                <td>{{ currentPage * pageSize + i + 1 }}</td>
+                <td class="sx-card-index">{{ currentPage * pageSize + i + 1 }}</td>
 
-                <td class="time-cell">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_DATE' | translate" class="time-cell">
                   {{ payment.paidAt | date: 'dd/MM/yyyy' }}
                 </td>
 
-                <td class="branch-cell">
+                <td class="branch-cell sx-card-title">
                   <span class="branch-name">{{ payment.branchName || '-' }}</span>
                   <span class="branch-code">{{ payment.branchCode }}</span>
                 </td>
 
-                <td class="amount-cell">{{ payment.amount | number }}</td>
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_AMOUNT' | translate" class="amount-cell">{{ payment.amount | number }}</td>
 
-                <td>{{ payment.months }}</td>
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_MONTHS' | translate">{{ payment.months }}</td>
 
-                <td class="commission-cell">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_COMMISSION' | translate" class="commission-cell">
                   {{ payment.commissionAmount | number }}
                   <span class="commission-percent">{{ payment.commissionPercent }}%</span>
                 </td>
 
-                <td>{{ payment.staffName || '-' }}</td>
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_STAFF' | translate">{{ payment.staffName || '-' }}</td>
 
-                <td class="reference-cell" [title]="payment.reference">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate" class="reference-cell" [title]="payment.reference">
                   {{ payment.reference || '-' }}
                 </td>
 
@@ -178,7 +178,7 @@
 
       <div class="table-wrapper">
 
-        <div class="sx-table-wrap"><table>
+        <div class="sx-table-wrap"><table class="unresolved-table sx-cards">
 
           <thead>
             <tr>
@@ -197,14 +197,14 @@
             @for (branch of unresolvedList; track branch.uid; let i = $index) {
               <tr>
 
-                <td>{{ i + 1 }}</td>
+                <td class="sx-card-index">{{ i + 1 }}</td>
 
-                <td class="branch-cell">
+                <td class="branch-cell sx-card-title">
                   <span class="branch-name">{{ branch.branchName || '-' }}</span>
                   <span class="branch-code">{{ branch.branchCode }}</span>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_STATUS' | translate">
                   <span
                     class="level-badge"
                     [class.status-pending]="branch.subscriptionStatus === 'PENDING'"
@@ -213,19 +213,19 @@
                   </span>
                 </td>
 
-                <td class="reason-cell" [title]="branch.lastPaymentFailure">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_REASON' | translate" class="reason-cell" [title]="branch.lastPaymentFailure">
                   {{ branch.lastPaymentFailure || '-' }}
                 </td>
 
-                <td class="reference-cell" [title]="branch.pendingPaymentRef">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate" class="reference-cell" [title]="branch.pendingPaymentRef">
                   {{ branch.pendingPaymentRef || '-' }}
                 </td>
 
-                <td class="time-cell">
+                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_DATE' | translate" class="time-cell">
                   {{ branch.pendingPaymentAt ? (branch.pendingPaymentAt | date: 'dd/MM/yyyy') : '-' }}
                 </td>
 
-                <td>
+                <td class="sx-card-actions">
                   <button
                     type="button"
                     class="reconcile-btn"

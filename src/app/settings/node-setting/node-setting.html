@@ -57,7 +57,7 @@
   <!-- TABLE -->
   <div class="branch-table-wrapper">
 
-    <div class="sx-table-wrap"><table class="branch-table">
+    <div class="sx-table-wrap"><table class="branch-table sx-cards">
 
       <thead>
         <tr>
@@ -80,7 +80,7 @@
         >
 
           <!-- NUMBER -->
-          <td>
+          <td class="sx-card-index">
             <span class="row-number">
               {{ i + 1 }}
             </span>
@@ -88,7 +88,7 @@
 
 
           <!-- BRANCH -->
-          <td>
+          <td class="sx-card-title">
 
             <div class="branch-info">
 
@@ -114,7 +114,7 @@
 
 
           <!-- CODE -->
-          <td>
+          <td [attr.data-label]="'NODE_SETTING_PAGE.COL_CODE' | translate">
 
             <span class="branch-code">
               {{ item.branchCode | uppercase}}
@@ -124,7 +124,7 @@
 
 
           <!-- CATEGORY -->
-          <td>
+          <td [attr.data-label]="'NODE_SETTING_PAGE.COL_CATEGORY' | translate">
 
             <span class="category-badge">
               {{ item.branchCategory | uppercase}}
@@ -133,7 +133,7 @@
           </td>
 
           <!-- REGION -->
-          <td>
+          <td [attr.data-label]="'NODE_SETTING_PAGE.COL_REGION' | translate">
 
             <div class="region-cell">
 
@@ -149,7 +149,7 @@
 
 
           <!-- PHONE -->
-          <td>
+          <td [attr.data-label]="'NODE_SETTING_PAGE.COL_PHONE' | translate">
 
             <div class="phone-cell">
 
@@ -165,7 +165,7 @@
 
 
           <!-- STATUS -->
-          <td>
+          <td [attr.data-label]="'NODE_SETTING_PAGE.COL_STATUS' | translate">
 
             <span
               class="status-badge"
@@ -182,7 +182,7 @@
           </td>
 
 <!-- ACTIONS -->
-<td class="action-column">
+<td class="action-column sx-card-actions">
   <div class="action-buttons">
 
     <!-- MORE -->
