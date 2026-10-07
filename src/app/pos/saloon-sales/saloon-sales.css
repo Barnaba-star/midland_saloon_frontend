@@ -4137,11 +4137,23 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   .sale-header,
   .payment-row,
   .payment-total-row,
-  .detail-row,
-  .action-container {
+  .detail-row {
     flex-wrap: wrap;
     gap: 10px;
     min-width: 0;
+  }
+  /* The page is one column that grows with its content. Wrapping it (with
+     its fixed 80vh height) sent the open bills into a second column off the
+     right edge, so on a phone they didn't show at all. */
+  .action-container {
+    flex-wrap: nowrap !important;
+    height: auto !important;
+    min-height: 0;
+    gap: 10px;
+    min-width: 0;
+  }
+  .outerSale {
+    height: auto;
   }
   .report-header,
   .date-filter-content,
@@ -4165,9 +4177,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex: 0 0 auto;
   }
   .sales-list,
-  .sale-body,
   .payment-summary-list {
     grid-template-columns: 1fr;
+  }
+  /* Bill and amount paid side by side keeps each bill card short. */
+  .sale-body {
+    grid-template-columns: 1fr 1fr;
   }
   .sale-card,
   .payment-summary,
@@ -4181,5 +4196,17 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   }
   .sale-code-cell {
     min-width: 0;
+  }
+}
+
+/* Phones: history cards - the row's action as a compact button on the
+   right instead of a full-width bar. */
+@media (max-width: 600px) {
+  .sales-table.sx-cards td.sx-card-actions {
+    background: transparent !important;
+  }
+  .sales-table.sx-cards td.sx-card-actions > * {
+    width: auto !important;
+    flex: 0 0 auto;
   }
 }

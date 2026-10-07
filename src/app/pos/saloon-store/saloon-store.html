@@ -74,7 +74,7 @@
       </div>
       @if (storeDataSource.length > 0) {
         <div class="table-responsive sx-table-wrap">
-          <table class="table store-table">
+          <table class="table store-table sx-cards">
             <thead>
        <tr>
   <th class="serial-column">#</th>
@@ -97,13 +97,13 @@
               @for (store of storeDataSource; track store.uid; let i = $index) {
                 <tr>
                   <!-- SERIAL NUMBER -->
-                  <td class="serial-column">
+                  <td class="serial-column sx-card-index">
                     <span class="serial-badge">
                       {{ currentPage * pageSize + i + 1 }}
                     </span>
                   </td>
                   <!-- ITEM NAME -->
-                  <td>
+                  <td class="sx-card-title">
                     <span class="item-name">
                       {{ store.nameOfStore }}
                     </span>
@@ -112,36 +112,36 @@
 
 
                   <!-- QUANTITY -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_QTY' | translate">
                     {{ store.quantity }}
                   </td>
 
                   <!-- SERVICE NAME -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_SERVICE' | translate">
                     {{ store.nameOfService }}
                   </td>
 
                   <!-- OPENED DATE -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_REG_DATE' | translate">
                     {{ store.openedDate }}
                   </td>
                   <!-- BUYING PRICE -->
-                  <td>Tshs {{ store.buyingPrice | number: '1.2-2' }}</td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_BUY_PRICE' | translate">Tshs {{ store.buyingPrice | number: '1.2-2' }}</td>
 
                   <!-- TOTAL PRICE -->
-                  <td>Tshs {{ store.totalQuantityPrice | number: '1.2-2' }}</td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_TOTAL_PRICE' | translate">Tshs {{ store.totalQuantityPrice | number: '1.2-2' }}</td>
 
                   <!-- USED QUANTITY -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_USED_QTY' | translate">
                     {{ store.usedQuantity }}
                   </td>
                   <!-- NOT USED QUANTITY -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_UNUSED_QTY' | translate">
                     {{ store.notUsedQuantity }}
                   </td>
 
                   <!-- STATUS -->
-                  <td>
+                  <td [attr.data-label]="'COMMON.STATUS' | translate">
                     <span
                       class="status-badge"
                       [class.status-open]="store.status === 'OPEN'"
@@ -153,7 +153,7 @@
                       {{ store.status }}
                     </span>
                   </td>
-                  <td class="actions-column">
+                  <td class="actions-column sx-card-actions">
                     <div class="action-buttons">
 
 
@@ -249,7 +249,7 @@
       }
       @if (storeOpenDataSource.length > 0) {
         <div class="table-responsive sx-table-wrap">
-          <table class="table store-table">
+          <table class="table store-table sx-cards">
             <thead>
               <tr>
                 <th class="serial-column">#</th>
@@ -271,39 +271,39 @@
               @for (store of storeOpenDataSource; track store.uid; let i = $index) {
                 <tr>
                   <!-- SERIAL NUMBER -->
-                  <td class="serial-column">
+                  <td class="serial-column sx-card-index">
                     <span class="serial-badge">
                       {{ currentPage * pageSize + i + 1 }}
                     </span>
                   </td>
 
                   <!-- ITEM CODE -->
-                  <td>
+                  <td class="sx-card-title">
                     <span class="item-code">
                       {{ store.nameOfStore }}
                     </span>
                   </td>
-                  <td>
+                  <td [attr.data-label]="'COMMON.CODE' | translate">
                     <span class="item-code">
                       {{ store.codeOfStore }}
                     </span>
                   </td>
 
                   <!-- SERVICE NAME -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_SERVICE' | translate">
                     {{ store.nameOfService }}
                   </td>
 
                   <!-- OPENED DATE -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_OPEN_DATE' | translate">
                     {{ store.openedDate }}
                   </td>
                   <!-- CLOSE DATE -->
-                  <td>
+                  <td [attr.data-label]="'STORE_PAGE.COL_CLOSE_DATE' | translate">
                     {{ store.closedDate || '--' }}
                   </td>
                   <!-- STATUS -->
-                  <td>
+                  <td [attr.data-label]="'COMMON.STATUS' | translate">
                     <span
                       class="status-badge"
                       [class.status-open]="store.status === 'OPEN'"
@@ -315,7 +315,7 @@
                       {{ store.status }}
                     </span>
                   </td>
-                 <td class="actions-column">
+                 <td class="actions-column sx-card-actions">
   <div class="action-buttons">
     @if (store.status === 'OPEN') {
       <button

@@ -39,7 +39,7 @@
     <!-- Table -->
     <div class="table-responsive sx-table-wrap">
 
-      <table class="table service-table">
+      <table class="table service-table sx-cards">
 
         <thead>
           <tr>
@@ -64,12 +64,12 @@
             <tr>
 
               <!-- Number -->
-              <td class="index-column">
+              <td class="index-column sx-card-index">
                 {{ (page * size) + i + 1 }}
               </td>
 
               <!-- Service -->
-              <td>
+              <td class="sx-card-title">
                 <div class="service-info">
 
                   <div class="service-avatar">
@@ -90,7 +90,7 @@
               </td>
 
               <!-- Code -->
-              <td>
+              <td [attr.data-label]="'COMMON.CODE' | translate">
                 <span class="service-code">
                   {{ service.serviceCode || '--' }}
                 </span>
@@ -99,7 +99,7 @@
 
 
               <!-- Duration -->
-              <td>
+              <td [attr.data-label]="'COMMON.DURATION' | translate">
                 <div class="duration">
                   <mat-icon>schedule</mat-icon>
                   <span>
@@ -109,14 +109,14 @@
               </td>
 
               <!-- Price -->
-              <td>
+              <td [attr.data-label]="'COMMON.PRICE' | translate">
                 <span class="service-price">
                   Tshs {{ service.price | number: '1.2-2' }}
                 </span>
               </td>
 
               <!-- Status -->
-              <td>
+              <td [attr.data-label]="'COMMON.STATUS' | translate">
 
                 @if (service.status === 'active') {
 
@@ -137,7 +137,7 @@
               </td>
 
               <!-- Actions -->
-              <td class="actions-column">
+              <td class="actions-column sx-card-actions">
 
                 <button
                   mat-icon-button

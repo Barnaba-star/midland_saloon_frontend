@@ -65,11 +65,9 @@ export class SaloonSales implements OnInit{
     private translate: TranslateService,
   ) {}
   ngOnInit(): void {
-    this.selectedSales='SALES.MANAGE'
-        this.salesOpenedListByStatus();
-        this.saleDetails = null;
-        this.selectedSaleServices = [];
-        this.selectedFilter = 'DAY';
+    // Selling is what this page is opened for: start on New Sales (the open
+    // bills), not History. History stays one tap away on its tab.
+    this.onAction('SALES.ADD');
   }
   selectedSales = '';
   saleOpenedUID: string = '';

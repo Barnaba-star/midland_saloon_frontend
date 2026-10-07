@@ -582,7 +582,7 @@
 
         <div class="sales-table-wrapper sx-table-wrap">
 
-          <table class="sales-table">
+          <table class="sales-table sx-cards">
 
             <!-- TABLE HEADER -->
             <thead>
@@ -634,7 +634,7 @@
               >
 
                 <!-- NUMBER -->
-                <td class="number-cell">
+                <td class="number-cell sx-card-index">
 
                   <span class="row-number">
                     {{ i + 1 }}
@@ -644,7 +644,7 @@
 
 
                 <!-- SALE CODE -->
-                <td class="sale-code-cell">
+                <td class="sale-code-cell sx-card-title">
 
                   <div class="sale-info">
 
@@ -658,7 +658,7 @@
 
 
                 <!-- DATE -->
-                <td class="date-cell">
+                <td [attr.data-label]="'COMMON.DATE' | translate" class="date-cell">
 
                   <div class="sale-date">
 
@@ -674,7 +674,7 @@
 
 
                 <!-- PAYMENT METHOD -->
-                <td>
+                <td [attr.data-label]="'SALES_PAGE.COL_PAYMENT_METHOD' | translate">
 
                   <div class="table-payment-method">
 
@@ -695,7 +695,7 @@
 
 
                 <!-- STATUS -->
-                <td>
+                <td [attr.data-label]="'COMMON.STATUS' | translate">
 
                   <span
                     class="status-badge"
@@ -728,7 +728,7 @@
 
 
                 <!-- AMOUNT -->
-                <td class="amount-cell">
+                <td [attr.data-label]="'SALES_PAGE.COL_AMOUNT' | translate" class="amount-cell">
 
                   <strong>
                     Tshs
@@ -741,7 +741,7 @@
 
 
                 <!-- ACTION -->
-                <td class="action-cell">
+                <td class="action-cell sx-card-actions">
 
                   <button
                     type="button"

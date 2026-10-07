@@ -45,7 +45,7 @@
 
         <!-- Table -->
         <div class="table-responsive sx-table-wrap">
-          <table class="table user-management-table">
+          <table class="table user-management-table sx-cards">
             <thead>
               <tr>
                 <th class="serial-column">#</th>
@@ -61,12 +61,12 @@
               @for (user of userDataSource; track user.uid; let i = $index) {
                 <tr>
                   <!-- Serial -->
-                  <td class="serial-column">
+                  <td class="serial-column sx-card-index">
                     {{ page * size + i + 1 }}
                   </td>
 
                   <!-- Username -->
-                  <td>
+                  <td class="sx-card-title">
                     <div class="username-wrapper">
                       <div class="username-avatar">
                         <mat-icon>person</mat-icon>
@@ -79,14 +79,14 @@
                   </td>
 
                   <!-- Full Name -->
-                  <td>
+                  <td [attr.data-label]="'SETTING_PAGE.COL_FULLNAME' | translate">
                     <span class="fullname-text">
                       {{ user.fullName }}
                     </span>
                   </td>
 
                   <!-- Role -->
-                  <td>
+                  <td [attr.data-label]="'SETTING_PAGE.COL_ROLE' | translate">
                     @if (user.isBlocked) {
                       <span class="blocked-badge">{{ 'SETTING_PAGE.BLOCKED' | translate }}</span>
                     }
@@ -98,7 +98,7 @@
                   </td>
 
                   <!-- Branch -->
-                  <td>
+                  <td [attr.data-label]="'SETTING_PAGE.COL_BRANCH' | translate">
                     <div class="branch-wrapper">
                       <mat-icon>business</mat-icon>
 
@@ -109,7 +109,7 @@
                   </td>
 
                   <!-- Actions -->
-                  <td class="actions-column">
+                  <td class="actions-column sx-card-actions">
                     <div class="user-actions">
 
                       <button
@@ -332,7 +332,7 @@
     <!-- Table -->
     <div class="table-scroll sx-table-wrap">
 
-      <table class="service-table">
+      <table class="service-table sx-cards">
 
         <thead>
           <tr>
@@ -354,13 +354,13 @@
             <tr>
 
               <!-- Number -->
-              <td class="number-cell">
+              <td class="number-cell sx-card-index">
                 {{ (page * size) + i + 1 }}
               </td>
 
 
               <!-- Service -->
-              <td>
+              <td class="sx-card-title">
                 <div class="service-info">
 
                   <div class="service-avatar">
@@ -384,7 +384,7 @@
 
 
               <!-- Code -->
-              <td>
+              <td [attr.data-label]="'COMMON.CODE' | translate">
                 <span class="service-code">
                   {{ service.serviceCode || '—' }}
                 </span>
@@ -392,7 +392,7 @@
 
 
               <!-- Price -->
-              <td>
+              <td [attr.data-label]="'COMMON.PRICE' | translate">
                 <span class="price">
                   Tshs {{ service.price | number:'1.2-2' }}
                 </span>
@@ -400,7 +400,7 @@
 
 
               <!-- Duration -->
-              <td>
+              <td [attr.data-label]="'COMMON.DURATION' | translate">
                 <div class="duration">
 
                   <mat-icon>schedule</mat-icon>
@@ -412,7 +412,7 @@
                 </div>
               </td>
 
-                <td>
+                <td [attr.data-label]="'SETTING_PAGE.COL_STORE_USAGE' | translate">
                 <div class="duration">
 
                   <mat-icon svgIcon="store"></mat-icon>
@@ -426,7 +426,7 @@
 
 
               <!-- Status -->
-              <td>
+              <td [attr.data-label]="'COMMON.STATUS' | translate">
 
                 @if (service.status?.toLowerCase() === 'active') {
 
@@ -450,7 +450,7 @@
 
 
               <!-- Action -->
-              <td class="action-column">
+              <td class="action-column sx-card-actions">
 
                 <button
                   mat-icon-button
@@ -748,7 +748,7 @@
 
             <!-- Table -->
             <div class="table-responsive sx-table-wrap">
-              <table class="table commission-table">
+              <table class="table commission-table sx-cards">
                 <thead>
                   <tr>
                     <th>#</th>
@@ -773,11 +773,11 @@
                 <tbody>
                   @for (commission of commissionDataSource; track commission.uid; let i = $index) {
                     <tr>
-                      <td class="number-column">
+                      <td class="number-column sx-card-index">
                         {{ i + 1 }}
                       </td>
 
-                      <td>
+                      <td class="sx-card-title">
                         <div class="service-info">
                           <div class="service-avatar">
                             {{ commission.serviceName?.charAt(0) }}
@@ -792,63 +792,63 @@
                         </div>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.PRICE' | translate">
                         <span class="price">Tshs {{ commission.price | number: '1.2-2' }}</span>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.OWNER' | translate">
                         <span class="percentage owner"> {{ commission.ownerPercent }}% </span>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.STAFF' | translate">
                         <span class="percentage staff"> {{ commission.staffPercent }}% </span>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.TRA' | translate">
                         <span class="percentage tra"> {{ commission.traPercent }}% </span>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.MAINTENANCE' | translate">
                         <span class="percentage maintenance">
                           {{ commission.maintenancePercent }}%
                         </span>
                       </td>
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.EMERGENCY' | translate">
                         <span class="percentage emergency">
                           {{ commission.emergencyPercent }}%
                         </span>
                       </td>
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.LOAN' | translate">
                         <span class="percentage emergency">
                           {{ commission.loanPercent }}%
                         </span>
                       </td>
-                       <td>
+                       <td [attr.data-label]="'COMMISSION_BREAKDOWN.RENT' | translate">
                         <span class="percentage emergency">
                           {{ commission.rentPercent }}%
                         </span>
                       </td>
-                       <td>
+                       <td [attr.data-label]="'COMMISSION_BREAKDOWN.LUKU' | translate">
                         <span class="percentage emergency">
                           {{ commission.lukuPercent }}%
                         </span>
                       </td>
-                       <td>
+                       <td [attr.data-label]="'COMMISSION_BREAKDOWN.WATER' | translate">
                         <span class="percentage emergency">
                           {{ commission.waterPercent }}%
                         </span>
                       </td>
-                       <td>
+                       <td [attr.data-label]="'COMMISSION_BREAKDOWN.STOCK_PURCHASE' | translate">
                         <span class="percentage emergency">
                           {{ commission.stockPurchasePercent }}%
                         </span>
                       </td>
 
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.OTHER' | translate">
                         <span class="percentage other"> {{ commission.otherPercent }}% </span>
                       </td>
 
-                  <td>
+                  <td [attr.data-label]="'COMMISSION_BREAKDOWN.TOTAL' | translate">
   <span class="total-percentage">
     <mat-icon>check_circle</mat-icon>
     {{
@@ -868,7 +868,7 @@
 </td>
 
 
-                      <td class="commission-actions-cell">
+                      <td class="commission-actions-cell sx-card-actions">
                         <button
                           mat-icon-button
                           type="button"

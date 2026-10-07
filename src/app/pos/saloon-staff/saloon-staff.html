@@ -60,7 +60,7 @@
 
           <!-- Table -->
           <div class="table-responsive sx-table-wrap">
-            <table class="table staff-table">
+            <table class="table staff-table sx-cards">
               <thead>
                 <tr>
                   <th>#</th>
@@ -78,12 +78,12 @@
                 @for (staff of saloonStaffDataSource.data; track staff.uid; let i = $index) {
                   <tr>
                     <!-- Number -->
-                    <td class="index-column">
+                    <td class="index-column sx-card-index">
                       {{ (pageParam.page || 0) * (pageParam.size || 10) + i + 1 }}
                     </td>
 
                     <!-- Staff -->
-                    <td>
+                    <td class="sx-card-title">
                       <div class="staff-info">
                         <div class="staff-avatar" [class.female]="staff.gender === 'Female'">
                           {{ staff.firstName?.charAt(0) || '?' }}
@@ -98,12 +98,12 @@
                         </div>
                       </div>
                     </td>
-                    <td>
+                    <td [attr.data-label]="'STAFF_PAGE.COL_PHONE' | translate">
                       {{ staff.phoneNumber || ('STAFF_PAGE.NO_PHONE' | translate) }}
                     </td>
 
                     <!-- Gender -->
-                    <td>
+                    <td [attr.data-label]="'STAFF_PAGE.COL_GENDER' | translate">
                       @if (staff.gender) {
                         <span
                           class="gender-badge"
@@ -122,7 +122,7 @@
                     </td>
 
                     <!-- Date of Birth -->
-                    <td>
+                    <td [attr.data-label]="'STAFF_PAGE.COL_DOB' | translate">
                       @if (staff.dateOfBirth) {
                         <div class="date-info">
                           <mat-icon>cake</mat-icon>
@@ -137,7 +137,7 @@
                     </td>
 
                     <!-- Category -->
-                    <td>
+                    <td [attr.data-label]="'STAFF_PAGE.COL_CATEGORY' | translate">
                       @if (staff.saloonCategory) {
                         <span class="category-badge">
                           <mat-icon>content_cut</mat-icon>
@@ -149,7 +149,7 @@
                     </td>
 
                     <!-- Status -->
-                    <td>
+                    <td [attr.data-label]="'COMMON.STATUS' | translate">
                       @if (staff.active === true) {
                         <span class="status-badge active">
                           <span class="status-dot"></span>
@@ -164,7 +164,7 @@
                     </td>
 
                     <!-- Actions -->
-                    <td class="actions-column">
+                    <td class="actions-column sx-card-actions">
                       <button mat-icon-button type="button" [matTooltip]="'STAFF_PAGE.TOOLTIP_VIEW' | translate" (click)="onViewStaff(staff)">
                         <mat-icon>visibility</mat-icon>
                       </button>

@@ -225,7 +225,7 @@
       *ngIf="details.length > 0"
     >
 
-      <table>
+      <table class="sx-cards">
 
         <thead>
 
@@ -261,12 +261,12 @@
             "
           >
 
-            <td>
+            <td class="sx-card-index">
               {{ i + 1 }}
             </td>
 
 
-            <td class="description">
+            <td class="description sx-card-title">
 
               {{
                 getDescription(item)
@@ -275,7 +275,7 @@
             </td>
 
 
-            <td>
+            <td [attr.data-label]="'COMMON.DATE' | translate">
 
               {{
                 getDescriptionDate(item)
@@ -284,7 +284,7 @@
             </td>
 
 
-            <td class="amount">
+            <td class="amount" [attr.data-label]="'COMMON.AMOUNT' | translate">
 
               {{
                 formatAmount(

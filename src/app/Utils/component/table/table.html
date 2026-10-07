@@ -5,10 +5,10 @@
     </mat-form-field>
   </div>
 
-  <table mat-table [dataSource]="dataSource" matSort>
+  <table mat-table class="sx-cards" [dataSource]="dataSource" matSort>
     <ng-container matColumnDef="sn">
       <th mat-header-cell *matHeaderCellDef class="with-divider"> S/NO: </th>
-   <td mat-cell *matCellDef="let row; let i = index" class="with-divider">
+   <td mat-cell *matCellDef="let row; let i = index" class="with-divider sx-card-index">
 
   <div
     class="serial-circle"
@@ -38,6 +38,7 @@
 
 <td
 mat-cell
+[attr.data-label]="(column.header || column.field) | uppercase"
 
 [style.background]="cellColor?.background"
 
@@ -83,7 +84,7 @@ mat-cell
     <!-- Actions Column -->
     <ng-container matColumnDef="actions">
       <th mat-header-cell *matHeaderCellDef> ACTIONS </th>
-      <td mat-cell *matCellDef="let row">
+      <td mat-cell class="sx-card-actions" *matCellDef="let row">
         <div class="action-icons">
 
           <ng-container *ngIf="customActionTemplate; else defaultActions">
