@@ -1,5 +1,5 @@
 export const environment = {
   production: true,
-  // Placeholder only - update to the real Midland backend URL once it is deployed.
+  // The backend on Render (render.yaml in midland_saloon_backend names it).
   baseApiUrl: 'https://midland-saloon-backend.onrender.com'
 };
