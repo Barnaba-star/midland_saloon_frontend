@@ -232,7 +232,7 @@ export class MainSidenav2 implements OnInit, OnDestroy {
 
 
     // Language
-    const lang = localStorage.getItem('language') || 'en';
+    const lang = localStorage.getItem('language') || 'sw';
 
     this.selectedLanguage = lang;
 
