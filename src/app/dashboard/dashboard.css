@@ -124,7 +124,7 @@
 }
 
 .icon-badge mat-icon {
-  color: #ffffff;
+  color: var(--sx-surface);
   width: 26px;
   height: 26px;
   font-size: 26px;

@@ -9,7 +9,7 @@
   cursor: pointer;
   font-size: 14px;
   color: rgb(129, 129, 135);
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted var(--sx-ink);
   border-top: 1px dotted rgb(192, 179, 179);
   display: flex;
   align-items: center;
@@ -18,7 +18,7 @@
 }
 
 .submenu-item:hover {
-  background: #eaeaea;
+  background: var(--sx-line);
 }
 
 
@@ -33,8 +33,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 10px;
-  background: white;
-  color: white;
+  background: var(--sx-surface);
+  color: var(--sx-surface);
   font-weight: 600;
   height: 130px;
   border-bottom: 1px dotted rgb(165, 152, 152);
@@ -99,7 +99,7 @@ position: static;
 
 
 .menu-item-logo img {
-  background-color: white;
+  background-color: var(--sx-surface);
   width: 100%;
   height: 100%;
   object-fit: contain;
@@ -130,7 +130,7 @@ position: static;
 }
 
 .profileItems:hover {
-  background: #f1f1f1;
+  background: var(--sx-navy-100);
 }
 
 .logout-item {
@@ -141,7 +141,7 @@ position: static;
 .example-container {
   width: 150px;
   height: calc(100vh - 60px);
-  background: #eee;
+  background: var(--sx-bg);
 }
 
 
@@ -155,8 +155,8 @@ position: static;
   justify-content: space-between;
   align-items: center;
   padding: 0 0px;
-  background: white;
-  color: white;
+  background: var(--sx-surface);
+  color: var(--sx-surface);
   z-index: 1000;
   border-bottom: 2px dotted rgb(169, 163, 163);
   animation: dropdownFade 1.5s ease-out;
@@ -205,7 +205,7 @@ position: static;
   max-height: 0;
   overflow: hidden;
   background: rgb(5, 3, 3);
-  border-left: 3px solid #e0e0e0;
+  border-left: 3px solid var(--sx-line);
   margin-left: 0px;
   border-radius: 5px;
   transition: max-height 0.5s ease;
@@ -221,7 +221,7 @@ position: static;
 
 
 .submenu-item:hover {
-  background: #eaeaea;
+  background: var(--sx-line);
 }
 
 /* MAIN CONTENT */
@@ -281,7 +281,7 @@ position: static;
 
 .sidebar-header {
   height: 75px;
-  background: white;
+  background: var(--sx-surface);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -297,25 +297,25 @@ position: static;
 
 .sidebar {
   width: 150px;
-  background: white;
+  background: var(--sx-surface);
 }
 
 
 .content {
   flex: 1;
   padding: 0px;
-  background: #f8fafc;
+  background: var(--sx-bg);
 }
 
 .footer {
   height: 40px;
-  background: #d7d9de;
+  background: var(--sx-line);
   color: rgb(143, 137, 137);
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: 13px;
-  border-top: 1px solid #1e293b;
+  border-top: 1px solid var(--sx-ink);
 }
 
 .logedUser {
@@ -397,7 +397,7 @@ position: static;
   justify-content: center;
 
   border-top: 1px dotted rgb(168, 185, 168);
-  background: white;
+  background: var(--sx-surface);
   cursor: pointer;
 }
 

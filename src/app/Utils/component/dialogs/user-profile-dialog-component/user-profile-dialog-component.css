@@ -3,7 +3,7 @@
   max-width: 95vw;
   max-height: 90vh;
   overflow-y: auto;
-  background: #ffffff;
+  background: var(--sx-surface);
   border-radius: 18px;
   padding: 0;
   box-sizing: border-box;
@@ -19,10 +19,10 @@
   padding: 22px 24px;
   background: linear-gradient(
     135deg,
-    #f0fdf4,
-    #ffffff
+    var(--sx-success-bg),
+    var(--sx-surface)
   );
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 .profile-avatar {
@@ -36,11 +36,11 @@
 
   background: linear-gradient(
     135deg,
-    #16a34a,
-    #22c55e
+    var(--sx-success),
+    var(--sx-success)
   );
 
-  color: white;
+  color: var(--sx-surface);
   font-size: 23px;
   font-weight: 700;
 
@@ -55,22 +55,22 @@
 
 .profile-title h2 {
   margin: 0 0 4px;
-  color: #111827;
+  color: var(--sx-ink);
   font-size: 18px;
   font-weight: 700;
 }
 
 .profile-title span {
-  color: #6b7280;
+  color: var(--sx-muted);
   font-size: 13px;
 }
 
 .close-btn {
-  color: #6b7280;
+  color: var(--sx-muted);
 }
 
 .close-btn:hover {
-  background: #f3f4f6;
+  background: var(--sx-bg);
 }
 
 
@@ -81,7 +81,7 @@
   align-items: center;
   gap: 10px;
   padding: 14px 24px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--sx-navy-100);
 }
 
 .status,
@@ -99,13 +99,13 @@
 }
 
 .status.active {
-  color: #15803d;
-  background: #dcfce7;
+  color: var(--sx-success);
+  background: var(--sx-success-bg);
 }
 
 .status.blocked {
-  color: #b91c1c;
-  background: #fee2e2;
+  color: var(--sx-danger);
+  background: var(--sx-danger-bg);
 }
 
 .status-dot {
@@ -116,8 +116,8 @@
 }
 
 .root-badge {
-  color: #7c3aed;
-  background: #ede9fe;
+  color: var(--sx-navy-700);
+  background: var(--sx-navy-100);
 }
 
 .root-badge mat-icon {
@@ -131,7 +131,7 @@
 
 .section {
   padding: 20px 24px;
-  border-bottom: 1px solid #f0f0f0;
+  border-bottom: 1px solid var(--sx-navy-100);
 }
 
 .section h3 {
@@ -141,13 +141,13 @@
 
   margin: 0 0 15px;
 
-  color: #374151;
+  color: var(--sx-muted);
   font-size: 14px;
   font-weight: 700;
 }
 
 .section h3 mat-icon {
-  color: #16a34a;
+  color: var(--sx-success);
   font-size: 19px;
   width: 19px;
   height: 19px;
@@ -165,9 +165,9 @@
 .info-item {
   padding: 12px 14px;
 
-  background: #f9fafb;
+  background: var(--sx-bg);
 
-  border: 1px solid #eef0f3;
+  border: 1px solid var(--sx-navy-100);
   border-radius: 10px;
 }
 
@@ -176,7 +176,7 @@
 
   margin-bottom: 5px;
 
-  color: #9ca3af;
+  color: var(--sx-muted);
 
   font-size: 11px;
   font-weight: 600;
@@ -188,7 +188,7 @@
 .info-item strong {
   display: block;
 
-  color: #1f2937;
+  color: var(--sx-ink);
 
   font-size: 14px;
   font-weight: 600;
@@ -205,7 +205,7 @@
 
   padding: 16px 24px;
 
-  background: #fafafa;
+  background: var(--sx-bg);
 }
 
 .dialog-footer button {

@@ -113,13 +113,13 @@
 ========================================= */
 
 .alert-success {
-  background: #e8f5e9;
-  color: #2e7d32;
+  background: var(--sx-success-bg);
+  color: var(--sx-success);
 }
 
 .alert-success .alert-icon {
-  background: #2e7d32;
-  color: white;
+  background: var(--sx-success);
+  color: var(--sx-surface);
 }
 
 
@@ -128,13 +128,13 @@
 ========================================= */
 
 .alert-error {
-  background: #ffebee;
-  color: #c62828;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 .alert-error .alert-icon {
-  background: #c62828;
-  color: white;
+  background: var(--sx-danger);
+  color: var(--sx-surface);
 }
 
 
@@ -143,13 +143,13 @@
 ========================================= */
 
 .alert-info {
-  background: #e3f2fd;
-  color: #1565c0;
+  background: var(--sx-navy-100);
+  color: var(--sx-navy-700);
 }
 
 .alert-info .alert-icon {
-  background: #1565c0;
-  color: white;
+  background: var(--sx-navy-700);
+  color: var(--sx-surface);
 }
 
 
@@ -158,13 +158,13 @@
 ========================================= */
 
 .alert-warning {
-  background: #fff8e1;
-  color: #ef6c00;
+  background: var(--sx-gold-100);
+  color: var(--sx-warning);
 }
 
 .alert-warning .alert-icon {
-  background: #ef6c00;
-  color: white;
+  background: var(--sx-warning);
+  color: var(--sx-surface);
 }
 
 

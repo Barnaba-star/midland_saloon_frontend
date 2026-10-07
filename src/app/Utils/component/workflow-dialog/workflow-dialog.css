@@ -15,8 +15,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #7d8084; 
-  border-bottom: 1px solid #d0d7e0;
+  background-color: var(--sx-muted); 
+  border-bottom: 1px solid var(--sx-line);
   display: flex;
   align-items: center;
   justify-content: space-between; /* left = title, right = buttons */
@@ -28,7 +28,7 @@ h2[mat-dialog-title] {
   font-size: 17px;
   font-weight: 600;
   margin: 0;
-  color: black;
+  color: var(--sx-ink);
   text-align: center;
 }
 
@@ -110,7 +110,7 @@ h2[mat-dialog-title] {
   justify-content: space-between; /* icons kushoto, text kulia */
   padding-top: 4px;
   margin-bottom: 0px;
-  background-color: #f7f7fa; /* rangi ya background */
+  background-color: var(--sx-bg); /* rangi ya background */
   margin-top: 5px;
 }
 

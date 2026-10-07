@@ -8,8 +8,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 0 20px;
-  background: white;
-  color: white;
+  background: var(--sx-surface);
+  color: var(--sx-surface);
   z-index: 1000; /* high enough */
   border-bottom: 1px dotted rgb(169, 163, 163);
 
@@ -49,7 +49,7 @@
 }
 
 .menu-item:hover {
-  background: #f2f2f2;
+  background: var(--sx-bg);
 }
 
 .menu-icon {
@@ -84,7 +84,7 @@
   max-height: 0;
   overflow: hidden;
   background: rgb(234, 228, 228);
-  border-left: 3px solid #e0e0e0;
+  border-left: 3px solid var(--sx-line);
   margin-left: 0px;
   border-radius: 5px;
   transition: max-height 0.5s ease;
@@ -101,7 +101,7 @@
   cursor: pointer;
   font-size: 14px;
   color: rgb(129, 129, 135);
-  border-bottom: 1px dotted black;
+  border-bottom: 1px dotted var(--sx-ink);
 
   height: 60px;
   display: flex;
@@ -111,7 +111,7 @@ gap: 30px;
 }
 
 .submenu-item:hover {
-  background: #eaeaea;
+  background: var(--sx-line);
 }
 
 /* MAIN CONTENT */
@@ -141,8 +141,8 @@ gap: 30px;
   justify-content: space-between; /* left + right */
   align-items: center;
   padding: 15px 2px;
-  background: white;
-  color: white;
+  background: var(--sx-surface);
+  color: var(--sx-surface);
   font-weight: 600;
   height: 10px;
   border-bottom: 1px dotted rgb(165, 152, 152);
@@ -211,7 +211,7 @@ position: relative;
   top: 100%; 
   right: 0;
   width: 180px;
-  background: white;
+  background: var(--sx-surface);
   border-radius: 12px;
   box-shadow: 0 4px 15px rgba(0,0,0,0.15);
   z-index: 1000;
@@ -237,7 +237,7 @@ position: relative;
 }
 
 .profileItems:hover {
-  background: #f1f1f1;
+  background: var(--sx-navy-100);
 }
 
 .logout-item {
@@ -247,5 +247,5 @@ position: relative;
 .example-container {
   width: 150px;
   height: calc(100vh - 60px);
-  background: #eee;
+  background: var(--sx-bg);
 }

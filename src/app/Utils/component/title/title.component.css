@@ -5,7 +5,7 @@
   height: 55px;
   padding: 0 10px;
   background-color: rgb(145, 135, 135);
-  border-bottom: 1px dotted #1e293b;
+  border-bottom: 1px dotted var(--sx-ink);
   gap: 10px;
   animation: dropdownFade 1.5s ease-out forwards;
 }
@@ -89,7 +89,7 @@
 
 .action-item.active .app-title,
 .action-item.active .app-icon {
-  color: #2563eb;
+  color: var(--sx-navy-700);
   font-weight: 500;
 }
 
@@ -100,7 +100,7 @@
 
 
 .action-item:focus-visible {
-  outline: 2px solid #3b82f6;
+  outline: 2px solid var(--sx-navy-700);
   outline-offset: 2px;
 }
 

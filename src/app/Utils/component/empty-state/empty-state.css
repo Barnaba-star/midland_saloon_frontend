@@ -28,8 +28,8 @@
 
   border-radius: 14px;
 
-  background: #f1f5f9;
-  color: #94a3b8;
+  background: var(--sx-bg);
+  color: var(--sx-muted);
 
   margin-bottom: 12px;
 }
@@ -50,7 +50,7 @@
   font-size: 13px;
   font-weight: 600;
 
-  color: #475467;
+  color: var(--sx-muted);
 }
 
 .empty-state-text {
@@ -61,7 +61,7 @@
   font-size: 12px;
   line-height: 1.5;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 
@@ -102,7 +102,7 @@
 .empty-state.compact .empty-state-title {
   font-size: 12px;
   font-weight: 500;
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 

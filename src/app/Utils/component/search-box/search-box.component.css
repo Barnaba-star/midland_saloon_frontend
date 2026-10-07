@@ -7,8 +7,8 @@
   height: 40px;
   padding: 0 12px;
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
   transition: border-color 0.16s ease, box-shadow 0.16s ease;
 }
@@ -16,7 +16,7 @@
 /* The whole box reacts, not just the input - the input itself has no border
    of its own so the focus ring has to live out here. */
 .search-box:focus-within {
-  border-color: #a5b4fc;
+  border-color: var(--sx-navy-300);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.14);
 }
 
@@ -25,7 +25,7 @@
   width: 17px;
   height: 17px;
   font-size: 17px;
-  color: #94a3b8;
+  color: var(--sx-muted);
 }
 
 .search-input {
@@ -35,13 +35,13 @@
   background: transparent;
   border: none;
   outline: none;
-  color: #0f172a;
+  color: var(--sx-ink);
   font-family: inherit;
   font-size: 13.5px;
 }
 
 .search-input::placeholder {
-  color: #94a3b8;
+  color: var(--sx-muted);
 }
 
 .clear-btn {
@@ -54,13 +54,13 @@
   background: transparent;
   border: none;
   border-radius: 8px;
-  color: #94a3b8;
+  color: var(--sx-muted);
   cursor: pointer;
 }
 
 .clear-btn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--sx-bg);
+  color: var(--sx-ink);
 }
 
 .clear-btn mat-icon {

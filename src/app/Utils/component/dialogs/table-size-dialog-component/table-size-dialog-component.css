@@ -10,18 +10,18 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 12px;
-  background: #f8fafc;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-bg);
+  border: 1px solid var(--sx-line);
   border-radius: 8px;
 }
 
 .detail-row span {
-  color: #64748b;
+  color: var(--sx-muted);
   font-size: 14px;
 }
 
 .detail-row strong {
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 14px;
 }
 
@@ -31,13 +31,13 @@
 }
 
 mat-dialog-content {
-  min-width: 400px;
+  min-width: min(400px, 100%);
   padding-top: 8px !important;
 }
 
 mat-dialog-actions {
   padding: 16px 0 0 !important;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--sx-line);
   margin-top: 8px;
 }
 
@@ -47,7 +47,7 @@ mat-dialog-actions button {
 }
 
 h2[mat-dialog-title] {
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 18px;
   font-weight: 600;
   margin-bottom: 16px;

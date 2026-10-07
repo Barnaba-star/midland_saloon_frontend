@@ -2,7 +2,7 @@ mat-sidenav-container {
   display: flex;
   flex-direction: row;
   height: 90vh;
-  border-right: 2px solid white;
+  border-right: 2px solid var(--sx-surface);
   padding: 0;       /* padding yote ndani 0 */
   margin: 0;
 }
@@ -11,7 +11,7 @@ mat-sidenav-container {
 mat-sidenav {
   flex: 0 0 240px;
   max-width: 150px;
-  background-color:white;
+  background-color:var(--sx-surface);
   padding: 0px 0px;
   border-radius: 0;
   font-size: larger;
@@ -30,23 +30,23 @@ mat-nav-list a.mat-mdc-list-item {
   justify-content: center !important;
   text-align: center;
   transition: background-color 0.3s;
-  color: #cbd5e1;
+  color: var(--sx-line);
   text-decoration: none;
-  background-color: white;
+  background-color: var(--sx-surface);
   height: 90px;
   border-radius: 0;
   padding: 0;
   gap: 4px;
-  border-top: 1px solid #e2e8f0;  /* light grey */
-  border-bottom: 1px solid #e2e8f0;
+  border-top: 1px solid var(--sx-line);  /* light grey */
+  border-bottom: 1px solid var(--sx-line);
 }
 
 /* Active link style */
 mat-nav-list a.active {
-  background-color: white;
-  color: #ffffff;
+  background-color: var(--sx-surface);
+  color: var(--sx-surface);
   font-weight: bold;
-  border-bottom: 2px solid white;
+  border-bottom: 2px solid var(--sx-surface);
 }
 
 
@@ -73,7 +73,7 @@ mat-nav-list a.active {
   object-fit: cover;
   border-radius: 4px;
   cursor: pointer;
-  background-color:  #7d8084;;
+  background-color:  var(--sx-muted);;
 }
 
 
@@ -91,11 +91,11 @@ mat-nav-list a.active {
   height: 24px;
   margin-right: 2px;
   fill: currentColor;
-  color: #2716c2;
+  color: var(--sx-navy-700);
   transition: color 0.3s ease;
 }
 .logo-icons{
-background-color: white;
+background-color: var(--sx-surface);
 }
 
 
@@ -103,13 +103,13 @@ background-color: white;
 /* Sidenav content */
 mat-sidenav-content {
   flex: 1;
-  background-color: white;
+  background-color: var(--sx-surface);
   padding: 0.5px;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid var(--sx-surface);
 
   overflow-x: hidden;
   overflow-y: auto;
-  border-right: 2px solid white;
+  border-right: 2px solid var(--sx-surface);
   padding: 0;
   margin: 0;
 }

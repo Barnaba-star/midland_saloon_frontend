@@ -30,7 +30,7 @@ mat-form-field .mat-form-field-label {
 
 /* Ondoa background kijivu kwenye fill */
 :host ::ng-deep .mat-mdc-text-field-wrapper.mdc-text-field--filled {
-  background-color: white !important;
+  background-color: var(--sx-surface) !important;
 }
 
 /* Ondoa overlay ya focus */

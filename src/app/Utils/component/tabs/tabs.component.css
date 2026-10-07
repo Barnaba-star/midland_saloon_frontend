@@ -1,9 +1,9 @@
 .custom-tab-group {
-  background-color: #223a6c;
-  border-bottom: 1px solid #ccc;
+  background-color: var(--sx-navy-700);
+  border-bottom: 1px solid var(--sx-line);
   box-shadow: 0 4px 12px rgba(183, 42, 42, 0.1);
   padding: 0;
-  border: 1px  #000;
+  border: 1px  var(--sx-ink);
   position: sticky;  
   top: 0;
   z-index: 1000; 

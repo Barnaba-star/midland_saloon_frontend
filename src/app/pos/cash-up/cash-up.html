@@ -15,64 +15,66 @@
       @if (loadingShift) {
         <p class="muted">{{ 'OTHER_SPLIT.LOADING' | translate }}</p>
       } @else {
-        <table class="cu-table">
-          <thead>
-            <tr>
-              <th>{{ 'CASH_UP.COL_METHOD' | translate }}</th>
-              <th class="num">{{ 'CASH_UP.COL_TAKINGS' | translate }}</th>
-              <th class="num">{{ 'CASH_UP.COL_PAYOUTS' | translate }}</th>
-              <th class="num">{{ 'CASH_UP.COL_EXPECTED' | translate }}</th>
-              <th class="num">{{ 'CASH_UP.COL_COUNTED' | translate }}</th>
-              <th class="num">{{ 'CASH_UP.COL_VARIANCE' | translate }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            @for (l of lines; track l.method) {
+        <div class="sx-table-wrap">
+          <table class="cu-table">
+            <thead>
               <tr>
-                <td>
-                  <strong>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</strong>
-                  @if (l.bills) { <small class="muted">{{ 'CASH_UP.BILLS' | translate: { count: l.bills } }}</small> }
-                </td>
-                <td class="num">{{ l.takings | number }}</td>
+                <th>{{ 'CASH_UP.COL_METHOD' | translate }}</th>
+                <th class="num">{{ 'CASH_UP.COL_TAKINGS' | translate }}</th>
+                <th class="num">{{ 'CASH_UP.COL_PAYOUTS' | translate }}</th>
+                <th class="num">{{ 'CASH_UP.COL_EXPECTED' | translate }}</th>
+                <th class="num">{{ 'CASH_UP.COL_COUNTED' | translate }}</th>
+                <th class="num">{{ 'CASH_UP.COL_VARIANCE' | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (l of lines; track l.method) {
+                <tr>
+                  <td>
+                    <strong>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</strong>
+                    @if (l.bills) { <small class="muted">{{ 'CASH_UP.BILLS' | translate: { count: l.bills } }}</small> }
+                  </td>
+                  <td class="num">{{ l.takings | number }}</td>
+                  <td class="num">
+                    @if (l.payouts) { <span class="neg">−{{ l.payouts | number }}</span> } @else { <span class="muted">-</span> }
+                  </td>
+                  <td class="num"><strong>{{ l.expected | number }}</strong></td>
+                  <td class="num">
+                    <input type="number" min="0" step="1" [(ngModel)]="l.counted" [name]="'c-' + l.method"
+                           [placeholder]="'CASH_UP.COUNT_PH' | translate" />
+                  </td>
+                  <td class="num">
+                    @if (variance(l) !== null) {
+                      <span class="pill" [class.short]="variance(l)! < 0" [class.over]="variance(l)! > 0" [class.even]="variance(l) === 0">
+                        {{ variance(l)! > 0 ? '+' : '' }}{{ variance(l) | number }}
+                      </span>
+                    } @else {
+                      <span class="muted">-</span>
+                    }
+                  </td>
+                </tr>
+              }
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>{{ 'OTHER_SPLIT.TOTAL' | translate }}</td>
+                <td class="num">{{ takingsTotal | number }}</td>
+                <td class="num">@if (payoutsTotal) { <span class="neg">−{{ payoutsTotal | number }}</span> } @else { - }</td>
+                <td class="num">{{ expectedTotal | number }}</td>
+                <td class="num">{{ countedTotal | number }}</td>
                 <td class="num">
-                  @if (l.payouts) { <span class="neg">−{{ l.payouts | number }}</span> } @else { <span class="muted">-</span> }
-                </td>
-                <td class="num"><strong>{{ l.expected | number }}</strong></td>
-                <td class="num">
-                  <input type="number" min="0" step="1" [(ngModel)]="l.counted" [name]="'c-' + l.method"
-                         [placeholder]="'CASH_UP.COUNT_PH' | translate" />
-                </td>
-                <td class="num">
-                  @if (variance(l) !== null) {
-                    <span class="pill" [class.short]="variance(l)! < 0" [class.over]="variance(l)! > 0" [class.even]="variance(l) === 0">
-                      {{ variance(l)! > 0 ? '+' : '' }}{{ variance(l) | number }}
+                  @if (anyCounted) {
+                    <span class="pill" [class.short]="countedTotal - expectedTotal < 0" [class.over]="countedTotal - expectedTotal > 0" [class.even]="countedTotal === expectedTotal">
+                      {{ countedTotal - expectedTotal > 0 ? '+' : '' }}{{ countedTotal - expectedTotal | number }}
                     </span>
                   } @else {
                     <span class="muted">-</span>
                   }
                 </td>
               </tr>
-            }
-          </tbody>
-          <tfoot>
-            <tr>
-              <td>{{ 'OTHER_SPLIT.TOTAL' | translate }}</td>
-              <td class="num">{{ takingsTotal | number }}</td>
-              <td class="num">@if (payoutsTotal) { <span class="neg">−{{ payoutsTotal | number }}</span> } @else { - }</td>
-              <td class="num">{{ expectedTotal | number }}</td>
-              <td class="num">{{ countedTotal | number }}</td>
-              <td class="num">
-                @if (anyCounted) {
-                  <span class="pill" [class.short]="countedTotal - expectedTotal < 0" [class.over]="countedTotal - expectedTotal > 0" [class.even]="countedTotal === expectedTotal">
-                    {{ countedTotal - expectedTotal > 0 ? '+' : '' }}{{ countedTotal - expectedTotal | number }}
-                  </span>
-                } @else {
-                  <span class="muted">-</span>
-                }
-              </td>
-            </tr>
-          </tfoot>
-        </table>
+            </tfoot>
+          </table>
+        </div>
 
         <!-- Payouts recorded in the system during this shift: read from those records, not typed here. -->
         <div class="cu-payouts">
@@ -146,57 +148,59 @@
           {{ 'CASH_UP.NET_VARIANCE' | translate }}: {{ historyVariance > 0 ? '+' : '' }}{{ historyVariance | number }}
         </span>
       </div>
-      <table class="cu-table">
-        <thead>
-          <tr>
-            <th>{{ 'CASH_UP.COL_CASHIER' | translate }}</th>
-            <th>{{ 'CASH_UP.COL_SHIFT' | translate }}</th>
-            <th class="num">{{ 'CASH_UP.COL_BILLS' | translate }}</th>
-            <th class="num">{{ 'CASH_UP.COL_EXPECTED' | translate }}</th>
-            <th class="num">{{ 'CASH_UP.COL_COUNTED' | translate }}</th>
-            <th class="num">{{ 'CASH_UP.COL_VARIANCE' | translate }}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (c of history; track c.uid) {
-            <tr class="row" (click)="toggle(c)">
-              <td><strong>{{ c.cashierName || c.cashierEmail }}</strong></td>
-              <td>{{ c.periodFrom | date: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
-              <td class="num">{{ c.billCount }}</td>
-              <td class="num">{{ c.expectedTotal | number }}</td>
-              <td class="num">{{ c.countedTotal | number }}</td>
-              <td class="num">
-                <span class="pill" [class.short]="c.variance < 0" [class.over]="c.variance > 0" [class.even]="c.variance === 0">
-                  {{ c.variance > 0 ? '+' : '' }}{{ c.variance | number }}
-                </span>
-              </td>
-              <td class="num"><mat-icon class="chev">{{ openUid === c.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
+      <div class="sx-table-wrap">
+        <table class="cu-table">
+          <thead>
+            <tr>
+              <th>{{ 'CASH_UP.COL_CASHIER' | translate }}</th>
+              <th>{{ 'CASH_UP.COL_SHIFT' | translate }}</th>
+              <th class="num">{{ 'CASH_UP.COL_BILLS' | translate }}</th>
+              <th class="num">{{ 'CASH_UP.COL_EXPECTED' | translate }}</th>
+              <th class="num">{{ 'CASH_UP.COL_COUNTED' | translate }}</th>
+              <th class="num">{{ 'CASH_UP.COL_VARIANCE' | translate }}</th>
+              <th></th>
             </tr>
-            @if (openUid === c.uid) {
-              <tr class="detail">
-                <td colspan="7">
-                  <div class="detail-box">
-                    @for (l of openLines; track l.method) {
-                      <div class="detail-line">
-                        <span>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</span>
-                        <span>{{ 'CASH_UP.COL_TAKINGS' | translate }}: {{ l.takings | number }}@if (l.payouts) { <span class="neg"> −{{ l.payouts | number }}</span> } = {{ l.expected | number }}</span>
-                        <span>{{ 'CASH_UP.COL_COUNTED' | translate }}: {{ l.counted | number }}</span>
-                        <span class="pill" [class.short]="l.variance < 0" [class.over]="l.variance > 0" [class.even]="l.variance === 0">
-                          {{ l.variance > 0 ? '+' : '' }}{{ l.variance | number }}
-                        </span>
-                      </div>
-                    }
-                    @if (c.note) {
-                      <p class="detail-note"><mat-icon>sticky_note_2</mat-icon>{{ c.note }}</p>
-                    }
-                  </div>
+          </thead>
+          <tbody>
+            @for (c of history; track c.uid) {
+              <tr class="row" (click)="toggle(c)">
+                <td><strong>{{ c.cashierName || c.cashierEmail }}</strong></td>
+                <td>{{ c.periodFrom | date: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
+                <td class="num">{{ c.billCount }}</td>
+                <td class="num">{{ c.expectedTotal | number }}</td>
+                <td class="num">{{ c.countedTotal | number }}</td>
+                <td class="num">
+                  <span class="pill" [class.short]="c.variance < 0" [class.over]="c.variance > 0" [class.even]="c.variance === 0">
+                    {{ c.variance > 0 ? '+' : '' }}{{ c.variance | number }}
+                  </span>
                 </td>
+                <td class="num"><mat-icon class="chev">{{ openUid === c.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
               </tr>
+              @if (openUid === c.uid) {
+                <tr class="detail">
+                  <td colspan="7">
+                    <div class="detail-box">
+                      @for (l of openLines; track l.method) {
+                        <div class="detail-line">
+                          <span>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</span>
+                          <span>{{ 'CASH_UP.COL_TAKINGS' | translate }}: {{ l.takings | number }}@if (l.payouts) { <span class="neg"> −{{ l.payouts | number }}</span> } = {{ l.expected | number }}</span>
+                          <span>{{ 'CASH_UP.COL_COUNTED' | translate }}: {{ l.counted | number }}</span>
+                          <span class="pill" [class.short]="l.variance < 0" [class.over]="l.variance > 0" [class.even]="l.variance === 0">
+                            {{ l.variance > 0 ? '+' : '' }}{{ l.variance | number }}
+                          </span>
+                        </div>
+                      }
+                      @if (c.note) {
+                        <p class="detail-note"><mat-icon>sticky_note_2</mat-icon>{{ c.note }}</p>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
             }
-          }
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
     }
   </section>
 </div>

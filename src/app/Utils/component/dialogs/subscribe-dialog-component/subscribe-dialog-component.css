@@ -15,13 +15,13 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
 }
 
 .dialog-subtitle {
   margin: 4px 0 20px;
   font-size: 13px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .close-btn {
@@ -30,7 +30,7 @@
   border: none;
   background: transparent;
   border-radius: 50%;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -39,7 +39,7 @@
 }
 
 .close-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .form-field {
@@ -51,23 +51,23 @@
   margin-bottom: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .input-wrapper {
   display: flex;
   align-items: center;
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
   border-radius: var(--radius-sm, 10px);
 
-  background: var(--color-surface, #ffffff);
+  background: var(--color-surface, var(--sx-surface));
 
   transition: border-color 0.2s ease;
 }
 
 .input-wrapper:focus-within {
-  border-color: var(--color-primary, #14315d);
+  border-color: var(--color-primary, var(--sx-navy-700));
 }
 
 .input-wrapper input {
@@ -81,7 +81,7 @@
   padding: 10px 12px;
 
   font-size: 14px;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
   font-family: inherit;
 }
 
@@ -100,7 +100,7 @@
   padding: 10px 12px;
 
   font-size: 14px;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
   font-family: inherit;
 
   appearance: none;
@@ -110,7 +110,7 @@
   width: 18px;
   height: 18px;
   font-size: 18px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   flex-shrink: 0;
 }
 
@@ -129,9 +129,9 @@
   gap: 2px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  border: 1px solid var(--color-border, var(--sx-line));
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -146,7 +146,7 @@
 .chip-amount {
   font-size: 11px;
   font-weight: 600;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -157,13 +157,13 @@
 }
 
 .month-chip:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .month-chip.active {
-  background: var(--color-primary, #14315d);
-  border-color: var(--color-primary, #14315d);
-  color: #ffffff;
+  background: var(--color-primary, var(--sx-navy-700));
+  border-color: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
 }
 
 .error-banner,
@@ -181,13 +181,13 @@
 }
 
 .error-banner {
-  background: #fef2f2;
-  color: #b91c1c;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 .success-banner {
-  background: #f0fdf4;
-  color: #15803d;
+  background: var(--sx-success-bg);
+  color: var(--sx-success);
 }
 
 .error-banner mat-icon,
@@ -218,19 +218,19 @@
 }
 
 .cancel-btn {
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  border: 1px solid var(--color-border, var(--sx-line));
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
 }
 
 .cancel-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .save-btn {
   border: none;
-  background: var(--color-primary, #14315d);
-  color: #ffffff;
+  background: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
 }
 
 .save-btn:disabled {

@@ -8,7 +8,7 @@
 
   box-sizing: border-box;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 
@@ -28,9 +28,9 @@
 
   border-radius: 50%;
 
-  background: #fef3f2;
+  background: var(--sx-danger-bg);
 
-  color: #d92d20;
+  color: var(--sx-danger);
 }
 
 .delete-icon-wrapper mat-icon {
@@ -50,7 +50,7 @@
 .delete-content h2 {
   margin: 0;
 
-  color: #101828;
+  color: var(--sx-ink);
 
   font-size: 18px;
   font-weight: 700;
@@ -61,7 +61,7 @@
 .delete-content p {
   margin: 8px 0 18px;
 
-  color: #667085;
+  color: var(--sx-muted);
 
   font-size: 13px;
 
@@ -85,11 +85,11 @@
 
   box-sizing: border-box;
 
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--sx-line);
 
   border-radius: 8px;
 
-  background: #f9fafb;
+  background: var(--sx-bg);
 }
 
 
@@ -105,11 +105,11 @@
 
   border-radius: 6px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  border: 1px solid #eaecf0;
+  border: 1px solid var(--sx-line);
 
-  color: #667085;
+  color: var(--sx-muted);
 }
 
 .item-preview-icon mat-icon {
@@ -131,7 +131,7 @@
 
 
 .item-label {
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 9px;
   font-weight: 600;
@@ -145,7 +145,7 @@
 .item-name {
   overflow: hidden;
 
-  color: #344054;
+  color: var(--sx-muted);
 
   font-size: 12px;
   font-weight: 650;
@@ -209,17 +209,17 @@
 ================================ */
 
 .cancel-button {
-  border: 1px solid #d0d5dd;
+  border: 1px solid var(--sx-line);
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  color: #344054;
+  color: var(--sx-muted);
 }
 
 .cancel-button:hover {
-  background: #f9fafb;
+  background: var(--sx-bg);
 
-  border-color: #98a2b3;
+  border-color: var(--sx-muted);
 }
 
 .cancel-button:active {
@@ -232,17 +232,17 @@
 ================================ */
 
 .delete-button {
-  border: 1px solid #d92d20;
+  border: 1px solid var(--sx-danger);
 
-  background: #d92d20;
+  background: var(--sx-danger);
 
-  color: #ffffff;
+  color: var(--sx-surface);
 }
 
 .delete-button:hover {
-  background: #b42318;
+  background: var(--sx-danger);
 
-  border-color: #b42318;
+  border-color: var(--sx-danger);
 }
 
 .delete-button:active {

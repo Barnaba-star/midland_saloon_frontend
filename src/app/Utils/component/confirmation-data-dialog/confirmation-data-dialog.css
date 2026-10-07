@@ -14,8 +14,8 @@
   font-size: 20px;
   font-weight: 600;
   padding: 16px 24px;
-  color: #a8a88c;
-  border-bottom: 1px solid #eee;
+  color: var(--sx-muted);
+  border-bottom: 1px solid var(--sx-bg);
 }
 
 
@@ -23,7 +23,7 @@
 .dialog-content {
   padding: 20px 24px;
   font-size: 16px;
-  color: #333;
+  color: var(--sx-ink);
 }
 
 /* Dropdown field */
@@ -35,8 +35,8 @@
 /* Actions row */
 .dialog-actions {
   padding: 12px 24px;
-  background: #fafafa;
-  border-top: 1px solid #eee;
+  background: var(--sx-bg);
+  border-top: 1px solid var(--sx-bg);
 }
 
 .dialog-actions button {

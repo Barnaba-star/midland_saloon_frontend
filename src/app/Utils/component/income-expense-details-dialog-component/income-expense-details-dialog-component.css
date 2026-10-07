@@ -1,8 +1,8 @@
 .dialog-container {
   width: 100%;
   max-width: 100%;
-  background: #ffffff;
-  color: #1f2937;
+  background: var(--sx-surface);
+  color: var(--sx-ink);
   overflow: hidden;
 }
 
@@ -13,17 +13,17 @@
 
 .dialog-header {
   padding: 24px 28px 20px;
-  border-bottom: 1px solid #edf0f4;
+  border-bottom: 1px solid var(--sx-bg);
   background: linear-gradient(
     135deg,
-    #ffffff 0%,
-    #f8fbff 100%
+    var(--sx-surface) 0%,
+    var(--sx-navy-50) 100%
   );
 }
 
 .dialog-header h2 {
   margin: 0;
-  color: #172033;
+  color: var(--sx-navy-900);
   font-size: 22px;
   font-weight: 750;
   line-height: 1.3;
@@ -31,7 +31,7 @@
 
 .subtitle {
   margin: 7px 0 0;
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 13px;
   line-height: 1.5;
 }
@@ -77,11 +77,11 @@ mat-dialog-content {
 
   padding: 18px;
 
-  border: 1px solid #e8edf3;
+  border: 1px solid var(--sx-navy-100);
 
   border-radius: 14px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
   box-shadow:
     0 2px 8px rgba(16, 24, 40, 0.04);
@@ -109,7 +109,7 @@ mat-dialog-content {
 
   margin-bottom: 5px;
 
-  color: #667085;
+  color: var(--sx-muted);
 
   font-size: 12px;
 
@@ -161,57 +161,57 @@ mat-dialog-content {
 /* INCOME */
 
 .summary-card.income {
-  background: #f6fffa;
+  background: var(--sx-navy-50);
 
-  border-color: #d9f2e3;
+  border-color: var(--sx-success-bg);
 }
 
 .summary-card.income .summary-icon {
-  background: #dcfce7;
+  background: var(--sx-success-bg);
 
-  color: #16a34a;
+  color: var(--sx-success);
 }
 
 .summary-card.income strong {
-  color: #15803d;
+  color: var(--sx-success);
 }
 
 
 /* EXPENSE */
 
 .summary-card.expense {
-  background: #fff8f8;
+  background: var(--sx-danger-bg);
 
-  border-color: #f8dddd;
+  border-color: var(--sx-danger-bg);
 }
 
 .summary-card.expense .summary-icon {
-  background: #fee2e2;
+  background: var(--sx-danger-bg);
 
-  color: #dc2626;
+  color: var(--sx-danger);
 }
 
 .summary-card.expense strong {
-  color: #dc2626;
+  color: var(--sx-danger);
 }
 
 
 /* BALANCE */
 
 .summary-card.balance {
-  background: #f6f9ff;
+  background: var(--sx-navy-50);
 
-  border-color: #dce8ff;
+  border-color: var(--sx-info-bg);
 }
 
 .summary-card.balance .summary-icon {
-  background: #dbeafe;
+  background: var(--sx-navy-100);
 
-  color: #2563eb;
+  color: var(--sx-navy-700);
 }
 
 .summary-card.balance strong {
-  color: #2563eb;
+  color: var(--sx-navy-700);
 }
 
 
@@ -226,7 +226,7 @@ mat-dialog-content {
 
   gap: 8px;
 
-  color: #1f2937;
+  color: var(--sx-ink);
 
   font-size: 15px;
 
@@ -239,7 +239,7 @@ mat-dialog-content {
 
   font-size: 19px;
 
-  color: #2563eb;
+  color: var(--sx-navy-700);
 }
 
 
@@ -260,13 +260,13 @@ mat-dialog-content {
 .details-box {
   width: 100%;
 
-  border: 1px solid #e7ebf0;
+  border: 1px solid var(--sx-line);
 
   border-radius: 13px;
 
   overflow: hidden;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 
@@ -283,7 +283,7 @@ mat-dialog-content {
 
   padding: 10px 17px;
 
-  border-bottom: 1px solid #edf0f4;
+  border-bottom: 1px solid var(--sx-bg);
 }
 
 
@@ -293,7 +293,7 @@ mat-dialog-content {
 
 
 .detail-row > span {
-  color: #667085;
+  color: var(--sx-muted);
 
   font-size: 12px;
 
@@ -302,7 +302,7 @@ mat-dialog-content {
 
 
 .detail-row > strong {
-  color: #344054;
+  color: var(--sx-muted);
 
   font-size: 13px;
 
@@ -339,9 +339,9 @@ mat-dialog-content {
 
   border-radius: 20px;
 
-  background: #eff6ff;
+  background: var(--sx-navy-50);
 
-  color: #2563eb;
+  color: var(--sx-navy-700);
 
   font-size: 11px;
 
@@ -357,10 +357,10 @@ mat-dialog-content {
 
 .history-table {
   width: 100%;
-  border: 1px solid #e5eaf0;
+  border: 1px solid var(--sx-line);
   border-radius: 13px;
   overflow: hidden;
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 .table-header,
@@ -378,8 +378,8 @@ mat-dialog-content {
 .table-header {
   min-height: 45px;
   padding: 0 17px;
-  background: #f8fafc;
-  color: #667085;
+  background: var(--sx-bg);
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 750;
   text-transform: uppercase;
@@ -389,12 +389,12 @@ mat-dialog-content {
 .table-row {
   min-height: 65px;
   padding: 10px 17px;
-  border-top: 1px solid #edf0f4;
+  border-top: 1px solid var(--sx-bg);
   transition: background 0.2s ease;
 }
 
 .table-row:hover {
-  background: #f8fbff;
+  background: var(--sx-navy-50);
 }
 
 
@@ -428,9 +428,9 @@ mat-dialog-content {
 
   border-radius: 9px;
 
-  background: #eff6ff;
+  background: var(--sx-navy-50);
 
-  color: #2563eb;
+  color: var(--sx-navy-700);
 }
 
 
@@ -443,7 +443,7 @@ mat-dialog-content {
 
 
 .date-cell strong {
-  color: #344054;
+  color: var(--sx-muted);
 
   font-size: 9px;
 
@@ -456,7 +456,7 @@ mat-dialog-content {
 ========================================= */
 
 .amount-cell {
-  color: #dc2626;
+  color: var(--sx-danger);
 
   font-size: 14px;
 
@@ -473,7 +473,7 @@ mat-dialog-content {
 .description-cell {
   min-width: 0;
 
-  color: #475467;
+  color: var(--sx-muted);
 
   font-size: 13px;
 
@@ -500,7 +500,7 @@ mat-dialog-content {
 
   text-align: center;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 
@@ -512,14 +512,14 @@ mat-dialog-content {
 
   font-size: 42px;
 
-  color: #cbd5e1;
+  color: var(--sx-line);
 }
 
 
 .empty-history h3 {
   margin: 0 0 5px;
 
-  color: #475467;
+  color: var(--sx-muted);
 
   font-size: 15px;
 
@@ -532,7 +532,7 @@ mat-dialog-content {
 
   margin: 0;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 12px;
 
@@ -551,9 +551,9 @@ mat-dialog-actions {
 
   padding: 12px 28px !important;
 
-  border-top: 1px solid #edf0f4;
+  border-top: 1px solid var(--sx-bg);
 
-  background: #fafbfc;
+  background: var(--sx-navy-50);
 }
 
 
@@ -579,13 +579,13 @@ mat-dialog-content::-webkit-scrollbar-track {
 }
 
 mat-dialog-content::-webkit-scrollbar-thumb {
-  background: #d0d5dd;
+  background: var(--sx-line);
 
   border-radius: 10px;
 }
 
 mat-dialog-content::-webkit-scrollbar-thumb:hover {
-  background: #98a2b3;
+  background: var(--sx-muted);
 }
 
 
@@ -676,8 +676,8 @@ mat-dialog-content::-webkit-scrollbar-thumb:hover {
 
 }
 .close-btn {
-  background: #f1f5f9 !important;
-  color: #344054 !important;
+  background: var(--sx-bg) !important;
+  color: var(--sx-muted) !important;
 }
 
 .close-btn mat-icon {

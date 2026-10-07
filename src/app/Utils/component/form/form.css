@@ -5,13 +5,13 @@
      mat-form-field labels/inputs regardless of the app's actual mode.
      Pin them to the app's own theme-aware colors so Material fields
      always match. */
-  --mat-sys-on-surface: var(--color-text, #111827);
-  --mat-sys-on-surface-variant: var(--color-text-muted, #6b7280);
+  --mat-sys-on-surface: var(--color-text, var(--sx-ink));
+  --mat-sys-on-surface-variant: var(--color-text-muted, var(--sx-muted));
 }
 
 form {
-  background-color: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  background-color: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
   width: 100%;
   box-sizing: border-box;
   padding: 8px 12px 0;
@@ -21,7 +21,7 @@ form {
   text-align: left;
   font-size: 20px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
   letter-spacing: -0.3px;
   margin: 0 0 16px;
 }
@@ -56,12 +56,12 @@ form {
 .form-field-wrapper label {
   font-weight: 600;
   font-size: 13px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   margin-bottom: 4px;
 }
 
 .form-control:focus {
-  border-color: #1976d2;
+  border-color: var(--sx-navy-700);
   outline: none;
 }
 
@@ -87,8 +87,8 @@ form {
 button[type="submit"] {
   margin-top: 2px;
   width: 100%;
-  background-color: var(--color-primary, #14315d);
-  color: #ffffff;
+  background-color: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
   border: none;
   padding: 10px 10px;
   font-weight: 600;
@@ -97,7 +97,7 @@ button[type="submit"] {
 }
 
 button[type="submit"]:hover {
-  background-color: var(--color-primary-dark, #0a1c38);
+  background-color: var(--color-primary-dark, var(--sx-navy-900));
 }
 .w-100 {
   width: 100%;
@@ -135,7 +135,7 @@ mat-form-field .mat-form-field-label-required {
 
 ::ng-deep .mat-option.selected-option {
   font-weight: bold;
-  color: blue;
+  color: var(--sx-navy-700);
 }
 
 
@@ -156,10 +156,10 @@ mat-form-field .mat-form-field-label-required {
 
     padding:0 14px;
 
-    border:1px solid #d9d9d9;
+    border:1px solid var(--sx-line);
     border-radius:4px;
 
-    background:#fff;
+    background:var(--sx-surface);
 
     display:flex;
     align-items:center;
@@ -182,9 +182,9 @@ mat-form-field .mat-form-field-label-required {
 
     padding:0 18px;
 
-    background:#3f51b5;
+    background:var(--sx-navy-700);
 
-    color:#fff;
+    color:var(--sx-surface);
 
     cursor:pointer;
 
@@ -192,7 +192,7 @@ mat-form-field .mat-form-field-label-required {
 
 .file-control:hover{
 
-    border-color:#3f51b5;
+    border-color:var(--sx-navy-700);
 
 }
 
@@ -200,7 +200,7 @@ mat-form-field .mat-form-field-label-required {
 
     outline:none;
 
-    border-color:#3f51b5;
+    border-color:var(--sx-navy-700);
 
     box-shadow:0 0 0 3px rgba(63,81,181,.15);
 
@@ -208,7 +208,7 @@ mat-form-field .mat-form-field-label-required {
 
 .file-control::file-selector-button:hover{
 
-    background:#303f9f;
+    background:var(--sx-navy-700);
 
 }
 

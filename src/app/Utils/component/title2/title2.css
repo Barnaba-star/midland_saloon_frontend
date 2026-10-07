@@ -12,9 +12,9 @@
   padding: 0 10px;
 
   border-radius: var(--radius-md, 16px);
-  background-color: var(--color-surface, #ffffff);
+  background-color: var(--color-surface, var(--sx-surface));
   box-shadow: var(--shadow-sm);
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
 
   gap: 10px;
   margin-bottom: 16px;
@@ -73,12 +73,12 @@
 
 .scroll-fade-start {
   left: 0;
-  background: linear-gradient(to right, var(--color-surface, #ffffff), transparent);
+  background: linear-gradient(to right, var(--color-surface, var(--sx-surface)), transparent);
 }
 
 .scroll-fade-end {
   right: 0;
-  background: linear-gradient(to left, var(--color-surface, #ffffff), transparent);
+  background: linear-gradient(to left, var(--color-surface, var(--sx-surface)), transparent);
 }
 
 .back-button {
@@ -91,27 +91,27 @@
 
   border: none;
   border-radius: 50%;
-  background: var(--color-primary-light, #eef2ff);
+  background: var(--color-primary-light, var(--sx-navy-50));
   cursor: pointer;
 
   transition: background 0.2s ease;
 }
 
 .back-button:hover {
-  background: #e0e4ff;
+  background: var(--sx-info-bg);
 }
 
 .app-icon-back {
   width: 20px;
   height: 20px;
   font-size: 20px;
-  color: var(--color-primary, #4f46e5);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 .app-title {
   font-size: 22px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
   letter-spacing: -0.2px;
   white-space: nowrap;
 }
@@ -132,21 +132,21 @@
 .breadcrumb-item {
   font-size: 15px;
   font-weight: 600;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   white-space: nowrap;
   text-decoration: none;
   transition: color 0.2s ease;
 }
 
 a.breadcrumb-item:hover {
-  color: var(--color-primary, #4f46e5);
+  color: var(--color-primary, var(--sx-navy-700));
   text-decoration: underline;
 }
 
 .breadcrumb-item.current {
   font-size: 22px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
   letter-spacing: -0.2px;
 }
 
@@ -154,13 +154,13 @@ a.breadcrumb-item:hover {
   width: 16px;
   height: 16px;
   font-size: 16px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   flex-shrink: 0;
 }
 
 .action {
-  background-color: var(--color-bg, #f5f6fb);
-  border: 1px solid var(--color-border, #e5e7eb);
+  background-color: var(--color-bg, var(--sx-bg));
+  border: 1px solid var(--color-border, var(--sx-line));
   border-radius: 999px;
   display: flex;
   gap: 8px;
@@ -176,7 +176,7 @@ a.breadcrumb-item:hover {
 .app-title-sm {
   font-size: 14px;
   font-weight: 600;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   white-space: nowrap;
 }
 
@@ -184,7 +184,7 @@ a.breadcrumb-item:hover {
   width: 20px;
   height: 20px;
   font-size: 20px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   display: flex;
   align-items: center;
   justify-content: center;
@@ -192,23 +192,23 @@ a.breadcrumb-item:hover {
 }
 
 .action:hover {
-  background-color: var(--color-primary-light, #eef2ff);
-  border-color: var(--color-primary, #4f46e5);
+  background-color: var(--color-primary-light, var(--sx-navy-50));
+  border-color: var(--color-primary, var(--sx-navy-700));
 }
 
 .action:hover .app-icon,
 .action:hover .app-title-sm {
-  color: var(--color-primary, #4f46e5);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 .action.active {
-  background-color: var(--color-primary, #4f46e5);
-  border-color: var(--color-primary, #4f46e5);
+  background-color: var(--color-primary, var(--sx-navy-700));
+  border-color: var(--color-primary, var(--sx-navy-700));
 }
 
 .action.active .app-icon,
 .action.active .app-title-sm {
-  color: #ffffff;
+  color: var(--sx-surface);
 }
 
 .action:active {
@@ -216,7 +216,7 @@ a.breadcrumb-item:hover {
 }
 
 .action:focus-visible {
-  outline: 2px solid var(--color-primary, #4f46e5);
+  outline: 2px solid var(--color-primary, var(--sx-navy-700));
   outline-offset: 2px;
 }
 
@@ -237,8 +237,8 @@ a.breadcrumb-item:hover {
 
   border-radius: 999px;
 
-  background: var(--color-accent, #c9962e);
-  color: #ffffff;
+  background: var(--color-accent, var(--sx-gold-500));
+  color: var(--sx-surface);
 
   font-size: 11px;
   font-weight: 700;
@@ -246,8 +246,8 @@ a.breadcrumb-item:hover {
 }
 
 .action.active .action-badge {
-  background: #ffffff;
-  color: var(--color-primary, #4f46e5);
+  background: var(--sx-surface);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 /* Wide screens: tabs that do not fit on one line drop to a second one
@@ -274,5 +274,48 @@ a.breadcrumb-item:hover {
 
   .scroll-fade {
     display: none;
+  }
+}
+
+/* Phones: the title on its own line, the tabs below it wrapping onto as
+   many lines as they need - nothing cut off at the edge, nothing riding
+   over the title. */
+@media (max-width: 700px) {
+  .main-toolbar {
+    position: static;
+    flex-wrap: wrap;
+    height: auto;
+    padding: 10px;
+    gap: 8px;
+  }
+  .left {
+    flex: 1 1 100%;
+    min-width: 0;
+    height: auto;
+  }
+  .app-title {
+    font-size: 19px;
+    white-space: normal;
+    color: var(--sx-navy-700);
+  }
+  .breadcrumbs {
+    min-width: 0;
+  }
+  .right {
+    flex: 1 1 100%;
+    height: auto;
+  }
+  .actions-list {
+    flex-wrap: wrap;
+    overflow-x: visible;
+    padding: 0;
+    gap: 6px;
+  }
+  .scroll-fade {
+    display: none;
+  }
+  .action {
+    flex: 1 1 auto;
+    justify-content: center;
   }
 }

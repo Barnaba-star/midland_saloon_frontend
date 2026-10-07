@@ -13,7 +13,7 @@
 
   .subtitle {
     margin: 5px 0 0;
-    color: #777;
+    color: var(--sx-muted);
     font-size: 14px;
   }
 }
@@ -28,8 +28,8 @@ mat-dialog-content {
   margin-bottom: 20px;
   box-sizing: border-box;
 
-  background: #f4f8ff;
-  border: 1px solid #dce8ff;
+  background: var(--sx-navy-50);
+  border: 1px solid var(--sx-info-bg);
   border-radius: 10px;
 }
 
@@ -47,8 +47,8 @@ mat-dialog-content {
   align-items: center;
   justify-content: center;
 
-  background: #e5efff;
-  color: #1976d2;
+  background: var(--sx-navy-100);
+  color: var(--sx-navy-700);
   border-radius: 10px;
 }
 
@@ -58,12 +58,12 @@ mat-dialog-content {
 
   span {
     font-size: 12px;
-    color: #777;
+    color: var(--sx-muted);
   }
 
   strong {
     font-size: 18px;
-    color: #1976d2;
+    color: var(--sx-navy-700);
   }
 }
 
@@ -78,7 +78,7 @@ mat-dialog-content {
 
   font-size: 13px;
   font-weight: 600;
-  color: #333;
+  color: var(--sx-ink);
 }
 
 mat-form-field {
@@ -98,14 +98,14 @@ mat-dialog-actions {
   padding: 16px 24px 22px !important;
   margin: 0 !important;
 
-  border-top: 1px solid #eee;
+  border-top: 1px solid var(--sx-bg);
 }
 .inputData {
   width: 100% !important;
   box-sizing: border-box;
 
   font-size: 15px;
-  color: #1f2937;
+  color: var(--sx-ink);
 }
 
 /* Input height */
@@ -130,9 +130,9 @@ mat-form-field {
 select.method-select {
   height: 52px;
   padding: 0 14px;
-  border: 1px solid #d1d9e6;
+  border: 1px solid var(--sx-line);
   border-radius: 10px;
-  background: #ffffff;
+  background: var(--sx-surface);
   font: inherit;
   font-size: 15px;
   cursor: pointer;

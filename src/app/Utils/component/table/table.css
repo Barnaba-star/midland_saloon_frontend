@@ -1,6 +1,6 @@
 .table-container {
   padding: 16px;
-   background-color: white;
+  background-color: var(--sx-surface);
   border-radius: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   overflow-x: auto;
@@ -16,35 +16,35 @@
 }
 
 .search-box:focus {
-  border-color: #3f51b5; /* Material primary */
+  border-color: var(--sx-navy-700); /* Material primary */
 }
 
 
 
 th.mat-header-cell {
   font-weight: 600;
-  background-color: white;
-  color: #333;
+  background-color: var(--sx-surface);
+  color: var(--sx-ink);
 }
 
 
 
 tr.mat-row:hover {
-  background-color: #f0f4f8;
-  color: #1a237e;
+  background-color: var(--sx-bg);
+  color: var(--sx-navy-700);
 
 }
 
 
 .custom-column {
-  background-color: #f4f6fa;
-  color: #333;
+  background-color: var(--sx-bg);
+  color: var(--sx-ink);
   font-weight: 500;
 }
 
 
 .custom-column {
-  background-color: #f9fafb;
+  background-color: var(--sx-bg);
  font-weight: bold;
 }
 
@@ -66,46 +66,46 @@ tr.mat-row:hover {
 
 .custom-header {
   font-weight: 600;
-  background-color: white !important;
+  background-color: var(--sx-surface) !important;
   font-size: 17px;
 }
 
 
 .action-cell {
   display: flex;
-  background-color: white;
+  background-color: var(--sx-surface);
   margin-top: 0px;
   margin-bottom: 0px;
   height: inherit;
 }
 .actions-headers{
   font-weight: 600;
-background-color: white;
+background-color: var(--sx-surface);
 font-size: 17px;
 }
 .paginator{
-background-color: white;
+background-color: var(--sx-surface);
 }
 .app-icon{
 
   width: 30px;
   height: 30px;
-  color: #3f51b5;
+  color: var(--sx-navy-700);
 }
 
 ::ng-deep .mat-header-row {
-  background-color: #a81e1e; /* Light gray background */
+  background-color: var(--sx-danger); /* Light gray background */
   font-weight: bold;
 }
 
 ::ng-deep .mat-header-cell {
-  color: #e02222; /* Dark text */
+  color: var(--sx-danger); /* Dark text */
   padding: 12px;
   font-size: 14px;
-  border-bottom: 1px solid #cd1c1c;
+  border-bottom: 1px solid var(--sx-danger);
 }
 .with-divider {
-  border-right: 1px solid #050404; /* au rangi yoyote unayotaka */
+  border-right: 1px solid var(--sx-ink); /* au rangi yoyote unayotaka */
   padding-right: 8px; /* optional */
 }
 .serial-circle {
@@ -131,4 +131,14 @@ align-items:center;
 
 gap:8px;
 
+}
+
+/* On a phone the table keeps readable columns and scrolls sideways inside
+   its box rather than squeezing cells over each other. */
+.table-container table {
+  min-width: 640px;
+}
+.table-container th,
+.table-container td {
+  white-space: nowrap;
 }

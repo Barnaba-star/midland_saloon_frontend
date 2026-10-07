@@ -12,7 +12,7 @@
 }
 
 .modal-card {
-  background: white;
+  background: var(--sx-surface);
   border-radius: 10px;
   padding: 30px 20px;
   box-shadow: 0 10px 30px 5px rgba(177, 1, 1, 0.3);
@@ -38,7 +38,7 @@
   position: relative;
   width: 300px;
   padding: 30px 20px;
-  background: white;
+  background: var(--sx-surface);
   border-radius: 10px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
   text-align: center;
@@ -72,12 +72,12 @@
 }
 
 .cancel-btn {
-  background-color: #ccc;
+  background-color: var(--sx-line);
 }
 
 .delete-btn {
-  background-color: #e74c3c;
-  color: white;
+  background-color: var(--sx-danger);
+  color: var(--sx-surface);
 }
 
 @keyframes slideUp {

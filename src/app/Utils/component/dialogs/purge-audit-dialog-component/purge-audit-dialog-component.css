@@ -18,7 +18,7 @@
      header until the title was cut off. */
   flex: 0 0 auto;
   padding: 0 0 14px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 .header-top {
@@ -33,7 +33,7 @@
   min-width: 0;
   margin: 0;
   padding-top: 2px;
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 19px;
   font-weight: 700;
   line-height: 1.4;
@@ -50,7 +50,7 @@
   height: 3px;
   margin-top: 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+  background: linear-gradient(90deg, var(--sx-navy-700) 0%, var(--sx-navy-300) 100%);
 }
 
 
@@ -68,14 +68,14 @@
   background: transparent;
   border: none;
   border-radius: 10px;
-  color: #64748b;
+  color: var(--sx-muted);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .icon-btn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--sx-bg);
+  color: var(--sx-ink);
 }
 
 
@@ -95,7 +95,7 @@
 
 .field-label {
   margin: 0 0 10px;
-  color: #94a3b8;
+  color: var(--sx-muted);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.6px;
@@ -122,9 +122,9 @@
   gap: 2px;
   padding: 8px 14px;
   border-radius: 999px;
-  border: 1px solid #e5e7eb;
-  background: #ffffff;
-  color: #111827;
+  border: 1px solid var(--sx-line);
+  background: var(--sx-surface);
+  color: var(--sx-ink);
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -140,7 +140,7 @@
 .chip-count {
   font-size: 11px;
   font-weight: 600;
-  color: #6b7280;
+  color: var(--sx-muted);
   font-variant-numeric: tabular-nums;
   white-space: nowrap;
 }
@@ -151,13 +151,13 @@
 }
 
 .age-chip:hover {
-  background: #f5f6fb;
+  background: var(--sx-bg);
 }
 
 .age-chip.active {
-  background: #14315d;
-  border-color: #14315d;
-  color: #ffffff;
+  background: var(--sx-navy-700);
+  border-color: var(--sx-navy-700);
+  color: var(--sx-surface);
 }
 
 .age-chip:focus-visible {
@@ -176,19 +176,19 @@
   gap: 9px;
   margin: 18px 0 0;
   padding: 12px 14px;
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
+  background: var(--sx-bg);
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
-  color: #475569;
+  color: var(--sx-muted);
   font-size: 12.5px;
   line-height: 1.5;
 }
 
 /* Losing the entries for good is the one thing that must not be skimmed. */
 .notice-danger {
-  background: #fef2f2;
-  border-color: #fecaca;
-  color: #b91c1c;
+  background: var(--sx-danger-bg);
+  border-color: var(--sx-danger-bg);
+  color: var(--sx-danger);
   font-weight: 600;
 }
 
@@ -214,7 +214,7 @@
   min-height: auto;
   padding: 16px 0 0;
   margin-top: 18px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--sx-line);
 }
 
 .btn {
@@ -248,25 +248,25 @@
 }
 
 .btn-ghost {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
+  color: var(--sx-muted);
 }
 
 .btn-ghost:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--sx-bg);
+  border-color: var(--sx-line);
 }
 
 .btn-danger {
-  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
-  border: 1px solid #dc2626;
-  color: #ffffff;
+  background: linear-gradient(180deg, var(--sx-danger) 0%, var(--sx-danger) 100%);
+  border: 1px solid var(--sx-danger);
+  color: var(--sx-surface);
   box-shadow: 0 1px 2px rgba(220, 38, 38, 0.24);
 }
 
 .btn-danger:hover {
-  background: linear-gradient(180deg, #f05252 0%, #b91c1c 100%);
+  background: linear-gradient(180deg, var(--sx-danger) 0%, var(--sx-danger) 100%);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28);
 }
 

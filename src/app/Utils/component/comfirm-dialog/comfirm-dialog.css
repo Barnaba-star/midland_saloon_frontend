@@ -25,9 +25,9 @@
   width: 42px;
   height: 42px;
   border-radius: 14px;
-  background: #fef2f2;
-  border: 1px solid #fee2e2;
-  color: #dc2626;
+  background: var(--sx-danger-bg);
+  border: 1px solid var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 .warn-badge mat-icon {
@@ -41,7 +41,7 @@
   min-width: 0;
   margin: 0;
   padding-top: 8px;
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 18px;
   font-weight: 700;
   line-height: 1.4;
@@ -61,7 +61,7 @@
 
 .dialog-message {
   margin: 0;
-  color: #475569;
+  color: var(--sx-muted);
   font-size: 14px;
   line-height: 1.6;
   overflow-wrap: anywhere;
@@ -83,7 +83,7 @@
   gap: 10px;
   margin-top: 20px;
   padding-top: 16px;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--sx-line);
 }
 
 .btn {
@@ -116,26 +116,26 @@
 }
 
 .btn-ghost {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
+  color: var(--sx-muted);
 }
 
 .btn-ghost:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--sx-bg);
+  border-color: var(--sx-line);
 }
 
 /* The destructive action is the one that carries the colour, not "No". */
 .btn-danger {
-  background: linear-gradient(180deg, #ef4444 0%, #dc2626 100%);
-  border: 1px solid #dc2626;
-  color: #ffffff;
+  background: linear-gradient(180deg, var(--sx-danger) 0%, var(--sx-danger) 100%);
+  border: 1px solid var(--sx-danger);
+  color: var(--sx-surface);
   box-shadow: 0 1px 2px rgba(220, 38, 38, 0.24);
 }
 
 .btn-danger:hover {
-  background: linear-gradient(180deg, #f05252 0%, #b91c1c 100%);
+  background: linear-gradient(180deg, var(--sx-danger) 0%, var(--sx-danger) 100%);
   box-shadow: 0 4px 12px rgba(220, 38, 38, 0.28);
 }
 

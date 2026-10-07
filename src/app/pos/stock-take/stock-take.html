@@ -23,7 +23,7 @@
         } @else if (rows.length === 0) {
           <p class="muted">{{ 'STOCK_TAKE.NO_ITEMS' | translate }}</p>
         } @else {
-          <div class="st-scroll">
+          <div class="st-scroll sx-table-wrap">
             <table class="st-table">
               <thead>
                 <tr>
@@ -139,78 +139,82 @@
       </div>
 
       <h4>{{ 'STOCK_TAKE.BY_PRODUCT' | translate }}</h4>
-      <table class="st-table">
-        <thead>
-          <tr>
-            <th>{{ 'STOCK_TAKE.COL_PRODUCT' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.COL_TIMES' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.COL_DIFF' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.COL_VALUE' | translate }}</th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (p of byProduct; track p.barServiceUid) {
+      <div class="sx-table-wrap">
+        <table class="st-table">
+          <thead>
             <tr>
-              <td><strong>{{ p.serviceName }}</strong> <small class="muted">{{ p.serviceCode }}</small></td>
-              <td class="num">{{ p.counts }}</td>
-              <td class="num">
-                <span class="pill" [class.short]="p.differenceUnits < 0" [class.over]="p.differenceUnits > 0" [class.even]="p.differenceUnits === 0">
-                  {{ p.differenceUnits > 0 ? '+' : '' }}{{ p.differenceUnits }} {{ (p.unit || 'STOCK_TAKE.UNITS') | translate }}
-                </span>
-              </td>
-              <td class="num"><span [class.neg]="p.differenceValue < 0">{{ p.differenceValue | number }}</span></td>
+              <th>{{ 'STOCK_TAKE.COL_PRODUCT' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.COL_TIMES' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.COL_DIFF' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.COL_VALUE' | translate }}</th>
             </tr>
-          }
-        </tbody>
-      </table>
-
-      <h4>{{ 'STOCK_TAKE.HISTORY' | translate }}</h4>
-      <table class="st-table">
-        <thead>
-          <tr>
-            <th>{{ 'STOCK_TAKE.COL_WHEN' | translate }}</th>
-            <th>{{ 'STOCK_TAKE.COL_BY' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.COL_ITEMS' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.LOSS' | translate }}</th>
-            <th class="num">{{ 'STOCK_TAKE.GAIN' | translate }}</th>
-            <th></th>
-          </tr>
-        </thead>
-        <tbody>
-          @for (t of takes; track t.uid) {
-            <tr class="row" (click)="toggle(t)">
-              <td>{{ t.takenAt | date: 'dd MMM yyyy, HH:mm' }}</td>
-              <td>{{ t.takenByName || t.takenBy }}</td>
-              <td class="num">{{ t.itemsDifferent }} / {{ t.itemsCounted }}</td>
-              <td class="num"><span [class.neg]="t.lossValue < 0">{{ t.lossValue | number }}</span></td>
-              <td class="num">+{{ t.gainValue | number }}</td>
-              <td class="num"><mat-icon class="chev">{{ openUid === t.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
-            </tr>
-            @if (openUid === t.uid) {
-              <tr class="detail">
-                <td colspan="6">
-                  <div class="detail-box">
-                    @for (l of openLines; track l.uid) {
-                      <div class="detail-line">
-                        <span><strong>{{ l.serviceName }}</strong></span>
-                        <span>{{ 'STOCK_TAKE.COL_SYSTEM' | translate }}: {{ l.systemUnits }}</span>
-                        <span>{{ 'STOCK_TAKE.COL_COUNTED' | translate }}: {{ l.countedUnits }}</span>
-                        <span class="pill" [class.short]="l.differenceUnits < 0" [class.over]="l.differenceUnits > 0" [class.even]="l.differenceUnits === 0">
-                          {{ l.differenceUnits > 0 ? '+' : '' }}{{ l.differenceUnits }}
-                        </span>
-                        <span class="num" [class.neg]="l.differenceValue < 0">{{ l.differenceValue | number }}</span>
-                      </div>
-                    }
-                    @if (t.note) {
-                      <p class="detail-note"><mat-icon>sticky_note_2</mat-icon>{{ t.note }}</p>
-                    }
-                  </div>
+          </thead>
+          <tbody>
+            @for (p of byProduct; track p.barServiceUid) {
+              <tr>
+                <td><strong>{{ p.serviceName }}</strong> <small class="muted">{{ p.serviceCode }}</small></td>
+                <td class="num">{{ p.counts }}</td>
+                <td class="num">
+                  <span class="pill" [class.short]="p.differenceUnits < 0" [class.over]="p.differenceUnits > 0" [class.even]="p.differenceUnits === 0">
+                    {{ p.differenceUnits > 0 ? '+' : '' }}{{ p.differenceUnits }} {{ (p.unit || 'STOCK_TAKE.UNITS') | translate }}
+                  </span>
                 </td>
+                <td class="num"><span [class.neg]="p.differenceValue < 0">{{ p.differenceValue | number }}</span></td>
               </tr>
             }
-          }
-        </tbody>
-      </table>
+          </tbody>
+        </table>
+      </div>
+
+      <h4>{{ 'STOCK_TAKE.HISTORY' | translate }}</h4>
+      <div class="sx-table-wrap">
+        <table class="st-table">
+          <thead>
+            <tr>
+              <th>{{ 'STOCK_TAKE.COL_WHEN' | translate }}</th>
+              <th>{{ 'STOCK_TAKE.COL_BY' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.COL_ITEMS' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.LOSS' | translate }}</th>
+              <th class="num">{{ 'STOCK_TAKE.GAIN' | translate }}</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (t of takes; track t.uid) {
+              <tr class="row" (click)="toggle(t)">
+                <td>{{ t.takenAt | date: 'dd MMM yyyy, HH:mm' }}</td>
+                <td>{{ t.takenByName || t.takenBy }}</td>
+                <td class="num">{{ t.itemsDifferent }} / {{ t.itemsCounted }}</td>
+                <td class="num"><span [class.neg]="t.lossValue < 0">{{ t.lossValue | number }}</span></td>
+                <td class="num">+{{ t.gainValue | number }}</td>
+                <td class="num"><mat-icon class="chev">{{ openUid === t.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
+              </tr>
+              @if (openUid === t.uid) {
+                <tr class="detail">
+                  <td colspan="6">
+                    <div class="detail-box">
+                      @for (l of openLines; track l.uid) {
+                        <div class="detail-line">
+                          <span><strong>{{ l.serviceName }}</strong></span>
+                          <span>{{ 'STOCK_TAKE.COL_SYSTEM' | translate }}: {{ l.systemUnits }}</span>
+                          <span>{{ 'STOCK_TAKE.COL_COUNTED' | translate }}: {{ l.countedUnits }}</span>
+                          <span class="pill" [class.short]="l.differenceUnits < 0" [class.over]="l.differenceUnits > 0" [class.even]="l.differenceUnits === 0">
+                            {{ l.differenceUnits > 0 ? '+' : '' }}{{ l.differenceUnits }}
+                          </span>
+                          <span class="num" [class.neg]="l.differenceValue < 0">{{ l.differenceValue | number }}</span>
+                        </div>
+                      }
+                      @if (t.note) {
+                        <p class="detail-note"><mat-icon>sticky_note_2</mat-icon>{{ t.note }}</p>
+                      }
+                    </div>
+                  </td>
+                </tr>
+              }
+            }
+          </tbody>
+        </table>
+      </div>
     }
   </section>
 </div>

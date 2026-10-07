@@ -21,8 +21,8 @@
 
   border-radius: 50%;
 
-  background: #ecfdf3;
-  color: #067647;
+  background: var(--sx-success-bg);
+  color: var(--sx-success);
 }
 
 .header-icon mat-icon {
@@ -35,13 +35,13 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
 }
 
 .dialog-subtitle {
   margin: 8px 0 18px;
   font-size: 13px;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 
@@ -55,10 +55,10 @@
 
   padding: 16px;
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
   border-radius: var(--radius-sm, 10px);
 
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .credential {
@@ -71,13 +71,13 @@
 .credential-label {
   font-size: 12px;
   font-weight: 600;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .credential-value {
   font-size: 15px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
 
   /* A username can be long; the code never is. */
   word-break: break-all;
@@ -88,7 +88,7 @@
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 24px;
   letter-spacing: 4px;
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
   word-break: normal;
 }
 
@@ -109,7 +109,7 @@
 
   font-size: 12px;
   line-height: 1.5;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .note mat-icon {
@@ -121,7 +121,7 @@
 }
 
 .note.warn {
-  color: #b54708;
+  color: var(--sx-warning);
 }
 
 
@@ -144,13 +144,13 @@
 }
 
 .copy-btn {
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  border: 1px solid var(--color-border, var(--sx-line));
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
 }
 
 .copy-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .copy-btn mat-icon {
@@ -161,8 +161,8 @@
 
 .done-btn {
   border: none;
-  background: var(--color-primary, #14315d);
-  color: #ffffff;
+  background: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
 }
 
 .done-btn:hover {

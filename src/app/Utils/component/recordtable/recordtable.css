@@ -6,7 +6,7 @@ table {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   overflow: hidden;
   border-radius: 8px;
-  background-color: #fff;
+  background-color: var(--sx-surface);
 
   /* Animation */
   opacity: 0;
@@ -23,13 +23,13 @@ table {
 
 
 thead {
-  background: linear-gradient(to right, #4e73df, #224abe);
-  color: #fff;
+  background: linear-gradient(to right, var(--sx-navy-700), var(--sx-navy-700));
+  color: var(--sx-surface);
 }
 
 th, td {
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid #e0e0e0;
+  border-bottom: 1px solid var(--sx-line);
   text-align: left;
   transition: background-color 0.3s ease;
 }
@@ -42,7 +42,7 @@ th {
 }
 
 tbody tr:hover {
-  background-color: #f1f5ff;
+  background-color: var(--sx-navy-50);
   cursor: pointer;
 }
 
@@ -52,7 +52,7 @@ tbody tr:last-child td {
 
 td {
   font-size: 0.9rem;
-  color: #333;
+  color: var(--sx-ink);
 }
 
 @media (max-width: 768px) {
@@ -66,7 +66,7 @@ td {
 
   tr {
     margin-bottom: 1rem;
-    border: 1px solid #ddd;
+    border: 1px solid var(--sx-line);
     border-radius: 6px;
     padding: 0.5rem;
   }
@@ -76,14 +76,14 @@ td {
     justify-content: space-between;
     padding: 0.5rem;
     border: none;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--sx-bg);
     font-size: 0.85rem;
   }
 
   td::before {
     content: attr(data-label);
     font-weight: bold;
-    color: #555;
+    color: var(--sx-muted);
   }
 }
 
@@ -105,7 +105,7 @@ th, td {
 }
 
 ::ng-deep .my-menu .mat-menu-panel {
-  background-color: green !important;
+  background-color: var(--sx-success) !important;
   width: 220px !important;
 }
 .serial-circle {
@@ -184,21 +184,21 @@ th, td {
 }
 
 .view-btn {
-  color: #0d6efd;
+  color: var(--sx-navy-700);
 }
 
 .edit-btn {
-  color: #198754;
+  color: var(--sx-success);
 }
 
 .delete-btn {
-  color: #dc3545;
+  color: var(--sx-danger);
 }
 
 .doc-btn {
-  color: #6f42c1;
+  color: var(--sx-muted);
 }
 
 .action-btn:hover {
-  background-color: #f1f1f1;
+  background-color: var(--sx-navy-100);
 }

@@ -15,12 +15,12 @@
   margin: 0 0 6px;
   font-size: 26px;
   font-weight: 700;
-  color: var(--color-text, #172033);
+  color: var(--color-text, var(--sx-navy-900));
 }
 
 .pos-home-intro p {
   margin: 0;
-  color: var(--color-text-muted, #667085);
+  color: var(--color-text-muted, var(--sx-muted));
   font-size: 14px;
 }
 
@@ -39,13 +39,13 @@
    the day-on-day change ships an arrow and a number beside its colour. */
 
 .pos-home {
-  --viz-surface: #ffffff;
-  --viz-series: #2a78d6;        /* validated >= 3:1 on this surface */
-  --viz-good: #0ca30c;
-  --viz-bad: #d03b3b;
-  --viz-ink: #0f172a;
-  --viz-ink-soft: #64748b;
-  --viz-line: #e2e8f0;
+  --viz-surface: var(--sx-surface);
+  --viz-series: var(--sx-navy-500);        /* validated >= 3:1 on this surface */
+  --viz-good: var(--sx-success);
+  --viz-bad: var(--sx-danger);
+  --viz-ink: var(--sx-navy-900);
+  --viz-ink-soft: var(--sx-muted);
+  --viz-line: var(--sx-navy-100);
 }
 
 
@@ -66,13 +66,13 @@
   background: var(--viz-surface);
   border: 1px solid var(--viz-line);
   border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--sx-navy-900) 4%, transparent);
 }
 
 /* Pending bills is the one tile that asks to be acted on. */
 .dash-tile.needs-action {
-  border-color: #fecaca;
-  background: #fffbfb;
+  border-color: var(--sx-danger-bg);
+  background: var(--sx-danger-bg);
 }
 
 .tile-label {
@@ -137,7 +137,7 @@
   background: var(--viz-surface);
   border: 1px solid var(--viz-line);
   border-radius: 16px;
-  box-shadow: 0 1px 2px rgba(15, 23, 42, 0.04);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--sx-navy-900) 4%, transparent);
 }
 
 .panel-head {
@@ -215,9 +215,9 @@
   top: 0;
   transform: translateX(-50%);
   padding: 7px 11px;
-  background: #0f172a;
+  background: var(--sx-navy-900);
   border-radius: 9px;
-  color: #ffffff;
+  color: var(--sx-surface);
   font-size: 12px;
   line-height: 1.45;
   pointer-events: none;
@@ -226,7 +226,7 @@
 
 .tip-date {
   display: block;
-  color: #cbd5e1;
+  color: var(--sx-navy-100);
   font-size: 11px;
 }
 
@@ -261,7 +261,7 @@
 
 .bar-track {
   height: 10px;
-  background: #f1f5f9;
+  background: var(--sx-navy-50);
   border-radius: 999px;
   overflow: hidden;
 }
@@ -323,11 +323,11 @@
 
 /* What is still owed is the figure worth noticing. */
 .stock-remaining b {
-  color: #b45309;
+  color: var(--sx-warning);
 }
 
 .bar-value small {
-  color: #94a3b8;
+  color: var(--sx-navy-300);
   font-weight: 500;
 }
 
@@ -402,7 +402,7 @@
   height: 180px;
   padding-bottom: 22px;
   box-sizing: border-box;
-  color: #94a3b8;
+  color: var(--sx-navy-300);
   font-size: 10px;
   font-variant-numeric: tabular-nums;
   text-align: right;
@@ -422,7 +422,7 @@
 .x-axis span {
   position: absolute;
   transform: translateX(-50%);
-  color: #94a3b8;
+  color: var(--sx-navy-300);
   font-size: 10px;
   white-space: nowrap;
 }
@@ -433,7 +433,7 @@
 .axis-caption {
   display: block;
   margin-top: 8px;
-  color: #94a3b8;
+  color: var(--sx-navy-300);
   font-size: 10.5px;
 }
 
@@ -457,7 +457,7 @@
 
 .donut-track {
   fill: none;
-  stroke: #f1f5f9;
+  stroke: var(--sx-navy-50);
   stroke-width: 13;
 }
 

@@ -1,9 +1,9 @@
 .div-container {
   margin: 15px auto;
   padding: 2px;
-  border: 1px solid #ddd;
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
-  background-color: white;
+  background-color: var(--sx-surface);
   max-width: 1500px;
 }
 
@@ -16,11 +16,17 @@
 }
 .partition-bottom-row {
   margin-top: 12px;
-  background-color: #fafafa;
+  background-color: var(--sx-bg);
   padding: 12px;
   border-radius: 8px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--sx-line);
   display: flex;
   justify-content: flex-end;
   gap: 8px;
+}
+/* Phones: the two halves stack. */
+@media (max-width: 640px) {
+  .div-grid {
+    grid-template-columns: 1fr;
+  }
 }

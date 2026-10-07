@@ -2,14 +2,14 @@
   width: 100%;
   min-height: calc(100vh - 200px);
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 16px;
   padding: 14px;
   margin-top: 20px;
   box-shadow:
-    0 4px 6px rgba(15, 23, 42, 0.03),
-    0 12px 30px rgba(15, 23, 42, 0.06);
+    0 4px 6px color-mix(in srgb, var(--sx-navy-900) 3%, transparent),
+    0 12px 30px color-mix(in srgb, var(--sx-navy-900) 6%, transparent);
 }
 
 
@@ -27,7 +27,7 @@
 
 .audit-header h2 {
   margin: 0;
-  color: #111827;
+  color: var(--sx-navy-900);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -35,7 +35,7 @@
 
 .audit-header p {
   margin: 6px 0 0;
-  color: #6b7280;
+  color: var(--sx-muted);
   font-size: 13px;
 }
 
@@ -50,10 +50,10 @@
   justify-content: center;
   height: 38px;
   padding: 0 18px;
-  background: #111827;
-  border: 1px solid #111827;
+  background: var(--sx-navy-900);
+  border: 1px solid var(--sx-navy-900);
   border-radius: 10px;
-  color: #ffffff;
+  color: var(--sx-surface);
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
@@ -61,7 +61,7 @@
 }
 
 .refresh-btn:hover {
-  background: #1f2937;
+  background: var(--sx-navy-800);
 }
 
 /* Outlined rather than filled red: it sits beside Refresh, and a solid red
@@ -72,10 +72,10 @@
   justify-content: center;
   height: 38px;
   padding: 0 18px;
-  background: #ffffff;
-  border: 1px solid #fecaca;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-danger-bg);
   border-radius: 10px;
-  color: #b91c1c;
+  color: var(--sx-danger);
   font-family: inherit;
   font-size: 13px;
   font-weight: 600;
@@ -84,8 +84,8 @@
 }
 
 .purge-btn:hover:not(:disabled) {
-  background: #fef2f2;
-  border-color: #fca5a5;
+  background: var(--sx-danger-bg);
+  border-color: var(--sx-danger-bg);
 }
 
 .purge-btn:disabled {
@@ -111,19 +111,19 @@
   gap: 4px;
   min-width: 140px;
   padding: 12px 16px;
-  background: #f9fafb;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-bg);
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
 }
 
 .summary-label {
-  color: #6b7280;
+  color: var(--sx-muted);
   font-size: 12px;
   font-weight: 500;
 }
 
 .summary-value {
-  color: #111827;
+  color: var(--sx-navy-900);
   font-size: 20px;
   font-weight: 700;
 }
@@ -144,10 +144,10 @@
 .filter-select {
   height: 36px;
   padding: 0 12px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 10px;
-  color: #374151;
+  color: var(--sx-navy-700);
   font-size: 13px;
   cursor: pointer;
 }
@@ -160,7 +160,7 @@
 .table-wrapper {
   width: 100%;
   overflow-x: auto;
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
 }
 
@@ -174,9 +174,9 @@
   position: sticky;
   top: 0;
   padding: 12px 14px;
-  background: #f9fafb;
-  border-bottom: 1px solid #e5e7eb;
-  color: #6b7280;
+  background: var(--sx-bg);
+  border-bottom: 1px solid var(--sx-line);
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.4px;
@@ -187,42 +187,42 @@
 
 .table-wrapper td {
   padding: 12px 14px;
-  border-bottom: 1px solid #f3f4f6;
-  color: #374151;
+  border-bottom: 1px solid var(--sx-bg);
+  color: var(--sx-navy-700);
   vertical-align: middle;
 }
 
 .table-wrapper tbody tr:hover {
-  background: #f9fafb;
+  background: var(--sx-bg);
 }
 
 .time-cell {
-  color: #6b7280;
+  color: var(--sx-muted);
   white-space: nowrap;
 }
 
 .user-cell {
   font-weight: 600;
-  color: #111827;
+  color: var(--sx-navy-900);
   white-space: nowrap;
 }
 
 /* The action is the wide column; everything else stays on one line. */
 .action-cell {
   max-width: 320px;
-  color: #374151;
+  color: var(--sx-navy-700);
 }
 
 .path-cell {
   max-width: 220px;
   overflow: hidden;
-  color: #6b7280;
+  color: var(--sx-muted);
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
 .duration-cell {
-  color: #6b7280;
+  color: var(--sx-muted);
   white-space: nowrap;
 }
 
@@ -234,9 +234,9 @@
 .level-badge {
   display: inline-block;
   padding: 3px 10px;
-  background: #f3f4f6;
+  background: var(--sx-bg);
   border-radius: 999px;
-  color: #374151;
+  color: var(--sx-navy-700);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -244,13 +244,13 @@
 }
 
 .outcome-success {
-  background: #dcfce7;
-  color: #15803d;
+  background: var(--sx-success-bg);
+  color: var(--sx-success);
 }
 
 .outcome-failed {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 
@@ -261,22 +261,22 @@
 .view-btn {
   height: 30px;
   padding: 0 14px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 8px;
-  color: #374151;
+  color: var(--sx-navy-700);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
 }
 
 .view-btn:hover {
-  background: #f3f4f6;
+  background: var(--sx-bg);
 }
 
 .empty-state {
   padding: 40px 0;
-  color: #9ca3af;
+  color: var(--sx-muted);
   font-size: 14px;
   text-align: center;
 }
@@ -298,16 +298,16 @@
   min-width: 34px;
   height: 34px;
   padding: 0 10px;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 8px;
-  color: #374151;
+  color: var(--sx-navy-700);
   font-size: 13px;
   cursor: pointer;
 }
 
 .pagination-btn:hover:not(:disabled) {
-  background: #f3f4f6;
+  background: var(--sx-bg);
 }
 
 .pagination-btn:disabled {
@@ -316,9 +316,9 @@
 }
 
 .pagination-btn.active {
-  background: #111827;
-  border-color: #111827;
-  color: #ffffff;
+  background: var(--sx-navy-900);
+  border-color: var(--sx-navy-900);
+  color: var(--sx-surface);
   font-weight: 600;
 }
 
@@ -332,4 +332,17 @@
   .action-cell {
     max-width: 200px;
   }
+}
+
+/* ===== Phones (Saloon sweep) ===== */
+/* Below 600px: rows wrap, grids become one column, nothing wider than the
+   screen, labels wrap instead of being cut. Generated from this file's own
+   layout rules, then checked by hand. */
+@media (max-width: 600px) {
+  :host { display: block; max-width: 100%; }
+  .audit-header { flex-wrap: wrap; }
+  .header-actions { flex-wrap: wrap; }
+  .user-cell { white-space: normal; }
+  .path-cell { white-space: normal; }
+  .duration-cell { white-space: normal; }
 }

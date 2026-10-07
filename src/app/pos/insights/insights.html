@@ -78,7 +78,7 @@
           <button type="button" [class.active]="sort === 'units'" (click)="setSort('units')">{{ 'INSIGHTS.UNITS' | translate }}</button>
         </div>
       </div>
-      <div class="table-scroll">
+      <div class="table-scroll sx-table-wrap">
         <table class="ins-table">
           <thead>
             <tr>
@@ -128,7 +128,7 @@
             <span class="chip day"><mat-icon>event</mat-icon>{{ 'INSIGHTS.BUSIEST_DAY' | translate }}: {{ ('INSIGHTS.DAY_' + topDay.day) | translate }}</span>
           }
         </div>
-        <div class="table-scroll">
+        <div class="table-scroll sx-table-wrap">
           <table class="heat">
             <thead>
               <tr>

@@ -2,14 +2,14 @@
   width: 100%;
   min-height: calc(100vh - 200px);
   box-sizing: border-box;
-  background: #ffffff;
-  border: 1px solid #e5e7eb;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 16px;
   padding: 14px;
   margin-top: 20px;
   box-shadow:
-    0 4px 6px rgba(15, 23, 42, 0.03),
-    0 12px 30px rgba(15, 23, 42, 0.06);
+    0 4px 6px color-mix(in srgb, var(--sx-navy-900) 3%, transparent),
+    0 12px 30px color-mix(in srgb, var(--sx-navy-900) 6%, transparent);
 }
 
 
@@ -27,7 +27,7 @@
 
 .table-header h2 {
   margin: 0;
-  color: #111827;
+  color: var(--sx-navy-900);
   font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.3px;
@@ -35,7 +35,7 @@
 
 .table-header p {
   margin: 6px 0 0;
-  color: #6b7280;
+  color: var(--sx-muted);
   font-size: 13px;
 }
 
@@ -56,8 +56,8 @@
   border: 0;
   border-radius: 9px;
 
-  background: #14315d;
-  color: #ffffff;
+  background: var(--sx-navy-700);
+  color: var(--sx-surface);
 
   font-size: 13px;
   font-weight: 600;
@@ -71,8 +71,8 @@
 }
 
 .refresh-btn:hover {
-  background: #0a1c38;
-  box-shadow: 0 4px 12px rgba(20, 49, 93, 0.25);
+  background: var(--sx-navy-900);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--sx-navy-700) 25%, transparent);
 }
 
 .refresh-btn:active {
@@ -91,11 +91,11 @@
   overflow-x: auto;
   overflow-y: auto;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
 
   scrollbar-width: thin;
-  scrollbar-color: #cbd5e1 transparent;
+  scrollbar-color: var(--sx-navy-100) transparent;
 }
 
 
@@ -107,16 +107,16 @@
 }
 
 .table-wrapper::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 }
 
 .table-wrapper::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--sx-navy-100);
   border-radius: 20px;
 }
 
 .table-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--sx-navy-300);
 }
 
 
@@ -131,7 +131,7 @@
   border-collapse: separate;
   border-spacing: 0;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 
@@ -144,15 +144,15 @@
   top: 0;
   z-index: 10;
 
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 }
 
 .table-wrapper th {
   padding: 14px 16px;
 
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 
-  color: #64748b;
+  color: var(--sx-muted);
 
   font-size: 12px;
   font-weight: 700;
@@ -161,7 +161,7 @@
 
   white-space: nowrap;
 
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 
@@ -172,15 +172,15 @@
 .table-wrapper td {
   padding: 15px 16px;
 
-  color: #374151;
+  color: var(--sx-navy-700);
 
   font-size: 13px;
 
   white-space: nowrap;
 
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid var(--sx-navy-50);
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 .table-wrapper tbody tr {
@@ -188,7 +188,7 @@
 }
 
 .table-wrapper tbody tr:hover td {
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 }
 
 .table-wrapper tbody tr:last-child td {
@@ -201,7 +201,7 @@
 ========================= */
 
 .table-wrapper td strong {
-  color: #111827;
+  color: var(--sx-navy-900);
   font-weight: 600;
 }
 
@@ -218,8 +218,8 @@
 
   border-radius: 6px;
 
-  background: #eff6ff;
-  color: #14315d;
+  background: var(--sx-navy-50);
+  color: var(--sx-navy-700);
 
   font-size: 11px;
   font-weight: 600;
@@ -238,7 +238,7 @@
 }
 
 .table-wrapper td:nth-child(7) strong {
-  color: #14315d;
+  color: var(--sx-navy-700);
 }
 
 
@@ -251,7 +251,7 @@
 
   text-align: center;
 
-  color: #9ca3af !important;
+  color: var(--sx-muted) !important;
 
   font-size: 14px !important;
 }
@@ -291,8 +291,8 @@
 
 .view-size-btn {
   border: none;
-  background: #14315d;
-  color: #fff;
+  background: var(--sx-navy-700);
+  color: var(--sx-surface);
   padding: 6px 10px;
   border-radius: 8px;
   cursor: pointer;
@@ -301,5 +301,15 @@
 }
 
 .view-size-btn:hover {
-  background: #0a1c38;
+  background: var(--sx-navy-900);
+}
+
+/* ===== Phones (Saloon sweep) ===== */
+/* Below 600px: rows wrap, grids become one column, nothing wider than the
+   screen, labels wrap instead of being cut. Generated from this file's own
+   layout rules, then checked by hand. */
+@media (max-width: 600px) {
+  :host { display: block; max-width: 100%; }
+  .table-header { flex-wrap: wrap; }
+  .size-cell { flex-wrap: wrap; }
 }

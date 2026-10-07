@@ -16,7 +16,7 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
 }
 
 .close-btn {
@@ -25,7 +25,7 @@
   border: none;
   background: transparent;
   border-radius: 50%;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -34,7 +34,7 @@
 }
 
 .close-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .avatar-section {
@@ -50,12 +50,12 @@
   height: 92px;
   border-radius: 50%;
   overflow: hidden;
-  background: var(--color-primary-light, #eef2ff);
+  background: var(--color-primary-light, var(--sx-navy-50));
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 3px solid var(--color-surface, #ffffff);
-  box-shadow: 0 0 0 1px var(--color-border, #e5e7eb);
+  border: 3px solid var(--color-surface, var(--sx-surface));
+  box-shadow: 0 0 0 1px var(--color-border, var(--sx-line));
 }
 
 .avatar-preview img {
@@ -68,7 +68,7 @@
   width: 44px;
   height: 44px;
   font-size: 44px;
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 .change-photo-btn {
@@ -78,11 +78,11 @@
 
   padding: 7px 14px;
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
   border-radius: 999px;
 
-  background: var(--color-surface, #ffffff);
-  color: var(--color-primary, #14315d);
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-primary, var(--sx-navy-700));
 
   font-size: 12px;
   font-weight: 600;
@@ -93,7 +93,7 @@
 }
 
 .change-photo-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .change-photo-btn mat-icon {
@@ -104,7 +104,7 @@
 
 .error-text {
   font-size: 12px;
-  color: #dc2626;
+  color: var(--sx-danger);
   text-align: center;
 }
 
@@ -114,8 +114,8 @@
   gap: 10px;
 
   padding: 14px 0;
-  border-top: 1px solid var(--color-border, #e5e7eb);
-  border-bottom: 1px solid var(--color-border, #e5e7eb);
+  border-top: 1px solid var(--color-border, var(--sx-line));
+  border-bottom: 1px solid var(--color-border, var(--sx-line));
 
   margin-bottom: 20px;
 }
@@ -127,13 +127,13 @@
 
   font-size: 14px;
   font-weight: 700;
-  color: var(--color-text, #111827);
+  color: var(--color-text, var(--sx-ink));
 }
 
 .info-row.muted {
   font-size: 13px;
   font-weight: 500;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .info-row mat-icon {
@@ -141,7 +141,7 @@
   height: 16px;
   font-size: 16px;
   flex-shrink: 0;
-  color: var(--color-text-muted, #6b7280);
+  color: var(--color-text-muted, var(--sx-muted));
 }
 
 .dialog-footer {
@@ -163,19 +163,19 @@
 }
 
 .cancel-btn {
-  border: 1px solid var(--color-border, #e5e7eb);
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #111827);
+  border: 1px solid var(--color-border, var(--sx-line));
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
 }
 
 .cancel-btn:hover {
-  background: var(--color-bg, #f5f6fb);
+  background: var(--color-bg, var(--sx-bg));
 }
 
 .save-btn {
   border: none;
-  background: var(--color-primary, #14315d);
-  color: #ffffff;
+  background: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
 }
 
 .save-btn:disabled {
@@ -213,11 +213,11 @@
   gap: 6px;
   margin-top: 16px;
   padding-top: 16px;
-  border-top: 1px solid var(--color-border, #e5e7eb);
+  border-top: 1px solid var(--color-border, var(--sx-line));
 }
 
 .account-label {
-  color: #94a3b8;
+  color: var(--sx-muted);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.6px;
@@ -234,10 +234,10 @@
   min-width: 0;
   height: 40px;
   padding: 0 12px;
-  border: 1px solid var(--color-border, #e2e8f0);
+  border: 1px solid var(--color-border, var(--sx-line));
   border-radius: 10px;
-  background: var(--color-surface, #ffffff);
-  color: var(--color-text, #0f172a);
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
   font-size: 14px;
   font-weight: 600;
@@ -246,7 +246,7 @@
 
 .account-input:focus {
   outline: none;
-  border-color: #c7d2fe;
+  border-color: var(--sx-navy-100);
   box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
 }
 
@@ -254,7 +254,7 @@
   font-family: inherit;
   font-weight: 500;
   letter-spacing: normal;
-  color: #cbd5e1;
+  color: var(--sx-line);
 }
 
 /* Saves on its own rather than with the photo: the two are unrelated, and
@@ -268,8 +268,8 @@
   flex-shrink: 0;
   border: none;
   border-radius: 10px;
-  background: var(--color-primary, #14315d);
-  color: #ffffff;
+  background: var(--color-primary, var(--sx-navy-700));
+  color: var(--sx-surface);
   cursor: pointer;
 }
 
@@ -285,7 +285,7 @@
 }
 
 .account-hint {
-  color: var(--color-text-muted, #94a3b8);
+  color: var(--color-text-muted, var(--sx-muted));
   font-size: 11.5px;
   line-height: 1.45;
 }
@@ -301,7 +301,7 @@
 }
 
 .account-error {
-  color: #b42318;
+  color: var(--sx-danger);
   font-size: 11.5px;
   line-height: 1.45;
 }

@@ -5,7 +5,7 @@
 <mat-dialog-content class="dialog-content">
  <strong><p>{{ data.message }}</p></strong> 
     <mat-select [(ngModel)]="selectedOption" style="border-radius: 70px;" placeholder="Select">
-      <mat-option *ngFor="let option of data.dropdownOptions" [value]="option.value" style="border-radius: 70px; border-color: green;">
+      <mat-option *ngFor="let option of data.dropdownOptions" [value]="option.value" style="border-radius: 70px; border-color: var(--sx-success);">
         {{ option.label }}
       </mat-option>
     </mat-select>

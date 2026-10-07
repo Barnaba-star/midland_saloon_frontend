@@ -2,9 +2,9 @@
   margin: 16px;
   padding: 0;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  border: 1px solid #eef2f7;
+  border: 1px solid var(--sx-navy-100);
   border-radius: 10px;
 
   overflow: hidden;
@@ -25,13 +25,13 @@
 
   padding: 16px 20px;
 
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid var(--sx-navy-100);
 }
 
 .commission-header h3 {
   margin: 0;
 
-  color: #101828;
+  color: var(--sx-navy-900);
   font-size: 15px;
   font-weight: 600;
 }
@@ -39,7 +39,7 @@
 .commission-header p {
   margin: 4px 0 0;
 
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 12px;
 }
 
@@ -64,7 +64,7 @@
 }
 
 .period-field span {
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 500;
 
@@ -79,12 +79,12 @@
 
   min-width: 120px;
 
-  border: 1px solid #e4e7ec;
+  border: 1px solid var(--sx-line);
   border-radius: 6px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  color: #101828;
+  color: var(--sx-navy-900);
   font-family: inherit;
   font-size: 13px;
 
@@ -94,7 +94,7 @@
 .period-field select:focus {
   outline: none;
 
-  border-color: #bfdbfe;
+  border-color: var(--sx-navy-100);
 }
 
 
@@ -108,9 +108,9 @@
 
   gap: 1px;
 
-  background: #eef2f7;
+  background: var(--sx-navy-100);
 
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid var(--sx-navy-100);
 }
 
 .summary-tile {
@@ -121,11 +121,11 @@
 
   padding: 14px 20px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 .summary-label {
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 500;
 
@@ -134,7 +134,7 @@
 }
 
 .summary-value {
-  color: #101828;
+  color: var(--sx-navy-900);
   font-size: 22px;
   font-weight: 600;
 
@@ -142,11 +142,11 @@
 }
 
 .summary-tile.accent .summary-value {
-  color: #5b21b6;
+  color: var(--sx-navy-500);
 }
 
 .summary-unit {
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 11px;
 }
 
@@ -171,9 +171,9 @@
 .commission-table thead th {
   padding: 10px 14px;
 
-  background: #f9fafb;
+  background: var(--sx-bg);
 
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 600;
 
@@ -183,16 +183,16 @@
 
   white-space: nowrap;
 
-  border-bottom: 1px solid #eef2f7;
+  border-bottom: 1px solid var(--sx-navy-100);
 }
 
 .commission-table td {
   padding: 12px 14px;
 
-  color: #344054;
+  color: var(--sx-navy-700);
   font-size: 13px;
 
-  border-bottom: 1px solid #f4f6f9;
+  border-bottom: 1px solid var(--sx-bg);
 
   vertical-align: middle;
 }
@@ -202,7 +202,7 @@
 }
 
 .index {
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 12px;
 }
 
@@ -213,17 +213,17 @@
 }
 
 .staff-row:hover {
-  background: #f9fafb;
+  background: var(--sx-bg);
 }
 
 .staff-row.expanded {
-  background: #f5f3ff;
+  background: var(--sx-navy-50);
 }
 
 /* A staff member owed nothing this month is still shown - that zero is the
    signal their branches went quiet - but shouldn't compete for attention. */
 .staff-row:not(.has-earnings) .commission {
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 .staff-info {
@@ -245,9 +245,9 @@
 
   border-radius: 50%;
 
-  background: #ede9fe;
+  background: var(--sx-navy-100);
 
-  color: #5b21b6;
+  color: var(--sx-navy-500);
   font-size: 12px;
   font-weight: 600;
 }
@@ -258,13 +258,13 @@
 }
 
 .full-name {
-  color: #101828;
+  color: var(--sx-navy-900);
   font-size: 13px;
   font-weight: 500;
 }
 
 .username {
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 11px;
 }
 
@@ -277,9 +277,9 @@
 
   border-radius: 12px;
 
-  background: #ecfdf3;
+  background: var(--sx-success-bg);
 
-  color: #027a48;
+  color: var(--sx-success);
   font-size: 12px;
   font-weight: 600;
 
@@ -287,13 +287,13 @@
 }
 
 .paid-badge.none {
-  background: #f2f4f7;
+  background: var(--sx-bg);
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 .commission {
-  color: #5b21b6;
+  color: var(--sx-navy-500);
   font-weight: 600;
 }
 
@@ -303,7 +303,7 @@
 
   font-size: 18px;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 
@@ -314,7 +314,7 @@
 .detail-row > td {
   padding: 0 !important;
 
-  background: #fbfaff;
+  background: var(--sx-navy-50);
 }
 
 .detail-table {
@@ -328,7 +328,7 @@
 
   background: transparent;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 10px;
   font-weight: 600;
 
@@ -342,7 +342,7 @@
 
   font-size: 12px;
 
-  border-bottom: 1px solid #f4f6f9;
+  border-bottom: 1px solid var(--sx-bg);
 }
 
 .detail-table tr:last-child td {
@@ -352,7 +352,7 @@
 .branch-code {
   margin-left: 6px;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 11px;
 }
 
@@ -365,7 +365,7 @@
 
   padding: 20px;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 12px;
 }
 
@@ -379,7 +379,7 @@
 
   text-align: center !important;
 
-  color: #98a2b3 !important;
+  color: var(--sx-muted) !important;
   font-size: 13px !important;
 }
 
@@ -393,7 +393,7 @@
 
   font-size: 32px;
 
-  color: #d0d5dd;
+  color: var(--sx-line);
 }
 
 .empty-state strong {
@@ -401,7 +401,7 @@
 
   margin-bottom: 4px;
 
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 14px;
 }
 
@@ -441,7 +441,7 @@
 ========================= */
 
 .summary-tile.warn .summary-value {
-  color: #b54708;
+  color: var(--sx-warning);
 }
 
 .status-cell {
@@ -449,7 +449,7 @@
 }
 
 .status-none {
-  color: #d0d5dd;
+  color: var(--sx-line);
 }
 
 .status-paid {
@@ -462,9 +462,9 @@
 
   border-radius: 12px;
 
-  background: #ecfdf3;
+  background: var(--sx-success-bg);
 
-  color: #027a48;
+  color: var(--sx-success);
   font-size: 12px;
   font-weight: 600;
 }
@@ -486,12 +486,12 @@
 
   padding: 0 12px;
 
-  border: 1px solid #039855;
+  border: 1px solid var(--sx-success);
   border-radius: 6px;
 
-  background: #039855;
+  background: var(--sx-success);
 
-  color: #ffffff;
+  color: var(--sx-surface);
   font-family: inherit;
   font-size: 12px;
   font-weight: 600;
@@ -504,9 +504,9 @@
 }
 
 .pay-button:hover:not(:disabled) {
-  background: #027a48;
+  background: var(--sx-success);
 
-  border-color: #027a48;
+  border-color: var(--sx-success);
 }
 
 .pay-button:disabled {
@@ -531,7 +531,7 @@
 
   margin-top: 3px;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
   font-size: 10px;
 }
 
@@ -550,12 +550,12 @@
 
   padding: 0 10px;
 
-  border: 1px solid #e4e7ec;
+  border: 1px solid var(--sx-line);
   border-radius: 6px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  color: #475467;
+  color: var(--sx-navy-500);
   font-family: inherit;
   font-size: 12px;
   font-weight: 500;
@@ -568,11 +568,11 @@
 }
 
 .branches-button:hover {
-  background: #eff8ff;
+  background: var(--sx-navy-50);
 
-  border-color: #b2ddff;
+  border-color: var(--sx-navy-100);
 
-  color: #175cd3;
+  color: var(--sx-navy-500);
 }
 
 .branches-button mat-icon {
@@ -593,9 +593,23 @@
 
   border-radius: 12px;
 
-  background: #fffaeb;
+  background: var(--sx-gold-100);
 
-  color: #b54708;
+  color: var(--sx-warning);
   font-size: 12px;
   font-weight: 600;
+}
+
+/* ===== Phones (Saloon sweep) ===== */
+/* Below 600px: rows wrap, grids become one column, nothing wider than the
+   screen, labels wrap instead of being cut. Generated from this file's own
+   layout rules, then checked by hand. */
+@media (max-width: 600px) {
+  :host { display: block; max-width: 100%; }
+  .period-picker { flex-wrap: wrap; }
+  .summary-row { grid-template-columns: 1fr; }
+  .staff-info { flex-wrap: wrap; }
+  .detail-state { flex-wrap: wrap; }
+  .pay-button { white-space: normal; }
+  .branches-button { white-space: normal; }
 }

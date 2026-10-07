@@ -114,9 +114,9 @@
 
   margin: 0 auto;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  border: 1px solid #e0e0e0;
+  border: 1px solid var(--sx-line);
 
   border-radius: 12px;
 
@@ -147,9 +147,9 @@
 
   box-sizing: border-box;
 
-  background: #f8f9fa;
+  background: var(--sx-bg);
 
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 
@@ -169,7 +169,7 @@
 
   margin: 0;
 
-  color: #263238;
+  color: var(--sx-navy-800);
 
   font-size: 17px;
 
@@ -179,7 +179,7 @@
 
 .info-card-header span {
 
-  color: #78909c;
+  color: var(--sx-muted);
 
   font-size: 14px;
 
@@ -230,11 +230,11 @@
 
   gap: 10px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--sx-line);
 
   border-radius: 8px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
   transition:
     background 0.2s ease,
@@ -245,12 +245,12 @@
 
 .permission-item:hover {
 
-  background: #f8fbff;
+  background: var(--sx-navy-50);
 
-  border-color: #90caf9;
+  border-color: var(--sx-navy-300);
 
   box-shadow:
-    0 3px 8px rgba(20, 49, 93, 0.08);
+    0 3px 8px color-mix(in srgb, var(--sx-navy-700) 8%, transparent);
 }
 
 
@@ -264,7 +264,7 @@
 
   min-width: 0;
 
-  color: #374151;
+  color: var(--sx-navy-700);
 
   font-size: 14px;
 
@@ -290,7 +290,7 @@
 
   flex-shrink: 0;
 
-  accent-color: #14315d;
+  accent-color: var(--sx-navy-700);
 }
 
 
@@ -314,9 +314,9 @@
 
   gap: 10px;
 
-  background: #fafafa;
+  background: var(--sx-bg);
 
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--sx-line);
 }
 
 
@@ -345,29 +345,29 @@
 
 .btn-save {
 
-  color: #ffffff;
+  color: var(--sx-surface);
 
-  background: #14315d;
+  background: var(--sx-navy-700);
 }
 
 
 .btn-save:hover {
 
-  background: #0a1c38;
+  background: var(--sx-navy-900);
 }
 
 
 .btn-cancel {
 
-  color: #374151;
+  color: var(--sx-navy-700);
 
-  background: #e5e7eb;
+  background: var(--sx-line);
 }
 
 
 .btn-cancel:hover {
 
-  background: #d1d5db;
+  background: var(--sx-line);
 }
 
 
@@ -397,14 +397,14 @@
   background:
     linear-gradient(
       135deg,
-      #eef6ff,
-      #ffffff
+      var(--sx-navy-50),
+      var(--sx-surface)
     );
 
   border-radius: 14px;
 
   box-shadow:
-    0 8px 20px rgba(20, 49, 93, 0.12);
+    0 8px 20px color-mix(in srgb, var(--sx-navy-700) 12%, transparent);
 
   animation: fadeInUp 0.8s ease-out;
 }
@@ -421,7 +421,7 @@
   padding-bottom: 15px;
 
   border-bottom:
-    1px dashed #d6e4f5;
+    1px dashed var(--sx-navy-100);
 }
 
 
@@ -438,7 +438,7 @@
   padding-bottom: 12px;
 
   border-bottom:
-    2px solid #d0d4d8;
+    2px solid var(--sx-line);
 }
 
 
@@ -446,7 +446,7 @@
 
   margin: 0;
 
-  color: #0a1c38;
+  color: var(--sx-navy-900);
 
   font-size: 18px;
 
@@ -460,7 +460,7 @@
 
   margin-bottom: 8px;
 
-  color: #0d47a1;
+  color: var(--sx-navy-500);
 
   font-size: 15px;
 }
@@ -470,7 +470,7 @@
 
   margin: 0;
 
-  color: #455a64;
+  color: var(--sx-navy-500);
 
   font-size: 14px;
 
@@ -653,7 +653,7 @@
 .filter-heading h2 {
   margin: 0 0 4px 0;
 
-  color: #263238;
+  color: var(--sx-navy-800);
 
   font-size: 20px;
 
@@ -663,7 +663,7 @@
 .filter-heading p {
   margin: 0;
 
-  color: #78909c;
+  color: var(--sx-muted);
 
   font-size: 13px;
 
@@ -726,7 +726,7 @@
 .filter-heading h2 {
   margin: 0 0 4px 0;
 
-  color: #263238;
+  color: var(--sx-navy-800);
 
   font-size: 20px;
 
@@ -737,7 +737,7 @@
 .filter-heading p {
   margin: 0;
 
-  color: #78909c;
+  color: var(--sx-muted);
 
   font-size: 13px;
 
@@ -762,9 +762,9 @@
 
   border-radius: 8px;
 
-  background: #14315d;
+  background: var(--sx-navy-700);
 
-  color: #ffffff;
+  color: var(--sx-surface);
 
   font-size: 14px;
 
@@ -793,10 +793,10 @@
 
 .search-button:hover:not(:disabled) {
 
-  background: #0a1c38;
+  background: var(--sx-navy-900);
 
   box-shadow:
-    0 4px 10px rgba(20, 49, 93, 0.25);
+    0 4px 10px color-mix(in srgb, var(--sx-navy-700) 25%, transparent);
 }
 
 
@@ -804,9 +804,9 @@
 
 .search-button:disabled {
 
-  background: #b0bec5;
+  background: var(--sx-line);
 
-  color: #eceff1;
+  color: var(--sx-line);
 
   cursor: not-allowed;
 
@@ -862,7 +862,7 @@
 
   margin: 0;
 
-  color: #374151;
+  color: var(--sx-navy-700);
 
   font-size: 13px;
 
@@ -898,7 +898,7 @@
 .role-select
 .mat-mdc-text-field-wrapper {
 
-  background: #fafafa;
+  background: var(--sx-bg);
 
   border-radius: 10px;
 }
@@ -915,7 +915,7 @@
 .role-select
 .mdc-notched-outline__trailing {
 
-  border-color: #d1d5db !important;
+  border-color: var(--sx-line) !important;
 }
 
 
@@ -930,7 +930,7 @@
 .role-select.mat-focused
 .mdc-notched-outline__trailing {
 
-  border-color: #14315d !important;
+  border-color: var(--sx-navy-700) !important;
 
   border-width: 2px;
 }
@@ -945,7 +945,7 @@
 
   font-weight: 500;
 
-  color: #374151;
+  color: var(--sx-navy-700);
 }
 
 
@@ -954,7 +954,7 @@
 .role-select
 .mat-mdc-select-arrow {
 
-  color: #14315d;
+  color: var(--sx-navy-700);
 }
 
 
@@ -1049,7 +1049,7 @@
 
   flex-shrink: 0;
 
-  color: #0a1c38;
+  color: var(--sx-navy-900);
 
   font-size: 14px;
 
@@ -1069,7 +1069,7 @@
 
   height: 1px;
 
-  background: #d6e4f5;
+  background: var(--sx-navy-100);
 }
 
 
@@ -1114,11 +1114,11 @@
 
   gap: 10px;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--sx-line);
 
   border-radius: 8px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
   transition:
     background 0.2s ease,
@@ -1129,12 +1129,12 @@
 
 .permission-item:hover {
 
-  background: #f8fbff;
+  background: var(--sx-navy-50);
 
-  border-color: #90caf9;
+  border-color: var(--sx-navy-300);
 
   box-shadow:
-    0 3px 8px rgba(20, 49, 93, 0.08);
+    0 3px 8px color-mix(in srgb, var(--sx-navy-700) 8%, transparent);
 }
 
 
@@ -1148,7 +1148,7 @@
 
   min-width: 0;
 
-  color: #374151;
+  color: var(--sx-navy-700);
 
   font-size: 14px;
 
@@ -1174,7 +1174,7 @@
 
   flex-shrink: 0;
 
-  accent-color: #14315d;
+  accent-color: var(--sx-navy-700);
 }
 
 
@@ -1212,4 +1212,25 @@
 
   }
 
+}
+
+/* ===== Phones (Saloon sweep) ===== */
+/* Below 600px: rows wrap, grids become one column, nothing wider than the
+   screen, labels wrap instead of being cut. Generated from this file's own
+   layout rules, then checked by hand. */
+@media (max-width: 600px) {
+  :host { display: block; max-width: 100%; }
+  .search-row { flex-wrap: wrap; }
+  .info-card-header { flex-wrap: wrap; }
+  .header-title { flex-wrap: wrap; }
+  .info-card-header span { white-space: normal; }
+  .info-card-body { grid-template-columns: 1fr; }
+  .permission-item { flex-wrap: wrap; }
+  .info-card-footer { flex-wrap: wrap; }
+  .permission-filter-section { flex-wrap: wrap; }
+  .filter-top-row { flex-wrap: wrap; }
+  .search-row { flex-wrap: wrap; }
+  .permission-group-header { flex-wrap: wrap; }
+  .permission-group-items { grid-template-columns: 1fr; }
+  .permission-item { flex-wrap: wrap; }
 }

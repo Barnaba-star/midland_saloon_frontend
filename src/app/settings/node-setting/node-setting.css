@@ -1,9 +1,9 @@
 .info-card{
     width: 80%;
     margin: 20px auto;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--sx-line);
     border-radius: 8px;
-    background: #fff;
+    background: var(--sx-surface);
     overflow: hidden;
     animation:fadeInUp 2s ease;
 
@@ -13,9 +13,9 @@
 .info-cardStepper{
     width: 95%;
     margin: 20px auto;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--sx-line);
     border-radius: 8px;
-    background: #fff;
+    background: var(--sx-surface);
     overflow: hidden;
     animation:fadeInUp .8s ease;
 }
@@ -26,8 +26,8 @@
   align-items: center;
   margin-bottom: 0px;
   padding: 12px 18px;
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
-  border: 1px solid #edf0f4;
+  background: linear-gradient(135deg, var(--sx-surface) 0%, var(--sx-navy-50) 100%);
+  border: 1px solid var(--sx-line);
   border-radius: 12px;
   height: 80px;
 }
@@ -36,17 +36,17 @@
   margin: 0;
   font-size: 18px;
   font-weight: 700;
-  color: #172033;
+  color: var(--sx-navy-900);
 }
 
 .table-header p {
   margin: 4px 0 0;
-  color: #666;
+  color: var(--sx-muted);
   font-size: 14px;
 }
 
 .record-badge {
-  background: #14315d;
+  background: var(--sx-navy-700);
   color: white;
   padding: 6px 14px;
   border-radius: 20px;
@@ -56,7 +56,7 @@
 
 .info-row{
     padding: 18px 24px;
-    border-bottom: 1px dotted #bdbdbd;
+    border-bottom: 1px dotted var(--sx-line);
 }
 
 .info-row:last-child{
@@ -65,38 +65,38 @@
 
 .info-row h3{
     margin: 0;
-    color: #14315d;
+    color: var(--sx-navy-700);
 }
 
 .info-row strong{
     display: block;
     margin-bottom: 8px;
-    color: #424242;
+    color: var(--sx-ink);
 }
 
 .info-row p{
     margin: 0;
     line-height: 1.7;
-    color: #616161;
+    color: var(--sx-muted);
 }
 
 
 .info-header{
     padding:20px 25px;
-    border-bottom:1px solid #edf0f4;
-    background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+    border-bottom:1px solid var(--sx-line);
+    background: linear-gradient(135deg, var(--sx-surface) 0%, var(--sx-navy-50) 100%);
 }
 
 .info-header h2{
     margin:0;
     font-size:18px;
     font-weight: 700;
-    color:#0a1c38;
+    color:var(--sx-navy-900);
 }
 
 .info-header p{
     margin-top:8px;
-    color:#666;
+    color:var(--sx-muted);
     line-height:1.6;
 }
 
@@ -136,23 +136,23 @@ app-form{
 }
 
 .btn-primary{
-    background:#14315d;
+    background:var(--sx-navy-700);
     color:white;
 }
 
 .btn-primary:hover{
-    background:#0a1c38;
+    background:var(--sx-navy-900);
 }
 
 .info-card-data{
     width: 80%;
     margin: 60px auto;
-    border: 1px solid #d6d6d6;
+    border: 1px solid var(--sx-line);
     border-radius: 8px;
     height: 300px;
-    background: #fff;
+    background: var(--sx-surface);
     overflow: hidden;
-    background-color: rgb(224, 214, 214);
+    background-color: var(--sx-line);
     animation:fadeInUp .4s ease;
 }
 
@@ -196,7 +196,7 @@ app-form{
   font-size: 90px;
   width: 90px;
   height: 90px;
-  color: rgba(182, 150, 109, 0.95);
+  color: color-mix(in srgb, var(--sx-warning) 95%, transparent);
   margin-bottom: 10px;
 }
 
@@ -204,12 +204,12 @@ app-form{
   margin: 0;
   font-size: 18px;
   font-weight: 600;
-  color: #424242;
+  color: var(--sx-ink);
 }
 
 .action-container p {
   margin-top: 1px;
-  color: #757575;
+  color: var(--sx-muted);
   font-size: 15px;
 }
 
@@ -252,7 +252,7 @@ app-form{
   gap: 5px;
   padding-left: 10px;
   padding-right: 10px;
-  background-color: #f8fafc;
+  background-color: var(--sx-navy-50);
   border-radius: 10px;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s ease;
@@ -271,8 +271,8 @@ app-form{
   transform: translateY(-2px);
 
   box-shadow:
-    0 4px 10px rgba(15, 23, 42, 0.05),
-    0 16px 38px rgba(15, 23, 42, 0.10);
+    0 4px 10px color-mix(in srgb, var(--sx-navy-900) 5%, transparent),
+    0 16px 38px color-mix(in srgb, var(--sx-navy-900) 10%, transparent);
 }
 
 
@@ -295,11 +295,11 @@ app-form{
 
   box-sizing: border-box;
 
-  color: var(--color-text, #0a1c38);
+  color: var(--color-text, var(--sx-navy-900));
 
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  background: linear-gradient(135deg, var(--sx-surface) 0%, var(--sx-navy-50) 100%);
 
-  border-bottom: 1px solid var(--color-border, #edf0f4);
+  border-bottom: 1px solid var(--color-border, var(--sx-line));
 
   overflow: hidden;
 }
@@ -326,7 +326,7 @@ app-form{
 
   border-radius: 50%;
 
-  background: rgba(20, 49, 93, 0.05);
+  background: color-mix(in srgb, var(--sx-navy-700) 5%, transparent);
 
   pointer-events: none;
 }
@@ -345,7 +345,7 @@ app-form{
 
   border-radius: 50%;
 
-  background: rgba(201, 150, 46, 0.06);
+  background: color-mix(in srgb, var(--sx-gold-500) 6%, transparent);
 
   pointer-events: none;
 }
@@ -367,7 +367,7 @@ app-form{
 .info-card12 .table-header h2 {
   margin: 0 0 5px;
 
-  color: var(--color-text, #172033);
+  color: var(--color-text, var(--sx-navy-900));
 
   font-size: 19px;
 
@@ -382,7 +382,7 @@ app-form{
 .info-card12 .table-header p {
   margin: 0;
 
-  color: var(--color-text-muted, #666);
+  color: var(--color-text-muted, var(--sx-muted));
 
   font-size: 12px;
 
@@ -422,11 +422,11 @@ app-form{
 
   gap: 8px;
 
-  border: 1px solid #cddcff;
+  border: 1px solid var(--sx-navy-100);
   border-radius: 10px;
 
-  background: #eef2ff;
-  color: #1d4ed8;
+  background: var(--sx-navy-100);
+  color: var(--sx-navy-500);
 
   font-size: 13px;
   font-weight: 700;
@@ -436,7 +436,7 @@ app-form{
 }
 
 .add-branch-btn:hover {
-  background: #e0e7ff;
+  background: var(--sx-navy-100);
 }
 
 .add-branch-btn mat-icon {
@@ -468,11 +468,11 @@ app-form{
 
   border-radius: 12px;
 
-  background: var(--color-primary-light, #eef2ff);
+  background: var(--color-primary-light, var(--sx-navy-100));
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
 
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
 
   font-size: 14px;
 
@@ -486,7 +486,7 @@ app-form{
 
   font-size: 19px;
 
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 
@@ -499,7 +499,7 @@ app-form{
 
   padding: 0;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
   overflow-x: auto;
 }
@@ -525,7 +525,7 @@ app-form{
 ===================================================== */
 
 .info-card12 .branch-table thead {
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 }
 
 
@@ -534,11 +534,11 @@ app-form{
 
   padding: 0 15px;
 
-  color: #667085;
+  color: var(--sx-muted);
 
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 
-  border-bottom: 1px solid #e8edf3;
+  border-bottom: 1px solid var(--sx-line);
 
   text-align: left;
 
@@ -559,7 +559,7 @@ app-form{
 ===================================================== */
 
 .info-card12 .branch-table tbody tr {
-  background: #ffffff;
+  background: var(--sx-surface);
 
   transition:
     background 0.18s ease,
@@ -568,10 +568,10 @@ app-form{
 
 
 .info-card12 .branch-table tbody tr:hover {
-  background: #f8fbff;
+  background: var(--sx-navy-50);
 
   box-shadow:
-    inset 3px 0 0 #14315d;
+    inset 3px 0 0 var(--sx-navy-700);
 }
 
 
@@ -584,9 +584,9 @@ app-form{
 
   padding: 8px 15px;
 
-  color: #344054;
+  color: var(--sx-navy-700);
 
-  border-bottom: 1px solid #edf1f5;
+  border-bottom: 1px solid var(--sx-line);
 
   font-size: 12px;
 
@@ -620,14 +620,14 @@ app-form{
   background:
     linear-gradient(
       135deg,
-      #eff6ff,
-      #dbeafe
+      var(--sx-navy-50),
+      var(--sx-navy-100)
     );
 
-  color: #14315d;
+  color: var(--sx-navy-700);
 
   box-shadow:
-    0 2px 6px rgba(20, 49, 93, 0.10);
+    0 2px 6px color-mix(in srgb, var(--sx-navy-700) 10%, transparent);
 }
 
 
@@ -644,7 +644,7 @@ app-form{
 ===================================================== */
 
 .info-card12 .branch-details strong {
-  color: #1d2939;
+  color: var(--sx-navy-800);
 
   font-size: 13px;
 
@@ -653,7 +653,7 @@ app-form{
 
 
 .info-card12 .branch-details span {
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 11px;
 }
@@ -668,9 +668,9 @@ app-form{
 
   border-radius: 6px;
 
-  background: #f2f4f7;
+  background: var(--sx-bg);
 
-  color: #475467;
+  color: var(--sx-navy-500);
 
   font-family: "Courier New", monospace;
 
@@ -689,9 +689,9 @@ app-form{
 
   border-radius: 7px;
 
-  background: #ecfdf3;
+  background: var(--sx-success-bg);
 
-  color: #027a48;
+  color: var(--sx-success);
 
   font-size: 11px;
 
@@ -721,16 +721,16 @@ app-form{
 
 
 .info-card12 .status-badge.active {
-  background: #ecfdf3;
+  background: var(--sx-success-bg);
 
-  color: #027a48;
+  color: var(--sx-success);
 }
 
 
 .info-card12 .status-badge.inactive {
-  background: #fef3f2;
+  background: var(--sx-danger-bg);
 
-  color: #b42318;
+  color: var(--sx-danger);
 }
 
 
@@ -743,7 +743,7 @@ app-form{
   background: currentColor;
 
   box-shadow:
-    0 0 0 3px rgba(2, 122, 72, 0.10);
+    0 0 0 3px color-mix(in srgb, var(--sx-success) 10%, transparent);
 }
 
 
@@ -768,7 +768,7 @@ app-form{
 
   font-size: 16px;
 
-  color: #667085;
+  color: var(--sx-muted);
 }
 
 
@@ -793,7 +793,7 @@ app-form{
 
   margin: 0 auto 10px;
 
-  color: #cbd5e1;
+  color: var(--sx-navy-100);
 
   font-size: 42px;
 }
@@ -804,14 +804,14 @@ app-form{
 
   margin-bottom: 5px;
 
-  color: #475467;
+  color: var(--sx-navy-500);
 
   font-size: 14px;
 }
 
 
 .info-card12 .empty-row span {
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 12px;
 }
@@ -827,19 +827,19 @@ app-form{
 
 
 .info-card12 .branch-table-wrapper::-webkit-scrollbar-track {
-  background: #f8fafc;
+  background: var(--sx-navy-50);
 }
 
 
 .info-card12 .branch-table-wrapper::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
+  background: var(--sx-navy-100);
 
   border-radius: 10px;
 }
 
 
 .info-card12 .branch-table-wrapper::-webkit-scrollbar-thumb:hover {
-  background: #94a3b8;
+  background: var(--sx-navy-300);
 }
 
 
@@ -977,14 +977,14 @@ app-form{
 
   box-sizing: border-box;
 
-  border-top: 1px solid #edf1f5;
+  border-top: 1px solid var(--sx-line);
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 
 .pagination-info {
-  color: #667085;
+  color: var(--sx-muted);
 
   font-size: 11px;
 
@@ -993,7 +993,7 @@ app-form{
 
 
 .pagination-info strong {
-  color: #344054;
+  color: var(--sx-navy-700);
 
   font-weight: 700;
 }
@@ -1003,7 +1003,7 @@ app-form{
 .branch-pagination mat-paginator {
   background: transparent !important;
 
-  color: #667085 !important;
+  color: var(--sx-muted) !important;
 }
 
 
@@ -1026,7 +1026,7 @@ app-form{
 
   margin: 0;
 
-  color: var(--color-text, #172033);
+  color: var(--color-text, var(--sx-navy-900));
 
   font-size: 20px;
   font-weight: 300;
@@ -1045,11 +1045,11 @@ app-form{
 
   border-radius: 50%;
 
-  background: var(--color-primary-light, #eef2ff);
+  background: var(--color-primary-light, var(--sx-navy-100));
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
 
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
 
   font-size: 13px;
   font-weight: 800;
@@ -1073,11 +1073,11 @@ app-form{
 
   box-sizing: border-box;
 
-  color: var(--color-text, #172033);
+  color: var(--color-text, var(--sx-navy-900));
 
-  background: linear-gradient(135deg, #ffffff 0%, #f8faff 100%);
+  background: linear-gradient(135deg, var(--sx-surface) 0%, var(--sx-navy-50) 100%);
 
-  border-bottom: 1px solid var(--color-border, #edf0f4);
+  border-bottom: 1px solid var(--color-border, var(--sx-line));
 
   border-radius: 18px 18px 0 0;
 
@@ -1101,7 +1101,7 @@ app-form{
 
   border-radius: 50%;
 
-  background: rgba(20, 49, 93, 0.05);
+  background: color-mix(in srgb, var(--sx-navy-700) 5%, transparent);
 
   pointer-events: none;
 }
@@ -1120,7 +1120,7 @@ app-form{
 
   border-radius: 50%;
 
-  background: rgba(201, 150, 46, 0.06);
+  background: color-mix(in srgb, var(--sx-gold-500) 6%, transparent);
 
   pointer-events: none;
 }
@@ -1152,9 +1152,9 @@ app-form{
 
   border-radius: 14px;
 
-  background: var(--color-primary-light, #eef2ff);
+  background: var(--color-primary-light, var(--sx-navy-100));
 
-  border: 1px solid var(--color-border, #e5e7eb);
+  border: 1px solid var(--color-border, var(--sx-line));
 
 }
 
@@ -1165,7 +1165,7 @@ app-form{
 
   font-size: 25px;
 
-  color: var(--color-primary, #14315d);
+  color: var(--color-primary, var(--sx-navy-700));
 }
 
 
@@ -1173,7 +1173,7 @@ app-form{
 .branch-form-text h2 {
   margin: 0 0 5px;
 
-  color: var(--color-text, #172033);
+  color: var(--color-text, var(--sx-navy-900));
 
   font-size: 19px;
 
@@ -1188,7 +1188,7 @@ app-form{
 .branch-form-text p {
   margin: 0;
 
-  color: var(--color-text-muted, #666);
+  color: var(--color-text-muted, var(--sx-muted));
 
   font-size: 12px;
 
@@ -1212,11 +1212,11 @@ app-form{
 
   border-radius: 20px;
 
-  background: var(--color-accent-light, #faf1de);
+  background: var(--color-accent-light, var(--sx-gold-100));
 
-  border: 1px solid var(--color-accent, #c9962e);
+  border: 1px solid var(--color-accent, var(--sx-gold-500));
 
-  color: var(--color-accent-dark, #a67a1f);
+  color: var(--color-accent-dark, var(--sx-gold-700));
 
   font-size: 11px;
 
@@ -1243,7 +1243,7 @@ app-form{
 
   box-sizing: border-box;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 }
 
 
@@ -1297,9 +1297,9 @@ app-form{
   align-items: center;
   justify-content: center;
 
-  border: 1px solid #e5e7eb;
+  border: 1px solid var(--sx-line);
   border-radius: 8px;
-  background: #fff;
+  background: var(--sx-surface);
 
   cursor: pointer;
   transition: all 0.2s ease;
@@ -1333,22 +1333,22 @@ app-form{
 
 /* EDIT */
 .edit-btn {
-  color: #14315d;
+  color: var(--sx-navy-700);
 }
 
 .edit-btn:hover {
-  background: #eff6ff;
-  border-color: #bfdbfe;
+  background: var(--sx-navy-50);
+  border-color: var(--sx-navy-100);
 }
 
 /* DELETE */
 .delete-btn {
-  color: #dc2626;
+  color: var(--sx-danger);
 }
 
 .delete-btn:hover {
-  background: #fef2f2;
-  border-color: #fecaca;
+  background: var(--sx-danger-bg);
+  border-color: var(--sx-danger-bg);
 }
 
 
@@ -1359,23 +1359,23 @@ app-form{
 
 /* MORE */
 .more-btn {
-  color: #6b7280;
+  color: var(--sx-muted);
 }
 
 .more-btn:hover {
-  background: #f3f4f6;
-  border-color: #d1d5db;
+  background: var(--sx-bg);
+  border-color: var(--sx-line);
 }
 .action-btn:disabled {
-  background-color: #f1f1f1 !important;
-  color: #b5b5b5 !important;
-  border-color: #e0e0e0 !important;
+  background-color: var(--sx-line) !important;
+  color: var(--sx-muted) !important;
+  border-color: var(--sx-line) !important;
   cursor: not-allowed;
   opacity: 0.65;
 }
 
 .action-btn:disabled mat-icon {
-  color: #b5b5b5 !important;
+  color: var(--sx-muted) !important;
 }
 
 
@@ -1387,18 +1387,43 @@ app-form{
    separated from everything above it. ::ng-deep is needed because the menu
    panel is rendered in an overlay, outside this component's view. */
 ::ng-deep .branch-action-menu .menu-item-danger {
-  color: #dc2626;
-  border-top: 1px solid #f1f5f9;
+  color: var(--sx-danger);
+  border-top: 1px solid var(--sx-navy-50);
 }
 
 ::ng-deep .branch-action-menu .menu-item-danger .mat-icon {
-  color: #dc2626;
+  color: var(--sx-danger);
 }
 
 ::ng-deep .branch-action-menu .menu-item-danger:hover:not([disabled]) {
-  background: #fef2f2;
+  background: var(--sx-danger-bg);
 }
 
 ::ng-deep .branch-action-menu .mat-mdc-menu-item .mat-icon {
   margin-right: 10px;
+}
+
+/* ===== Phones (Saloon sweep) ===== */
+/* Below 600px: rows wrap, grids become one column, nothing wider than the
+   screen, labels wrap instead of being cut. Generated from this file's own
+   layout rules, then checked by hand. */
+@media (max-width: 600px) {
+  :host { display: block; max-width: 100%; }
+  .table-header { flex-wrap: wrap; }
+  .action-container { flex-wrap: wrap; }
+  .footerButoons { flex-wrap: wrap; }
+  .titles { flex-wrap: wrap; }
+  .info-card12 .table-header { flex-wrap: wrap; }
+  .table-header-actions { flex-wrap: wrap; }
+  .info-card12 .branch-count { flex-wrap: wrap; }
+  .info-card12 .region-cell,
+.info-card12 .phone-cell { flex-wrap: wrap; }
+  .info-card12 .table-header { flex-wrap: wrap; }
+  .branch-pagination { flex-wrap: wrap; }
+  .pagination-info { white-space: normal; }
+  .branch-title h2 { flex-wrap: wrap; }
+  .branch-form-header { flex-wrap: wrap; }
+  .branch-form-title { flex-wrap: wrap; }
+  .action-column { white-space: normal; }
+  .action-label { white-space: normal; }
 }

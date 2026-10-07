@@ -22,7 +22,7 @@
 .action-container p {
   margin: 0;
   font-family: var(--font-sans);
-  color: rgb(65, 62, 88);
+  color: var(--sx-ink);
   font-size: 20px;
   text-align: center;
 
@@ -59,12 +59,13 @@
 
 }
 .service-card {
-  background: #ffffff;
-  border: 1px solid #e8edf3;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(16, 24, 40, 0.05);
-  width: 1500px;
+  box-shadow: 0 5px 20px color-mix(in srgb, var(--sx-navy-900) 5%, transparent);
+  width: 100%;
+  max-width: 1500px;
 }
 
 /* =========================
@@ -80,11 +81,11 @@
 
   background: linear-gradient(
     135deg,
-    #ffffff 0%,
-    #f8faff 100%
+    var(--sx-surface) 0%,
+    var(--sx-navy-50) 100%
   );
 
-  border-bottom: 1px solid #edf0f4;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 .service-header-left {
@@ -103,8 +104,8 @@
 
   border-radius: 12px;
 
-  background: #eef4ff;
-  color: #14315d;
+  background: var(--sx-navy-50);
+  color: var(--sx-navy-700);
 }
 
 .service-header-icon mat-icon {
@@ -117,14 +118,14 @@
   font-size: 14px;
   font-weight: 600;
 
-  color: #334155;
+  color: var(--sx-ink);
 }
 
 .service-card-header p {
   margin: 4px 0 0;
 
   font-size: 13px;
-  color: #8a94a6;
+  color: var(--sx-muted);
 }
 
 /* =========================
@@ -141,18 +142,18 @@
   padding: 7px 13px;
 
   border-radius: 9px;
-  background: #f5f7fa;
+  background: var(--sx-bg);
 }
 
 .summary-number {
   font-size: 14px;
   font-weight: 700;
-  color: #14315d;
+  color: var(--sx-navy-700);
 }
 
 .summary-label {
   font-size: 11px;
-  color: #98a2b3;
+  color: var(--sx-muted);
 }
 
 /* =========================
@@ -170,11 +171,11 @@
 .service-table thead th {
   padding: 14px 16px;
 
-  background: #f8fafc;
+  background: var(--sx-bg);
 
-  border-bottom: 1px solid #e9edf3;
+  border-bottom: 1px solid var(--sx-line);
 
-  color: #667085;
+  color: var(--sx-muted);
 
   font-size: 11px;
   font-weight: 700;
@@ -188,7 +189,7 @@
 .service-table tbody td {
   padding: 15px 16px;
 
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid var(--sx-bg);
 
   vertical-align: middle;
 
@@ -200,7 +201,7 @@
 }
 
 .service-table tbody tr:hover {
-  background: #f8faff;
+  background: var(--sx-navy-50);
 }
 
 .service-table tbody tr:last-child td {
@@ -212,7 +213,7 @@
 ========================= */
 
 .index-column {
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 13px;
   font-weight: 600;
@@ -244,7 +245,7 @@
     var(--color-primary-dark)
   );
 
-  color: #ffffff;
+  color: var(--sx-surface);
 }
 
 .service-avatar mat-icon {
@@ -258,7 +259,7 @@
 }
 
 .service-name {
-  color: #1d2939;
+  color: var(--sx-navy-800);
 
   font-size: 14px;
   font-weight: 700;
@@ -270,7 +271,7 @@
   overflow: hidden;
   text-overflow: ellipsis;
 
-  color: #98a2b3;
+  color: var(--sx-muted);
 
   font-size: 11px;
 }
@@ -286,9 +287,9 @@
 
   border-radius: 6px;
 
-  background: #f2f4f7;
+  background: var(--sx-bg);
 
-  color: #344054;
+  color: var(--sx-ink);
 
   font-size: 12px;
   font-weight: 700;
@@ -307,9 +308,9 @@
 
   border-radius: 6px;
 
-  background: #f5f3ff;
+  background: var(--sx-navy-50);
 
-  color: #6941c6;
+  color: var(--sx-navy-500);
 
   font-size: 12px;
   font-weight: 600;
@@ -324,7 +325,7 @@
   align-items: center;
   gap: 5px;
 
-  color: #475467;
+  color: var(--sx-ink);
 
   font-size: 13px;
   font-weight: 600;
@@ -336,7 +337,7 @@
 
   font-size: 17px;
 
-  color: #667085;
+  color: var(--sx-muted);
 }
 
 /* =========================
@@ -344,7 +345,7 @@
 ========================= */
 
 .service-price {
-  color: #101828;
+  color: var(--sx-navy-900);
 
   font-size: 13px;
   font-weight: 700;
@@ -368,13 +369,13 @@
 }
 
 .status-badge.active {
-  background: #ecfdf3;
-  color: #027a48;
+  background: var(--sx-success-bg);
+  color: var(--sx-success);
 }
 
 .status-badge.inactive {
-  background: #fef2f2;
-  color: #b42318;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 .status-dot {
@@ -396,22 +397,22 @@
 }
 
 .actions-column button {
-  color: #14315d;
+  color: var(--sx-navy-700);
   transition: all 0.2s ease;
 }
 
 .actions-column button:hover {
-  background: linear-gradient(135deg, #eef4ff 0%, #fdf6e3 100%);
+  background: linear-gradient(135deg, var(--sx-navy-50) 0%, var(--sx-gold-100) 100%);
   transform: scale(1.08);
 }
 
 .actions-column button.delete-action-icon {
-  color: #a67c00;
+  color: var(--sx-gold-700);
 }
 
 .actions-column button.delete-action-icon:hover {
-  background: linear-gradient(135deg, #c9a227 0%, #14315d 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, var(--sx-gold-500) 0%, var(--sx-navy-700) 100%);
+  color: var(--sx-surface);
 }
 
 /* =========================
@@ -425,9 +426,9 @@
 
   padding: 15px 20px;
 
-  border-top: 1px solid #edf0f4;
+  border-top: 1px solid var(--sx-line);
 
-  background: #fafbfc;
+  background: var(--sx-bg);
 }
 
 .page-size {
@@ -435,7 +436,7 @@
   align-items: center;
   gap: 8px;
 
-  color: #667085;
+  color: var(--sx-muted);
   font-size: 13px;
 }
 
@@ -444,12 +445,12 @@
 
   padding: 6px 9px;
 
-  border: 1px solid #d0d5dd;
+  border: 1px solid var(--sx-line);
   border-radius: 7px;
 
-  background: #ffffff;
+  background: var(--sx-surface);
 
-  color: #344054;
+  color: var(--sx-ink);
 
   outline: none;
 }
@@ -466,13 +467,13 @@
 }
 
 .pagination-buttons .active-page {
-  background: #14315d;
-  color: #ffffff;
+  background: var(--sx-navy-700);
+  color: var(--sx-surface);
   border-radius: 7px;
 }
 
 .pagination-buttons .active-page:hover {
-  background: #0a1c38;
+  background: var(--sx-navy-900);
 }
 
 /* =========================
@@ -497,3 +498,30 @@
 
 }
 
+
+/* =====================================================
+   PHONE (Saloon sweep) - last in the file so it wins.
+===================================================== */
+@media (max-width: 600px) {
+  .service-card {
+    width: 100%;
+  }
+  .service-card-header,
+  .service-header-left,
+  .service-pagination,
+  .page-size,
+  .action-container {
+    flex-wrap: wrap;
+    gap: 10px;
+    min-width: 0;
+  }
+  .service-card-header {
+    padding: 16px;
+  }
+  .service-header-left {
+    overflow-wrap: anywhere;
+  }
+  .actions-column {
+    width: auto;
+  }
+}

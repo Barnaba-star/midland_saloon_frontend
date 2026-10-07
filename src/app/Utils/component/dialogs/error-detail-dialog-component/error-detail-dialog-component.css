@@ -20,7 +20,7 @@
      was cut off - that is the clipping, not the text itself. */
   flex: 0 0 auto;
   padding: 0 0 14px;
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--sx-line);
 }
 
 .header-top {
@@ -37,7 +37,7 @@
   min-width: 0;
   margin: 0;
   padding-top: 2px;
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 19px;
   font-weight: 700;
   line-height: 1.4;
@@ -54,7 +54,7 @@
   height: 3px;
   margin-top: 8px;
   border-radius: 999px;
-  background: linear-gradient(90deg, #4f46e5 0%, #818cf8 100%);
+  background: linear-gradient(90deg, var(--sx-navy-700) 0%, var(--sx-navy-300) 100%);
 }
 
 .header-meta {
@@ -76,8 +76,8 @@
   height: 24px;
   padding: 0 11px;
   border-radius: 999px;
-  background: #f1f5f9;
-  color: #334155;
+  background: var(--sx-bg);
+  color: var(--sx-muted);
   font-size: 11px;
   font-weight: 600;
   letter-spacing: 0.3px;
@@ -85,24 +85,24 @@
 }
 
 .chip-error {
-  background: #fee2e2;
-  color: #b91c1c;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
 }
 
 .chip-warn {
-  background: #fef3c7;
-  color: #92400e;
+  background: var(--sx-warning-bg);
+  color: var(--sx-warning);
 }
 
 .chip-source {
-  background: #eef2ff;
-  color: #3730a3;
+  background: var(--sx-navy-50);
+  color: var(--sx-navy-700);
 }
 
 .chip-muted {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #64748b;
+  background: var(--sx-bg);
+  border: 1px solid var(--sx-line);
+  color: var(--sx-muted);
   font-weight: 500;
 }
 
@@ -121,14 +121,14 @@
   background: transparent;
   border: none;
   border-radius: 10px;
-  color: #64748b;
+  color: var(--sx-muted);
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease;
 }
 
 .icon-btn:hover {
-  background: #f1f5f9;
-  color: #0f172a;
+  background: var(--sx-bg);
+  color: var(--sx-ink);
 }
 
 
@@ -166,7 +166,7 @@
 }
 
 .detail-label {
-  color: #94a3b8;
+  color: var(--sx-muted);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.6px;
@@ -174,14 +174,14 @@
 }
 
 .detail-value {
-  color: #0f172a;
+  color: var(--sx-ink);
   font-size: 13px;
   line-height: 1.5;
   overflow-wrap: anywhere;
 }
 
 .user-agent {
-  color: #64748b;
+  color: var(--sx-muted);
   font-size: 12px;
 }
 
@@ -205,7 +205,7 @@
 .block-label {
   display: block;
   margin-bottom: 7px;
-  color: #94a3b8;
+  color: var(--sx-muted);
   font-size: 10.5px;
   font-weight: 700;
   letter-spacing: 0.6px;
@@ -220,7 +220,7 @@
   padding: 0;
   background: none;
   border: none;
-  color: #4f46e5;
+  color: var(--sx-navy-700);
   font-size: 12px;
   font-weight: 600;
   cursor: pointer;
@@ -244,9 +244,9 @@
 }
 
 .message-box {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--sx-bg);
+  border: 1px solid var(--sx-line);
+  color: var(--sx-muted);
 }
 
 /* The payload is what most troubleshooting starts from, so it is the one
@@ -254,27 +254,27 @@
 .payload-box {
   max-height: 240px;
   overflow-y: auto;
-  background: #0b1120;
-  border: 1px solid #0b1120;
-  color: #bae6fd;
+  background: var(--sx-ink);
+  border: 1px solid var(--sx-ink);
+  color: var(--sx-info-bg);
 }
 
 .no-payload {
   margin: 0;
   padding: 13px 15px;
-  background: #f8fafc;
-  border: 1px dashed #e2e8f0;
+  background: var(--sx-bg);
+  border: 1px dashed var(--sx-line);
   border-radius: 12px;
-  color: #94a3b8;
+  color: var(--sx-muted);
   font-size: 12.5px;
 }
 
 .stack-box {
   max-height: 240px;
   overflow-y: auto;
-  background: #0f172a;
-  border: 1px solid #0f172a;
-  color: #e2e8f0;
+  background: var(--sx-ink);
+  border: 1px solid var(--sx-ink);
+  color: var(--sx-line);
 }
 
 
@@ -289,7 +289,7 @@
   gap: 10px;
   min-height: auto;
   padding: 16px 0 0;
-  border-top: 1px solid #e5e7eb;
+  border-top: 1px solid var(--sx-line);
 }
 
 .btn {
@@ -322,25 +322,25 @@
 }
 
 .btn-ghost {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  color: #334155;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
+  color: var(--sx-muted);
 }
 
 .btn-ghost:hover {
-  background: #f8fafc;
-  border-color: #cbd5e1;
+  background: var(--sx-bg);
+  border-color: var(--sx-line);
 }
 
 .btn-primary {
-  background: linear-gradient(180deg, #1e293b 0%, #0f172a 100%);
-  border: 1px solid #0f172a;
-  color: #ffffff;
+  background: linear-gradient(180deg, var(--sx-ink) 0%, var(--sx-ink) 100%);
+  border: 1px solid var(--sx-ink);
+  color: var(--sx-surface);
   box-shadow: 0 1px 2px rgba(15, 23, 42, 0.18);
 }
 
 .btn-primary:hover {
-  background: linear-gradient(180deg, #334155 0%, #1e293b 100%);
+  background: linear-gradient(180deg, var(--sx-muted) 0%, var(--sx-ink) 100%);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
 }
 

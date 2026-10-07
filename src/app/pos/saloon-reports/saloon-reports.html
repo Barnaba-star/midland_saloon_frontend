@@ -59,7 +59,7 @@
           <!-- TABLE CARD -->
           <div class="card border-0 shadow-sm saloon-table-card">
             <div class="card-body p-0 saloon-table-body">
-              <div class="table-responsive saloon-table-responsive">
+              <div class="table-responsive saloon-table-responsive sx-table-wrap">
                 <table class="table table-hover align-middle mb-0 saloon-table">
                   <!-- TABLE HEADER -->
                   <thead>
@@ -868,7 +868,7 @@
             <!-- =========================
                COMMISSION TABLE
           ========================== -->
-            <div class="commission-table-wrapper">
+            <div class="commission-table-wrapper sx-table-wrap">
               <table class="commission-table">
                 <!-- =========================
                    TABLE HEADER
@@ -1289,6 +1289,7 @@
         </div>
 
         @if (serviceAndStoreReports.length > 0) {
+        <div class="sx-table-wrap">
         <table class="report-table">
           <thead>
             <tr>
@@ -1527,6 +1528,7 @@
             }
           </tbody>
         </table>
+        </div>
         } @else {
           <app-empty-state
             icon="store"
@@ -1693,7 +1695,7 @@
         </div>
 
         @if (incomeRows.length > 0) {
-          <div class="income-table-wrapper">
+          <div class="income-table-wrapper sx-table-wrap">
             <table class="income-table">
               <thead>
                 <tr>
@@ -2003,7 +2005,7 @@
         </div>
 
         @if (otherPots.length > 0) {
-          <div class="income-table-wrapper">
+          <div class="income-table-wrapper sx-table-wrap">
             <table class="income-table">
               <thead>
                 <tr>
@@ -2269,7 +2271,7 @@
              TABLE
         ========================== -->
           @if (stockAndPurchaseReports.length > 0) {
-            <div class="stock-table-wrapper">
+            <div class="stock-table-wrapper sx-table-wrap">
               <table class="stock-table">
                 <thead>
                   <tr>

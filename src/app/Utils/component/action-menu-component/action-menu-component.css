@@ -1,7 +1,7 @@
 .menu-box {
   position: absolute;
-  background: white;
-  border: 1px solid #ccc;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   box-shadow: 0px 4px 12px rgba(0,0,0,0.15);
   border-radius: 6px;
   padding: 8px 0;
@@ -17,7 +17,7 @@
 }
 
 .menu-item:hover {
-  background: #eaeaea;
+  background: var(--sx-line);
 }
 
 .menu-icon {
@@ -30,8 +30,8 @@
 }
 
 .menu-box {
-  background: white;
-  border: 1px solid #ddd;
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
   border-radius: 6px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
   width: 150px;
@@ -47,7 +47,7 @@
 }
 
 .menu-item:hover {
-  background: #f3f3f3;
+  background: var(--sx-bg);
 }
 
 .menu-icon {
