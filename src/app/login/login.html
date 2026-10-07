@@ -2,8 +2,7 @@
   <!-- ================= LEFT: the saloon (photo behind) ================= -->
   <aside class="login-panel">
     <a routerLink="/" class="panel-brand">
-      <img src="assets/images/midland.png" alt="Midland Saloon" class="panel-logo">
-      <span class="panel-name">Midland <em>Saloon</em></span>
+      <app-brand-word tone="light" class="panel-word" />
     </a>
 
     <div class="panel-copy">
@@ -48,7 +47,7 @@
 
   <mat-card class="login-card">
     <div class="brand">
-      <img src="assets/images/midland.png" alt="Midland Solutions" class="brand-logo">
+      <app-brand-word class="brand-word" />
       <span class="card-eyebrow">{{ 'LOGIN.SIGN_IN' | translate }}</span>
       <h1 class="brand-title">{{ 'LOGIN.WELCOME_BACK' | translate }}</h1>
       <p class="brand-subtitle">{{ 'LOGIN.SUBTITLE' | translate }}</p>

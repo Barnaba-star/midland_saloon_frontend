@@ -18,14 +18,14 @@
         <ng-container [ngSwitch]="field.type">
 
           <!-- Text -->
-          <mat-form-field *ngSwitchCase="'text'" appearance="outline" class="w-100">
+          <mat-form-field *ngSwitchCase="'text'" appearance="outline" subscriptSizing="dynamic" class="w-100">
              <span *ngIf="field.prefix" matPrefix>{{ field.prefix }}&nbsp;</span>
             <input matInput type="text" [formControlName]="field.name" [placeholder]="field.placeholder || 'Enter text here'" />
             <span *ngIf="field.suffix" matSuffix>&nbsp;{{ field.suffix }}</span>
           </mat-form-field>
 
           <!-- Number -->
-          <mat-form-field *ngSwitchCase="'number'" appearance="outline" class="w-100">
+          <mat-form-field *ngSwitchCase="'number'" appearance="outline" subscriptSizing="dynamic" class="w-100">
              <span *ngIf="field.prefix" matPrefix>{{ field.prefix }}&nbsp;</span>
             <input matInput type="number" [formControlName]="field.name" [placeholder]="field.placeholder || field.label" />
             <mat-hint *ngIf="field.required && form.get(field.name)?.invalid && form.get(field.name)?.touched">
@@ -35,7 +35,7 @@
           </mat-form-field>
 
           <!-- Textarea -->
-          <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" class="w-100 textarea-field">
+          <mat-form-field *ngSwitchCase="'textarea'" appearance="outline" subscriptSizing="dynamic" class="w-100 textarea-field">
             <textarea matInput [rows]="field.rows || 4" [formControlName]="field.name" [placeholder]="field.placeholder || field.label"></textarea>
             <mat-hint *ngIf="field.required && form.get(field.name)?.invalid && form.get(field.name)?.touched">
               This field is required.
@@ -43,7 +43,7 @@
           </mat-form-field>
 
           <!-- Select -->
-          <mat-form-field *ngSwitchCase="'select'" appearance="outline" class="w-100">
+          <mat-form-field *ngSwitchCase="'select'" appearance="outline" subscriptSizing="dynamic" class="w-100">
   <mat-select [formControlName]="field.name" [placeholder]="field.placeholder || field.label">
     <mat-option
       *ngFor="let option of field.options"
@@ -82,7 +82,7 @@
 
           <!-- Checkbox Group -->
           <div *ngSwitchCase="'checkbox-group'">
-            <mat-form-field appearance="outline" class="w-100">
+            <mat-form-field appearance="outline" subscriptSizing="dynamic" class="w-100">
               <mat-select [formControlName]="field.name" multiple [placeholder]="field.placeholder || field.label">
                 <mat-option *ngFor="let option of field.options" [value]="option.value">
                   {{ option.label }}
@@ -120,7 +120,7 @@
 </div>
 
           <!-- Date -->
-          <mat-form-field *ngSwitchCase="'date'" appearance="outline" class="w-100">
+          <mat-form-field *ngSwitchCase="'date'" appearance="outline" subscriptSizing="dynamic" class="w-100">
             <mat-label *ngIf="field.label">{{ field.label }}</mat-label>
             <input matInput [matDatepicker]="picker" [formControlName]="field.name" [placeholder]="field.placeholder || field.label">
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
@@ -131,7 +131,7 @@
           </mat-form-field>
 
           <!-- Autocomplete (Async Select) -->
-          <mat-form-field *ngSwitchCase="'autocomplete-async'" appearance="outline" class="w-100">
+          <mat-form-field *ngSwitchCase="'autocomplete-async'" appearance="outline" subscriptSizing="dynamic" class="w-100">
             <mat-label *ngIf="field.label">{{ field.label }}</mat-label>
             <input matInput [formControl]="field.searchControl" [placeholder]="field.placeholder || field.label" [matAutocomplete]="auto"/>
             <mat-autocomplete #auto="matAutocomplete" (optionSelected)="onFieldChange(field, $event)">

@@ -1,20 +1,38 @@
 <div class="page">
 
   <!-- ================= STAGE: the barbershop behind nav and hero ================= -->
-  <div class="stage">
+  <div class="stage" [class.compact]="!home">
     <div class="stage-photo" aria-hidden="true"></div>
 
     <nav class="nav">
-      <div class="brand">
-        <img src="assets/images/midland.png" alt="Midland Saloon" class="brand-logo">
-        <span class="brand-name">Midland <em>Saloon</em></span>
+      <a class="brand" [routerLink]="[]" aria-label="Mr Saloon">
+        <app-brand-word tone="light" class="brand-word" />
+      </a>
+      <!-- Every title on the page, one tap away. On a phone they fold into Menyu. -->
+      <ul class="nav-links" [class.open]="menuOpen" id="landing-menu">
+        @for (l of navLinks; track l.label) {
+          <li>
+            @if (l.id) {
+              <a [routerLink]="[]" [fragment]="l.id" [class.active]="view === l.id">{{ l.label | translate }}</a>
+            } @else {
+              <a [routerLink]="[]" [class.active]="home">{{ l.label | translate }}</a>
+            }
+          </li>
+        }
+      </ul>
+      <div class="nav-right">
+        <button type="button" class="nav-cta" (click)="goToLogin()">
+          {{ 'LOGIN.SIGN_IN' | translate }}
+          <mat-icon>login</mat-icon>
+        </button>
+        <button type="button" class="nav-toggle" (click)="menuOpen = !menuOpen"
+                [attr.aria-expanded]="menuOpen" aria-controls="landing-menu" [attr.aria-label]="'LANDING.NAV_MENU' | translate">
+          <mat-icon>{{ menuOpen ? 'close' : 'menu' }}</mat-icon>
+        </button>
       </div>
-      <button type="button" class="nav-cta" (click)="goToLogin()">
-        {{ 'LOGIN.SIGN_IN' | translate }}
-        <mat-icon>login</mat-icon>
-      </button>
     </nav>
 
+    @if (home) {
     <header class="hero">
       <div class="hero-copy">
         <span class="eyebrow"><i></i>{{ 'LANDING.HERO_BADGE' | translate }}</span>
@@ -28,7 +46,7 @@
             {{ 'LANDING.GET_STARTED' | translate }}
             <mat-icon>arrow_forward</mat-icon>
           </button>
-          <a href="#visit" class="btn-ghost">
+          <a [routerLink]="[]" fragment="huduma" class="btn-ghost">
             {{ 'LANDING.SEE_INCLUDED' | translate }}
             <mat-icon>south</mat-icon>
           </a>
@@ -40,8 +58,14 @@
         </ul>
       </div>
     </header>
+    } @else {
+    <header class="page-head">
+      <h1>{{ 'LANDING.TAB_' + view | translate }}</h1>
+    </header>
+    }
   </div>
 
+  @if (home) {
   <!-- ================= SERVICES BAND ================= -->
   <div class="band" aria-hidden="true">
     <div class="band-track">
@@ -78,6 +102,32 @@
     </div>
   </section>
 
+  }
+
+  <!-- ================= ABOUT ================= -->
+  @if (view === 'kuhusu') {
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-copy">
+        <h2>{{ 'LANDING.ABOUT_TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.ABOUT_DESC' | translate }}</p>
+      </div>
+      <ul class="about-points">
+        @for (a of aboutPoints; track a.title) {
+          <li>
+            <mat-icon>{{ a.icon }}</mat-icon>
+            <div>
+              <strong>{{ a.title | translate }}</strong>
+              <span>{{ a.desc | translate }}</span>
+            </div>
+          </li>
+        }
+      </ul>
+    </div>
+  </section>
+  }
+
+  @if (view === 'huduma') {
   <!-- ================= A CLIENT'S VISIT ================= -->
   <section class="visit" id="visit">
     <div class="section-head">
@@ -130,7 +180,10 @@
     </div>
   </section>
 
+  }
+
   <!-- ================= VALUES, over the saloon floor ================= -->
+  @if (view === 'kuhusu') {
   <section class="values">
     <div class="values-inner">
       <div class="values-head">
@@ -151,7 +204,73 @@
     </div>
   </section>
 
+  }
+
+  <!-- ================= PRICING ================= -->
+  @if (view === 'bei') {
+  <section class="info-section">
+    <div class="price-inner">
+      <div class="price-copy">
+        <h2>{{ 'LANDING.PRICE_TITLE' | translate }}</h2>
+        <p>{{ 'LANDING.PRICE_DESC' | translate }}</p>
+      </div>
+      <div class="price-card">
+        <span class="price-badge">{{ 'LANDING.PRICE_BADGE' | translate }}</span>
+        <span class="price-then">{{ 'LANDING.PRICE_THEN' | translate }}</span>
+        <strong class="price-inc">{{ 'LANDING.PRICE_INC' | translate }}</strong>
+        <ul>
+          @for (i of priceIncludes; track i) {
+            <li><mat-icon>check_circle</mat-icon>{{ i | translate }}</li>
+          }
+        </ul>
+        <a class="btn-gold" [href]="contactHref">
+          {{ 'LANDING.PRICE_CTA' | translate }}
+          <mat-icon>mail</mat-icon>
+        </a>
+      </div>
+    </div>
+  </section>
+  }
+
+  <!-- ================= FAQ ================= -->
+  @if (view === 'maswali') {
+  <section class="info-section">
+    <div class="faq">
+      @for (f of faqs; track f.q) {
+        <details>
+          <summary>{{ f.q | translate }}<mat-icon>expand_more</mat-icon></summary>
+          <p>{{ f.a | translate }}</p>
+        </details>
+      }
+    </div>
+  </section>
+  }
+
+  <!-- ================= CONTACT ================= -->
+  @if (view === 'mawasiliano') {
+  <section class="cta">
+    <div class="cta-inner">
+      <span class="eyebrow">{{ 'LANDING.CTA_EYEBROW' | translate }}</span>
+      <h2>{{ 'LANDING.CONTACT_TITLE' | translate }}</h2>
+      <div class="gold-rule center" aria-hidden="true"><span></span><i></i><span></span></div>
+      <p>{{ 'LANDING.CONTACT_DESC' | translate }}</p>
+      <div class="contact-actions">
+        <a class="btn-gold" [href]="contactHref">
+          {{ 'LANDING.CONTACT_EMAIL' | translate }}
+          <mat-icon>mail</mat-icon>
+        </a>
+        <button type="button" class="btn-ghost" (click)="goToLogin()">
+          {{ 'LANDING.CONTACT_HAVE' | translate }}
+          <mat-icon>login</mat-icon>
+        </button>
+      </div>
+      <a class="contact-email" [href]="contactHref">{{ contactEmail }}</a>
+    </div>
+  </section>
+  }
+
   <!-- ================= CTA ================= -->
+  @if (home) {
   <section class="cta">
     <div class="cta-inner">
       <span class="eyebrow">{{ 'LANDING.CTA_EYEBROW' | translate }}</span>
@@ -165,11 +284,29 @@
     </div>
   </section>
 
+  }
+
+  <!-- The foot of every tab: walk on to the next title. -->
+  @if (!home) {
+    <nav class="tab-flow">
+      @if (nextTab; as next) {
+        <a class="tab-flow-next" [routerLink]="[]" [fragment]="next.id">
+          <small>{{ 'LANDING.NEXT' | translate }}</small>
+          <strong>{{ next.label | translate }}</strong>
+          <mat-icon>arrow_forward</mat-icon>
+        </a>
+      } @else {
+        <a class="tab-flow-next" [routerLink]="[]">
+          <small>{{ 'LANDING.NEXT' | translate }}</small>
+          <strong>{{ 'LANDING.BACK_HOME' | translate }}</strong>
+          <mat-icon>home</mat-icon>
+        </a>
+      }
+    </nav>
+  }
+
   <footer class="footer">
-    <div class="brand">
-      <img src="assets/images/midland.png" alt="" class="brand-logo small">
-      <span class="brand-name">Midland <em>Saloon</em></span>
-    </div>
-    <span>&copy; {{ currentYear }} Midland Solutions. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
+    <app-brand-word tone="light" class="brand-word small" />
+    <span>&copy; {{ currentYear }} Mr Saloon. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
   </footer>
 </div>

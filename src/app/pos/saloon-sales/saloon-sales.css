@@ -4210,3 +4210,233 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     flex: 0 0 auto;
   }
 }
+
+/* ===== Phones: open bills as compact tickets, History filters all in view ===== */
+@media (max-width: 600px) {
+  /* One card per bill - no frame around the list as well. */
+  .sales-section {
+    padding: 0 !important;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .sales-list {
+    display: flex !important;
+    flex-direction: column;
+    gap: 12px !important;
+    padding: 0 !important;
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+
+  .sale-card {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    border-radius: 18px !important;
+    border: 1px solid var(--sx-line) !important;
+    border-left: 4px solid var(--sx-gold-500) !important;
+    background: var(--sx-surface) !important;
+    box-shadow: 0 6px 18px rgba(10, 28, 56, 0.06) !important;
+    overflow: hidden;
+  }
+
+  .sale-card.selected {
+    border-left-color: var(--sx-navy-700) !important;
+  }
+
+  /* Header: code on the left, then status; delete as a small round icon. */
+  .sale-header {
+    display: flex !important;
+    align-items: center !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 14px 16px 12px !important;
+    border-bottom: 1px dashed var(--sx-line) !important;
+  }
+
+  .sale-code {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .sale-code strong {
+    font-size: 17px !important;
+    color: var(--sx-navy-800) !important;
+  }
+
+  .sale-status {
+    order: 2;
+    padding: 4px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .bill-delete-btn {
+    order: 3;
+    width: 34px !important;
+    height: 34px !important;
+    min-width: 0 !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    display: grid !important;
+    place-items: center;
+    box-shadow: none !important;
+  }
+
+  .bill-delete-btn span {
+    display: none !important;
+  }
+
+  .bill-delete-btn mat-icon {
+    margin: 0 !important;
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+  }
+
+  /* Amounts: small label over a big figure, side by side, aligned left. */
+  .sale-body {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0 !important;
+    margin: 0 !important;
+    padding: 14px 16px !important;
+  }
+
+  .sale-info {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 4px !important;
+    padding: 0 !important;
+    border: 0 !important;
+    text-align: left !important;
+  }
+
+  .sale-info + .sale-info {
+    padding-left: 14px !important;
+    border-left: 1px solid var(--sx-line) !important;
+  }
+
+  .sale-info span {
+    font-size: 11px !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--sx-muted) !important;
+  }
+
+  .sale-info strong {
+    font-size: 16px !important;
+    line-height: 1.25 !important;
+    white-space: nowrap;
+    text-transform: none !important;
+    color: var(--sx-navy-800) !important;
+  }
+
+  .sale-info .paid-amount {
+    color: var(--sx-gold-700) !important;
+  }
+
+  /* Two actions in one row: Add Service (navy), View Inside (gold outline). */
+  .sale-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr !important;
+    gap: 10px !important;
+    margin: 0 !important;
+    padding: 0 16px 16px !important;
+  }
+
+  .sale-action-btn {
+    width: 100% !important;
+    min-height: 44px !important;
+    margin: 0 !important;
+    padding: 0 10px !important;
+    gap: 6px !important;
+    justify-content: center !important;
+    border-radius: 12px !important;
+    font-size: 13px !important;
+    box-shadow: none !important;
+  }
+
+  .sale-action-btn.add-btn {
+    background: var(--sx-navy-700) !important;
+    border: 1px solid var(--sx-navy-700) !important;
+    color: #ffffff !important;
+  }
+
+  .sale-action-btn.load-btn {
+    background: var(--sx-gold-100) !important;
+    border: 1px solid var(--sx-gold-300) !important;
+    color: var(--sx-navy-800) !important;
+  }
+
+  .sale-action-btn .action-icon {
+    width: 22px !important;
+    height: 22px !important;
+    min-width: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+  }
+
+  .sale-action-btn .action-icon mat-icon {
+    font-size: 18px !important;
+    width: 18px !important;
+    height: 18px !important;
+    color: inherit !important;
+  }
+
+  .sale-action-btn .action-text {
+    color: inherit !important;
+    white-space: nowrap;
+  }
+
+  /* History: every period in view, wrapped - no hidden ones off to the side. */
+  .filter-buttons {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    gap: 8px !important;
+    overflow: visible !important;
+    width: 100% !important;
+  }
+
+  .filter-buttons .filter-btn {
+    flex: 1 1 calc(33.33% - 8px) !important;
+    min-width: 0 !important;
+    padding: 9px 6px !important;
+    white-space: nowrap;
+    font-size: 13px !important;
+  }
+
+  .header-controls {
+    flex-wrap: wrap !important;
+    overflow: visible !important;
+  }
+}
+
+/* The day's sale count: navy on gold like every other badge. */
+.customer-count {
+  background: var(--sx-gold-500) !important;
+  color: var(--sx-navy-900) !important;
+  box-shadow: none !important;
+}
+
+.table-payment-icon mat-icon {
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+@media (max-width: 600px) {
+  .sale-code,
+  .sale-code strong {
+    text-align: left !important;
+  }
+
+  .sale-action-btn.load-btn .action-icon mat-icon {
+    color: var(--sx-navy-700) !important;
+    opacity: 1 !important;
+  }
+}

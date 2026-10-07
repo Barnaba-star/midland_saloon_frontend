@@ -1,8 +1,7 @@
-<div style="display: flex; justify-content: flex-end; align-items: center; ">
-  <button mat-icon-button (click)="onClose()" [attr.aria-label]="'COMMON.CLOSE' | translate" style="display: flex; justify-content: flex-end;">
-    <img src ="/assets/icons/close.svg" [attr.alt]="'COMMON.CLOSE' | translate" />
-  </button>
-</div>
+<!-- Close sits in the corner, over the title row - no empty band above the form. -->
+<button mat-icon-button type="button" class="dlg-close" (click)="onClose()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+  <mat-icon>close</mat-icon>
+</button>
 
 
 <app-form
@@ -12,5 +11,3 @@
   (submitForm)="onSubmitFromChild($event)">
 </app-form>
 
-<div style="margin-top: 16px; display: flex; justify-content: flex-end;">
-</div>

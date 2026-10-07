@@ -1,4 +1,4 @@
-/* Midland Saloon sign-in - navy and gold: the saloon photo under a navy shade on the
+/* Mr Saloon sign-in - navy and gold: the saloon photo under a navy shade on the
    left, the sign-in card on the right. */
 :host {
   --navy: #14315d;
@@ -41,28 +41,8 @@
   text-decoration: none;
 }
 
-.panel-logo {
-  width: 42px;
-  height: 42px;
-  padding: 4px;
-  border-radius: 50%;
-  background: #ffffff;
-  object-fit: contain;
-}
-
-.panel-name {
-  font-size: 21px;
-  font-weight: 700;
-  color: #ffffff;
-}
-
-.panel-name em {
-  margin-left: 2px;
-  font-family: var(--script);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 1.55em;
-  color: var(--gold-light);
+.panel-word {
+  font-size: 24px;
 }
 
 .panel-copy {
@@ -274,10 +254,9 @@
   margin-bottom: 24px;
 }
 
-.brand-logo {
-  width: 64px;
-  height: auto;
-  margin-bottom: 12px;
+.brand-word {
+  font-size: 26px;
+  margin-bottom: 18px;
 }
 
 .brand-title {

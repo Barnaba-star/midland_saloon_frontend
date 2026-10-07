@@ -21,16 +21,8 @@
   gap: 10px;
 }
 
-.topbar-logo {
-  width: 32px;
-  height: 32px;
-  object-fit: contain;
-}
-
-.topbar-name {
-  font-weight: 600;
-  font-size: 16px;
-  color: var(--color-text);
+.topbar-word {
+  font-size: 19px;
 }
 
 .topbar-actions {
@@ -180,8 +172,8 @@ mat-card-content {
     gap: 8px;
   }
 
-  .topbar-name {
-    font-size: 14px;
+  .topbar-word {
+    font-size: 16px;
   }
 
   .user-chip span {

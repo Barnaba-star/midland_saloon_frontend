@@ -1,4 +1,5 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { BrandWord } from '../Utils/component/brand-word/brand-word';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +14,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
     selector: 'app-dashboard',
-    imports: [CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, RouterModule, TranslatePipe],
+    imports: [BrandWord, CommonModule, MatCardModule, MatIconModule, MatButtonModule, MatTooltipModule, RouterModule, TranslatePipe],
     templateUrl: './dashboard.html',
     styleUrls: ['./dashboard.css'],
     changeDetection: ChangeDetectionStrategy.OnPush

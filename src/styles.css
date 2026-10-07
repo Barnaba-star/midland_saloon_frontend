@@ -1,7 +1,7 @@
 @import './styles/middle_container.scss';
 
 :root {
-  /* Brand palette sourced from the Midland Solutions logo (navy + gold).
+  /* Brand palette of Mr Saloon (navy + gold).
      The --sx-* scale is the Saloon's one palette: every page colours itself
      from these (or the --color-* names mapped onto them) - never a literal
      hex, so the whole app reads as one product. */
@@ -416,5 +416,57 @@ body {
   @page {
     size: A4;
     margin: 14mm;
+  }
+}
+
+/* ===== Icon badges: the landing's colours, everywhere =====
+   Every decorative icon badge and letter avatar is navy on gold - the gold
+   disc with a navy icon the landing page uses. Status badges (danger,
+   success, warning) keep their own colours; photos inside avatars cover
+   the gold. Component styles out-rank a global class, hence !important. */
+:is(.icon-badge, .table-heading-icon, .role-icon, .role-avatar, .branch-icon,
+    .branch-form-icon, .avatar, .user-avatar, .empty-online-icon, .empty-icon,
+    .empty-state-icon, .sale-icon, .date-icon, .user-row-avatar, .help-icon,
+    .staff-avatar, .service-icon, .branch-avatar, .large-branch-icon,
+    .role-dialog-icon, .balance-icon, .pl-icon, .st-head-icon, .payment-icon,
+    .filter-label-icon, .report-icon, .summary-icon, .total-icon,
+    .table-payment-icon, .grand-total-icon, .other-head-icon,
+    .staff-header-icon, .cu-head-icon, .commission-icon, .service-avatar,
+    .user-header-icon, .username-avatar, .service-header-icon,
+    .customer-avatar, .service-report-icon, .income-title-icon, .name-icon,
+    .dialog-icon, .payment-form-icon, .revenue-total-icon) {
+  background: var(--sx-gold-500) !important;
+  color: var(--sx-navy-900) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+:is(.icon-badge, .table-heading-icon, .role-icon, .role-avatar, .branch-icon,
+    .branch-form-icon, .avatar, .user-avatar, .empty-online-icon, .empty-icon,
+    .empty-state-icon, .sale-icon, .date-icon, .user-row-avatar, .help-icon,
+    .staff-avatar, .service-icon, .branch-avatar, .large-branch-icon,
+    .role-dialog-icon, .balance-icon, .pl-icon, .st-head-icon, .payment-icon,
+    .filter-label-icon, .report-icon, .summary-icon, .total-icon,
+    .table-payment-icon, .grand-total-icon, .other-head-icon,
+    .staff-header-icon, .cu-head-icon, .commission-icon, .service-avatar,
+    .user-header-icon, .username-avatar, .service-header-icon,
+    .customer-avatar, .service-report-icon, .income-title-icon, .name-icon,
+    .dialog-icon, .payment-form-icon, .revenue-total-icon)
+  :is(mat-icon, .mat-icon, .material-icons, span, i, svg) {
+  color: var(--sx-navy-900) !important;
+  fill: currentColor;
+}
+
+/* Dialog surfaces in plain white - Material 3 otherwise tints them lilac. */
+.mat-mdc-dialog-container {
+  --mat-dialog-container-color: var(--color-surface, var(--sx-surface));
+  --mdc-dialog-container-color: var(--color-surface, var(--sx-surface));
+}
+
+@media (max-width: 600px) {
+  /* Form dialogs on a phone: a sheet with rounded corners and room to breathe. */
+  .cdk-overlay-pane.mat-mdc-dialog-panel:has(app-dialog) .mat-mdc-dialog-surface {
+    border-radius: 22px !important;
+    padding: 20px 18px 24px !important;
   }
 }
