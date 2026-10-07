@@ -7589,3 +7589,32 @@
     min-width: 0;
   }
 }
+
+/* Phones: the period buttons as two even columns of pills, and the date
+   picker on its own full-width row instead of being cut off at the edge. */
+@media (max-width: 600px) {
+  .report-actions {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    border: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+  }
+
+  .report-actions > button {
+    width: 100%;
+    min-width: 0;
+    margin: 0 !important;
+    border-radius: 999px !important;
+    white-space: nowrap;
+  }
+
+  .report-actions > .report-date-input {
+    grid-column: 1 / -1;
+    width: 100% !important;
+    max-width: none !important;
+    margin: 4px 0 0 !important;
+  }
+}

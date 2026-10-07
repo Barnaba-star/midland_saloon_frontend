@@ -139,6 +139,13 @@ body {
 }
 
 @media (max-width: 600px) {
+  /* Page bodies inside the POS/Settings shell: the shell already pads the
+     sides, so an extra one-sided inset only pushed content off-centre. */
+  .action-container {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+  }
+
   /* Dialogs use the whole phone width. */
   .cdk-overlay-pane.mat-mdc-dialog-panel {
     max-width: calc(100vw - 16px) !important;
