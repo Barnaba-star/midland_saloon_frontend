@@ -1,3 +1,4 @@
+import { OtherSplit } from '../other-split/other-split';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from "../../Utils/component/title2/title2";
 import { Authentication } from '../../Utils/services/authentication';
@@ -48,7 +49,7 @@ export interface SaloonServiceEntity {
 @Component({
   selector: 'app-saloon-setting',
   imports: [
-    EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
+    OtherSplit, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -97,6 +98,12 @@ throw new Error('Method not implemented.');
       icon: 'commission',
       title: 'SALON.COMMISSION',
       roles: ['ROOT', 'STAFF', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER']
+    },
+    {
+      // Only the CEO decides what the Other commission pays for.
+      icon: 'pay',
+      title: 'SALON.OTHER_SPLIT',
+      roles: ['CEO']
     }
   ];
 

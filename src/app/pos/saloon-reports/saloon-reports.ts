@@ -1,3 +1,8 @@
+import { Insights } from '../insights/insights';
+import { PotsLedger } from '../pots-ledger/pots-ledger';
+import { CashUp } from '../cash-up/cash-up';
+import { StockTake } from '../stock-take/stock-take';
+import { PotNamePipe } from '../../Utils/pipes/pot-name.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { Authentication } from '../../Utils/services/authentication';
 import { POS_FULL_ACCESS_ROLES } from '../pos-role.guard';
@@ -33,7 +38,7 @@ import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-sta
   selector: 'app-saloon-reports',
   standalone: true,
   imports: [
-    EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
+    Insights, PotsLedger, CashUp, StockTake, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -79,6 +84,12 @@ export class SaloonReports implements OnInit{
       title: 'REPORTS.INCOME',
       roles: this.fullAccessRoles
     },
+    {
+      // What the Other commission collected for each of the CEO's items, and paying out of them.
+      icon: 'pay',
+      title: 'REPORTS.OTHER',
+      roles: this.fullAccessRoles
+    },
       {
       icon: 'store',
       title: 'REPORTS.STORE',
@@ -92,6 +103,30 @@ export class SaloonReports implements OnInit{
     {
       icon: 'service',
       title: 'REPORTS.SERVICE',
+      roles: this.fullAccessRoles
+    },
+    {
+      // Closing a shift: what the cashier took against what they counted.
+      icon: 'pay',
+      title: 'REPORTS.CASHUP',
+      roles: [...this.fullAccessRoles, 'MANAGER', 'CASHIER']
+    },
+    {
+      // Counting the store's unopened items at one go, and what went missing.
+      icon: 'stock',
+      title: 'REPORTS.VARIANCE',
+      roles: [...this.fullAccessRoles, 'MANAGER']
+    },
+    {
+      // What each service brings in, what sells most, and when.
+      icon: 'report',
+      title: 'REPORTS.PROFIT',
+      roles: [...this.fullAccessRoles, 'MANAGER']
+    },
+    {
+      // Every pot's balance since the start.
+      icon: 'payment2',
+      title: 'REPORTS.LEDGER',
       roles: this.fullAccessRoles
     },
 
@@ -135,6 +170,12 @@ export class SaloonReports implements OnInit{
       this.selectIncomeExpenseFilter('THIS_WEEK');
 
       break;
+
+        case 'REPORTS.OTHER':
+
+          this.selectIncomeExpenseFilter('THIS_WEEK');
+
+          break;
       case 'REPORTS.STOCK':
       this.getStockAndPurchaseByFilter('THIS_WEEK');
 
@@ -786,6 +827,10 @@ filterDate:string=''
 remainingAmount:number=0
 weekDate: string = new Date().toISOString().split('T')[0];
 descriptions:string=''
+/** How the staff payment goes out - the cash-up takes it off this method. */
+paymentMethod = 'cash';
+/** The methods a payout may go by - the same as a bill's. */
+readonly payoutMethods = ['cash', 'mpesa', 'tigopesa', 'airtelmoney', 'halopesa', 'bank'];
 
 
 
@@ -803,6 +848,7 @@ openPaymentOverlay(report: any, origin: CdkOverlayOrigin): void {
 
   // Reset description kila unapofungua overlay
   this.descriptions = '';
+  this.paymentMethod = 'cash';
 }
 
 closePaymentOverlay(): void {
@@ -819,7 +865,8 @@ submitPayment(): void {
     amount: this.paymentAmount,
     filter: this.selectedRange,
     weekDate: this.weekDate,
-    descriptions: this.descriptions.trim()
+    descriptions: this.descriptions.trim(),
+    method: this.paymentMethod
   };
 
   console.log('Staff Commissions', staffCommissionDTO);
@@ -1155,6 +1202,65 @@ selectIncomeExpenseFilter(filter: string): void {
 }
 
 
+/** The tab that breaks a pot down, when it has one: Other, Staff (commissions) and Stock Purchase. */
+breakdownTab(item: any): string | null {
+  if (item.otherGroup) {
+    return 'REPORTS.OTHER';
+  }
+  if (item.name === 'Staff') {
+    return 'REPORTS.STAFF';
+  }
+  if (item.name === 'Stock Purchase') {
+    return 'REPORTS.STOCK';
+  }
+  return null;
+}
+
+/**
+ * Income & Expenses rows: every bucket as it is, but Other as one line per week -
+ * its items are broken down only in the Other Expense Report.
+ */
+get incomeRows(): any[] {
+  const isOther = (name: string) => name === 'Other' || String(name || '').startsWith('Other · ');
+  const rows: any[] = [];
+  const byWeek = new Map<string, any>();
+  for (const item of this.incomeExpenses) {
+    if (!isOther(item.name)) {
+      rows.push(item);
+      continue;
+    }
+    const week = String(item.weekStartDate);
+    let group = byWeek.get(week);
+    if (!group) {
+      group = { uid: 'other-' + week, otherGroup: true, name: 'Other', weekStartDate: item.weekStartDate, income: 0, expenses: 0, parts: 0 };
+      byWeek.set(week, group);
+      rows.push(group);
+    }
+    group.income += Number(item.income || 0);
+    group.expenses += Number(item.expenses || 0);
+    if (String(item.name).startsWith('Other · ')) {
+      group.parts++;
+    }
+  }
+  return rows;
+}
+
+/** The Other pots: one per item of the CEO's split ("Other · Internet"), and the plain "Other" from before it. */
+get otherPots(): any[] {
+  return this.incomeExpenses.filter((i) =>
+    String(i.name || '').startsWith('Other · ')
+    // The plain pot only while it holds something - once split into the items it reads 0 and 0.
+    || (i.name === 'Other' && (Number(i.income || 0) !== 0 || Number(i.expenses || 0) !== 0)));
+}
+
+otherTotal(kind: 'income' | 'expenses' | 'balance'): number {
+  return this.otherPots.reduce((sum, i) => {
+    const income = Number(i.income || 0);
+    const spent = Number(i.expenses || 0);
+    return sum + (kind === 'income' ? income : kind === 'expenses' ? spent : income - spent);
+  }, 0);
+}
+
 getTotalIncome(): number {
 
   return this.incomeExpenses.reduce(
@@ -1200,7 +1306,8 @@ spendIncomeExpense(item: any): void {
       const spendDTO:SpendDTO={
         description:result.description,
         amount:result.amount,
-        uid:result.uid
+        uid:result.uid,
+        method:result.method
       }
       this.saloonService.addSpend(spendDTO).subscribe({
         next:(res)=>{
@@ -1355,6 +1462,7 @@ selectedStockPurchase: any = null;
 stockPaymentAmount: number | null = null;
 
 stockPaymentDescription:string='';
+stockPaymentMethod = 'cash';
 
 stockPaymentDialogRef?: MatDialogRef<any>;
 @ViewChild('stockPaymentDialog')
@@ -1466,6 +1574,8 @@ payStockPurchase(stock: any): void {
 
   this.stockPaymentDescription = '';
 
+  this.stockPaymentMethod = 'cash';
+
   this.stockPaymentDialogRef = this.dialog.open(
     this.stockPaymentDialog,
     {
@@ -1521,7 +1631,8 @@ submitStockPayment(): void {
     uid:request.stockAndPurchaseUid,
     weekDate:request.weekDate,
     description:request.description,
-    amount:request.amount
+    amount:request.amount,
+    method:this.stockPaymentMethod
   }
 
   this.saloonService.payStockAndPurchase(payStockAndPurchaseDTO).subscribe({
