@@ -68,7 +68,7 @@
   <!-- ================= ACCENT LINE ================= -->
 
   <div class="heading-accent"></div>
-  <div class="sx-table-wrap"><table class="role-table">
+  <div class="sx-table-wrap"><table class="role-table sx-cards">
 
     <thead>
       <tr>
@@ -89,12 +89,12 @@
         <tr>
 
           <!-- Number -->
-          <td>
+          <td class="sx-card-index">
             {{ (pageIndex * pageSize) + i + 1 }}
           </td>
 
           <!-- Name -->
-          <td>
+          <td class="sx-card-title">
             <div class="role-name">
               <div class="role-avatar">
                 {{ item.name?.charAt(0) }}
@@ -105,21 +105,21 @@
           </td>
 
           <!-- Code -->
-          <td>
+          <td [attr.data-label]="'ROLE_SETTING_PAGE.COL_CODE' | translate">
             <span class="code">
               {{ item.code | uppercase}}
             </span>
           </td>
 
           <!-- Category -->
-          <td>
+          <td [attr.data-label]="'ROLE_SETTING_PAGE.COL_CATEGORY' | translate">
             {{ item.category | uppercase}}
           </td>
 
 
 
           <!-- Status -->
-          <td>
+          <td [attr.data-label]="'ROLE_SETTING_PAGE.COL_STATUS' | translate">
             <span
               class="status"
               [class.active]="item.status === 'ACTIVE'"
@@ -133,12 +133,12 @@
           </td>
 
           <!-- Created -->
-          <td>
+          <td [attr.data-label]="'ROLE_SETTING_PAGE.COL_REG_DATE' | translate">
             {{ item.createdAt | date:'dd MMM yyyy' }}
           </td>
 
           <!-- Actions -->
-     <td class="actions-cell">
+     <td class="actions-cell sx-card-actions">
 
   <button
     class="action-btn"

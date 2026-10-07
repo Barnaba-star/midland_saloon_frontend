@@ -24,7 +24,7 @@
     @if (onlineUsers.length > 0) {
 
       <div class="online-table-wrapper">
-        <div class="sx-table-wrap"><table class="online-table">
+        <div class="sx-table-wrap"><table class="online-table sx-cards">
 
           <thead>
             <tr>
@@ -43,7 +43,7 @@
 
               <tr>
 
-                <td>
+                <td class="sx-card-title">
                   <div class="user-info">
 
                     <div class="user-avatar">
@@ -62,18 +62,18 @@
 
                   </div>
                 </td>
-  <td>
+  <td [attr.data-label]="'USERS_SETTING_PAGE.COL_EMAIL' | translate">
                   <span class="role-badge">
                  {{ user.email || ('USERS_SETTING_PAGE.NO_EMAIL' | translate) }}
                   </span>
                 </td>
-                <td>
+                <td [attr.data-label]="'USERS_SETTING_PAGE.COL_ROLE' | translate">
                   <span class="role-badge">
                     {{ user.roleName || ('USERS_SETTING_PAGE.DEFAULT_ROLE' | translate) }}
                   </span>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'USERS_SETTING_PAGE.COL_BRANCH' | translate">
                   <div class="branch-info">
                     <strong>
                       {{ user.branchName || ('COMMON.NA' | translate) }}
@@ -85,13 +85,13 @@
                   </div>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'USERS_SETTING_PAGE.COL_LAST_SEEN' | translate">
                   <span class="last-seen">
                     {{ user.lastSeen | date:'dd MMM yyyy, HH:mm:ss' }}
                   </span>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'USERS_SETTING_PAGE.COL_STATUS' | translate">
                   <span class="online-status">
                     <span class="status-dot"></span>
                     {{ 'COMMON.ONLINE' | translate }}
@@ -169,7 +169,7 @@
 
   <div class="table-container">
 
-    <div class="sx-table-wrap"><table class="users-table">
+    <div class="sx-table-wrap"><table class="users-table sx-cards">
 
       <thead>
         <tr>
@@ -191,13 +191,13 @@
         <tr *ngFor="let user of users; let i = index">
 
           <!-- NUMBER -->
-          <td class="index">
+          <td class="index sx-card-index">
             {{ pageIndex * pageSize + i + 1 }}
           </td>
 
 
           <!-- USER -->
-          <td>
+          <td class="sx-card-title">
 
             <div class="user-info">
 
@@ -225,7 +225,7 @@
 
 
           <!-- USERNAME -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_USERNAME' | translate">
 
             <span class="username">
               {{ user?.username || '-' }}
@@ -235,7 +235,7 @@
 
 
           <!-- CONTACT -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_CONTACT' | translate">
 
             <div class="contact-info">
 
@@ -255,7 +255,7 @@
 
 
           <!-- GENDER -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_GENDER' | translate">
 
             <span class="gender">
               {{ user?.gender || '-' | uppercase}}
@@ -265,7 +265,7 @@
 
 
           <!-- BRANCH -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_BRANCH' | translate">
 
             <div
               class="branch"
@@ -297,7 +297,7 @@
 
 
           <!-- STATUS -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_STATUS' | translate">
 
             <div class="status-column">
 
@@ -343,7 +343,7 @@
 
 
           <!-- CREATED -->
-          <td>
+          <td [attr.data-label]="'USERS_SETTING_PAGE.COL_CREATED' | translate">
 
             <span class="created-date">
               {{ user?.createdAt || '-' }}
@@ -353,7 +353,7 @@
 
 
           <!-- ACTION -->
-          <td>
+          <td class="sx-card-actions">
 
             <div class="action-buttons">
 

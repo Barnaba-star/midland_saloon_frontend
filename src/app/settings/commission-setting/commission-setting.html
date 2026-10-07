@@ -75,7 +75,7 @@
   <!-- ============ TABLE ============ -->
   <div class="table-container">
 
-    <div class="sx-table-wrap"><table class="commission-table">
+    <div class="sx-table-wrap"><table class="commission-table sx-cards">
 
       <thead>
         <tr>
@@ -102,9 +102,9 @@
             (click)="toggleStaff(row)"
           >
 
-            <td class="index">{{ i + 1 }}</td>
+            <td class="index sx-card-index">{{ i + 1 }}</td>
 
-            <td>
+            <td class="sx-card-title">
               <div class="staff-info">
                 <div class="avatar">{{ (row.staffName || '?').charAt(0) | uppercase }}</div>
                 <div class="staff-name">
@@ -114,9 +114,9 @@
               </div>
             </td>
 
-            <td class="num">{{ row.branchesRegistered }}</td>
+            <td [attr.data-label]="'COMMISSION_PAGE.COL_REGISTERED' | translate" class="num">{{ row.branchesRegistered }}</td>
 
-            <td class="num">
+            <td [attr.data-label]="'COMMISSION_PAGE.COL_PAID' | translate" class="num">
               <span
                 class="paid-badge"
                 [class.none]="row.branchesPaid === 0"
@@ -126,11 +126,11 @@
               </span>
             </td>
 
-            <td class="num">{{ row.totalCollected | number }}</td>
+            <td [attr.data-label]="'COMMISSION_PAGE.COL_COLLECTED' | translate" class="num">{{ row.totalCollected | number }}</td>
 
-            <td class="num commission">{{ row.commissionDue | number }}</td>
+            <td [attr.data-label]="'COMMISSION_PAGE.COL_COMMISSION' | translate" class="num commission">{{ row.commissionDue | number }}</td>
 
-            <td class="num status-cell">
+            <td [attr.data-label]="'COMMISSION_PAGE.COL_STATUS' | translate" class="num status-cell">
 
               @if (row.commissionDue === 0) {
                 <span class="status-none">-</span>
@@ -169,7 +169,7 @@
 
             </td>
 
-            <td class="num">
+            <td class="num sx-card-actions">
               <button
                 type="button"
                 class="branches-button"
@@ -181,7 +181,7 @@
               </button>
             </td>
 
-            <td class="num">
+            <td class="num sx-card-actions">
               @if (row.payments) {
                 <mat-icon class="chevron">
                   {{ expandedStaffUid === row.staffUid ? 'expand_less' : 'expand_more' }}

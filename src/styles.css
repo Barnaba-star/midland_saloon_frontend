@@ -133,6 +133,115 @@ body {
   min-width: 180px;
 }
 
+/* .sx-cards on a table: on a phone every row becomes its own card - the
+   first cell (.sx-card-title) as the heading, then each cell as
+   "LABEL  value" (the label from the cell's data-label), actions
+   (.sx-card-actions) along the bottom. No sideways scrolling, nothing
+   hidden off-screen. On a wide screen it stays an ordinary table. */
+@media (max-width: 600px) {
+  .sx-table-wrap:has(> table.sx-cards) {
+    overflow: visible;
+  }
+  /* Boxes around a card table may have a fixed height or their own
+     scrollbar from the table days: the cards set the height now. */
+  .table-container:has(table.sx-cards),
+  .info-card12:has(table.sx-cards),
+  .table-wrapper:has(table.sx-cards) {
+    height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+  }
+  table.sx-cards {
+    display: block !important;
+    min-width: 0 !important;
+    width: 100% !important;
+    border-collapse: separate !important;
+    background: transparent !important;
+  }
+  table.sx-cards > thead {
+    display: none;
+  }
+  table.sx-cards > tbody,
+  table.sx-cards > tbody > tr,
+  table.sx-cards > tbody > tr > td {
+    display: block !important;
+    width: 100% !important;
+    min-width: 0 !important;
+    max-width: 100% !important;
+    height: auto !important;
+    min-height: 0 !important;
+    box-sizing: border-box;
+    position: static !important;
+  }
+  table.sx-cards > tbody > tr {
+    background: var(--sx-surface) !important;
+    border: 1px solid var(--sx-line) !important;
+    border-radius: 14px;
+    padding: 12px 14px;
+    margin: 0 0 10px;
+    box-shadow: var(--shadow-sm);
+  }
+  table.sx-cards > tbody > tr > td {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0 !important;
+    border: 0 !important;
+    white-space: normal !important;
+    text-align: right !important;
+    min-height: 0;
+    height: auto !important;
+  }
+  table.sx-cards > tbody > tr > td::before {
+    content: attr(data-label);
+    flex: 0 0 auto;
+    max-width: 45%;
+    text-align: left;
+    color: var(--sx-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  table.sx-cards > tbody > tr > td:not([data-label])::before,
+  table.sx-cards > tbody > tr > td[data-label=""]::before {
+    content: none;
+  }
+  table.sx-cards > tbody > tr > td.sx-card-index {
+    display: none !important;
+  }
+  table.sx-cards > tbody > tr > td.sx-card-title {
+    display: block !important;
+    text-align: left !important;
+    padding: 0 0 10px !important;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--sx-line) !important;
+  }
+  table.sx-cards > tbody > tr > td.sx-card-actions {
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    padding-top: 10px !important;
+    margin-top: 6px;
+    border-top: 1px solid var(--sx-line) !important;
+  }
+  /* A row of action buttons inside the actions cell wraps onto a second
+     line instead of spilling out of the card. */
+  table.sx-cards > tbody > tr > td.sx-card-actions > * {
+    display: flex !important;
+    flex-wrap: wrap !important;
+    justify-content: flex-end;
+    gap: 6px;
+    max-width: 100%;
+  }
+
+  /* A full-width row inside the table (empty state, detail panel). */
+  table.sx-cards > tbody > tr > td[colspan] {
+    display: block !important;
+    text-align: left !important;
+  }
+}
+
 /* Long words (emails, codes) break instead of overflowing their box. */
 .sx-break {
   overflow-wrap: anywhere;
