@@ -1,7 +1,35 @@
 @import './styles/middle_container.scss';
 
 :root {
-  /* Brand palette sourced from the Midland Solutions logo (navy + gold) */
+  /* Brand palette sourced from the Midland Solutions logo (navy + gold).
+     The --sx-* scale is the Saloon's one palette: every page colours itself
+     from these (or the --color-* names mapped onto them) - never a literal
+     hex, so the whole app reads as one product. */
+  --sx-navy-900: #0a1c38;
+  --sx-navy-800: #102748;
+  --sx-navy-700: #14315d;
+  --sx-navy-500: #2c5491;
+  --sx-navy-300: #8ea6cf;
+  --sx-navy-100: #eaeff8;
+  --sx-navy-50: #f5f7fc;
+  --sx-gold-700: #a67a1f;
+  --sx-gold-500: #c9962e;
+  --sx-gold-300: #e2bf6e;
+  --sx-gold-100: #faf1de;
+  --sx-ink: #111827;
+  --sx-muted: #6b7280;
+  --sx-line: #e5e7eb;
+  --sx-bg: #f5f6fb;
+  --sx-surface: #ffffff;
+  --sx-success: #15803d;
+  --sx-success-bg: #dcfce7;
+  --sx-warning: #b45309;
+  --sx-warning-bg: #fef3c7;
+  --sx-danger: #b91c1c;
+  --sx-danger-bg: #fee2e2;
+  --sx-info: #1d4ed8;
+  --sx-info-bg: #dbeafe;
+  --sx-script: 'Allura', cursive;
   --color-primary: #14315d;
   --color-primary-dark: #0a1c38;
   --color-primary-light: #eaeff8;
@@ -71,6 +99,50 @@ body {
 *::before,
 *::after {
   box-sizing: border-box;
+}
+
+/* =====================================================
+   TABLES AND PHONES - shared rules for every page.
+
+   .sx-table-wrap: put any data table inside it. On a wide screen it is
+   invisible; on a phone the table keeps its columns readable and scrolls
+   sideways inside its own box, instead of squeezing until cells ride over
+   each other or pushing the whole page wider.
+===================================================== */
+.sx-table-wrap {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border-radius: var(--radius-md, 16px);
+}
+.sx-table-wrap > table,
+.sx-table-wrap > .mat-mdc-table {
+  width: 100%;
+  min-width: 640px;
+  border-collapse: collapse;
+}
+.sx-table-wrap th,
+.sx-table-wrap td {
+  white-space: nowrap;
+}
+/* A cell meant to hold running text (a description, a note) may wrap. */
+.sx-table-wrap td.sx-wrap,
+.sx-table-wrap th.sx-wrap {
+  white-space: normal;
+  min-width: 180px;
+}
+
+/* Long words (emails, codes) break instead of overflowing their box. */
+.sx-break {
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 600px) {
+  /* Dialogs use the whole phone width. */
+  .cdk-overlay-pane.mat-mdc-dialog-panel {
+    max-width: calc(100vw - 16px) !important;
+  }
 }
 .modal-backdrop {
   position: fixed !important;
