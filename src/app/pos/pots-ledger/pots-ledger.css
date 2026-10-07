@@ -31,3 +31,63 @@
   .kpi { padding: 12px; }
   .kpi strong { font-size: 18px; }
 }
+
+/* Phones: the totals row reads as a final summary card under the row cards. */
+@media (max-width: 600px) {
+  table.sx-cards > tfoot,
+  table.sx-cards > tfoot > tr,
+  table.sx-cards > tfoot > tr > td {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box;
+  }
+  table.sx-cards > tfoot > tr {
+    background: var(--sx-navy-50) !important;
+    border: 1px solid var(--sx-line) !important;
+    border-radius: 14px;
+    padding: 12px 14px;
+  }
+  table.sx-cards > tfoot > tr > td {
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 6px 0 !important;
+    border: 0 !important;
+    text-align: right !important;
+    white-space: normal !important;
+  }
+  table.sx-cards > tfoot > tr > td::before {
+    content: attr(data-label);
+    text-align: left;
+    color: var(--sx-muted);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  table.sx-cards > tfoot > tr > td.sx-card-title {
+    display: block !important;
+    text-align: left !important;
+    font-weight: 800;
+    color: var(--sx-navy-700);
+    padding-bottom: 10px !important;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--sx-line) !important;
+  }
+  table.sx-cards > tfoot > tr > td.sx-card-title::before {
+    content: none;
+  }
+  table.sx-cards > tfoot > tr > td.sx-foot-empty {
+    display: none !important;
+  }
+}
+
+/* Phones: the Other items under their pot, as smaller tinted cards. */
+@media (max-width: 600px) {
+  table.sx-cards > tbody > tr.sub {
+    background: var(--sx-navy-50) !important;
+    margin-left: 14px !important;
+    width: calc(100% - 14px) !important;
+  }
+}

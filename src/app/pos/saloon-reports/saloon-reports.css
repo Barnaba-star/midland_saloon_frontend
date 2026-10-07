@@ -7644,3 +7644,39 @@
     max-width: none !important;
   }
 }
+
+/* Phones: an actions cell spanning two columns still lines its buttons up
+   at the bottom right of the card. */
+@media (max-width: 600px) {
+  table.sx-cards > tbody > tr > td.sx-card-actions[colspan] {
+    display: flex !important;
+    justify-content: flex-end;
+  }
+}
+
+/* Phones: the Store report's period buttons were squeezed into one row with
+   every label cut; two full-width columns instead, the date picker last. */
+@media (max-width: 600px) {
+  .table-wrapper > .date-filter {
+    height: auto !important;
+    max-height: none !important;
+    display: grid !important;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px !important;
+    padding: 10px !important;
+    overflow: visible !important;
+    white-space: normal !important;
+  }
+
+  .table-wrapper > .date-filter > * {
+    width: 100% !important;
+    min-width: 0 !important;
+    margin: 0 !important;
+    border-radius: 999px;
+    white-space: nowrap;
+  }
+
+  .table-wrapper > .date-filter > :last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
+}

@@ -16,7 +16,7 @@
         <p class="muted">{{ 'OTHER_SPLIT.LOADING' | translate }}</p>
       } @else {
         <div class="sx-table-wrap">
-          <table class="cu-table">
+          <table class="cu-table sx-cards">
             <thead>
               <tr>
                 <th>{{ 'CASH_UP.COL_METHOD' | translate }}</th>
@@ -30,20 +30,20 @@
             <tbody>
               @for (l of lines; track l.method) {
                 <tr>
-                  <td>
+                  <td class="sx-card-title">
                     <strong>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</strong>
                     @if (l.bills) { <small class="muted">{{ 'CASH_UP.BILLS' | translate: { count: l.bills } }}</small> }
                   </td>
-                  <td class="num">{{ l.takings | number }}</td>
-                  <td class="num">
+                  <td [attr.data-label]="'CASH_UP.COL_TAKINGS' | translate" class="num">{{ l.takings | number }}</td>
+                  <td [attr.data-label]="'CASH_UP.COL_PAYOUTS' | translate" class="num">
                     @if (l.payouts) { <span class="neg">−{{ l.payouts | number }}</span> } @else { <span class="muted">-</span> }
                   </td>
-                  <td class="num"><strong>{{ l.expected | number }}</strong></td>
-                  <td class="num">
+                  <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num"><strong>{{ l.expected | number }}</strong></td>
+                  <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">
                     <input type="number" min="0" step="1" [(ngModel)]="l.counted" [name]="'c-' + l.method"
                            [placeholder]="'CASH_UP.COUNT_PH' | translate" />
                   </td>
-                  <td class="num">
+                  <td [attr.data-label]="'CASH_UP.COL_VARIANCE' | translate" class="num">
                     @if (variance(l) !== null) {
                       <span class="pill" [class.short]="variance(l)! < 0" [class.over]="variance(l)! > 0" [class.even]="variance(l) === 0">
                         {{ variance(l)! > 0 ? '+' : '' }}{{ variance(l) | number }}
@@ -57,12 +57,12 @@
             </tbody>
             <tfoot>
               <tr>
-                <td>{{ 'OTHER_SPLIT.TOTAL' | translate }}</td>
-                <td class="num">{{ takingsTotal | number }}</td>
-                <td class="num">@if (payoutsTotal) { <span class="neg">−{{ payoutsTotal | number }}</span> } @else { - }</td>
-                <td class="num">{{ expectedTotal | number }}</td>
-                <td class="num">{{ countedTotal | number }}</td>
-                <td class="num">
+                <td class="sx-card-title">{{ 'OTHER_SPLIT.TOTAL' | translate }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_TAKINGS' | translate" class="num">{{ takingsTotal | number }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_PAYOUTS' | translate" class="num">@if (payoutsTotal) { <span class="neg">−{{ payoutsTotal | number }}</span> } @else { - }</td>
+                <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num">{{ expectedTotal | number }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">{{ countedTotal | number }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_VARIANCE' | translate" class="num">
                   @if (anyCounted) {
                     <span class="pill" [class.short]="countedTotal - expectedTotal < 0" [class.over]="countedTotal - expectedTotal > 0" [class.even]="countedTotal === expectedTotal">
                       {{ countedTotal - expectedTotal > 0 ? '+' : '' }}{{ countedTotal - expectedTotal | number }}
@@ -149,7 +149,7 @@
         </span>
       </div>
       <div class="sx-table-wrap">
-        <table class="cu-table">
+        <table class="cu-table sx-cards">
           <thead>
             <tr>
               <th>{{ 'CASH_UP.COL_CASHIER' | translate }}</th>
@@ -164,17 +164,17 @@
           <tbody>
             @for (c of history; track c.uid) {
               <tr class="row" (click)="toggle(c)">
-                <td><strong>{{ c.cashierName || c.cashierEmail }}</strong></td>
-                <td>{{ c.periodFrom | date: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
-                <td class="num">{{ c.billCount }}</td>
-                <td class="num">{{ c.expectedTotal | number }}</td>
-                <td class="num">{{ c.countedTotal | number }}</td>
-                <td class="num">
+                <td class="sx-card-title"><strong>{{ c.cashierName || c.cashierEmail }}</strong></td>
+                <td [attr.data-label]="'CASH_UP.COL_SHIFT' | translate">{{ c.periodFrom | date: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_BILLS' | translate" class="num">{{ c.billCount }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num">{{ c.expectedTotal | number }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">{{ c.countedTotal | number }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_VARIANCE' | translate" class="num">
                   <span class="pill" [class.short]="c.variance < 0" [class.over]="c.variance > 0" [class.even]="c.variance === 0">
                     {{ c.variance > 0 ? '+' : '' }}{{ c.variance | number }}
                   </span>
                 </td>
-                <td class="num"><mat-icon class="chev">{{ openUid === c.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
+                <td class="num sx-card-actions"><mat-icon class="chev">{{ openUid === c.uid ? 'expand_less' : 'expand_more' }}</mat-icon></td>
               </tr>
               @if (openUid === c.uid) {
                 <tr class="detail">

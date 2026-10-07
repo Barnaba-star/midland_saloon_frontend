@@ -79,7 +79,7 @@
         </div>
       </div>
       <div class="table-scroll sx-table-wrap">
-        <table class="ins-table">
+        <table class="ins-table sx-cards">
           <thead>
             <tr>
               <th>{{ 'COMMISSION_BREAKDOWN.SERVICE' | translate }}</th>
@@ -95,13 +95,13 @@
           <tbody>
             @for (p of sorted; track p.uid) {
               <tr>
-                <td><strong>{{ p.serviceName }}</strong> <small class="muted">{{ p.serviceCode }}</small></td>
-                <td class="num">{{ p.units | number }}</td>
-                <td class="num">{{ p.revenue | number }}</td>
+                <td class="sx-card-title"><strong>{{ p.serviceName }}</strong> <small class="muted">{{ p.serviceCode }}</small></td>
+                <td [attr.data-label]="'INSIGHTS.UNITS' | translate" class="num">{{ p.units | number }}</td>
+                <td [attr.data-label]="'INSIGHTS.REVENUE' | translate" class="num">{{ p.revenue | number }}</td>
                 @if (costTracked) {
-                <td class="num">@if (p.costKnown) { {{ p.cost | number }} } @else { <span class="muted" [title]="'INSIGHTS.NO_COST_TIP' | translate">?</span> }</td>
-                <td class="num">@if (p.costKnown) { <strong [class.neg]="p.profit < 0">{{ p.profit | number }}</strong> } @else { <span class="muted">-</span> }</td>
-                <td class="num">
+                <td [attr.data-label]="'INSIGHTS.COST' | translate" class="num">@if (p.costKnown) { {{ p.cost | number }} } @else { <span class="muted" [title]="'INSIGHTS.NO_COST_TIP' | translate">?</span> }</td>
+                <td [attr.data-label]="'INSIGHTS.PROFIT' | translate" class="num">@if (p.costKnown) { <strong [class.neg]="p.profit < 0">{{ p.profit | number }}</strong> } @else { <span class="muted">-</span> }</td>
+                <td [attr.data-label]="'INSIGHTS.MARGIN' | translate" class="num">
                   @if (p.marginPercent !== null) {
                     <span class="pill" [class.low]="p.marginPercent < 20" [class.mid]="p.marginPercent >= 20 && p.marginPercent < 35" [class.high]="p.marginPercent >= 35">{{ p.marginPercent }}%</span>
                   } @else { <span class="muted">-</span> }

@@ -60,7 +60,7 @@
           <div class="card border-0 shadow-sm saloon-table-card">
             <div class="card-body p-0 saloon-table-body">
               <div class="table-responsive saloon-table-responsive sx-table-wrap">
-                <table class="table table-hover align-middle mb-0 saloon-table">
+                <table class="table table-hover align-middle mb-0 saloon-table sx-cards">
                   <!-- TABLE HEADER -->
                   <thead>
                     <tr>
@@ -81,14 +81,14 @@
                     @for (report of filteredReports; track report.uid; let i = $index) {
                     <tr>
                       <!-- NUMBER -->
-                      <td class="text-center">
+                      <td class="text-center sx-card-index">
                         <span class="text-muted">
                           {{ i + 1 }}
                         </span>
                       </td>
 
                       <!-- CUSTOMER -->
-                      <td>
+                      <td class="sx-card-title">
                         <div class="customer-info">
                           <div class="customer-avatar">
                             {{ report.firstName?.charAt(0) || '?' }}
@@ -103,7 +103,7 @@
                       </td>
 
                       <!-- SERVICE -->
-                      <td>
+                      <td [attr.data-label]="'COMMISSION_BREAKDOWN.SERVICE' | translate">
                         <div class="fw-semibold">
                           {{ 'REPORTS_PAGE.CODE_LABEL' | translate }}
                           {{ report.serviceCode || ('COMMON.NA' | translate) }}
@@ -111,7 +111,7 @@
                       </td>
 
                       <!-- PRICE -->
-                      <td class="text-end">
+                      <td [attr.data-label]="'COMMON.PRICE' | translate" class="text-end">
                         <div class="fw-bold text-primary">
                           {{ formatAmount(report.price) }}
                         </div>
@@ -119,7 +119,7 @@
 
                       <!-- BREAKDOWN -->
                       <!-- BREAKDOWN -->
-                      <td>
+                      <td [attr.data-label]="'REPORTS_PAGE.COL_REVENUE_BREAKDOWN' | translate">
                         <div class="breakdown-container">
                           <!-- TOTAL - ALWAYS VISIBLE -->
                           <button
@@ -869,7 +869,7 @@
                COMMISSION TABLE
           ========================== -->
             <div class="commission-table-wrapper sx-table-wrap">
-              <table class="commission-table">
+              <table class="commission-table sx-cards">
                 <!-- =========================
                    TABLE HEADER
               ========================== -->
@@ -894,14 +894,14 @@
                   @for (report of commissionReports; track report.uid; let i = $index) {
                     <tr>
                       <!-- # -->
-                      <td class="index-cell">
+                      <td class="index-cell sx-card-index">
                         <span class="row-number">
                           {{ pageC * sizeC + i + 1 }}
                         </span>
                       </td>
 
                       <!-- STAFF -->
-                      <td class="staff-cell">
+                      <td class="staff-cell sx-card-title">
                         <div class="staff-info">
                           <div class="staff-avatar">
                             {{ report.firstName?.charAt(0) }}
@@ -918,39 +918,39 @@
                       </td>
 
                       <!-- CATEGORY -->
-                      <td>
+                      <td [attr.data-label]="'REPORTS_PAGE.COL_CATEGORY' | translate">
                         <span class="category-badge">
                           {{ report.saloonCategory | uppercase }}
                         </span>
                       </td>
 
                       <!-- DATE -->
-                      <td>
+                      <td [attr.data-label]="'COMMON.DATE' | translate">
                         <span class="category-badge">
                           {{ report.date | uppercase }}
                         </span>
                       </td>
 
                       <!-- TOTAL -->
-                      <td class="amount-cell">
+                      <td [attr.data-label]="'COMMON.TOTAL' | translate" class="amount-cell">
                         Tshs
                         {{ report.totalAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- PAID -->
-                      <td class="amount-cell paid-amount">
+                      <td [attr.data-label]="'COMMON.PAID' | translate" class="amount-cell paid-amount">
                         Tshs
                         {{ report.paidAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- REMAINING -->
-                      <td class="amount-cell remaining-amount">
+                      <td [attr.data-label]="'COMMON.REMAINING' | translate" class="amount-cell remaining-amount">
                         Tshs
                         {{ report.remainingAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- PAYMENT STATUS -->
-                      <td>
+                      <td [attr.data-label]="'REPORTS_PAGE.COL_PAYMENT' | translate">
                         <span
                           class="payment-status"
                           [ngClass]="{
@@ -964,7 +964,7 @@
                       </td>
 
                       <!-- ACTION -->
-                      <td class="actions-cell">
+                      <td class="actions-cell sx-card-actions">
                         <button
                           type="button"
                           class="action-btn pay-btn"
@@ -1290,7 +1290,7 @@
 
         @if (serviceAndStoreReports.length > 0) {
         <div class="sx-table-wrap">
-        <table class="report-table">
+        <table class="report-table sx-cards">
           <thead>
             <tr>
               <th>#</th>
@@ -1309,18 +1309,18 @@
           <tbody>
             @for (row of serviceAndStoreReports; track row.uid) {
               <tr>
-                <td>{{ $index + 1 }}</td>
-                <td>
+                <td class="sx-card-index">{{ $index + 1 }}</td>
+                <td class="sx-card-title">
                   <span class="service-name">
                     {{ row.serviceName || '-' }}
                   </span>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_STORE_CODE' | translate">
                   {{ row.openStoreCode || '-' }}
                 </td>
 
-                <td>
+                <td [attr.data-label]="'COMMON.STATUS' | translate">
                   <span
                     class="status-badge"
                     [class.open]="row.status === 'OPEN'"
@@ -1330,24 +1330,24 @@
                   </span>
                 </td>
 
-                <td><small>Tshs</small> {{ row.buyingPrice | number: '1.2-2' }}</td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_BUYING_PRICE' | translate"><small>Tshs</small> {{ row.buyingPrice | number: '1.2-2' }}</td>
 
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_OPENED_DATE' | translate">
                   {{ row.openedDate ? (row.openedDate | date: 'dd MMM yyyy') : '-' }}
                 </td>
 
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_CLOSED_DATE' | translate">
                   {{ row.closedDate ? (row.closedDate | date: 'dd MMM yyyy') : '-' }}
                 </td>
 
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_USAGE' | translate">
                   {{ row.reportCount }}
                 </td>
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_AMOUNT_COLLECTED' | translate">
                   <strong><small>Tshs</small> {{ row.sharedAmount | number: '1.2-2' }}</strong>
                 </td>
 
-                <td>
+                <td [attr.data-label]="'REPORTS_PAGE.COL_COMMISSION_EARNED' | translate">
                   <div class="commission-summary">
                     <!-- Total -->
                     <div
@@ -1696,7 +1696,7 @@
 
         @if (incomeRows.length > 0) {
           <div class="income-table-wrapper sx-table-wrap">
-            <table class="income-table">
+            <table class="income-table sx-cards">
               <thead>
                 <tr>
                   <th>#</th>
@@ -1720,14 +1720,14 @@
                 @for (item of incomeRows; track item.uid; let i = $index) {
                   <tr>
                     <!-- NUMBER -->
-                    <td>
+                    <td class="sx-card-index">
                       <span class="row-number">
                         {{ i + 1 }}
                       </span>
                     </td>
 
                     <!-- NAME -->
-                    <td>
+                    <td class="sx-card-title">
                       <div class="income-name">
                         <div class="name-icon">
                           <mat-icon> payments </mat-icon>
@@ -1740,14 +1740,14 @@
                     </td>
 
                     <!-- DESCRIPTION -->
-                    <td>
+                    <td [attr.data-label]="'COMMON.DESCRIPTION' | translate">
                       <span class="description">
                         {{ item.otherGroup ? ('OTHER_SPLIT.GROUP_DESC' | translate: { count: item.parts }) : ('OTHER_SPLIT.POT_DESC_OF' | translate: { name: (item.name | potName) }) }}
                       </span>
                     </td>
 
                     <!-- WEEK -->
-                    <td>
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_WEEK' | translate">
                       <div class="week-date">
                         <mat-icon> calendar_month </mat-icon>
 
@@ -1758,7 +1758,7 @@
                     </td>
 
                     <!-- INCOME -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_INCOME' | translate" class="amount-column">
                       <span class="income-amount">
                         + Tshs
                         {{ item.income | number: '1.2-2' }}
@@ -1766,7 +1766,7 @@
                     </td>
 
                     <!-- EXPENSE -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_EXPENSES' | translate" class="amount-column">
                       <span class="expense-amount">
                         - Tshs
                         {{ item.expenses | number: '1.2-2' }}
@@ -1774,7 +1774,7 @@
                     </td>
 
                     <!-- BALANCE -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_BALANCE' | translate" class="amount-column">
                       <strong
                         class="balance-amount"
                         [class.negative]="(item.income || 0) - (item.expenses || 0) < 0"
@@ -1784,7 +1784,7 @@
                       </strong>
                     </td>
                     @if (!breakdownTab(item)) {
-                    <td class="action-column">
+                    <td class="action-column sx-card-actions">
                       <button
                         type="button"
                         class="spend-btn"
@@ -1797,7 +1797,7 @@
                       </button>
                     </td>
 
-                    <td class="action-details">
+                    <td class="action-details sx-card-actions">
                       <button
                         type="button"
                         class="details-btn"
@@ -1810,7 +1810,7 @@
                     </td>
                     } @else {
                       <!-- Other, Staff and Stock Purchase have tabs of their own: paid and broken down there. -->
-                      <td class="action-column" colspan="2">
+                      <td class="action-column sx-card-actions" colspan="2">
                         <button type="button" class="details-btn" (click)="onAction(breakdownTab(item)!)">
                           <mat-icon>call_split</mat-icon>
                           <span>{{ 'OTHER_SPLIT.VIEW_BREAKDOWN' | translate }}</span>
@@ -2006,7 +2006,7 @@
 
         @if (otherPots.length > 0) {
           <div class="income-table-wrapper sx-table-wrap">
-            <table class="income-table">
+            <table class="income-table sx-cards">
               <thead>
                 <tr>
                   <th>#</th>
@@ -2030,14 +2030,14 @@
                 @for (item of otherPots; track item.uid; let i = $index) {
                   <tr>
                     <!-- NUMBER -->
-                    <td>
+                    <td class="sx-card-index">
                       <span class="row-number">
                         {{ i + 1 }}
                       </span>
                     </td>
 
                     <!-- NAME -->
-                    <td>
+                    <td class="sx-card-title">
                       <div class="income-name">
                         <div class="name-icon">
                           <mat-icon> payments </mat-icon>
@@ -2050,14 +2050,14 @@
                     </td>
 
                     <!-- DESCRIPTION -->
-                    <td>
+                    <td [attr.data-label]="'COMMON.DESCRIPTION' | translate">
                       <span class="description">
                         {{ 'OTHER_SPLIT.POT_DESC_OF' | translate: { name: (item.name === 'Other' ? ('COMMISSION_BREAKDOWN.OTHERS' | translate) : (item.name | potName: 'item')) } }}
                       </span>
                     </td>
 
                     <!-- WEEK -->
-                    <td>
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_WEEK' | translate">
                       <div class="week-date">
                         <mat-icon> calendar_month </mat-icon>
 
@@ -2068,7 +2068,7 @@
                     </td>
 
                     <!-- INCOME -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_INCOME' | translate" class="amount-column">
                       <span class="income-amount">
                         + Tshs
                         {{ item.income | number: '1.2-2' }}
@@ -2076,7 +2076,7 @@
                     </td>
 
                     <!-- EXPENSE -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_EXPENSES' | translate" class="amount-column">
                       <span class="expense-amount">
                         - Tshs
                         {{ item.expenses | number: '1.2-2' }}
@@ -2084,7 +2084,7 @@
                     </td>
 
                     <!-- BALANCE -->
-                    <td class="amount-column">
+                    <td [attr.data-label]="'REPORTS_PAGE.COL_BALANCE' | translate" class="amount-column">
                       <strong
                         class="balance-amount"
                         [class.negative]="(item.income || 0) - (item.expenses || 0) < 0"
@@ -2093,7 +2093,7 @@
                         {{ (item.income || 0) - (item.expenses || 0) | number: '1.2-2' }}
                       </strong>
                     </td>
-                    <td class="action-column">
+                    <td class="action-column sx-card-actions">
                       <button
                         type="button"
                         class="spend-btn"
@@ -2105,7 +2105,7 @@
                       </button>
                     </td>
 
-                    <td class="action-details">
+                    <td class="action-details sx-card-actions">
                       <button
                         type="button"
                         class="details-btn"
@@ -2272,7 +2272,7 @@
         ========================== -->
           @if (stockAndPurchaseReports.length > 0) {
             <div class="stock-table-wrapper sx-table-wrap">
-              <table class="stock-table">
+              <table class="stock-table sx-cards">
                 <thead>
                   <tr>
                     <th class="index-col">#</th>
@@ -2297,14 +2297,14 @@
                   @for (stock of stockAndPurchaseReports; track stock.uid; let i = $index) {
                     <tr>
                       <!-- # -->
-                      <td class="index-cell">
+                      <td class="index-cell sx-card-index">
                         <span class="row-number">
                           {{ i + 1 }}
                         </span>
                       </td>
 
                       <!-- SERVICE -->
-                      <td class="service-cell">
+                      <td class="service-cell sx-card-title">
                         <div class="service-info">
                           <div class="service-icon">
                             <mat-icon>spa</mat-icon>
@@ -2322,7 +2322,7 @@
 
 
                       <!-- WEEK -->
-                      <td>
+                      <td [attr.data-label]="'REPORTS_PAGE.COL_WEEK' | translate">
                         <span class="week-badge">
                           <mat-icon> date_range </mat-icon>
 
@@ -2331,25 +2331,25 @@
                       </td>
 
                       <!-- TOTAL -->
-                      <td class="amount-cell total-amount">
+                      <td [attr.data-label]="'COMMON.TOTAL' | translate" class="amount-cell total-amount">
                         Tshs
                         {{ stock.totalAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- PAID -->
-                      <td class="amount-cell paid-amount">
+                      <td [attr.data-label]="'COMMON.PAID' | translate" class="amount-cell paid-amount">
                         Tshs
                         {{ stock.payedAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- REMAINING -->
-                      <td class="amount-cell remaining-amount">
+                      <td [attr.data-label]="'COMMON.REMAINING' | translate" class="amount-cell remaining-amount">
                         Tshs
                         {{ stock.remainingAmount | number: '1.2-2' }}
                       </td>
 
                       <!-- PAYMENT STATUS -->
-                      <td>
+                      <td [attr.data-label]="'REPORTS_PAGE.COL_PAYMENT' | translate">
                         <span
                           class="payment-status"
                           [ngClass]="{
@@ -2364,7 +2364,7 @@
                         </span>
                       </td>
 
-                      <td class="actions-cell">
+                      <td class="actions-cell sx-card-actions">
                         <button
                           type="button"
                           class="action-btn pay-btn"
