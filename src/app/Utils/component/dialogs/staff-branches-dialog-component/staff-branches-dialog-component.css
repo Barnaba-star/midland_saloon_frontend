@@ -116,7 +116,7 @@
 
 .counter {
   display: flex;
-  flex-direction: column;
+  flex-direction: column-reverse;
 
   gap: 1px;
 
@@ -126,7 +126,7 @@
 }
 
 .counter strong {
-  font-size: 19px;
+  font-size: 13px;
   font-weight: 600;
 
   line-height: 1.2;
@@ -134,11 +134,12 @@
 
 .counter span {
   color: var(--sx-muted);
-  font-size: 10px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
 
   text-transform: uppercase;
   letter-spacing: .03em;
+  overflow-wrap: anywhere;
 }
 
 .counter.paid strong   { color: var(--sx-success); }

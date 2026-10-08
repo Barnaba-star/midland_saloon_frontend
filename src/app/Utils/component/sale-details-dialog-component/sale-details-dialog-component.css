@@ -136,7 +136,7 @@
 .summary-item span {
   color: var(--sx-muted);
 
-  font-size: 9px;
+  font-size: 13px;
   font-weight: 700;
 
   text-transform: uppercase;
@@ -153,13 +153,13 @@
 .summary-item .bill {
   color: var(--sx-navy-700);
 
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .summary-item .paid-amount {
   color: var(--sx-success);
 
-  font-size: 14px;
+  font-size: 12px;
 }
 
 
@@ -382,14 +382,14 @@
 .dialog-total span {
   color: var(--sx-muted);
 
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 700;
 }
 
 .dialog-total strong {
   color: var(--sx-navy-700);
 
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 800;
 }
 

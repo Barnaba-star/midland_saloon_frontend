@@ -127,9 +127,9 @@
 .category-label {
   display: block;
   color: var(--sx-navy-300);
-  font-size: 10.5px;
+  font-size: 15px;
   font-weight: 700;
-  letter-spacing: 0.6px;
+  letter-spacing: 0.3px;
   text-transform: uppercase;
 }
 
@@ -137,7 +137,7 @@
   display: block;
   margin-top: 1px;
   color: var(--sx-navy-700);
-  font-size: 15px;
+  font-size: 14px;
   font-weight: 700;
 }
 

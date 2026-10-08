@@ -158,8 +158,4 @@ export class PaymentService {
       { params }
     );
   }
-
-  findBalance(): Observable<Response<number | null>> {
-    return this.http.get<Response<number | null>>(`${this.paymentUrl}/findBalance`);
-  }
 }

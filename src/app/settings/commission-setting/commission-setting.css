@@ -32,7 +32,7 @@
   margin: 0;
 
   color: var(--sx-navy-900);
-  font-size: 15px;
+  font-size: 18px;
   font-weight: 600;
 }
 
@@ -126,8 +126,8 @@
 
 .summary-label {
   color: var(--sx-muted);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 700;
 
   text-transform: uppercase;
   letter-spacing: .03em;
@@ -135,7 +135,7 @@
 
 .summary-value {
   color: var(--sx-navy-900);
-  font-size: 22px;
+  font-size: 15px;
   font-weight: 600;
 
   line-height: 1.2;
@@ -174,7 +174,7 @@
   background: var(--sx-bg);
 
   color: var(--sx-muted);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
 
   text-align: left;
@@ -329,7 +329,7 @@
   background: transparent;
 
   color: var(--sx-muted);
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 600;
 
   text-align: left;

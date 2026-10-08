@@ -128,8 +128,8 @@
 
 .table-header h2 {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: var(--sx-navy-800);
 }
 
@@ -159,19 +159,21 @@
 
 .info-row h3{
     margin: 0;
-    font-size: 14px;
-    font-weight: 600;
+    font-size: 16px;
+    font-weight: 700;
     color: var(--sx-navy-800);
 }
 
 .info-row strong{
     display: block;
     margin-bottom: 8px;
+    font-size: 15px;
     color: var(--sx-ink);
 }
 
 .info-row p{
     margin: 0;
+    font-size: 14px;
     line-height: 1.7;
     color: var(--sx-muted);
 }
@@ -185,13 +187,14 @@
 
 .info-header h2{
     margin:0;
-    font-size:14px;
-    font-weight: 600;
+    font-size:18px;
+    font-weight: 700;
     color:var(--sx-navy-800);
 }
 
 .info-header p{
     margin-top:8px;
+    font-size:14px;
     color:var(--sx-muted);
     line-height:1.6;
 }
@@ -404,8 +407,8 @@ app-form{
 
 .commission-title h2 {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: var(--sx-navy-800);
 }
 
@@ -596,7 +599,7 @@ app-form{
 }
 
 .service-info-item strong {
-  font-size: 15px;
+  font-size: 14px;
   color: var(--sx-ink);
   font-weight: 600;
 }
@@ -696,8 +699,8 @@ app-form{
 
 .commission-title h3 {
   margin: 0;
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
   color: var(--sx-navy-800);
 }
 
@@ -1003,8 +1006,8 @@ app-form{
 
   color: var(--sx-navy-800);
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .user-management-header p {
@@ -1464,8 +1467,8 @@ app-form{
   margin: 0;
 
   color: var(--sx-navy-800);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .service-table-header p {

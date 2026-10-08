@@ -86,8 +86,8 @@
 
 .credential-value.code {
   font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
-  font-size: 24px;
-  letter-spacing: 4px;
+  font-size: 16px;
+  letter-spacing: 3px;
   color: var(--color-primary, var(--sx-navy-700));
   word-break: normal;
 }

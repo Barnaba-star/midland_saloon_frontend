@@ -78,8 +78,8 @@ mat-dialog-content {
 .section-label {
   margin-bottom: 8px;
 
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 16px;
+  font-weight: 700;
 
   color: var(--sx-muted);
 }

@@ -90,7 +90,7 @@
 
 .summary-line.total .value {
   color: var(--sx-success);
-  font-size: 17px;
+  font-size: 15px;
   font-weight: 700;
 }
 

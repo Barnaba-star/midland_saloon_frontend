@@ -332,17 +332,17 @@
 .total-title {
   color: var(--sx-muted);
 
-  font-size: 11px;
+  font-size: 14px;
 
   text-transform: uppercase;
 
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .total-amount {
   color: var(--sx-navy-700);
 
-  font-size: 14px;
+  font-size: 13px;
 
   font-weight: 700;
 
@@ -452,14 +452,14 @@
 }
 
 .total-title {
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 700;
   color: var(--sx-muted);
   text-transform: uppercase;
 }
 
 .total-amount {
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 700;
   color: var(--sx-navy-700);
 }
@@ -1106,7 +1106,7 @@
 .revenue-summary-row.total {
   margin-top: 8px;
   padding: 9px 8px;
-    font-size: 19px;
+    font-size: 15px;
 
   border-top: 1px solid var(--sx-line);
   border-radius: 0 0 6px 6px;
@@ -1117,7 +1117,7 @@
 
 .revenue-summary-row.total span {
   font-weight: 600;
-  font-size: 16px;
+  font-size: 15px;
 }
 
 .revenue-summary-row.total strong {
@@ -1198,7 +1198,7 @@
   display: block;
 
   color: var(--sx-navy-900);
-  font-size: 14px;
+  font-size: 15px;
   font-weight: 700;
   line-height: 1.3;
 }
@@ -1346,7 +1346,7 @@
   }
 
   .service-revenue-name strong {
-    font-size: 13px;
+    font-size: 14px;
   }
 
   .service-breakdown-row {
@@ -1409,8 +1409,8 @@
 }
 
 .report-label {
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 800;
   letter-spacing: 0.1px;
   color: var(--sx-navy-900);
 }
@@ -1599,7 +1599,7 @@
 .service-report-header h2 {
   margin: 3px 0 5px;
   color: var(--sx-navy-900);
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   letter-spacing: -0.2px;
 }
@@ -2564,14 +2564,14 @@
 }
 
 .revenue-total-label {
-  font-size: 10px;
-  font-weight: 300;
+  font-size: 15px;
+  font-weight: 700;
   opacity: 0.85;
   letter-spacing: 0.3px;
 }
 
 .revenue-total-amount {
-  font-size: 20px;
+  font-size: 14px;
   font-weight: 500;
   line-height: 1.2;
 }
@@ -2585,8 +2585,8 @@
   border-radius: 6px;
 
   color: var(--sx-navy-800);
-  font-size: 15px;
-  font-weight: 600;
+  font-size: 17px;
+  font-weight: 700;
 }
 
 .commission-filters {
@@ -3096,8 +3096,8 @@
 .commission-summary-header .summary-title h2 {
   margin: 2px 0 4px;
   color: var(--sx-ink);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
 }
 
 .commission-summary-header .summary-title p {
@@ -3177,13 +3177,13 @@
 
 .summary-info span {
   color: var(--sx-muted);
-  font-size: 11px;
-  font-weight: 500;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .summary-info strong {
   color: var(--sx-navy-900);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
 }
 
@@ -3810,7 +3810,7 @@
 }
 
 .total-label {
-  font-size: 10px;
+  font-size: 13px;
   color: var(--sx-success);
   font-weight: 600;
 
@@ -3942,7 +3942,7 @@
   }
 
   .total-label {
-    font-size: 8px;
+    font-size: 11px;
   }
 
   .commission-total strong {
@@ -4363,14 +4363,14 @@
   margin-bottom: 4px;
 
   color: var(--sx-muted);
-  font-size: 11px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   text-transform: uppercase;
 }
 
 .summary-value {
   color: var(--sx-navy-900);
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 700;
 
   overflow-wrap: anywhere;
@@ -5159,7 +5159,7 @@
 .income-card-content span {
   color: var(--sx-muted);
 
-  font-size: 12px;
+  font-size: 14px;
 
   font-weight: 700;
 
@@ -5170,7 +5170,7 @@
 
 
 .income-card-content strong {
-  font-size: 15px;
+  font-size: 13px;
 
   font-weight: 800;
 }
@@ -5986,8 +5986,8 @@
 .stock-summary-header .summary-title h2 {
   margin: 2px 0 6px;
   color: var(--sx-ink);
-  font-size: 14px;
-  font-weight: 600;
+  font-size: 18px;
+  font-weight: 700;
   letter-spacing: normal;
 }
 
@@ -6096,15 +6096,15 @@
 
 .summary-info span {
   color: var(--sx-muted);
-  font-size: 10.5px;
+  font-size: 14px;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.2px;
   text-transform: uppercase;
 }
 
 .summary-info strong {
   color: var(--sx-navy-900);
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 700;
   white-space: nowrap;
 }
@@ -6841,8 +6841,8 @@
 
   color: var(--sx-muted);
 
-  font-size: 9px;
-  font-weight: 500;
+  font-size: 12px;
+  font-weight: 700;
 }
 
 .info-item strong {
@@ -6920,7 +6920,7 @@
 
   color: var(--sx-navy-800);
 
-  font-size: 12px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -6944,8 +6944,8 @@
 
   color: var(--sx-ink);
 
-  font-size: 10px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .amount-input-wrapper {

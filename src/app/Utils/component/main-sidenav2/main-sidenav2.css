@@ -1224,7 +1224,7 @@
 
   border-bottom: 1px solid var(--color-border, var(--sx-line));
 
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 700;
   color: var(--color-text, var(--sx-ink));
 }

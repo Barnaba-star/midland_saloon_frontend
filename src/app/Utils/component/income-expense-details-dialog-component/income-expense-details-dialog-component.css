@@ -111,16 +111,16 @@ mat-dialog-content {
 
   color: var(--sx-muted);
 
-  font-size: 12px;
+  font-size: 15px;
 
-  font-weight: 600;
+  font-weight: 700;
 }
 
 
 .summary-card strong {
   display: block;
 
-  font-size: 19px;
+  font-size: 14px;
 
   font-weight: 750;
 
@@ -646,7 +646,7 @@ mat-dialog-content::-webkit-scrollbar-thumb:hover {
 
 
   .summary-card strong {
-    font-size: 17px;
+    font-size: 13px;
   }
 
 

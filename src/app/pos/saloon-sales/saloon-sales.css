@@ -184,7 +184,7 @@
 .sale-code strong {
   color: var(--sx-navy-900);
 
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 800;
 
   letter-spacing: 0.3px;
@@ -1312,8 +1312,8 @@
 
 .bill-text {
   color: var(--sx-ink);
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 700;
+  font-size: 18px;
 }
 
 .separator {
@@ -2032,9 +2032,9 @@
 
   color: var(--sx-ink);
 
-  font-size: 14px;
+  font-size: 20px;
 
-  font-weight: 600;
+  font-weight: 700;
 
   line-height: 1.25;
 }
@@ -2250,11 +2250,11 @@
 
   color: var(--sx-navy-700);
 
-  font-size: 10px;
+  font-size: 17px;
 
   font-weight: 800;
 
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
 }
 
 
@@ -2511,7 +2511,7 @@
 .grand-payment-total {
   color: var(--sx-success);
 
-  font-size: 17px;
+  font-size: 15px;
 
   font-weight: 900;
 }
@@ -2576,9 +2576,9 @@
 
   color: var(--sx-ink);
 
-  font-size: 14px;
+  font-size: 16px;
 
-  font-weight: 600;
+  font-weight: 700;
 }
 
 
@@ -3141,7 +3141,7 @@
 
 
   .report-header h3 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
 
@@ -3151,7 +3151,7 @@
 
 
   .grand-total-amount {
-    font-size: 15px;
+    font-size: 14px;
   }
 
 
@@ -3765,11 +3765,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .grand-total-label {
   color: var(--sx-muted);
 
-  font-size: 9px;
+  font-size: 16px;
 
   font-weight: 800;
 
-  letter-spacing: 1px;
+  letter-spacing: 0.4px;
 
   line-height: 1;
 
@@ -3782,7 +3782,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 .grand-total-amount {
   color: var(--sx-navy-900);
 
-  font-size: 18px;
+  font-size: 15px;
 
   font-weight: 900;
 

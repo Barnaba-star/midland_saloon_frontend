@@ -89,13 +89,13 @@
 
 .summary-label {
   color: var(--sx-muted);
-  font-size: 12px;
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .summary-value {
   color: var(--sx-navy-900);
-  font-size: 20px;
+  font-size: 15px;
   font-weight: 700;
 }
 
@@ -148,7 +148,7 @@
   background: var(--sx-bg);
   border-bottom: 1px solid var(--sx-line);
   color: var(--sx-muted);
-  font-size: 11px;
+  font-size: 14px;
   font-weight: 600;
   letter-spacing: 0.4px;
   text-align: left;
