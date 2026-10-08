@@ -1276,6 +1276,7 @@
     "COL_PAID": "Paid",
     "COL_OUTSTANDING": "Outstanding",
     "NO_RECIPIENTS": "Nobody holds this role.",
+    "LOAD_FAILED": "Could not load the list - close the row and open it again.",
     "PAY_BTN": "Pay",
     "PAID_LABEL": "Paid",
     "PAY_FAILED": "The payout could not be recorded.",

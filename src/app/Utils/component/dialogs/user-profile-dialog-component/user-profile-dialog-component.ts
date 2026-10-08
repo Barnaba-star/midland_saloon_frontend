@@ -18,6 +18,11 @@ export class UserProfileDialogComponent {
     private dialogRef: MatDialogRef<UserProfileDialogComponent>
   ) {}
 
+  /** Users sign in with their e-mail, so the username stands in when no e-mail is stored. */
+  get shownEmail(): string {
+    return this.user?.email || (this.user?.username?.includes('@') ? this.user.username : '');
+  }
+
   close(): void {
     this.dialogRef.close();
   }

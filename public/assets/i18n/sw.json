@@ -1276,6 +1276,7 @@
     "COL_PAID": "Amelipwa",
     "COL_OUTSTANDING": "Anadai",
     "NO_RECIPIENTS": "Hakuna mwenye cheo hiki.",
+    "LOAD_FAILED": "Imeshindwa kupakua orodha - funga safu hii uifungue tena.",
     "PAY_BTN": "Lipa",
     "PAID_LABEL": "Imelipwa",
     "PAY_FAILED": "Malipo haya hayakuweza kurekodiwa.",

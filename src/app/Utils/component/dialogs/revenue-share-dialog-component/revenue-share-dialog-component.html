@@ -91,6 +91,8 @@
 
                 @if (isRecipientsLoading(row.role)) {
                   <p class="recipient-note">{{ 'REVENUE_SHARE_DIALOG.LOADING' | translate }}</p>
+                } @else if (recipientsFailedRole === row.role) {
+                  <p class="recipient-note">{{ 'REVENUE_SHARE_DIALOG.LOAD_FAILED' | translate }}</p>
                 } @else if (isRecipientsEmpty(row.role)) {
                   <p class="recipient-note">{{ 'REVENUE_SHARE_DIALOG.NO_RECIPIENTS' | translate }}</p>
                 } @else {

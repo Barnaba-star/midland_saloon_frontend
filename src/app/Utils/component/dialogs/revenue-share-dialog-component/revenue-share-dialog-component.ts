@@ -230,8 +230,13 @@ export class RevenueShareDialogComponent implements OnInit {
     }
   }
 
+  recipientsFailedRole: string | null = null;
+
   private loadRecipients(role: string): void {
     this.recipientsLoadingRole = role;
+    if (this.recipientsFailedRole === role) {
+      this.recipientsFailedRole = null;
+    }
     this.cdr.markForCheck();
     this.paymentService.findShareRecipients(role, this.selectedYear, this.selectedMonth).subscribe({
       next: (response) => {
@@ -242,8 +247,10 @@ export class RevenueShareDialogComponent implements OnInit {
         this.cdr.markForCheck();
       },
       error: () => {
-        // The interceptor already said what went wrong; an empty list reads as "nobody".
-        this.recipientsByRole.set(role, []);
+        // Not "nobody": a failed load said that once and hid the real cause.
+        // Left unloaded so opening the row again tries again.
+        this.recipientsByRole.delete(role);
+        this.recipientsFailedRole = role;
         if (this.recipientsLoadingRole === role) {
           this.recipientsLoadingRole = null;
         }
