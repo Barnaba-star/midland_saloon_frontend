@@ -17,6 +17,10 @@ app.use(
     maxAge: '1y',
     index: false,
     redirect: false,
+    // the word lists keep their names between releases, so never keep them a year
+    setHeaders: (res, path) => {
+      if (/[\\/]assets[\\/]i18n[\\/]/.test(path)) res.setHeader('Cache-Control', 'no-cache');
+    },
   }),
 );
 

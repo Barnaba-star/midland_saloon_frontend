@@ -58,7 +58,9 @@ export const appConfig: ApplicationConfig = {
     provideTranslateService({
       loader: provideTranslateHttpLoader({
         prefix: './assets/i18n/',
-        suffix: '.json'
+        // fresh words on every load: a cached sw.json from an older release
+        // showed new keys raw (MENU.SUBSCRIPTION_DAYS_LEFT)
+        suffix: `.json?v=${Date.now()}`
       }),
       fallbackLang: 'en',
       lang: 'sw'
