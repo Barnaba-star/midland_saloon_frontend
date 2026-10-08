@@ -41,7 +41,7 @@
           <button
             type="button"
             class="print-btn"
-            [disabled]="!payroll || payroll.recipients === 0"
+            [disabled]="!payroll"
             (click)="print()">
             <mat-icon svgIcon="report"></mat-icon>
             <span>{{ 'PAYROLL_PAGE.PRINT' | translate }}</span>
