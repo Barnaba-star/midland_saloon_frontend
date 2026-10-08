@@ -8,7 +8,8 @@ const MOUSTACHE =
 /**
  * The Mr Saloon logo, which is the word itself (as BaronixTZ is the Bar's):
  * a gold "Mr" in Allura script with a handlebar moustache under it - the
- * gentleman in the chair - then "SALOON" in heavy, spaced Inter capitals,
+ * gentleman in the chair - then "SALOON" in heavy, spaced Inter capitals led
+ * by a big gold Bodoni italic S,
  * standing level with the script.
  *
  * tone="dark" draws SALOON in navy (for light backgrounds); "light" in white
@@ -34,7 +35,7 @@ const MOUSTACHE =
         <path fill="#c9962e" transform="translate(16 40) scale(.32)" d="${MOUSTACHE}"/>
       </svg>
     } @else {
-      <span class="bw-mr" aria-hidden="true">Mr<svg class="bw-tache" viewBox="0 0 100 26"><path d="${MOUSTACHE}"/></svg></span><span class="bw-saloon" aria-hidden="true">Saloon</span>
+      <span class="bw-mr" aria-hidden="true">Mr<svg class="bw-tache" viewBox="0 0 100 26"><path d="${MOUSTACHE}"/></svg></span><span class="bw-saloon" aria-hidden="true"><span class="bw-s">S</span>aloon</span>
     }
   `,
   styles: [`
@@ -79,6 +80,21 @@ const MOUSTACHE =
       margin-left: 0.2em;
       /* the tracking would otherwise leave a gap after the N */
       margin-right: -0.2em;
+    }
+    /* The S leads big and gold: heavy Bodoni italic against the spaced caps. */
+    .bw-s {
+      display: inline-block;
+      font-family: 'Bodoni Moda', 'Playfair Display', serif;
+      font-style: italic;
+      font-weight: 900;
+      font-size: 1.6em;
+      line-height: 0.8;
+      letter-spacing: 0;
+      margin-right: 0.04em;
+      color: var(--sx-gold-500, #c9962e);
+    }
+    :host(.bw-light) .bw-s {
+      color: var(--sx-gold-300, #e2bf6e);
     }
     .bw-badge {
       width: 1.6em;
