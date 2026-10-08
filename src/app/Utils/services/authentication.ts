@@ -265,19 +265,23 @@ heartbeat(): Observable<any> {
   );
 }
 
+/**
+ * "I'm here" every 30 s while signed in - what the Online Users list counts
+ * (anyone seen in the last 2 minutes). The first beat goes at once, and it is
+ * started on every page load with a token, not only at sign-in - a reload
+ * used to leave the user looking offline.
+ */
 startHeartbeat(): void {
   this.stopHeartbeat();
-
-  this.heartbeatInterval = setInterval(() => {
-    this.heartbeat().subscribe({
-      next: () => {
-        console.log('Heartbeat updated');
-      },
-      error: (error) => {
-        console.error('Heartbeat failed:', error);
-      }
-    });
-  }, 30000);
+  const beat = () => {
+    if (!this.getToken()) {
+      this.stopHeartbeat();
+      return;
+    }
+    this.heartbeat().subscribe({ error: () => {} });
+  };
+  beat();
+  this.heartbeatInterval = setInterval(beat, 30000);
 }
 
 stopHeartbeat(): void {

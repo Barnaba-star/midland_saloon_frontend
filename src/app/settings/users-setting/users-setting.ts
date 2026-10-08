@@ -92,6 +92,8 @@ export class UsersSetting implements OnInit {
     this.findBranch();
     this.findRoles();
     this.findUsers();
+    // The online count is right from the start, not only after its tab is opened.
+    this.findOnlineUsers();
     this.selectedUser='USERS_SETTING_PAGE.MANAGE_TAB'
   }
 
