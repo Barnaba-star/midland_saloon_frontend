@@ -60,6 +60,16 @@ export const StatusInterceptor: HttpInterceptorFn = (
   }
 
   /*
+   * Uploaded pictures (profile photo, logo): a missing one just shows the
+   * default. On Render's free plan uploads live in /tmp and every deploy
+   * clears them, so a stored name can point at a file that is gone - that
+   * must not pop up "Resource not found".
+   */
+  if (req.url.includes('/uploads/')) {
+    return next(req);
+  }
+
+  /*
    * Screens that say things in their own words.
    *
    * This covers both directions. The backend answers these in codes - EMPTY,
