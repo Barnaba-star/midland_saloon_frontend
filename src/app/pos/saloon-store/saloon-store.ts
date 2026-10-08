@@ -14,12 +14,13 @@ import { DecimalPipe, UpperCasePipe } from '@angular/common';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../../Utils/component/dialog/dialog';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { SearchBoxComponent } from '../../Utils/component/search-box/search-box.component';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
 @Component({
   selector: 'app-saloon-bookings',
-  imports: [
+  imports: [SearchBoxComponent, 
     EmptyStateComponent,Title2, MatIcon, DecimalPipe, UpperCasePipe, TranslatePipe],
   templateUrl: './saloon-store.html',
   styleUrl: './saloon-store.css',
@@ -211,11 +212,27 @@ export class SaloonStore implements OnInit{
   totalElements = 0;
   totalPages = 0;
   searchParam: string = '';
+  /** What the search box holds - name, code or service. */
+  storeQuery = '';
+
+  /** Search the list on show: all items ('' status), or in use / closed. */
+  onStoreSearch(q: string): void {
+    this.storeQuery = (q || '').trim();
+    this.currentPage = 0;
+    if (this.search === 'OPEN' || this.search === 'CLOSED') {
+      this.findOpenClosedStorePage();
+    } else {
+      this.loadSaloonStorePage();
+    }
+  }
+
   loadSaloonStorePage(): void {
     this.storeOpenDataSource=[];
+    this.search = '';
     const params: PageableParam = {
       page: this.currentPage,
       size: this.pageSize,
+      searchParam: this.storeQuery,
     };
 
     this.saloonService.findSaloonStorePage(params).subscribe({
@@ -461,7 +478,8 @@ export class SaloonStore implements OnInit{
     const params: PageableParam = {
       page: this.currentPage,
       size: this.pageSize,
-      searchParam: this.search
+      searchParam: this.search,
+      filter: this.storeQuery,
     };
 
     this.saloonService.findOpenStorePage(params).subscribe({

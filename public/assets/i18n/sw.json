@@ -330,7 +330,8 @@
     "SHOWING_PAGE": "Inaonyesha ukurasa",
     "EMPTY_TITLE": "Hakuna Kumbukumbu za Store",
     "EMPTY_TEXT": "Hakuna kumbukumbu za store za kuonyesha kwa uchaguzi huu.",
-    "PRICE_NEEDED": "Weka bei ya kipande kimoja au bei ya jumla ya mzigo wote."
+    "PRICE_NEEDED": "Weka bei ya kipande kimoja au bei ya jumla ya mzigo wote.",
+    "SEARCH_PLACEHOLDER": "Tafuta bidhaa, code au huduma"
   },
   "REPORTS_PAGE": {
     "SERVICE_REPORT_LABEL": "RIPOTI YA HUDUMA",

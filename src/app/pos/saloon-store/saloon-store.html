@@ -72,6 +72,10 @@
 </div>
 
       </div>
+      <!-- Search whichever list is showing: all items, in use, or closed. -->
+      <div class="store-search">
+        <app-search-box (searchChange)="onStoreSearch($event)" [placeholder]="'STORE_PAGE.SEARCH_PLACEHOLDER'"></app-search-box>
+      </div>
       @if (storeDataSource.length > 0) {
         <div class="table-responsive sx-table-wrap">
           <table class="table store-table sx-cards">

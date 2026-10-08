@@ -1025,3 +1025,15 @@
     overflow-wrap: anywhere;
   }
 }
+
+/* The search box over the store tables. */
+.store-search {
+  margin: 4px 0 14px;
+  max-width: 420px;
+}
+
+@media (max-width: 600px) {
+  .store-search {
+    max-width: none;
+  }
+}
