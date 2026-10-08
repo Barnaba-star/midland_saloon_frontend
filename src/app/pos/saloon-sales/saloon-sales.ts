@@ -18,6 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 import { SaleDetailsDialogComponent } from '../../Utils/component/sale-details-dialog-component/sale-details-dialog-component';
 import { ViewChild } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
+import { ShiftBar, ShiftState } from '../shift-bar/shift-bar';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 
 
@@ -33,7 +34,7 @@ interface PaymentSummaryDisplay {
 }
 @Component({
   selector: 'app-saloon-sales',
-  imports: [
+  imports: [ShiftBar, 
     EmptyStateComponent,
     MatIconModule,
     Title2,
@@ -56,6 +57,14 @@ interface PaymentSummaryDisplay {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonSales implements OnInit{
+  /** The cashier's shift: selling buttons work only while it is OPEN. */
+  shiftState: ShiftState | null = null;
+
+  onShiftState(state: ShiftState): void {
+    this.shiftState = state;
+    this.cdr.detectChanges();
+  }
+
   constructor(
     private visibility: Authentication,
     private saloonServce: ServiceSaloonMethod,

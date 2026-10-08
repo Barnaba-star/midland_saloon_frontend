@@ -8,6 +8,8 @@
 @switch (selectedSales) {
   @case ('SALES.ADD') {
     <div class="action-container">
+      <!-- The cashier's shift (zamu): bills are opened, added to and paid only while it is open. -->
+      <app-shift-bar area="saloon" (stateChange)="onShiftState($event)"></app-shift-bar>
       <div class="bills-header">
         <p>
           <span class="bill-count">{{ salesOpenedList.length }}</span>
@@ -19,7 +21,7 @@
           </span>
         </p>
 
-        <button class="add-bill-btn" (click)="openNewSales()">
+        <button class="add-bill-btn" [disabled]="shiftState !== 'OPEN'" [title]="shiftState !== 'OPEN' ? ('SHIFT.NEED_OPEN' | translate) : ''" (click)="openNewSales()">
           <span>+</span>
           {{ 'SALES_PAGE.OPEN_BILL' | translate }}
         </button>
@@ -80,6 +82,7 @@
   <button
     type="button"
     class="sale-action-btn add-btn"
+    [disabled]="shiftState !== 'OPEN'"
     (click)="saveSaloonSales(sale)"
   >
     <span class="action-icon">
@@ -245,7 +248,7 @@
               <button
                 type="button"
                 class="checkout-btn"
-                [disabled]="!selectedPaymentMethod"
+                [disabled]="!selectedPaymentMethod || shiftState !== 'OPEN'"
                 (click)="proceedToPayment()"
               >
                 Proceed to Payment

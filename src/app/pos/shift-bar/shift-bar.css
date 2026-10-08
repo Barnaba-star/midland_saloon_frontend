@@ -1,0 +1,200 @@
+/*
+ * One card: the shift on the left (status chip, what it means, its button),
+ * the page's own controls on the right. Saloon tokens only; the state is
+ * carried by --shift-tone (gold to open, green while open, navy waiting for
+ * the handover).
+ */
+.shift-bar {
+  --shift-tone: var(--sx-gold-500);
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  padding: 14px 18px;
+  margin-bottom: 16px;
+  border-radius: var(--radius-md, 16px);
+  border: 1px solid var(--sx-line);
+  background:
+    linear-gradient(90deg, color-mix(in srgb, var(--shift-tone) 12%, transparent) 0%, transparent 55%),
+    var(--sx-surface);
+  box-shadow: var(--shadow-sm);
+  color: var(--sx-ink);
+  overflow: hidden;
+}
+
+.shift-bar::before {
+  content: '';
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 4px;
+  background: var(--shift-tone);
+}
+
+.shift-bar.none { --shift-tone: var(--sx-gold-500); }
+.shift-bar.open,
+.shift-bar.running { --shift-tone: var(--sx-success); }
+.shift-bar.closed { --shift-tone: var(--sx-navy-700); }
+
+.shift-icon {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.shift-icon mat-icon {
+  width: 22px;
+  height: 22px;
+  font-size: 22px;
+}
+
+.shift-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+  flex: 1 1 200px;
+  min-width: 0;
+}
+
+.shift-text strong {
+  font-size: 15px;
+  line-height: 1.25;
+  color: var(--sx-navy-800);
+}
+
+.shift-text > span:not(.shift-chip) {
+  font-size: 12.5px;
+  color: var(--sx-muted);
+}
+
+.shift-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 2px 9px 2px 7px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--shift-tone) 14%, transparent);
+  color: var(--shift-tone);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.shift-chip i {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: currentColor;
+}
+
+.shift-bar.open .shift-chip i,
+.shift-bar.running .shift-chip i {
+  animation: shift-pulse 1.8s ease-in-out infinite;
+}
+
+@keyframes shift-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--sx-success) 55%, transparent); }
+  50% { box-shadow: 0 0 0 5px transparent; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .shift-bar.open .shift-chip i,
+  .shift-bar.running .shift-chip i { animation: none; }
+}
+
+.shift-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 42px;
+  padding: 0 18px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.shift-btn mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+}
+
+.shift-btn:not(:disabled):hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.shift-btn.go {
+  background: var(--sx-navy-700);
+  color: #fff;
+}
+
+.shift-btn.stop {
+  background: transparent;
+  color: var(--sx-danger);
+  border-color: color-mix(in srgb, var(--sx-danger) 55%, transparent);
+}
+
+.shift-btn.stop:not(:disabled):hover {
+  background: var(--sx-danger);
+  color: #fff;
+}
+
+.shift-btn.ghost {
+  background: transparent;
+  color: var(--sx-ink);
+  border-color: var(--sx-line);
+}
+
+.shift-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.shift-extra {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-left: auto;
+  padding-left: 18px;
+  border-left: 1px solid var(--sx-line);
+}
+
+.shift-extra:empty {
+  display: none;
+}
+
+@media (max-width: 600px) {
+  .shift-bar {
+    padding: 12px 14px;
+    gap: 10px;
+  }
+
+  /* Buttons take the full width under the text on a phone. */
+  .shift-btn {
+    flex: 1 1 100%;
+    height: 46px;
+  }
+
+  .shift-extra {
+    width: 100%;
+    margin-left: 0;
+    padding: 12px 0 0;
+    border-left: none;
+    border-top: 1px solid var(--sx-line);
+    justify-content: space-between;
+  }
+}

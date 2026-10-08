@@ -6,15 +6,30 @@
         <div class="cu-head-icon"><mat-icon>point_of_sale</mat-icon></div>
         <div>
           <h3>{{ 'CASH_UP.MY_SHIFT' | translate }}</h3>
-          @if (from) {
-            <p>{{ 'CASH_UP.SINCE' | translate: { from: (from | date: 'dd MMM, HH:mm'), bills: billCount } }}</p>
+          @if (shiftState === 'CLOSED' && from) {
+            <p>{{ 'CASH_UP.PERIOD' | translate: { from: (from | date: 'dd MMM, HH:mm'), to: (to | date: 'dd MMM, HH:mm'), bills: billCount } }}</p>
           }
         </div>
       </div>
 
+      @if (handedOverBy !== null) {
+        <!-- Money handed over: the store count is the second half of closing. -->
+        <div class="cu-next">
+          <span class="cu-next-icon"><mat-icon>inventory_2</mat-icon></span>
+          <div>
+            <strong>{{ 'SHIFT.COUNT_STORE_TITLE' | translate }}</strong>
+            <span>{{ 'SHIFT.COUNT_STORE_TEXT' | translate: { name: handedOverBy } }}</span>
+          </div>
+          <button type="button" class="btn-close" (click)="countStore()"><mat-icon>fact_check</mat-icon>{{ 'SHIFT.COUNT_STORE_BTN' | translate }}</button>
+        </div>
+      }
       @if (loadingShift) {
         <p class="muted">{{ 'OTHER_SPLIT.LOADING' | translate }}</p>
+      } @else if (shiftState !== 'CLOSED') {
+        <!-- Open a shift to sell, close it to hand it over here. -->
+        <app-shift-bar [area]="area" [showCashUpLink]="false" [goToHandoverOnClose]="false" (stateChange)="onShiftState($event)"></app-shift-bar>
       } @else {
+        <p class="cu-step">{{ 'SHIFT.STEP_MONEY' | translate }}</p>
         <div class="sx-table-wrap">
           <table class="cu-table sx-cards">
             <thead>
@@ -121,6 +136,57 @@
       }
     </section>
   }
+
+  <!-- ================= SHIFTS ================= -->
+  <section class="cu-card">
+    <div class="cu-head">
+      <div class="cu-head-icon alt"><mat-icon>schedule</mat-icon></div>
+      <div>
+        <h3>{{ 'SHIFT.LIST_TITLE' | translate }}</h3>
+        <p>{{ 'SHIFT.LIST_DESC' | translate }}</p>
+      </div>
+    </div>
+    @if (shifts.length === 0) {
+      <p class="muted empty">{{ 'SHIFT.EMPTY' | translate }}</p>
+    } @else {
+      <div class="sx-table-wrap">
+        <table class="cu-table sx-cards">
+          <thead>
+            <tr>
+              <th>{{ 'SHIFT.COL_CASHIER' | translate }}</th>
+              <th>{{ 'SHIFT.COL_OPENED' | translate }}</th>
+              <th>{{ 'SHIFT.COL_CLOSED' | translate }}</th>
+              <th>{{ 'SHIFT.COL_DURATION' | translate }}</th>
+              <th>{{ 'SHIFT.COL_STATUS' | translate }}</th>
+              <th class="num">{{ 'SHIFT.COL_MONEY' | translate }}</th>
+              <th class="num">{{ 'SHIFT.COL_STORE' | translate }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            @for (s of shifts; track s.uid) {
+              <tr>
+                <td class="sx-card-title"><strong>{{ s.cashierName || s.cashierEmail }}</strong></td>
+                <td [attr.data-label]="'SHIFT.COL_OPENED' | translate">{{ s.openedAt | date: 'dd MMM HH:mm' }}</td>
+                <td [attr.data-label]="'SHIFT.COL_CLOSED' | translate">@if (s.closedAt) { {{ s.closedAt | date: 'dd MMM HH:mm' }} } @else { <span class="muted">-</span> }</td>
+                <td [attr.data-label]="'SHIFT.COL_DURATION' | translate">{{ duration(s.minutes) }}</td>
+                <td [attr.data-label]="'SHIFT.COL_STATUS' | translate"><span class="shift-status" [attr.data-status]="s.status">{{ 'SHIFT.STATUS_' + s.status | translate }}</span></td>
+                <td [attr.data-label]="'SHIFT.COL_MONEY' | translate" class="num">
+                  @if (s.variance !== null && s.variance !== undefined) {
+                    <span class="pill" [class.short]="s.variance < 0" [class.over]="s.variance > 0" [class.even]="s.variance === 0">{{ s.variance > 0 ? '+' : '' }}{{ s.variance | number }}</span>
+                  } @else { <span class="muted">-</span> }
+                </td>
+                <td [attr.data-label]="'SHIFT.COL_STORE' | translate" class="num">
+                  @if (s.storeLoss !== null && s.storeLoss !== undefined) {
+                    <span class="pill" [class.short]="s.storeLoss < 0" [class.even]="s.storeLoss === 0">{{ s.storeLoss | number }}</span>
+                  } @else { <span class="muted">-</span> }
+                </td>
+              </tr>
+            }
+          </tbody>
+        </table>
+      </div>
+    }
+  </section>
 
   <!-- ================= CLOSED CASH-UPS ================= -->
   <section class="cu-card">

@@ -3,7 +3,8 @@ import { PotsLedger } from '../pots-ledger/pots-ledger';
 import { CashUp } from '../cash-up/cash-up';
 import { StockTake } from '../stock-take/stock-take';
 import { PotNamePipe } from '../../Utils/pipes/pot-name.pipe';
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Authentication } from '../../Utils/services/authentication';
 import { POS_FULL_ACCESS_ROLES } from '../pos-role.guard';
 import { TitleAction } from '../../Utils/component/title/title.component';
@@ -60,11 +61,23 @@ export class SaloonReports implements OnInit{
     // on Service as before, MANAGER/CASHIER (who can't see Service) land on
     // Staff.
     const visible = this.getTitled(this.titleActions).map(action => action.title);
-    const defaultTab = ['REPORTS.SERVICE', 'REPORTS.STAFF'].find(tab => visible.includes(tab)) ?? visible[0];
+    // ?tab=... (e.g. from closing a shift: the handover, then the store count) wins when this role sees it.
+    const asked = this.route.snapshot.queryParamMap.get('tab');
+    const defaultTab = (asked && visible.includes(asked) ? asked : null)
+      ?? ['REPORTS.SERVICE', 'REPORTS.STAFF'].find(tab => visible.includes(tab)) ?? visible[0];
     if (defaultTab) {
       this.onAction(defaultTab);
     }
+    // Asked again while already here (the handover's "count the store" step).
+    this.route.queryParamMap.subscribe((q) => {
+      const tab = q.get('tab');
+      if (tab && tab !== this.selectedReport && visible.includes(tab)) {
+        this.onAction(tab);
+        this.cdr.markForCheck();
+      }
+    });
   }
+  private route = inject(ActivatedRoute);
   selectedReport = '';
   // Who sees which tab inside Report ("Matumizi" for MANAGER/CASHIER):
   //   CEO     -> every tab
@@ -115,7 +128,8 @@ export class SaloonReports implements OnInit{
       // Counting the store's unopened items at one go, and what went missing.
       icon: 'stock',
       title: 'REPORTS.VARIANCE',
-      roles: [...this.fullAccessRoles, 'MANAGER']
+      // A cashier counts the store at their shift's handover.
+      roles: [...this.fullAccessRoles, 'MANAGER', 'CASHIER']
     },
     {
       // What each service brings in, what sells most, and when.

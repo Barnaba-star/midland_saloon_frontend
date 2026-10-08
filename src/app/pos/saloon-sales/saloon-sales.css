@@ -4440,3 +4440,12 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 1 !important;
   }
 }
+
+/* No open shift: the selling buttons rest, greyed out. */
+.add-bill-btn:disabled,
+.sale-action-btn:disabled {
+  opacity: 0.45 !important;
+  cursor: not-allowed !important;
+  transform: none !important;
+  box-shadow: none !important;
+}

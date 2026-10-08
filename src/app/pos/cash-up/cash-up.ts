@@ -9,6 +9,8 @@ import { environment } from '../../Utils/enviroments/environment';
 import { Response, ResponseList } from '../../Utils/models/responces';
 import { AlertService } from '../../Utils/services/alert';
 import { Authentication } from '../../Utils/services/authentication';
+import { Router } from '@angular/router';
+import { ShiftBar, ShiftState } from '../shift-bar/shift-bar';
 
 interface CountLine {
   method: string;
@@ -22,14 +24,16 @@ interface CountLine {
 }
 
 /**
- * Closing a shift. The top card is the signed-in cashier's open shift: what
- * the payments they took say each method should hold, a box to type what they
- * counted, and the difference as they type. Below, the cash-ups already closed
- * - everyone's for a manager, their own for a cashier.
+ * Handing over a shift (zamu). The top card is the signed-in cashier's shift:
+ * open it to sell, close it to hand over - what the payments they took in it
+ * say each method should hold, a box to type what they counted, and the
+ * difference as they type; then the store count, so anything missing stays on
+ * that shift. Below, every shift (its handover and store loss) and the
+ * cash-ups done - everyone's for a manager, their own for a cashier.
  */
 @Component({
   selector: 'app-cash-up',
-  imports: [PotNamePipe, FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
+  imports: [PotNamePipe, ShiftBar, FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
   templateUrl: './cash-up.html',
   styleUrl: './cash-up.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -42,6 +46,11 @@ export class CashUp implements OnInit {
 
   canClose = false;
   loadingShift = true;
+  /** NONE / OPEN show the shift bar; CLOSED shows the count below it. */
+  shiftState: ShiftState | null = null;
+  shifts: any[] = [];
+  /** Just handed over: the store count comes next, on that same shift. */
+  handedOverBy: string | null = null;
   from: string | null = null;
   to: string | null = null;
   lines: CountLine[] = [];
@@ -70,6 +79,7 @@ export class CashUp implements OnInit {
     private alert: AlertService,
     private translate: TranslateService,
     private auth: Authentication,
+    private router: Router,
   ) {}
 
   private get url(): string {
@@ -79,11 +89,57 @@ export class CashUp implements OnInit {
   ngOnInit(): void {
     this.canClose = CashUp.TAKES_PAYMENTS.some((r) => this.auth.hasRole(r));
     if (this.canClose) {
-      this.loadShift();
+      this.http.get<Response<any>>(`${environment.baseApiUrl}/${this.area}/shift/current`).subscribe({
+        next: (res) => this.onShiftState(res?.data?.state ?? 'NONE'),
+        error: () => {
+          this.loadingShift = false;
+          this.cdr.markForCheck();
+        },
+      });
     } else {
       this.loadingShift = false;
     }
     this.loadHistory(this.filter);
+  }
+
+  onShiftState(state: ShiftState): void {
+    const changed = this.shiftState !== null && this.shiftState !== state;
+    this.shiftState = state;
+    if (state === 'CLOSED') {
+      this.loadShift();
+    } else {
+      this.loadingShift = false;
+      this.lines = [];
+    }
+    if (changed) {
+      this.loadShifts(this.filter);
+    }
+    this.cdr.markForCheck();
+  }
+
+  /** The store count of the shift just handed over (Reports > store count). */
+  countStore(): void {
+    this.router.navigate(['/pos/saloonReports'], { queryParams: { tab: 'REPORTS.VARIANCE' } });
+  }
+
+  loadShifts(filter: string): void {
+    this.http.get<ResponseList<any>>(`${environment.baseApiUrl}/${this.area}/shift/list/${filter}`).subscribe({
+      next: (res) => {
+        this.shifts = res?.data ?? [];
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.shifts = [];
+        this.cdr.markForCheck();
+      },
+    });
+  }
+
+  duration(minutes: number): string {
+    const m = Number(minutes) || 0;
+    return m < 60
+      ? this.translate.instant('SHIFT.MINUTES', { m })
+      : this.translate.instant('SHIFT.HOURS', { h: Math.floor(m / 60), m: m % 60 });
   }
 
   loadShift(): void {
@@ -162,7 +218,9 @@ export class CashUp implements OnInit {
           const v = Number(res.data.variance) || 0;
           this.alert.show(v < 0 ? 'warning' : 'success', this.translate.instant(v < 0 ? 'CASH_UP.CLOSED_SHORT' : 'CASH_UP.CLOSED_OK', { amount: Math.abs(v).toLocaleString() }));
           this.note = '';
-          this.loadShift();
+          this.handedOverBy = res.data.cashierName || '';
+          this.shiftState = 'NONE';
+          this.lines = [];
           this.loadHistory(this.filter);
         }
         this.cdr.markForCheck();
@@ -177,6 +235,7 @@ export class CashUp implements OnInit {
   loadHistory(filter: string): void {
     this.filter = filter;
     this.openUid = null;
+    this.loadShifts(filter);
     this.http.get<ResponseList<any>>(`${this.url}/list/${filter}`).subscribe({
       next: (res) => {
         this.history = res?.data ?? [];
