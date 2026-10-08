@@ -29,6 +29,7 @@ export class Landing implements OnInit {
     { id: null, label: 'LANDING.NAV_HOME' },
     { id: 'kuhusu', label: 'LANDING.NAV_ABOUT' },
     { id: 'huduma', label: 'LANDING.NAV_SERVICES' },
+    { id: 'maelekezo', label: 'LANDING.NAV_GUIDE' },
     { id: 'bei', label: 'LANDING.NAV_PRICE' },
     { id: 'maswali', label: 'LANDING.NAV_FAQ' },
     { id: 'mawasiliano', label: 'LANDING.NAV_CONTACT' },
@@ -36,7 +37,7 @@ export class Landing implements OnInit {
 
   /** The tab on show, or 'home' for Mwanzo. */
   view = 'home';
-  private readonly tabOrder = ['kuhusu', 'huduma', 'bei', 'maswali', 'mawasiliano'];
+  private readonly tabOrder = ['kuhusu', 'huduma', 'maelekezo', 'bei', 'maswali', 'mawasiliano'];
   private route = inject(ActivatedRoute);
   private cdr = inject(ChangeDetectorRef);
   private destroyRef = inject(DestroyRef);
@@ -67,6 +68,38 @@ export class Landing implements OnInit {
     { icon: 'travel_explore', title: 'LANDING.ABOUT_P1_T', desc: 'LANDING.ABOUT_P1_D' },
     { icon: 'content_cut', title: 'LANDING.ABOUT_P2_T', desc: 'LANDING.ABOUT_P2_D' },
     { icon: 'store', title: 'LANDING.ABOUT_P3_T', desc: 'LANDING.ABOUT_P3_D' },
+  ];
+
+  /** Maelekezo: getting started, the day step by step (with where to tap), and who sees what. */
+  readonly startSteps = [
+    { no: '1', icon: 'mail', title: 'LANDING.S1_T', desc: 'LANDING.S1_D' },
+    { no: '2', icon: 'tune', title: 'LANDING.S2_T', desc: 'LANDING.S2_D' },
+    { no: '3', icon: 'badge', title: 'LANDING.S3_T', desc: 'LANDING.S3_D' },
+    { no: '4', icon: 'insights', title: 'LANDING.S4_T', desc: 'LANDING.S4_D' },
+  ];
+
+  readonly guideSteps = [
+    { icon: 'content_cut', key: 'G1' },
+    { icon: 'person_add', key: 'G2' },
+    { icon: 'receipt_long', key: 'G3' },
+    { icon: 'add_circle', key: 'G4' },
+    { icon: 'payments', key: 'G5' },
+    { icon: 'inventory_2', key: 'G6' },
+    { icon: 'point_of_sale', key: 'G7' },
+    { icon: 'volunteer_activism', key: 'G8' },
+  ].map((g, i) => ({
+    no: String(i + 1).padStart(2, '0'),
+    icon: g.icon,
+    title: `LANDING.${g.key}_T`,
+    desc: `LANDING.${g.key}_D`,
+    where: `LANDING.${g.key}_W`,
+  }));
+
+  readonly roles = [
+    { icon: 'workspace_premium', title: 'LANDING.R_OWNER_T', desc: 'LANDING.R_OWNER_D' },
+    { icon: 'manage_accounts', title: 'LANDING.R_MANAGER_T', desc: 'LANDING.R_MANAGER_D' },
+    { icon: 'point_of_sale', title: 'LANDING.R_CASHIER_T', desc: 'LANDING.R_CASHIER_D' },
+    { icon: 'content_cut', title: 'LANDING.R_STAFF_T', desc: 'LANDING.R_STAFF_D' },
   ];
 
   readonly priceIncludes = ['LANDING.PRICE_INC1', 'LANDING.PRICE_INC2', 'LANDING.PRICE_INC3', 'LANDING.PRICE_INC4'];

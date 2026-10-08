@@ -206,6 +206,60 @@
 
   }
 
+  <!-- ================= MAELEKEZO: how to use it ================= -->
+  @if (view === 'maelekezo') {
+  <section class="info-section guide">
+    <div class="section-head">
+      <h2>{{ 'LANDING.GUIDE_START_TITLE' | translate }}</h2>
+    </div>
+    <ol class="start-grid">
+      @for (st of startSteps; track st.no) {
+        <li class="start-card">
+          <span class="start-no">{{ st.no }}</span>
+          <mat-icon>{{ st.icon }}</mat-icon>
+          <h3>{{ st.title | translate }}</h3>
+          <p>{{ st.desc | translate }}</p>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="about guide-day">
+    <div class="section-head">
+      <h2>{{ 'LANDING.GUIDE_DAY_TITLE' | translate }}</h2>
+      <p>{{ 'LANDING.GUIDE_DAY_DESC' | translate }}</p>
+    </div>
+    <ol class="guide-steps">
+      @for (g of guideSteps; track g.no) {
+        <li class="guide-step">
+          <div class="guide-mark"><mat-icon>{{ g.icon }}</mat-icon><b>{{ g.no }}</b></div>
+          <div class="guide-body">
+            <h3>{{ g.title | translate }}</h3>
+            <p>{{ g.desc | translate }}</p>
+            <span class="guide-where"><small>{{ 'LANDING.GUIDE_WHERE' | translate }}</small>{{ g.where | translate }}</span>
+          </div>
+        </li>
+      }
+    </ol>
+  </section>
+
+  <section class="info-section guide">
+    <div class="section-head">
+      <h2>{{ 'LANDING.GUIDE_ROLES_TITLE' | translate }}</h2>
+    </div>
+    <div class="start-grid">
+      @for (r of roles; track r.title) {
+        <article class="start-card">
+          <mat-icon>{{ r.icon }}</mat-icon>
+          <h3>{{ r.title | translate }}</h3>
+          <p>{{ r.desc | translate }}</p>
+        </article>
+      }
+    </div>
+    <p class="guide-help"><mat-icon>support_agent</mat-icon>{{ 'LANDING.GUIDE_HELP' | translate }}</p>
+  </section>
+  }
+
   <!-- ================= PRICING ================= -->
   @if (view === 'bei') {
   <section class="info-section">
