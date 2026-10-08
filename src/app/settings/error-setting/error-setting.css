@@ -262,6 +262,24 @@
   background: var(--sx-bg);
 }
 
+.delete-btn {
+  height: 30px;
+  padding: 0 12px;
+  margin-left: 6px;
+  background: var(--sx-danger-bg);
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--sx-danger);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.delete-btn:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
 .empty-state {
   padding: 40px 0;
   color: var(--sx-muted);

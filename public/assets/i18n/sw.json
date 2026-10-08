@@ -1166,7 +1166,8 @@
     "VIEW_BTN": "Angalia",
     "EMPTY_TEXT": "Hakuna makosa yaliyorekodiwa.",
     "CLEAR_CONFIRM_TITLE": "Futa kumbukumbu ya makosa?",
-    "CLEAR_CONFIRM_ACTION": "Futa yote"
+    "CLEAR_CONFIRM_ACTION": "Futa yote",
+    "DELETE_ONE": "Futa"
   },
   "ERROR_DETAIL_DIALOG": {
     "TITLE": "Maelezo ya kosa",

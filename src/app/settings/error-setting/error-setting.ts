@@ -149,12 +149,48 @@ export class ErrorSetting implements OnInit {
       }
       this.errorLogService.clearErrors().subscribe({
         next: () => {
+          // Gone from the screen at once, then the server's (now empty) list.
+          this.errorLogs = [];
+          this.totalElements = 0;
+          this.totalPages = 0;
+          this.pageNumbers = [];
+          this.lastDayCount = 0;
+          this.lastWeekCount = 0;
+          this.cdr.markForCheck();
           this.refresh();
         },
         error: () => {
           this.cdr.markForCheck();
         }
       });
+    });
+  }
+
+  deletingUid: string | null = null;
+
+  /** One error off the list - taken off the screen as soon as the server agrees. */
+  deleteOne(errorLog: ErrorLog) {
+    if (!errorLog?.uid || this.deletingUid) {
+      return;
+    }
+    this.deletingUid = errorLog.uid;
+    this.errorLogService.deleteError(errorLog.uid).subscribe({
+      next: (res) => {
+        this.deletingUid = null;
+        if (res?.data) {
+          this.errorLogs = this.errorLogs.filter((e) => e.uid !== errorLog.uid);
+          this.totalElements = Math.max(0, this.totalElements - 1);
+          this.loadSummary();
+          if (this.errorLogs.length === 0 && this.totalElements > 0) {
+            this.loadErrors();
+          }
+        }
+        this.cdr.markForCheck();
+      },
+      error: () => {
+        this.deletingUid = null;
+        this.cdr.markForCheck();
+      },
     });
   }
 

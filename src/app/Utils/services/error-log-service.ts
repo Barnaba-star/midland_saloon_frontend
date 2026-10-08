@@ -64,6 +64,11 @@ export class ErrorLogService {
     );
   }
 
+  /** One error off the list. */
+  deleteError(uid: string): Observable<Response<number>> {
+    return this.http.post<Response<number>>(`${this.monitoringUrl}/deleteError/${uid}`, {});
+  }
+
   clearErrors(): Observable<Response<number>> {
     return this.http.delete<Response<number>>(`${this.monitoringUrl}/clearErrors`);
   }
