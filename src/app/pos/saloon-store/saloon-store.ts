@@ -113,12 +113,21 @@ export class SaloonStore implements OnInit{
       required: true,
     },
 
+    // The price of one item, or of the whole lot - either will do; the
+    // backend works the other out from the quantity.
     {
       name: 'buyingPrice',
       type: 'number',
-      label: 'Enter Buying Price',
-      placeholder: 'Enter Single Item Buying Price',
-      required: true,
+      label: 'Bei ya kununulia (kipande kimoja)',
+      placeholder: 'mfano 5,000',
+      required: false,
+    },
+    {
+      name: 'totalPrice',
+      type: 'number',
+      label: 'Bei ya jumla (mzigo wote)',
+      placeholder: 'mfano 50,000 kwa vipande 10',
+      required: false,
     },
 
     {
@@ -166,10 +175,13 @@ export class SaloonStore implements OnInit{
       quantity: store.quantity,
       description: store.description,
       saloonServiceEntityUID: store.saloonService,
-      buyingPrice: store.buyingPrice,
+      buyingPrice: store.buyingPrice || undefined,
+      totalPrice: store.totalPrice || undefined,
     };
-
-    console.log('Store to save', storeDTO);
+    if (!storeDTO.buyingPrice && !storeDTO.totalPrice) {
+      this.alert.show('error', this.translate.instant('STORE_PAGE.PRICE_NEEDED'));
+      return;
+    }
 
     this.saloonService.saveStore(storeDTO).subscribe({
       next: (res) => {
@@ -306,8 +318,25 @@ export class SaloonStore implements OnInit{
     {
       name: 'quantity',
       type: 'number',
-      placeholder: 'Enter Store Item Quantity',
+      label: 'Idadi iliyoongezwa',
+      placeholder: 'mfano 10',
       required: true,
+    },
+    // This delivery's cost, per item or for the lot; left empty, the item's
+    // current price per item is used.
+    {
+      name: 'buyingPrice',
+      type: 'number',
+      label: 'Bei ya kununulia (kipande kimoja)',
+      placeholder: 'Acha wazi kutumia bei ya sasa',
+      required: false,
+    },
+    {
+      name: 'totalPrice',
+      type: 'number',
+      label: 'Bei ya jumla (mzigo wote)',
+      placeholder: 'mfano 50,000 kwa vipande 10',
+      required: false,
     },
   ];
  addQuantityToStore(store: any) {
@@ -327,6 +356,8 @@ export class SaloonStore implements OnInit{
         const storeDTO: StoreDTO = {
           uid: store.uid,
           quantity: result.quantity,
+          buyingPrice: result.buyingPrice || undefined,
+          totalPrice: result.totalPrice || undefined,
         };
         this.saloonService.addQuantityToStore(storeDTO).subscribe({
           next: (res) => {

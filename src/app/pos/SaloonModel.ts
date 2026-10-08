@@ -135,6 +135,8 @@ export interface StoreDTO {
     closedDate?:string;
     status?:string;
     buyingPrice?:number;
+    /** What the whole lot cost - give this or buyingPrice. */
+    totalPrice?:number;
     totalQuantityPrice?:number;
     usedQuantity?:number;
     notUsedQuantity?:number;

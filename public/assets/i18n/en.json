@@ -329,7 +329,8 @@
     "NO_ACTION": "No Action",
     "SHOWING_PAGE": "Showing page",
     "EMPTY_TITLE": "No Store Records Found",
-    "EMPTY_TEXT": "There are no store records to display for this selection."
+    "EMPTY_TEXT": "There are no store records to display for this selection.",
+    "PRICE_NEEDED": "Enter the price of one item or the total for the whole lot."
   },
   "REPORTS_PAGE": {
     "SERVICE_REPORT_LABEL": "SERVICE REPORT",

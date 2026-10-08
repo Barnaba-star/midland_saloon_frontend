@@ -329,7 +329,8 @@
     "NO_ACTION": "Hakuna Kitendo",
     "SHOWING_PAGE": "Inaonyesha ukurasa",
     "EMPTY_TITLE": "Hakuna Kumbukumbu za Store",
-    "EMPTY_TEXT": "Hakuna kumbukumbu za store za kuonyesha kwa uchaguzi huu."
+    "EMPTY_TEXT": "Hakuna kumbukumbu za store za kuonyesha kwa uchaguzi huu.",
+    "PRICE_NEEDED": "Weka bei ya kipande kimoja au bei ya jumla ya mzigo wote."
   },
   "REPORTS_PAGE": {
     "SERVICE_REPORT_LABEL": "RIPOTI YA HUDUMA",
