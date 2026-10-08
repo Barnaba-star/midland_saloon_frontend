@@ -598,23 +598,34 @@ private openEditDialog(item: any): void {
 subscriptionFormField: FormField[] = [
   {
     name: 'subscriptionAmount',
-    label: 'Subscription Amount (per month)',
+    label: '',
     placeholder: 'e.g. 50000',
     type: 'number',
     required: true,
     min: 0
   },
-  {
-    name: 'closeSubscription',
-    label: 'Subscription End Date',
-    type: 'date',
-    required: true
-  }
 ];
 
 openSubscriptionDialog(item: any): void {
 
-  this.translate.get('NODE_SETTING_PAGE.FORM_TITLE_SUBSCRIPTION').subscribe(formTitle => {
+  // The free plan's end is not picked: it is today + Configuration's trial
+  // days, worked out by the server - shown in the title so it is seen.
+  this.nodeService.freePlanEnd().subscribe({
+    next: (res) => this.openPlanDialog(item, res?.data ?? null),
+    error: () => this.openPlanDialog(item, null),
+  });
+}
+
+private openPlanDialog(item: any, end: { closeSubscription: string; trialDays: number } | null): void {
+  this.subscriptionFormField[0].label = this.translate.instant('NODE_SETTING_PAGE.PLAN_AMOUNT');
+  const base = this.translate.instant('NODE_SETTING_PAGE.FORM_TITLE_SUBSCRIPTION');
+  const formTitle = end
+    ? `${base} · ${this.translate.instant('NODE_SETTING_PAGE.FREE_UNTIL', {
+        date: end.closeSubscription.split('-').reverse().join('/'),
+        days: end.trialDays,
+      })}`
+    : base;
+  {
 
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '600px',
@@ -623,7 +634,6 @@ openSubscriptionDialog(item: any): void {
         formTitle,
         formData: {
           subscriptionAmount: item.subscriptionAmount,
-          closeSubscription: item.closeSubscription
         },
         uid: item.uid
       }
@@ -636,7 +646,6 @@ openSubscriptionDialog(item: any): void {
         const branchDTO: BranchDTO = {
           uid: item.uid,
           subscriptionAmount: result.subscriptionAmount,
-          closeSubscription: result.closeSubscription
         };
 
         this.nodeService.saveBranchSubscription(branchDTO).subscribe({
@@ -669,7 +678,7 @@ openSubscriptionDialog(item: any): void {
 
     });
 
-  });
+  }
 }
 
 moreActions(item: any): void {

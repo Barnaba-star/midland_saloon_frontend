@@ -18,6 +18,11 @@ saveBranch(branchDTO: BranchDTO):Observable<Response<any>>{
 return this.http.post<Response<any>>(`${this.baseUrl}/saveBranch`, branchDTO);
 }
 
+/** Where a free plan set today ends (today + Configuration's trial days). */
+freePlanEnd(): Observable<Response<{ closeSubscription: string; trialDays: number }>> {
+  return this.http.get<Response<{ closeSubscription: string; trialDays: number }>>(`${this.api}/setting/freePlanEnd`);
+}
+
 saveBranchSubscription(branchDTO: BranchDTO):Observable<Response<any>>{
 return this.http.post<Response<any>>(`${this.api}/setting/saveBranchSubscription`, branchDTO);
 }

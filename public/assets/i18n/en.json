@@ -754,7 +754,9 @@
     "LABEL_ADD_USER": "Add user",
     "LABEL_ASSIGN_ROLE": "Assign role",
     "LABEL_MORE": "More",
-    "MENU_VIEW_USER": "View branch user"
+    "MENU_VIEW_USER": "View branch user",
+    "PLAN_AMOUNT": "Subscription amount per month (TZS)",
+    "FREE_UNTIL": "Free until {{date}} ({{days}} days)"
   },
   "PERMISSION_SETTING_PAGE": {
     "TITLE": "System Permissions Setting",

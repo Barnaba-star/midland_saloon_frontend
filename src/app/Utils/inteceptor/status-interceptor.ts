@@ -69,6 +69,11 @@ export const StatusInterceptor: HttpInterceptorFn = (
     return next(req);
   }
 
+  // The shift bar's own calls show their state in the bar, never a popup.
+  if (req.url.includes('/shift/current')) {
+    return next(req);
+  }
+
   /*
    * Screens that say things in their own words.
    *

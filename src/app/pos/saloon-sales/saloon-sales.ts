@@ -57,7 +57,11 @@ interface PaymentSummaryDisplay {
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class SaloonSales implements OnInit{
-  /** The cashier's shift: selling buttons work only while it is OPEN. */
+  /**
+   * The cashier's shift: selling buttons rest only when the server says there
+   * is none or it is closed. Unknown (null - not loaded, or a backend without
+   * shifts) leaves them working, so selling is never blocked by a failed check.
+   */
   shiftState: ShiftState | null = null;
 
   onShiftState(state: ShiftState): void {
