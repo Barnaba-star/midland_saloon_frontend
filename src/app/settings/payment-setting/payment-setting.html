@@ -46,17 +46,6 @@
       <span class="summary-value">{{ totals.thisMonth | number }}</span>
     </div>
 
-    <div class="summary-card">
-      <span class="summary-label">{{ 'PAYMENT_SETTING_PAGE.BALANCE' | translate }}</span>
-      @if (balance === null) {
-        <span class="summary-value summary-muted">
-          {{ 'PAYMENT_SETTING_PAGE.BALANCE_UNAVAILABLE' | translate }}
-        </span>
-      } @else {
-        <span class="summary-value">{{ balance | number }}</span>
-      }
-    </div>
-
   </div>
 
 

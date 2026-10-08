@@ -30,7 +30,6 @@ export class PaymentSetting implements OnInit {
     this.payments = 'PAYMENT_SETTING_PAGE.RECEIVED_TAB';
     this.loadPayments();
     this.loadUnresolved();
-    this.loadBalance();
     this.loadTotals();
   }
 
@@ -60,7 +59,6 @@ export class PaymentSetting implements OnInit {
   reconcilingUid: string | null = null;
 
   /** null means Snippe didn't answer - the card says so instead of showing 0. */
-  balance: number | null = null;
 
   /** Across every payment ever recorded, not just the page on screen. */
   totals = { payments: 0, totalAmount: 0, totalCommission: 0, thisMonth: 0 };
@@ -129,19 +127,6 @@ export class PaymentSetting implements OnInit {
     });
   }
 
-  loadBalance() {
-    this.paymentService.findBalance().subscribe({
-      next: (response) => {
-        this.balance = response.data ?? null;
-        this.cdr.markForCheck();
-      },
-      error: () => {
-        this.balance = null;
-        this.cdr.markForCheck();
-      }
-    });
-  }
-
   goToPage(page: number) {
     if (page < 0 || page >= this.totalPages || page === this.currentPage) {
       return;
@@ -162,7 +147,6 @@ export class PaymentSetting implements OnInit {
     this.currentPage = 0;
     this.loadPayments();
     this.loadUnresolved();
-    this.loadBalance();
     this.loadTotals();
   }
 
@@ -181,10 +165,9 @@ export class PaymentSetting implements OnInit {
           response.data || response.message || 'Done'
         );
         // A reconciled payment leaves the unresolved list and joins the paid
-        // one, and the balance moves with it.
+        // one.
         this.loadPayments();
         this.loadUnresolved();
-        this.loadBalance();
     this.loadTotals();
         this.cdr.markForCheck();
       },
