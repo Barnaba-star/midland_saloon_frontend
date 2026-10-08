@@ -6,6 +6,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 export interface PurgeBranchData {
   branchName: string;
   branchCode: string;
+  /** i18n group for the texts; PURGE_BRANCH (wipe everything) by default. */
+  textKey?: string;
+  /** Set when only a period is cleared (yyyy-MM-dd), shown under the branch. */
+  from?: string;
+  to?: string;
 }
 
 /**
@@ -20,23 +25,26 @@ export interface PurgeBranchData {
   template: `
     <div class="pb">
       <span class="pb-icon"><mat-icon>delete_forever</mat-icon></span>
-      <h2>{{ 'PURGE_BRANCH.TITLE' | translate }}</h2>
+      <h2>{{ k + '.TITLE' | translate }}</h2>
       <p class="pb-branch">{{ data.branchName }} <code>{{ data.branchCode }}</code></p>
+      @if (data.from && data.to) {
+        <p class="pb-period">{{ k + '.PERIOD' | translate: { from: data.from, to: data.to } }}</p>
+      }
 
       <div class="pb-lists">
         <div class="pb-list gone">
-          <strong>{{ 'PURGE_BRANCH.GOES' | translate }}</strong>
-          <p>{{ 'PURGE_BRANCH.GOES_LIST' | translate }}</p>
+          <strong>{{ k + '.GOES' | translate }}</strong>
+          <p>{{ k + '.GOES_LIST' | translate }}</p>
         </div>
         <div class="pb-list kept">
-          <strong>{{ 'PURGE_BRANCH.STAYS' | translate }}</strong>
-          <p>{{ 'PURGE_BRANCH.STAYS_LIST' | translate }}</p>
+          <strong>{{ k + '.STAYS' | translate }}</strong>
+          <p>{{ k + '.STAYS_LIST' | translate }}</p>
         </div>
       </div>
 
-      <p class="pb-warn"><mat-icon>warning</mat-icon>{{ 'PURGE_BRANCH.NO_UNDO' | translate }}</p>
+      <p class="pb-warn"><mat-icon>warning</mat-icon>{{ k + '.NO_UNDO' | translate }}</p>
 
-      <label for="pb-code">{{ 'PURGE_BRANCH.TYPE_CODE' | translate: { code: data.branchCode } }}</label>
+      <label for="pb-code">{{ k + '.TYPE_CODE' | translate: { code: data.branchCode } }}</label>
       <input id="pb-code" type="text" autocomplete="off" spellcheck="false"
              [value]="typed()" (input)="typed.set($any($event.target).value)"
              [placeholder]="data.branchCode">
@@ -44,7 +52,7 @@ export interface PurgeBranchData {
       <div class="pb-actions">
         <button type="button" class="pb-cancel" (click)="ref.close()">{{ 'COMMON.CANCEL' | translate }}</button>
         <button type="button" class="pb-go" [disabled]="!matches()" (click)="ref.close(typed().trim())">
-          <mat-icon>delete_forever</mat-icon>{{ 'PURGE_BRANCH.CONFIRM' | translate }}
+          <mat-icon>delete_forever</mat-icon>{{ k + '.CONFIRM' | translate }}
         </button>
       </div>
     </div>
@@ -57,6 +65,7 @@ export interface PurgeBranchData {
     }
     .pb-icon mat-icon { font-size: 32px; width: 32px; height: 32px; }
     h2 { margin: 14px 0 4px; font-size: 20px; color: var(--sx-navy-800); }
+    .pb-period { margin: -10px 0 16px; font-size: 13px; color: var(--sx-muted); }
     .pb-branch { margin: 0 0 16px; font-weight: 600; color: var(--sx-ink); }
     .pb-branch code {
       margin-left: 6px; padding: 2px 8px; border-radius: 6px;
@@ -96,6 +105,7 @@ export interface PurgeBranchData {
 export class PurgeBranchDialogComponent {
   readonly data = inject<PurgeBranchData>(MAT_DIALOG_DATA);
   readonly ref = inject(MatDialogRef<PurgeBranchDialogComponent, string>);
+  readonly k = this.data.textKey || 'PURGE_BRANCH';
   readonly typed = signal('');
   readonly matches = computed(() => this.typed().trim().toUpperCase() === (this.data.branchCode || '').toUpperCase());
 }
