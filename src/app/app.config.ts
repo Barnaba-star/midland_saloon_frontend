@@ -25,6 +25,7 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './Utils/inteceptor/auth-interceptor';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { StatusInterceptor } from './Utils/inteceptor/status-interceptor';
+import { WakeRetryInterceptor } from './Utils/inteceptor/wake-retry-interceptor';
 import { GlobalErrorHandler } from './Utils/handlers/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
@@ -48,7 +49,9 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([
         AuthInterceptor,
-        StatusInterceptor
+        StatusInterceptor,
+        // innermost: a sleeping backend is retried before any error dialog shows
+        WakeRetryInterceptor
       ])
     ),
 
