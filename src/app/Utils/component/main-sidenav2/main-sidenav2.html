@@ -190,6 +190,18 @@
   <!-- RIGHT SIDE -->
   <div class="right">
 
+    <!-- SUBSCRIPTION: always in sight - its state and days left; tap to pay. -->
+    @if (subscriptionStatus) {
+      <button type="button" [class]="subscriptionBadgeClass + ' sub-header'" (click)="openSubscribeDialog()"
+              [matTooltip]="(subscriptionBadgeLabel | translate) + (subscriptionEndDate ? (' · ' + ('MENU.SUBSCRIPTION_VALID_UNTIL' | translate) + ' ' + (subscriptionEndDate | date: 'dd/MM/yyyy')) : '')">
+        <span class="sub-badge-dot"></span>
+        <span class="sub-header-label">{{ subscriptionBadgeLabel | translate }}</span>
+        @if (subscriptionDaysLeft !== null) {
+          <span class="sub-header-days">{{ 'MENU.SUBSCRIPTION_DAYS_LEFT' | translate: { days: subscriptionDaysLeft } }}</span>
+        }
+      </button>
+    }
+
     <!-- LANGUAGE -->
     <div
       class="language-toggle"

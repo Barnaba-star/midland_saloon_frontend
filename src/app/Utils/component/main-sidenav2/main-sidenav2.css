@@ -1531,3 +1531,45 @@
     font-size: 11px;
   }
 }
+
+/* The subscription badge in the header: its state and days left, tap to pay. */
+.sub-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 34px;
+  margin-right: 8px;
+  padding: 0 12px;
+  border: 0;
+  border-radius: 999px;
+  font: 600 12px var(--font-sans);
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.sub-header .sub-header-days {
+  opacity: 0.85;
+  font-weight: 500;
+}
+
+.sub-header.pending .sub-badge-dot {
+  animation: sub-pulse 1.2s ease-in-out infinite;
+}
+
+@keyframes sub-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.35; transform: scale(1.4); }
+}
+
+@media (max-width: 600px) {
+  .sub-header {
+    height: 30px;
+    padding: 0 9px;
+    margin-right: 4px;
+  }
+
+  /* On a phone: the dot and the days only. */
+  .sub-header .sub-header-label {
+    display: none;
+  }
+}

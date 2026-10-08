@@ -132,7 +132,8 @@
     "SUBSCRIPTION_UNKNOWN": "Hali ya huduma haijulikani",
     "SUBSCRIPTION_VALID_UNTIL": "Inaisha tarehe",
     "SUPPORT": "Ujumbe",
-    "HELP": "Msaada"
+    "HELP": "Msaada",
+    "SUBSCRIPTION_DAYS_LEFT": "siku {{days}}"
   },
   "SALON": {
     "OFFICE": "Ofisi",

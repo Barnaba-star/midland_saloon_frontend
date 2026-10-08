@@ -132,7 +132,8 @@
     "SUBSCRIPTION_UNKNOWN": "Subscription status unknown",
     "SUBSCRIPTION_VALID_UNTIL": "Valid until",
     "SUPPORT": "Messages",
-    "HELP": "Help"
+    "HELP": "Help",
+    "SUBSCRIPTION_DAYS_LEFT": "{{days}} days"
   },
   "SALON": {
     "OFFICE": "Office",

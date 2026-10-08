@@ -455,6 +455,16 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     }
   }
 
+  /** Days until the subscription ends (0 on the last day); null without a date. */
+  get subscriptionDaysLeft(): number | null {
+    if (!this.subscriptionEndDate) {
+      return null;
+    }
+    const end = new Date(this.subscriptionEndDate + 'T23:59:59');
+    const days = Math.ceil((end.getTime() - Date.now()) / 86400000) - 1;
+    return Math.max(0, days);
+  }
+
   get subscriptionBadgeLabel(): string {
     switch (this.subscriptionStatus) {
       case 'ACTIVE': return 'MENU.SUBSCRIPTION_ACTIVE';
@@ -480,7 +490,11 @@ export class MainSidenav2 implements OnInit, OnDestroy {
       return;
     }
 
-    const period = this.subscriptionStatus === 'PENDING' ? 5000 : 60000;
+    // Fast while a payment is pending, and for 5 minutes after the pay
+    // dialog opens (the request may still be on its way - the badge must flip
+    // the moment the phone confirms, not a minute later).
+    const fast = this.subscriptionStatus === 'PENDING' || Date.now() < this.fastPollUntil;
+    const period = fast ? 5000 : 60000;
     if (this.subscriptionPollSub && this.subscriptionPollPeriod === period) {
       return;
     }
@@ -913,9 +927,14 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     });
   }
 
+  /** Until when the subscription status is checked every 5 s (after Pay). */
+  private fastPollUntil = 0;
+
   openSubscribeDialog(): void {
 
     this.profile = false;
+    this.fastPollUntil = Date.now() + 5 * 60 * 1000;
+    this.startSubscriptionStatusPolling();
 
     const dialogRef = this.dialog.open(SubscribeDialogComponent, {
       width: '420px',

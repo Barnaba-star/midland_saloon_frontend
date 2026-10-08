@@ -72,13 +72,28 @@ export class SubscribeDialogComponent {
     private translate: TranslateService,
     private cdr: ChangeDetectorRef,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: SubscribeDialogData | null,
-  ) { }
+  ) {
+    // Signed in: the price is Configuration's plan price, asked for here so
+    // it is always the current one. From the login screen (expired, no
+    // token) the sign-in answer already carried it.
+    if (!this.data?.credentials) {
+      this.service.subscriptionPrice().subscribe({
+        next: (res) => {
+          this.configMonthly = res?.data?.monthly ?? null;
+          this.cdr.markForCheck();
+        },
+        error: () => {},
+      });
+    }
+  }
 
-  // Null when the branch has no plan configured, or when the dialog was
-  // opened from somewhere that didn't pass it - in that case we can't check
-  // anything client-side and simply let the backend answer.
+  /** Configuration's plan price, once fetched. */
+  private configMonthly: number | null = null;
+
+  // Null when no price is set, or not loaded yet - then the backend answers.
   get monthlyAmount(): number | null {
-    return this.data?.subscriptionAmount ?? null;
+    const m = this.configMonthly ?? this.data?.subscriptionAmount ?? null;
+    return m && m > 0 ? m : null;
   }
 
   get totalAmount(): number | null {

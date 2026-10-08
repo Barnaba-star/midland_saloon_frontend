@@ -24,6 +24,11 @@ export class Service {
       return this.http.get<ResponseList<any>>(`${this.settingURL}/findOnlineUsers`)
     }
 
+    /** One month's subscription price - Configuration's plan price. */
+    subscriptionPrice():Observable<Response<{ monthly: number }>>{
+      return this.http.get<Response<{ monthly: number }>>(`${this.settingURL}/subscriptionPrice`)
+    }
+
     updateSubscription(payload: { mobileNetwork: string; phoneNumber: string; months: number }):Observable<Response<any>>{
       return this.http.post<Response<any>>(`${this.settingURL}/updateSubscription`, payload)
     }
