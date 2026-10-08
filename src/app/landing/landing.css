@@ -812,6 +812,55 @@ h1, h2, h3 {
   gap: 10px;
 }
 
+/* Pakua App: a gold outline pill beside Ingia; on a phone just the Android icon. */
+.nav-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1px solid var(--gold);
+  border-radius: 12px;
+  color: var(--gold-light);
+  font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s;
+}
+
+.nav-app:hover {
+  background: rgba(201, 150, 46, 0.14);
+}
+
+.nav-app mat-icon,
+.footer-app mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.footer-app {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--gold-light);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+@media (max-width: 560px) {
+  .nav-app {
+    width: 44px;
+    min-height: 44px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav-app span {
+    display: none;
+  }
+}
+
 .nav-links {
   display: flex;
   gap: 4px;

@@ -21,6 +21,9 @@
         }
       </ul>
       <div class="nav-right">
+        <a class="nav-app" routerLink="/app" [attr.aria-label]="'DOWNLOAD.NAV' | translate">
+          <mat-icon>android</mat-icon><span>{{ 'DOWNLOAD.NAV' | translate }}</span>
+        </a>
         <button type="button" class="nav-cta" (click)="goToLogin()">
           {{ 'LOGIN.SIGN_IN' | translate }}
           <mat-icon>login</mat-icon>
@@ -361,6 +364,7 @@
 
   <footer class="footer">
     <app-brand-word tone="light" class="brand-word small" />
+    <a class="footer-app" routerLink="/app"><mat-icon>android</mat-icon> {{ 'DOWNLOAD.NAV' | translate }}</a>
     <span>&copy; {{ currentYear }} Mr Saloon. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
   </footer>
 </div>

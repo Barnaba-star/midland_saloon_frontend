@@ -1750,5 +1750,24 @@
     "TYPE_CODE": "Andika code ya tawi ({{code}}) kuthibitisha",
     "CONFIRM": "Futa data zote",
     "DONE": "Data za tawi zimefutwa ({{count}} kumbukumbu)."
+  },
+  "DOWNLOAD": {
+    "EYEBROW": "App ya Android",
+    "TITLE": "Pakua App ya Mr Saloon",
+    "LEAD": "Simamia saluni yako kutoka kwenye simu: bili, huduma na wahudumu, malipo, store, kamisheni na ripoti - kila kitu kilichopo kwenye website, sasa ndani ya app. Tumia akaunti ile ile unayoingia nayo hapa.",
+    "APPLE": "App ni ya simu za Android kwa sasa. Kwenye iPhone tumia website hii kama kawaida.",
+    "BUTTON": "Pakua kwa Android",
+    "VERSION": "Toleo {{v}}",
+    "S1_T": "Pakua",
+    "S1_D": "Gusa kitufe cha Pakua. Faili (APK) litaingia kwenye Downloads za simu.",
+    "S2_T": "Ruhusu kusakinisha",
+    "S2_D": "Ukilifungua, simu itauliza kuruhusu \"Install unknown apps\" kwa kivinjari (Chrome). Ruhusu - ni mara moja tu.",
+    "S3_T": "Sakinisha",
+    "S3_D": "Gusa Install. Ikiuliza Play Protect, chagua \"Install anyway\" - app ni ya Mr Saloon yenyewe.",
+    "S4_T": "Ingia",
+    "S4_D": "Fungua Mr Saloon uingie kwa jina la mtumiaji na neno la siri lako.",
+    "BACK": "Rudi Mwanzo",
+    "NAV": "Pakua App",
+    "ALL_PHONES": "Inafanya kazi kwenye simu zote za Android, mpya na za zamani"
   }
 }

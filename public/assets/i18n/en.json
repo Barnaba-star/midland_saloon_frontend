@@ -1750,5 +1750,24 @@
     "TYPE_CODE": "Type the branch code ({{code}}) to confirm",
     "CONFIRM": "Wipe all data",
     "DONE": "Branch data wiped ({{count}} records)."
+  },
+  "DOWNLOAD": {
+    "EYEBROW": "Android app",
+    "TITLE": "Download the Mr Saloon app",
+    "LEAD": "Run your saloon from your phone: bills, services and stylists, payments, store, commission and reports - everything on the website, now in an app. Sign in with the same account you use here.",
+    "APPLE": "The app is for Android phones for now. On an iPhone, keep using this website.",
+    "BUTTON": "Download for Android",
+    "VERSION": "Version {{v}}",
+    "S1_T": "Download",
+    "S1_D": "Tap Download. The file (APK) goes to your phone's Downloads.",
+    "S2_T": "Allow installing",
+    "S2_D": "When you open it, the phone asks to allow \"Install unknown apps\" for the browser (Chrome). Allow it - only once.",
+    "S3_T": "Install",
+    "S3_D": "Tap Install. If Play Protect asks, choose \"Install anyway\" - the app is Mr Saloon's own.",
+    "S4_T": "Sign in",
+    "S4_D": "Open Mr Saloon and sign in with your username and password.",
+    "BACK": "Back to home",
+    "NAV": "Download App",
+    "ALL_PHONES": "Works on every Android phone, new and old"
   }
 }
