@@ -30,65 +30,55 @@
         <app-shift-bar [area]="area" [showCashUpLink]="false" [goToHandoverOnClose]="false" (stateChange)="onShiftState($event)"></app-shift-bar>
       } @else {
         <p class="cu-step">{{ 'SHIFT.STEP_MONEY' | translate }}</p>
-        <div class="sx-table-wrap">
-          <table class="cu-table sx-cards">
-            <thead>
-              <tr>
-                <th>{{ 'CASH_UP.COL_METHOD' | translate }}</th>
-                <th class="num">{{ 'CASH_UP.COL_TAKINGS' | translate }}</th>
-                <th class="num">{{ 'CASH_UP.COL_PAYOUTS' | translate }}</th>
-                <th class="num">{{ 'CASH_UP.COL_EXPECTED' | translate }}</th>
-                <th class="num">{{ 'CASH_UP.COL_COUNTED' | translate }}</th>
-                <th class="num">{{ 'CASH_UP.COL_VARIANCE' | translate }}</th>
-              </tr>
-            </thead>
-            <tbody>
-              @for (l of lines; track l.method) {
-                <tr>
-                  <td class="sx-card-title">
-                    <strong>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</strong>
-                    @if (l.bills) { <small class="muted">{{ 'CASH_UP.BILLS' | translate: { count: l.bills } }}</small> }
-                  </td>
-                  <td [attr.data-label]="'CASH_UP.COL_TAKINGS' | translate" class="num">{{ l.takings | number }}</td>
-                  <td [attr.data-label]="'CASH_UP.COL_PAYOUTS' | translate" class="num">
-                    @if (l.payouts) { <span class="neg">−{{ l.payouts | number }}</span> } @else { <span class="muted">-</span> }
-                  </td>
-                  <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num"><strong>{{ l.expected | number }}</strong></td>
-                  <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">
-                    <input type="number" min="0" step="1" [(ngModel)]="l.counted" [name]="'c-' + l.method"
-                           [placeholder]="'CASH_UP.COUNT_PH' | translate" />
-                  </td>
-                  <td [attr.data-label]="'CASH_UP.COL_VARIANCE' | translate" class="num">
-                    @if (variance(l) !== null) {
-                      <span class="pill" [class.short]="variance(l)! < 0" [class.over]="variance(l)! > 0" [class.even]="variance(l) === 0">
-                        {{ variance(l)! > 0 ? '+' : '' }}{{ variance(l) | number }}
-                      </span>
-                    } @else {
-                      <span class="muted">-</span>
-                    }
-                  </td>
-                </tr>
-              }
-            </tbody>
-            <tfoot>
-              <tr>
-                <td class="sx-card-title">{{ 'OTHER_SPLIT.TOTAL' | translate }}</td>
-                <td [attr.data-label]="'CASH_UP.COL_TAKINGS' | translate" class="num">{{ takingsTotal | number }}</td>
-                <td [attr.data-label]="'CASH_UP.COL_PAYOUTS' | translate" class="num">@if (payoutsTotal) { <span class="neg">−{{ payoutsTotal | number }}</span> } @else { - }</td>
-                <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num">{{ expectedTotal | number }}</td>
-                <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">{{ countedTotal | number }}</td>
-                <td [attr.data-label]="'CASH_UP.COL_VARIANCE' | translate" class="num">
-                  @if (anyCounted) {
-                    <span class="pill" [class.short]="countedTotal - expectedTotal < 0" [class.over]="countedTotal - expectedTotal > 0" [class.even]="countedTotal === expectedTotal">
-                      {{ countedTotal - expectedTotal > 0 ? '+' : '' }}{{ countedTotal - expectedTotal | number }}
-                    </span>
-                  } @else {
-                    <span class="muted">-</span>
+        <!-- One button per payment method: tap to count it. The totals stay in view below. -->
+        <div class="cu-methods">
+          @for (l of lines; track l.method) {
+            <div class="cu-mfold" [class.open]="isOpen('m:' + l.method)">
+              <button type="button" class="cu-mhead" (click)="toggleFold('m:' + l.method)" [attr.aria-expanded]="isOpen('m:' + l.method)">
+                <span class="cu-mtitle">
+                  <strong>{{ 'PAY_BILL.METHOD_' + l.method | translate }}</strong>
+                  <small>{{ 'CASH_UP.COL_EXPECTED' | translate }} {{ l.expected | number }}@if (l.bills) { · {{ 'CASH_UP.BILLS' | translate: { count: l.bills } }} }</small>
+                </span>
+                @if (variance(l) !== null) {
+                  <span class="pill" [class.short]="variance(l)! < 0" [class.over]="variance(l)! > 0" [class.even]="variance(l) === 0">
+                    {{ variance(l)! > 0 ? '+' : '' }}{{ variance(l) | number }}
+                  </span>
+                }
+                <mat-icon>{{ isOpen('m:' + l.method) ? 'expand_less' : 'expand_more' }}</mat-icon>
+              </button>
+              @if (isOpen('m:' + l.method)) {
+                <div class="cu-mbody">
+                  <div class="cu-kv"><span>{{ 'CASH_UP.COL_TAKINGS' | translate }}</span><span>{{ l.takings | number }}</span></div>
+                  @if (l.payouts) {
+                    <div class="cu-kv"><span>{{ 'CASH_UP.COL_PAYOUTS' | translate }}</span><span class="neg">−{{ l.payouts | number }}</span></div>
                   }
-                </td>
-              </tr>
-            </tfoot>
-          </table>
+                  <div class="cu-kv strong"><span>{{ 'CASH_UP.COL_EXPECTED' | translate }}</span><span>{{ l.expected | number }}</span></div>
+                  <label class="cu-count">
+                    <span>{{ 'CASH_UP.COL_COUNTED' | translate }}</span>
+                    <input type="number" min="0" step="1" inputmode="numeric" [(ngModel)]="l.counted" [name]="'c-' + l.method"
+                           [placeholder]="'CASH_UP.COUNT_PH' | translate" />
+                  </label>
+                </div>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="cu-totals">
+          <div class="cu-kv"><span>{{ 'CASH_UP.COL_TAKINGS' | translate }}</span><span>{{ takingsTotal | number }}</span></div>
+          @if (payoutsTotal) {
+            <div class="cu-kv"><span>{{ 'CASH_UP.COL_PAYOUTS' | translate }}</span><span class="neg">−{{ payoutsTotal | number }}</span></div>
+          }
+          <div class="cu-kv strong"><span>{{ 'CASH_UP.COL_EXPECTED' | translate }}</span><span>{{ expectedTotal | number }}</span></div>
+          <div class="cu-kv"><span>{{ 'CASH_UP.COL_COUNTED' | translate }}</span><span>{{ countedTotal | number }}</span></div>
+          @if (anyCounted) {
+            <div class="cu-kv strong">
+              <span>{{ 'CASH_UP.COL_VARIANCE' | translate }}</span>
+              <span class="pill" [class.short]="countedTotal - expectedTotal < 0" [class.over]="countedTotal - expectedTotal > 0" [class.even]="countedTotal === expectedTotal">
+                {{ countedTotal - expectedTotal > 0 ? '+' : '' }}{{ countedTotal - expectedTotal | number }}
+              </span>
+            </div>
+          }
         </div>
 
         <!-- Payouts recorded in the system during this shift: read from those records, not typed here. -->
@@ -98,7 +88,12 @@
             <strong>{{ 'CASH_UP.PAYOUTS_TITLE' | translate }}</strong>
             <span class="muted">{{ 'CASH_UP.PAYOUTS_DESC' | translate }}</span>
           </div>
-          @if (payouts.length === 0) {
+          <button type="button" class="cu-fold" (click)="toggleFold('payouts')" [attr.aria-expanded]="isOpen('payouts')">
+            <mat-icon>{{ isOpen('payouts') ? 'expand_less' : 'expand_more' }}</mat-icon>
+            {{ (isOpen('payouts') ? 'CASH_UP.HIDE' : 'CASH_UP.SHOW_PAYOUTS') | translate: { count: payouts.length } }}
+          </button>
+          @if (!isOpen('payouts')) {
+          } @else if (payouts.length === 0) {
             <p class="muted">{{ 'CASH_UP.PAYOUTS_NONE' | translate }}</p>
           } @else {
             @for (o of payouts; track $index) {
@@ -146,7 +141,12 @@
         <p>{{ 'SHIFT.LIST_DESC' | translate }}</p>
       </div>
     </div>
-    @if (shifts.length === 0) {
+    <button type="button" class="cu-fold" (click)="toggleFold('shifts')" [attr.aria-expanded]="isOpen('shifts')">
+      <mat-icon>{{ isOpen('shifts') ? 'expand_less' : 'expand_more' }}</mat-icon>
+      {{ (isOpen('shifts') ? 'CASH_UP.HIDE' : 'CASH_UP.SHOW_SHIFTS') | translate: { count: shifts.length } }}
+    </button>
+    @if (!isOpen('shifts')) {
+    } @else if (shifts.length === 0) {
       <p class="muted empty">{{ 'SHIFT.EMPTY' | translate }}</p>
     } @else {
       <div class="sx-table-wrap">
@@ -214,6 +214,12 @@
           {{ 'CASH_UP.NET_VARIANCE' | translate }}: {{ historyVariance > 0 ? '+' : '' }}{{ historyVariance | number }}
         </span>
       </div>
+      <!-- Folded until asked for: the summary line above says enough at a glance. -->
+      <button type="button" class="cu-fold" (click)="toggleFold('history')" [attr.aria-expanded]="isOpen('history')">
+        <mat-icon>{{ isOpen('history') ? 'expand_less' : 'expand_more' }}</mat-icon>
+        {{ (isOpen('history') ? 'CASH_UP.HIDE_HISTORY' : 'CASH_UP.SHOW_HISTORY') | translate: { count: history.length } }}
+      </button>
+      @if (isOpen('history')) {
       <div class="sx-table-wrap">
         <table class="cu-table sx-cards">
           <thead>
@@ -267,6 +273,7 @@
           </tbody>
         </table>
       </div>
+      }
     }
   </section>
 </div>

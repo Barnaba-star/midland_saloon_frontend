@@ -71,6 +71,20 @@ export class CashUp implements OnInit {
   ];
   history: any[] = [];
   openUid: string | null = null;
+  /** Sections folded into a button until opened (each method, payouts, shifts, history). */
+  private openFolds = new Set<string>();
+
+  isOpen(key: string): boolean {
+    return this.openFolds.has(key);
+  }
+
+  toggleFold(key: string): void {
+    const next = new Set(this.openFolds);
+    if (!next.delete(key)) {
+      next.add(key);
+    }
+    this.openFolds = next;
+  }
   openLines: any[] = [];
 
   constructor(

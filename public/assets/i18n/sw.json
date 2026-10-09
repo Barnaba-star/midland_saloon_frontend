@@ -1644,7 +1644,12 @@
     "PAYOUTS_TITLE": "Matumizi yaliyorekodiwa kwenye zamu hii",
     "PAYOUTS_DESC": "yamechukuliwa na mfumo kutoka Pay ya akiba, commission ya staff na Stock & Purchase - hayabadilishwi hapa",
     "PAYOUTS_NONE": "Hakuna matumizi uliyorekodi kwenye zamu hii.",
-    "PERIOD": "Zamu ya {{from}} → {{to}} · bili {{bills}}"
+    "PERIOD": "Zamu ya {{from}} → {{to}} · bili {{bills}}",
+    "HIDE": "Ficha",
+    "SHOW_SHIFTS": "Onyesha zamu {{count}}",
+    "SHOW_PAYOUTS": "Onyesha matumizi {{count}}",
+    "SHOW_HISTORY": "Onyesha makabidhiano {{count}}",
+    "HIDE_HISTORY": "Ficha makabidhiano"
   },
   "STOCK_TAKE": {
     "TITLE": "Hesabu ya stock",
