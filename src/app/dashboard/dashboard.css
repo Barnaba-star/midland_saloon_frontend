@@ -19,10 +19,11 @@
   display: flex;
   align-items: center;
   gap: 10px;
+  min-width: 0;
 }
 
 .topbar-word {
-  font-size: 19px;
+  font-size: 22px;
 }
 
 .topbar-actions {
@@ -173,7 +174,7 @@ mat-card-content {
   }
 
   .topbar-word {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .user-chip span {

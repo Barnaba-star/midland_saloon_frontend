@@ -128,7 +128,7 @@ export class MainSidenav2 implements OnInit, OnDestroy {
 
   @Input() menuItems: SidenavItem[] = [];
 
-  @Input() logoUrl = 'assets/images/mr-saloon-logo.png';
+  @Input() logoUrl = 'assets/images/salonix-logo.png';
 
   canManageLogo = false;
 
