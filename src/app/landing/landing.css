@@ -194,6 +194,8 @@ h1, h2, h3 {
 /* The Mr Saloon word, white on the navy stage. */
 .brand {
   text-decoration: none;
+  /* The SalonixTz badge keeps its size; the menu links give way, not the logo. */
+  flex: none;
 }
 
 .brand-word {
@@ -1390,7 +1392,8 @@ h1, h2, h3 {
   }
 }
 
-@media (max-width: 1080px) {
+/* Folds sooner than 1080 since the SalonixTz badge is wider than the old word. */
+@media (max-width: 1340px) {
   .nav {
     flex-wrap: wrap;
     position: relative;
