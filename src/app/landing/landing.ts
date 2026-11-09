@@ -18,7 +18,7 @@ export class Landing implements OnInit {
   currentYear = new Date().getFullYear();
   menuOpen = false;
   readonly contactEmail = 'barnabachristopher@gmail.com';
-  readonly contactHref = `mailto:${this.contactEmail}?subject=${encodeURIComponent('Mr Saloon')}`;
+  readonly contactHref = `mailto:${this.contactEmail}?subject=${encodeURIComponent('SalonixTz')}`;
 
   /**
    * The titles across the top, as on the Bar's page: each opens its own tab

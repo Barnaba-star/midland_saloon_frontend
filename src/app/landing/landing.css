@@ -1,19 +1,20 @@
-/* Mr Saloon - navy and gold. Bold Inter headlines with an Allura script accent,
-   gold hairlines and round gold markers. Nothing here is the Hotel's forest and brass
-   or the Bar's amber. */
+/* SalonixTz - the Bar's colours since 2026-11-09 (owner): ink and espresso
+   with beer amber on warm paper. The variable names are the old ones
+   (navy = espresso, gold = amber). Bold Inter headlines with an Allura script
+   accent, amber hairlines and round amber markers stay. */
 :host {
-  --navy: #14315d;
-  --navy-deep: #0a1c38;
-  --navy-soft: #eaeff8;
-  --gold: #c9962e;
-  --gold-dark: #a67a1f;
-  --gold-light: #e9c878;
-  --gold-pale: #faf1de;
+  --navy: #2b2118;
+  --navy-deep: #0e0c0a;
+  --navy-soft: #f5e9d4;
+  --gold: #f5a524;
+  --gold-dark: #b86e00;
+  --gold-light: #ffc861;
+  --gold-pale: #fdf1dc;
   --paper: #ffffff;
-  --mist: #f5f6fb;
-  --ink: #111827;
-  --muted: #5f6878;
-  --line: #e3e6ee;
+  --mist: #f6f0e6;
+  --ink: #1d1812;
+  --muted: #7a6f60;
+  --line: #e8dcc8;
   --script: 'Allura', cursive;
   display: block;
 }
@@ -156,8 +157,8 @@ h1, h2, h3 {
   inset: 0;
   z-index: -1;
   background:
-    linear-gradient(90deg, rgba(10, 28, 56, 0.95) 0%, rgba(10, 28, 56, 0.8) 45%, rgba(10, 28, 56, 0.25) 100%),
-    linear-gradient(0deg, rgba(10, 28, 56, 0.6) 0%, rgba(10, 28, 56, 0) 35%),
+    linear-gradient(90deg, rgba(14, 12, 10, 0.95) 0%, rgba(14, 12, 10, 0.8) 45%, rgba(14, 12, 10, 0.25) 100%),
+    linear-gradient(0deg, rgba(14, 12, 10, 0.6) 0%, rgba(14, 12, 10, 0) 35%),
     url('/assets/images/saloon/barbershop.jpg') center / cover no-repeat;
 }
 
@@ -191,19 +192,21 @@ h1, h2, h3 {
   gap: 10px;
 }
 
-/* The Mr Saloon word, white on the navy stage. */
+/* The SalonixTz logo, cream on the dark stage. */
 .brand {
   text-decoration: none;
-  /* The SalonixTz badge keeps its size; the menu links give way, not the logo. */
+  /* The logo keeps its size; the menu links give way, not the logo. */
   flex: none;
+  min-width: 0;
+  max-width: calc(100vw - 150px);
 }
 
 .brand-word {
-  font-size: 22px;
+  --bw-h: 48px;
 }
 
 .brand-word.small {
-  font-size: 17px;
+  --bw-h: 40px;
 }
 
 .nav-cta {
@@ -275,7 +278,7 @@ h1, h2, h3 {
   margin: 24px 0 32px;
   font-size: 17px;
   line-height: 1.7;
-  color: #d5dcea;
+  color: #e0d2bb;
 }
 
 .hero-actions {
@@ -290,10 +293,10 @@ h1, h2, h3 {
   gap: 10px 24px;
   margin: 36px 0 0;
   padding: 22px 0 0;
-  border-top: 1px solid rgba(233, 200, 120, 0.25);
+  border-top: 1px solid rgba(255, 200, 97, 0.25);
   list-style: none;
   font-size: 14px;
-  color: #d5dcea;
+  color: #e0d2bb;
 }
 
 .hero-meta li {
@@ -409,7 +412,7 @@ h1, h2, h3 {
   content: '';
   position: absolute;
   inset: 10px;
-  border: 1px solid rgba(233, 200, 120, 0.5);
+  border: 1px solid rgba(255, 200, 97, 0.5);
   border-radius: 4px;
   pointer-events: none;
 }
@@ -423,7 +426,7 @@ h1, h2, h3 {
   align-items: flex-end;
   gap: 12px;
   padding: 52px 24px 22px;
-  background: linear-gradient(0deg, rgba(10, 28, 56, 0.92), rgba(10, 28, 56, 0));
+  background: linear-gradient(0deg, rgba(14, 12, 10, 0.92), rgba(14, 12, 10, 0));
   color: #ffffff;
 }
 
@@ -454,7 +457,7 @@ h1, h2, h3 {
   display: block;
   margin-top: 3px;
   font-size: 13px;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 /* ================= A CLIENT'S VISIT ================= */
@@ -536,14 +539,14 @@ h1, h2, h3 {
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(0deg, rgba(10, 28, 56, 0.97) 0%, rgba(10, 28, 56, 0.8) 42%, rgba(10, 28, 56, 0.1) 78%);
+  background: linear-gradient(0deg, rgba(14, 12, 10, 0.97) 0%, rgba(14, 12, 10, 0.8) 42%, rgba(14, 12, 10, 0.1) 78%);
 }
 
 .step::after {
   content: '';
   position: absolute;
   inset: 10px;
-  border: 1px solid rgba(233, 200, 120, 0.4);
+  border: 1px solid rgba(255, 200, 97, 0.4);
   border-radius: 4px;
   pointer-events: none;
 }
@@ -566,7 +569,7 @@ h1, h2, h3 {
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.04em;
-  color: rgba(233, 200, 120, 0.25);
+  color: rgba(255, 200, 97, 0.25);
 }
 
 .step mat-icon {
@@ -591,7 +594,7 @@ h1, h2, h3 {
   max-width: 320px;
   font-size: 14.5px;
   line-height: 1.7;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 /* ================= FEATURES ================= */
@@ -634,7 +637,7 @@ h1, h2, h3 {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(0deg, rgba(10, 28, 56, 0.45), rgba(10, 28, 56, 0) 55%);
+  background: linear-gradient(0deg, rgba(14, 12, 10, 0.45), rgba(14, 12, 10, 0) 55%);
 }
 
 /* The icon sits on the seam between photo and text. */
@@ -678,7 +681,7 @@ h1, h2, h3 {
   margin-top: 6px;
   padding: 120px 24px;
   background:
-    linear-gradient(90deg, rgba(10, 28, 56, 0.95) 0%, rgba(10, 28, 56, 0.85) 55%, rgba(10, 28, 56, 0.65) 100%),
+    linear-gradient(90deg, rgba(14, 12, 10, 0.95) 0%, rgba(14, 12, 10, 0.85) 55%, rgba(14, 12, 10, 0.65) 100%),
     url('/assets/images/saloon/salon-bw.jpg') center / cover no-repeat;
   color: #ffffff;
 }
@@ -708,7 +711,7 @@ h1, h2, h3 {
   max-width: 420px;
   font-size: 16px;
   line-height: 1.75;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 .values-grid {
@@ -721,7 +724,7 @@ h1, h2, h3 {
 .value {
   position: relative;
   padding: 26px 24px;
-  border: 1px solid rgba(233, 200, 120, 0.3);
+  border: 1px solid rgba(255, 200, 97, 0.3);
   border-radius: 14px;
   background: rgba(255, 255, 255, 0.06);
   backdrop-filter: blur(8px);
@@ -741,7 +744,7 @@ h1, h2, h3 {
   margin: 0;
   font-size: 13.5px;
   line-height: 1.65;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 /* ================= CTA ================= */
@@ -750,7 +753,7 @@ h1, h2, h3 {
   padding: 128px 24px;
   text-align: center;
   background:
-    linear-gradient(180deg, rgba(10, 28, 56, 0.7), rgba(10, 28, 56, 0.92)),
+    linear-gradient(180deg, rgba(14, 12, 10, 0.7), rgba(14, 12, 10, 0.92)),
     url('/assets/images/saloon/hair-wash.jpg') center 40% / cover no-repeat;
   color: #ffffff;
 }
@@ -783,7 +786,7 @@ h1, h2, h3 {
   margin: 0 auto 30px;
   font-size: 16px;
   line-height: 1.7;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 /* ================= FOOTER ================= */
@@ -796,7 +799,7 @@ h1, h2, h3 {
   gap: 12px;
   padding: 26px max(24px, calc((100% - 1132px) / 2));
   background: var(--navy-deep);
-  color: #93a0b8;
+  color: #a89c8a;
   font-size: 13px;
 }
 
@@ -831,7 +834,7 @@ h1, h2, h3 {
 }
 
 .nav-app:hover {
-  background: rgba(201, 150, 46, 0.14);
+  background: rgba(245, 165, 36, 0.14);
 }
 
 .nav-app mat-icon,
@@ -877,7 +880,7 @@ h1, h2, h3 {
   border-radius: 10px;
   font-size: 14px;
   font-weight: 500;
-  color: #cfd7e6;
+  color: #e0d2bb;
   text-decoration: none;
   white-space: nowrap;
   transition: background 0.2s, color 0.2s;
@@ -1025,7 +1028,7 @@ h1, h2, h3 {
   border-radius: 22px;
   background: var(--navy-deep);
   color: #ffffff;
-  box-shadow: 0 24px 56px rgba(10, 28, 56, 0.25);
+  box-shadow: 0 24px 56px rgba(14, 12, 10, 0.25);
   border-top: 4px solid var(--gold);
 }
 
@@ -1038,7 +1041,7 @@ h1, h2, h3 {
 
 .price-then {
   font-size: 15px;
-  color: #cfd7e6;
+  color: #e0d2bb;
 }
 
 .price-inc {
@@ -1060,7 +1063,7 @@ h1, h2, h3 {
   gap: 12px;
   font-size: 14.5px;
   line-height: 1.5;
-  color: #e3e8f2;
+  color: #ece2d0;
 }
 
 .price-card li mat-icon {
@@ -1089,7 +1092,7 @@ h1, h2, h3 {
 
 .faq details[open] {
   border-color: var(--gold);
-  box-shadow: 0 10px 28px rgba(10, 28, 56, 0.08);
+  box-shadow: 0 10px 28px rgba(14, 12, 10, 0.08);
 }
 
 .faq summary {
@@ -1493,7 +1496,7 @@ h1, h2, h3 {
 @media (max-width: 960px) {
   .stage-photo {
     background:
-      linear-gradient(180deg, rgba(10, 28, 56, 0.9) 0%, rgba(10, 28, 56, 0.74) 55%, rgba(10, 28, 56, 0.88) 100%),
+      linear-gradient(180deg, rgba(14, 12, 10, 0.9) 0%, rgba(14, 12, 10, 0.74) 55%, rgba(14, 12, 10, 0.88) 100%),
       url('/assets/images/saloon/barbershop.jpg') center / cover no-repeat;
   }
 
@@ -1537,7 +1540,33 @@ h1, h2, h3 {
   }
 
   .brand-word {
-    font-size: 18px;
+    --bw-h: 38px;
+  }
+
+  /* Logo and the three buttons on one row at 360-390px: the buttons go
+     icon-only (Ingia keeps its aria-label) and the logo may give a little
+     on the narrowest phones instead of pushing the buttons to a new row. */
+  .brand {
+    max-width: calc(100% - 154px);
+  }
+
+  .nav-right {
+    gap: 6px;
+  }
+
+  .nav .nav-app,
+  .nav .nav-toggle,
+  .nav .nav-cta {
+    width: 40px;
+    min-height: 40px;
+    height: 40px;
+    padding: 0;
+    justify-content: center;
+  }
+
+  .nav .nav-cta {
+    gap: 0;
+    font-size: 0;
   }
 
   .hero {
@@ -1604,7 +1633,7 @@ h1, h2, h3 {
   .values {
     padding: 72px 16px;
     background:
-      linear-gradient(180deg, rgba(10, 28, 56, 0.93), rgba(10, 28, 56, 0.86)),
+      linear-gradient(180deg, rgba(14, 12, 10, 0.93), rgba(14, 12, 10, 0.86)),
       url('/assets/images/saloon/salon-bw.jpg') center / cover no-repeat;
   }
 

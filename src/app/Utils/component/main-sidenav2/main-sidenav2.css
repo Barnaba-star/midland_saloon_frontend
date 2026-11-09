@@ -23,14 +23,15 @@
   flex-direction: column;
   min-height: 100vh;
 
-  --sidenav-bg: linear-gradient(160deg, var(--sx-navy-100) 0%, var(--sx-bg) 45%, var(--sx-gold-100) 100%);
-  --sidenav-hover: rgba(20, 49, 93, 0.08);
+  /* The side menu is ink-dark in both themes, as in the Bar. */
+  --sidenav-bg: linear-gradient(180deg, #16130f 0%, #0e0c0a 100%);
+  --sidenav-hover: rgba(245, 165, 36, 0.1);
   font-family: var(--font-sans, 'Inter', sans-serif);
 }
 
 :host-context([data-theme="dark"]) {
-  --sidenav-bg: linear-gradient(160deg, var(--sx-ink) 0%, var(--sx-ink) 45%, var(--sx-ink) 100%);
-  --sidenav-hover: rgba(79, 127, 219, 0.12);
+  --sidenav-bg: linear-gradient(180deg, #16130f 0%, #0e0c0a 100%);
+  --sidenav-hover: rgba(245, 165, 36, 0.1);
 }
 
 /* ========================================================= */
@@ -358,7 +359,7 @@
 }
 
 .icon-btn:hover {
-  background: rgba(79, 70, 229, 0.12);
+  background: rgba(245, 165, 36, 0.12);
   color: var(--color-primary-dark, var(--sx-navy-900));
   transform: scale(1.06);
 }
@@ -654,7 +655,14 @@
   height: calc(100vh - 68px);
 
   background: var(--sidenav-bg);
-  border-right: 1px solid var(--color-border, var(--sx-line));
+  border-right: 1px solid rgba(255, 236, 205, 0.08);
+
+  /* Dark panel: everything inside reads these instead of the page's. */
+  --color-text: #f6ecdc;
+  --color-text-muted: #a89c8a;
+  --color-primary: #f5a524;
+  --color-primary-dark: #ffc861;
+  --color-border: rgba(255, 236, 205, 0.1);
 
   z-index: 999;
 
@@ -672,7 +680,7 @@
 
   top: 68px;
 
-  background: rgba(10, 15, 30, 0.45);
+  background: rgba(14, 12, 10, 0.45);
 
   z-index: 998;
 }
@@ -717,7 +725,7 @@
   border-radius: 50%;
 
   background: var(--color-primary, var(--sx-navy-700));
-  color: var(--sx-surface);
+  color: #1a1206;
 
   border: 2px solid var(--color-surface, var(--sx-surface));
 
@@ -757,6 +765,14 @@
   box-shadow: var(--shadow-sm);
 
   transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* The SalonixTz logo (the default) is cream letters on nothing: it sits
+   straight on the dark panel, no white tile behind it. */
+.menu-item-logo img[src*="salonix-logo"] {
+  background-color: transparent;
+  box-shadow: none;
+  padding: 6px 2px;
 }
 
 .menu-item-logo img:hover {
@@ -866,8 +882,8 @@
 /* ========================================================= */
 
 .menu-item.active {
-  background: linear-gradient(135deg, var(--color-primary, var(--sx-navy-700)), var(--color-accent, var(--sx-info)));
-  box-shadow: 0 4px 14px rgba(20, 49, 93, 0.35);
+  background: #f5a524;
+  box-shadow: 0 6px 18px rgba(245, 165, 36, 0.25);
 }
 
 .menu-item.active:hover {
@@ -876,7 +892,7 @@
 
 .menu-item.active .menu-icon,
 .menu-item.active .label {
-  color: var(--sx-surface);
+  color: #1a1206;
 }
 
 .menu-item.active .label {
@@ -917,7 +933,7 @@
 
   overflow: hidden;
 
-  background: rgba(20, 49, 93, 0.04);
+  background: rgba(255, 236, 205, 0.03);
 
   transition:
     max-height 0.25s ease;
@@ -1043,7 +1059,7 @@
 }
 
 .sidebar::-webkit-scrollbar-thumb {
-  background: rgba(20, 49, 93, 0.2);
+  background: rgba(43, 33, 24, 0.2);
 
   border-radius: 10px;
 }
@@ -1340,7 +1356,7 @@
 .search-backdrop {
   position: fixed;
   inset: 0;
-  background: rgba(10, 15, 30, 0.5);
+  background: rgba(14, 12, 10, 0.5);
   z-index: 1300;
 }
 

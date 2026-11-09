@@ -4239,7 +4239,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: 1px solid var(--sx-line) !important;
     border-left: 4px solid var(--sx-gold-500) !important;
     background: var(--sx-surface) !important;
-    box-shadow: 0 6px 18px rgba(10, 28, 56, 0.06) !important;
+    box-shadow: 0 6px 18px rgba(14, 12, 10, 0.06) !important;
     overflow: hidden;
   }
 

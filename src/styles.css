@@ -1,26 +1,28 @@
 @import './styles/middle_container.scss';
 
 :root {
-  /* Brand palette of Mr Saloon (navy + gold).
+  /* Brand palette of SalonixTz - the Bar's colours (owner, 2026-11-09):
+     espresso and beer amber on warm paper, ink-dark panels. The scale keeps
+     its old names (navy = espresso, gold = amber) so no page had to change.
      The --sx-* scale is the Saloon's one palette: every page colours itself
      from these (or the --color-* names mapped onto them) - never a literal
      hex, so the whole app reads as one product. */
-  --sx-navy-900: #0a1c38;
-  --sx-navy-800: #102748;
-  --sx-navy-700: #14315d;
-  --sx-navy-500: #2c5491;
-  --sx-navy-300: #8ea6cf;
-  --sx-navy-100: #eaeff8;
-  --sx-navy-50: #f5f7fc;
-  --sx-gold-700: #a67a1f;
-  --sx-gold-500: #c9962e;
-  --sx-gold-300: #e2bf6e;
-  --sx-gold-100: #faf1de;
-  --sx-ink: #111827;
-  --sx-muted: #6b7280;
-  --sx-line: #e5e7eb;
-  --sx-bg: #f5f6fb;
-  --sx-surface: #ffffff;
+  --sx-navy-900: #0e0c0a;
+  --sx-navy-800: #16130f;
+  --sx-navy-700: #2b2118;
+  --sx-navy-500: #6b4f33;
+  --sx-navy-300: #c9b79a;
+  --sx-navy-100: #f5e9d4;
+  --sx-navy-50: #fbf6ec;
+  --sx-gold-700: #b86e00;
+  --sx-gold-500: #f5a524;
+  --sx-gold-300: #ffc861;
+  --sx-gold-100: #fdf1dc;
+  --sx-ink: #1d1812;
+  --sx-muted: #7a6f60;
+  --sx-line: #e8dcc8;
+  --sx-bg: #f6f0e6;
+  --sx-surface: #fffdf9;
   --sx-success: #15803d;
   --sx-success-bg: #dcfce7;
   --sx-warning: #b45309;
@@ -30,17 +32,17 @@
   --sx-info: #1d4ed8;
   --sx-info-bg: #dbeafe;
   --sx-script: 'Allura', cursive;
-  --color-primary: #14315d;
-  --color-primary-dark: #0a1c38;
-  --color-primary-light: #eaeff8;
-  --color-accent: #c9962e;
-  --color-accent-dark: #a67a1f;
-  --color-accent-light: #faf1de;
-  --color-bg: #f5f6fb;
-  --color-surface: #ffffff;
-  --color-text: #111827;
-  --color-text-muted: #6b7280;
-  --color-border: #e5e7eb;
+  --color-primary: #2b2118;
+  --color-primary-dark: #17110b;
+  --color-primary-light: #f5e9d4;
+  --color-accent: #f5a524;
+  --color-accent-dark: #c97f0a;
+  --color-accent-light: #fdf1dc;
+  --color-bg: #f6f0e6;
+  --color-surface: #fffdf9;
+  --color-text: #1d1812;
+  --color-text-muted: #7a6f60;
+  --color-border: #e8dcc8;
   --radius-sm: 10px;
   --radius-md: 16px;
   --radius-lg: 24px;
@@ -51,17 +53,17 @@
 }
 
 :root[data-theme="dark"] {
-  --color-primary: #4f7fdb;
-  --color-primary-dark: #b6cbf2;
-  --color-primary-light: #1b2536;
-  --color-accent: #d8ab52;
-  --color-accent-dark: #f0c877;
+  --color-primary: #d08a14;
+  --color-primary-dark: #ffc861;
+  --color-primary-light: #2a2115;
+  --color-accent: #f5a524;
+  --color-accent-dark: #ffc861;
   --color-accent-light: #2c2413;
-  --color-bg: #0f1420;
-  --color-surface: #171d2b;
-  --color-text: #e5e9f0;
-  --color-text-muted: #93a0b8;
-  --color-border: #2a3346;
+  --color-bg: #0e0c0a;
+  --color-surface: #16130f;
+  --color-text: #f6ecdc;
+  --color-text-muted: #a89c8a;
+  --color-border: #2e271e;
   --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.35);
   --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.45);
   --shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.55);
@@ -349,7 +351,7 @@ body {
 }
 
 .custom-dialog {
-  background-color: #f8faff !important;
+  background-color: #fffaf2 !important;
 }
 .spend-dialog {
   width: 700px !important;
@@ -420,8 +422,8 @@ body {
 }
 
 /* ===== Icon badges: the landing's colours, everywhere =====
-   Every decorative icon badge and letter avatar is navy on gold - the gold
-   disc with a navy icon the landing page uses. Status badges (danger,
+   Every decorative icon badge and letter avatar is ink on amber - the amber
+   disc with an ink icon the landing page uses. Status badges (danger,
    success, warning) keep their own colours; photos inside avatars cover
    the gold. Component styles out-rank a global class, hence !important. */
 :is(.icon-badge, .table-heading-icon, .role-icon, .role-avatar, .branch-icon,

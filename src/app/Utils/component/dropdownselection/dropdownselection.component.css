@@ -37,5 +37,5 @@
 .dropdown-select:focus {
   border-color: var(--sx-navy-700);
   outline: none;
-  box-shadow: 0 0 0 2px rgba(63, 81, 181, 0.2);
+  box-shadow: 0 0 0 2px rgba(245, 165, 36, 0.2);
 }

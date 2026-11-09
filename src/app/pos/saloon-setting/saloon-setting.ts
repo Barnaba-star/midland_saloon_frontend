@@ -258,7 +258,7 @@ serviceColumns: {
     header: 'Service',
     icon: 'more',
     iconPosition: 'left',
-    iconColor: '#413e58'
+    iconColor: '#2b2118'
   },
   {
     field: 'serviceCode',

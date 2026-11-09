@@ -409,3 +409,9 @@ position: static;
   cursor: pointer;
   animation: dropdownFade 1.5s ease-out;
 }
+
+/* The SalonixTz logo is cream letters on nothing - it needs the dark tile. */
+.menu-item-logo img[src*="salonix-logo"] {
+  background-color: #16130f;
+  padding: 8px;
+}

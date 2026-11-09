@@ -215,7 +215,7 @@ mat-form-field .mat-form-field-label-required {
 
     border-color:var(--sx-navy-700);
 
-    box-shadow:0 0 0 3px rgba(63,81,181,.15);
+    box-shadow:0 0 0 3px rgba(245, 165, 36,.15);
 
 }
 
@@ -364,7 +364,7 @@ mat-form-field .mat-form-field-label-required {
   background-color: var(--color-primary-dark, var(--sx-navy-900));
 
   box-shadow:
-    0 4px 12px rgba(20, 49, 93, 0.35);
+    0 4px 12px rgba(43, 33, 24, 0.35);
 }
 
 .submit-button:disabled {

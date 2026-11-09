@@ -247,7 +247,7 @@
 .account-input:focus {
   outline: none;
   border-color: var(--sx-navy-100);
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.18);
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.18);
 }
 
 .account-input::placeholder {

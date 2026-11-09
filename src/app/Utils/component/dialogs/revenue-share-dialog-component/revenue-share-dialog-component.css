@@ -313,7 +313,7 @@
 
 .who-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.28);
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.28);
 }
 
 /* Indented and ruled off, so the list reads as belonging to the row above it. */
@@ -463,7 +463,7 @@
 
 .pay-btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.28);
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.28);
 }
 
 /* Settled rows still say so in words - a tick on its own would not. */
@@ -541,7 +541,7 @@
 
 .btn:focus-visible {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.28);
+  box-shadow: 0 0 0 3px rgba(245, 165, 36, 0.28);
 }
 
 

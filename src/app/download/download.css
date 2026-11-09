@@ -1,19 +1,19 @@
-/* /app - the landing's look: the barbershop under a navy shade, gold accents,
-   heavy Inter heads, gold discs for the steps. */
+/* /app - the landing's look: the barbershop under an ink shade, amber accents,
+   heavy Inter heads, amber discs for the steps (the Bar's colours). */
 .page {
-  --navy: #0a1c38;
-  --navy-2: #102748;
+  --navy: #0e0c0a;
+  --navy-2: #16130f;
   --line: rgba(255, 255, 255, 0.1);
   --cream: #ffffff;
-  --muted: #c3cde0;
-  --gold: #c9962e;
-  --gold-2: #e2bf6e;
+  --muted: #e0d2bb;
+  --gold: #f5a524;
+  --gold-2: #ffc861;
 
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   background:
-    linear-gradient(180deg, rgba(10, 28, 56, 0.9), rgba(10, 28, 56, 0.97)),
+    linear-gradient(180deg, rgba(14, 12, 10, 0.9), rgba(14, 12, 10, 0.97)),
     url('/assets/images/saloon/barbershop.jpg') center / cover no-repeat fixed,
     var(--navy);
   color: var(--cream);
@@ -31,7 +31,8 @@
   padding: 20px clamp(16px, 5vw, 56px);
 }
 
-.brand { text-decoration: none; font-size: 22px; }
+.brand { text-decoration: none; flex: none; min-width: 0; max-width: calc(100vw - 150px); --bw-h: 48px; }
+@media (max-width: 560px) { .brand { --bw-h: 38px; } }
 
 .nav-link {
   display: inline-flex;
@@ -95,7 +96,7 @@ h1 {
   font-weight: 700;
   font-size: 17px;
   text-decoration: none;
-  box-shadow: 0 12px 32px rgba(201, 150, 46, 0.3);
+  box-shadow: 0 12px 32px rgba(245, 165, 36, 0.3);
   transition: transform 0.15s ease, background 0.15s ease;
 }
 .btn-gold:hover { background: var(--gold-2); transform: translateY(-1px); }
@@ -109,8 +110,8 @@ h1 {
   align-items: flex-start;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(201, 150, 46, 0.12);
-  border: 1px solid rgba(201, 150, 46, 0.35);
+  background: rgba(245, 165, 36, 0.12);
+  border: 1px solid rgba(245, 165, 36, 0.35);
   color: var(--cream);
   margin: 0 0 20px;
   max-width: 560px;

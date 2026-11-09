@@ -222,7 +222,7 @@ mat-form-field .mat-form-field-label-required {
 
     border-color:var(--sx-navy-700);
 
-    box-shadow:0 0 0 3px rgba(63,81,181,.15);
+    box-shadow:0 0 0 3px rgba(245, 165, 36,.15);
 
 }
 
@@ -247,7 +247,7 @@ mat-form-field .mat-form-field-label-required {
   font-weight: 600;
   letter-spacing: 0.3px;
 
-  box-shadow: 0 4px 12px rgba(63, 81, 181, 0.25);
+  box-shadow: 0 4px 12px rgba(245, 165, 36, 0.25);
   transition: all 0.25s ease;
 }
 
@@ -259,7 +259,7 @@ mat-form-field .mat-form-field-label-required {
 
 .submit-btn:hover:not(:disabled) {
   transform: translateY(-2px);
-  box-shadow: 0 7px 18px rgba(63, 81, 181, 0.35);
+  box-shadow: 0 7px 18px rgba(245, 165, 36, 0.35);
 }
 
 .submit-btn:active:not(:disabled) {

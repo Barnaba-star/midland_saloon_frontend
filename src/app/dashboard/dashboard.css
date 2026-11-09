@@ -7,9 +7,11 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 32px;
-  background: var(--color-surface);
-  border-bottom: 1px solid var(--color-border);
+  padding: 12px 32px;
+  /* Ink-dark like the side menu: the logo's cream letters need it. */
+  background: linear-gradient(180deg, #16130f 0%, #0e0c0a 100%);
+  border-bottom: 1px solid rgba(245, 165, 36, 0.3);
+  color: #f6ecdc;
   position: sticky;
   top: 0;
   z-index: 10;
@@ -22,8 +24,17 @@
   min-width: 0;
 }
 
+.topbar-brand {
+  flex: none;
+  max-width: calc(100vw - 120px);
+}
+
 .topbar-word {
-  font-size: 22px;
+  --bw-h: 48px;
+}
+
+.topbar-actions .mat-mdc-icon-button {
+  color: #f6ecdc;
 }
 
 .topbar-actions {
@@ -38,8 +49,9 @@
   gap: 6px;
   padding: 6px 14px;
   border-radius: 999px;
-  background: var(--color-primary-light);
-  color: var(--color-primary);
+  background: rgba(245, 165, 36, 0.12);
+  border: 1px solid rgba(245, 165, 36, 0.3);
+  color: #ffc861;
   font-size: 13px;
   font-weight: 500;
 }
@@ -174,7 +186,7 @@ mat-card-content {
   }
 
   .topbar-word {
-    font-size: 18px;
+    --bw-h: 38px;
   }
 
   .user-chip span {
