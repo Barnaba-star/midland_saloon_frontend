@@ -18,7 +18,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
     '[class.bw-light]': "tone() === 'light'",
     '[class.bw-mark]': 'mark()',
   },
-  template: `<img class="bw-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" width="2247" height="403" />`,
+  template: `<img class="bw-logo" [src]="surface() === 'light' ? 'assets/images/salonix-logo-dark.png' : 'assets/images/salonix-logo.png'" alt="SalonixTz" width="2247" height="403" />`,
   styles: [`
     :host {
       display: inline-flex;
@@ -38,5 +38,7 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 })
 export class BrandWord {
   readonly tone = input<'dark' | 'light'>('dark');
+  /** What the logo sits on: 'light' shows the espresso-lettered logo (no dark tile behind it). */
+  readonly surface = input<'dark' | 'light'>('dark');
   readonly mark = input(false);
 }
