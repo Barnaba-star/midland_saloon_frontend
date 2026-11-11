@@ -1647,3 +1647,28 @@ h1, h2, h3 {
     text-align: center;
   }
 }
+
+
+/* The app's own launcher icon on the "Pakua App" links, and the words stay
+   on phones too (owner, 2026-11-11) - Ingia and Menyu stay icon-only there. */
+.app-mark {
+  display: block;
+  flex: none;
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+}
+.app-mark.small { width: 18px; height: 18px; border-radius: 5px; }
+.nav-app { padding-left: 6px; white-space: nowrap; }
+
+@media (max-width: 760px) {
+  .nav .nav-app {
+    width: auto;
+    padding: 0 10px 0 6px;
+    gap: 6px;
+    font-size: 13px;
+  }
+  .nav .nav-app span { display: inline; }
+  .nav { flex-wrap: nowrap; gap: 8px; }
+  .brand { max-width: calc(100% - 222px); min-width: 0; }
+}

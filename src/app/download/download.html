@@ -6,8 +6,13 @@
 
   <main class="hero">
     <div class="copy">
-      <span class="eyebrow"><mat-icon>android</mat-icon> {{ 'DOWNLOAD.EYEBROW' | translate }}</span>
-      <h1>{{ 'DOWNLOAD.TITLE' | translate }}</h1>
+      <div class="app-head">
+        <img src="salonix-192.png" alt="SalonixTz" class="app-icon">
+        <div>
+        <span class="eyebrow"><mat-icon>android</mat-icon> {{ 'DOWNLOAD.EYEBROW' | translate }}</span>
+        <h1>{{ 'DOWNLOAD.TITLE' | translate }}</h1>
+        </div>
+      </div>
       <p class="lead">{{ 'DOWNLOAD.LEAD' | translate }}</p>
 
       @if (isApple) {

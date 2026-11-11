@@ -22,7 +22,7 @@
       </ul>
       <div class="nav-right">
         <a class="nav-app" routerLink="/app" [attr.aria-label]="'DOWNLOAD.NAV' | translate">
-          <mat-icon>android</mat-icon><span>{{ 'DOWNLOAD.NAV' | translate }}</span>
+          <img src="salonix-192.png" alt="" class="app-mark"><span>{{ 'DOWNLOAD.NAV' | translate }}</span>
         </a>
         <button type="button" class="nav-cta" (click)="goToLogin()" [attr.aria-label]="'LOGIN.SIGN_IN' | translate">
           {{ 'LOGIN.SIGN_IN' | translate }}
@@ -364,7 +364,7 @@
 
   <footer class="footer">
     <app-brand-word tone="light" class="brand-word small" />
-    <a class="footer-app" routerLink="/app"><mat-icon>android</mat-icon> {{ 'DOWNLOAD.NAV' | translate }}</a>
+    <a class="footer-app" routerLink="/app"><img src="salonix-192.png" alt="" class="app-mark small"> {{ 'DOWNLOAD.NAV' | translate }}</a>
     <span>&copy; {{ currentYear }} SalonixTz. {{ 'LANDING.ALL_RIGHTS_RESERVED' | translate }}</span>
   </footer>
 </div>

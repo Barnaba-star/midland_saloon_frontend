@@ -161,3 +161,9 @@ h1 {
   font-size: 14px;
 }
 .footer a { color: var(--cream); text-decoration: none; }
+
+/* The app's launcher icon beside the title - what they will find on the phone. */
+.app-head { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; }
+.app-head h1 { margin-bottom: 0; }
+.app-icon { flex: none; width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }
+@media (max-width: 420px) { .app-icon { width: 60px; height: 60px; border-radius: 14px; } }
