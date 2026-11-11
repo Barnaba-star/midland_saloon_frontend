@@ -1,0 +1,74 @@
+<app-title2 titleHeader="MENU.QUEUE" [actions]="[]"></app-title2>
+
+<div class="sq-page">
+  <section class="sq-door">
+    <div class="sq-door-text">
+      <h2>{{ 'QUEUE.DOOR_TITLE' | translate }}</h2>
+      @if (settings(); as s) {
+        <p>
+          @if (s.enabled) {
+            {{ 'QUEUE.DOOR_ON' | translate }}
+          } @else {
+            <span class="sq-off">{{ 'QUEUE.DOOR_OFF' | translate }}</span>
+          }
+        </p>
+        <button type="button" class="sq-link" (click)="copyLink()" [title]="'QUEUE.COPY_LINK' | translate">{{ link() }}</button>
+      }
+    </div>
+    <button type="button" class="sq-btn sq-btn-gold" [disabled]="!settings()" (click)="print()">
+      <mat-icon>print</mat-icon>
+      <span>{{ 'QUEUE.PRINT_DOOR' | translate }}</span>
+    </button>
+  </section>
+
+  @if (loaded() && !tickets().length) {
+    <div class="sq-empty">
+      <mat-icon>groups</mat-icon>
+      <h3>{{ 'QUEUE.EMPTY_TITLE' | translate }}</h3>
+      <p>{{ 'QUEUE.EMPTY_TEXT' | translate }}</p>
+    </div>
+  }
+
+  @for (g of groups(); track g.key) {
+    @if (g.rows.length) {
+      <section class="sq-group" [attr.data-status]="g.key">
+        <h2 class="sq-group-title">{{ g.title | translate }} <span class="sq-count">{{ g.rows.length }}</span></h2>
+        <div class="sq-list">
+          @for (t of g.rows; track t.uid) {
+            <article class="sq-row">
+              <div class="sq-num">#{{ t.number }}</div>
+              <div class="sq-info">
+                <strong class="sq-name">{{ t.customerName }}</strong>
+                <span class="sq-meta">{{ t.serviceName }} · {{ t.staffName || ('QUEUE.ANYONE' | translate) }}</span>
+                <span class="sq-time">
+                  {{ (t.status === 'WAITING' ? 'QUEUE.WAITED' : t.status === 'CALLED' ? 'QUEUE.CALLED_AGO' : 'QUEUE.SERVING_SINCE') | translate: { n: minutes(t) } }}
+                  @if (t.status === 'CALLED' && t.smsSent) {
+                    · {{ 'QUEUE.SMS_SENT' | translate }}
+                  }
+                </span>
+              </div>
+              <div class="sq-actions">
+                @if (t.status === 'SERVING') {
+                  <button type="button" class="sq-btn sq-btn-gold" (click)="openSales()">
+                    <mat-icon>receipt_long</mat-icon><span>{{ 'QUEUE.TO_BILL' | translate }}</span>
+                  </button>
+                } @else {
+                  <button type="button" class="sq-btn" [disabled]="busy() === t.uid" (click)="call(t)">
+                    <mat-icon>campaign</mat-icon><span>{{ (t.status === 'CALLED' ? 'QUEUE.CALL_AGAIN' : 'QUEUE.CALL') | translate }}</span>
+                  </button>
+                  <button type="button" class="sq-btn sq-btn-gold" [disabled]="busy() === t.uid" (click)="start(t)">
+                    <mat-icon>play_arrow</mat-icon><span>{{ 'QUEUE.START' | translate }}</span>
+                  </button>
+                  <button type="button" class="sq-btn sq-btn-quiet" [disabled]="busy() === t.uid" (click)="left(t)">
+                    <mat-icon>logout</mat-icon><span>{{ 'QUEUE.LEFT' | translate }}</span>
+                  </button>
+                }
+              </div>
+            </article>
+          }
+        </div>
+      </section>
+    }
+  }
+  <p class="sq-foot">{{ 'QUEUE.AUTO_REFRESH' | translate }}</p>
+</div>

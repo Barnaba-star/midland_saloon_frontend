@@ -107,6 +107,12 @@ export interface SalesOpened{
     paidAmount?:number;
     paymentStatus?:string;
     bill?:number;
+    /** The customer card on this bill, and the reward taken off it. */
+    customerUid?: string | null;
+    customerName?: string | null;
+    loyaltyDiscount?: number | null;
+    /** Opened from the door queue (Foleni). */
+    queueTicketUid?: string | null;
 }
 
 export interface StaffCommissionDTO {

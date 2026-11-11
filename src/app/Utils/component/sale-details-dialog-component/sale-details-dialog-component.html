@@ -230,6 +230,28 @@
   </div>
 
 
+  <!-- ================= CUSTOMER REWARD ================= -->
+  @if (discount() > 0) {
+    <div class="dialog-reward">
+      <div class="reward-row">
+        <span>{{ 'BILL_CUSTOMER.REWARD_LINE' | translate }}@if (data.sale?.customerName) { ({{ data.sale.customerName }})}</span>
+        <strong>- Tshs {{ discount() | number:'1.0-0' }}</strong>
+      </div>
+      <div class="reward-row reward-pay">
+        <span>{{ 'BILL_CUSTOMER.TO_PAY' | translate }}</span>
+        <strong>Tshs {{ toPay() | number:'1.0-0' }}</strong>
+      </div>
+    </div>
+  } @else if (data.sale?.customerName) {
+    <div class="dialog-reward">
+      <div class="reward-row">
+        <span>{{ 'BILL_CUSTOMER.CUSTOMER' | translate }}</span>
+        <strong>{{ data.sale.customerName }}</strong>
+      </div>
+    </div>
+  }
+
+
   <!-- ================= PAYMENT ================= -->
   @if (data.showPayment) {
 

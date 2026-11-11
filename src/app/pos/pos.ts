@@ -100,6 +100,13 @@ menuItems: SidenavItem[] = [
     roles: this.allRoles,
   },
   {
+    // Walk-ins who joined by the door QR.
+    label: 'MENU.QUEUE',
+    icon: 'team',
+    route: '/pos/saloonQueue',
+    roles: this.allRoles
+  },
+  {
     label: this.reportLabel,
     icon: 'report',
     route: '/pos/saloonReports',

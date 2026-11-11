@@ -1,0 +1,98 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (door(); as d) {
+    <p class="pp-branch">{{ d.branchName }}</p>
+  }
+</header>
+
+<main class="pp-main">
+  @if (loading()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (loadError()) {
+    <h1 class="pp-title">{{ 'PUBLIC.QUEUE_TITLE' | translate }}</h1>
+    <p class="pp-error">{{ ('PUBLIC.ERR_' + (loadError() === 'QUEUE_NOT_FOUND' || loadError() === 'NOT_FOUND' ? 'QUEUE_NOT_FOUND' : 'NETWORK')) | translate }}</p>
+    @if (loadError() === 'NETWORK' || loadError() === 'UNKNOWN') {
+      <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+    }
+  } @else if (door(); as d) {
+    <div>
+      <h1 class="pp-title">{{ 'PUBLIC.QUEUE_TITLE' | translate }}</h1>
+      <p class="pp-lead">
+        @if (d.waiting > 0) {
+          {{ 'PUBLIC.WAITING_NOW' | translate: { n: d.waiting } }}
+        } @else {
+          {{ 'PUBLIC.NO_ONE_WAITING' | translate }}
+        }
+      </p>
+    </div>
+
+    @if (myTicket()) {
+      <p class="pp-note">
+        {{ 'PUBLIC.HAVE_TICKET' | translate }}
+        <a [routerLink]="['/tiketi', myTicket()]">{{ 'PUBLIC.SEE_TICKET' | translate }}</a>
+      </p>
+    }
+
+    @if (!d.enabled) {
+      <p class="pp-error">{{ 'PUBLIC.ERR_QUEUE_CLOSED' | translate }}</p>
+    } @else {
+      <section class="pp-card">
+        <h2 class="pp-card-title">1. {{ 'PUBLIC.PICK_SERVICE' | translate }}</h2>
+        <div class="qj-options">
+          @for (s of d.services; track s.uid) {
+            <button type="button" class="qj-option" [class.on]="serviceUid() === s.uid" (click)="serviceUid.set(s.uid)">
+              <span class="qj-name">{{ s.name }}</span>
+              <span class="qj-side">
+                <strong>TZS {{ s.price | number: '1.0-0' }}</strong>
+                @if (s.minutes) {
+                  <small>{{ 'PUBLIC.MINUTES' | translate: { n: s.minutes } }}</small>
+                }
+              </span>
+            </button>
+          } @empty {
+            <p class="pp-muted">{{ 'PUBLIC.NO_SERVICES' | translate }}</p>
+          }
+        </div>
+      </section>
+
+      <section class="pp-card">
+        <h2 class="pp-card-title">2. {{ 'PUBLIC.PICK_STAFF' | translate }}</h2>
+        <div class="qj-options">
+          <button type="button" class="qj-option" [class.on]="staffUid() === null" (click)="staffUid.set(null)">
+            <span class="qj-name">{{ 'PUBLIC.ANYONE' | translate }}</span>
+          </button>
+          @for (p of d.staff; track p.uid) {
+            <button type="button" class="qj-option" [class.on]="staffUid() === p.uid" (click)="staffUid.set(p.uid)">
+              <span class="qj-name">{{ p.name }}</span>
+              <span class="qj-side">
+                <small>{{ (p.waiting > 0 ? 'PUBLIC.STAFF_WAITING' : 'PUBLIC.STAFF_FREE') | translate: { n: p.waiting } }}</small>
+              </span>
+            </button>
+          }
+        </div>
+      </section>
+
+      <section class="pp-card">
+        <h2 class="pp-card-title">3. {{ 'PUBLIC.YOUR_DETAILS' | translate }}</h2>
+        <label class="qj-field">
+          <span>{{ 'PUBLIC.NAME' | translate }}</span>
+          <input type="text" [(ngModel)]="name" name="name" autocomplete="name" maxlength="60" />
+        </label>
+        <label class="qj-field">
+          <span>{{ 'PUBLIC.PHONE' | translate }}</span>
+          <input type="tel" [(ngModel)]="phone" name="phone" autocomplete="tel" inputmode="tel" placeholder="07XX XXX XXX" maxlength="16" />
+        </label>
+        <p class="pp-muted qj-hint">{{ 'PUBLIC.PHONE_HINT' | translate }}</p>
+      </section>
+
+      @if (joinError()) {
+        <p class="pp-error">{{ ('PUBLIC.ERR_' + joinError()) | translate }}</p>
+      }
+
+      <button type="button" class="pp-btn" [disabled]="!canJoin()" (click)="join()">
+        {{ (sending() ? 'PUBLIC.JOINING' : 'PUBLIC.JOIN') | translate }}
+      </button>
+    }
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>

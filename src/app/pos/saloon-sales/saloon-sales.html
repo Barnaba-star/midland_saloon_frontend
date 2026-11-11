@@ -75,6 +75,18 @@
                   </div>
                 </div>
 
+                <!-- The customer card on this bill, and the reward taken off it. -->
+                @if (sale.customerName || (sale.loyaltyDiscount || 0) > 0) {
+                  <div class="sale-customer">
+                    @if (sale.customerName) {
+                      <span class="sale-customer-name"><mat-icon>badge</mat-icon>{{ sale.customerName }}</span>
+                    }
+                    @if ((sale.loyaltyDiscount || 0) > 0) {
+                      <span class="sale-customer-reward">{{ 'BILL_CUSTOMER.REWARD_ON' | translate: { amount: (sale.loyaltyDiscount | number: '1.0-0') } }}</span>
+                    }
+                  </div>
+                }
+
                 <!-- ================= FOOTER ================= -->
              <div class="sale-actions">
 
@@ -94,6 +106,23 @@
     </span>
   </button>
 
+
+  <!-- MTEJA: the customer's card on this bill -->
+  @if (sale.paymentStatus !== 'PAID') {
+    <button
+      type="button"
+      class="sale-action-btn customer-btn"
+      (click)="openCustomer(sale)"
+    >
+      <span class="action-icon">
+        <mat-icon>badge</mat-icon>
+      </span>
+
+      <span class="action-text">
+        {{ 'BILL_CUSTOMER.BUTTON' | translate }}
+      </span>
+    </button>
+  }
 
   <!-- TAZAMA NDANI -->
   <button

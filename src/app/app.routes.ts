@@ -108,6 +108,19 @@ export const routes: Routes = [
   path: 'login',
   loadComponent: () => import('./login/login').then(m => m.Login)
 },
+// A walk-in's own phone: no login, no guard (door QR, their ticket, their card).
+{
+  path: 'foleni/:token',
+  loadComponent: () => import('./public/queue-join/queue-join').then(m => m.QueueJoin)
+},
+{
+  path: 'tiketi/:token',
+  loadComponent: () => import('./public/queue-ticket/queue-ticket').then(m => m.QueueTicket)
+},
+{
+  path: 'kadi/:token',
+  loadComponent: () => import('./public/customer-card/customer-card').then(m => m.CustomerCard)
+},
 {
   path: 'dashboard',
   loadComponent: () => import('./dashboard/dashboard').then(m => m.Dashboard)
@@ -130,6 +143,11 @@ export const routes: Routes = [
        {
         path: 'saloonService',
         loadComponent:()=>import('./pos/saloon-service/saloon-service').then(m=>m.SaloonService)
+      },
+      {
+        // The door queue (Foleni): walk-ins who joined by the door QR.
+        path: 'saloonQueue',
+        loadComponent:()=>import('./pos/saloon-queue/saloon-queue').then(m=>m.SaloonQueue)
       },
        {
         path: 'saloonSales',

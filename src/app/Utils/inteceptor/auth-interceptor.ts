@@ -3,6 +3,7 @@ import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable, catchError, throwError } from 'rxjs';
 import { Authentication } from '../services/authentication';
+import { isPublicPath } from '../../public/public-paths';
 
 export const AuthInterceptor: HttpInterceptorFn = (
   req: HttpRequest<any>,
@@ -25,7 +26,9 @@ export const AuthInterceptor: HttpInterceptorFn = (
       const isLoginRequest = req.url.includes('/authentication/login');
       const isProfilePicRequest = req.url.includes('/attachment/findUserForProfile');
 
-      if (error.status === 401 && !isLoginRequest && !isProfilePicRequest) {
+      // A walk-in's own pages (door QR, ticket, card) never go to /login,
+      // even if the phone still holds an old staff cookie.
+      if (error.status === 401 && !isLoginRequest && !isProfilePicRequest && !isPublicPath()) {
         authService.stopHeartbeat();
         authService.removeToken();
         router.navigate(['/login']);

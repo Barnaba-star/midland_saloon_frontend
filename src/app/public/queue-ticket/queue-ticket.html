@@ -1,0 +1,85 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (ticket(); as t) {
+    <p class="pp-branch">{{ t.branchName }}</p>
+  }
+</header>
+
+<main class="pp-main">
+  @if (loading() && !ticket()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (error() && !ticket()) {
+    <h1 class="pp-title">{{ 'PUBLIC.TICKET' | translate }}</h1>
+    <p class="pp-error">{{ (error() === 'NETWORK' ? 'PUBLIC.ERR_NETWORK' : 'PUBLIC.ERR_TICKET_NOT_FOUND') | translate }}</p>
+    <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+  } @else if (ticket(); as t) {
+    @if (!t.today && (t.status === 'WAITING' || t.status === 'CALLED')) {
+      <h1 class="pp-title">{{ 'PUBLIC.TICKET_NUMBER' | translate: { n: t.number } }}</h1>
+      <p class="pp-note">{{ 'PUBLIC.TICKET_OLD' | translate }}</p>
+    } @else {
+      @switch (t.status) {
+        @case ('CALLED') {
+          <section class="qt-called">
+            <h1 class="qt-called-title">{{ 'PUBLIC.YOUR_TURN' | translate }}</h1>
+            <p class="qt-called-text">{{ 'PUBLIC.YOUR_TURN_TEXT' | translate: { n: t.number } }}</p>
+          </section>
+        }
+        @case ('WAITING') {
+          <div>
+            <h1 class="pp-title">{{ 'PUBLIC.TICKET_NUMBER' | translate: { n: t.number } }}</h1>
+            <p class="pp-lead">{{ 'PUBLIC.HELLO' | translate: { name: t.name } }}</p>
+          </div>
+          <section class="pp-card qt-place">
+            <h2 class="pp-card-title">
+              @if ((t.ahead ?? 0) > 0) {
+                {{ 'PUBLIC.AHEAD' | translate: { n: t.ahead } }}
+              } @else {
+                {{ 'PUBLIC.NEXT' | translate }}
+              }
+            </h2>
+            @if ((t.waitMinutes ?? 0) > 0) {
+              <p class="qt-wait">{{ 'PUBLIC.WAIT_ABOUT' | translate: { n: t.waitMinutes } }}</p>
+            }
+            <p class="pp-muted">{{ 'PUBLIC.AUTO_REFRESH' | translate }}</p>
+          </section>
+        }
+        @case ('SERVING') {
+          <h1 class="pp-title">{{ 'PUBLIC.SERVING' | translate }}</h1>
+          <p class="pp-lead">{{ 'PUBLIC.SERVING_TEXT' | translate }}</p>
+        }
+        @case ('DONE') {
+          <h1 class="pp-title">{{ 'PUBLIC.DONE' | translate }}</h1>
+          <p class="pp-lead">{{ 'PUBLIC.DONE_TEXT' | translate }}</p>
+        }
+        @default {
+          <h1 class="pp-title">{{ 'PUBLIC.LEFT' | translate }}</h1>
+          <p class="pp-lead">{{ 'PUBLIC.LEFT_TEXT' | translate }}</p>
+        }
+      }
+    }
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'PUBLIC.YOUR_TICKET' | translate }}</h2>
+      <dl class="qt-rows">
+        <div><dt>{{ 'PUBLIC.NUMBER' | translate }}</dt><dd>#{{ t.number }}</dd></div>
+        <div><dt>{{ 'PUBLIC.SERVICE' | translate }}</dt><dd>{{ t.serviceName }}</dd></div>
+        <div><dt>{{ 'PUBLIC.STYLIST' | translate }}</dt><dd>{{ t.staffName || ('PUBLIC.ANYONE' | translate) }}</dd></div>
+      </dl>
+    </section>
+
+    @if (live()) {
+      @if (confirmLeave()) {
+        <p class="pp-note">{{ 'PUBLIC.LEAVE_SURE' | translate }}</p>
+      }
+      <button type="button" class="pp-btn pp-btn-danger" [disabled]="leaving()" (click)="leave()">
+        {{ (confirmLeave() ? 'PUBLIC.LEAVE_YES' : 'PUBLIC.LEAVE') | translate }}
+      </button>
+      @if (confirmLeave()) {
+        <button type="button" class="pp-btn pp-btn-ghost" (click)="confirmLeave.set(false)">{{ 'PUBLIC.STAY' | translate }}</button>
+      }
+    } @else if (door()) {
+      <a class="pp-btn pp-btn-ghost" [routerLink]="['/foleni', door()]">{{ 'PUBLIC.JOIN_AGAIN' | translate }}</a>
+    }
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>

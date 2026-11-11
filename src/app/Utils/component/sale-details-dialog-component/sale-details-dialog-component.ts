@@ -7,13 +7,14 @@ import {
 import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-sale-details-dialog-component',
 
   imports: [
     MatIcon,
-    FormsModule, DecimalPipe
+    FormsModule, DecimalPipe, TranslatePipe
   ],
 
   templateUrl: './sale-details-dialog-component.html',
@@ -51,6 +52,17 @@ export class SaleDetailsDialogComponent {
       0
     );
 
+  }
+
+
+  /** The customer's reward taken off this bill (loyalty discount). */
+  discount(): number {
+    return Number(this.data.sale?.loyaltyDiscount ?? 0);
+  }
+
+  /** What the customer pays: the services less their reward. */
+  toPay(): number {
+    return Math.max(0, this.getTotal() - this.discount());
   }
 
 

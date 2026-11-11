@@ -1,4 +1,5 @@
 import { OtherSplit } from '../other-split/other-split';
+import { QueueCardSetting } from '../queue-card-setting/queue-card-setting';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from "../../Utils/component/title2/title2";
 import { Authentication } from '../../Utils/services/authentication';
@@ -49,7 +50,7 @@ export interface SaloonServiceEntity {
 @Component({
   selector: 'app-saloon-setting',
   imports: [
-    OtherSplit, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
+    OtherSplit, QueueCardSetting, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -104,6 +105,12 @@ throw new Error('Method not implemented.');
       icon: 'pay',
       title: 'SALON.OTHER_SPLIT',
       roles: ['CEO']
+    },
+    {
+      // The door QR queue and the customer card's reward rule - the CEO's call.
+      icon: 'team',
+      title: 'SALON.QUEUE_CARD',
+      roles: ['ROOT', 'CEO']
     }
   ];
 

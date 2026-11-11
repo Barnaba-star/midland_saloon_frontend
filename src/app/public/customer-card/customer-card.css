@@ -1,0 +1,80 @@
+.cc-qr-card {
+  text-align: center;
+}
+
+.cc-qr {
+  display: block;
+  width: 100%;
+  max-width: 300px;
+  aspect-ratio: 1;
+  margin: 0 auto 10px;
+  border-radius: 12px;
+  background: var(--sx-surface);
+}
+
+.cc-qr-empty {
+  background: var(--sx-navy-50);
+}
+
+.cc-qr-card .pp-muted {
+  margin: 0;
+}
+
+.cc-reward {
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.cc-reward .pp-card-title {
+  color: var(--sx-navy-900);
+  margin-bottom: 6px;
+}
+
+.cc-reward p {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.cc-progress-text {
+  margin: 0 0 12px;
+  font-size: 15px;
+  line-height: 1.45;
+}
+
+.cc-dots {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.cc-dot {
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid var(--sx-gold-500);
+  background: var(--sx-surface);
+}
+
+.cc-dot.on {
+  background: var(--sx-gold-500);
+}
+
+.cc-bar {
+  height: 12px;
+  border-radius: 999px;
+  background: var(--sx-navy-50);
+  overflow: hidden;
+}
+
+.cc-bar span {
+  display: block;
+  height: 100%;
+  background: var(--sx-gold-500);
+}
+
+.cc-total {
+  margin: 12px 0 0;
+}

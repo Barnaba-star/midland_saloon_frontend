@@ -1,0 +1,128 @@
+<div class="bc">
+  <header class="bc-head">
+    <div>
+      <h2 class="bc-title">{{ 'BILL_CUSTOMER.TITLE' | translate }}</h2>
+      <p class="bc-sub">{{ 'BILL_CUSTOMER.FOR_BILL' | translate: { code: data.sale.salesCode } }}</p>
+    </div>
+    <button type="button" class="bc-x" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  @switch (view()) {
+    @case ('current') {
+      <section class="bc-box">
+        <h3 class="bc-name">{{ billName() }}</h3>
+        @if (customer(); as c) {
+          <p class="bc-line">{{ c.phone }}</p>
+          @if (c.ruleOn) {
+            <p class="bc-line">{{ 'BILL_CUSTOMER.PROGRESS' | translate: { n: c.visitsTowardReward, of: c.visitsNeeded } }}</p>
+          }
+          <p class="bc-line">{{ 'BILL_CUSTOMER.VISITS' | translate: { n: c.totalVisits } }}</p>
+        }
+        @if (discount() > 0) {
+          <p class="bc-reward-on">{{ 'BILL_CUSTOMER.REWARD_ON' | translate: { amount: (discount() | number: '1.0-0') } }}</p>
+        }
+      </section>
+      <div class="bc-actions">
+        @if (discount() > 0) {
+          <button type="button" class="bc-btn" [disabled]="busy()" (click)="removeReward()">
+            <mat-icon>undo</mat-icon><span>{{ 'BILL_CUSTOMER.REMOVE_REWARD' | translate }}</span>
+          </button>
+        } @else if (!customer() || customer()!.rewardsAvailable > 0) {
+          <button type="button" class="bc-btn bc-btn-gold" [disabled]="busy()" (click)="useReward()">
+            <mat-icon>redeem</mat-icon>
+            <span>
+              @if (customer(); as c) {
+                {{ 'BILL_CUSTOMER.USE_REWARD_AMOUNT' | translate: { amount: (c.rewardAmount | number: '1.0-0') } }}
+              } @else {
+                {{ 'BILL_CUSTOMER.USE_REWARD' | translate }}
+              }
+            </span>
+          </button>
+        }
+        <button type="button" class="bc-btn" [disabled]="busy()" (click)="change()">
+          <mat-icon>swap_horiz</mat-icon><span>{{ 'BILL_CUSTOMER.CHANGE' | translate }}</span>
+        </button>
+        <button type="button" class="bc-btn" (click)="close()">{{ 'BILL_CUSTOMER.DONE' | translate }}</button>
+      </div>
+    }
+
+    @case ('search') {
+      @if (scanning()) {
+        <div class="bc-cam">
+          <video #video playsinline muted></video>
+          <p class="bc-line">{{ 'BILL_CUSTOMER.SCAN_HINT' | translate }}</p>
+          <button type="button" class="bc-btn" (click)="stopScan()">{{ 'BILL_CUSTOMER.STOP_SCAN' | translate }}</button>
+        </div>
+      } @else {
+        @if (canScan) {
+          <button type="button" class="bc-btn bc-btn-gold bc-wide" (click)="startScan()">
+            <mat-icon>qr_code_scanner</mat-icon><span>{{ 'BILL_CUSTOMER.SCAN' | translate }}</span>
+          </button>
+          @if (scanError()) {
+            <p class="bc-error">{{ 'BILL_CUSTOMER.CAMERA_FAILED' | translate }}</p>
+          }
+          <p class="bc-or">{{ 'BILL_CUSTOMER.OR_TYPE' | translate }}</p>
+        }
+        <form class="bc-find" (ngSubmit)="find()">
+          <input type="text" inputmode="tel" name="query" [(ngModel)]="query" [placeholder]="'BILL_CUSTOMER.PHONE_PLACEHOLDER' | translate" autocomplete="off" />
+          <button type="submit" class="bc-btn bc-btn-gold" [disabled]="busy() || !query.trim()">
+            <mat-icon>search</mat-icon><span>{{ 'BILL_CUSTOMER.FIND' | translate }}</span>
+          </button>
+        </form>
+        @if (notFound()) {
+          <div class="bc-box">
+            <p class="bc-line">{{ 'BILL_CUSTOMER.NOT_FOUND' | translate }}</p>
+            <button type="button" class="bc-btn bc-btn-gold" (click)="openRegister()">
+              <mat-icon>person_add</mat-icon><span>{{ 'BILL_CUSTOMER.REGISTER' | translate }}</span>
+            </button>
+          </div>
+        }
+      }
+    }
+
+    @case ('found') {
+      @if (customer(); as c) {
+        <section class="bc-box">
+          <h3 class="bc-name">{{ c.name }}</h3>
+          <p class="bc-line">{{ c.phone }}</p>
+          <p class="bc-line">{{ 'BILL_CUSTOMER.VISITS' | translate: { n: c.totalVisits } }}</p>
+          @if (c.ruleOn) {
+            <p class="bc-line">{{ 'BILL_CUSTOMER.PROGRESS' | translate: { n: c.visitsTowardReward, of: c.visitsNeeded } }}</p>
+          }
+          @if (c.rewardsAvailable > 0) {
+            <p class="bc-reward-on">{{ 'BILL_CUSTOMER.HAS_REWARDS' | translate: { n: c.rewardsAvailable, amount: (c.rewardAmount | number: '1.0-0') } }}</p>
+          }
+        </section>
+        <div class="bc-actions">
+          <button type="button" class="bc-btn bc-btn-gold" [disabled]="busy()" (click)="attach()">
+            <mat-icon>check</mat-icon><span>{{ 'BILL_CUSTOMER.ATTACH' | translate }}</span>
+          </button>
+          <button type="button" class="bc-btn" (click)="change()">{{ 'BILL_CUSTOMER.BACK' | translate }}</button>
+        </div>
+      }
+    }
+
+    @case ('register') {
+      <form class="bc-reg" (ngSubmit)="register()">
+        <h3 class="bc-name">{{ 'BILL_CUSTOMER.NEW_CUSTOMER' | translate }}</h3>
+        <label>
+          <span>{{ 'BILL_CUSTOMER.NAME' | translate }}</span>
+          <input type="text" name="regName" [(ngModel)]="regName" autocomplete="off" maxlength="60" />
+        </label>
+        <label>
+          <span>{{ 'BILL_CUSTOMER.PHONE' | translate }}</span>
+          <input type="tel" name="regPhone" [(ngModel)]="regPhone" inputmode="tel" autocomplete="off" maxlength="16" />
+        </label>
+        <p class="bc-line">{{ 'BILL_CUSTOMER.SMS_NOTE' | translate }}</p>
+        <div class="bc-actions">
+          <button type="submit" class="bc-btn bc-btn-gold" [disabled]="busy() || !regName.trim() || !regPhone.trim()">
+            <mat-icon>person_add</mat-icon><span>{{ 'BILL_CUSTOMER.REGISTER_ATTACH' | translate }}</span>
+          </button>
+          <button type="button" class="bc-btn" (click)="change()">{{ 'BILL_CUSTOMER.BACK' | translate }}</button>
+        </div>
+      </form>
+    }
+  }
+</div>

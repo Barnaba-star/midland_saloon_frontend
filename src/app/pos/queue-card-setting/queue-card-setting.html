@@ -1,0 +1,66 @@
+<div class="qc-page">
+  <section class="qc-card">
+    <h2 class="qc-title">{{ 'QUEUE_SETTING.DOOR_TITLE' | translate }}</h2>
+    <p class="qc-text">{{ 'QUEUE_SETTING.DOOR_TEXT' | translate }}</p>
+
+    @if (settings(); as s) {
+      <div class="qc-door">
+        <div class="qc-qr-box">
+          @if (qr()) {
+            <img class="qc-qr" [src]="qr()" alt="QR" />
+          }
+          <span class="qc-branch">{{ s.branchName }}</span>
+        </div>
+        <div class="qc-door-side">
+          <a class="qc-link" [href]="link()" target="_blank" rel="noopener">{{ link() }}</a>
+          <div class="qc-switch">
+            <mat-slide-toggle [checked]="s.enabled" [disabled]="saving()" (change)="toggle('enabled', $event.checked)">
+              {{ 'QUEUE_SETTING.QUEUE_ON' | translate }}
+            </mat-slide-toggle>
+          </div>
+          <div class="qc-switch">
+            <mat-slide-toggle [checked]="s.smsOn" [disabled]="saving()" (change)="toggle('smsOn', $event.checked)">
+              {{ 'QUEUE_SETTING.SMS_ON' | translate }}
+            </mat-slide-toggle>
+          </div>
+          <div class="qc-buttons">
+            <button type="button" class="qc-btn qc-btn-gold" (click)="print()">
+              <mat-icon>print</mat-icon><span>{{ 'QUEUE_SETTING.PRINT' | translate }}</span>
+            </button>
+            <button type="button" class="qc-btn" [disabled]="saving()" (click)="newCard()">
+              <mat-icon>autorenew</mat-icon><span>{{ 'QUEUE_SETTING.NEW_CARD' | translate }}</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    }
+  </section>
+
+  <section class="qc-card">
+    <h2 class="qc-title">{{ 'QUEUE_SETTING.RULE_TITLE' | translate }}</h2>
+    <p class="qc-text">{{ 'QUEUE_SETTING.RULE_TEXT' | translate }}</p>
+    @if (ruleLoaded()) {
+      <div class="qc-switch">
+        <mat-slide-toggle [(ngModel)]="rule.enabled" name="ruleOn">{{ 'QUEUE_SETTING.RULE_ON' | translate }}</mat-slide-toggle>
+      </div>
+      <div class="qc-fields">
+        <label class="qc-field">
+          <span>{{ 'QUEUE_SETTING.VISITS' | translate }}</span>
+          <input type="number" min="2" max="100" [(ngModel)]="rule.visitsNeeded" name="visits" />
+        </label>
+        <label class="qc-field">
+          <span>{{ 'QUEUE_SETTING.REWARD' | translate }}</span>
+          <input type="number" min="100" step="500" [(ngModel)]="rule.rewardAmount" name="reward" />
+        </label>
+        <label class="qc-field">
+          <span>{{ 'QUEUE_SETTING.MIN_BILL' | translate }}</span>
+          <input type="number" min="0" step="500" [(ngModel)]="rule.minBill" name="minBill" />
+        </label>
+      </div>
+      <p class="qc-example">{{ 'QUEUE_SETTING.RULE_EXAMPLE' | translate: { n: rule.visitsNeeded, amount: rule.rewardAmount } }}</p>
+      <button type="button" class="qc-btn qc-btn-gold" [disabled]="savingRule()" (click)="saveRule()">
+        <mat-icon>save</mat-icon><span>{{ 'QUEUE_SETTING.SAVE' | translate }}</span>
+      </button>
+    }
+  </section>
+</div>

@@ -4449,3 +4449,55 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   transform: none !important;
   box-shadow: none !important;
 }
+
+/* =====================================================
+   CUSTOMER CARD ON A BILL (Mteja)
+===================================================== */
+
+.sale-customer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 6px 10px;
+  margin: 10px 16px 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--sx-gold-100);
+  font-size: 13px;
+  text-align: left;
+}
+
+.sale-customer-name {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  color: var(--sx-navy-800);
+  overflow-wrap: anywhere;
+}
+
+.sale-customer-name mat-icon {
+  width: 18px;
+  height: 18px;
+  font-size: 18px;
+  color: var(--sx-gold-700);
+}
+
+.sale-customer-reward {
+  font-weight: 700;
+  color: var(--sx-gold-700);
+}
+
+.sale-action-btn.customer-btn {
+  grid-column: 1 / -1;
+  order: 3;
+  color: var(--sx-navy-800);
+  background: var(--sx-surface);
+  border: 1px dashed var(--sx-gold-500);
+}
+
+.customer-btn .action-icon {
+  color: var(--sx-navy-900);
+  background: var(--sx-gold-500);
+}

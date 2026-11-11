@@ -20,6 +20,8 @@ import { ViewChild } from '@angular/core';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { ShiftBar, ShiftState } from '../shift-bar/shift-bar';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
+import { BillCustomerDialog } from '../bill-customer-dialog/bill-customer-dialog';
+import { BillLoyalty, LoyaltyCustomer } from '../queue-loyalty-service';
 
 
 interface PaymentSummary {
@@ -348,9 +350,11 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
       alert('Tafadhali chagua njia ya malipo.');
       return;
     }
+    // A customer's reward (loyalty discount) is not paid for.
+    const discount = Number(this.selectedSale?.loyaltyDiscount ?? 0);
     const saloonSalesDTO: SaleOpenedDTO = {
       paymentMethod: this.selectedPaymentMethod,
-      paidAmount: this.getSelectedSaleTotal(),
+      paidAmount: Math.max(0, this.getSelectedSaleTotal() - discount),
       uid: this.saleOpenedUID,
       paymentStatus: 'PAID',
     };
@@ -427,6 +431,42 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
       });
     });
   }
+  /** Customers looked up on this device, so the dialog knows their rewards next time. */
+  private knownCustomers = new Map<string, LoyaltyCustomer>();
+
+  /** Mteja: put a customer card on the bill (scan or phone), use or undo their reward. */
+  openCustomer(sale: SalesOpened) {
+    if (!sale?.uid) {
+      return;
+    }
+    this.dialog.open(BillCustomerDialog, {
+      width: '460px',
+      maxWidth: '95vw',
+      autoFocus: false,
+      data: {
+        sale,
+        known: sale.customerUid ? this.knownCustomers.get(sale.customerUid) ?? null : null,
+        onChange: (bill: BillLoyalty, customer: LoyaltyCustomer | null) => {
+          if (customer) {
+            this.knownCustomers.set(customer.uid, customer);
+          }
+          const patch = {
+            customerUid: bill?.customerUid ?? null,
+            customerName: bill?.customerName ?? null,
+            loyaltyDiscount: bill?.loyaltyDiscount ?? 0,
+          };
+          this.salesOpenedList = this.salesOpenedList.map((item) =>
+            item.uid === sale.uid ? { ...item, ...patch } : item,
+          );
+          if (this.selectedSale?.uid === sale.uid) {
+            this.selectedSale = { ...this.selectedSale, ...patch };
+          }
+          this.cdr.detectChanges();
+        },
+      },
+    });
+  }
+
   deletingBill: string | null = null;
 
   /** A bill opened by mistake, still at zero - asked once, then gone. */

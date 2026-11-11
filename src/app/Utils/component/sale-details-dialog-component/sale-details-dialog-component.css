@@ -574,3 +574,31 @@
   box-shadow:
     0 0 0 3px rgba(37, 99, 235, 0.10);
 }
+
+/* Customer reward (loyalty discount) under the total. */
+.dialog-reward {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 12px 20px;
+  background: var(--sx-gold-100);
+  border-bottom: 1px solid var(--sx-line);
+}
+
+.reward-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 14px;
+  color: var(--sx-navy-700);
+}
+
+.reward-row strong {
+  font-weight: 800;
+  color: var(--sx-gold-700);
+}
+
+.reward-pay strong {
+  font-size: 15px;
+  color: var(--sx-navy-800);
+}

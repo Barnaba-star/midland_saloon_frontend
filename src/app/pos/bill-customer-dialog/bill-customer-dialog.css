@@ -1,0 +1,185 @@
+.bc {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  font-family: var(--font-sans);
+  color: var(--color-text, var(--sx-ink));
+}
+
+.bc-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+.bc-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.bc-sub {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.bc-x {
+  display: inline-flex;
+  padding: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.bc-box {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px;
+  border: 1px solid var(--color-border, var(--sx-line));
+  border-radius: 14px;
+}
+
+.bc-name {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.bc-line {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.bc-reward-on {
+  margin: 4px 0 0;
+  padding: 8px 10px;
+  border-radius: 10px;
+  background: var(--sx-gold-100);
+  color: var(--sx-gold-700);
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.bc-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.bc-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 44px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  background: var(--color-surface, var(--sx-surface));
+  color: inherit;
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.bc-btn mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.bc-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.bc-btn-gold {
+  border-color: var(--sx-gold-500);
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.bc-wide {
+  width: 100%;
+  min-height: 52px;
+  font-size: 16px;
+}
+
+.bc-or {
+  margin: 0;
+  text-align: center;
+  font-size: 13px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.bc-error {
+  margin: 0;
+  font-size: 14px;
+  color: var(--sx-danger);
+}
+
+.bc-find {
+  display: flex;
+  gap: 8px;
+}
+
+.bc-find input,
+.bc-reg input {
+  flex: 1;
+  min-width: 0;
+  min-height: 46px;
+  padding: 0 12px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  background: var(--color-surface, var(--sx-surface));
+  color: inherit;
+  font: inherit;
+  font-size: 16px;
+}
+
+.bc-reg {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.bc-reg label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.bc-cam {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.bc-cam video {
+  width: 100%;
+  max-height: 320px;
+  border-radius: 14px;
+  background: var(--sx-navy-900);
+  object-fit: cover;
+}
+
+@media (max-width: 600px) {
+  .bc {
+    padding: 16px;
+  }
+
+  .bc-actions .bc-btn {
+    flex: 1 1 auto;
+  }
+}

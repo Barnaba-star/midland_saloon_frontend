@@ -1,0 +1,157 @@
+/* A walk-in's own phone: the door queue, their ticket and their customer
+   card. Phone first, the SalonixTz palette (src/styles.css --sx-* tokens).
+   Type scale (owner rule - a title is bigger than anything inside it):
+   page title 30-36px > card title 19px > figures 18px > text 15px. */
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--sx-bg);
+  color: var(--sx-ink);
+  font-family: var(--font-sans);
+}
+
+.pp-top {
+  background: var(--sx-navy-800);
+  color: var(--sx-navy-50);
+  padding: 14px 16px 18px;
+  text-align: center;
+}
+
+.pp-logo {
+  display: block;
+  height: 30px;
+  width: auto;
+  margin: 0 auto 6px;
+}
+
+.pp-branch {
+  margin: 0;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sx-gold-300);
+}
+
+.pp-main {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 20px 16px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.pp-title {
+  margin: 0;
+  font-size: 32px;
+  line-height: 1.1;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: var(--sx-navy-700);
+}
+
+.pp-lead {
+  margin: 6px 0 0;
+  font-size: 15px;
+  line-height: 1.45;
+  color: var(--sx-muted);
+}
+
+.pp-card {
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  box-shadow: var(--shadow-sm);
+}
+
+.pp-card-title {
+  margin: 0 0 12px;
+  font-size: 19px;
+  line-height: 1.25;
+  font-weight: 700;
+  color: var(--sx-navy-700);
+}
+
+.pp-muted {
+  color: var(--sx-muted);
+  font-size: 14px;
+}
+
+.pp-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 52px;
+  padding: 0 18px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 700;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.pp-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.pp-btn-ghost {
+  background: transparent;
+  color: var(--sx-navy-700);
+  border: 1.5px solid var(--sx-line);
+}
+
+.pp-btn-danger {
+  background: transparent;
+  color: var(--sx-danger);
+  border: 1.5px solid var(--sx-danger-bg);
+}
+
+.pp-error {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sx-danger-bg);
+  color: var(--sx-danger);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.pp-note {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sx-gold-100);
+  color: var(--sx-navy-700);
+  font-size: 15px;
+}
+
+.pp-note a {
+  color: var(--sx-gold-700);
+  font-weight: 700;
+}
+
+.pp-center {
+  text-align: center;
+}
+
+.pp-loading {
+  padding: 48px 0;
+  text-align: center;
+  color: var(--sx-muted);
+  font-size: 15px;
+}
+
+.pp-foot {
+  text-align: center;
+  font-size: 12px;
+  color: var(--sx-muted);
+}

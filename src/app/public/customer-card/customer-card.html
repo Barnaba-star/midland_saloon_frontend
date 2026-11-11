@@ -1,0 +1,57 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (card(); as c) {
+    <p class="pp-branch">{{ c.branchName }}</p>
+  }
+</header>
+
+<main class="pp-main">
+  @if (loading()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (error()) {
+    <h1 class="pp-title">{{ 'PUBLIC.CARD_TITLE' | translate }}</h1>
+    <p class="pp-error">{{ (error() === 'NETWORK' ? 'PUBLIC.ERR_NETWORK' : 'PUBLIC.ERR_CARD_NOT_FOUND') | translate }}</p>
+    <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+  } @else if (card(); as c) {
+    <div class="pp-center">
+      <h1 class="pp-title">{{ 'PUBLIC.CARD_TITLE' | translate }}</h1>
+      <p class="pp-lead">{{ c.name }}</p>
+    </div>
+
+    <section class="pp-card cc-qr-card">
+      @if (qr()) {
+        <img class="cc-qr" [src]="qr()" alt="QR" />
+      } @else {
+        <div class="cc-qr cc-qr-empty"></div>
+      }
+      <p class="pp-muted">{{ 'PUBLIC.CARD_SHOW' | translate }}</p>
+    </section>
+
+    @if (c.rewardsAvailable > 0) {
+      <section class="cc-reward">
+        <h2 class="pp-card-title">{{ 'PUBLIC.CARD_HAVE_REWARD' | translate: { n: c.rewardsAvailable } }}</h2>
+        <p>{{ 'PUBLIC.CARD_REWARD_TEXT' | translate: { amount: (c.rewardAmount | number: '1.0-0') } }}</p>
+      </section>
+    }
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'PUBLIC.CARD_VISITS' | translate }}</h2>
+      @if (c.ruleOn) {
+        <p class="cc-progress-text">
+          {{ 'PUBLIC.CARD_PROGRESS' | translate: { n: c.visitsTowardReward, of: c.visitsNeeded, amount: (c.rewardAmount | number: '1.0-0') } }}
+        </p>
+        @if (dots().length) {
+          <div class="cc-dots" [attr.aria-label]="c.visitsTowardReward + ' / ' + c.visitsNeeded">
+            @for (on of dots(); track $index) {
+              <span class="cc-dot" [class.on]="on"></span>
+            }
+          </div>
+        } @else {
+          <div class="cc-bar"><span [style.width.%]="percent()"></span></div>
+        }
+      }
+      <p class="pp-muted cc-total">{{ 'PUBLIC.CARD_TOTAL' | translate: { n: c.totalVisits } }}</p>
+    </section>
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>

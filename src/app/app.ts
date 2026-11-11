@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { AlertComponent } from "./Utils/component/alert/alert";
 import { LoaderComponent } from "./Utils/component/loader/loader";
 import { IconRegistryService } from './Utils/services/icon-registry.service';
+import { isPublicPath } from './public/public-paths';
 
 @Component({
   selector: 'app-root',
@@ -22,7 +23,9 @@ export class App {
     // Signed in already (a reload, a new tab): keep showing as online.
     if (isPlatformBrowser(inject(PLATFORM_ID))) {
       const auth = inject(Authentication);
-      if (auth.getToken()) {
+      // Not on a walk-in's page (door QR, ticket, card): an old cookie there
+      // is not someone at work.
+      if (auth.getToken() && !isPublicPath()) {
         auth.startHeartbeat();
       }
     }
