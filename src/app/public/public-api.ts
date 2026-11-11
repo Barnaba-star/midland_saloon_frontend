@@ -34,6 +34,42 @@ export interface CardView {
   rewardAmount: number;
   ruleOn: boolean;
 }
+export interface TvPerson { number: number; name: string; staffName: string | null; serviceName: string | null; }
+export interface StarStaff { staffUid: string; name: string; clients: number; regulars: number; stars: number; ratings: number; photo: string | null; rank: number; }
+export interface TvView {
+  branchName: string;
+  called: TvPerson[];
+  serving: TvPerson[];
+  waiting: number;
+  next: TvPerson[];
+  star: StarStaff | null;
+  offer: string | null;
+  loyalty: { visitsNeeded: number; rewardAmount: number } | null;
+  joinPath: string;
+}
+export interface StaffBadge { photo?: string | null; stars?: number | null; ratings?: number | null; }
+export interface StaffPhoto { uid: string; url: string; caption: string | null; at: string; }
+export interface StaffComment { stars: number; comment: string | null; name: string | null; at: string; }
+export interface StaffPortfolio {
+  uid: string;
+  name: string;
+  category: string | null;
+  photos: StaffPhoto[];
+  stars: number;
+  ratings: number;
+  comments: StaffComment[];
+  branchName?: string;
+}
+export interface RatingState { canRate: boolean; servedBy: string | null; servedByUid: string | null; }
+export interface StylePhoto { uid: string; url: string; kind: 'BEFORE' | 'AFTER'; staffName: string | null; note: string | null; billUid: string | null; at: string; }
+
+/** A photo path from the backend (/public/photo/...) as a full address. */
+export function photoUrl(path?: string | null): string {
+  if (!path) {
+    return '';
+  }
+  return /^https?:\/\//.test(path) ? path : `${environment.baseApiUrl}${path.startsWith('/') ? '' : '/'}${path}`;
+}
 
 /**
  * The walk-in's own phone: no app, no login. These calls go straight to the
@@ -64,6 +100,32 @@ export class PublicApi {
 
   card(token: string): Observable<CardView> {
     return this.http.get<CardView>(`${this.base}/card/${encodeURIComponent(token)}`);
+  }
+
+  cardPhotos(token: string): Observable<{ photos: StylePhoto[] }> {
+    return this.http.get<{ photos: StylePhoto[] }>(`${this.base}/card/${encodeURIComponent(token)}/photos`);
+  }
+
+  /** The salon TV: who is called, who is next, the star of the week. */
+  tv(token: string): Observable<TvView> {
+    return this.http.get<TvView>(`${this.base}/queue/${encodeURIComponent(token)}/tv`);
+  }
+
+  /** Photo + stars per stylist, for the join page's stylist choice. */
+  staffBadges(token: string): Observable<Record<string, StaffBadge>> {
+    return this.http.get<Record<string, StaffBadge>>(`${this.base}/queue/${encodeURIComponent(token)}/staff`);
+  }
+
+  staffPortfolio(token: string, staffUid: string): Observable<StaffPortfolio> {
+    return this.http.get<StaffPortfolio>(`${this.base}/queue/${encodeURIComponent(token)}/staff/${encodeURIComponent(staffUid)}`);
+  }
+
+  rating(ticketToken: string): Observable<RatingState> {
+    return this.http.get<RatingState>(`${this.base}/ticket/${encodeURIComponent(ticketToken)}/rating`);
+  }
+
+  rate(ticketToken: string, body: { stars: number; comment?: string }): Observable<{ rated: boolean }> {
+    return this.http.post<{ rated: boolean }>(`${this.base}/ticket/${encodeURIComponent(ticketToken)}/rate`, body);
   }
 }
 

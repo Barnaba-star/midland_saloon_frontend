@@ -1,0 +1,482 @@
+/* The salon TV: espresso + amber, read from four metres. Every size hangs
+   off --u (1/100 of a 16:9 screen width), so 1920x1080 and 1280x720 show the
+   same picture. Owner rule: each title is bigger than anything inside it. */
+:host {
+  --u: min(1vw, 1.7778vh);
+  display: block;
+  height: 100vh;
+  overflow: hidden;
+  background: radial-gradient(ellipse at 20% 0%, #2b2118 0%, var(--sx-navy-900) 60%);
+  color: var(--sx-navy-50);
+  font-family: var(--font-sans);
+  /* The app's body line-height is a fixed 20px; TV type is far bigger. */
+  line-height: 1.2;
+}
+
+.tv {
+  position: relative;
+  height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: calc(1.4 * var(--u));
+  padding: calc(1.6 * var(--u)) calc(2.2 * var(--u));
+  box-sizing: border-box;
+}
+
+/* ----------------------------------------------------------- top bar */
+.tv-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: calc(2 * var(--u));
+  min-width: 0;
+}
+
+.tv-brand {
+  display: flex;
+  align-items: center;
+  gap: calc(1.4 * var(--u));
+  min-width: 0;
+}
+
+.tv-logo {
+  height: calc(4 * var(--u));
+  width: auto;
+}
+
+.tv-branch {
+  margin: 0;
+  font-size: calc(3 * var(--u));
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  text-transform: uppercase;
+  color: var(--sx-gold-300);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-clock {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.tv-time {
+  font-size: calc(3 * var(--u));
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  color: var(--sx-navy-50);
+}
+
+.tv-date {
+  margin-top: calc(0.4 * var(--u));
+  font-size: calc(1.4 * var(--u));
+  color: var(--sx-navy-300);
+  text-transform: capitalize;
+}
+
+/* -------------------------------------------------------------- body */
+.tv-body {
+  display: grid;
+  grid-template-columns: 1.75fr 1fr;
+  gap: calc(1.4 * var(--u));
+  min-height: 0;
+}
+
+.tv-left,
+.tv-right {
+  display: flex;
+  flex-direction: column;
+  gap: calc(1.4 * var(--u));
+  min-height: 0;
+  min-width: 0;
+}
+
+.tv-panel {
+  background: rgba(255, 253, 249, 0.05);
+  border: 1px solid rgba(245, 165, 36, 0.22);
+  border-radius: calc(1.4 * var(--u));
+  padding: calc(1.4 * var(--u)) calc(1.8 * var(--u));
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tv-title {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--u);
+  margin: 0 0 calc(1 * var(--u));
+  font-size: calc(2.6 * var(--u));
+  font-weight: 800;
+  line-height: 1.1;
+  color: var(--sx-gold-300);
+}
+
+.tv-count {
+  font-size: calc(1.7 * var(--u));
+  font-weight: 600;
+  color: var(--sx-navy-300);
+  white-space: nowrap;
+}
+
+/* Now: the line the whole room reads. */
+.tv-now {
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: calc(1.2 * var(--u));
+}
+
+.tv-called {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: calc(1.2 * var(--u));
+  row-gap: calc(0.3 * var(--u));
+  margin: 0;
+  padding: calc(0.8 * var(--u)) calc(1.2 * var(--u));
+  border-radius: calc(1 * var(--u));
+  font-size: calc(4.8 * var(--u));
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  min-width: 0;
+}
+
+.tv-called + .tv-called {
+  font-size: calc(3.6 * var(--u));
+}
+
+.tv-label {
+  color: var(--sx-gold-300);
+}
+
+.tv-num {
+  color: var(--sx-gold-500);
+  font-variant-numeric: tabular-nums;
+}
+
+.tv-who,
+.tv-staff {
+  overflow-wrap: anywhere;
+}
+
+.tv-arrow {
+  color: var(--sx-gold-500);
+}
+
+.tv-staff {
+  color: var(--sx-gold-100);
+}
+
+.tv-idle .tv-who {
+  font-size: calc(3.6 * var(--u));
+  color: var(--sx-navy-100);
+}
+
+/* A number just called glows for a few seconds. */
+.tv-called.fresh {
+  animation: tv-glow 1.6s ease-in-out 5;
+}
+
+@keyframes tv-glow {
+  0%,
+  100% {
+    background: transparent;
+    box-shadow: none;
+  }
+  50% {
+    background: rgba(245, 165, 36, 0.22);
+    box-shadow: 0 0 calc(3 * var(--u)) rgba(245, 165, 36, 0.45);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tv-called.fresh {
+    animation: none;
+    background: rgba(245, 165, 36, 0.2);
+  }
+}
+
+.tv-serving {
+  padding: 0 calc(1.2 * var(--u));
+}
+
+.tv-sub {
+  margin: 0 0 calc(0.5 * var(--u));
+  font-size: calc(2.2 * var(--u));
+  font-weight: 700;
+  color: var(--sx-navy-300);
+}
+
+.tv-serving ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(0.4 * var(--u)) calc(2.4 * var(--u));
+  font-size: calc(2 * var(--u));
+  color: var(--sx-navy-100);
+}
+
+.tv-serving strong {
+  color: var(--sx-gold-300);
+}
+
+/* Next */
+.tv-next {
+  flex: 1;
+}
+
+.tv-chips {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: calc(0.8 * var(--u));
+}
+
+.tv-chips li {
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.2 * var(--u));
+  padding: calc(0.7 * var(--u)) calc(1 * var(--u));
+  border-radius: calc(0.8 * var(--u));
+  background: rgba(255, 253, 249, 0.07);
+  min-width: 0;
+}
+
+.tv-chips strong {
+  font-size: calc(2.4 * var(--u));
+  font-weight: 800;
+  color: var(--sx-gold-500);
+  line-height: 1;
+}
+
+.tv-chips span {
+  font-size: calc(1.7 * var(--u));
+  color: var(--sx-navy-100);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.tv-empty {
+  margin: 0;
+  font-size: calc(1.9 * var(--u));
+  color: var(--sx-navy-300);
+}
+
+/* Star of the week */
+.tv-star {
+  background: linear-gradient(135deg, rgba(245, 165, 36, 0.2), rgba(245, 165, 36, 0.05));
+  border-color: rgba(245, 165, 36, 0.5);
+}
+
+.tv-star-body {
+  display: flex;
+  align-items: center;
+  gap: calc(1.4 * var(--u));
+  min-width: 0;
+}
+
+.tv-star-photo {
+  width: calc(10 * var(--u));
+  height: calc(10 * var(--u));
+  flex-shrink: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  border: calc(0.3 * var(--u)) solid var(--sx-gold-500);
+}
+
+.tv-star-initial {
+  display: grid;
+  place-items: center;
+  background: var(--sx-navy-700);
+  font-size: calc(4 * var(--u));
+  font-weight: 800;
+  color: var(--sx-gold-300);
+  box-sizing: border-box;
+}
+
+.tv-star-text {
+  display: flex;
+  flex-direction: column;
+  gap: calc(0.3 * var(--u));
+  min-width: 0;
+}
+
+.tv-crown {
+  font-size: calc(2 * var(--u));
+  line-height: 1;
+  color: var(--sx-gold-500);
+}
+
+.tv-star-name {
+  font-size: calc(2.4 * var(--u));
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff;
+  overflow-wrap: anywhere;
+}
+
+.tv-stars {
+  font-size: calc(2 * var(--u));
+  color: rgba(255, 253, 249, 0.25);
+  letter-spacing: 0.05em;
+}
+
+.tv-stars .on {
+  color: var(--sx-gold-500);
+}
+
+.tv-stars em {
+  margin-left: calc(0.6 * var(--u));
+  font-style: normal;
+  font-weight: 700;
+  color: var(--sx-navy-50);
+}
+
+.tv-star-guests {
+  font-size: calc(1.6 * var(--u));
+  color: var(--sx-navy-100);
+}
+
+/* Door QR */
+.tv-join {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.tv-join .tv-title {
+  font-size: calc(2.4 * var(--u));
+}
+
+.tv-join-body {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: calc(1.4 * var(--u));
+  min-height: 0;
+}
+
+.tv-qr {
+  height: 100%;
+  max-height: calc(16 * var(--u));
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  border-radius: calc(0.8 * var(--u));
+  background: #fff;
+  padding: calc(0.5 * var(--u));
+  box-sizing: border-box;
+}
+
+.tv-join-text {
+  margin: 0;
+  font-size: calc(1.7 * var(--u));
+  line-height: 1.3;
+  color: var(--sx-navy-100);
+}
+
+/* ------------------------------------------------------------ footer */
+.tv-foot {
+  display: flex;
+  gap: calc(1.4 * var(--u));
+  min-width: 0;
+}
+
+.tv-foot p {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: calc(1 * var(--u));
+  margin: 0;
+  padding: calc(0.9 * var(--u)) calc(1.4 * var(--u));
+  border-radius: calc(1 * var(--u));
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+  font-size: calc(2 * var(--u));
+  font-weight: 700;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.tv-foot .tv-loyalty {
+  background: rgba(255, 253, 249, 0.1);
+  color: var(--sx-navy-50);
+}
+
+.tv-tag {
+  flex-shrink: 0;
+  padding: calc(0.2 * var(--u)) calc(0.8 * var(--u));
+  border-radius: calc(0.5 * var(--u));
+  background: var(--sx-navy-900);
+  color: var(--sx-gold-300);
+  font-size: calc(1.3 * var(--u));
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* --------------------------------------------------------- the rest */
+.tv-message {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: calc(2 * var(--u));
+  text-align: center;
+}
+
+.tv-message h2 {
+  margin: 0;
+  font-size: calc(3 * var(--u));
+  color: var(--sx-navy-100);
+}
+
+.tv-retry,
+.tv-fs {
+  border: 1px solid rgba(245, 165, 36, 0.5);
+  border-radius: calc(0.8 * var(--u));
+  background: transparent;
+  color: var(--sx-gold-300);
+  font: inherit;
+  cursor: pointer;
+}
+
+.tv-retry {
+  padding: calc(0.8 * var(--u)) calc(2 * var(--u));
+  font-size: calc(2 * var(--u));
+}
+
+.tv-fs {
+  position: absolute;
+  right: calc(1 * var(--u));
+  bottom: calc(0.4 * var(--u));
+  padding: 4px 10px;
+  font-size: 12px;
+  opacity: 0.35;
+}
+
+.tv-fs:hover,
+.tv-fs:focus-visible {
+  opacity: 1;
+}
+
+.tv-stale {
+  position: absolute;
+  top: calc(0.6 * var(--u));
+  right: calc(0.6 * var(--u));
+  width: calc(0.8 * var(--u));
+  height: calc(0.8 * var(--u));
+  border-radius: 50%;
+  background: var(--sx-danger);
+}

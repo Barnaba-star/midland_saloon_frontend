@@ -30,6 +30,9 @@
             <button type="button" class="qc-btn" [disabled]="saving()" (click)="newCard()">
               <mat-icon>autorenew</mat-icon><span>{{ 'QUEUE_SETTING.NEW_CARD' | translate }}</span>
             </button>
+            <a class="qc-btn" [href]="tv()" target="_blank" rel="noopener">
+              <mat-icon>tv</mat-icon><span>{{ 'TV.OPEN' | translate }}</span>
+            </a>
           </div>
         </div>
       </div>
@@ -61,6 +64,34 @@
       <button type="button" class="qc-btn qc-btn-gold" [disabled]="savingRule()" (click)="saveRule()">
         <mat-icon>save</mat-icon><span>{{ 'QUEUE_SETTING.SAVE' | translate }}</span>
       </button>
+    }
+  </section>
+
+  <section class="qc-card">
+    <h2 class="qc-title">{{ 'TV_SETTING.TITLE' | translate }}</h2>
+    <p class="qc-text">{{ 'TV_SETTING.TEXT' | translate }}</p>
+    @if (showLoaded()) {
+      <div class="qc-fields qc-fields-2">
+        <label class="qc-field">
+          <span>{{ 'TV_SETTING.OFFER' | translate }}</span>
+          <input type="text" maxlength="120" [(ngModel)]="show_.tvOffer" name="tvOffer" [placeholder]="'TV_SETTING.OFFER_HINT' | translate" />
+        </label>
+        <label class="qc-field">
+          <span>{{ 'TV_SETTING.BONUS' | translate }}</span>
+          <input type="number" min="0" step="1000" [(ngModel)]="show_.weeklyBonus" name="weeklyBonus" />
+        </label>
+      </div>
+      <p class="qc-example">{{ 'TV_SETTING.BONUS_HINT' | translate }}</p>
+      <div class="qc-buttons">
+        <button type="button" class="qc-btn qc-btn-gold" [disabled]="savingShow()" (click)="saveShowcase()">
+          <mat-icon>save</mat-icon><span>{{ 'QUEUE_SETTING.SAVE' | translate }}</span>
+        </button>
+        @if (tv()) {
+          <a class="qc-btn" [href]="tv()" target="_blank" rel="noopener">
+            <mat-icon>tv</mat-icon><span>{{ 'TV.OPEN' | translate }}</span>
+          </a>
+        }
+      </div>
     }
   </section>
 </div>

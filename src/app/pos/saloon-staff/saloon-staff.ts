@@ -19,6 +19,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { StaffDetailsDialogComponent } from '../../Utils/component/dialogs/staff-details-dialog-component/staff-details-dialog-component';
 import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delete-confirmation-component/delete-confirmation-component';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
+import { StaffPhotosDialog } from '../staff-photos-dialog/staff-photos-dialog';
 
 @Component({
   selector: 'app-saloon-staff',
@@ -68,6 +69,21 @@ export class SaloonStaff implements OnInit{
 
   getTitled(title: TitleAction[]): TitleAction[] {
     return this.visibility.filteredTitleActions(title);
+  }
+
+  /** Kazi zake: this stylist's work photos, shown to guests at the door. */
+  onStaffPhotos(staff: any): void {
+    if (!staff?.uid) {
+      return;
+    }
+    const name = [staff.firstName, staff.lastName].filter(Boolean).join(' ');
+    this.dialog.open(StaffPhotosDialog, {
+      width: '640px',
+      maxWidth: '95vw',
+      maxHeight: '90vh',
+      autoFocus: false,
+      data: { staffUid: staff.uid, name },
+    });
   }
 
   onAction(action: string) {

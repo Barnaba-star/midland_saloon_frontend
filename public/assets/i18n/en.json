@@ -134,7 +134,8 @@
     "SUPPORT": "Messages",
     "HELP": "Help",
     "SUBSCRIPTION_DAYS_LEFT": "{{days}} days",
-    "QUEUE": "Queue"
+    "QUEUE": "Queue",
+    "BOARD": "Leaderboard"
   },
   "SALON": {
     "OFFICE": "Office",
@@ -2026,5 +2027,99 @@
     "REWARD_LINE": "Customer reward",
     "TO_PAY": "To pay",
     "CUSTOMER": "Customer"
+  },
+  "TV": {
+    "NOW": "Now",
+    "SOON": "The next number is called shortly",
+    "WELCOME": "Welcome! No one is waiting",
+    "IN_CHAIR": "In the chair",
+    "NEXT": "Next",
+    "WAITING": "{{n}} waiting",
+    "NO_ONE_NEXT": "No one waiting now - scan the QR to join",
+    "STAR": "Stylist of the week",
+    "GUESTS": "{{n}} guests this week",
+    "SCAN": "Scan to join the queue",
+    "SCAN_TEXT": "Open your phone camera, pick a service and a stylist. We call you by your number.",
+    "OFFER": "Offer",
+    "CARD": "Card",
+    "LOYALTY": "Every {{n}} visits = TZS {{amount}} off",
+    "FULLSCREEN": "Full screen",
+    "NOT_FOUND": "This TV link no longer exists. Open it again from POS > Queue.",
+    "OPEN": "Open TV"
+  },
+  "STYLIST": {
+    "TITLE": "Stylist",
+    "NOT_FOUND": "This stylist cannot be found.",
+    "REVIEWS": "{{n}} reviews",
+    "NO_REVIEWS": "No stars yet",
+    "JOIN_FOR": "Join the queue for {{name}}",
+    "WORK": "Their work",
+    "PHOTO": "Photo",
+    "NO_PHOTOS": "No work photos yet.",
+    "COMMENTS": "What guests said",
+    "GUEST": "Guest",
+    "NO_COMMENTS": "No comments yet.",
+    "SEE_WORK": "See their work"
+  },
+  "RATE": {
+    "TITLE": "Give {{name}} stars",
+    "STARS": "Stars",
+    "COMMENT": "Comment (optional)",
+    "COMMENT_HINT": "How was your service?",
+    "ERR_STARS_REQUIRED": "Pick the stars first.",
+    "ERR_NETWORK": "Network failed. Try again.",
+    "ERR_OTHER": "Could not send your stars. Try again.",
+    "SENDING": "Sending...",
+    "SEND": "Send",
+    "THANKS": "Thank you!",
+    "THANKS_TEXT": "Your stars reached {{name}}.",
+    "ALREADY": "You already rated this visit."
+  },
+  "STYLES": {
+    "TITLE": "Your styles",
+    "BEFORE": "Before",
+    "AFTER": "After",
+    "POS_TITLE": "Style photos",
+    "STYLIST": "Stylist",
+    "NO_STYLIST": "Stylist (not chosen)",
+    "UPLOADING": "Uploading...",
+    "TAKE": "Take/add photo",
+    "REMOVE": "Remove photo",
+    "REMOVE_SURE": "Remove?",
+    "EMPTY": "No style photos for this customer yet.",
+    "SAVED": "Photo saved"
+  },
+  "STAFF_PHOTOS": {
+    "TITLE": "{{name}}'s work",
+    "PUBLIC_PAGE": "Guests' page",
+    "CAPTION": "Caption (optional)",
+    "CAPTION_HINT": "E.g. Box braids",
+    "UPLOAD": "Upload",
+    "ADD": "Add a work photo",
+    "EMPTY": "No photos yet. Add their best work - guests see it when choosing a stylist.",
+    "SAVED": "Photo uploaded",
+    "BUTTON": "Their work (photos)"
+  },
+  "BOARD": {
+    "TITLE": "Weekly leaderboard",
+    "THIS_WEEK": "This week",
+    "LAST_WEEK": "Last week",
+    "BONUS": "The winner gets TZS {{amount}}",
+    "BONUS_WON": "The winner got TZS {{amount}}",
+    "GUESTS": "Guests",
+    "REGULARS": "Regulars",
+    "SCORE": "Score",
+    "HOW": "The score comes from guests served, guests who came back and the stars guests gave.",
+    "EMPTY": "No stylists to rank this week yet.",
+    "FAILED": "Could not load the leaderboard."
+  },
+  "TV_SETTING": {
+    "TITLE": "TV & Leaderboard",
+    "TEXT": "The offer shown on the salon TV, and the prize for the weekly leaderboard winner.",
+    "OFFER": "TV offer",
+    "OFFER_HINT": "E.g. Today: braids 10% off",
+    "BONUS": "Weekly winner's prize (TZS)",
+    "BONUS_HINT": "Set 0 for no prize. With no offer, the TV shows no offer line.",
+    "SAVED": "TV settings saved"
   }
 }

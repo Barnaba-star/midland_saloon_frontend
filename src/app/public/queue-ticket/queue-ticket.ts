@@ -1,17 +1,19 @@
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FormsModule } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
-import { PublicApi, TicketView, errorCode } from '../public-api';
+import { PublicApi, RatingState, TicketView, errorCode } from '../public-api';
 
 const POLL_MS = 15_000;
 
 /**
  * /tiketi/:token - the walk-in's place in the queue, on their own phone.
- * Refreshes every 15 s while waiting or called; "ZAMU YAKO!" when called.
+ * Refreshes every 15 s while waiting, called or in the chair; "ZAMU YAKO!"
+ * when called. Once served, the guest can give their stylist stars.
  */
 @Component({
   selector: 'app-queue-ticket',
-  imports: [TranslatePipe, RouterLink],
+  imports: [FormsModule, TranslatePipe, RouterLink],
   templateUrl: './queue-ticket.html',
   styleUrls: ['../public-page.css', './queue-ticket.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -30,6 +32,16 @@ export class QueueTicket implements OnInit, OnDestroy {
   door = signal('');
   private timer: any = null;
 
+  /** Stars for the stylist, once the visit is done. */
+  rating = signal<RatingState | null>(null);
+  stars = signal(0);
+  comment = '';
+  rateSending = signal(false);
+  rateError = signal('');
+  /** 'SENT' just now, or 'ALREADY' rated before. */
+  rated = signal<'' | 'SENT' | 'ALREADY'>('');
+  showRate = computed(() => !!this.rating()?.canRate && !this.rated());
+
   live = computed(() => {
     const t = this.ticket();
     return !!t && t.today && (t.status === 'WAITING' || t.status === 'CALLED');
@@ -42,7 +54,9 @@ export class QueueTicket implements OnInit, OnDestroy {
     } catch {}
     this.load();
     this.timer = setInterval(() => {
-      if (this.live() && document.visibilityState !== 'hidden') {
+      const t = this.ticket();
+      const inChair = !!t && t.today && t.status === 'SERVING';
+      if ((this.live() || inChair) && document.visibilityState !== 'hidden') {
         this.load(true);
       }
     }, POLL_MS);
@@ -69,6 +83,9 @@ export class QueueTicket implements OnInit, OnDestroy {
         }
         if (!this.live()) {
           this.forget();
+        }
+        if ((t.status === 'DONE' || t.status === 'SERVING') && !this.rated()) {
+          this.loadRating();
         }
       },
       error: (e) => {
@@ -97,6 +114,38 @@ export class QueueTicket implements OnInit, OnDestroy {
         this.leaving.set(false);
         this.confirmLeave.set(false);
         this.load(true);
+      },
+    });
+  }
+
+  private loadRating(): void {
+    this.api.rating(this.token).subscribe({
+      next: (r) => this.rating.set(r),
+      error: () => {},
+    });
+  }
+
+  rate(): void {
+    if (!this.stars() || this.rateSending()) {
+      this.rateError.set(this.stars() ? '' : 'STARS_REQUIRED');
+      return;
+    }
+    this.rateSending.set(true);
+    this.rateError.set('');
+    const comment = this.comment.trim();
+    this.api.rate(this.token, comment ? { stars: this.stars(), comment } : { stars: this.stars() }).subscribe({
+      next: () => {
+        this.rateSending.set(false);
+        this.rated.set('SENT');
+      },
+      error: (e) => {
+        this.rateSending.set(false);
+        const code = errorCode(e);
+        if (code === 'ALREADY_RATED') {
+          this.rated.set('ALREADY');
+        } else {
+          this.rateError.set(code);
+        }
       },
     });
   }

@@ -1,0 +1,87 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (staff()?.branchName; as b) {
+    <p class="pp-branch">{{ b }}</p>
+  }
+</header>
+
+<main class="pp-main">
+  @if (loading()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (error()) {
+    <h1 class="pp-title">{{ 'STYLIST.TITLE' | translate }}</h1>
+    <p class="pp-error">{{ (error() === 'NETWORK' ? 'PUBLIC.ERR_NETWORK' : 'STYLIST.NOT_FOUND') | translate }}</p>
+    <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+  } @else if (staff(); as s) {
+    <div class="sp-head">
+      <h1 class="pp-title">{{ s.name }}</h1>
+      @if (s.category) {
+        <p class="pp-lead">{{ s.category }}</p>
+      }
+      <p class="sp-stars" [attr.aria-label]="s.stars + ' / 5'">
+        @if (s.ratings > 0) {
+          <span class="sp-star-row">
+            @for (i of [1, 2, 3, 4, 5]; track i) {
+              <span [class.on]="i <= full()">&#9733;</span>
+            }
+          </span>
+          <strong>{{ s.stars | number: '1.1-1' }}</strong>
+          <span class="pp-muted">{{ 'STYLIST.REVIEWS' | translate: { n: s.ratings } }}</span>
+        } @else {
+          <span class="pp-muted">{{ 'STYLIST.NO_REVIEWS' | translate }}</span>
+        }
+      </p>
+    </div>
+
+    <a class="pp-btn" [routerLink]="['/foleni', door]" [queryParams]="{ staff: s.uid }">
+      {{ 'STYLIST.JOIN_FOR' | translate: { name: s.name } }}
+    </a>
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'STYLIST.WORK' | translate }}</h2>
+      @if (photos().length) {
+        <div class="sp-grid">
+          @for (p of photos(); track p.uid) {
+            <button type="button" class="sp-thumb" (click)="open.set(p)" [attr.aria-label]="p.caption || ('STYLIST.PHOTO' | translate)">
+              <img [src]="p.src" [alt]="p.caption || ''" />
+            </button>
+          }
+        </div>
+      } @else {
+        <p class="pp-muted">{{ 'STYLIST.NO_PHOTOS' | translate }}</p>
+      }
+    </section>
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'STYLIST.COMMENTS' | translate }}</h2>
+      @for (c of comments(); track $index) {
+        <article class="sp-comment">
+          <div class="sp-comment-top">
+            <span class="sp-comment-stars">
+              @for (i of [1, 2, 3, 4, 5]; track i) {
+                <span [class.on]="i <= c.stars">&#9733;</span>
+              }
+            </span>
+            <span class="pp-muted">{{ c.name || ('STYLIST.GUEST' | translate) }} · {{ c.at | date: 'd MMM' }}</span>
+          </div>
+          @if (c.comment) {
+            <p class="sp-comment-text">{{ c.comment }}</p>
+          }
+        </article>
+      } @empty {
+        <p class="pp-muted">{{ 'STYLIST.NO_COMMENTS' | translate }}</p>
+      }
+    </section>
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>
+
+@if (open(); as p) {
+  <div class="sp-viewer" (click)="close()" role="dialog" aria-modal="true">
+    <img [src]="src(p)" [alt]="p.caption || ''" />
+    @if (p.caption) {
+      <p class="sp-viewer-caption">{{ p.caption }}</p>
+    }
+    <button type="button" class="sp-viewer-x" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate">&times;</button>
+  </div>
+}

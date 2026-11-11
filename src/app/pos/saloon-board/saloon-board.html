@@ -1,0 +1,76 @@
+<app-title2 titleHeader="MENU.BOARD" [actions]="[]"></app-title2>
+
+<div class="sb-page">
+  <section class="sb-head">
+    <div class="sb-head-text">
+      <h2 class="sb-title">{{ 'BOARD.TITLE' | translate }}</h2>
+      @if (board(); as b) {
+        <p class="sb-week">{{ b.weekStart | date: 'd MMM' }} – {{ b.weekEnd | date: 'd MMM y' }}</p>
+      }
+    </div>
+    <div class="sb-toggle" role="tablist">
+      <button type="button" role="tab" [class.on]="weeksBack() === 0" [attr.aria-selected]="weeksBack() === 0" (click)="pick(0)">{{ 'BOARD.THIS_WEEK' | translate }}</button>
+      <button type="button" role="tab" [class.on]="weeksBack() === 1" [attr.aria-selected]="weeksBack() === 1" (click)="pick(1)">{{ 'BOARD.LAST_WEEK' | translate }}</button>
+    </div>
+  </section>
+
+  @if (board(); as b) {
+    @if ((b.bonus ?? 0) > 0) {
+      <p class="sb-bonus">
+        <mat-icon>emoji_events</mat-icon>
+        <span>{{ (weeksBack() === 0 ? 'BOARD.BONUS' : 'BOARD.BONUS_WON') | translate: { amount: (b.bonus | number: '1.0-0') } }}</span>
+      </p>
+    }
+
+    @if (b.rows.length) {
+      <ol class="sb-list">
+        @for (r of b.rows; track r.staffUid) {
+          <li class="sb-row" [class.first]="r.rank === 1 && r.score > 0">
+            <span class="sb-rank">
+              @if (r.rank === 1 && r.score > 0) {
+                <span class="sb-crown" aria-hidden="true">&#9819;</span>
+              }
+              {{ r.rank }}
+            </span>
+            @if (photo(r.photo); as src) {
+              <img class="sb-photo" [src]="src" alt="" loading="lazy" />
+            } @else {
+              <span class="sb-photo sb-initial">{{ r.name.charAt(0) }}</span>
+            }
+            <div class="sb-who">
+              <strong class="sb-name">{{ r.name }}</strong>
+              <span class="sb-stars">
+                @if (r.ratings > 0) {
+                  <span class="sb-star-row">
+                    @for (i of [1, 2, 3, 4, 5]; track i) {
+                      <span [class.on]="i <= stars(r.stars)">&#9733;</span>
+                    }
+                  </span>
+                  {{ r.stars | number: '1.1-1' }} · {{ 'STYLIST.REVIEWS' | translate: { n: r.ratings } }}
+                } @else {
+                  {{ 'STYLIST.NO_REVIEWS' | translate }}
+                }
+              </span>
+            </div>
+            <dl class="sb-figs">
+              <div><dt>{{ 'BOARD.GUESTS' | translate }}</dt><dd>{{ r.clients }}</dd></div>
+              <div><dt>{{ 'BOARD.REGULARS' | translate }}</dt><dd>{{ r.regulars }}</dd></div>
+              <div><dt>{{ 'BOARD.SCORE' | translate }}</dt><dd>{{ r.score | number: '1.0-1' }}</dd></div>
+            </dl>
+          </li>
+        }
+      </ol>
+      <p class="sb-foot">{{ 'BOARD.HOW' | translate }}</p>
+    } @else {
+      <div class="sb-empty">
+        <mat-icon>emoji_events</mat-icon>
+        <p>{{ 'BOARD.EMPTY' | translate }}</p>
+      </div>
+    }
+  } @else if (loaded()) {
+    <div class="sb-empty">
+      <mat-icon>cloud_off</mat-icon>
+      <p>{{ 'BOARD.FAILED' | translate }}</p>
+    </div>
+  }
+</div>

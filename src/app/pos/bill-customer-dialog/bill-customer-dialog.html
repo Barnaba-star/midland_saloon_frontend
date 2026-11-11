@@ -46,6 +46,9 @@
         </button>
         <button type="button" class="bc-btn" (click)="close()">{{ 'BILL_CUSTOMER.DONE' | translate }}</button>
       </div>
+      @if (customerUid(); as cu) {
+        <app-customer-style-photos [customerUid]="cu" [billUid]="data.sale.uid" />
+      }
     }
 
     @case ('search') {

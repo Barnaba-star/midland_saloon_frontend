@@ -8,13 +8,14 @@ import { MatIcon } from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
+import { CustomerStylePhotos } from '../../../pos/customer-style-photos/customer-style-photos';
 
 @Component({
   selector: 'app-sale-details-dialog-component',
 
   imports: [
     MatIcon,
-    FormsModule, DecimalPipe, TranslatePipe
+    FormsModule, DecimalPipe, TranslatePipe, CustomerStylePhotos
   ],
 
   templateUrl: './sale-details-dialog-component.html',

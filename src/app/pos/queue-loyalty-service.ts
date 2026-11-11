@@ -77,8 +77,9 @@ export class QueueLoyaltyService {
     return this.http.post<{ data: any }>(`${this.url}/queue/${uid}/left`, {});
   }
 
-  settings(): Observable<{ data: QueueSettingsView }> {
-    return this.http.get<{ data: QueueSettingsView }>(`${this.url}/queue/settings`);
+  /** quiet: no loader, no error popup (a side link that may simply not show). */
+  settings(quiet = false): Observable<{ data: QueueSettingsView }> {
+    return this.http.get<{ data: QueueSettingsView }>(`${this.url}/queue/settings`, quiet ? { context: silent() } : {});
   }
   saveSettings(body: { enabled?: boolean; smsOn?: boolean; newCard?: boolean }): Observable<{ data: QueueSettingsView }> {
     return this.http.post<{ data: QueueSettingsView }>(`${this.url}/queue/settings`, body);

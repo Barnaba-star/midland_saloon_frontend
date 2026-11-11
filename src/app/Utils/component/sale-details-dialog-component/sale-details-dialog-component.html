@@ -252,6 +252,14 @@
   }
 
 
+  <!-- ================= STYLE PHOTOS (customer on the bill) ================= -->
+  @if (data.sale?.customerUid) {
+    <div class="dialog-styles">
+      <app-customer-style-photos [customerUid]="data.sale.customerUid" [billUid]="data.sale.uid" />
+    </div>
+  }
+
+
   <!-- ================= PAYMENT ================= -->
   @if (data.showPayment) {
 

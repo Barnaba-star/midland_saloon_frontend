@@ -107,6 +107,13 @@ menuItems: SidenavItem[] = [
     roles: this.allRoles
   },
   {
+    // Mashindano: who served the most guests and got the best stars this week.
+    label: 'MENU.BOARD',
+    icon: 'levels',
+    route: '/pos/saloonBoard',
+    roles: this.allRoles
+  },
+  {
     label: this.reportLabel,
     icon: 'report',
     route: '/pos/saloonReports',

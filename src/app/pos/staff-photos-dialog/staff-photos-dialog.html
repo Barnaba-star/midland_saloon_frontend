@@ -1,0 +1,97 @@
+<div class="spd">
+  <header class="spd-head">
+    <div class="spd-head-text">
+      <h2 class="spd-title">{{ 'STAFF_PHOTOS.TITLE' | translate: { name: data.name } }}</h2>
+      @if (staff(); as s) {
+        <p class="spd-stars">
+          @if (s.ratings > 0) {
+            <span class="spd-star-row">
+              @for (i of [1, 2, 3, 4, 5]; track i) {
+                <span [class.on]="i <= full()">&#9733;</span>
+              }
+            </span>
+            <strong>{{ s.stars | number: '1.1-1' }}</strong>
+            <span>{{ 'STYLIST.REVIEWS' | translate: { n: s.ratings } }}</span>
+          } @else {
+            <span>{{ 'STYLIST.NO_REVIEWS' | translate }}</span>
+          }
+        </p>
+      }
+    </div>
+    <button type="button" class="spd-x" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+      <mat-icon>close</mat-icon>
+    </button>
+  </header>
+
+  @if (publicLink()) {
+    <div class="spd-link">
+      <a [href]="publicLink()" target="_blank" rel="noopener">
+        <mat-icon>open_in_new</mat-icon><span>{{ 'STAFF_PHOTOS.PUBLIC_PAGE' | translate }}</span>
+      </a>
+      <button type="button" (click)="copyLink()">
+        <mat-icon>content_copy</mat-icon><span>{{ 'QUEUE.COPY_LINK' | translate }}</span>
+      </button>
+    </div>
+  }
+
+  @if (pending(); as p) {
+    <section class="spd-new">
+      <img class="spd-preview" [src]="p.preview" alt="" />
+      <div class="spd-new-side">
+        <label class="spd-field">
+          <span>{{ 'STAFF_PHOTOS.CAPTION' | translate }}</span>
+          <input type="text" name="caption" [(ngModel)]="caption" maxlength="80" [placeholder]="'STAFF_PHOTOS.CAPTION_HINT' | translate" />
+        </label>
+        <div class="spd-actions">
+          <button type="button" class="spd-btn spd-btn-gold" [disabled]="uploading()" (click)="upload()">
+            <mat-icon>cloud_upload</mat-icon><span>{{ (uploading() ? 'STYLES.UPLOADING' : 'STAFF_PHOTOS.UPLOAD') | translate }}</span>
+          </button>
+          <button type="button" class="spd-btn" [disabled]="uploading()" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+        </div>
+      </div>
+    </section>
+  } @else {
+    <label class="spd-btn spd-btn-gold spd-pick">
+      <mat-icon>add_a_photo</mat-icon><span>{{ 'STAFF_PHOTOS.ADD' | translate }}</span>
+      <input type="file" accept="image/*" (change)="picked($event)" />
+    </label>
+  }
+
+  @if (photos().length) {
+    <div class="spd-grid">
+      @for (p of photos(); track p.uid) {
+        <figure class="spd-photo">
+          <img [src]="p.src" [alt]="p.caption || ''" loading="lazy" />
+          <figcaption>
+            <span>{{ p.caption || '' }}</span>
+            <small>{{ p.at | date: 'd MMM y' }}</small>
+          </figcaption>
+          <button type="button" class="spd-remove" [class.sure]="confirmRemove() === p.uid" [disabled]="removing() === p.uid" (click)="remove(p)" [attr.aria-label]="'STYLES.REMOVE' | translate">
+            @if (confirmRemove() === p.uid) {
+              {{ 'STYLES.REMOVE_SURE' | translate }}
+            } @else {
+              <mat-icon>delete_outline</mat-icon>
+            }
+          </button>
+        </figure>
+      }
+    </div>
+  } @else if (loaded()) {
+    <p class="spd-empty">{{ 'STAFF_PHOTOS.EMPTY' | translate }}</p>
+  }
+
+  @if (comments().length) {
+    <section class="spd-comments">
+      <h3 class="spd-sub">{{ 'STYLIST.COMMENTS' | translate }}</h3>
+      @for (c of comments(); track $index) {
+        <p class="spd-comment">
+          <span class="spd-comment-stars">@for (i of [1, 2, 3, 4, 5]; track i) {@if (i <= c.stars) {&#9733;}}</span>
+          @if (c.comment) {
+            "{{ c.comment }}"
+          }
+          <small>— {{ c.name || ('STYLIST.GUEST' | translate) }}, {{ c.at | date: 'd MMM' }}</small>
+        </p>
+      }
+    </section>
+  }
+</div>

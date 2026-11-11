@@ -1,0 +1,138 @@
+<div class="tv">
+  <header class="tv-top">
+    <div class="tv-brand">
+      <img class="tv-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+      @if (tv(); as t) {
+        <h1 class="tv-branch">{{ t.branchName }}</h1>
+      }
+    </div>
+    <div class="tv-clock">
+      <span class="tv-time">{{ time() }}</span>
+      <span class="tv-date">{{ date() }}</span>
+    </div>
+  </header>
+
+  @if (error() && !tv()) {
+    <main class="tv-message">
+      <h2>{{ (error() === 'NETWORK' ? 'PUBLIC.ERR_NETWORK' : 'TV.NOT_FOUND') | translate }}</h2>
+      <button type="button" class="tv-retry" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+    </main>
+  } @else if (!tv()) {
+    <main class="tv-message"><h2>{{ 'PUBLIC.LOADING' | translate }}</h2></main>
+  } @else if (tv(); as t) {
+    <main class="tv-body">
+      <div class="tv-left">
+        <section class="tv-panel tv-now">
+          @for (r of calledRows(); track r.number) {
+            <h2 class="tv-called" [class.fresh]="fresh().has(r.number)">
+              <span class="tv-label">{{ 'TV.NOW' | translate }}:</span>
+              <span class="tv-num">#{{ r.number }}</span>
+              <span class="tv-who">{{ r.name }}</span>
+              @if (r.staffName) {
+                <span class="tv-arrow">&rarr;</span>
+                <span class="tv-staff">{{ r.staffName }}</span>
+              }
+            </h2>
+          } @empty {
+            <h2 class="tv-called tv-idle">
+              <span class="tv-label">{{ 'TV.NOW' | translate }}:</span>
+              <span class="tv-who">{{ (t.waiting > 0 ? 'TV.SOON' : 'TV.WELCOME') | translate }}</span>
+            </h2>
+          }
+          @if (servingRows().length) {
+            <div class="tv-serving">
+              <h3 class="tv-sub">{{ 'TV.IN_CHAIR' | translate }}</h3>
+              <ul>
+                @for (r of servingRows(); track r.number) {
+                  <li>
+                    <strong>#{{ r.number }}</strong> {{ r.name }}
+                    @if (r.staffName) {
+                      <span class="tv-arrow">&rarr;</span> {{ r.staffName }}
+                    }
+                  </li>
+                }
+              </ul>
+            </div>
+          }
+        </section>
+
+        <section class="tv-panel tv-next">
+          <h2 class="tv-title">
+            {{ 'TV.NEXT' | translate }}
+            <span class="tv-count">{{ 'TV.WAITING' | translate: { n: t.waiting } }}</span>
+          </h2>
+          @if (nextRows().length) {
+            <ol class="tv-chips">
+              @for (r of nextRows(); track r.number) {
+                <li>
+                  <strong>#{{ r.number }}</strong>
+                  <span>{{ r.name }}</span>
+                </li>
+              }
+            </ol>
+          } @else {
+            <p class="tv-empty">{{ 'TV.NO_ONE_NEXT' | translate }}</p>
+          }
+        </section>
+      </div>
+
+      <div class="tv-right">
+        @if (t.star; as s) {
+          <section class="tv-panel tv-star">
+            <h2 class="tv-title">{{ 'TV.STAR' | translate }}</h2>
+            <div class="tv-star-body">
+              @if (starPhoto()) {
+                <img class="tv-star-photo" [src]="starPhoto()" alt="" />
+              } @else {
+                <div class="tv-star-photo tv-star-initial">{{ s.name.charAt(0) }}</div>
+              }
+              <div class="tv-star-text">
+                <span class="tv-crown" aria-hidden="true">&#9819;</span>
+                <strong class="tv-star-name">{{ s.name }}</strong>
+                @if (s.ratings > 0) {
+                  <span class="tv-stars">
+                    @for (i of [1, 2, 3, 4, 5]; track i) {
+                      <span [class.on]="i <= starFull()">&#9733;</span>
+                    }
+                    <em>{{ s.stars | number: '1.1-1' }}</em>
+                  </span>
+                }
+                <span class="tv-star-guests">{{ 'TV.GUESTS' | translate: { n: s.clients } }}</span>
+              </div>
+            </div>
+          </section>
+        }
+
+        <section class="tv-panel tv-join">
+          <h2 class="tv-title">{{ 'TV.SCAN' | translate }}</h2>
+          <div class="tv-join-body">
+            @if (qr()) {
+              <img class="tv-qr" [src]="qr()" alt="QR" />
+            } @else {
+              <div class="tv-qr"></div>
+            }
+            <p class="tv-join-text">{{ 'TV.SCAN_TEXT' | translate }}</p>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    @if (t.offer || t.loyalty) {
+      <footer class="tv-foot">
+        @if (t.offer) {
+          <p class="tv-offer"><span class="tv-tag">{{ 'TV.OFFER' | translate }}</span>{{ t.offer }}</p>
+        }
+        @if (t.loyalty; as l) {
+          <p class="tv-loyalty"><span class="tv-tag">{{ 'TV.CARD' | translate }}</span>{{ 'TV.LOYALTY' | translate: { n: l.visitsNeeded, amount: (l.rewardAmount | number: '1.0-0') } }}</p>
+        }
+      </footer>
+    }
+  }
+
+  @if (stale()) {
+    <span class="tv-stale" [title]="'PUBLIC.ERR_NETWORK' | translate"></span>
+  }
+  @if (!fullscreen()) {
+    <button type="button" class="tv-fs" (click)="goFullscreen()">{{ 'TV.FULLSCREEN' | translate }}</button>
+  }
+</div>

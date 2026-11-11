@@ -134,7 +134,8 @@
     "SUPPORT": "Ujumbe",
     "HELP": "Msaada",
     "SUBSCRIPTION_DAYS_LEFT": "siku {{days}}",
-    "QUEUE": "Foleni"
+    "QUEUE": "Foleni",
+    "BOARD": "Mashindano"
   },
   "SALON": {
     "OFFICE": "Ofisi",
@@ -2026,5 +2027,99 @@
     "REWARD_LINE": "Zawadi ya mteja",
     "TO_PAY": "Kulipa",
     "CUSTOMER": "Mteja"
+  },
+  "TV": {
+    "NOW": "Sasa",
+    "SOON": "Namba inayofuata inaitwa hivi punde",
+    "WELCOME": "Karibu! Hakuna anayesubiri",
+    "IN_CHAIR": "Wanahudumiwa",
+    "NEXT": "Wanaofuata",
+    "WAITING": "{{n}} wanasubiri",
+    "NO_ONE_NEXT": "Hakuna anayesubiri sasa - scan QR ujiunge",
+    "STAR": "Mhudumu bora wa wiki",
+    "GUESTS": "Wateja {{n}} wiki hii",
+    "SCAN": "Scan ujiunge na foleni",
+    "SCAN_TEXT": "Fungua kamera ya simu, chagua huduma na mhudumu. Tutakuita kwa namba yako.",
+    "OFFER": "Ofa",
+    "CARD": "Kadi",
+    "LOYALTY": "Kila ziara {{n}} = punguzo TZS {{amount}}",
+    "FULLSCREEN": "Skrini nzima",
+    "NOT_FOUND": "TV hii haipo. Fungua tena kutoka POS > Foleni.",
+    "OPEN": "Fungua TV"
+  },
+  "STYLIST": {
+    "TITLE": "Mhudumu",
+    "NOT_FOUND": "Mhudumu huyu hapatikani.",
+    "REVIEWS": "maoni {{n}}",
+    "NO_REVIEWS": "Bado hana nyota",
+    "JOIN_FOR": "Jiunge na foleni kwa {{name}}",
+    "WORK": "Kazi zake",
+    "PHOTO": "Picha",
+    "NO_PHOTOS": "Bado hakuna picha za kazi.",
+    "COMMENTS": "Maoni ya wateja",
+    "GUEST": "Mteja",
+    "NO_COMMENTS": "Bado hakuna maoni.",
+    "SEE_WORK": "Ona kazi zake"
+  },
+  "RATE": {
+    "TITLE": "Mpe {{name}} nyota",
+    "STARS": "Nyota",
+    "COMMENT": "Maoni (si lazima)",
+    "COMMENT_HINT": "Ulipendaje huduma?",
+    "ERR_STARS_REQUIRED": "Chagua nyota kwanza.",
+    "ERR_NETWORK": "Mtandao umekataa. Jaribu tena.",
+    "ERR_OTHER": "Imeshindikana kutuma nyota. Jaribu tena.",
+    "SENDING": "Inatuma...",
+    "SEND": "Tuma",
+    "THANKS": "Asante!",
+    "THANKS_TEXT": "Nyota zako zimemfikia {{name}}.",
+    "ALREADY": "Ulishatoa nyota kwa ziara hii."
+  },
+  "STYLES": {
+    "TITLE": "Mitindo yako",
+    "BEFORE": "Kabla",
+    "AFTER": "Baada",
+    "POS_TITLE": "Picha za mtindo",
+    "STYLIST": "Mhudumu",
+    "NO_STYLIST": "Mhudumu (hajachaguliwa)",
+    "UPLOADING": "Inapakia...",
+    "TAKE": "Piga/Weka picha",
+    "REMOVE": "Ondoa picha",
+    "REMOVE_SURE": "Ondoa?",
+    "EMPTY": "Bado hakuna picha za mtindo wa mteja huyu.",
+    "SAVED": "Picha imehifadhiwa"
+  },
+  "STAFF_PHOTOS": {
+    "TITLE": "Kazi za {{name}}",
+    "PUBLIC_PAGE": "Ukurasa wa wateja",
+    "CAPTION": "Maelezo (si lazima)",
+    "CAPTION_HINT": "Mf. Box braids",
+    "UPLOAD": "Pakia",
+    "ADD": "Weka picha ya kazi",
+    "EMPTY": "Bado hakuna picha. Weka picha za kazi bora - wateja wanaziona wakichagua mhudumu.",
+    "SAVED": "Picha imepakiwa",
+    "BUTTON": "Kazi zake (picha)"
+  },
+  "BOARD": {
+    "TITLE": "Mashindano ya wiki",
+    "THIS_WEEK": "Wiki hii",
+    "LAST_WEEK": "Wiki iliyopita",
+    "BONUS": "Mshindi anapata TZS {{amount}}",
+    "BONUS_WON": "Mshindi alipata TZS {{amount}}",
+    "GUESTS": "Wateja",
+    "REGULARS": "Wa kudumu",
+    "SCORE": "Alama",
+    "HOW": "Alama zinatokana na wateja waliohudumiwa, wateja waliorudi na nyota walizotoa wateja.",
+    "EMPTY": "Bado hakuna wahudumu wa kupangwa wiki hii.",
+    "FAILED": "Imeshindikana kupakia mashindano."
+  },
+  "TV_SETTING": {
+    "TITLE": "TV & Mashindano",
+    "TEXT": "Ofa inayoonekana kwenye TV ya saluni, na zawadi ya mshindi wa mashindano ya wiki.",
+    "OFFER": "Ofa ya TV",
+    "OFFER_HINT": "Mf. Leo: kusuka punguzo 10%",
+    "BONUS": "Zawadi ya mshindi wa wiki (TZS)",
+    "BONUS_HINT": "Weka 0 kama hakuna zawadi. Ofa ikiwa tupu, TV haionyeshi mstari wa ofa.",
+    "SAVED": "Mipangilio ya TV imehifadhiwa"
   }
 }

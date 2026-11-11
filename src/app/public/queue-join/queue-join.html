@@ -62,12 +62,27 @@
             <span class="qj-name">{{ 'PUBLIC.ANYONE' | translate }}</span>
           </button>
           @for (p of d.staff; track p.uid) {
-            <button type="button" class="qj-option" [class.on]="staffUid() === p.uid" (click)="staffUid.set(p.uid)">
-              <span class="qj-name">{{ p.name }}</span>
-              <span class="qj-side">
-                <small>{{ (p.waiting > 0 ? 'PUBLIC.STAFF_WAITING' : 'PUBLIC.STAFF_FREE') | translate: { n: p.waiting } }}</small>
-              </span>
-            </button>
+            <div class="qj-staff">
+              <button type="button" class="qj-option qj-staff-pick" [class.on]="staffUid() === p.uid" (click)="staffUid.set(p.uid)">
+                @if (badgePhoto(p.uid); as src) {
+                  <img class="qj-avatar" [src]="src" alt="" loading="lazy" />
+                } @else {
+                  <span class="qj-avatar qj-avatar-initial">{{ p.name.charAt(0) }}</span>
+                }
+                <span class="qj-staff-text">
+                  <span class="qj-name">{{ p.name }}</span>
+                  @if (badges()[p.uid]; as b) {
+                    @if ((b.ratings ?? 0) > 0) {
+                      <small class="qj-stars"><b>&#9733; {{ b.stars | number: '1.1-1' }}</b> · {{ 'STYLIST.REVIEWS' | translate: { n: b.ratings } }}</small>
+                    }
+                  }
+                </span>
+                <span class="qj-side">
+                  <small>{{ (p.waiting > 0 ? 'PUBLIC.STAFF_WAITING' : 'PUBLIC.STAFF_FREE') | translate: { n: p.waiting } }}</small>
+                </span>
+              </button>
+              <a class="qj-work" [routerLink]="['/mhudumu', token, p.uid]">{{ 'STYLIST.SEE_WORK' | translate }} &rsaquo;</a>
+            </div>
           }
         </div>
       </section>

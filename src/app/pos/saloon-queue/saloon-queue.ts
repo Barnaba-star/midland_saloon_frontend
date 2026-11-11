@@ -5,7 +5,7 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Title2 } from '../../Utils/component/title2/title2';
 import { AlertService } from '../../Utils/services/alert';
 import { QueueLoyaltyService, QueueSettingsView, QueueTicketRow } from '../queue-loyalty-service';
-import { doorLink, printDoorCard } from '../../Utils/services/print-door-card';
+import { doorLink, printDoorCard, tvLink } from '../../Utils/services/print-door-card';
 
 const POLL_MS = 20_000;
 
@@ -38,6 +38,7 @@ export class SaloonQueue implements OnInit, OnDestroy {
   called = computed(() => this.tickets().filter((t) => t.status === 'CALLED'));
   serving = computed(() => this.tickets().filter((t) => t.status === 'SERVING'));
   link = computed(() => (this.settings() ? doorLink(this.settings()!.token) : ''));
+  tv = computed(() => (this.settings() ? tvLink(this.settings()!.token) : ''));
 
   groups = computed(() => [
     { key: 'WAITING', title: 'QUEUE.WAITING', rows: this.waiting() },

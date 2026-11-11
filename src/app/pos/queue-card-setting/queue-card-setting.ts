@@ -7,12 +7,14 @@ import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../../Utils/services/alert';
 import { ComfirmDialogComponent } from '../../Utils/component/comfirm-dialog/comfirm-dialog';
 import { QueueLoyaltyService, QueueSettingsView } from '../queue-loyalty-service';
-import { doorLink, printDoorCard } from '../../Utils/services/print-door-card';
+import { doorLink, printDoorCard, tvLink } from '../../Utils/services/print-door-card';
+import { ShowcaseService } from '../showcase-service';
 import { qrDataUrl } from '../../Utils/services/qr';
 
 /**
  * POS Setting > Foleni & Kadi (CEO): the branch's door QR card (print, a new
- * one, on/off, the "your turn" SMS) and the customer-card reward rule.
+ * one, on/off, the "your turn" SMS), the customer-card reward rule, and the
+ * salon TV's offer line + the stylists' weekly bonus (TV & Mashindano).
  */
 @Component({
   selector: 'app-queue-card-setting',
@@ -26,10 +28,16 @@ export class QueueCardSetting implements OnInit {
   private dialog = inject(MatDialog);
   private alert = inject(AlertService);
   private translate = inject(TranslateService);
+  private showcase = inject(ShowcaseService);
 
   settings = signal<QueueSettingsView | null>(null);
   qr = signal('');
   link = signal('');
+  tv = signal('');
+
+  show_ = { tvOffer: '', weeklyBonus: 0 };
+  showLoaded = signal(false);
+  savingShow = signal(false);
   saving = signal(false);
 
   rule = { enabled: false, visitsNeeded: 10, rewardAmount: 5000, minBill: 0 };
@@ -37,6 +45,13 @@ export class QueueCardSetting implements OnInit {
   savingRule = signal(false);
 
   ngOnInit(): void {
+    this.showcase.settings().subscribe({
+      next: (r) => {
+        this.show_ = { tvOffer: r.data?.tvOffer ?? '', weeklyBonus: Number(r.data?.weeklyBonus ?? 0) };
+        this.showLoaded.set(true);
+      },
+      error: () => this.showLoaded.set(true),
+    });
     this.api.settings().subscribe({ next: (r) => this.show(r.data), error: () => {} });
     this.api.rule().subscribe({
       next: (r) => {
@@ -61,6 +76,7 @@ export class QueueCardSetting implements OnInit {
     }
     const l = doorLink(s.token);
     this.link.set(l);
+    this.tv.set(tvLink(s.token));
     qrDataUrl(l, 480).then((u) => this.qr.set(u)).catch(() => this.qr.set(''));
   }
 
@@ -98,6 +114,22 @@ export class QueueCardSetting implements OnInit {
       heading: this.translate.instant('QUEUE_SETTING.PRINT_HEADING'),
       hint: this.translate.instant('QUEUE_SETTING.PRINT_HINT'),
     });
+  }
+
+  saveShowcase(): void {
+    this.savingShow.set(true);
+    this.showcase
+      .saveSettings({ tvOffer: (this.show_.tvOffer ?? '').trim(), weeklyBonus: Math.max(0, Number(this.show_.weeklyBonus) || 0) })
+      .subscribe({
+        next: (r) => {
+          this.savingShow.set(false);
+          if (r.data) {
+            this.show_ = { tvOffer: r.data.tvOffer ?? '', weeklyBonus: Number(r.data.weeklyBonus ?? 0) };
+          }
+          this.alert.show('success', this.translate.instant('TV_SETTING.SAVED'));
+        },
+        error: () => this.savingShow.set(false),
+      });
   }
 
   saveRule(): void {

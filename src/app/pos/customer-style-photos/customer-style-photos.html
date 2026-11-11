@@ -1,0 +1,59 @@
+<section class="cs">
+  <h3 class="cs-title">{{ 'STYLES.POS_TITLE' | translate }}</h3>
+
+  <div class="cs-controls">
+    <div class="cs-kinds" role="radiogroup">
+      <button type="button" role="radio" class="cs-kind" [class.on]="kind() === 'BEFORE'" [attr.aria-checked]="kind() === 'BEFORE'" (click)="kind.set('BEFORE')">
+        {{ 'STYLES.BEFORE' | translate }}
+      </button>
+      <button type="button" role="radio" class="cs-kind" [class.on]="kind() === 'AFTER'" [attr.aria-checked]="kind() === 'AFTER'" (click)="kind.set('AFTER')">
+        {{ 'STYLES.AFTER' | translate }}
+      </button>
+    </div>
+    @if (staff().length) {
+      <select class="cs-staff" name="styleStaff" [ngModel]="staffUid()" (ngModelChange)="staffUid.set($event)" [attr.aria-label]="'STYLES.STYLIST' | translate">
+        <option value="">{{ 'STYLES.NO_STYLIST' | translate }}</option>
+        @for (s of staff(); track s.uid) {
+          <option [value]="s.uid">{{ s.name }}</option>
+        }
+      </select>
+    }
+    <label class="cs-take" [class.busy]="uploading()">
+      <mat-icon>photo_camera</mat-icon>
+      <span>{{ (uploading() ? 'STYLES.UPLOADING' : 'STYLES.TAKE') | translate }}</span>
+      <input type="file" accept="image/*" capture="environment" [disabled]="uploading()" (change)="picked($event)" />
+    </label>
+  </div>
+
+  @if (photos().length) {
+    <div class="cs-grid">
+      @for (p of photos(); track p.uid) {
+        <figure class="cs-photo">
+          <button type="button" class="cs-open" (click)="open.set(p)">
+            <img [src]="p.src" alt="" loading="lazy" />
+          </button>
+          <span class="cs-badge" [class.after]="p.kind === 'AFTER'">{{ (p.kind === 'AFTER' ? 'STYLES.AFTER' : 'STYLES.BEFORE') | translate }}</span>
+          <figcaption>
+            <span>{{ p.staffName || '' }}</span>
+            <small>{{ p.at | date: 'd MMM' }}</small>
+          </figcaption>
+          <button type="button" class="cs-remove" [class.sure]="confirmRemove() === p.uid" [disabled]="removing() === p.uid" (click)="remove(p)" [attr.aria-label]="'STYLES.REMOVE' | translate">
+            @if (confirmRemove() === p.uid) {
+              {{ 'STYLES.REMOVE_SURE' | translate }}
+            } @else {
+              <mat-icon>delete_outline</mat-icon>
+            }
+          </button>
+        </figure>
+      }
+    </div>
+  } @else if (loaded()) {
+    <p class="cs-empty">{{ 'STYLES.EMPTY' | translate }}</p>
+  }
+</section>
+
+@if (open(); as p) {
+  <div class="cs-viewer" (click)="open.set(null)" role="dialog" aria-modal="true">
+    <img [src]="p.src" alt="" />
+  </div>
+}

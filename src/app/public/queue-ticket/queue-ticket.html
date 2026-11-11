@@ -58,6 +58,32 @@
       }
     }
 
+    @if (showRate()) {
+      <section class="pp-card qt-rate">
+        <h2 class="qt-rate-title">{{ 'RATE.TITLE' | translate: { name: rating()?.servedBy || ('PUBLIC.STYLIST' | translate) } }}</h2>
+        <div class="qt-stars" role="radiogroup" [attr.aria-label]="'RATE.STARS' | translate">
+          @for (i of [1, 2, 3, 4, 5]; track i) {
+            <button type="button" role="radio" class="qt-star" [class.on]="i <= stars()" [attr.aria-checked]="i === stars()" [attr.aria-label]="i + ' / 5'" (click)="stars.set(i)">&#9733;</button>
+          }
+        </div>
+        <label class="qt-comment">
+          <span>{{ 'RATE.COMMENT' | translate }}</span>
+          <textarea name="comment" [(ngModel)]="comment" rows="3" maxlength="300" [placeholder]="'RATE.COMMENT_HINT' | translate"></textarea>
+        </label>
+        @if (rateError()) {
+          <p class="pp-error">{{ ('RATE.ERR_' + (rateError() === 'STARS_REQUIRED' || rateError() === 'NETWORK' ? rateError() : 'OTHER')) | translate }}</p>
+        }
+        <button type="button" class="pp-btn" [disabled]="rateSending() || !stars()" (click)="rate()">
+          {{ (rateSending() ? 'RATE.SENDING' : 'RATE.SEND') | translate }}
+        </button>
+      </section>
+    } @else if (rated()) {
+      <section class="pp-card pp-center">
+        <h2 class="pp-card-title">{{ 'RATE.THANKS' | translate }}</h2>
+        <p class="pp-muted">{{ (rated() === 'SENT' ? 'RATE.THANKS_TEXT' : 'RATE.ALREADY') | translate: { name: rating()?.servedBy || '' } }}</p>
+      </section>
+    }
+
     <section class="pp-card">
       <h2 class="pp-card-title">{{ 'PUBLIC.YOUR_TICKET' | translate }}</h2>
       <dl class="qt-rows">

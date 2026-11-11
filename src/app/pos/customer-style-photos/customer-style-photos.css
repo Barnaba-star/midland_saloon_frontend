@@ -1,0 +1,215 @@
+.cs {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 14px;
+  border: 1px solid var(--color-border, var(--sx-line));
+  border-radius: 14px;
+  font-family: var(--font-sans);
+}
+
+/* Owner rule: the title is bigger than anything inside the box. */
+.cs-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text, var(--sx-navy-700));
+}
+
+.cs-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.cs-kinds {
+  display: inline-flex;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.cs-kind {
+  min-height: 40px;
+  padding: 0 14px;
+  border: 0;
+  background: transparent;
+  color: var(--color-text, var(--sx-navy-700));
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.cs-kind.on {
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.cs-staff {
+  min-height: 40px;
+  min-width: 0;
+  flex: 1 1 140px;
+  padding: 0 10px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
+  font: inherit;
+  font-size: 14px;
+}
+
+.cs-take {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 40px;
+  padding: 0 14px;
+  border-radius: 12px;
+  background: var(--sx-navy-800);
+  color: var(--sx-gold-300);
+  font-size: 14px;
+  font-weight: 700;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.cs-take.busy {
+  opacity: 0.6;
+  cursor: progress;
+}
+
+.cs-take mat-icon {
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+}
+
+.cs-take input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.cs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(96px, 1fr));
+  gap: 8px;
+}
+
+.cs-photo {
+  position: relative;
+  margin: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid var(--color-border, var(--sx-line));
+  background: var(--color-surface, var(--sx-surface));
+}
+
+.cs-open {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: 0;
+  background: var(--sx-navy-100);
+  cursor: zoom-in;
+}
+
+.cs-open img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.cs-badge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  padding: 1px 7px;
+  border-radius: 999px;
+  background: var(--sx-navy-800);
+  color: var(--sx-navy-50);
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.cs-badge.after {
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.cs-photo figcaption {
+  display: flex;
+  flex-direction: column;
+  padding: 4px 6px 6px;
+  font-size: 12px;
+  color: var(--color-text, var(--sx-ink));
+}
+
+.cs-photo figcaption span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cs-photo figcaption small {
+  font-size: 11px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.cs-remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(14, 12, 10, 0.7);
+  color: #fff;
+  font: inherit;
+  font-size: 11px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.cs-remove.sure {
+  background: var(--sx-danger);
+}
+
+.cs-remove mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.cs-empty {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.cs-viewer {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+  background: rgba(14, 12, 10, 0.92);
+  cursor: zoom-out;
+}
+
+.cs-viewer img {
+  max-width: 100%;
+  max-height: 90vh;
+  border-radius: 12px;
+}

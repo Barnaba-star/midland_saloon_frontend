@@ -70,3 +70,72 @@
   text-align: right;
   overflow-wrap: anywhere;
 }
+
+.qt-rate {
+  border-color: var(--sx-gold-500);
+}
+
+/* Owner rule: the title stays bigger than the stars inside it. */
+.qt-rate-title {
+  margin: 0 0 12px;
+  font-size: 30px;
+  line-height: 1.15;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--sx-navy-700);
+  text-align: center;
+}
+
+.qt-stars {
+  display: flex;
+  justify-content: center;
+  gap: 4px;
+  margin: 0 0 14px;
+}
+
+.qt-star {
+  width: 54px;
+  height: 54px;
+  padding: 0;
+  border: 0;
+  background: none;
+  font-size: 28px;
+  line-height: 1;
+  color: var(--sx-line);
+  cursor: pointer;
+  transition: transform 0.12s ease, color 0.12s ease;
+}
+
+.qt-star.on {
+  color: var(--sx-gold-500);
+}
+
+.qt-star:active {
+  transform: scale(0.9);
+}
+
+.qt-comment {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--sx-navy-700);
+}
+
+.qt-comment textarea {
+  padding: 10px 12px;
+  border: 1.5px solid var(--sx-line);
+  border-radius: 12px;
+  background: var(--sx-surface);
+  color: var(--sx-ink);
+  font: inherit;
+  font-size: 16px;
+  resize: vertical;
+}
+
+.qt-comment textarea:focus {
+  outline: none;
+  border-color: var(--sx-gold-500);
+}

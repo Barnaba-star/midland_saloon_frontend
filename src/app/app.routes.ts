@@ -121,6 +121,15 @@ export const routes: Routes = [
   path: 'kadi/:token',
   loadComponent: () => import('./public/customer-card/customer-card').then(m => m.CustomerCard)
 },
+// The salon TV on the wall, and one stylist's work - also no login.
+{
+  path: 'tv/:token',
+  loadComponent: () => import('./public/salon-tv/salon-tv').then(m => m.SalonTv)
+},
+{
+  path: 'mhudumu/:doorToken/:staffUid',
+  loadComponent: () => import('./public/stylist-page/stylist-page').then(m => m.StylistPage)
+},
 {
   path: 'dashboard',
   loadComponent: () => import('./dashboard/dashboard').then(m => m.Dashboard)
@@ -148,6 +157,11 @@ export const routes: Routes = [
         // The door queue (Foleni): walk-ins who joined by the door QR.
         path: 'saloonQueue',
         loadComponent:()=>import('./pos/saloon-queue/saloon-queue').then(m=>m.SaloonQueue)
+      },
+      {
+        // Mashindano: the stylists' weekly board.
+        path: 'saloonBoard',
+        loadComponent:()=>import('./pos/saloon-board/saloon-board').then(m=>m.SaloonBoard)
       },
        {
         path: 'saloonSales',

@@ -3,7 +3,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { DecimalPipe } from '@angular/common';
 import { TranslatePipe } from '@ngx-translate/core';
-import { DoorInfo, PublicApi, errorCode } from '../public-api';
+import { DoorInfo, PublicApi, StaffBadge, errorCode, photoUrl } from '../public-api';
 
 const ticketKey = (door: string) => `salonix-ticket-${door}`;
 const GUEST_KEY = 'salonix-guest';
@@ -40,9 +40,14 @@ export class QueueJoin implements OnInit {
   phone = '';
 
   canJoin = computed(() => !!this.serviceUid() && !this.sending());
+  /** Each stylist's first photo and stars, for choosing who does your hair. */
+  badges = signal<Record<string, StaffBadge>>({});
+  /** ?staff=UID from a stylist's page: that stylist comes picked. */
+  private wanted: string | null = null;
 
   ngOnInit(): void {
     this.token = this.route.snapshot.paramMap.get('token') ?? '';
+    this.wanted = this.route.snapshot.queryParamMap.get('staff');
     try {
       this.myTicket.set(localStorage.getItem(ticketKey(this.token)) ?? '');
       const guest = JSON.parse(localStorage.getItem(GUEST_KEY) ?? 'null');
@@ -63,13 +68,23 @@ export class QueueJoin implements OnInit {
         if (d.services?.length === 1) {
           this.serviceUid.set(d.services[0].uid);
         }
+        if (this.wanted && d.staff?.some((p) => p.uid === this.wanted)) {
+          this.staffUid.set(this.wanted);
+        }
         this.loading.set(false);
+        if (d.staff?.length) {
+          this.api.staffBadges(this.token).subscribe({ next: (b) => this.badges.set(b ?? {}), error: () => {} });
+        }
       },
       error: (e) => {
         this.loadError.set(errorCode(e));
         this.loading.set(false);
       },
     });
+  }
+
+  badgePhoto(uid: string): string {
+    return photoUrl(this.badges()[uid]?.photo);
   }
 
   join(): void {

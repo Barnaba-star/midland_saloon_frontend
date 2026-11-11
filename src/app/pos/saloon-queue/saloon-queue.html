@@ -15,10 +15,18 @@
         <button type="button" class="sq-link" (click)="copyLink()" [title]="'QUEUE.COPY_LINK' | translate">{{ link() }}</button>
       }
     </div>
-    <button type="button" class="sq-btn sq-btn-gold" [disabled]="!settings()" (click)="print()">
-      <mat-icon>print</mat-icon>
-      <span>{{ 'QUEUE.PRINT_DOOR' | translate }}</span>
-    </button>
+    <div class="sq-door-buttons">
+      @if (tv()) {
+        <a class="sq-btn" [href]="tv()" target="_blank" rel="noopener">
+          <mat-icon>tv</mat-icon>
+          <span>{{ 'TV.OPEN' | translate }}</span>
+        </a>
+      }
+      <button type="button" class="sq-btn sq-btn-gold" [disabled]="!settings()" (click)="print()">
+        <mat-icon>print</mat-icon>
+        <span>{{ 'QUEUE.PRINT_DOOR' | translate }}</span>
+      </button>
+    </div>
   </section>
 
   @if (loaded() && !tickets().length) {

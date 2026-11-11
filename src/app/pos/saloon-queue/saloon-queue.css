@@ -236,3 +236,14 @@
     padding: 0 8px;
   }
 }
+
+.sq-door-buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+a.sq-btn {
+  text-decoration: none;
+}

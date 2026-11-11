@@ -1,0 +1,274 @@
+.spd {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px;
+  font-family: var(--font-sans);
+  color: var(--color-text, var(--sx-ink));
+}
+
+.spd-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.spd-head-text {
+  min-width: 0;
+}
+
+/* Owner rule: the dialog title is the biggest text in it. */
+.spd-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.spd-stars {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin: 4px 0 0;
+  font-size: 14px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.spd-stars strong {
+  color: var(--color-text, var(--sx-navy-700));
+}
+
+.spd-star-row {
+  font-size: 18px;
+  color: var(--color-border, var(--sx-line));
+}
+
+.spd-star-row .on {
+  color: var(--sx-gold-500);
+}
+
+.spd-x {
+  display: inline-flex;
+  padding: 6px;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+}
+
+.spd-link {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spd-link a,
+.spd-link button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 0 12px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 10px;
+  background: transparent;
+  color: var(--color-text, var(--sx-navy-700));
+  font: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.spd-link mat-icon,
+.spd-btn mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.spd-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 42px;
+  padding: 0 14px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-navy-700));
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.spd-btn-gold {
+  border-color: var(--sx-gold-500);
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.spd-btn:disabled {
+  opacity: 0.55;
+  cursor: default;
+}
+
+.spd-pick input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.spd-new {
+  display: flex;
+  gap: 12px;
+  padding: 12px;
+  border: 1.5px dashed var(--sx-gold-500);
+  border-radius: 14px;
+}
+
+.spd-preview {
+  width: 110px;
+  height: 110px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.spd-new-side {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  flex: 1;
+}
+
+.spd-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.spd-field input {
+  min-height: 40px;
+  padding: 0 10px;
+  border: 1.5px solid var(--color-border, var(--sx-line));
+  border-radius: 10px;
+  background: var(--color-surface, var(--sx-surface));
+  color: var(--color-text, var(--sx-ink));
+  font: inherit;
+  font-size: 15px;
+}
+
+.spd-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.spd-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 10px;
+}
+
+.spd-photo {
+  position: relative;
+  margin: 0;
+  border: 1px solid var(--color-border, var(--sx-line));
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.spd-photo img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+  background: var(--sx-navy-100);
+}
+
+.spd-photo figcaption {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 8px 8px;
+  font-size: 13px;
+}
+
+.spd-photo figcaption span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.spd-photo figcaption small {
+  font-size: 11px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.spd-remove {
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  height: 32px;
+  padding: 0 8px;
+  border: 0;
+  border-radius: 999px;
+  background: rgba(14, 12, 10, 0.7);
+  color: #fff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.spd-remove.sure {
+  background: var(--sx-danger);
+}
+
+.spd-remove mat-icon {
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+}
+
+.spd-empty {
+  margin: 0;
+  font-size: 14px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.spd-sub {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.spd-comment {
+  margin: 0 0 6px;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.spd-comment-stars {
+  color: var(--sx-gold-500);
+  margin-right: 4px;
+}
+
+.spd-comment small {
+  color: var(--color-text-muted, var(--sx-muted));
+}

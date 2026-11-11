@@ -1,0 +1,241 @@
+/* Owner rule: each title bigger than anything inside it -
+   page title 22px > row name 17px = figures 17px > labels 12px. */
+.sb-page {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 16px 20px 32px;
+  font-family: var(--font-sans);
+  color: var(--color-text, var(--sx-ink));
+}
+
+.sb-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px;
+  border-radius: var(--radius-md);
+  background: var(--sx-navy-800);
+  color: var(--sx-navy-50);
+}
+
+.sb-title {
+  margin: 0;
+  font-size: 22px;
+  font-weight: 800;
+  color: var(--sx-gold-300);
+}
+
+.sb-week {
+  margin: 2px 0 0;
+  font-size: 14px;
+  color: var(--sx-navy-300);
+}
+
+.sb-toggle {
+  display: inline-flex;
+  padding: 3px;
+  border-radius: 12px;
+  background: rgba(255, 253, 249, 0.08);
+}
+
+.sb-toggle button {
+  min-height: 38px;
+  padding: 0 14px;
+  border: 0;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--sx-navy-100);
+  font: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sb-toggle button.on {
+  background: var(--sx-gold-500);
+  color: var(--sx-navy-900);
+}
+
+.sb-bonus {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: var(--sx-gold-100);
+  color: var(--sx-navy-700);
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.sb-bonus mat-icon {
+  color: var(--sx-gold-700);
+}
+
+.sb-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sb-row {
+  display: grid;
+  grid-template-columns: 40px 52px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border: 1px solid var(--color-border, var(--sx-line));
+  border-radius: 14px;
+  background: var(--color-surface, var(--sx-surface));
+}
+
+.sb-row.first {
+  border-color: var(--sx-gold-500);
+  box-shadow: inset 0 0 0 1px var(--sx-gold-500);
+  background: linear-gradient(90deg, var(--sx-gold-100), var(--color-surface, var(--sx-surface)) 70%);
+}
+
+.sb-rank {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 17px;
+  font-weight: 800;
+  color: var(--color-text-muted, var(--sx-muted));
+  line-height: 1;
+}
+
+.sb-row.first .sb-rank {
+  color: var(--sx-gold-700);
+}
+
+.sb-crown {
+  font-size: 16px;
+  color: var(--sx-gold-500);
+  margin-bottom: 2px;
+}
+
+.sb-photo {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--sx-navy-100);
+}
+
+.sb-initial {
+  display: grid;
+  place-items: center;
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--sx-navy-700);
+}
+
+.sb-row.first .sb-photo {
+  border: 2px solid var(--sx-gold-500);
+}
+
+.sb-who {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.sb-name {
+  font-size: 17px;
+  font-weight: 700;
+  overflow-wrap: anywhere;
+}
+
+.sb-stars {
+  font-size: 13px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.sb-star-row {
+  color: var(--color-border, var(--sx-line));
+  margin-right: 4px;
+}
+
+.sb-star-row .on {
+  color: var(--sx-gold-500);
+}
+
+.sb-figs {
+  display: flex;
+  gap: 16px;
+  margin: 0;
+}
+
+.sb-figs div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 52px;
+}
+
+.sb-figs dt {
+  font-size: 12px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.sb-figs dd {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 800;
+}
+
+.sb-foot {
+  margin: 0;
+  font-size: 13px;
+  color: var(--color-text-muted, var(--sx-muted));
+}
+
+.sb-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  padding: 32px 16px;
+  color: var(--color-text-muted, var(--sx-muted));
+  text-align: center;
+}
+
+.sb-empty mat-icon {
+  font-size: 40px;
+  width: 40px;
+  height: 40px;
+  color: var(--sx-gold-500);
+}
+
+@media (max-width: 600px) {
+  .sb-page {
+    padding: 12px 12px 24px;
+  }
+
+  .sb-row {
+    grid-template-columns: 32px 44px minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .sb-photo {
+    width: 44px;
+    height: 44px;
+  }
+
+  .sb-figs {
+    grid-column: 1 / -1;
+    justify-content: space-around;
+    padding-top: 8px;
+    border-top: 1px solid var(--color-border, var(--sx-line));
+  }
+}

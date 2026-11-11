@@ -5,6 +5,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe } from '@ngx-translate/core';
 import { BillLoyalty, LoyaltyCustomer, QueueLoyaltyService } from '../queue-loyalty-service';
+import { CustomerStylePhotos } from '../customer-style-photos/customer-style-photos';
 
 export interface BillCustomerData {
   sale: { uid: string; salesCode?: string; bill?: number; customerUid?: string | null; customerName?: string | null; loyaltyDiscount?: number | null };
@@ -23,7 +24,7 @@ type View = 'current' | 'search' | 'found' | 'register';
  */
 @Component({
   selector: 'app-bill-customer-dialog',
-  imports: [FormsModule, DecimalPipe, MatIconModule, TranslatePipe],
+  imports: [FormsModule, DecimalPipe, MatIconModule, TranslatePipe, CustomerStylePhotos],
   templateUrl: './bill-customer-dialog.html',
   styleUrl: './bill-customer-dialog.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -39,6 +40,8 @@ export class BillCustomerDialog implements OnInit, OnDestroy {
   customer = signal<LoyaltyCustomer | null>(null);
   billName = signal<string | null>(null);
   discount = signal(0);
+  /** The customer on this bill (for their style photos). */
+  customerUid = signal<string | null>(null);
 
   query = '';
   regName = '';
@@ -56,6 +59,7 @@ export class BillCustomerDialog implements OnInit, OnDestroy {
     const s = this.data.sale;
     this.billName.set(s.customerName ?? null);
     this.discount.set(Number(s.loyaltyDiscount ?? 0));
+    this.customerUid.set(s.customerUid ?? null);
     if (s.customerUid) {
       this.customer.set(this.data.known && this.data.known.uid === s.customerUid ? this.data.known : null);
       this.view.set('current');
@@ -165,6 +169,7 @@ export class BillCustomerDialog implements OnInit, OnDestroy {
     this.customer.set(c);
     this.billName.set(bill?.customerName ?? c?.name ?? null);
     this.discount.set(Number(bill?.loyaltyDiscount ?? 0));
+    this.customerUid.set(bill?.customerUid ?? c?.uid ?? null);
     this.view.set('current');
     this.data.onChange(bill, c);
   }

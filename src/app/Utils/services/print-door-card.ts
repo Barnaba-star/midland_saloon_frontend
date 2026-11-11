@@ -5,6 +5,11 @@ export function doorLink(token: string): string {
   return `${location.origin}/foleni/${token}`;
 }
 
+/** The salon TV page for the same door. */
+export function tvLink(token: string): string {
+  return `${location.origin}/tv/${token}`;
+}
+
 const esc = (s: string) =>
   String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
 

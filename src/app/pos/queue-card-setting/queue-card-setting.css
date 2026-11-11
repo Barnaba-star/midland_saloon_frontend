@@ -182,3 +182,17 @@
     grid-template-columns: 1fr;
   }
 }
+
+.qc-fields-2 {
+  grid-template-columns: 2fr 1fr;
+}
+
+a.qc-btn {
+  text-decoration: none;
+}
+
+@media (max-width: 640px) {
+  .qc-fields-2 {
+    grid-template-columns: 1fr;
+  }
+}

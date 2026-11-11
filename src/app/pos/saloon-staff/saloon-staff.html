@@ -169,6 +169,10 @@
                         <mat-icon>visibility</mat-icon>
                       </button>
 
+                      <button mat-icon-button type="button" [matTooltip]="'STAFF_PHOTOS.BUTTON' | translate" (click)="onStaffPhotos(staff)">
+                        <mat-icon>photo_library</mat-icon>
+                      </button>
+
                       <button mat-icon-button type="button" [matTooltip]="'STAFF_PAGE.TOOLTIP_EDIT' | translate" (click)="onEditSaloonStaffPage(staff)">
                         <mat-icon>edit</mat-icon>
                       </button>

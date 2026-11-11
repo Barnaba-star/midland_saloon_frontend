@@ -52,6 +52,40 @@
       }
       <p class="pp-muted cc-total">{{ 'PUBLIC.CARD_TOTAL' | translate: { n: c.totalVisits } }}</p>
     </section>
+
+    @if (photos().length) {
+      <section class="pp-card">
+        <h2 class="pp-card-title">{{ 'STYLES.TITLE' | translate }}</h2>
+        <div class="cc-styles">
+          @for (p of photos(); track p.uid) {
+            <button type="button" class="cc-style" (click)="open.set(p)">
+              <img [src]="p.src" alt="" loading="lazy" />
+              <span class="cc-kind" [class.after]="p.kind === 'AFTER'">{{ (p.kind === 'AFTER' ? 'STYLES.AFTER' : 'STYLES.BEFORE') | translate }}</span>
+              <span class="cc-style-meta">
+                @if (p.staffName) {
+                  <strong>{{ p.staffName }}</strong>
+                }
+                <small>{{ p.at | date: 'd MMM y' }}</small>
+              </span>
+            </button>
+          }
+        </div>
+      </section>
+    }
   }
   <p class="pp-foot">SalonixTz</p>
 </main>
+
+@if (open(); as p) {
+  <div class="cc-viewer" (click)="open.set(null)" role="dialog" aria-modal="true">
+    <img [src]="p.src" alt="" />
+    <p>
+      {{ (p.kind === 'AFTER' ? 'STYLES.AFTER' : 'STYLES.BEFORE') | translate }}
+      @if (p.staffName) { · {{ p.staffName }} }
+      · {{ p.at | date: 'd MMM y' }}
+    </p>
+    @if (p.note) {
+      <p>{{ p.note }}</p>
+    }
+  </div>
+}
