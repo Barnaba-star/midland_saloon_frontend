@@ -8,6 +8,8 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class IconRegistryService {
   private icons: { name: string; path: string }[] = [
     { name: 'social', path: 'assets/icons/social.svg' },
+    // Settings > Role and Users tabs use it; it was missing (error log 2026-11-11).
+    { name: 'manage', path: 'assets/icons/manage.svg' },
     { name: 'support', path: 'assets/icons/support.svg' },
     { name: 'events', path: 'assets/icons/events.svg' },
     { name: 'invite', path: 'assets/icons/invite.svg' },

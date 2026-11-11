@@ -187,7 +187,16 @@ export const StatusInterceptor: HttpInterceptorFn = (
          * server-side; reporting it here too would file it twice.
          */
 
-        if (status === 0 && !errorLogService.isReportingUrl(error?.url)) {
+        // Not filed: the heartbeat and quiet refreshes (the phone simply lost
+        // signal for a moment - the next one tries again), and anything sent
+        // while the device knows it is offline. They filled the error log
+        // with network blips that nobody can fix (2026-11-11).
+        const networkBlip =
+          req.url.includes('/setting/heartbeat') ||
+          req.context.get(SILENT_REQUEST) ||
+          (typeof navigator !== 'undefined' && navigator.onLine === false);
+
+        if (status === 0 && !networkBlip && !errorLogService.isReportingUrl(error?.url)) {
           errorLogService.reportClientError({
             level: 'ERROR',
             message: error?.message ?? 'Backend unreachable',
