@@ -26,6 +26,7 @@ import { AuthInterceptor } from './Utils/inteceptor/auth-interceptor';
 import { provideNativeDateAdapter } from '@angular/material/core';
 import { StatusInterceptor } from './Utils/inteceptor/status-interceptor';
 import { WakeRetryInterceptor } from './Utils/inteceptor/wake-retry-interceptor';
+import { FastReadsInterceptor } from './Utils/inteceptor/fast-reads-interceptor';
 import { GlobalErrorHandler } from './Utils/handlers/global-error-handler';
 
 export const appConfig: ApplicationConfig = {
@@ -49,6 +50,9 @@ export const appConfig: ApplicationConfig = {
       withFetch(),
       withInterceptors([
         AuthInterceptor,
+        // Lists answered at once from the device's last copy, refreshed quietly
+        // (the server is ~0.5 s away from Tanzania) - as Bar and Hotel.
+        FastReadsInterceptor,
         StatusInterceptor,
         // innermost: a sleeping backend is retried before any error dialog shows
         WakeRetryInterceptor

@@ -1,3 +1,5 @@
+import { HttpClient } from '@angular/common/http';
+import { warmUp } from '../Utils/inteceptor/fast-reads-interceptor';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router, RouterModule } from '@angular/router';
 
@@ -25,6 +27,7 @@ export  class Pos implements OnInit{
 // when the field initializers below (e.g. reportLabel) run - constructor
 // parameters are only assigned after those initializers.
 private visibility = inject(Authentication);
+private http = inject(HttpClient);
 constructor(private router: Router, private route: ActivatedRoute, private cdr: ChangeDetectorRef, private saloonService: ServiceSaloonMethod) {
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
@@ -42,6 +45,8 @@ constructor(private router: Router, private route: ActivatedRoute, private cdr: 
     if (this.isHome) {
       this.loadDashboard();
     }
+    // The till's lists, fetched quietly now so opening them is instant.
+    warmUp(this.http);
   }
 isHome = true;
 // Frontend visibility only - the actual security boundary is each

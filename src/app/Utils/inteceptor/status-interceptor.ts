@@ -1,3 +1,4 @@
+import { SILENT_REQUEST } from './silent-request';
 import {
   HttpHandlerFn,
   HttpInterceptorFn,
@@ -100,7 +101,9 @@ export const StatusInterceptor: HttpInterceptorFn = (
     // Branch messages and guidance: every outcome is a code the screen
     // has wording for, in both the success and the failure case.
     req.url.includes('/branchMessage/') ||
-    req.url.includes('/guidance/');
+    req.url.includes('/guidance/') ||
+    // Quiet refreshes and warm-ups (FastReadsInterceptor): never a popup.
+    req.context.get(SILENT_REQUEST);
 
 
   /*
