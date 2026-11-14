@@ -30,7 +30,8 @@
 }
 
 .topbar-word {
-  --bw-h: 48px;
+  /* Bigger logo (owner 2026-11-14: "inaonekana kwa udogo sana") */
+  --bw-h: 64px;
 }
 
 .topbar-actions .mat-mdc-icon-button {
@@ -186,7 +187,7 @@ mat-card-content {
   }
 
   .topbar-word {
-    --bw-h: 38px;
+    --bw-h: 50px;
   }
 
   .user-chip span {
