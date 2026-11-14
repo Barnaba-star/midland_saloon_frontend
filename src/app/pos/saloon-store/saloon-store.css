@@ -1059,4 +1059,52 @@
   }
 }
 
-.action-btn.delete-store-btn { color: var(--sx-danger); }
+
+/* Store item actions (owner 2026-11-14: "muonekano mzuri"): one even set -
+   Ongeza Idadi and Fungua as before, Hariri a calm outline, Futa soft red;
+   same height and radius, a 2x2 grid that fills the card on phones. */
+.actions-column .action-buttons {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 6px;
+  min-width: 250px;
+}
+.actions-column .action-btn {
+  width: 100%;
+  height: 34px;
+  border-radius: 9px;
+  padding: 0 10px;
+  font-size: 12.5px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.action-btn.edit-store-btn {
+  color: var(--sx-ink);
+  background: var(--sx-surface);
+  border: 1px solid var(--sx-line);
+}
+.action-btn.edit-store-btn mat-icon { color: var(--sx-gold-700); }
+.action-btn.edit-store-btn:hover {
+  border-color: var(--sx-gold-500);
+  background: var(--sx-gold-100);
+  transform: translateY(-1px);
+}
+.action-btn.delete-store-btn {
+  color: var(--sx-danger);
+  background: var(--sx-danger-bg);
+  border: 1px solid transparent;
+}
+.action-btn.delete-store-btn:hover {
+  color: var(--sx-surface);
+  background: var(--sx-danger);
+  transform: translateY(-1px);
+}
+@media (max-width: 600px) {
+  .actions-column .action-buttons {
+    min-width: 0;
+    width: 100%;
+  }
+  .actions-column .action-btn {
+    height: 40px;
+    font-size: 13px;
+  }
+}
