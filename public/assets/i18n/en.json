@@ -2282,7 +2282,10 @@
       "EDIT_TITLE": "Edit item: {{name}}",
       "UPDATED": "Item saved",
       "DELETE_TITLE": "Delete item?",
-      "DELETE_CONFIRM": "Delete {{name}} from the store? Items already opened stay in the history."
+      "DELETE_CONFIRM": "Delete {{name}} from the store? Items already opened stay in the history.",
+      "EXTRA_SERVICES": "Other services that use this item",
+      "EXTRA_SERVICES_HINT": "Pick them if more than one service uses it",
+      "ALSO_USED": "Also: {{names}}"
     },
     "CLEAR_SEARCH": "Clear search",
     "REPORTS": {

@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.34",
+    "date": "2026-11-14",
+    "sw": [
+      "Store: bidhaa moja inaweza kutumika na huduma kadhaa - chagua \"Huduma nyingine zinazotumia bidhaa hii\"; ikifunguliwa inahesabika kwa huduma zote hizo kwenye mauzo."
+    ],
+    "en": [
+      "Store: one item can serve several services - pick \"Other services that use this item\"; once opened it counts for all of them at a sale."
+    ]
+  },
+  {
     "v": "1.0.33",
     "date": "2026-11-14",
     "sw": [

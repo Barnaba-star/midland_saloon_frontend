@@ -123,6 +123,9 @@
                   <!-- SERVICE NAME -->
                   <td [attr.data-label]="'STORE_PAGE.COL_SERVICE' | translate">
                     {{ store.serviceName || store.nameOfService }}
+                    @if (extraNames(store); as more) {
+                      <small class="also-used">{{ 'POS_T.STORE.ALSO_USED' | translate: { names: more } }}</small>
+                    }
                   </td>
 
                   <!-- OPENED DATE -->

@@ -45,6 +45,7 @@ export class SaloonStore implements OnInit{
   ngOnInit(): void {
     this.selectedBooking = 'STORE.MANAGE';
     this.loadSaloonStorePage();
+    this.loadSaloonService();
   }
   selectedBooking = '';
   titleActions: TitleAction[] = [
@@ -142,6 +143,15 @@ export class SaloonStore implements OnInit{
       options: [],
     },
     {
+      // An item used by several services (owner 2026-11-14): besides its own one.
+      name: 'extraServices',
+      type: 'checkbox-group',
+      label: 'POS_T.STORE.EXTRA_SERVICES',
+      placeholder: 'POS_T.STORE.EXTRA_SERVICES_HINT',
+      required: false,
+      options: [],
+    },
+    {
       name: 'description',
       type: 'textarea',
       label: 'COMMON.DESCRIPTION',
@@ -149,6 +159,14 @@ export class SaloonStore implements OnInit{
       required: true,
     },
   ];
+
+  /** Service names by uid, for the "also used by" line of each item. */
+  serviceNames = new Map<string, string>();
+
+  extraNames(row: any): string {
+    const uids = String(row?.extraServiceUids || '').split(',').map((u) => u.trim()).filter(Boolean);
+    return uids.map((u) => this.serviceNames.get(u)).filter(Boolean).join(', ');
+  }
 
   loadSaloonService() {
     this.saloonService.findSaloonServiceList().subscribe({
@@ -163,6 +181,11 @@ export class SaloonStore implements OnInit{
           if (serviceField) {
             serviceField.options = options;
           }
+          const extraField = this.bookingFields.find((field) => field.name === 'extraServices');
+          if (extraField) {
+            extraField.options = options;
+          }
+          this.serviceNames = new Map(res.data.map((x: any) => [x.uid, x.serviceName]));
           this.cdr.markForCheck();
         }
       },
@@ -178,6 +201,7 @@ export class SaloonStore implements OnInit{
       quantity: store.quantity,
       description: store.description,
       saloonServiceEntityUID: store.saloonService,
+      extraServiceUids: Array.isArray(store.extraServices) ? store.extraServices : [],
       buyingPrice: store.buyingPrice || undefined,
       totalPrice: store.totalPrice || undefined,
     };
@@ -312,6 +336,7 @@ export class SaloonStore implements OnInit{
           buyingPrice: row.buyingPrice,
           totalPrice: row.totalQuantityPrice,
           saloonService: row.saloonServiceEntityUID,
+          extraServices: String(row.extraServiceUids || '').split(',').map((u: string) => u.trim()).filter(Boolean),
           description: row.description,
         },
       },
@@ -325,6 +350,7 @@ export class SaloonStore implements OnInit{
         quantity: result.quantity,
         description: result.description,
         saloonServiceEntityUID: result.saloonService || row.saloonServiceEntityUID,
+        extraServiceUids: Array.isArray(result.extraServices) ? result.extraServices : [],
         // The unit price leads when it was changed; else the lot price, so a new quantity re-prices from the lot.
         buyingPrice: unitChanged ? (result.buyingPrice || undefined) : undefined,
         totalPrice: unitChanged ? undefined : (result.totalPrice || undefined),

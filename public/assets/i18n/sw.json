@@ -2282,7 +2282,10 @@
       "EDIT_TITLE": "Hariri bidhaa: {{name}}",
       "UPDATED": "Bidhaa imehifadhiwa",
       "DELETE_TITLE": "Futa bidhaa?",
-      "DELETE_CONFIRM": "Futa {{name}} kwenye store? Bidhaa zilizokwisha funguliwa zinabaki kwenye historia."
+      "DELETE_CONFIRM": "Futa {{name}} kwenye store? Bidhaa zilizokwisha funguliwa zinabaki kwenye historia.",
+      "EXTRA_SERVICES": "Huduma nyingine zinazotumia bidhaa hii",
+      "EXTRA_SERVICES_HINT": "Chagua kama inatumika na huduma zaidi ya moja",
+      "ALSO_USED": "Pia: {{names}}"
     },
     "CLEAR_SEARCH": "Futa utafutaji",
     "REPORTS": {

@@ -139,6 +139,7 @@ export interface StoreDTO {
     codeOfStore?:string;
     quantity?:number;
     saloonServiceEntityUID?:string;
+    extraServiceUids?: string[];
     description?:string;
     openedDate?:string;
     closedDate?:string;
@@ -160,6 +161,7 @@ export interface Store {
     nameOfService?:string;
     serviceName?: string;
     saloonServiceEntityUID?: string;
+    extraServiceUids?: string;
     codeOfService?:string;
     openedDate?:string;
     closedDate?:string;
