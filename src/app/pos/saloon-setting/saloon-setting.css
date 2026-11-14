@@ -2240,3 +2240,21 @@ mat-paginator {
     flex-wrap: wrap;
   }
 }
+
+/* Kamisheni: every service, with or without a split (2026-11-14) */
+.commission-filters { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.commission-filters button {
+  border: 1.5px solid var(--sx-line); background: var(--sx-surface); color: var(--sx-ink);
+  border-radius: 999px; padding: 6px 14px; font: inherit; font-size: 13px; font-weight: 600; cursor: pointer;
+}
+.commission-filters button.on { background: var(--sx-gold-500); border-color: var(--sx-gold-500); color: var(--sx-navy-900); }
+.no-commission-badge {
+  display: inline-block; padding: 4px 10px; border-radius: 999px;
+  background: var(--sx-warning-bg); color: var(--sx-warning); font-size: 12.5px; font-weight: 700;
+}
+.set-commission-btn {
+  display: inline-flex; align-items: center; gap: 4px; border: 0; border-radius: 10px;
+  padding: 6px 12px; background: var(--sx-gold-500); color: var(--sx-navy-900);
+  font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
+}
+.set-commission-btn mat-icon { width: 18px; height: 18px; font-size: 18px; }

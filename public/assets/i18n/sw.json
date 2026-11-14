@@ -305,7 +305,13 @@
     "USER_NOT_FOUND": "Mtu huyo hayupo tena kwenye orodha.",
     "ACCESS_FAILED": "Haikuweza kubadilishwa. Tafadhali jaribu tena.",
     "BTN_ASSIGN_ROLE": "Weka role",
-    "TOOLTIP_ASSIGN_ROLE": "Chagua role anazoshikilia huyu"
+    "TOOLTIP_ASSIGN_ROLE": "Chagua role anazoshikilia huyu",
+    "COMMISSION_STATE": "Kamisheni",
+    "NO_COMMISSION_YET": "Haina kamisheni bado",
+    "SET_COMMISSION": "Weka kamisheni",
+    "COMMISSION_ALL": "Zote",
+    "COMMISSION_WITH": "Zina kamisheni",
+    "COMMISSION_WITHOUT": "Hazina kamisheni"
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Ongeza Bidhaa ya Store",

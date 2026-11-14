@@ -341,7 +341,6 @@
             <th>{{ 'COMMON.CODE' | translate }}</th>
             <th>{{ 'COMMON.PRICE' | translate }}</th>
             <th>{{ 'COMMON.DURATION' | translate }}</th>
-            <th>{{ 'SETTING_PAGE.COL_STORE_USAGE' | translate }}</th>
             <th>{{ 'COMMON.STATUS' | translate }}</th>
             <th class="action-column">{{ 'COMMON.ACTION' | translate }}</th>
           </tr>
@@ -407,18 +406,6 @@
 
                   <span>
                     {{ service.duration || 0 }} min
-                  </span>
-
-                </div>
-              </td>
-
-                <td [attr.data-label]="'SETTING_PAGE.COL_STORE_USAGE' | translate">
-                <div class="duration">
-
-                  <mat-icon svgIcon="store"></mat-icon>
-
-                  <span>
-                    {{ service.usageType}}
                   </span>
 
                 </div>
@@ -754,6 +741,12 @@
               </div>
             </div>
 
+            <div class="commission-filters">
+              <button type="button" [class.on]="commissionFilter === 'ALL'" (click)="commissionFilter = 'ALL'">{{ 'SETTING_PAGE.COMMISSION_ALL' | translate }} ({{ totalElements }})</button>
+              <button type="button" [class.on]="commissionFilter === 'WITH'" (click)="commissionFilter = 'WITH'">{{ 'SETTING_PAGE.COMMISSION_WITH' | translate }} ({{ withCount }})</button>
+              <button type="button" [class.on]="commissionFilter === 'WITHOUT'" (click)="commissionFilter = 'WITHOUT'">{{ 'SETTING_PAGE.COMMISSION_WITHOUT' | translate }} ({{ withoutCount }})</button>
+            </div>
+
             <!-- Table -->
             <div class="table-responsive sx-table-wrap">
               <table class="table commission-table sx-cards">
@@ -779,7 +772,7 @@
                 </thead>
 
                 <tbody>
-                  @for (commission of commissionDataSource; track commission.uid; let i = $index) {
+                  @for (commission of shownCommissionRows(); track commission.uid; let i = $index) {
                     <tr>
                       <td class="number-column sx-card-index">
                         {{ i + 1 }}
@@ -804,6 +797,16 @@
                         <span class="price">Tshs {{ commission.price | number: '1.2-2' }}</span>
                       </td>
 
+                      @if (commission.noCommission) {
+                      <td colspan="12" class="no-commission-cell" [attr.data-label]="'SETTING_PAGE.COMMISSION_STATE' | translate">
+                        <span class="no-commission-badge">{{ 'SETTING_PAGE.NO_COMMISSION_YET' | translate }}</span>
+                      </td>
+                      <td class="commission-actions-cell sx-card-actions">
+                        <button type="button" class="set-commission-btn" (click)="setCommissionFor(commission)">
+                          <mat-icon>add</mat-icon>{{ 'SETTING_PAGE.SET_COMMISSION' | translate }}
+                        </button>
+                      </td>
+                      } @else {
                       <td [attr.data-label]="'COMMISSION_BREAKDOWN.OWNER' | translate">
                         <span class="percentage owner"> {{ commission.ownerPercent }}% </span>
                       </td>
@@ -894,19 +897,13 @@
                           <mat-icon svgIcon="delete"></mat-icon>
                         </button>
                       </td>
+                      }
                     </tr>
                   }
                 </tbody>
               </table>
             </div>
-            <mat-paginator
-      [length]="totalElements"
-      [pageSize]="size"
-      [pageIndex]="page"
-      [pageSizeOptions]="[5, 10, 20, 50]"
-      showFirstLastButtons
-      (page)="onCommissionPageChange($event)">
-    </mat-paginator>
+            
           </div>
         }
 

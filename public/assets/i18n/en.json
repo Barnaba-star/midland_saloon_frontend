@@ -305,7 +305,13 @@
     "USER_NOT_FOUND": "That person is no longer on the list.",
     "ACCESS_FAILED": "That could not be changed. Please try again.",
     "BTN_ASSIGN_ROLE": "Assign role",
-    "TOOLTIP_ASSIGN_ROLE": "Choose which roles this person holds"
+    "TOOLTIP_ASSIGN_ROLE": "Choose which roles this person holds",
+    "COMMISSION_STATE": "Commission",
+    "NO_COMMISSION_YET": "No commission yet",
+    "SET_COMMISSION": "Set commission",
+    "COMMISSION_ALL": "All",
+    "COMMISSION_WITH": "With commission",
+    "COMMISSION_WITHOUT": "Without commission"
   },
   "STORE_PAGE": {
     "FORM_TITLE_ADD": "Add Store Item",

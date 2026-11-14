@@ -1,3 +1,5 @@
+import { forkJoin, of } from 'rxjs';
+import { catchError } from 'rxjs/operators';
 import { OtherSplit } from '../other-split/other-split';
 import { ServicesQrSetting } from '../services-qr-setting/services-qr-setting';
 import { QueueCardSetting } from '../queue-card-setting/queue-card-setting';
@@ -153,13 +155,6 @@ serviceFields:FormField[] = [
     placeholder: 'Enter service name',
     required: true,
   },
-    {
-    name: 'serviceCode',
-    type: 'text',
-    label: 'Service Code',
-    placeholder: 'Enter service code',
-    required: true,
-  },
   {
     name: 'price',
     type: 'number',
@@ -184,12 +179,6 @@ serviceFields:FormField[] = [
       { value: 'Not Active', label: 'Not Active' }
     ]
   },
-   {
-    name:'usageType',
-    type:'select',
-    placeholder:'Usage Type',
-    options:[{label:'ASSIGNED', value:'ASSIGNED'}, {label:'SHARED', value:'SHARED'}]
-  },
     {
     name: 'description',
     type: 'textarea',
@@ -208,12 +197,6 @@ serviceFieldsEdit:FormField[] = [
     placeholder: 'Enter service name',
     required: true,
   },
-    {
-    name: 'serviceCode',
-    type: 'text',
-    placeholder: 'Enter service code',
-    required: true,
-  },
   {
     name: 'price',
     type: 'number',
@@ -225,12 +208,6 @@ serviceFieldsEdit:FormField[] = [
     type: 'number',
     placeholder: 'Enter duration in minutes',
     required: true,
-  },
-  {
-    name:'usageType',
-    type:'select',
-    placeholder:'Usage Type',
-    options:[{label:'ASSIGNED', value:'ASSIGNED'}, {label:'SHARED', value:'SHARED'}]
   },
     {
     name: 'status',
@@ -292,13 +269,6 @@ serviceColumns: {
     iconPosition: 'left',
     iconColor: '#6c757d'
   },
-   {
-    field: 'usageType',
-    header: 'usageType',
-    icon: 'more',
-    iconPosition: 'left',
-    iconColor: '#6c757d'
-  },
   {
     field: 'status',
     header: 'Status'
@@ -328,12 +298,11 @@ submitServiceForm(data: any) {
     this.saloonServiceInfo=false;
   const saloonServiceDTO:SaloonServiceDTO={
     serviceName: data.serviceName,
-    serviceCode: data.serviceCode,
     price: data.price,
     duration: data.duration,
     status: data.status,
     description: data.description,
-    usageType:data.usageType
+    // serviceCode: the system gives it (H001...); usage type left off (2026-11-14).
   }
   console.log('Service DTO:', saloonServiceDTO);
   this.service.saveSaloonEntity(saloonServiceDTO).subscribe({
@@ -377,7 +346,6 @@ tableConfig = {
     { field: 'serviceCode', header: 'SERVICE CODE' },
     { field: 'price', header: 'PRICE' },
     { field: 'duration', header: 'DURATION' },
-    {field:'usageType', header:'usageType'},
     { field: 'status', header: 'STATUS' }
   ] as TableColumn[]
 };
@@ -451,12 +419,10 @@ nextPage() {
               const saloonServiceDTO:SaloonServiceDTO={
               uid: this.serviceEditUID,
               serviceName: result.serviceName,
-              serviceCode: result.serviceCode,
               price: result.price,
               duration: result.duration,
               status: result.status,
               description: result.description,
-              usageType:result.usageType
             }
             console.log('Service Edited Value is:', saloonServiceDTO);
               this.service.saveSaloonEntity(saloonServiceDTO).subscribe({
@@ -661,6 +627,7 @@ saveCommission() {
          this.addCommission =false;
          this.selectedService=false;
          this.serviceDataSource.data=[]
+         this.findCommissionPage();
          this.cdr.detectChanges();
       }
     },
@@ -677,33 +644,65 @@ totalElements = 0;
 totalPages = 0;
 commissionDataSource: any[] = [];
 
+/** Kamisheni (owner 2026-11-14): every service, with its split or "Haina kamisheni" + Weka. */
+commissionFilter: 'ALL' | 'WITH' | 'WITHOUT' = 'ALL';
+withCount = 0;
+withoutCount = 0;
+
 findCommissionPage() {
   this.addCommission = false;
   this.selectedService = false;
-  const params: PageableParam = {
-    page: this.page,
-    size: this.size
-  };
-
-  this.saloonService.findCommissionPage(params).subscribe({
-    next: (res) => {
-      if (res.data) {
-        this.commissionDataSource = res.data;
-
-        // Muhimu: hizi lazima zitoke kwenye pagination response
-        this.totalElements = res.totalElements;
-        this.totalPages = res.totalPages;
-
-        this.cdr.detectChanges();
-
-        console.log('Data Found:', res);
+  forkJoin({
+    commissions: this.saloonService.findCommissionList().pipe(catchError(() => of({ data: [] } as any))),
+    services: this.saloonService.findSaloonServiceList().pipe(catchError(() => of({ data: [] } as any))),
+  }).subscribe(({ commissions, services }) => {
+    const list: any[] = commissions?.data ?? [];
+    const used = new Set<any>();
+    const rows: any[] = [];
+    for (const svc of (services?.data ?? []) as any[]) {
+      const c = list.find((x) => !used.has(x) && (x.saloonServiceUID ? x.saloonServiceUID === svc.uid : x.serviceName === svc.serviceName));
+      if (c) {
+        used.add(c);
+        rows.push({ ...c, saloonServiceUID: svc.uid, serviceName: svc.serviceName, price: svc.price });
+      } else {
+        rows.push({ uid: 'svc-' + svc.uid, saloonServiceUID: svc.uid, serviceName: svc.serviceName, price: svc.price, noCommission: true });
       }
-    },
-    error: (err) => {
-      console.error('Error fetching commission page:', err);
     }
+    // A split whose service is no longer listed still shows, so it can be deleted.
+    for (const c of list) if (!used.has(c)) rows.push(c);
+    // Services still waiting for a split come first.
+    rows.sort((a, b) => Number(!a.noCommission) - Number(!b.noCommission) || String(a.serviceName ?? '').localeCompare(String(b.serviceName ?? '')));
+    this.commissionDataSource = rows;
+    this.withoutCount = rows.filter((r) => r.noCommission).length;
+    this.withCount = rows.length - this.withoutCount;
+    this.totalElements = rows.length;
+    this.cdr.detectChanges();
   });
 }
+
+shownCommissionRows(): any[] {
+  if (this.commissionFilter === 'WITH') return this.commissionDataSource.filter((r) => !r.noCommission);
+  if (this.commissionFilter === 'WITHOUT') return this.commissionDataSource.filter((r) => r.noCommission);
+  return this.commissionDataSource;
+}
+
+/** Weka kamisheni for a service that has none: open the split form on that service. */
+setCommissionFor(row: any) {
+  this.saloonService.findSaloonServiceByUID(row.saloonServiceUID).subscribe({
+    next: (res) => {
+      if (!res?.data) return;
+      this.saloonServiceData = res.data;
+      this.commissionRows.forEach((r) => { r.amount = 0; r.percentage = 0; });
+      this.remainingAmount = Number(res.data.price) || 0;
+      this.addCommission = true;
+      this.selectedService = true;
+      this.cdr.detectChanges();
+      try { document.querySelector('.commission-table-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch {}
+    },
+    error: () => this.alertService.show('error', 'Error When Loading Services'),
+  });
+}
+
 onCommissionPageChange(event: PageEvent) {
   this.page = event.pageIndex;
   this.size = event.pageSize;
@@ -762,12 +761,6 @@ deleteCommission(commission: any) {
       this.commissionDataSource = this.commissionDataSource.filter(
         (item) => item.uid !== commission.uid
       );
-
-      this.totalElements--;
-
-      if (this.commissionDataSource.length === 0 && this.page > 0) {
-        this.page--;
-      }
 
       this.findCommissionPage();
       this.cdr.detectChanges();

@@ -3,6 +3,28 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.26",
+    "date": "2026-11-14",
+    "sw": [
+      "Kamisheni (Mipangilio > Kamisheni): huduma zote zinaonekana - zenye kamisheni na zisizo nazo, kitufe \"Weka kamisheni\" kwa zisizo nazo."
+    ],
+    "en": [
+      "Commission (Settings > Commission): every service shows - with and without a split, with a \"Set commission\" button for those without."
+    ]
+  },
+  {
+    "v": "1.0.25",
+    "date": "2026-11-14",
+    "sw": [
+      "Kuongeza huduma: hakuna tena kuandika code - mfumo unatoa code wenyewe (H001, H002...).",
+      "Chaguo la \"Shared\" limeondolewa kwenye fomu ya huduma."
+    ],
+    "en": [
+      "Adding a service: no code to type any more - the system gives one (H001, H002...).",
+      "The \"Shared\" choice is removed from the service form."
+    ]
+  },
+  {
     "v": "1.0.24",
     "date": "2026-11-14",
     "sw": [
