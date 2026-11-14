@@ -52,11 +52,16 @@ export class StaffCommission implements OnInit, OnDestroy {
     try {
       this.installed.set(window.matchMedia('(display-mode: standalone)').matches || (navigator as any).standalone === true);
       this.isIos = /iPhone|iPad|iPod/i.test(navigator.userAgent);
-      // This card's own manifest: the installed app opens on this page.
+      // Remember the card on this phone: the installed card opens on it even if
+      // it starts on / (index.html sends it back here).
+      try { localStorage.setItem('salonix-staff-card', this.token.toUpperCase()); } catch {}
+      // This card's own manifest (index.html already set it when the page was
+      // opened straight on the card; this covers arriving from inside the app).
       const link = document.querySelector<HTMLLinkElement>('link[rel="manifest"]');
-      if (link && this.token) {
+      const own = `${environment.baseApiUrl}/public/staffCard/${encodeURIComponent(this.token.toUpperCase())}/manifest`;
+      if (link && this.token && link.getAttribute('href') !== own) {
         this.oldManifest = link.getAttribute('href');
-        link.setAttribute('href', `${environment.baseApiUrl}/public/staffCard/${encodeURIComponent(this.token)}/manifest`);
+        link.setAttribute('href', own);
       }
       document.querySelector('meta[name="apple-mobile-web-app-title"]')?.setAttribute('content', 'Kamisheni');
       window.addEventListener('beforeinstallprompt', this.onPrompt);

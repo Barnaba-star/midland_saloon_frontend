@@ -10,8 +10,39 @@
   <link rel="icon" type="image/png" sizes="64x64" href="salonix-64.png">
   <link rel="icon" type="image/png" sizes="192x192" href="salonix-192.png">
   <link rel="apple-touch-icon" href="salonix-180.png">
-  <link rel="manifest" href="manifest.webmanifest">
-  <meta name="apple-mobile-web-app-title" content="SalonixTz">
+  <!-- A stylist's commission card (owner 2026-11-14): on /kamisheni/TOKEN the
+       page carries that card's own manifest from the start, so "Install" opens
+       straight on the card; and the installed card, if it ever starts on / or
+       /login with nobody signed in, goes back to the card it came from. -->
+  <script>
+    (function () {
+      var api = 'https://api.salonixtz.com';
+      var KEY = 'salonix-staff-card';
+      var p = location.pathname;
+      var m = p.match(/^\/kamisheni\/([A-Za-z0-9]{8,24})\/?$/);
+      var standalone = false;
+      try { standalone = matchMedia('(display-mode: standalone)').matches || matchMedia('(display-mode: fullscreen)').matches || navigator.standalone === true; } catch (e) {}
+      if (m) {
+        try { localStorage.setItem(KEY, m[1].toUpperCase()); } catch (e) {}
+        if (location.hostname !== 'localhost' && location.hostname !== '127.0.0.1') {
+          document.write('<link rel="manifest" href="' + api + '/public/staffCard/' + m[1].toUpperCase() + '/manifest">');
+        } else {
+          document.write('<link rel="manifest" href="manifest.webmanifest">');
+        }
+        document.write('<meta name="apple-mobile-web-app-title" content="Kamisheni">');
+        return;
+      }
+      var signedIn = /(?:^|;\s*)jwt_token=/.test(document.cookie);
+      var t = null;
+      try { t = localStorage.getItem(KEY); } catch (e) {}
+      if (t && !signedIn && standalone && (p === '/' || p === '/login' || p === '/index.html')) {
+        location.replace('/kamisheni/' + t);
+        return;
+      }
+      document.write('<link rel="manifest" href="manifest.webmanifest">');
+      document.write('<meta name="apple-mobile-web-app-title" content="SalonixTz">');
+    })();
+  </script>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Allura&family=Bodoni+Moda:ital,opsz,wght@1,6..96,900&display=swap" rel="stylesheet">
 
