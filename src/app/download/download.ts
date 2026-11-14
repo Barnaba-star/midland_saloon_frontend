@@ -25,6 +25,8 @@ const APP_VERSION = '1.0.23';
 export class Download {
   readonly version = APP_VERSION;
   readonly main = { href: `/downloads/salonixtz-${APP_VERSION}.apk`, mb: 41.9 };
+  /** What this version brings - update together with APP_VERSION. */
+  readonly whatsNew = ['DOWNLOAD.NEW_1', 'DOWNLOAD.NEW_2', 'DOWNLOAD.NEW_3', 'DOWNLOAD.NEW_4'];
   readonly currentYear = new Date().getFullYear();
   /** iPhone/iPad: the app is Android only for now - point them at the website. */
   readonly isApple: boolean;

@@ -167,3 +167,15 @@ h1 {
 .app-head h1 { margin-bottom: 0; }
 .app-icon { flex: none; width: 76px; height: 76px; border-radius: 18px; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45); }
 @media (max-width: 420px) { .app-icon { width: 60px; height: 60px; border-radius: 14px; } }
+
+.whats-new {
+  margin-top: 22px;
+  padding: 16px 18px;
+  border: 1px solid var(--sx-line);
+  border-radius: 14px;
+  background: var(--sx-surface);
+}
+.whats-new h2 { margin: 0 0 10px; font-size: 19px; font-weight: 800; color: var(--sx-ink); }
+.whats-new ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+.whats-new li { display: flex; gap: 8px; align-items: flex-start; font-size: 14.5px; line-height: 1.4; color: var(--sx-ink); }
+.whats-new mat-icon { flex-shrink: 0; width: 20px; height: 20px; font-size: 20px; color: var(--sx-gold-500); }

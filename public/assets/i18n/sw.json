@@ -1785,7 +1785,12 @@
     "S4_D": "Fungua SalonixTz uingie kwa jina la mtumiaji na neno la siri lako.",
     "BACK": "Rudi Mwanzo",
     "NAV": "Pakua App",
-    "ALL_PHONES": "Inafanya kazi kwenye simu zote za Android, mpya na za zamani"
+    "ALL_PHONES": "Inafanya kazi kwenye simu zote za Android, mpya na za zamani",
+    "NEW_TITLE": "Mpya kwenye toleo {{v}}",
+    "NEW_1": "QR ya Huduma (Mipangilio > QR ya Huduma): chapisha QR ubandike ndani ya saluni.",
+    "NEW_2": "Mteja akiscan QR anaona huduma zote, maelezo, bei, muda na wasusi - bila app wala kuingia.",
+    "NEW_3": "Kitufe cha \"QR mpya\" kubadilisha QR ikipotea au ikinakiliwa.",
+    "NEW_4": "Foleni ya mlangoni imeondolewa; QR ya TV ya saluni sasa inaonyesha huduma."
   },
   "SHIFT": {
     "NONE_TITLE": "Huna zamu iliyo wazi",
