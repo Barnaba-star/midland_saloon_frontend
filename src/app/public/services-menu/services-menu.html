@@ -20,16 +20,6 @@
       <p class="pp-lead">{{ 'MENU_PAGE.LEAD' | translate: { branch: d.branchName } }}</p>
     </div>
 
-    @if (d.enabled) {
-      <a class="pp-btn" [routerLink]="['/foleni', token]">{{ 'PUBLIC.JOIN' | translate }}</a>
-      <p class="pp-muted sm-center">
-        @if (d.waiting > 0) {
-          {{ 'PUBLIC.WAITING_NOW' | translate: { n: d.waiting } }}
-        } @else {
-          {{ 'PUBLIC.NO_ONE_WAITING' | translate }}
-        }
-      </p>
-    }
 
     <section class="pp-card">
       <h2 class="pp-card-title">{{ 'MENU_PAGE.SERVICES' | translate }} ({{ d.services.length }})</h2>

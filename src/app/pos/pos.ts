@@ -99,13 +99,8 @@ menuItems: SidenavItem[] = [
      route:'/pos/saloonSales',
     roles: this.allRoles,
   },
-  {
-    // Walk-ins who joined by the door QR.
-    label: 'MENU.QUEUE',
-    icon: 'team',
-    route: '/pos/saloonQueue',
-    roles: this.allRoles
-  },
+  // MENU.QUEUE (/pos/saloonQueue, the door-QR queue) is off since 2026-11-14:
+  // the owner chose the services QR inside the salon instead of a queue.
   {
     // Mashindano: who served the most guests and got the best stars this week.
     label: 'MENU.BOARD',

@@ -1,45 +1,5 @@
 <div class="qc-page">
   <section class="qc-card">
-    <h2 class="qc-title">{{ 'QUEUE_SETTING.DOOR_TITLE' | translate }}</h2>
-    <p class="qc-text">{{ 'QUEUE_SETTING.DOOR_TEXT' | translate }}</p>
-
-    @if (settings(); as s) {
-      <div class="qc-door">
-        <div class="qc-qr-box">
-          @if (qr()) {
-            <img class="qc-qr" [src]="qr()" alt="QR" />
-          }
-          <span class="qc-branch">{{ s.branchName }}</span>
-        </div>
-        <div class="qc-door-side">
-          <a class="qc-link" [href]="link()" target="_blank" rel="noopener">{{ link() }}</a>
-          <div class="qc-switch">
-            <mat-slide-toggle [checked]="s.enabled" [disabled]="saving()" (change)="toggle('enabled', $event.checked)">
-              {{ 'QUEUE_SETTING.QUEUE_ON' | translate }}
-            </mat-slide-toggle>
-          </div>
-          <div class="qc-switch">
-            <mat-slide-toggle [checked]="s.smsOn" [disabled]="saving()" (change)="toggle('smsOn', $event.checked)">
-              {{ 'QUEUE_SETTING.SMS_ON' | translate }}
-            </mat-slide-toggle>
-          </div>
-          <div class="qc-buttons">
-            <button type="button" class="qc-btn qc-btn-gold" (click)="print()">
-              <mat-icon>print</mat-icon><span>{{ 'QUEUE_SETTING.PRINT' | translate }}</span>
-            </button>
-            <button type="button" class="qc-btn" [disabled]="saving()" (click)="newCard()">
-              <mat-icon>autorenew</mat-icon><span>{{ 'QUEUE_SETTING.NEW_CARD' | translate }}</span>
-            </button>
-            <a class="qc-btn" [href]="tv()" target="_blank" rel="noopener">
-              <mat-icon>tv</mat-icon><span>{{ 'TV.OPEN' | translate }}</span>
-            </a>
-          </div>
-        </div>
-      </div>
-    }
-  </section>
-
-  <section class="qc-card">
     <h2 class="qc-title">{{ 'QUEUE_SETTING.RULE_TITLE' | translate }}</h2>
     <p class="qc-text">{{ 'QUEUE_SETTING.RULE_TEXT' | translate }}</p>
     @if (ruleLoaded()) {

@@ -145,7 +145,7 @@
     "SERVICE": "Huduma",
     "COMMISSION": "Kamisheni",
     "OTHER_SPLIT": "Matumizi Mengineyo",
-    "QUEUE_CARD": "Foleni & Kadi",
+    "QUEUE_CARD": "Kadi & TV",
     "SERVICES_QR": "QR ya Huduma"
   },
   "SERVICE": {
@@ -2036,16 +2036,16 @@
     "IN_CHAIR": "Wanahudumiwa",
     "NEXT": "Wanaofuata",
     "WAITING": "{{n}} wanasubiri",
-    "NO_ONE_NEXT": "Hakuna anayesubiri sasa - scan QR ujiunge",
+    "NO_ONE_NEXT": "Karibu! Scan QR uone huduma zetu",
     "STAR": "Mhudumu bora wa wiki",
     "GUESTS": "Wateja {{n}} wiki hii",
-    "SCAN": "Scan ujiunge na foleni",
-    "SCAN_TEXT": "Fungua kamera ya simu, chagua huduma na mhudumu. Tutakuita kwa namba yako.",
+    "SCAN": "Scan uone huduma zetu",
+    "SCAN_TEXT": "Fungua kamera ya simu uone huduma, bei na wasusi wetu.",
     "OFFER": "Ofa",
     "CARD": "Kadi",
     "LOYALTY": "Kila ziara {{n}} = punguzo TZS {{amount}}",
     "FULLSCREEN": "Skrini nzima",
-    "NOT_FOUND": "TV hii haipo. Fungua tena kutoka POS > Foleni.",
+    "NOT_FOUND": "TV hii haipo. Fungua tena kutoka POS > Setting > Kadi & TV.",
     "OPEN": "Fungua TV"
   },
   "STYLIST": {
@@ -2126,13 +2126,17 @@
   "SERVICES_QR": {
     "TITLE": "QR ya huduma za branch",
     "TEXT": "Chapisha QR hii ubandike mlangoni, ukutani au mezani. Mtu akiiscan kwa simu yake anaona huduma zote za branch hii, bei na muda, pamoja na wasusi - bila app wala kuingia kwenye mfumo.",
-    "SHOWS": "Inaonyesha: huduma, bei, muda, wasusi (picha na nyota) na kitufe cha kujiunga na foleni ikiwa foleni imewashwa.",
+    "SHOWS": "Inaonyesha: huduma, bei, muda, na wasusi (picha na nyota).",
     "OPEN": "Fungua ukurasa",
     "COPY": "Nakili kiungo",
     "COPIED": "Kiungo kimenakiliwa",
     "PRINT_HEADING": "Huduma zetu",
     "PRINT_HINT": "Scan QR uone huduma na bei zetu",
-    "NOTE": "Ukibonyeza \"Kadi mpya\" kwenye Foleni & Kadi, QR hii nayo inabadilika - chapisha upya."
+    "NOTE": "QR ikinakiliwa au kupotea, bonyeza \"QR mpya\" - ya zamani itaacha kufanya kazi, chapisha mpya.",
+    "NEW": "QR mpya",
+    "NEW_TITLE": "QR mpya ya huduma",
+    "NEW_CONFIRM": "QR iliyochapishwa sasa itaacha kufanya kazi (hata kwenye TV itabadilika). Utahitaji kuchapisha mpya. Endelea?",
+    "NEW_DONE": "QR mpya imetengenezwa - ichapishe"
   },
   "MENU_PAGE": {
     "TITLE": "Huduma zetu",

@@ -8,8 +8,8 @@ import { DoorInfo, PublicApi, StaffBadge, errorCode, photoUrl } from '../public-
 /**
  * /huduma/:token - the services QR a branch prints (POS Setting > QR ya Huduma).
  * Anyone scans it with a plain phone (no app, no login) and sees the branch's
- * services with prices and time, and its stylists; from here they can join
- * the queue when it is on. Same door token as /foleni.
+ * services with prices and time, and its stylists;
+ * nothing else - the door queue is off. Uses the branch door token.
  */
 @Component({
   selector: 'app-services-menu',

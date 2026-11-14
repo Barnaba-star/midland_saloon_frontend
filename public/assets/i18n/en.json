@@ -145,7 +145,7 @@
     "SERVICE": "Services",
     "COMMISSION": "Commissions",
     "OTHER_SPLIT": "Other Expenses",
-    "QUEUE_CARD": "Queue & Card",
+    "QUEUE_CARD": "Card & TV",
     "SERVICES_QR": "Services QR"
   },
   "STAFF": {
@@ -2036,16 +2036,16 @@
     "IN_CHAIR": "In the chair",
     "NEXT": "Next",
     "WAITING": "{{n}} waiting",
-    "NO_ONE_NEXT": "No one waiting now - scan the QR to join",
+    "NO_ONE_NEXT": "Welcome! Scan the QR to see our services",
     "STAR": "Stylist of the week",
     "GUESTS": "{{n}} guests this week",
-    "SCAN": "Scan to join the queue",
-    "SCAN_TEXT": "Open your phone camera, pick a service and a stylist. We call you by your number.",
+    "SCAN": "Scan to see our services",
+    "SCAN_TEXT": "Open your phone camera to see our services, prices and stylists.",
     "OFFER": "Offer",
     "CARD": "Card",
     "LOYALTY": "Every {{n}} visits = TZS {{amount}} off",
     "FULLSCREEN": "Full screen",
-    "NOT_FOUND": "This TV link no longer exists. Open it again from POS > Queue.",
+    "NOT_FOUND": "This TV is not found. Open it again from POS > Setting > Card & TV.",
     "OPEN": "Open TV"
   },
   "STYLIST": {
@@ -2126,13 +2126,17 @@
   "SERVICES_QR": {
     "TITLE": "Branch services QR",
     "TEXT": "Print this QR and put it on the door, a wall or a table. Anyone who scans it with their phone sees this branch's services, prices and time, and the stylists - no app, no login.",
-    "SHOWS": "Shows: services, prices, time, stylists (photo and stars) and a join-the-queue button when the queue is on.",
+    "SHOWS": "Shows: services, prices, time, and stylists (photo and stars).",
     "OPEN": "Open page",
     "COPY": "Copy link",
     "COPIED": "Link copied",
     "PRINT_HEADING": "Our services",
     "PRINT_HINT": "Scan to see our services and prices",
-    "NOTE": "Pressing \"New card\" under Queue & Card changes this QR too - print it again."
+    "NOTE": "If the QR is copied or lost, press \"New QR\" - the old one stops working, print the new one.",
+    "NEW": "New QR",
+    "NEW_TITLE": "New services QR",
+    "NEW_CONFIRM": "The printed QR will stop working (the TV changes too). You will need to print the new one. Continue?",
+    "NEW_DONE": "New QR made - print it"
   },
   "MENU_PAGE": {
     "TITLE": "Our services",

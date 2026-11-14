@@ -102,7 +102,8 @@ export class SalonTv implements OnInit, OnDestroy {
         this.tv.set(t);
         this.error.set('');
         this.stale.set(false);
-        const link = `${location.origin}${t.joinPath || `/foleni/${this.token}`}`;
+        // The services QR (the door queue is off since 2026-11-14).
+        const link = `${location.origin}/huduma/${this.token}`;
         if (link !== this.qrFor) {
           this.qrFor = link;
           qrDataUrl(link, 640).then((u) => this.qr.set(u)).catch(() => this.qr.set(''));

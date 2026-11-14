@@ -1,20 +1,18 @@
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { AlertService } from '../../Utils/services/alert';
-import { ComfirmDialogComponent } from '../../Utils/component/comfirm-dialog/comfirm-dialog';
 import { QueueLoyaltyService, QueueSettingsView } from '../queue-loyalty-service';
-import { doorLink, printDoorCard, tvLink } from '../../Utils/services/print-door-card';
+import { tvLink } from '../../Utils/services/print-door-card';
 import { ShowcaseService } from '../showcase-service';
-import { qrDataUrl } from '../../Utils/services/qr';
 
 /**
- * POS Setting > Foleni & Kadi (CEO): the branch's door QR card (print, a new
- * one, on/off, the "your turn" SMS), the customer-card reward rule, and the
+ * POS Setting > Kadi & TV (CEO): the customer-card reward rule, and the
  * salon TV's offer line + the stylists' weekly bonus (TV & Mashindano).
+ * The door-QR queue card was taken out 2026-11-14 (owner chose the services
+ * QR inside the salon - POS Setting > QR ya Huduma).
  */
 @Component({
   selector: 'app-queue-card-setting',
@@ -25,20 +23,16 @@ import { qrDataUrl } from '../../Utils/services/qr';
 })
 export class QueueCardSetting implements OnInit {
   private api = inject(QueueLoyaltyService);
-  private dialog = inject(MatDialog);
   private alert = inject(AlertService);
   private translate = inject(TranslateService);
   private showcase = inject(ShowcaseService);
 
   settings = signal<QueueSettingsView | null>(null);
-  qr = signal('');
-  link = signal('');
   tv = signal('');
 
   show_ = { tvOffer: '', weeklyBonus: 0 };
   showLoaded = signal(false);
   savingShow = signal(false);
-  saving = signal(false);
 
   rule = { enabled: false, visitsNeeded: 10, rewardAmount: 5000, minBill: 0 };
   ruleLoaded = signal(false);
@@ -71,49 +65,7 @@ export class QueueCardSetting implements OnInit {
 
   private show(s: QueueSettingsView | null): void {
     this.settings.set(s);
-    if (!s) {
-      return;
-    }
-    const l = doorLink(s.token);
-    this.link.set(l);
-    this.tv.set(tvLink(s.token));
-    qrDataUrl(l, 480).then((u) => this.qr.set(u)).catch(() => this.qr.set(''));
-  }
-
-  toggle(field: 'enabled' | 'smsOn', value: boolean): void {
-    this.save({ [field]: value });
-  }
-
-  newCard(): void {
-    this.dialog
-      .open(ComfirmDialogComponent, {
-        width: '440px',
-        maxWidth: '95vw',
-        data: {
-          title: this.translate.instant('QUEUE_SETTING.NEW_CARD_TITLE'),
-          message: this.translate.instant('QUEUE_SETTING.NEW_CARD_CONFIRM'),
-          confirmLabel: this.translate.instant('QUEUE_SETTING.NEW_CARD'),
-        },
-      })
-      .afterClosed()
-      .subscribe((ok) => {
-        if (ok) {
-          this.save({ newCard: true }, 'QUEUE_SETTING.NEW_CARD_DONE');
-        }
-      });
-  }
-
-  print(): void {
-    const s = this.settings();
-    if (!s) {
-      return;
-    }
-    printDoorCard({
-      token: s.token,
-      branchName: s.branchName,
-      heading: this.translate.instant('QUEUE_SETTING.PRINT_HEADING'),
-      hint: this.translate.instant('QUEUE_SETTING.PRINT_HINT'),
-    });
+    this.tv.set(s ? tvLink(s.token) : '');
   }
 
   saveShowcase(): void {
@@ -150,22 +102,5 @@ export class QueueCardSetting implements OnInit {
       });
   }
 
-  private save(body: { enabled?: boolean; smsOn?: boolean; newCard?: boolean }, done?: string): void {
-    this.saving.set(true);
-    this.api.saveSettings(body).subscribe({
-      next: (r) => {
-        this.saving.set(false);
-        this.show(r.data);
-        if (done) {
-          this.alert.show('success', this.translate.instant(done));
-        }
-      },
-      error: () => {
-        this.saving.set(false);
-        // Put the switch back to what the server holds.
-        const s = this.settings();
-        this.settings.set(s ? { ...s } : s);
-      },
-    });
-  }
+
 }

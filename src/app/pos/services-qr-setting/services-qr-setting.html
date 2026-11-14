@@ -24,6 +24,9 @@
             <button type="button" class="qc-btn" (click)="copy()">
               <mat-icon>content_copy</mat-icon><span>{{ 'SERVICES_QR.COPY' | translate }}</span>
             </button>
+            <button type="button" class="qc-btn" [disabled]="saving()" (click)="newCard()">
+              <mat-icon>autorenew</mat-icon><span>{{ 'SERVICES_QR.NEW' | translate }}</span>
+            </button>
           </div>
           <p class="qc-example">{{ 'SERVICES_QR.NOTE' | translate }}</p>
         </div>
