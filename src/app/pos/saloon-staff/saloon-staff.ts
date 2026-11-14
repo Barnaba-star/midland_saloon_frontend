@@ -20,6 +20,7 @@ import { StaffDetailsDialogComponent } from '../../Utils/component/dialogs/staff
 import { DeleteConfirmationComponent } from '../../Utils/component/dialogs/delete-confirmation-component/delete-confirmation-component';
 import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-state';
 import { StaffPhotosDialog } from '../staff-photos-dialog/staff-photos-dialog';
+import { StaffCardDialog } from '../staff-card-dialog/staff-card-dialog';
 
 @Component({
   selector: 'app-saloon-staff',
@@ -72,6 +73,13 @@ export class SaloonStaff implements OnInit{
   }
 
   /** Kazi zake: this stylist's work photos, shown to guests at the door. */
+  /** The stylist's commission QR (owner 2026-11-14). */
+  onStaffCard(staff: any): void {
+    if (!staff?.uid) return;
+    const name = [staff.firstName, staff.lastName].filter(Boolean).join(' ');
+    this.dialog.open(StaffCardDialog, { width: '460px', maxWidth: '95vw', autoFocus: false, data: { staffUid: staff.uid, name } });
+  }
+
   onStaffPhotos(staff: any): void {
     if (!staff?.uid) {
       return;

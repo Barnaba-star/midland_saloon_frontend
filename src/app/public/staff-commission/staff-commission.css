@@ -1,0 +1,22 @@
+.sk-tabs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 6px; }
+.sk-tabs button { height: 40px; border-radius: 12px; border: 1.5px solid var(--sx-line); background: var(--sx-surface); color: var(--sx-ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.sk-tabs button.on { background: var(--sx-gold-500); border-color: var(--sx-gold-500); color: var(--sx-navy-900); }
+.sk-hero { display: flex; flex-direction: column; align-items: center; gap: 4px; text-align: center; padding: 20px 16px; }
+.sk-hero span { font-size: 13px; color: var(--sx-muted); font-weight: 600; }
+.sk-hero strong { font-size: 30px; font-weight: 800; color: var(--sx-gold-700); line-height: 1.1; }
+.sk-hero small { font-size: 13px; color: var(--sx-muted); }
+.sk-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.sk-mini { display: flex; flex-direction: column; gap: 4px; padding: 12px; }
+.sk-mini span { font-size: 12.5px; color: var(--sx-muted); font-weight: 600; }
+.sk-mini strong { font-size: 17px; font-weight: 800; color: var(--sx-ink); }
+.sk-owed { color: var(--sx-danger) !important; }
+.sk-list { list-style: none; margin: 0; padding: 0; }
+.sk-list li { display: flex; justify-content: space-between; gap: 10px; padding: 10px 0; border-top: 1px solid var(--sx-line); }
+.sk-list li:first-child { border-top: 0; padding-top: 0; }
+.sk-list li div { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.sk-list b { font-size: 14px; color: var(--sx-ink); overflow-wrap: anywhere; }
+.sk-list small { font-size: 12px; color: var(--sx-muted); }
+.sk-right { align-items: flex-end; text-align: right; flex-shrink: 0; }
+.sk-right b { color: var(--sx-success); }
+
+.sk-install { min-height: 46px; font-size: 15px; }

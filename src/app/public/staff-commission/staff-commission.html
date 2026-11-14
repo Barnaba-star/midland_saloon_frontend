@@ -1,0 +1,82 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (view(); as v) { <p class="pp-branch">{{ v.branchName }}</p> }
+</header>
+
+<main class="pp-main">
+  @if (loading() && !view()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (error() && !view()) {
+    <h1 class="pp-title">{{ 'STAFF_CARD.PAGE_TITLE' | translate }}</h1>
+    <p class="pp-error">{{ (error() === 'NETWORK' ? 'PUBLIC.ERR_NETWORK' : 'STAFF_CARD.NOT_FOUND') | translate }}</p>
+    @if (error() === 'NETWORK') {
+      <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+    }
+  } @else if (view(); as v) {
+    <div>
+      <h1 class="pp-title">{{ v.name }}</h1>
+      <p class="pp-lead">{{ 'STAFF_CARD.PAGE_TITLE' | translate }}@if (v.category) { · {{ catKey(v.category) | translate }} }</p>
+    </div>
+
+    @if (!installed()) {
+      <button type="button" class="pp-btn sk-install" (click)="install()">
+        {{ 'STAFF_CARD.INSTALL' | translate }}
+      </button>
+      @if (showHow() && !canPrompt()) {
+        <p class="pp-note">{{ (isIos ? 'STAFF_CARD.HOW_IOS' : 'STAFF_CARD.HOW_ANDROID') | translate }}</p>
+      }
+    }
+
+    <div class="sk-tabs">
+      @for (p of periods; track p) {
+        <button type="button" [class.on]="period() === p" (click)="pick(p)">{{ ('STAFF_CARD.P_' + p) | translate }}</button>
+      }
+    </div>
+
+    <section class="pp-card sk-hero">
+      <span>{{ 'STAFF_CARD.MY_COMMISSION' | translate }}</span>
+      <strong>TZS {{ v.commission | number: '1.0-0' }}</strong>
+      <small>{{ 'STAFF_CARD.SERVICES_N' | translate: { n: v.services } }} · {{ 'STAFF_CARD.SALES' | translate }} TZS {{ v.sales | number: '1.0-0' }}</small>
+    </section>
+
+    <div class="sk-pair">
+      <section class="pp-card sk-mini">
+        <span>{{ 'STAFF_CARD.OWED' | translate }}</span>
+        <strong class="sk-owed">TZS {{ v.owed | number: '1.0-0' }}</strong>
+      </section>
+      <section class="pp-card sk-mini">
+        <span>{{ 'STAFF_CARD.PAID' | translate }}</span>
+        <strong>TZS {{ v.paidAllTime | number: '1.0-0' }}</strong>
+      </section>
+    </div>
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'STAFF_CARD.WORK' | translate }}</h2>
+      <ul class="sk-list">
+        @for (l of v.lines; track $index) {
+          <li>
+            <div><b>{{ l.service || '-' }}</b><small>{{ (l.at || l.date) | langDate: 'dd MMM, HH:mm' }}</small></div>
+            <div class="sk-right"><b>+ {{ l.commission | number: '1.0-0' }}</b><small>TZS {{ l.price | number: '1.0-0' }}</small></div>
+          </li>
+        } @empty {
+          <li class="pp-muted">{{ 'STAFF_CARD.NO_WORK' | translate }}</li>
+        }
+      </ul>
+    </section>
+
+    @if (v.payouts.length) {
+      <section class="pp-card">
+        <h2 class="pp-card-title">{{ 'STAFF_CARD.WEEKS' | translate }}</h2>
+        <ul class="sk-list">
+          @for (w of v.payouts; track $index) {
+            <li>
+              <div><b>{{ 'STAFF_CARD.WEEK_OF' | translate: { d: (w.week | langDate: 'dd MMM yyyy') } }}</b><small>{{ 'STAFF_CARD.WEEK_TOTAL' | translate }} TZS {{ w.total | number: '1.0-0' }}</small></div>
+              <div class="sk-right"><b [class.sk-owed]="w.remaining > 0">{{ w.remaining > 0 ? ('TZS ' + (w.remaining | number: '1.0-0')) : ('STAFF_CARD.CLEARED' | translate) }}</b><small>{{ 'STAFF_CARD.PAID' | translate }} {{ w.paid | number: '1.0-0' }}</small></div>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>

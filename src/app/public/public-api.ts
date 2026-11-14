@@ -34,6 +34,20 @@ export interface CardView {
   rewardAmount: number;
   ruleOn: boolean;
 }
+export interface StaffCardView {
+  name: string;
+  category: string | null;
+  branchName: string;
+  period: 'TODAY' | 'WEEK' | 'MONTH';
+  from: string;
+  services: number;
+  commission: number;
+  sales: number;
+  owed: number;
+  paidAllTime: number;
+  lines: { date: string; service: string | null; price: number; commission: number; at: string | null }[];
+  payouts: { week: string; total: number; paid: number; remaining: number }[];
+}
 export interface TvPerson { number: number; name: string; staffName: string | null; serviceName: string | null; }
 export interface StarStaff { staffUid: string; name: string; clients: number; regulars: number; stars: number; ratings: number; photo: string | null; rank: number; }
 export interface TvView {
@@ -96,6 +110,11 @@ export class PublicApi {
 
   leave(token: string): Observable<{ status: string }> {
     return this.http.post<{ status: string }>(`${this.base}/ticket/${encodeURIComponent(token)}/leave`, {});
+  }
+
+  /** A stylist's own commission card (/kamisheni/TOKEN). */
+  staffCard(token: string, period: 'TODAY' | 'WEEK' | 'MONTH'): Observable<StaffCardView> {
+    return this.http.get<StaffCardView>(`${this.base}/staffCard/${encodeURIComponent(token)}?period=${period}`);
   }
 
   card(token: string): Observable<CardView> {

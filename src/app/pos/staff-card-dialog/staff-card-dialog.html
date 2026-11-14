@@ -1,0 +1,18 @@
+<div class="sc">
+  <div class="sc-head">
+    <h2>{{ 'STAFF_CARD.TITLE' | translate: { name: data.name } }}</h2>
+    <button type="button" class="sc-x" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate"><mat-icon>close</mat-icon></button>
+  </div>
+  <p class="sc-text">{{ 'STAFF_CARD.TEXT' | translate }}</p>
+  <div class="sc-qr">
+    @if (qr()) { <img [src]="qr()" alt="QR" /> } @else { <div class="sc-wait">...</div> }
+    @if (card(); as c) { <strong>{{ c.name }}</strong> }
+  </div>
+  @if (link()) { <a class="sc-link" [href]="link()" target="_blank" rel="noopener">{{ link() }}</a> }
+  <div class="sc-buttons">
+    <button type="button" class="sc-btn sc-gold" [disabled]="!card()" (click)="print()"><mat-icon>print</mat-icon>{{ 'QUEUE_SETTING.PRINT' | translate }}</button>
+    <button type="button" class="sc-btn" [disabled]="!link()" (click)="copy()"><mat-icon>content_copy</mat-icon>{{ 'SERVICES_QR.COPY' | translate }}</button>
+    <button type="button" class="sc-btn" [class.sc-warn]="confirmNew()" [disabled]="busy()" (click)="newCard()"><mat-icon>autorenew</mat-icon>{{ (confirmNew() ? 'STAFF_CARD.NEW_SURE' : 'SERVICES_QR.NEW') | translate }}</button>
+  </div>
+  <p class="sc-note">{{ 'STAFF_CARD.NOTE' | translate }}</p>
+</div>

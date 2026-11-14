@@ -2691,5 +2691,33 @@
     "REGION_HAS_BRANCHES_REMOVE": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo hauwezi kuondolewa",
     "ENTRIES_NEWER_THAN_DAYS": "Kumbukumbu za chini ya siku {{x}} haziwezi kuondolewa",
     "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza au kuondoa huduma"
+  },
+  "STAFF_CARD": {
+    "BUTTON": "QR ya kamisheni",
+    "TITLE": "QR ya {{name}}",
+    "TEXT": "Mpe mhudumu QR hii. Akiiscan kwa simu yake anaona kamisheni yake ya leo, wiki na mwezi, huduma alizofanya, alicholipwa na anachodai - bila kuingia kwenye mfumo.",
+    "NOTE": "QR hii ni siri yake: ikipotea au ikionwa na mwingine, bonyeza \"QR mpya\" - ya zamani inaacha kufanya kazi.",
+    "NEW_SURE": "Ndiyo, QR mpya",
+    "NEW_DONE": "QR mpya imetengenezwa - mpe mhudumu",
+    "PRINT_HINT": "Scan uone kamisheni yako",
+    "PAGE_TITLE": "Kamisheni yangu",
+    "NOT_FOUND": "QR hii haifanyi kazi tena. Uliza meneja akupe mpya.",
+    "P_TODAY": "Leo",
+    "P_WEEK": "Wiki hii",
+    "P_MONTH": "Mwezi huu",
+    "MY_COMMISSION": "Kamisheni yangu",
+    "SERVICES_N": "Huduma {{n}}",
+    "SALES": "Mauzo",
+    "OWED": "Unadai",
+    "PAID": "Umelipwa",
+    "WORK": "Huduma nilizofanya",
+    "NO_WORK": "Hakuna huduma katika kipindi hiki.",
+    "WEEKS": "Malipo kwa wiki",
+    "WEEK_OF": "Wiki ya {{d}}",
+    "WEEK_TOTAL": "Jumla",
+    "CLEARED": "Imelipwa yote",
+    "INSTALL": "Weka kwenye simu yangu",
+    "HOW_ANDROID": "Fungua menyu ya kivinjari (vidoti vitatu ⋮ juu kulia), kisha chagua \"Add to Home screen\" au \"Install app\". Aikoni ya Kamisheni itakaa kwenye simu yako.",
+    "HOW_IOS": "Gusa kitufe cha Share (mraba wenye mshale) chini ya Safari, kisha \"Add to Home Screen\". Aikoni ya Kamisheni itakaa kwenye simu yako."
   }
 }

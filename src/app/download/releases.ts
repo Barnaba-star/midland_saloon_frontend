@@ -3,6 +3,20 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.31",
+    "date": "2026-11-14",
+    "sw": [
+      "QR ya kamisheni kwa kila mhudumu (Watumishi > QR): akiiscan anaona kamisheni yake ya leo, wiki na mwezi, huduma alizofanya, alicholipwa na anachodai.",
+      "Mhudumu anaweza kuweka ukurasa wake wa kamisheni kwenye simu (\"Weka kwenye simu yangu\") na kuufungua muda wowote.",
+      "Logo ya menyu ya pembeni ndani ya kisanduku, katikati."
+    ],
+    "en": [
+      "A commission QR for every stylist (Staff > QR): scanning it shows their commission for today, this week and this month, the services they did, what they were paid and what is owed.",
+      "The stylist can add their commission page to the phone (\"Add to my phone\") and open it any time.",
+      "The side menu logo sits centred in its own box."
+    ]
+  },
+  {
     "v": "1.0.30",
     "date": "2026-11-14",
     "sw": [

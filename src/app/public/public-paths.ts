@@ -4,7 +4,7 @@
  * Nothing on them may ever send the guest to /login, even when the phone
  * still holds an old staff login cookie.
  */
-const PUBLIC_PREFIXES = ['/huduma/', '/foleni/', '/tiketi/', '/kadi/', '/tv/', '/mhudumu/'];
+const PUBLIC_PREFIXES = ['/kamisheni/', '/huduma/', '/foleni/', '/tiketi/', '/kadi/', '/tv/', '/mhudumu/'];
 
 export function isPublicPath(path?: string): boolean {
   let p = path;

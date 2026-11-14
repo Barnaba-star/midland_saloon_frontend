@@ -115,6 +115,11 @@ export const routes: Routes = [
 },
 // A walk-in's own phone: no login, no guard (door QR, their ticket, their card).
 {
+  // A stylist's own commission card (their QR, owner 2026-11-14).
+  path: 'kamisheni/:token',
+  loadComponent: () => import('./public/staff-commission/staff-commission').then(m => m.StaffCommission)
+},
+{
   // The services QR: what this branch offers, prices, stylists.
   path: 'huduma/:token',
   loadComponent: () => import('./public/services-menu/services-menu').then(m => m.ServicesMenu)

@@ -2691,5 +2691,33 @@
     "REGION_HAS_BRANCHES_REMOVE": "{{x}} branch(es) are registered in this region, so it cannot be removed",
     "ENTRIES_NEWER_THAN_DAYS": "Entries newer than {{x}} days cannot be removed",
     "NOT_YOUR_BILL": "This is not your bill - only the one who opened it can add or remove services"
+  },
+  "STAFF_CARD": {
+    "BUTTON": "Commission QR",
+    "TITLE": "{{name}}'s QR",
+    "TEXT": "Give this QR to the stylist. Scanning it with their phone shows their commission for today, this week and this month, the services they did, what they were paid and what is still owed - no login.",
+    "NOTE": "This QR is private to them: if it is lost or seen by someone else, press \"New QR\" - the old one stops working.",
+    "NEW_SURE": "Yes, new QR",
+    "NEW_DONE": "New QR made - give it to the stylist",
+    "PRINT_HINT": "Scan to see your commission",
+    "PAGE_TITLE": "My commission",
+    "NOT_FOUND": "This QR no longer works. Ask the manager for a new one.",
+    "P_TODAY": "Today",
+    "P_WEEK": "This week",
+    "P_MONTH": "This month",
+    "MY_COMMISSION": "My commission",
+    "SERVICES_N": "{{n}} services",
+    "SALES": "Sales",
+    "OWED": "Owed to you",
+    "PAID": "Paid",
+    "WORK": "Services I did",
+    "NO_WORK": "No services in this period.",
+    "WEEKS": "Payments by week",
+    "WEEK_OF": "Week of {{d}}",
+    "WEEK_TOTAL": "Total",
+    "CLEARED": "Fully paid",
+    "INSTALL": "Add to my phone",
+    "HOW_ANDROID": "Open the browser menu (three dots ⋮ top right), then choose \"Add to Home screen\" or \"Install app\". The Kamisheni icon stays on your phone.",
+    "HOW_IOS": "Tap Share (the square with an arrow) at the bottom of Safari, then \"Add to Home Screen\". The Kamisheni icon stays on your phone."
   }
 }
