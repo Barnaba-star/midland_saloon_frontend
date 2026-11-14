@@ -27,12 +27,17 @@
       <p class="meta">{{ 'DOWNLOAD.VERSION' | translate: { v: version } }} · {{ 'DOWNLOAD.ALL_PHONES' | translate }}</p>
 
       <section class="whats-new">
-        <h2>{{ 'DOWNLOAD.NEW_TITLE' | translate: { v: version } }}</h2>
-        <ul>
-          @for (k of whatsNew; track k) {
-            <li><mat-icon>check_circle</mat-icon><span>{{ k | translate }}</span></li>
-          }
-        </ul>
+        <h2>{{ 'DOWNLOAD.HISTORY' | translate }}</h2>
+        @for (r of releases; track r.v; let first = $first) {
+          <div class="release" [class.latest]="first">
+            <h3>{{ 'DOWNLOAD.VERSION' | translate: { v: r.v } }} <small>{{ r.date }}</small></h3>
+            <ul>
+              @for (line of (lang() === 'en' ? r.en : r.sw); track $index) {
+                <li><mat-icon>check_circle</mat-icon><span>{{ line }}</span></li>
+              }
+            </ul>
+          </div>
+        }
       </section>
     </div>
 

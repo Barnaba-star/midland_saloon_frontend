@@ -1786,11 +1786,7 @@
     "BACK": "Back to home",
     "NAV": "Download App",
     "ALL_PHONES": "Works on every Android phone, new and old",
-    "NEW_TITLE": "New in version {{v}}",
-    "NEW_1": "Services QR (Settings > Services QR): print a QR to put up inside the salon.",
-    "NEW_2": "A guest who scans it sees all services, descriptions, prices, time and stylists - no app, no login.",
-    "NEW_3": "A \"New QR\" button to change the QR if it is lost or copied.",
-    "NEW_4": "The door queue is removed; the salon TV QR now shows the services."
+    "HISTORY": "Release history (newest first)"
   },
   "SHIFT": {
     "NONE_TITLE": "You have no open shift",

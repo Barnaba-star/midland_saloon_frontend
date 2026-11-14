@@ -179,3 +179,10 @@ h1 {
 .whats-new ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
 .whats-new li { display: flex; gap: 8px; align-items: flex-start; font-size: 14.5px; line-height: 1.4; color: var(--sx-ink); }
 .whats-new mat-icon { flex-shrink: 0; width: 20px; height: 20px; font-size: 20px; color: var(--sx-gold-500); }
+
+.whats-new { max-height: 440px; overflow-y: auto; }
+.release { padding: 10px 0; border-top: 1px solid var(--sx-line); }
+.release:first-of-type { border-top: 0; padding-top: 0; }
+.release h3 { margin: 0 0 6px; font-size: 16px; font-weight: 800; color: var(--sx-ink); }
+.release h3 small { margin-left: 6px; font-size: 12px; font-weight: 500; color: var(--sx-muted); }
+.release.latest h3 { color: var(--sx-gold-700); }
