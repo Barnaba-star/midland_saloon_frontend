@@ -15,7 +15,7 @@ import { RELEASES } from './releases';
  * new (64-bit) - two separate downloads confused people. Bump APP_VERSION
  * and the size together with the file.
  */
-const APP_VERSION = '1.0.29';
+const APP_VERSION = '1.0.30';
 
 @Component({
   selector: 'app-download',

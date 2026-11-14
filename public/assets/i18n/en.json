@@ -2200,7 +2200,7 @@
       "BILL_SAVED": "Bill saved",
       "SELECTED_DATE": "Selected Date",
       "OPENED_BY": "Opened by {{name}}",
-      "NOT_YOUR_BILL": "{{name}} opened this bill - only they can add services"
+      "NOT_YOUR_BILL": "{{name}} opened this bill - only they can add or remove services"
     },
     "PAY": {
       "CASH": "Cash",
@@ -2690,6 +2690,6 @@
     "REGION_HAS_BRANCHES_RENAME": "{{x}} branch(es) are registered in this region, so its name and code cannot change",
     "REGION_HAS_BRANCHES_REMOVE": "{{x}} branch(es) are registered in this region, so it cannot be removed",
     "ENTRIES_NEWER_THAN_DAYS": "Entries newer than {{x}} days cannot be removed",
-    "NOT_YOUR_BILL": "This is not your bill - only the one who opened it can add services"
+    "NOT_YOUR_BILL": "This is not your bill - only the one who opened it can add or remove services"
   }
 }

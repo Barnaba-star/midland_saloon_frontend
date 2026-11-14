@@ -2200,7 +2200,7 @@
       "BILL_SAVED": "Bili imehifadhiwa",
       "SELECTED_DATE": "Tarehe Uliyochagua",
       "OPENED_BY": "Imefunguliwa na {{name}}",
-      "NOT_YOUR_BILL": "Bili hii imefunguliwa na {{name}} - ni yeye tu anayeweza kuongeza huduma"
+      "NOT_YOUR_BILL": "Bili hii imefunguliwa na {{name}} - ni yeye tu anayeweza kuongeza au kuondoa huduma"
     },
     "PAY": {
       "CASH": "Taslimu",
@@ -2690,6 +2690,6 @@
     "REGION_HAS_BRANCHES_RENAME": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo jina na msimbo wake haviwezi kubadilika",
     "REGION_HAS_BRANCHES_REMOVE": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo hauwezi kuondolewa",
     "ENTRIES_NEWER_THAN_DAYS": "Kumbukumbu za chini ya siku {{x}} haziwezi kuondolewa",
-    "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza huduma"
+    "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza au kuondoa huduma"
   }
 }
