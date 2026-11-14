@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../../pipes/lang-date.pipe';
 import { ChangeDetectorRef, Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -18,7 +19,7 @@ export interface StaffBranchesDialogData {
 @Component({
   selector: 'app-staff-branches-dialog-component',
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatTooltipModule, TranslatePipe],
+  imports: [LangDatePipe, CommonModule, MatIconModule, MatTooltipModule, TranslatePipe],
   templateUrl: './staff-branches-dialog-component.html',
   styleUrl: './staff-branches-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

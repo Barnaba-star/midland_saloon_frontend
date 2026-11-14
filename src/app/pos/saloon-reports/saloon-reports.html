@@ -47,7 +47,7 @@
                 class="clear-search"
                 type="button"
                 (click)="clearSearch()"
-                aria-label="Clear search"
+                [attr.aria-label]="'POS_T.CLEAR_SEARCH' | translate"
               >
                 <mat-icon>close</mat-icon>
               </button>
@@ -359,7 +359,7 @@
 
                 <span class="selected-period">
                   <mat-icon>date_range</mat-icon>
-                  {{ getSelectedRangeLabel() }}
+                  {{ getSelectedRangeLabel() | translate }}
                 </span>
               </div>
             </div>
@@ -711,7 +711,7 @@
 
                   <span class="selected-period">
                     <mat-icon>date_range</mat-icon>
-                    {{ getSelectedRangeLabel() }}
+                    {{ getSelectedRangeLabel() | translate }}
                   </span>
                 </div>
               </div>
@@ -959,7 +959,7 @@
                             'status-partially': report.status === 'PARTIAL',
                           }"
                         >
-                          {{ report.status | uppercase }}
+                          {{ report.status | statusKey | translate | uppercase }}
                         </span>
                       </td>
 
@@ -1179,7 +1179,7 @@
         <div class="summary-item">
           <span class="summary-label">{{ 'COMMON.DURATION' | translate }}</span>
           <strong class="summary-value">
-            {{ getSelectedStoreDateLabel() }}
+            {{ getSelectedStoreDateLabel() | translate }}
           </strong>
         </div>
         <div class="summary-item">
@@ -1192,14 +1192,14 @@
         <div class="summary-item">
           <span class="summary-label">{{ 'REPORTS_PAGE.OPENED_DATE_LABEL' | translate }}</span>
           <strong class="summary-value">
-            {{ reportOpenedDate ? (reportOpenedDate | date: 'dd MMM yyyy') : '-' }}
+            {{ reportOpenedDate ? (reportOpenedDate | langDate: 'dd MMM yyyy') : '-' }}
           </strong>
         </div>
 
         <div class="summary-item">
           <span class="summary-label">{{ 'REPORTS_PAGE.CLOSED_DATE_LABEL' | translate }}</span>
           <strong class="summary-value">
-            {{ reportClosedDate ? (reportClosedDate | date: 'dd MMM yyyy') : '-' }}
+            {{ reportClosedDate ? (reportClosedDate | langDate: 'dd MMM yyyy') : '-' }}
           </strong>
         </div>
       </div>
@@ -1326,18 +1326,18 @@
                     [class.open]="row.status === 'OPEN'"
                     [class.closed]="row.status === 'CLOSED'"
                   >
-                    {{ row.status || '-' }}
+                    {{ (row.status | statusKey | translate) || '-' }}
                   </span>
                 </td>
 
                 <td [attr.data-label]="'REPORTS_PAGE.COL_BUYING_PRICE' | translate"><small>Tshs</small> {{ row.buyingPrice | number: '1.2-2' }}</td>
 
                 <td [attr.data-label]="'REPORTS_PAGE.COL_OPENED_DATE' | translate">
-                  {{ row.openedDate ? (row.openedDate | date: 'dd MMM yyyy') : '-' }}
+                  {{ row.openedDate ? (row.openedDate | langDate: 'dd MMM yyyy') : '-' }}
                 </td>
 
                 <td [attr.data-label]="'REPORTS_PAGE.COL_CLOSED_DATE' | translate">
-                  {{ row.closedDate ? (row.closedDate | date: 'dd MMM yyyy') : '-' }}
+                  {{ row.closedDate ? (row.closedDate | langDate: 'dd MMM yyyy') : '-' }}
                 </td>
 
                 <td [attr.data-label]="'REPORTS_PAGE.COL_USAGE' | translate">
@@ -2154,7 +2154,7 @@
 
                   <span class="selected-period">
                     <mat-icon>date_range</mat-icon>
-                    {{ getStockSelectedRangeLabel() }}
+                    {{ getStockSelectedRangeLabel() | translate }}
                   </span>
                 </div>
               </div>
@@ -2326,7 +2326,7 @@
                         <span class="week-badge">
                           <mat-icon> date_range </mat-icon>
 
-                          {{ stock.weekDate | date: 'dd MMM yyyy' }}
+                          {{ stock.weekDate | langDate: 'dd MMM yyyy' }}
                         </span>
                       </td>
 
@@ -2480,7 +2480,7 @@
         }"
       >
 
-        {{ selectedStockPurchase?.paymentStatus }}
+        {{ selectedStockPurchase?.paymentStatus | statusKey | translate }}
 
       </span>
 

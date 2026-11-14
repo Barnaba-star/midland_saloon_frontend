@@ -65,7 +65,7 @@
                 @if (p.staffName) {
                   <strong>{{ p.staffName }}</strong>
                 }
-                <small>{{ p.at | date: 'd MMM y' }}</small>
+                <small>{{ p.at | date: 'd/M/y' }}</small>
               </span>
             </button>
           }
@@ -82,7 +82,7 @@
     <p>
       {{ (p.kind === 'AFTER' ? 'STYLES.AFTER' : 'STYLES.BEFORE') | translate }}
       @if (p.staffName) { · {{ p.staffName }} }
-      · {{ p.at | date: 'd MMM y' }}
+      · {{ p.at | date: 'd/M/y' }}
     </p>
     @if (p.note) {
       <p>{{ p.note }}</p>

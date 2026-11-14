@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, EventEmitter, Inject, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormField } from '../../models/form-field';
@@ -17,7 +18,7 @@ import { FormComponent } from "../form/form";
 
 @Component({
   selector: 'app-stepper-form-component',
-  imports: [MatDialogModule, CommonModule, MatStepperModule, ReactiveFormsModule, MatNativeDateModule,
+  imports: [TranslatePipe, MatDialogModule, CommonModule, MatStepperModule, ReactiveFormsModule, MatNativeDateModule,
             MatFormFieldModule, MatInputModule, MatButtonModule, MatIconModule, MatSelectModule, MatDatepickerModule, FormsModule, FormComponent],
   templateUrl: './stepper-form-component.html',
   styleUrl: './stepper-form-component.css',

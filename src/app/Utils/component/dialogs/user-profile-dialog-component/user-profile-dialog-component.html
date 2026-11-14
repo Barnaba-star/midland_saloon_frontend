@@ -93,7 +93,7 @@
       <div class="info-item">
         <span>{{ 'STAFF_PAGE.COL_DOB' | translate }}</span>
         <strong>
-          {{ user.dateOfBirth | date:'dd MMM yyyy' }}
+          {{ user.dateOfBirth | langDate: 'dd MMM yyyy' }}
         </strong>
       </div>
 
@@ -133,7 +133,7 @@
       <div class="info-item">
         <span>{{ 'COMMON.CREATED_AT' | translate }}</span>
         <strong>
-          {{ user.createdAt | date:'dd MMM yyyy' }}
+          {{ user.createdAt | langDate: 'dd MMM yyyy' }}
         </strong>
       </div>
 
@@ -141,7 +141,7 @@
         <span>{{ 'COMMON.UPDATED_AT' | translate }}</span>
         <strong>
           {{ user.updatedAt
-            ? (user.updatedAt | date:'dd MMM yyyy')
+            ? (user.updatedAt | langDate: 'dd MMM yyyy')
             : '-' }}
         </strong>
       </div>

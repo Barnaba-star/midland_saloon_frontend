@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -6,7 +7,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
     selector: 'app-button',
     templateUrl: './button.html',
-    imports: [MatButtonModule, MatIconModule, CommonModule],
+    imports: [TranslatePipe, MatButtonModule, MatIconModule, CommonModule],
     styleUrls: ['./button.css'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })

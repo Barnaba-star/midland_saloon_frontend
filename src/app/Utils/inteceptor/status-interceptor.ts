@@ -6,7 +6,7 @@ import {
   HttpResponse
 } from '@angular/common/http';
 
-import { inject } from '@angular/core';
+import { Injector, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 
@@ -18,6 +18,8 @@ import {
 import { tap } from 'rxjs';
 
 import { ErrorLogService } from '../services/error-log-service';
+import { TranslateService } from '@ngx-translate/core';
+import { translateServerMessage } from '../services/server-message';
 
 /** The body as it was about to be sent, so a failure can be traced back to it. */
 const serialiseBody = (body: unknown): string | undefined => {
@@ -46,6 +48,12 @@ export const StatusInterceptor: HttpInterceptorFn = (
   const dialog = inject(MatDialog);
   const errorLogService = inject(ErrorLogService);
   const router = inject(Router);
+  // TranslateService loads its JSON through HttpClient, i.e. through this
+  // interceptor: injecting it up front is a circular dependency. Look it up
+  // only when a message is shown (by then it exists).
+  const injector = inject(Injector);
+  // Backend wording (or an SRV_MSG key) in the chosen language.
+  const say = (msg: string) => translateServerMessage(msg, injector.get(TranslateService));
 
   /*
    * ============================================================
@@ -149,7 +157,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
 
             const dialogData: StatusDialogData = {
               status: 'info',
-              message: body.message,
+              message: say(body.message),
               showClose: true
             };
 
@@ -245,7 +253,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
          * ======================================================
          */
 
-        let errorMessage = 'An unexpected error occurred.';
+        let errorMessage = 'SRV_MSG.AN_UNEXPECTED_ERROR_OCCURRED';
 
 
         /*
@@ -281,6 +289,20 @@ export const StatusInterceptor: HttpInterceptorFn = (
 
 
         /*
+         * Some answers carry only a code: { "code": "QUEUE_FULL" }.
+         * Use it when we have wording for it.
+         */
+
+        else if (
+          typeof error?.error?.code === 'string' &&
+          say(error.error.code) !== error.error.code
+        ) {
+
+          errorMessage = error.error.code;
+        }
+
+
+        /*
          * ======================================================
          * 5. HANDLE HTTP STATUS
          * ======================================================
@@ -300,7 +322,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Bad Request. Please check the information you provided.';
+                'SRV_MSG.BAD_REQUEST_PLEASE_CHECK_THE_INFORMATION_YOU_PROVIDED';
             }
 
             break;
@@ -320,7 +342,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Unauthorized: Please login to continue.';
+                'SRV_MSG.UNAUTHORIZED_PLEASE_LOGIN_TO_CONTINUE';
             }
 
             break;
@@ -333,7 +355,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Access Denied. You do not have permission to perform this action.';
+                'SRV_MSG.ACCESS_DENIED_YOU_DO_NOT_HAVE_PERMISSION_TO_PERFORM_THIS_ACT';
             }
 
             break;
@@ -346,7 +368,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Resource not found. Please check the URL or try again later.';
+                'SRV_MSG.RESOURCE_NOT_FOUND_PLEASE_CHECK_THE_URL_OR_TRY_AGAIN_LATER';
             }
 
             break;
@@ -359,7 +381,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Internal Server Error. Please contact support if this persists.';
+                'SRV_MSG.INTERNAL_SERVER_ERROR_PLEASE_CONTACT_SUPPORT_IF_THIS_PERSIST';
             }
 
             break;
@@ -372,8 +394,16 @@ export const StatusInterceptor: HttpInterceptorFn = (
               typeof error?.error !== 'string'
             ) {
               errorMessage =
-                'Bad Method, Check URL.';
+                'SRV_MSG.BAD_METHOD_CHECK_URL';
             }
+
+            break;
+
+
+          case 0:
+
+            // No answer at all - server down or no connection.
+            errorMessage = 'SRV_MSG.BACKEND_UNREACHABLE';
 
             break;
 
@@ -403,7 +433,7 @@ export const StatusInterceptor: HttpInterceptorFn = (
 
           status: 'error',
 
-          message: errorMessage,
+          message: say(errorMessage),
 
           showClose: true
         };

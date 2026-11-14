@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Input, Output, EventEmitter, ViewEncapsulation, ChangeDetectionStrategy } from '@angular/core';
 import { MatTabsModule } from '@angular/material/tabs';
 import { CommonModule } from '@angular/common';
@@ -9,7 +10,7 @@ import { IconRegistryService } from '../../services/icon-registry.service';
 
 @Component({
     selector: 'app-tabs',
-    imports: [MatTabsModule, CommonModule, FormsModule, MatIconModule],
+    imports: [TranslatePipe, MatTabsModule, CommonModule, FormsModule, MatIconModule],
     templateUrl: './tabs.component.html',
     styleUrls: ['./tabs.component.css'],
     encapsulation: ViewEncapsulation.None, // ← Ongeza hii line

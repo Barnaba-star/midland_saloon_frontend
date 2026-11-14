@@ -1,7 +1,7 @@
 <form [formGroup]="form">
 
   <!-- Title -->
-  <h2 class="form-title">{{ formTitle }}</h2>
+  <h2 class="form-title">{{ formTitle | translate }}</h2>
 
   <div class="form-grid">
 
@@ -16,7 +16,7 @@
           <div class="form-field-wrapper">
 
             @if (field.type !== 'checkbox' && field.type !== 'checkbox-group') {
-              <label>{{ field.label }}</label>
+              <label>{{ field.label | translate }}</label>
             }
 
             @switch (field.type) {
@@ -27,17 +27,17 @@
                 <mat-form-field appearance="outline" class="w-100">
 
                   @if (field.prefix) {
-                    <span matPrefix>{{ field.prefix }}&nbsp;</span>
+                    <span matPrefix>{{ field.prefix | translate }}&nbsp;</span>
                   }
 
                   <input
                     matInput
                     type="text"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || 'Enter text here'" />
+                    [placeholder]="(field.placeholder || 'UTIL_T.PH.ENTER_TEXT_HERE') | translate" />
 
                   @if (field.suffix) {
-                    <span matSuffix>&nbsp;{{ field.suffix }}</span>
+                    <span matSuffix>&nbsp;{{ field.suffix | translate }}</span>
                   }
 
                 </mat-form-field>
@@ -50,23 +50,23 @@
                 <mat-form-field appearance="outline" class="w-100">
 
                   @if (field.prefix) {
-                    <span matPrefix>{{ field.prefix }}&nbsp;</span>
+                    <span matPrefix>{{ field.prefix | translate }}&nbsp;</span>
                   }
 
                   <input
                     matInput
                     type="number"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label" />
+                    [placeholder]="(field.placeholder || field.label) | translate" />
 
                   @if (hasError(field)) {
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
                   }
 
                   @if (field.suffix) {
-                    <span matSuffix>&nbsp;{{ field.suffix }}</span>
+                    <span matSuffix>&nbsp;{{ field.suffix | translate }}</span>
                   }
 
                 </mat-form-field>
@@ -84,12 +84,12 @@
                   <textarea
                     matInput
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
                   </textarea>
 
                   @if (hasError(field)) {
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
                   }
 
@@ -104,7 +104,7 @@
 
                   <mat-select
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
 
                     @for (option of field.options; track option.value) {
 
@@ -115,7 +115,7 @@
                           form.get(field.name)?.value === option.value
                         }">
 
-                        {{ option.label }}
+                        {{ option.label | translate }}
 
                       </mat-option>
 
@@ -125,7 +125,7 @@
 
                   @if (hasError(field)) {
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
                   }
 
@@ -146,7 +146,7 @@
                         [value]="option.value"
                         class="radio-button">
 
-                        {{ option.label }}
+                        {{ option.label | translate }}
 
                       </mat-radio-button>
 
@@ -156,7 +156,7 @@
 
                   @if (hasError(field)) {
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
                   }
 
@@ -168,13 +168,13 @@
 
                 <mat-checkbox
                   [formControlName]="field.name"
-                  [aria-label]="field.placeholder || field.label">
+                  [aria-label]="(field.placeholder || field.label) | translate">
 
-                  {{ field.label }}
+                  {{ field.label | translate }}
 
                   @if (hasError(field)) {
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
                   }
 
@@ -193,13 +193,13 @@
                     <mat-select
                       [formControlName]="field.name"
                       multiple
-                      [placeholder]="field.placeholder || field.label">
+                      [placeholder]="(field.placeholder || field.label) | translate">
 
                       @for (option of field.options; track option.value) {
 
                         <mat-option [value]="option.value">
 
-                          {{ option.label }}
+                          {{ option.label | translate }}
 
                         </mat-option>
 
@@ -210,7 +210,7 @@
                     @if (hasError(field)) {
 
                       <mat-error>
-                        {{ getErrorMessage(field) }}
+                        {{ getErrorMessage(field) | translate }}
                       </mat-error>
 
                     }
@@ -229,7 +229,7 @@
 
                   @if (field.label) {
                     <label class="form-label">
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </label>
                   }
 
@@ -245,7 +245,7 @@
 
                       <img
                         [src]="previewUrls[field.name]"
-                        alt="Preview">
+                        [alt]="'UTIL_T.PREVIEW' | translate">
 
                     </div>
 
@@ -254,7 +254,7 @@
                   @if (hasError(field)) {
 
                     <div class="validation-error">
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </div>
 
                   }
@@ -271,7 +271,7 @@
 
                   @if (field.label) {
                     <mat-label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </mat-label>
                   }
 
@@ -279,7 +279,7 @@
                     matInput
                     [matDatepicker]="picker"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
 
                   <mat-datepicker-toggle
                     matSuffix
@@ -291,7 +291,7 @@
                   @if (hasError(field)) {
 
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
 
                   }
@@ -307,7 +307,7 @@
 
                   @if (field.label) {
                     <mat-label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </mat-label>
                   }
 
@@ -315,12 +315,12 @@
                     matInput
                     type="datetime-local"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
 
                   @if (hasError(field)) {
 
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
 
                   }
@@ -337,7 +337,7 @@
 
                   @if (field.label) {
                     <mat-label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </mat-label>
                   }
 
@@ -345,12 +345,12 @@
                     matInput
                     type="month"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
 
                   @if (hasError(field)) {
 
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
 
                   }
@@ -367,7 +367,7 @@
 
                   @if (field.label) {
                     <mat-label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </mat-label>
                   }
 
@@ -375,12 +375,12 @@
                     matInput
                     type="week"
                     [formControlName]="field.name"
-                    [placeholder]="field.placeholder || field.label">
+                    [placeholder]="(field.placeholder || field.label) | translate">
 
                   @if (hasError(field)) {
 
                     <mat-error>
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </mat-error>
 
                   }
@@ -397,7 +397,7 @@
 
                   @if (field.label) {
                     <label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </label>
                   }
 
@@ -408,7 +408,7 @@
                   @if (hasError(field)) {
 
                     <div class="validation-error">
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </div>
 
                   }
@@ -425,7 +425,7 @@
 
                   @if (field.label) {
                     <label>
-                      {{ field.label }}
+                      {{ field.label | translate }}
                     </label>
                   }
 
@@ -438,7 +438,7 @@
                   @if (hasError(field)) {
 
                     <div class="validation-error">
-                      {{ getErrorMessage(field) }}
+                      {{ getErrorMessage(field) | translate }}
                     </div>
 
                   }

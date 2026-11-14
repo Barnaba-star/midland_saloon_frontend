@@ -114,7 +114,7 @@
                             {{ staff.gender === 'Male' ? 'male' : 'female' }}
                           </mat-icon>
 
-                          {{ staff.gender }}
+                          {{ (staff.gender === 'Male' ? 'POS_T.STAFF.MALE' : staff.gender === 'Female' ? 'POS_T.STAFF.FEMALE' : staff.gender) | translate }}
                         </span>
                       } @else {
                         <span class="empty-value">--</span>
@@ -141,7 +141,7 @@
                       @if (staff.saloonCategory) {
                         <span class="category-badge">
                           <mat-icon>content_cut</mat-icon>
-                          {{ staff.saloonCategory }}
+                          {{ (staff.saloonCategory === 'Barber' ? 'POS_T.STAFF.BARBER' : staff.saloonCategory === 'Beauty Therapist' ? 'POS_T.STAFF.BEAUTY_THERAPIST' : staff.saloonCategory) | translate }}
                         </span>
                       } @else {
                         <span class="empty-value">--</span>

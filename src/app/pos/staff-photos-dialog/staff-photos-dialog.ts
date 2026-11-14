@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, Component, OnDestroy, OnInit, computed, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -21,7 +22,7 @@ export interface StaffPhotosData {
  */
 @Component({
   selector: 'app-staff-photos-dialog',
-  imports: [FormsModule, DatePipe, DecimalPipe, MatIconModule, TranslatePipe],
+  imports: [LangDatePipe, FormsModule, DatePipe, DecimalPipe, MatIconModule, TranslatePipe],
   templateUrl: './staff-photos-dialog.html',
   styleUrl: './staff-photos-dialog.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

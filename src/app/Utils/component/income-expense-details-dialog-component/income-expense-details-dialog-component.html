@@ -91,7 +91,7 @@
         <div class="detail-row">
           <span>{{ 'INCOME_EXPENSE_DIALOG.WEEK_START' | translate }}</span>
           <strong>
-            {{ data.weekStartDate | date:'dd MMM yyyy' }}
+            {{ data.weekStartDate | langDate: 'dd MMM yyyy' }}
           </strong>
         </div>
 
@@ -169,7 +169,7 @@
             </div>
 
             <strong>
-              {{ spend.descriptionDate | date:'dd MMM yyyy' }}
+              {{ spend.descriptionDate | langDate: 'dd MMM yyyy' }}
             </strong>
 
           </div>

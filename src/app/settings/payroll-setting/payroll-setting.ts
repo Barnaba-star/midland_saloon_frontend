@@ -45,7 +45,7 @@ export class PayrollSetting implements OnInit {
   ) {}
 
   titleActions = [
-    { icon: 'pay', title: 'PAYROLL_PAGE.MANAGE_TAB', roles: ['ROOT', 'DIRECTOR'] }
+    { icon: 'pay', title: 'PAGE_T.PAYROLL', roles: ['ROOT', 'DIRECTOR'] }
   ];
 
   tab = '';
@@ -61,7 +61,7 @@ export class PayrollSetting implements OnInit {
   selectedYear = new Date().getFullYear();
 
   ngOnInit(): void {
-    this.tab = 'PAYROLL_PAGE.MANAGE_TAB';
+    this.tab = 'PAGE_T.PAYROLL';
     this.buildPeriodOptions();
     this.load();
   }

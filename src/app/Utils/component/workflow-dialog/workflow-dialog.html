@@ -1,7 +1,7 @@
-  <button mat-icon-button (click)="onClose()" aria-label="Close dialog">
+  <button mat-icon-button (click)="onClose()" [attr.aria-label]="'COMMON.CLOSE' | translate">
     <mat-icon>close</mat-icon>
   </button>
-<h2 mat-dialog-title>{{ data.formTitle }}</h2>
+<h2 mat-dialog-title>{{ data.formTitle | translate }}</h2>
 
 
 
@@ -11,17 +11,17 @@
 
   <div class="form-actions" *ngIf="data.showDeleteButton">
 <p style="font-size: 18px; block-size: 12px; font-weight: bold; margin-left: 30px;">
-   No#: {{form.index}}
+   {{ 'UTIL_T.NO_N' | translate }} {{form.index}}
 </p>
 
   <div class="icon-group" style="margin-right: 20px;">
     <img *ngIf="data.showAddButton"
          src="assets/icons/add.svg"
-         alt="Add"
+         [alt]="'UTIL_T.ADD' | translate"
          class="icon-btn"
          (click)="addForm()"/>
     <img src="assets/icons/delete.svg"
-         alt="Delete"
+         [alt]="'COMMON.DELETE' | translate"
          class="icon-btn"
          (click)="deleteForm()" />
   </div>

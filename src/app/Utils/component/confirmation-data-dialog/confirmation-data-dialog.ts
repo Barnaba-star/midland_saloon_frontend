@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ export interface ConfirmationDialogData {
   standalone: true,
   templateUrl: './confirmation-data-dialog.html',
   styleUrl: './confirmation-data-dialog.css',
-  imports: [
+  imports: [TranslatePipe, 
     CommonModule,
     FormsModule,
     MatDialogModule,

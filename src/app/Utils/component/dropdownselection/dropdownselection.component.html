@@ -1,9 +1,9 @@
 <div class="dropdown-wrapper">
-  <label class="dropdown-label">{{ label }}</label>
+  <label class="dropdown-label">{{ label | translate }}</label>
   <select [ngModel]="selectedValue" (ngModelChange)="onSelectChange($event)" class="dropdown-select">
-    <option disabled selected value="">-- Select --</option>
+    <option disabled selected value="">{{ 'UTIL_T.SELECT_DASHES' | translate }}</option>
     <option *ngFor="let option of options" [value]="option.value">
-      {{ option.label }}
+      {{ option.label | translate }}
     </option>
   </select>
 </div>

@@ -1,3 +1,5 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
+import { StatusKeyPipe } from '../status-key.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from '../../Utils/component/title2/title2';
 import { Authentication } from '../../Utils/services/authentication';
@@ -36,7 +38,7 @@ interface PaymentSummaryDisplay {
 }
 @Component({
   selector: 'app-saloon-sales',
-  imports: [ShiftBar, 
+  imports: [LangDatePipe, StatusKeyPipe, ShiftBar, 
     EmptyStateComponent,
     MatIconModule,
     Title2,
@@ -128,14 +130,14 @@ export class SaloonSales implements OnInit{
     {
       name: 'staffName',
       type: 'select',
-      placeholder: 'Enter staff name',
+      placeholder: 'POS_T.SALES.SELECT_STAFF',
       required: true,
       options: [],
     },
     {
       name: 'saloonService',
       type: 'checkbox-group',
-      placeholder: 'Enter saloon service',
+      placeholder: 'POS_T.SALES.SELECT_SERVICES',
       required: true,
       options: [],
     },
@@ -145,7 +147,7 @@ export class SaloonSales implements OnInit{
     {
       name: 'openSaleCode',
       type: 'select',
-      placeholder: 'Enter sale code',
+      placeholder: 'POS_T.SALES.SELECT_SALE_CODE',
       required: true,
       options: [
         { label: 'SK-1', value: 'SK-1' },
@@ -159,7 +161,7 @@ export class SaloonSales implements OnInit{
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '1200px',
       data: {
-        formTitle: 'Open New Sale',
+        formTitle: 'POS_T.SALES.OPEN_NEW_SALE',
         fields: this.openSales,
       },
     });
@@ -347,7 +349,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
   selectedPaymentMethod: string = '';
   proceedToPayment(): void {
     if (!this.selectedPaymentMethod) {
-      alert('Tafadhali chagua njia ya malipo.');
+      alert(this.translate.instant('POS_T.SALES.CHOOSE_PAYMENT_METHOD'));
       return;
     }
     // A customer's reward (loyalty discount) is not paid for.
@@ -364,7 +366,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
         console.log('BACKEND RESPONSE:', res);
         if (res.data) {
           console.log('Sale Updated Successfully', res.data);
-          this.alertService.show('success', 'Sale updated successfully');
+          this.alertService.show('success', 'POS_T.SALES.SALE_UPDATED');
           const index = this.salesOpenedList.findIndex((idx) => idx.uid === res.data.uid);
           if (index !== -1) {
             this.salesOpenedList = this.salesOpenedList.map((item) =>
@@ -397,7 +399,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '1200px',
       data: {
-        formTitle: 'Add New Sale',
+        formTitle: 'POS_T.SALES.ADD_NEW_SALE',
         fields: this.salesFields,
       },
     });
@@ -420,7 +422,7 @@ openSaleDetailsDialogForMore(sale: SalesOpened) {
             if (index !== -1) {
               this.salesOpenedList[index] = res.data[0].salesOpened;
             }
-            this.alertService.show('success', 'Bill Saved');
+            this.alertService.show('success', 'POS_T.SALES.BILL_SAVED');
             this.cdr.detectChanges();
             console.log('Sales Opened UID', this.saleOpenedUID);
           }
@@ -575,14 +577,14 @@ selectedDateObject: Date | null = null;
 
 
 filters = [
-  { label: 'Today', value: 'DAY' },
-  { label: 'Yesterday', value: 'YESTERDAY' },
-  { label: 'This Week', value: 'WEEK' },
-  { label: 'Last Week', value: 'LAST_WEEK' },
-  { label: 'This Month', value: 'MONTH' },
-  { label: 'Last Month', value: 'LAST_MONTH' },
-  { label: 'This Year', value: 'THIS_YEAR' },
-  { label: 'Last Year', value: 'LAST_YEAR' },
+  { label: 'COMMON.TODAY', value: 'DAY' },
+  { label: 'COMMON.YESTERDAY', value: 'YESTERDAY' },
+  { label: 'COMMON.THIS_WEEK', value: 'WEEK' },
+  { label: 'COMMON.LAST_WEEK', value: 'LAST_WEEK' },
+  { label: 'COMMON.THIS_MONTH', value: 'MONTH' },
+  { label: 'COMMON.LAST_MONTH', value: 'LAST_MONTH' },
+  { label: 'COMMON.THIS_YEAR', value: 'THIS_YEAR' },
+  { label: 'COMMON.LAST_YEAR', value: 'LAST_YEAR' },
 ];
 
   getSelectedDate(): string {
@@ -596,36 +598,36 @@ displayedFilter(): string {
   switch (this.selectedFilter) {
 
     case 'DAY':
-      return 'Today';
+      return this.translate.instant('COMMON.TODAY');
 
     case 'YESTERDAY':
-      return 'Yesterday';
+      return this.translate.instant('COMMON.YESTERDAY');
 
     case 'WEEK':
-      return 'This Week';
+      return this.translate.instant('COMMON.THIS_WEEK');
 
     case 'LAST_WEEK':
-      return 'Last Week';
+      return this.translate.instant('COMMON.LAST_WEEK');
 
     case 'MONTH':
-      return 'This Month';
+      return this.translate.instant('COMMON.THIS_MONTH');
 
     case 'LAST_MONTH':
-      return 'Last Month';
+      return this.translate.instant('COMMON.LAST_MONTH');
 
     case 'THIS_YEAR':
-      return 'This Year';
+      return this.translate.instant('COMMON.THIS_YEAR');
 
     case 'LAST_YEAR':
-      return 'Last Year';
+      return this.translate.instant('COMMON.LAST_YEAR');
 
     case 'SPECIFIC_DATE':
       return this.selectedDate
         ? this.formatDisplayDate(this.selectedDate)
-        : 'Selected Date';
+        : this.translate.instant('POS_T.SALES.SELECTED_DATE');
 
     default:
-      return 'Today';
+      return this.translate.instant('COMMON.TODAY');
   }
 }
 onSpecificDateChange(): void {
@@ -875,8 +877,8 @@ closeBill(sale: any) {
 }
 
 formatPaymentMethod(method: string | null | undefined): string {
-  if (!method) {
-    return 'Not selected';
+  if (!method || method === 'Not selected') {
+    return this.translate.instant('COMMON.NOT_SELECTED');
   }
 
   const paymentMethods: Record<string, string> = {
@@ -895,8 +897,8 @@ formatPaymentMethod(method: string | null | undefined): string {
     halopesa: 'H-pesa',
     'halo pesa': 'H-pesa',
 
-    cash: 'Cash',
-    bank: 'Bank'
+    cash: this.translate.instant('POS_T.PAY.CASH'),
+    bank: this.translate.instant('POS_T.PAY.BANK')
   };
 
   const key = method

@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -18,7 +19,7 @@ export type ShiftState = 'NONE' | 'OPEN' | 'CLOSED';
  */
 @Component({
   selector: 'app-shift-bar',
-  imports: [MatIconModule, DatePipe, TranslatePipe],
+  imports: [LangDatePipe, MatIconModule, DatePipe, TranslatePipe],
   templateUrl: './shift-bar.html',
   styleUrl: './shift-bar.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, EventEmitter, Inject, Input, Output, QueryList, TemplateRef, ViewChildren, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
@@ -12,7 +13,7 @@ import { FormComponent } from '../form/form';
 
 @Component({
   selector: 'app-workflow-dialog',
-  imports: [
+  imports: [TranslatePipe, 
  MatDialogModule,
     CommonModule,
     FormComponent,

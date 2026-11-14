@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../../pipes/lang-date.pipe';
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -8,7 +9,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-table-size-dialog-component',
-  imports: [MatDatepickerModule, MatDialogModule, MatInputModule, FormsModule, DatePipe, CommonModule, TranslatePipe],
+  imports: [LangDatePipe, MatDatepickerModule, MatDialogModule, MatInputModule, FormsModule, CommonModule, TranslatePipe],
   templateUrl: './table-size-dialog-component.html',
   styleUrl: './table-size-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

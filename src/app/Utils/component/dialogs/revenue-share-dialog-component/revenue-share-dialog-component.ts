@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../../pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -29,7 +30,7 @@ interface MonthOption {
 @Component({
   selector: 'app-revenue-share-dialog-component',
   standalone: true,
-  imports: [CommonModule, MatDialogModule, MatIconModule, TranslatePipe],
+  imports: [LangDatePipe, CommonModule, MatDialogModule, MatIconModule, TranslatePipe],
   templateUrl: './revenue-share-dialog-component.html',
   styleUrl: './revenue-share-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

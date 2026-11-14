@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +14,7 @@ import { ActivatedRoute, Route, Router, RouterModule } from "@angular/router";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.css'],
   standalone: true,
-  imports: [CommonModule, MatIconModule, MatFormFieldModule, MatSidenavModule, RouterModule, MatDivider],
+  imports: [TranslatePipe, CommonModule, MatIconModule, MatFormFieldModule, MatSidenavModule, RouterModule, MatDivider],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HeaderComponent {

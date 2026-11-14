@@ -3,10 +3,10 @@
 </div>
 
 <mat-dialog-content class="dialog-content">
- <strong><p>{{ data.message }}</p></strong> 
-    <mat-select [(ngModel)]="selectedOption" style="border-radius: 70px;" placeholder="Select">
+ <strong><p>{{ data.message | translate }}</p></strong> 
+    <mat-select [(ngModel)]="selectedOption" style="border-radius: 70px;" [placeholder]="'UTIL_T.SELECT' | translate">
       <mat-option *ngFor="let option of data.dropdownOptions" [value]="option.value" style="border-radius: 70px; border-color: var(--sx-success);">
-        {{ option.label }}
+        {{ option.label | translate }}
       </mat-option>
     </mat-select>
 
@@ -14,8 +14,8 @@
 
 <mat-dialog-actions align="end" class="dialog-actions full-width-actions">
  <button mat-raised-button color="warn" (click)="onConfirm()" [disabled]="data.dropdownOptions && !selectedOption">
-    <mat-icon>check</mat-icon>Submit</button>
-  <button mat-raised-button color="primary" (click)="onCancel()">Cancell</button>
+    <mat-icon>check</mat-icon>{{ 'COMMON.SUBMIT' | translate }}</button>
+  <button mat-raised-button color="primary" (click)="onCancel()">{{ 'COMMON.CANCEL' | translate }}</button>
  
 </mat-dialog-actions>
 

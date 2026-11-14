@@ -98,60 +98,60 @@ export class SaloonStaff implements OnInit{
     {
       name: 'firstName',
       type: 'text',
-      label: 'First Name',
-      placeholder: 'Enter staff name',
+      label: 'COMMON.FIRST_NAME',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'middleName',
       type: 'text',
-      label: 'Middle Name',
-      placeholder: 'Enter staff name',
+      label: 'COMMON.MIDDLE_NAME',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'lastName',
       type: 'text',
-      label: 'Last Name',
-      placeholder: 'Enter staff name',
+      label: 'COMMON.LAST_NAME',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'phone',
       type: 'text',
-      label: 'Phone Number',
-      placeholder: 'Enter phone number',
+      label: 'POS_T.STAFF.PHONE_NUMBER',
+      placeholder: 'POS_T.STAFF.ENTER_PHONE',
       required: true,
     },
     {
       name: 'saloonCategory',
-      label: 'Category',
+      label: 'COMMON.CATEGORY',
       type: 'select',
       options: [
-        { label: 'Beauty Therapist', value: 'Beauty Therapist' },
-        { label: 'Barber', value: 'Barber' },
+        { label: 'POS_T.STAFF.BEAUTY_THERAPIST', value: 'Beauty Therapist' },
+        { label: 'POS_T.STAFF.BARBER', value: 'Barber' },
       ],
     },
     {
-      label: 'Date of Birth',
+      label: 'STAFF_PAGE.COL_DOB',
       name: 'dateOfBirth',
-      placeholder: 'date of Birth',
+      placeholder: 'STAFF_PAGE.COL_DOB',
       type: 'date',
     },
     {
       name: 'description',
-      label: 'Description',
+      label: 'COMMON.DESCRIPTION',
       type: 'textarea',
       rows: 1,
       colSpan: 2,
     },
     {
       name: 'gender',
-      label: 'Gender',
+      label: 'COMMON.GENDER',
       type: 'radio',
       options: [
-        { label: 'Male', value: 'Male' },
-        { label: 'Female', value: 'Female' },
+        { label: 'POS_T.STAFF.MALE', value: 'Male' },
+        { label: 'POS_T.STAFF.FEMALE', value: 'Female' },
       ],
     },
   ];
@@ -160,38 +160,38 @@ export class SaloonStaff implements OnInit{
     {
       name: 'firstName',
       type: 'text',
-      placeholder: 'Enter staff name',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'middleName',
       type: 'text',
-      placeholder: 'Enter staff name',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'lastName',
       type: 'text',
-      placeholder: 'Enter staff name',
+      placeholder: 'POS_T.STAFF.ENTER_NAME',
       required: true,
     },
     {
       name: 'phoneNumber',
       type: 'text',
-      placeholder: 'Enter phone number',
+      placeholder: 'POS_T.STAFF.ENTER_PHONE',
       required: true,
     },
     {
       name: 'saloonCategory',
       type: 'select',
       options: [
-        { label: 'Beauty Therapist', value: 'Beauty Therapist' },
-        { label: 'Barber', value: 'Barber' },
+        { label: 'POS_T.STAFF.BEAUTY_THERAPIST', value: 'Beauty Therapist' },
+        { label: 'POS_T.STAFF.BARBER', value: 'Barber' },
       ],
     },
     {
       name: 'dateOfBirth',
-      placeholder: 'date of Birth',
+      placeholder: 'STAFF_PAGE.COL_DOB',
       type: 'date',
     },
     {
@@ -204,8 +204,8 @@ export class SaloonStaff implements OnInit{
       name: 'gender',
       type: 'radio',
       options: [
-        { label: 'Male', value: 'Male' },
-        { label: 'Female', value: 'Female' },
+        { label: 'POS_T.STAFF.MALE', value: 'Male' },
+        { label: 'POS_T.STAFF.FEMALE', value: 'Female' },
       ],
     },
   ];
@@ -215,27 +215,27 @@ export class SaloonStaff implements OnInit{
   staffColumns = [
     {
       field: 'firstName',
-      header: 'First Name',
+      header: 'COMMON.FIRST_NAME',
     },
     {
       field: 'middleName',
-      header: 'Middle Name',
+      header: 'COMMON.MIDDLE_NAME',
     },
     {
       field: 'lastName',
-      header: 'Last Name',
+      header: 'COMMON.LAST_NAME',
     },
     {
       field: 'phoneNumber',
-      header: 'Phone Number',
+      header: 'POS_T.STAFF.PHONE_NUMBER',
     },
     {
       field: 'saloonCategory',
-      header: 'Category',
+      header: 'COMMON.CATEGORY',
     },
     {
       field: 'gender',
-      header: 'Gender',
+      header: 'COMMON.GENDER',
     },
   ];
 
@@ -255,7 +255,7 @@ export class SaloonStaff implements OnInit{
       next: (response) => {
         console.log('Saloon staff saved successfully:', response);
         if (response.data) {
-          this.alertService.show('success', 'Saloon staff saved successfully.');
+          this.alertService.show('success', 'POS_T.STAFF.SAVED');
           this.saloonStaff.push(response.data);
           this.cdr.detectChanges();
           console.log('Saved Saloon Staff:', this.saloonStaff);
@@ -273,7 +273,7 @@ export class SaloonStaff implements OnInit{
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '1200px',
       data: {
-        formTitle: 'Update Staff',
+        formTitle: 'POS_T.STAFF.UPDATE',
         fields: this.editStaffFields,
         formData: [event],
       },
@@ -297,7 +297,7 @@ export class SaloonStaff implements OnInit{
         next: (response) => {
           console.log('Saloon staff Updated successfully:', response);
           if (response.data) {
-            this.alertService.show('success', 'Saloon staff updated successfully.');
+            this.alertService.show('success', 'POS_T.STAFF.UPDATED');
             this.saloonStaff = [];
             this.saloonStaff.push(response.data);
             this.cdr.detectChanges();
@@ -349,7 +349,7 @@ export class SaloonStaff implements OnInit{
       next: (response) => {
         console.log('Delete response:', response);
         if (response.data) {
-          this.alertService.show('success', 'Staff Deleted');
+          this.alertService.show('success', 'POS_T.STAFF.DELETED');
           this.saloonStaff = this.saloonStaff.filter((staff) => staff.uid !== this.staffUID);
           this.saloonStaffEdited = [];
           this.cdr.detectChanges();
@@ -359,7 +359,7 @@ export class SaloonStaff implements OnInit{
 
       error: (error) => {
         console.error('Error on deleting staff:', error);
-        this.alertService.show('error', 'Failed to delete staff');
+        this.alertService.show('error', 'POS_T.STAFF.DELETE_FAILED');
       },
     });
   }
@@ -376,29 +376,29 @@ export class SaloonStaff implements OnInit{
   staffColumnsPage: TableColumn[] = [
     {
       field: 'firstName',
-      header: 'First Name',
+      header: 'COMMON.FIRST_NAME',
       icon: 'person2',
       iconPosition: 'left',
       iconColor: '#198754',
     },
     {
       field: 'middleName',
-      header: 'Middle Name',
+      header: 'COMMON.MIDDLE_NAME',
     },
     {
       field: 'lastName',
-      header: 'Last Name',
+      header: 'COMMON.LAST_NAME',
     },
     {
       field: 'phoneNumber',
-      header: 'Phone',
+      header: 'COMMON.PHONE',
       icon: 'more',
       iconPosition: 'left',
       iconColor: '#0d6efd',
     },
     {
       field: 'gender',
-      header: 'Gender',
+      header: 'COMMON.GENDER',
       cellColors: {
         Male: {
           background: '#e7f1ff',
@@ -412,7 +412,7 @@ export class SaloonStaff implements OnInit{
     },
     {
       field: 'saloonCategory',
-      header: 'Category',
+      header: 'COMMON.CATEGORY',
       cellColors: {
         Barber: {
           background: '#e8f5e9',
@@ -466,7 +466,7 @@ loadStaffPage() {
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '1200px',
       data: {
-        formTitle: 'Edit Staff Details',
+        formTitle: 'POS_T.STAFF.EDIT_DETAILS',
         fields: this.editStaffFields,
         formData: [event],
       },
@@ -496,7 +496,7 @@ loadStaffPage() {
               if (index != -1) {
                 this.saloonStaffDataSource.data[index] = res.data;
                 this.saloonStaffDataSource.data = [...this.saloonStaffDataSource.data];
-                this.alertService.show('success', 'Data Successfully Updated');
+                this.alertService.show('success', 'POS_T.STAFF.UPDATED');
                 this.cdr.detectChanges();
                 this.staffPageUID = '';
               }
@@ -551,7 +551,7 @@ loadStaffPage() {
             this.saloonStaffDataSource.data.splice(index, 1);
             this.saloonStaffDataSource.data = [...this.saloonStaffDataSource.data];
             this.cdr.detectChanges();
-            this.alertService.show('success', 'Staff Deleted')
+            this.alertService.show('success', 'POS_T.STAFF.DELETED')
           }
         }
       },

@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
@@ -16,7 +17,7 @@ export type MatMenuItem ={
 @Component({
   selector: 'app-mat-menu',
   standalone:true,
-  imports: [MatButtonModule, MatMenuModule, MatIconModule, CommonModule, MatDivider],
+  imports: [TranslatePipe, MatButtonModule, MatMenuModule, MatIconModule, CommonModule, MatDivider],
   templateUrl: './mat-menu.html',
   styleUrl: './mat-menu.css',
   changeDetection: ChangeDetectionStrategy.OnPush

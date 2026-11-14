@@ -46,7 +46,7 @@
   <div class="warning-box" *ngIf="cutoffDate">
     ⚠️ {{ 'TABLE_SIZE_DIALOG.WARNING_PREFIX' | translate }}
     <strong>
-      {{ cutoffDate | date:'dd MMM yyyy' }}
+      {{ cutoffDate | langDate: 'dd MMM yyyy' }}
     </strong>
     {{ 'TABLE_SIZE_DIALOG.WARNING_SUFFIX' | translate }}
   </div>

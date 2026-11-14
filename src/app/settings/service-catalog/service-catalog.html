@@ -64,7 +64,7 @@
               @if (c.description) { <small>{{ c.description }}</small> }
             </td>
             <td>{{ c.category || '-' }}</td>
-            <td>{{ c.duration ? (c.duration + ' min') : '-' }}</td>
+            <td>{{ c.duration ? ('PAGE_T.MINUTES_COUNT' | translate: { n: c.duration }) : '-' }}</td>
             @if (canEdit) {
               <td class="row-actions">
                 <button type="button" class="ghost-btn" (click)="edit(c)">{{ 'COMMON.EDIT' | translate }}</button>

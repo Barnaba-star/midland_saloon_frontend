@@ -10,11 +10,11 @@
   <div class="delete-content">
 
     <h2>
-      {{ data.title || ('COMMON.DELETE_ITEM_TITLE' | translate) }}
+      {{ (data.title || 'COMMON.DELETE_ITEM_TITLE') | translate }}
     </h2>
 
     <p>
-      {{ data.message || ('COMMON.CONFIRM_DELETE_ITEM' | translate) }}
+      {{ (data.message || 'COMMON.CONFIRM_DELETE_ITEM') | translate }}
     </p>
 
 
@@ -53,7 +53,7 @@
       class="cancel-button"
       (click)="cancel()"
     >
-      {{ data.cancelText || ('COMMON.CANCEL' | translate) }}
+      {{ (data.cancelText || 'COMMON.CANCEL') | translate }}
     </button>
 
 
@@ -67,7 +67,7 @@
         delete_outline
       </mat-icon>
 
-      {{ data.confirmText || ('COMMON.DELETE' | translate) }}
+      {{ (data.confirmText || 'COMMON.DELETE') | translate }}
 
     </button>
 

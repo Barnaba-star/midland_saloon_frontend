@@ -54,7 +54,7 @@
           @for (s of data.slowMovers; track s.uid) {
             <div class="slow-row">
               <div><strong>{{ s.serviceName }}</strong>
-                <small class="muted">{{ s.lastSold ? ('INSIGHTS.LAST_SOLD' | translate: { date: (s.lastSold | date: 'dd MMM') }) : ('INSIGHTS.NEVER_SOLD' | translate) }}</small>
+                <small class="muted">{{ s.lastSold ? ('INSIGHTS.LAST_SOLD' | translate: { date: (s.lastSold | langDate: 'dd MMM') }) : ('INSIGHTS.NEVER_SOLD' | translate) }}</small>
               </div>
               <div class="num"><span>{{ s.stock | number }}</span><small class="muted">Tshs {{ s.stockValue | number }}</small></div>
             </div>

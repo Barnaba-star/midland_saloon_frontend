@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
@@ -18,7 +19,7 @@ export interface MenuItem {
 @Component({
   selector: 'app-sidenav',
   standalone: true,
-  imports: [RouterModule, MatListModule, MatIconModule, MatToolbarModule, MatSidenavModule, CommonModule],
+  imports: [TranslatePipe, RouterModule, MatListModule, MatIconModule, MatToolbarModule, MatSidenavModule, CommonModule],
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush

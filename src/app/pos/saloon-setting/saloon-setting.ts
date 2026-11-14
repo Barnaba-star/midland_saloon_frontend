@@ -1,3 +1,4 @@
+import { StatusKeyPipe } from '../status-key.pipe';
 import { ServiceCatalogPick } from '../service-catalog-pick/service-catalog-pick';
 import { BranchCatalogService, ServiceCatalogApi } from '../../settings/service-catalog/service-catalog-api';
 import { forkJoin, of } from 'rxjs';
@@ -54,7 +55,7 @@ export interface SaloonServiceEntity {
 
 @Component({
   selector: 'app-saloon-setting',
-  imports: [
+  imports: [StatusKeyPipe, 
     OtherSplit, QueueCardSetting, ServicesQrSetting, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
@@ -154,39 +155,39 @@ serviceFields:FormField[] = [
   {
     name: 'serviceName',
     type: 'text',
-    label: 'Service Name',
-    placeholder: 'Enter service name',
+    label: 'POS_T.SERVICE.NAME',
+    placeholder: 'POS_T.SERVICE.ENTER_NAME',
     required: true,
   },
   {
     name: 'price',
     type: 'number',
-    label: 'Price',
-    placeholder: 'Enter price',
+    label: 'COMMON.PRICE',
+    placeholder: 'POS_T.SERVICE.ENTER_PRICE',
     required: true,
   },
   {
     name: 'duration',
     type: 'number',
-    label: 'Duration (in minutes)',
-    placeholder: 'Enter duration in minutes',
+    label: 'POS_T.SERVICE.DURATION_MINUTES',
+    placeholder: 'POS_T.SERVICE.ENTER_DURATION',
     required: true,
   },
    {
     name: 'status',
     type: 'select',
-    placeholder: 'Enter status',
+    placeholder: 'POS_T.SERVICE.CHOOSE_STATUS',
     required: true,
     options: [
-      { value: 'active', label: 'Active' },
-      { value: 'Not Active', label: 'Not Active' }
+      { value: 'active', label: 'COMMON.ACTIVE' },
+      { value: 'Not Active', label: 'COMMON.INACTIVE' }
     ]
   },
     {
     name: 'description',
     type: 'textarea',
-    label: 'Description',
-    placeholder: 'Enter service description',
+    label: 'COMMON.DESCRIPTION',
+    placeholder: 'POS_T.SERVICE.ENTER_DESCRIPTION',
     required: true,
 
   },
@@ -197,35 +198,35 @@ serviceFieldsEdit:FormField[] = [
   {
     name: 'serviceName',
     type: 'text',
-    placeholder: 'Enter service name',
+    placeholder: 'POS_T.SERVICE.ENTER_NAME',
     required: true,
   },
   {
     name: 'price',
     type: 'number',
-    placeholder: 'Enter price',
+    placeholder: 'POS_T.SERVICE.ENTER_PRICE',
     required: true,
   },
   {
     name: 'duration',
     type: 'number',
-    placeholder: 'Enter duration in minutes',
+    placeholder: 'POS_T.SERVICE.ENTER_DURATION',
     required: true,
   },
     {
     name: 'status',
     type: 'select',
-    placeholder: 'Enter status',
+    placeholder: 'POS_T.SERVICE.CHOOSE_STATUS',
     required: true,
     options: [
-      { value: 'active', label: 'Active' },
-      { value: 'Not Active', label: 'Not Active' }
+      { value: 'active', label: 'COMMON.ACTIVE' },
+      { value: 'Not Active', label: 'COMMON.INACTIVE' }
     ]
   },
     {
     name: 'description',
     type: 'textarea',
-    placeholder: 'Enter service description',
+    placeholder: 'POS_T.SERVICE.ENTER_DESCRIPTION',
     required: true,
 
   },
@@ -249,32 +250,32 @@ serviceColumns: {
 }[] = [
   {
     field: 'serviceName',
-    header: 'Service',
+    header: 'COMMON.SERVICE',
     icon: 'more',
     iconPosition: 'left',
     iconColor: '#2b2118'
   },
   {
     field: 'serviceCode',
-    header: 'Code'
+    header: 'COMMON.CODE'
   },
   {
     field: 'price',
-    header: 'Price',
+    header: 'COMMON.PRICE',
     icon: 'more',
     iconPosition: 'left',
     iconColor: '#28a745'
   },
   {
     field: 'duration',
-    header: 'Duration',
+    header: 'COMMON.DURATION',
     icon: 'more',
     iconPosition: 'left',
     iconColor: '#6c757d'
   },
   {
     field: 'status',
-    header: 'Status'
+    header: 'COMMON.STATUS'
   }
 ];
 /** System services this branch does not offer yet - ticked above its own list (owner, 2026-11-14). */
@@ -325,7 +326,7 @@ onAddService(){
     maxWidth: '95vw',
     autoFocus: false,
     data: {
-      formTitle: 'Add Service',
+      formTitle: 'SERVICE.ADD',
       fields: this.serviceFields,
     },
   });
@@ -352,7 +353,7 @@ submitServiceForm(data: any) {
   this.service.saveSaloonEntity(saloonServiceDTO).subscribe({
     next: (response) => {
       if(response){
-        this.alertService.show('success', 'Service saved successfully!');
+        this.alertService.show('success', 'POS_T.SERVICE.SAVED');
         this.findSaloonServicePage();
         console.log('Service saved successfully:', response.data);
         this.cdr.markForCheck();
@@ -386,11 +387,11 @@ serviceDataSource = new MatTableDataSource<SaloonServiceEntity>([]);
 serviceEditUID:string='';
 tableConfig = {
   displayedColumns: [
-    { field: 'serviceName', header: 'SERVICE NAME' },
-    { field: 'serviceCode', header: 'SERVICE CODE' },
-    { field: 'price', header: 'PRICE' },
-    { field: 'duration', header: 'DURATION' },
-    { field: 'status', header: 'STATUS' }
+    { field: 'serviceName', header: 'POS_T.SERVICE.NAME' },
+    { field: 'serviceCode', header: 'POS_T.SERVICE.CODE' },
+    { field: 'price', header: 'COMMON.PRICE' },
+    { field: 'duration', header: 'COMMON.DURATION' },
+    { field: 'status', header: 'COMMON.STATUS' }
   ] as TableColumn[]
 };
 
@@ -452,7 +453,7 @@ nextPage() {
         const dialogRef = this.dialog.open(DialogComponent, {
           width: '1200px',
           data: {
-            formTitle: 'Update Service',
+            formTitle: 'POS_T.SERVICE.UPDATE',
             fields: this.serviceFieldsEdit,
             formData: [row],
           },
@@ -473,7 +474,7 @@ nextPage() {
               this.service.saveSaloonEntity(saloonServiceDTO).subscribe({
                   next: (response) => {
                     if(response){
-                      this.alertService.show('success', 'Service Updated successfully!');
+                      this.alertService.show('success', 'POS_T.SERVICE.UPDATED');
                       this.findSaloonServicePage();
                       this.cdr.markForCheck();
                     }
@@ -492,7 +493,7 @@ nextPage() {
       maxWidth: '95vw',
       disableClose: true,
       data: {
-        itemName: row.serviceName || row.serviceCode || 'Service',
+        itemName: row.serviceName || row.serviceCode || this.translate.instant('COMMON.SERVICE'),
       },
     });
 
@@ -508,14 +509,14 @@ nextPage() {
       next:(res)=>{
         if(res){
           console.log('Service Deleted Successfully', res.data);
-          this.alertService.show('success', 'Service successfully Deleted');
+          this.alertService.show('success', 'POS_T.SERVICE.DELETED');
           this.findSaloonServicePage();
           this.cdr.markForCheck();
         }
       },
       error:(error)=>{
         console.error('Error Occurred', error)
-        this.alertService.show('error', 'Error When Deleting Service');
+        this.alertService.show('error', 'POS_T.SERVICE.DELETE_FAILED');
       }
     })
    }
@@ -534,7 +535,7 @@ addCommissionForm: FormField[] = [
   {
     name: 'serviceName',
     type: 'select',
-    placeholder: 'Service/Huduma',
+    placeholder: 'COMMON.SERVICE',
     required: true,
     options: []
   }
@@ -555,7 +556,7 @@ this.addCommissionForm[0].options = (res.data ?? []).map((service: any) => ({
     },
     error: (error) => {
       console.error('Error Occurred', error);
-      this.alertService.show('error', 'Error When Loading Services');
+      this.alertService.show('error', 'POS_T.SERVICE.LOAD_FAILED');
     }
   });
 }
@@ -566,7 +567,7 @@ this.addCommissionForm[0].options = (res.data ?? []).map((service: any) => ({
     const dialogRef = this.dialog.open(DialogComponent, {
       width: '1200px',
       data:{
-        formTitle: 'Select Service/Chagua Huduma',
+        formTitle: 'SETTING_PAGE.CHOOSE_SERVICE',
         fields: this.addCommissionForm,
       }
 
@@ -585,7 +586,7 @@ this.addCommissionForm[0].options = (res.data ?? []).map((service: any) => ({
             },
              error: (error) => {
       console.error('Error Occurred', error);
-      this.alertService.show('error', 'Error When Loading Services');
+      this.alertService.show('error', 'POS_T.SERVICE.LOAD_FAILED');
     }
           })
      })
@@ -596,17 +597,17 @@ servicePrice = 0;
 remainingAmount = 0;
 
 commissionRows = [
-  { name: 'Staff Commission', code: 'STF', amount: 0, percentage: 0 },
-  { name: 'Owner Commission', code: 'OWN', amount: 0, percentage: 0 },
-  { name: 'Maintenance', code: 'MTN', amount: 0, percentage: 0 },
-  { name: 'TRA Commission', code: 'TRA', amount: 0, percentage: 0 },
-  { name: 'Emergency', code: 'EMG', amount: 0, percentage: 0 },
-  { name: 'Others', code: 'OTH', amount: 0, percentage: 0 },
-  { name: 'Rent', code: 'RT', amount: 0, percentage: 0 },
-  { name: 'Loan', code: 'LN', amount: 0, percentage: 0 },
-  { name: 'Luku', code: 'LK', amount: 0, percentage: 0 },
-  { name: 'Water', code: 'WTR', amount: 0, percentage: 0 },
-  { name: 'Stock Purchase', code: 'SP', amount: 0, percentage: 0 }
+  { name: 'POS_T.COMMISSION.STAFF', code: 'STF', amount: 0, percentage: 0 },
+  { name: 'POS_T.COMMISSION.OWNER', code: 'OWN', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.MAINTENANCE', code: 'MTN', amount: 0, percentage: 0 },
+  { name: 'POS_T.COMMISSION.TRA', code: 'TRA', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.EMERGENCY', code: 'EMG', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.OTHERS', code: 'OTH', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.RENT', code: 'RT', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.LOAN', code: 'LN', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.LUKU', code: 'LK', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.WATER', code: 'WTR', amount: 0, percentage: 0 },
+  { name: 'COMMISSION_BREAKDOWN.STOCK_PURCHASE', code: 'SP', amount: 0, percentage: 0 }
 ];
 
 calculateCommission(row: any) {
@@ -668,7 +669,7 @@ saveCommission() {
     next:(res)=>{
       if(res){
         console.log('Commission saved', res.data);
-        this.alertService.show('success', 'commission saved')
+        this.alertService.show('success', 'POS_T.COMMISSION.SAVED')
          this.addCommission =false;
          this.selectedService=false;
          this.serviceDataSource.data=[]
@@ -678,7 +679,7 @@ saveCommission() {
     },
      error: (error) => {
       console.error('Error Occurred', error);
-      this.alertService.show('error', 'Error When Loading Services');
+      this.alertService.show('error', 'POS_T.SERVICE.LOAD_FAILED');
   }
 })
 }
@@ -744,7 +745,7 @@ setCommissionFor(row: any) {
       this.cdr.detectChanges();
       try { document.querySelector('.commission-table-area')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); } catch {}
     },
-    error: () => this.alertService.show('error', 'Error When Loading Services'),
+    error: () => this.alertService.show('error', 'POS_T.SERVICE.LOAD_FAILED'),
   });
 }
 
@@ -775,7 +776,7 @@ editCommission(commission: any) {
     this.saloonService.saveCommissions(commissionDTO).subscribe({
       next: (res) => {
         if (res) {
-          this.alertService.show('success', 'Commission updated successfully');
+          this.alertService.show('success', 'POS_T.COMMISSION.UPDATED');
           const index = this.commissionDataSource.findIndex(item => item.uid === commission.uid);
           if (index !== -1) {
             // Merge instead of replacing outright: the update response only
@@ -790,7 +791,7 @@ editCommission(commission: any) {
       },
       error: (error) => {
         console.error('Error updating commission:', error);
-        this.alertService.show('error', error?.error?.message || 'Error updating commission');
+        this.alertService.show('error', error?.error?.message || 'POS_T.COMMISSION.UPDATE_FAILED');
       }
     });
   });
@@ -812,7 +813,7 @@ deleteCommission(commission: any) {
 
       this.alertService.show(
         'success',
-        'Commission successfully deleted'
+        'POS_T.COMMISSION.DELETED'
       );
     },
 
@@ -821,7 +822,7 @@ deleteCommission(commission: any) {
 
       this.alertService.show(
         'error',
-        err?.error?.message || 'Error deleting commission'
+        err?.error?.message || 'POS_T.COMMISSION.DELETE_FAILED'
       );
     }
   });
@@ -942,7 +943,7 @@ private openAddUserDialog(roles: any[]): void {
 
       next: (res) => {
         if (res.data) {
-          this.alertService.show('success', 'User Added');
+          this.alertService.show('success', 'POS_T.USER.ADDED');
           this.showActivationCode(res.data, staff.phoneNumber);
           this.findUserPageByBranch();
           this.cdr.markForCheck();
@@ -950,7 +951,7 @@ private openAddUserDialog(roles: any[]): void {
       },
 
       error: (err) => {
-        this.alertService.show('error', err?.error?.message || 'Failed to add user');
+        this.alertService.show('error', err?.error?.message || 'POS_T.USER.ADD_FAILED');
       }
     });
   });
@@ -1166,14 +1167,14 @@ openRoleDialog(user: UserTableData): void {
 
         next: (res) => {
           if (res.data) {
-            this.alertService.show('success', 'Role Assigned');
+            this.alertService.show('success', 'POS_T.USER.ROLE_ASSIGNED');
             this.findUserPageByBranch();
             this.cdr.markForCheck();
           }
         },
 
         error: (err) => {
-          this.alertService.show('error', err?.error?.message || 'Failed to update role');
+          this.alertService.show('error', err?.error?.message || 'POS_T.USER.ROLE_FAILED');
         }
       });
     }

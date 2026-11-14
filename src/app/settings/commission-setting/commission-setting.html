@@ -137,7 +137,7 @@
               } @else if (row.outstanding === 0) {
                 <span
                   class="status-paid"
-                  [matTooltip]="('COMMISSION_PAGE.PAID_ON' | translate) + ' ' + (row.lastPaidAt | date: 'dd MMM yyyy')"
+                  [matTooltip]="('COMMISSION_PAGE.PAID_ON' | translate) + ' ' + (row.lastPaidAt | date: 'dd/MM/yyyy')"
                 >
                   <mat-icon>check_circle</mat-icon>
                   {{ 'COMMISSION_PAGE.STATUS_PAID' | translate }}
@@ -223,7 +223,7 @@
                             <strong>{{ payment.branchName | uppercase }}</strong>
                             <span class="branch-code">{{ payment.branchCode }}</span>
                           </td>
-                          <td [attr.data-label]="'COMMISSION_PAGE.COL_DATE' | translate">{{ payment.paidAt | date: 'dd MMM yyyy' }}</td>
+                          <td [attr.data-label]="'COMMISSION_PAGE.COL_DATE' | translate">{{ payment.paidAt | date: 'dd/MM/yyyy' }}</td>
                           <td [attr.data-label]="'COMMISSION_PAGE.COL_MONTHS' | translate" class="num">{{ payment.months }}</td>
                           <td [attr.data-label]="'COMMISSION_PAGE.COL_AMOUNT' | translate" class="num">{{ payment.amount | number }}</td>
                           <td [attr.data-label]="'COMMISSION_PAGE.COL_RATE' | translate" class="num">{{ payment.commissionPercent }}%</td>

@@ -71,24 +71,24 @@ return this.visibility.filteredTitleActions(title);
 roleFormField: FormField[] = [
   {
     name: 'name',
-    placeholder: 'Name',
+    placeholder: 'COMMON.NAME',
     type: 'text',
     required: true
   },
 
   {
     name: 'category',
-    placeholder: 'Category',
+    placeholder: 'COMMON.CATEGORY',
     type: 'select',
     required: true,
     options: [
-      { label: 'Saloon', value: 'SALOON' },
+      { label: 'PAGE_T.SALOON', value: 'SALOON' },
     ]
   },
 
   {
     name: 'description',
-    placeholder: 'Description',
+    placeholder: 'COMMON.DESCRIPTION',
     type: 'textarea',
     required: true
   },
@@ -97,10 +97,10 @@ roleFormField: FormField[] = [
 
 formTitle = '';
 columns = [
-  { field: 'name', header: 'ROLE NAME' },
-  { field: 'code', header: 'ROLE CODE' },
-  { field: 'category', header: 'CATEGORY' },
-  { field: 'status', header: 'STATUS' }
+  { field: 'name', header: 'ROLE_SETTING_PAGE.COL_ROLE_NAME' },
+  { field: 'code', header: 'COMMON.CODE' },
+  { field: 'category', header: 'COMMON.CATEGORY' },
+  { field: 'status', header: 'COMMON.STATUS' }
 ];
 
 roleData: any[] = [];

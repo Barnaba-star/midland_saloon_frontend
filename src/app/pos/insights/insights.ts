@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
@@ -15,7 +16,7 @@ type SortKey = 'profit' | 'marginPercent' | 'revenue' | 'units';
  */
 @Component({
   selector: 'app-insights',
-  imports: [MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
+  imports: [LangDatePipe, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
   templateUrl: './insights.html',
   styleUrl: './insights.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -10,7 +10,7 @@
 
 <img [src]="profilePic"
  class="logoPic"
-  alt="Logo"
+  [alt]="'UTIL_T.LOGO' | translate"
 />
 
   </div>
@@ -67,15 +67,15 @@
           </div>
           <mat-divider style="color: rgb(237, 229, 229);">----------</mat-divider>
         <div class="profileItems">
-                <div style="color: rgb(143, 137, 137)">Profile</div><mat-icon style="color: rgb(120, 108, 108);"> account_circle</mat-icon>
+                <div style="color: rgb(143, 137, 137)">{{ 'COMMON.PROFILE' | translate }}</div><mat-icon style="color: rgb(120, 108, 108);"> account_circle</mat-icon>
           </div>
           <mat-divider style="color: rgb(237, 229, 229);">----------</mat-divider>
           <div class="profileItems" >
-                <div style="color: rgb(120, 108, 108);"> Change Password</div><mat-icon style="color: rgb(143, 132, 132);">password</mat-icon>
+                <div style="color: rgb(120, 108, 108);">{{ 'COMMON.CHANGE_PASSWORD' | translate }}</div><mat-icon style="color: rgb(143, 132, 132);">password</mat-icon>
           </div>
           <mat-divider>-----------</mat-divider>
            <div class="profileItems" (click)="goToLogin()" >
-                <div style="color: rgb(120, 108, 108);">Logout</div><mat-icon style="color: rgb(120, 108, 108);">logout</mat-icon>
+                <div style="color: rgb(120, 108, 108);">{{ 'MENU.LOGOUT' | translate }}</div><mat-icon style="color: rgb(120, 108, 108);">logout</mat-icon>
           </div>
           <mat-divider>------------</mat-divider>
         </div>
@@ -92,7 +92,7 @@
 
 <div class="sidebar"   *ngIf="isOpen" >
 <div class="menu-item-logo" >
-<img [src]="logoUrl" alt="Logo" (click)="goToDashboard()"/>
+<img [src]="logoUrl" [alt]="'UTIL_T.LOGO' | translate" (click)="goToDashboard()"/>
 </div>
 
 <ng-container *ngFor="let item of menuItems; let i = index">
@@ -100,7 +100,7 @@
 
 <div class="menu-item" (click)="onItemClick(item, i)">
 <mat-icon class="menu-icon">{{ item.icon }}</mat-icon>
-<span class="label">{{ item.label }}</span>
+<span class="label">{{ item.label | translate }}</span>
 
 <mat-icon *ngIf="item.children" class="arrow"
 [class.rotate]="openIndex === i">expand_more</mat-icon>
@@ -111,7 +111,7 @@
 <div class="submenu-item"
 *ngFor="let sub of item.children"
 (click)="onSubItemClick(sub)">
-<span>{{ sub.label }}</span>
+<span>{{ sub.label | translate }}</span>
 <mat-icon>{{ sub.icon }}</mat-icon>
 </div>
 </div>

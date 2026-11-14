@@ -151,18 +151,18 @@ addUser(): void {
     this.userService.saveUser(userDTO).subscribe({
       next: (res) => {
         if (res.data) {
-          this.alert.show('success', 'User Added');
+          this.alert.show('success', 'PAGE_T.USER_ADDED');
           this.showActivationCode(res.data, staff.phoneNumber);
           this.pageIndex = 0;
           this.findUsers();
         } else {
-          this.alert.show('error', res.message || 'Failed to add user');
+          this.alert.show('error', res.message || 'PAGE_T.ADD_USER_FAILED');
         }
         this.cdr.markForCheck();
       },
       error: (err) => {
         console.error('Error saving user:', err);
-        this.alert.show('error', err?.error?.message || 'Failed to add user');
+        this.alert.show('error', err?.error?.message || 'PAGE_T.ADD_USER_FAILED');
       }
     });
   });
@@ -270,62 +270,62 @@ private showActivationCode(data: any, phone?: string): void {
     {
       name: 'firstName',
       type: 'text',
-      placeholder: 'Enter first name',
+      placeholder: 'USER_FIELDS.FIRST_NAME',
       required: true,
     },
     {
       name: 'middleName',
       type: 'text',
-      placeholder: 'Enter middle name',
+      placeholder: 'USER_FIELDS.MIDDLE_NAME',
       required: true,
     },
     {
       name: 'lastName',
       type: 'text',
-      placeholder: 'Enter last name',
+      placeholder: 'USER_FIELDS.LAST_NAME',
       required: true,
     },
 
     {
       name: 'gender',
       type: 'select',
-      placeholder: 'Gender',
+      placeholder: 'USER_FIELDS.GENDER',
       required: true,
       options: [
-        { label: 'Male', value: 'Male' },
-        { label: 'Female', value: 'Female' },
+        { label: 'USER_FIELDS.MALE', value: 'Male' },
+        { label: 'USER_FIELDS.FEMALE', value: 'Female' },
       ],
     },
 
     {
       name: 'dob',
       type: 'date',
-      placeholder: 'DOB',
+      placeholder: 'USER_FIELDS.DOB',
       required: true,
     },
      {
       name: 'email',
       type: 'text',
-      placeholder: 'Enter email address',
+      placeholder: 'USER_FIELDS.EMAIL',
       required: true,
     },
       {
       name: 'address',
       type: 'text',
-      placeholder: 'Enter  address',
+      placeholder: 'USER_FIELDS.ADDRESS',
       required: true,
     },
 
     {
       name: 'phone',
       type: 'number',
-      placeholder: 'Enter phone number',
+      placeholder: 'USER_FIELDS.PHONE',
       required: true,
     },
     {
       name: 'branch',
       type: 'select',
-      placeholder: 'Select Branch',
+      placeholder: 'PAGE_T.SELECT_BRANCH',
       rows: 4,
       required: false,
       options: [],
@@ -427,11 +427,11 @@ private showActivationCode(data: any, phone?: string): void {
   tableConfig = {
     displayedColumns: ['firstName', 'lastName', 'email', 'middleName', 'gender'],
     columnHeaderMap: {
-      firstName: 'FIRST NAME',
-      middleName: 'MIDDLE NAME',
-      lastName: 'LAST NAME',
-      email: 'EMAIL',
-      gender: 'GENDER',
+      firstName: 'COMMON.FIRST_NAME',
+      middleName: 'COMMON.MIDDLE_NAME',
+      lastName: 'COMMON.LAST_NAME',
+      email: 'COMMON.EMAIL',
+      gender: 'COMMON.GENDER',
     },
   };
 
@@ -541,7 +541,7 @@ const dialogRef = this.dialog.open(
       next: (res) => {
 
         console.log('User Deleted:', res);
-        this.alert.show('success', 'User Deleted')
+        this.alert.show('success', 'PAGE_T.USER_DELETED')
 
         // ukifuta mtu wa mwisho kwenye ukurasa, rudi ukurasa uliopita
         if (this.users.length === 1 && this.pageIndex > 0) {
@@ -697,7 +697,7 @@ openRoleDialog(user: any): void {
         next:(res)=>{
           if(res.data){
             console.log('Assigned Role', res.data)
-            this.alert.show('success', 'Role Assigned')
+            this.alert.show('success', 'PAGE_T.ROLE_ASSIGNED')
           }
         }
       })

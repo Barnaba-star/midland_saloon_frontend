@@ -35,7 +35,7 @@
           <span class="cs-badge" [class.after]="p.kind === 'AFTER'">{{ (p.kind === 'AFTER' ? 'STYLES.AFTER' : 'STYLES.BEFORE') | translate }}</span>
           <figcaption>
             <span>{{ p.staffName || '' }}</span>
-            <small>{{ p.at | date: 'd MMM' }}</small>
+            <small>{{ p.at | langDate: 'd MMM' }}</small>
           </figcaption>
           <button type="button" class="cs-remove" [class.sure]="confirmRemove() === p.uid" [disabled]="removing() === p.uid" (click)="remove(p)" [attr.aria-label]="'STYLES.REMOVE' | translate">
             @if (confirmRemove() === p.uid) {

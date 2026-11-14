@@ -81,25 +81,25 @@ return this.visibility.filteredTitleActions(title);
 // Same user fields as Settings > Users, minus the branch picker - the
 // branch is whichever row the button was clicked on.
 userFormField: FormField[] = [
-  { name: 'firstName', type: 'text', placeholder: 'Enter first name', required: true },
-  { name: 'middleName', type: 'text', placeholder: 'Enter middle name', required: true },
-  { name: 'lastName', type: 'text', placeholder: 'Enter last name', required: true },
+  { name: 'firstName', type: 'text', placeholder: 'USER_FIELDS.FIRST_NAME', required: true },
+  { name: 'middleName', type: 'text', placeholder: 'USER_FIELDS.MIDDLE_NAME', required: true },
+  { name: 'lastName', type: 'text', placeholder: 'USER_FIELDS.LAST_NAME', required: true },
   {
     name: 'gender',
     type: 'select',
-    placeholder: 'Gender',
+    placeholder: 'USER_FIELDS.GENDER',
     required: true,
     options: [
-      { label: 'Male', value: 'Male' },
-      { label: 'Female', value: 'Female' },
+      { label: 'USER_FIELDS.MALE', value: 'Male' },
+      { label: 'USER_FIELDS.FEMALE', value: 'Female' },
     ],
   },
-  { name: 'dob', type: 'date', placeholder: 'DOB', required: true },
-  { name: 'email', type: 'text', placeholder: 'Enter email address', required: true },
-  { name: 'address', type: 'text', placeholder: 'Enter  address', required: true },
-  { name: 'phone', type: 'number', placeholder: 'Enter phone number', required: true },
+  { name: 'dob', type: 'date', placeholder: 'USER_FIELDS.DOB', required: true },
+  { name: 'email', type: 'text', placeholder: 'USER_FIELDS.EMAIL', required: true },
+  { name: 'address', type: 'text', placeholder: 'USER_FIELDS.ADDRESS', required: true },
+  { name: 'phone', type: 'number', placeholder: 'USER_FIELDS.PHONE', required: true },
   // Options are filled in when the dialog opens - see addUserToBranch.
-  { name: 'role', type: 'select', placeholder: 'Select role', required: true, options: [] },
+  { name: 'role', type: 'select', placeholder: 'PAGE_T.SELECT_ROLE', required: true, options: [] },
 ];
 
 addUserToBranch(item: any): void {
@@ -153,15 +153,15 @@ private openAddUserToBranchDialog(item: any, roles: any[]): void {
         this.userService.saveUser(userDTO).subscribe({
           next: (res) => {
             if (res.data) {
-              this.alertService.show('success', 'User Added');
+              this.alertService.show('success', 'PAGE_T.USER_ADDED');
               this.showActivationCode(res.data, result.phone);
             } else {
-              this.alertService.show('error', res.message || 'Failed to add user');
+              this.alertService.show('error', res.message || 'PAGE_T.ADD_USER_FAILED');
             }
           },
           error: (err) => {
             console.error('Error saving user:', err);
-            this.alertService.show('error', err?.error?.message || 'Failed to add user');
+            this.alertService.show('error', err?.error?.message || 'PAGE_T.ADD_USER_FAILED');
           },
         });
       });
@@ -181,7 +181,7 @@ assignRoleToBranchUser(item: any): void {
       const users = res.data || [];
 
       if (users.length === 0) {
-        this.alertService.show('error', 'No users in this branch');
+        this.alertService.show('error', 'PAGE_T.NO_USERS_IN_BRANCH');
         return;
       }
 
@@ -203,7 +203,7 @@ assignRoleToBranchUser(item: any): void {
 
     error: (error) => {
       console.error('Error fetching branch users:', error);
-      this.alertService.show('error', 'Error when Fetching Users');
+      this.alertService.show('error', 'PAGE_T.LOAD_USERS_FAILED');
     },
   });
 }
@@ -266,14 +266,14 @@ private openRoleDialog(user: any): void {
         this.userService.assignOrUnAssignUserRole(assignUserRoleDTO).subscribe({
           next: (res) => {
             if (res.data) {
-              this.alertService.show('success', 'Role Assigned');
+              this.alertService.show('success', 'PAGE_T.ROLE_ASSIGNED');
             } else {
-              this.alertService.show('error', res.message || 'Failed to assign role');
+              this.alertService.show('error', res.message || 'PAGE_T.ASSIGN_ROLE_FAILED');
             }
           },
           error: (err) => {
             console.error('Error assigning role:', err);
-            this.alertService.show('error', err?.error?.message || 'Failed to assign role');
+            this.alertService.show('error', err?.error?.message || 'PAGE_T.ASSIGN_ROLE_FAILED');
           },
         });
       });
@@ -281,7 +281,7 @@ private openRoleDialog(user: any): void {
 
     error: (error) => {
       console.error('Error fetching roles:', error);
-      this.alertService.show('error', 'Error when Fetching Roles');
+      this.alertService.show('error', 'PAGE_T.LOAD_ROLES_FAILED');
     },
   });
 }
@@ -354,13 +354,13 @@ branchData = {
   description: '',
 };
 columns = [
-  { field: 'branchName', header: 'BRANCH NAME' },
-  { field: 'branchCode', header: 'BRANCH CODE' },
-  { field: 'branchType', header: 'BRANCH TYPE' },
-  { field: 'branchCategory', header: 'CATEGORY' },
-  { field: 'region', header: 'REGION' },
-  { field: 'phone', header: 'PHONE NO' },
-  { field: 'status', header: 'STATUS' }
+  { field: 'branchName', header: 'COMMON.BRANCH_NAME' },
+  { field: 'branchCode', header: 'COMMON.BRANCH_CODE' },
+  { field: 'branchType', header: 'PAGE_T.BRANCH_TYPE' },
+  { field: 'branchCategory', header: 'COMMON.CATEGORY' },
+  { field: 'region', header: 'COMMON.REGION' },
+  { field: 'phone', header: 'COMMON.PHONE' },
+  { field: 'status', header: 'COMMON.STATUS' }
 ];
 
 tableData: any[] = [];
@@ -386,13 +386,13 @@ error:(error)=>{
       'status'
     ],
     columnHeaderMap: {
-      branchName: 'BRANCH NAME',
-      branchCode: 'BRANCH CODE',
-      branchType: 'BRANCH TYPE',
-      branchCategory: 'BRANCH CATEGORY',
-      region: 'REGION',
-      phone: 'PHONE NO',
-      staus: 'STATUS'
+      branchName: 'COMMON.BRANCH_NAME',
+      branchCode: 'COMMON.BRANCH_CODE',
+      branchType: 'PAGE_T.BRANCH_TYPE',
+      branchCategory: 'COMMON.CATEGORY',
+      region: 'COMMON.REGION',
+      phone: 'COMMON.PHONE',
+      staus: 'COMMON.STATUS'
     },
   };
 branch: Branch[] = [];
@@ -483,10 +483,10 @@ purgeBranchData(item: any): void {
           const count = Object.values(res.data).reduce((a, b) => a + b, 0);
           this.alertService.show('success', this.translate.instant('PURGE_BRANCH.DONE', { count }));
         } else {
-          this.alertService.show('error', res.message || 'Failed');
+          this.alertService.show('error', res.message || 'PAGE_T.FAILED');
         }
       },
-      error: (err) => this.alertService.show('error', err?.error?.message || 'Failed'),
+      error: (err) => this.alertService.show('error', err?.error?.message || 'PAGE_T.FAILED'),
     });
   });
 }
@@ -522,7 +522,7 @@ private openDeleteDialog(item: any, translations: Record<string, string>): void 
               (branch: any) => branch.uid !== result.uid
             );
             this.cdr.detectChanges();
-            this.alertService.show('success', 'Branch Deleted');
+            this.alertService.show('success', 'PAGE_T.BRANCH_DELETED');
           }
         },
         error: (error) => {
@@ -581,12 +581,12 @@ private openEditDialog(item: any): void {
             if(index !==-1){
               this.branch[index] = res.data;
               this.cdr.detectChanges();
-              this.alertService.show('success', 'Branch Updated');
+              this.alertService.show('success', 'PAGE_T.BRANCH_UPDATED');
             }
           }
         },
         error:(error)=>{
-          this.alertService.show('error', 'Error when Updating Branch');
+          this.alertService.show('error', 'PAGE_T.UPDATE_BRANCH_FAILED');
         }
       })
 
@@ -599,7 +599,7 @@ subscriptionFormField: FormField[] = [
   {
     name: 'subscriptionAmount',
     label: '',
-    placeholder: 'e.g. 50000',
+    placeholder: 'PAGE_T.EG_AMOUNT',
     type: 'number',
     required: true,
     min: 0
@@ -661,15 +661,15 @@ private openPlanDialog(item: any, end: { closeSubscription: string; trialDays: n
                 this.cdr.detectChanges();
               }
 
-              this.alertService.show('success', 'Branch Subscription Saved');
+              this.alertService.show('success', 'PAGE_T.SUBSCRIPTION_SAVED');
 
             } else {
-              this.alertService.show('error', res.message || 'Error when Saving Branch Subscription');
+              this.alertService.show('error', res.message || 'PAGE_T.SAVE_SUBSCRIPTION_FAILED');
             }
           },
 
           error: () => {
-            this.alertService.show('error', 'Error when Saving Branch Subscription');
+            this.alertService.show('error', 'PAGE_T.SAVE_SUBSCRIPTION_FAILED');
           }
 
         });
@@ -712,7 +712,7 @@ moreActions(item: any): void {
 
       this.alertService.show(
         'error',
-        'Error when Fetching User'
+        'PAGE_T.LOAD_USER_FAILED'
       );
     }
 

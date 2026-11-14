@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, Inject, Input, TemplateRef, ChangeDetectionStrategy } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
@@ -5,7 +6,7 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialogModule } from '@angular/materia
 @Component({
   selector: 'app-reusable-dialog-component',
   standalone:true,
-  imports: [MatDialogModule, CommonModule],
+  imports: [TranslatePipe, MatDialogModule, CommonModule],
   templateUrl: './reusable-dialog-component.html',
   styleUrls: ['./reusable-dialog-component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush

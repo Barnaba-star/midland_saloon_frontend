@@ -1,3 +1,5 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
+import { StatusKeyPipe } from '../status-key.pipe';
 import { localDate } from '../../Utils/services/local-date';
 import { Insights } from '../insights/insights';
 import { PotsLedger } from '../pots-ledger/pots-ledger';
@@ -39,7 +41,7 @@ import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-sta
 @Component({
   selector: 'app-saloon-reports',
   standalone: true,
-  imports: [
+  imports: [LangDatePipe, StatusKeyPipe, 
     Insights, PotsLedger, CashUp, StockTake, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
@@ -794,18 +796,18 @@ getRemainingCommission(): number {
 
 getSelectedRangeLabel(): string {
   if (!this.selectedRange) {
-    return 'Today';
+    return 'COMMON.TODAY';
   }
 
   const labels: { [key: string]: string } = {
-    TODAY: 'Today',
-    YESTERDAY: 'Yesterday',
-    THIS_WEEK: 'This Week',
-    LAST_WEEK: 'Last Week',
-    THIS_MONTH: 'This Month',
-    LAST_MONTH: 'Last Month',
-    THIS_YEAR: 'This Year',
-    LAST_YEAR: 'Last Year'
+    TODAY: 'COMMON.TODAY',
+    YESTERDAY: 'COMMON.YESTERDAY',
+    THIS_WEEK: 'COMMON.THIS_WEEK',
+    LAST_WEEK: 'COMMON.LAST_WEEK',
+    THIS_MONTH: 'COMMON.THIS_MONTH',
+    LAST_MONTH: 'COMMON.LAST_MONTH',
+    THIS_YEAR: 'COMMON.THIS_YEAR',
+    LAST_YEAR: 'COMMON.LAST_YEAR'
   };
 
   // If it is a predefined range
@@ -895,7 +897,7 @@ submitPayment(): void {
 
         this.alert.show(
           'success',
-          'Payment Successfully'
+          'POS_T.REPORTS.PAYMENT_DONE'
         );
 
         const index = this.commissionReports.findIndex(
@@ -939,7 +941,7 @@ submitPayment(): void {
 
       this.alert.show(
         'error',
-        'Error Occurred when saving'
+        'POS_T.REPORTS.SAVE_FAILED'
       );
     }
   });
@@ -983,7 +985,7 @@ findServiceEntityUIDList(): void {
       this.serviceEntityUIDS = [];
       this.alert.show(
         'error',
-        'Error Occurred when fetching Service Entity UIDs'
+        'POS_T.REPORTS.STORE_LOAD_FAILED'
       );
 
       this.cdr.markForCheck();
@@ -1141,18 +1143,18 @@ selectDateFilter(filter: string): void {
 
 getSelectedStoreDateLabel(): string {
   const labels: { [key: string]: string } = {
-    DAY: 'Today',
-    YESTERDAY: 'Yesterday',
-    WEEK: 'This Week',
-    LAST_WEEK: 'Last Week',
-    MONTH: 'This Month',
-    LAST_MONTH: 'Last Month',
-    THIS_YEAR: 'This Year',
-    LAST_YEAR: 'Last Year',
+    DAY: 'COMMON.TODAY',
+    YESTERDAY: 'COMMON.YESTERDAY',
+    WEEK: 'COMMON.THIS_WEEK',
+    LAST_WEEK: 'COMMON.LAST_WEEK',
+    MONTH: 'COMMON.THIS_MONTH',
+    LAST_MONTH: 'COMMON.LAST_MONTH',
+    THIS_YEAR: 'COMMON.THIS_YEAR',
+    LAST_YEAR: 'COMMON.LAST_YEAR',
   };
 
   if (!this.selectedDateFilter) {
-    return 'Today';
+    return 'COMMON.TODAY';
   }
 
   return labels[this.selectedDateFilter] || this.selectedDateFilter;
@@ -1328,7 +1330,7 @@ spendIncomeExpense(item: any): void {
         next:(res)=>{
           if(res.data){
             console.log('Updated Data', res.data);
-            this.alert.show('success', 'Success Spend Added')
+            this.alert.show('success', 'POS_T.REPORTS.SPEND_ADDED')
             const index = this.incomeExpenses.findIndex(idx=>idx.uid === res.data.uid);
             if(index !==-1){
               this.incomeExpenses[index] = res.data
@@ -1338,7 +1340,7 @@ spendIncomeExpense(item: any): void {
         },
         error:(error)=>{
           console.log('Error', error)
-          this.alert.show('error', 'Error in saving spend')
+          this.alert.show('error', 'POS_T.REPORTS.SPEND_FAILED')
         }
       })
     }
@@ -1450,25 +1452,25 @@ getStockSelectedRangeLabel(): string {
   switch (this.stockSelectedFilter) {
 
     case 'THIS_WEEK':
-      return 'This Week';
+      return 'COMMON.THIS_WEEK';
 
     case 'LAST_WEEK':
-      return 'Last Week';
+      return 'COMMON.LAST_WEEK';
 
     case 'THIS_MONTH':
-      return 'This Month';
+      return 'COMMON.THIS_MONTH';
 
     case 'LAST_MONTH':
-      return 'Last Month';
+      return 'COMMON.LAST_MONTH';
 
     case 'THIS_YEAR':
-      return 'This Year';
+      return 'COMMON.THIS_YEAR';
 
     case 'LAST_YEAR':
-      return 'Last Year';
+      return 'COMMON.LAST_YEAR';
 
     default:
-      return 'This Week';
+      return 'COMMON.THIS_WEEK';
   }
 
 }
@@ -1503,7 +1505,7 @@ viewStockPurchaseDetails(stock: any): void {
 
           this.alert.show(
             'error',
-            'No stock purchase details found'
+            'POS_T.REPORTS.NO_STOCK_DETAILS'
           );
 
           return;
@@ -1571,7 +1573,7 @@ viewStockPurchaseDetails(stock: any): void {
 
         this.alert.show(
           'error',
-          'Error fetching stock purchase details'
+          'POS_T.REPORTS.STOCK_DETAILS_FAILED'
         );
 
       }
@@ -1656,7 +1658,7 @@ submitStockPayment(): void {
       const index = this.stockAndPurchaseReports.findIndex(index=>index.uid===res.data.uid);
       this.stockAndPurchaseReports[index]=res.data;
       this.cdr.detectChanges();
-      this.alert.show('success', 'Payed Success')
+      this.alert.show('success', 'POS_T.REPORTS.PAID_DONE')
       console.log('PAY STOCK PURCHASE:', res.data);
       }
     },

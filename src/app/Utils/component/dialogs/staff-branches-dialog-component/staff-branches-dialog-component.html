@@ -87,7 +87,7 @@
               @if (branch.closeSubscription) {
                 <span class="expiry">
                   {{ 'STAFF_BRANCHES_DIALOG.UNTIL' | translate }}
-                  {{ branch.closeSubscription | date: 'dd MMM yyyy' }}
+                  {{ branch.closeSubscription | langDate: 'dd MMM yyyy' }}
                 </span>
               }
             </div>

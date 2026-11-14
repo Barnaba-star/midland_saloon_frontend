@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { ChangeDetectorRef, Component, Input, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatIcon } from '@angular/material/icon';
@@ -14,7 +15,7 @@ import { environment } from '../../enviroments/environment';
   selector: 'app-main-sidenav',
   templateUrl: './main-sidenav-component.html',
   styleUrls: ['./main-sidenav-component.css'],
-  imports: [MatIcon, CommonModule, MatDivider],
+  imports: [TranslatePipe, MatIcon, CommonModule, MatDivider],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 

@@ -1,10 +1,11 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogContent, MatDialogModule } from '@angular/material/dialog';
 import { SafeUrlPipe } from "../../pipes/safe-url-pipe";
 
 @Component({
   selector: 'app-attachment-viewer-dialog-component',
-  imports: [MatDialogContent, MatDialogModule, SafeUrlPipe],
+  imports: [TranslatePipe, MatDialogContent, MatDialogModule, SafeUrlPipe],
   templateUrl: './attachment-viewer-dialog-component.html',
   styleUrl: './attachment-viewer-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

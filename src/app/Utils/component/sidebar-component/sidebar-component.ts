@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 import { MatIconModule } from "@angular/material/icon";
@@ -15,7 +16,7 @@ interface MenuItem {
   selector: 'app-sidebar',
   templateUrl: './sidebar-component.html',
   styleUrls: ['./sidebar-component.css'],
-  imports: [MatIconModule, CommonModule],
+  imports: [TranslatePipe, MatIconModule, CommonModule],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class SidebarComponent {

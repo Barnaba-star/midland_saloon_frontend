@@ -122,7 +122,7 @@
 
                   <!-- SERVICE NAME -->
                   <td [attr.data-label]="'STORE_PAGE.COL_SERVICE' | translate">
-                    {{ store.nameOfService }}
+                    {{ store.serviceName || store.nameOfService }}
                   </td>
 
                   <!-- OPENED DATE -->
@@ -154,7 +154,7 @@
                       [class.status-inactive]="store.status === 'INACTIVE'"
                     >
                       <span class="status-dot"></span>
-                      {{ store.status }}
+                      {{ store.status | statusKey | translate }}
                     </span>
                   </td>
                   <td class="actions-column sx-card-actions">
@@ -181,6 +181,15 @@
   <mat-icon>open_in_new</mat-icon>
   <span>{{ 'STORE_PAGE.TOOLTIP_OPEN_STORE' | translate }}</span>
 </button>
+                      <!-- Edit and delete a store item (owner 2026-11-14). -->
+                      <button type="button" class="action-btn more-btn" [title]="'COMMON.EDIT' | translate" (click)="editStore(store)">
+                        <mat-icon>edit</mat-icon>
+                        <span>{{ 'COMMON.EDIT' | translate }}</span>
+                      </button>
+                      <button type="button" class="action-btn delete-store-btn" [title]="'COMMON.DELETE' | translate" (click)="askDeleteStore(store)">
+                        <mat-icon>delete_outline</mat-icon>
+                        <span>{{ 'COMMON.DELETE' | translate }}</span>
+                      </button>
 
                     </div>
                   </td>
@@ -316,7 +325,7 @@
                       [class.status-inactive]="store.status === 'INACTIVE'"
                     >
                       <span class="status-dot"></span>
-                      {{ store.status }}
+                      {{ store.status | statusKey | translate }}
                     </span>
                   </td>
                  <td class="actions-column sx-card-actions">

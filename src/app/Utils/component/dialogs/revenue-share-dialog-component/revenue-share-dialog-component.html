@@ -47,7 +47,7 @@
         <span class="revenue-label">{{ 'REVENUE_SHARE_DIALOG.MONTH_REVENUE' | translate }}</span>
         <span class="revenue-value">{{ share.revenue | number }} <span class="revenue-unit">TZS</span></span>
         <span class="revenue-meta">
-          {{ monthDate | date: 'MMMM yyyy' }} &middot;
+          {{ monthDate | langDate: 'MMMM yyyy' }} &middot;
           {{ share.payments | number }} {{ 'REVENUE_SHARE_DIALOG.PAYMENTS' | translate }}
         </span>
       </div>

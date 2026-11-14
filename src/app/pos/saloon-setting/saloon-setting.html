@@ -307,7 +307,7 @@
               <input type="checkbox" [checked]="catalogTick.has(c.uid)" (change)="toggleCatalog(c.uid)" />
               <span>
                 <strong>{{ c.name }}</strong>
-                <small>{{ c.category || '' }}@if (c.duration) { @if (c.category) { · } {{ c.duration }} min }</small>
+                <small>{{ c.category || '' }}@if (c.duration) { @if (c.category) { · } {{ c.duration }} {{ 'POS_T.MIN' | translate }} }</small>
               </span>
             </label>
           }
@@ -439,7 +439,7 @@
                   <mat-icon>schedule</mat-icon>
 
                   <span>
-                    {{ service.duration || 0 }} min
+                    {{ service.duration || 0 }} {{ 'POS_T.MIN' | translate }}
                   </span>
 
                 </div>
@@ -686,7 +686,7 @@
                     [class.active-status]="saloonServiceData.status === 'active'"
                     [class.inactive-status]="saloonServiceData.status !== 'active'"
                   >
-                    {{ saloonServiceData.status | uppercase }}
+                    {{ saloonServiceData.status | statusKey | translate | uppercase }}
                   </strong>
                 </div>
               </div>
@@ -705,7 +705,7 @@
                 @for (row of commissionRows; track row.code) {
                   <div class="commission-row">
                     <div>
-                      {{ row.name }}
+                      {{ row.name | translate }}
                     </div>
 
                     <div>

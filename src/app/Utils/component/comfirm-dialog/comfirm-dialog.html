@@ -22,7 +22,7 @@
         <mat-label>{{ 'COMMON.SELECT_OPTION' | translate }}</mat-label>
         <mat-select [(ngModel)]="selectedOption">
           @for (option of data.dropdownOptions; track option.value) {
-            <mat-option [value]="option.value">{{ option.label }}</mat-option>
+            <mat-option [value]="option.value">{{ option.label | translate }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

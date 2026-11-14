@@ -7,12 +7,12 @@
 
   <!-- Title -->
   <h2 class="dialog-title">
-    {{ data.title || (statusKey | translate) }}
+    {{ (data.title || statusKey) | translate }}
   </h2>
 
   <!-- Message -->
   <div class="dialog-message">
-    {{ data.message }}
+    {{ data.message | translate }}
   </div>
 
   <!-- Close -->

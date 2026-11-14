@@ -1,5 +1,5 @@
 <div class="wrapper" >
-  <h2 *ngIf="title">{{ title }}</h2>
+  <h2 *ngIf="title">{{ title | translate }}</h2>
 
   <ng-container *ngIf="hasData; else noDataBlock">
     <ng-content></ng-content>
@@ -7,7 +7,7 @@
 
   <ng-template #noDataBlock>
     <div class="no-data">
-      <p>No data available.</p>
+      <p>{{ 'UTIL_T.NO_DATA' | translate }}</p>
     </div>
   </ng-template>
 </div>

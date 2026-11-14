@@ -18,6 +18,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { DateAdapter } from '@angular/material/core';
 
 import {
   TranslatePipe,
@@ -176,6 +177,7 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     private alertService: AlertService,
     private cdr: ChangeDetectorRef,
     private uploadedImage: UploadedImageService,
+    private dateAdapter: DateAdapter<any>,
   ) {
 
     this.notifications$ = this.notificationService.notifications$;
@@ -237,6 +239,9 @@ export class MainSidenav2 implements OnInit, OnDestroy {
     this.selectedLanguage = lang;
 
     this.translate.use(lang);
+
+    // date pickers: month and day names in the chosen language
+    this.dateAdapter.setLocale(lang === 'sw' ? 'sw' : 'en-US');
 
 
     // Theme
@@ -326,6 +331,8 @@ export class MainSidenav2 implements OnInit, OnDestroy {
         : 'en';
 
     this.translate.use(this.selectedLanguage);
+
+    this.dateAdapter.setLocale(this.selectedLanguage === 'sw' ? 'sw' : 'en-US');
 
     localStorage.setItem(
       'language',

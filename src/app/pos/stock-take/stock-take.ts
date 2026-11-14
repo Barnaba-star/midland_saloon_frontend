@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { FormsModule } from '@angular/forms';
@@ -31,7 +32,7 @@ interface CountRow {
  */
 @Component({
   selector: 'app-stock-take',
-  imports: [FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
+  imports: [LangDatePipe, FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
   templateUrl: './stock-take.html',
   styleUrl: './stock-take.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

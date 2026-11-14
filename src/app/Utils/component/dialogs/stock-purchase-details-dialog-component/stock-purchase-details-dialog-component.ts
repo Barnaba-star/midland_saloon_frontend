@@ -78,7 +78,7 @@ export class StockPurchaseDetailsDialogComponent {
     return (
       item?.descriptions ??
       item?.description ??
-      'No description'
+      'UTIL_T.NO_DESCRIPTION'
     );
 
   }

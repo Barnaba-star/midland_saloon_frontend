@@ -40,6 +40,13 @@ export class SaleDetailsDialogComponent {
   selectedPaymentMethod = '';
 
 
+  /** Payment status word on screen; an unknown status shows as sent. */
+  statusLabel(status: string | null | undefined): string {
+    const s = String(status || 'PENDING').toUpperCase();
+    return ['PAID', 'PENDING', 'UNPAID', 'PARTIAL'].includes(s) ? 'UTIL_T.STATUS.' + s : s;
+  }
+
+
   close() {
     this.dialogRef.close();
   }

@@ -62,7 +62,7 @@
                 <span [class.on]="i <= c.stars">&#9733;</span>
               }
             </span>
-            <span class="pp-muted">{{ c.name || ('STYLIST.GUEST' | translate) }} · {{ c.at | date: 'd MMM' }}</span>
+            <span class="pp-muted">{{ c.name || ('STYLIST.GUEST' | translate) }} · {{ c.at | date: 'd/M/y' }}</span>
           </div>
           @if (c.comment) {
             <p class="sp-comment-text">{{ c.comment }}</p>

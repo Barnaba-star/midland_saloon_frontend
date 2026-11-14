@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, EventEmitter, Input, OnInit, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,7 +24,7 @@ export interface TitleAction {
 @Component({
   selector: 'app-title',
   standalone:true,
-  imports: [MatToolbarModule, CommonModule, MatIcon,  MatSelectModule],
+  imports: [TranslatePipe, MatToolbarModule, CommonModule, MatIcon,  MatSelectModule],
   templateUrl: './title.component.html',
   styleUrl: './title.component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

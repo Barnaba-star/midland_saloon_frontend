@@ -28,7 +28,7 @@
           <span class="main">
             <strong>{{ r.name }}</strong>
             @if (r.description) { <span class="detail">{{ r.description }}</span> }
-            <small>{{ r.category || '' }}@if (r.duration) { @if (r.category) { · } {{ r.duration }} min }</small>
+            <small>{{ r.category || '' }}@if (r.duration) { @if (r.category) { · } {{ r.duration }} {{ 'POS_T.MIN' | translate }} }</small>
           </span>
           @if (r.added) {
             <span class="badge">{{ 'SERVICE_CATALOG.IN_BRANCH' | translate }} · {{ r.price | number }}</span>
@@ -48,7 +48,7 @@
             <input type="number" min="1" placeholder="TSh" [ngModel]="r.sell" (ngModelChange)="setField(r, 'sell', $event)" />
           </label>
           <label>{{ 'SERVICE_CATALOG.DURATION' | translate }}
-            <input type="number" min="0" placeholder="min" [ngModel]="r.minutes" (ngModelChange)="setField(r, 'minutes', $event)" />
+            <input type="number" min="0" [placeholder]="'POS_T.MIN' | translate" [ngModel]="r.minutes" (ngModelChange)="setField(r, 'minutes', $event)" />
           </label>
         </div>
       }

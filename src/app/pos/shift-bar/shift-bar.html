@@ -8,7 +8,7 @@
           <div class="shift-text">
             <span class="shift-chip"><i></i>{{ 'SHIFT.STATUS_OPEN' | translate }}</span>
             @for (o of others; track $index) {
-              <strong>{{ 'SHIFT.OPEN_BY' | translate: { name: o.cashierName, time: (o.openedAt | date: 'dd MMM, HH:mm') } }}</strong>
+              <strong>{{ 'SHIFT.OPEN_BY' | translate: { name: o.cashierName, time: (o.openedAt | langDate: 'dd MMM, HH:mm') } }}</strong>
             }
             <span>{{ 'SHIFT.OWN_TO_SELL' | translate }}</span>
           </div>
@@ -28,7 +28,7 @@
         <span class="shift-icon"><mat-icon>schedule</mat-icon></span>
         <div class="shift-text">
           <span class="shift-chip"><i></i>{{ 'SHIFT.STATUS_OPEN' | translate }}</span>
-          <strong>{{ 'SHIFT.OPEN_SINCE' | translate: { time: (openedAt | date: 'dd MMM, HH:mm') } }}</strong>
+          <strong>{{ 'SHIFT.OPEN_SINCE' | translate: { time: (openedAt | langDate: 'dd MMM, HH:mm') } }}</strong>
           @if (confirmingClose) {
             <span>{{ 'SHIFT.CLOSE_CONFIRM' | translate }}</span>
           } @else {

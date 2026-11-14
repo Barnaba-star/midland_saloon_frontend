@@ -155,6 +155,8 @@ export interface Store {
     quantity?:number;
     description?:string;
     nameOfService?:string;
+    serviceName?: string;
+    saloonServiceEntityUID?: string;
     codeOfService?:string;
     openedDate?:string;
     closedDate?:string;

@@ -1,12 +1,12 @@
 <app-title2
-  [titleHeader]="'PAYROLL_PAGE.TITLE'"
+  [titleHeader]="'PAGE_T.PAYROLL'"
   (customButtonClick)="onAction($event)"
   [actions]="getTitled(titleActions)"
   [activeAction]="tab"
 ></app-title2>
 
 @switch (tab) {
-  @case ('PAYROLL_PAGE.MANAGE_TAB') {
+  @case ('PAGE_T.PAYROLL') {
 
     <div class="payroll-container">
 

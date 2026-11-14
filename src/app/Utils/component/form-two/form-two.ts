@@ -1,3 +1,4 @@
+import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { localDate } from '../../services/local-date';
 import {
   Component,
@@ -8,6 +9,7 @@ import {
   OnDestroy,
   ChangeDetectorRef,
   ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 import {
   ReactiveFormsModule,
@@ -34,7 +36,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 @Component({
   selector: 'app-form-two',
-  imports: [
+  imports: [TranslatePipe, 
         ReactiveFormsModule,
         FormsModule,
         CommonModule,
@@ -53,6 +55,8 @@ import { MatIconModule } from '@angular/material/icon';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FormTWO implements OnInit, OnDestroy {
+  private tr = inject(TranslateService);
+
   // The onChange listeners below outlive nothing else: these form components are
   // rebuilt every time a dialog opens, so their valueChanges subscriptions have
   // to be closed with the component.
@@ -289,32 +293,32 @@ getErrorMessage(field: FormField): string {
   }
 
   if (control.hasError('required')) {
-    return field.requiredMessage || `Enter ${field.label}`;
+    return field.requiredMessage || this.tr.instant('UTIL_T.ENTER_FIELD', { field: field.label ? this.tr.instant(field.label) : '' });
   }
 
   if (control.hasError('email')) {
-    return 'Enter a valid email address';
+    return this.tr.instant('UTIL_T.INVALID_EMAIL');
   }
 
   if (control.hasError('minlength')) {
     return (
       field.minLengthMessage ||
-      `Minimum ${field.minLength} characters required`
+      this.tr.instant('UTIL_T.MIN_CHARS', { n: field.minLength })
     );
   }
 
   if (control.hasError('maxlength')) {
     return (
       field.maxLengthMessage ||
-      `Maximum ${field.maxLength} characters allowed`
+      this.tr.instant('UTIL_T.MAX_CHARS', { n: field.maxLength })
     );
   }
 
   if (control.hasError('pattern')) {
-    return field.patternMessage || 'Invalid value';
+    return field.patternMessage || this.tr.instant('UTIL_T.INVALID_VALUE');
   }
 
-  return 'Invalid value';
+  return this.tr.instant('UTIL_T.INVALID_VALUE');
 }
 
 hasError(field: FormField): boolean {

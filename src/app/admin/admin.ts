@@ -86,7 +86,7 @@ export class Admin implements OnInit {
       roles: this.manageRoles
     },
     {
-      label: 'SETTINGS_MENU.PAYROLL',
+      label: 'PAGE_T.PAYROLL',
       icon: 'pay',
       route: '/admin/payroll',
       roles: this.manageRoles

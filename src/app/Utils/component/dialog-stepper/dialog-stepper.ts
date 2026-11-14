@@ -1,3 +1,4 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Inject, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
@@ -17,7 +18,7 @@ import { MatNativeDateModule } from '@angular/material/core';
 @Component({
   selector: 'app-dialog-stepper',
   standalone: true,
-  imports: [
+  imports: [TranslatePipe, 
     CommonModule,
     ReactiveFormsModule,
     MatDialogModule,

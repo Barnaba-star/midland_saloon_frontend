@@ -7,7 +7,7 @@
         <div>
           <h3>{{ 'CASH_UP.MY_SHIFT' | translate }}</h3>
           @if (shiftState === 'CLOSED' && from) {
-            <p>{{ 'CASH_UP.PERIOD' | translate: { from: (from | date: 'dd MMM, HH:mm'), to: (to | date: 'dd MMM, HH:mm'), bills: billCount } }}</p>
+            <p>{{ 'CASH_UP.PERIOD' | translate: { from: (from | langDate: 'dd MMM, HH:mm'), to: (to | langDate: 'dd MMM, HH:mm'), bills: billCount } }}</p>
           }
         </div>
       </div>
@@ -166,8 +166,8 @@
             @for (s of shifts; track s.uid) {
               <tr>
                 <td class="sx-card-title"><strong>{{ s.cashierName || s.cashierEmail }}</strong></td>
-                <td [attr.data-label]="'SHIFT.COL_OPENED' | translate">{{ s.openedAt | date: 'dd MMM HH:mm' }}</td>
-                <td [attr.data-label]="'SHIFT.COL_CLOSED' | translate">@if (s.closedAt) { {{ s.closedAt | date: 'dd MMM HH:mm' }} } @else { <span class="muted">-</span> }</td>
+                <td [attr.data-label]="'SHIFT.COL_OPENED' | translate">{{ s.openedAt | langDate: 'dd MMM HH:mm' }}</td>
+                <td [attr.data-label]="'SHIFT.COL_CLOSED' | translate">@if (s.closedAt) { {{ s.closedAt | langDate: 'dd MMM HH:mm' }} } @else { <span class="muted">-</span> }</td>
                 <td [attr.data-label]="'SHIFT.COL_DURATION' | translate">{{ duration(s.minutes) }}</td>
                 <td [attr.data-label]="'SHIFT.COL_STATUS' | translate"><span class="shift-status" [attr.data-status]="s.status">{{ 'SHIFT.STATUS_' + s.status | translate }}</span></td>
                 <td [attr.data-label]="'SHIFT.COL_MONEY' | translate" class="num">
@@ -237,7 +237,7 @@
             @for (c of history; track c.uid) {
               <tr class="row" (click)="toggle(c)">
                 <td class="sx-card-title"><strong>{{ c.cashierName || c.cashierEmail }}</strong></td>
-                <td [attr.data-label]="'CASH_UP.COL_SHIFT' | translate">{{ c.periodFrom | date: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
+                <td [attr.data-label]="'CASH_UP.COL_SHIFT' | translate">{{ c.periodFrom | langDate: 'dd MMM HH:mm' }} → {{ c.periodTo | date: 'HH:mm' }}</td>
                 <td [attr.data-label]="'CASH_UP.COL_BILLS' | translate" class="num">{{ c.billCount }}</td>
                 <td [attr.data-label]="'CASH_UP.COL_EXPECTED' | translate" class="num">{{ c.expectedTotal | number }}</td>
                 <td [attr.data-label]="'CASH_UP.COL_COUNTED' | translate" class="num">{{ c.countedTotal | number }}</td>

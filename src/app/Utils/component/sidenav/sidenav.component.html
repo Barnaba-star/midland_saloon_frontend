@@ -2,7 +2,7 @@
   <mat-sidenav mode="side" opened class="sidenav">
 
     <div class="sidenav-header" (click)="goDashboard()">
-      <img src="/assets/images/log.png" alt="Logo" class="logo-image"/>
+      <img src="/assets/images/log.png" [alt]="'UTIL_T.LOGO' | translate" class="logo-image"/>
     </div>
 
     <mat-nav-list>
@@ -20,7 +20,7 @@
           <div class="divider"></div>
 
           <div class="menu-label-wrapper">
-            <span class="menu-label">{{ item.label }}</span>
+            <span class="menu-label">{{ item.label | translate }}</span>
           </div>
         </a>
 

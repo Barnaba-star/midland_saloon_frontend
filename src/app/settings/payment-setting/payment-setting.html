@@ -67,9 +67,9 @@
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_BRANCH' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_AMOUNT' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_MONTHS' | translate }}</th>
-              <th>{{ 'PAYMENT_SETTING_PAGE.COL_COMMISSION' | translate }}</th>
-              <th>{{ 'PAYMENT_SETTING_PAGE.COL_STAFF' | translate }}</th>
-              <th>{{ 'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate }}</th>
+              <th>{{ 'PAGE_T.COMMISSION' | translate }}</th>
+              <th>{{ 'PAGE_T.STAFF' | translate }}</th>
+              <th>{{ 'PAGE_T.REFERENCE' | translate }}</th>
             </tr>
           </thead>
 
@@ -93,14 +93,14 @@
 
                 <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_MONTHS' | translate">{{ payment.months }}</td>
 
-                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_COMMISSION' | translate" class="commission-cell">
+                <td [attr.data-label]="'PAGE_T.COMMISSION' | translate" class="commission-cell">
                   {{ payment.commissionAmount | number }}
                   <span class="commission-percent">{{ payment.commissionPercent }}%</span>
                 </td>
 
-                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_STAFF' | translate">{{ payment.staffName || '-' }}</td>
+                <td [attr.data-label]="'PAGE_T.STAFF' | translate">{{ payment.staffName || '-' }}</td>
 
-                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate" class="reference-cell" [title]="payment.reference">
+                <td [attr.data-label]="'PAGE_T.REFERENCE' | translate" class="reference-cell" [title]="payment.reference">
                   {{ payment.reference || '-' }}
                 </td>
 
@@ -175,7 +175,7 @@
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_BRANCH' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_STATUS' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_REASON' | translate }}</th>
-              <th>{{ 'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate }}</th>
+              <th>{{ 'PAGE_T.REFERENCE' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_DATE' | translate }}</th>
               <th>{{ 'PAYMENT_SETTING_PAGE.COL_ACTION' | translate }}</th>
             </tr>
@@ -206,7 +206,7 @@
                   {{ branch.lastPaymentFailure || '-' }}
                 </td>
 
-                <td [attr.data-label]="'PAYMENT_SETTING_PAGE.COL_REFERENCE' | translate" class="reference-cell" [title]="branch.pendingPaymentRef">
+                <td [attr.data-label]="'PAGE_T.REFERENCE' | translate" class="reference-cell" [title]="branch.pendingPaymentRef">
                   {{ branch.pendingPaymentRef || '-' }}
                 </td>
 

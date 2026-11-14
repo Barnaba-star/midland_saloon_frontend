@@ -58,7 +58,7 @@ export class SelectStaffDialogComponent implements OnInit {
 
       error: (err) => {
         this.loading = false;
-        this.errorMessage = err?.error?.message || 'Failed to load staff';
+        this.errorMessage = err?.error?.message || 'UTIL_T.FAILED_LOAD_STAFF';
         this.cdr.detectChanges();
       },
     });

@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { PotNamePipe } from '../../Utils/pipes/pot-name.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
@@ -33,7 +34,7 @@ interface CountLine {
  */
 @Component({
   selector: 'app-cash-up',
-  imports: [PotNamePipe, ShiftBar, FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
+  imports: [LangDatePipe, PotNamePipe, ShiftBar, FormsModule, MatIconModule, DecimalPipe, DatePipe, TranslatePipe],
   templateUrl: './cash-up.html',
   styleUrl: './cash-up.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

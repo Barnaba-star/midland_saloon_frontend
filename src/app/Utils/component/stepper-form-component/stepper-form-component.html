@@ -2,7 +2,7 @@
   <ng-container *ngFor="let step of steps; let i = index">
     <mat-step [stepControl]="formGroups[i]">
       <form [formGroup]="formGroups[i]">
-        <ng-template matStepLabel>Step {{ i + 1 }}</ng-template>
+        <ng-template matStepLabel>{{ 'UTIL_T.STEP_N' | translate: { n: i + 1 } }}</ng-template>
         <app-form
           [fields]="step"
           [initialData]="initialData"
@@ -10,10 +10,10 @@
         ></app-form>
 
         <div style="margin-top: 16px;">
-          <button mat-button matStepperPrevious *ngIf="i > 0">Back</button>
-          <button mat-button matStepperNext *ngIf="i < steps.length - 1">Next</button>
+          <button mat-button matStepperPrevious *ngIf="i > 0">{{ 'COMMON.BACK' | translate }}</button>
+          <button mat-button matStepperNext *ngIf="i < steps.length - 1">{{ 'COMMON.NEXT' | translate }}</button>
           <button mat-button color="primary" (click)="submit()" *ngIf="i === steps.length - 1">
-            Submit
+            {{ 'COMMON.SUBMIT' | translate }}
           </button>
         </div>
       </form>

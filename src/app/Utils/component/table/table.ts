@@ -1,3 +1,5 @@
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { TranslatePipe } from '@ngx-translate/core';
 import { Component, Input, Output, EventEmitter, OnInit, AfterViewInit, ViewChild, TemplateRef, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatTableModule } from '@angular/material/table';
@@ -28,7 +30,7 @@ export interface TableColumn {
 
 @Component({
     selector: 'app-table',
-    imports: [CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatInputModule, MatCheckboxModule],
+    imports: [TranslatePipe, MatTooltipModule, CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatIconModule, MatInputModule, MatCheckboxModule],
     templateUrl: './table.html',
     styleUrls: ['./table.css'],
     changeDetection: ChangeDetectionStrategy.OnPush

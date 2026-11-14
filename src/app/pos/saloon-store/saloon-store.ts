@@ -1,3 +1,5 @@
+import { ComfirmDialogComponent } from '../../Utils/component/comfirm-dialog/comfirm-dialog';
+import { StatusKeyPipe } from '../status-key.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Authentication } from '../../Utils/services/authentication';
 import { POS_FULL_ACCESS_ROLES } from '../pos-role.guard';
@@ -20,7 +22,7 @@ import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-sta
 
 @Component({
   selector: 'app-saloon-bookings',
-  imports: [SearchBoxComponent, 
+  imports: [StatusKeyPipe, SearchBoxComponent, 
     EmptyStateComponent,Title2, MatIcon, DecimalPipe, UpperCasePipe, TranslatePipe],
   templateUrl: './saloon-store.html',
   styleUrl: './saloon-store.css',
@@ -101,16 +103,16 @@ export class SaloonStore implements OnInit{
     {
       name: 'nameOfStore',
       type: 'text',
-      label: 'Store Item Name',
-      placeholder: 'Enter Store Item Name',
+      label: 'STORE_PAGE.COL_ITEM',
+      placeholder: 'POS_T.STORE.ENTER_ITEM_NAME',
       required: true,
     },
 
     {
       name: 'quantity',
       type: 'number',
-      label: 'Enter Quantity',
-      placeholder: 'Enter Store Item Quantity',
+      label: 'STORE_PAGE.COL_QTY',
+      placeholder: 'POS_T.STORE.ENTER_QUANTITY',
       required: true,
     },
 
@@ -119,31 +121,31 @@ export class SaloonStore implements OnInit{
     {
       name: 'buyingPrice',
       type: 'number',
-      label: 'Bei ya kununulia (kipande kimoja)',
-      placeholder: 'mfano 5,000',
+      label: 'POS_T.STORE.UNIT_PRICE',
+      placeholder: 'POS_T.STORE.UNIT_PRICE_EG',
       required: false,
     },
     {
       name: 'totalPrice',
       type: 'number',
-      label: 'Bei ya jumla (mzigo wote)',
-      placeholder: 'mfano 50,000 kwa vipande 10',
+      label: 'POS_T.STORE.LOT_PRICE',
+      placeholder: 'POS_T.STORE.LOT_PRICE_EG',
       required: false,
     },
 
     {
       name: 'saloonService',
       type: 'select',
-      label: 'Attached Service',
-      placeholder: 'Attach Saloon Service',
+      label: 'POS_T.STORE.ATTACHED_SERVICE',
+      placeholder: 'POS_T.STORE.ATTACH_SERVICE',
       required: true,
       options: [],
     },
     {
       name: 'description',
       type: 'textarea',
-      label: 'Description',
-      placeholder: 'Enter service description',
+      label: 'COMMON.DESCRIPTION',
+      placeholder: 'POS_T.STORE.ENTER_DESCRIPTION',
       required: true,
     },
   ];
@@ -187,7 +189,7 @@ export class SaloonStore implements OnInit{
     this.saloonService.saveStore(storeDTO).subscribe({
       next: (res) => {
         if (res.data) {
-          this.alert.show('success', 'Store saved successfully');
+          this.alert.show('success', 'POS_T.STORE.SAVED');
 
           // Refresh the Manage Store table so the new item shows up.
           this.loadSaloonStorePage();
@@ -199,7 +201,7 @@ export class SaloonStore implements OnInit{
 
       error: (error) => {
         console.error('Error Occurred when saving store', error);
-        this.alert.show('error', 'Error Occurred When Saving Store');
+        this.alert.show('error', 'POS_T.STORE.SAVE_FAILED');
       },
     });
   }
@@ -295,6 +297,75 @@ export class SaloonStore implements OnInit{
     this.loadSaloonStorePage();
   }
 
+  /** Hariri: the add form, filled with this item; the item keeps its code and what is used (owner 2026-11-14). */
+  editStore(row: any): void {
+    this.loadSaloonService();
+    const dialogRef = this.dialog.open(DialogComponent, {
+      width: '900px',
+      maxWidth: '95vw',
+      data: {
+        formTitle: this.translate.instant('POS_T.STORE.EDIT_TITLE', { name: row.nameOfStore ?? '' }),
+        fields: this.bookingFields,
+        formData: {
+          nameOfStore: row.nameOfStore,
+          quantity: row.quantity,
+          buyingPrice: row.buyingPrice,
+          totalPrice: row.totalQuantityPrice,
+          saloonService: row.saloonServiceEntityUID,
+          description: row.description,
+        },
+      },
+    });
+    dialogRef.afterClosed().subscribe((result) => {
+      if (!result) return;
+      const unitChanged = Number(result.buyingPrice) !== Number(row.buyingPrice);
+      const storeDTO: StoreDTO = {
+        uid: row.uid,
+        nameOfStore: result.nameOfStore,
+        quantity: result.quantity,
+        description: result.description,
+        saloonServiceEntityUID: result.saloonService || row.saloonServiceEntityUID,
+        // The unit price leads when it was changed; else the lot price, so a new quantity re-prices from the lot.
+        buyingPrice: unitChanged ? (result.buyingPrice || undefined) : undefined,
+        totalPrice: unitChanged ? undefined : (result.totalPrice || undefined),
+      };
+      if (!storeDTO.buyingPrice && !storeDTO.totalPrice) {
+        storeDTO.buyingPrice = result.buyingPrice || undefined;
+      }
+      if (!storeDTO.buyingPrice && !storeDTO.totalPrice) {
+        this.alert.show('error', this.translate.instant('STORE_PAGE.PRICE_NEEDED'));
+        return;
+      }
+      this.saloonService.saveStore(storeDTO).subscribe({
+        next: (res) => {
+          if (res.data) {
+            this.alert.show('success', 'POS_T.STORE.UPDATED');
+            this.loadSaloonStorePage();
+          }
+          this.cdr.markForCheck();
+        },
+      });
+    });
+  }
+
+  /** Futa: confirm first; the item is set aside, opened ones keep their history. */
+  askDeleteStore(row: any): void {
+    this.dialog
+      .open(ComfirmDialogComponent, {
+        width: '440px',
+        maxWidth: '95vw',
+        data: {
+          title: this.translate.instant('POS_T.STORE.DELETE_TITLE'),
+          message: this.translate.instant('POS_T.STORE.DELETE_CONFIRM', { name: row.nameOfStore ?? '' }),
+          confirmLabel: this.translate.instant('COMMON.DELETE'),
+        },
+      })
+      .afterClosed()
+      .subscribe((ok) => {
+        if (ok) this.onConfirmDeleteStore(row);
+      });
+  }
+
   deleteStore: boolean = false;
   storeRecord: Store = {};
   onDeleteStore(event: Store): void {
@@ -315,10 +386,11 @@ export class SaloonStore implements OnInit{
             this.storeDataSource.splice(index, 1);
             this.storeDataSource = [...this.storeDataSource];
             this.cdr.detectChanges();
-            this.alert.show('success', 'Store deleted successfully');
+            this.alert.show('success', 'POS_T.STORE.DELETED');
           }
           this.deleteStore = false;
           this.storeRecord = {};
+          this.loadSaloonStorePage();
           this.cdr.markForCheck();
         }
       },
@@ -326,7 +398,7 @@ export class SaloonStore implements OnInit{
       error: (error) => {
         console.error('Error deleting store:', error);
 
-        this.alert.show('error', 'Failed to delete store');
+        this.alert.show('error', 'POS_T.STORE.DELETE_FAILED');
       },
     });
   }
@@ -335,8 +407,8 @@ export class SaloonStore implements OnInit{
     {
       name: 'quantity',
       type: 'number',
-      label: 'Idadi iliyoongezwa',
-      placeholder: 'mfano 10',
+      label: 'POS_T.STORE.ADDED_QTY',
+      placeholder: 'POS_T.STORE.ADDED_QTY_EG',
       required: true,
     },
     // This delivery's cost, per item or for the lot; left empty, the item's
@@ -344,15 +416,15 @@ export class SaloonStore implements OnInit{
     {
       name: 'buyingPrice',
       type: 'number',
-      label: 'Bei ya kununulia (kipande kimoja)',
-      placeholder: 'Acha wazi kutumia bei ya sasa',
+      label: 'POS_T.STORE.UNIT_PRICE',
+      placeholder: 'POS_T.STORE.KEEP_PRICE',
       required: false,
     },
     {
       name: 'totalPrice',
       type: 'number',
-      label: 'Bei ya jumla (mzigo wote)',
-      placeholder: 'mfano 50,000 kwa vipande 10',
+      label: 'POS_T.STORE.LOT_PRICE',
+      placeholder: 'POS_T.STORE.LOT_PRICE_EG',
       required: false,
     },
   ];
@@ -364,7 +436,7 @@ export class SaloonStore implements OnInit{
       top: '350px',
     },
     data: {
-      formTitle: `Add Quantity (Current: ${store.quantity} AVL)`,
+      formTitle: this.translate.instant('POS_T.STORE.ADD_QTY_TITLE', { qty: store.quantity }),
       fields: this.addQuantityFields,
     },
   });
@@ -379,7 +451,7 @@ export class SaloonStore implements OnInit{
         this.saloonService.addQuantityToStore(storeDTO).subscribe({
           next: (res) => {
             if (res.data) {
-              this.alert.show('success', 'Quantity added successfully');
+              this.alert.show('success', 'POS_T.STORE.QTY_ADDED');
               console.log('Store to add quantity', res.data);
               const index = this.storeDataSource.findIndex((item) => item.uid === res.data.uid);
               if (index !== -1) {
@@ -400,7 +472,7 @@ export class SaloonStore implements OnInit{
           },
           error: (error) => {
             console.error('Error Occurred when adding quantity to store', error);
-            this.alert.show('error', 'Error Occurred When Adding Quantity to Store');
+            this.alert.show('error', 'POS_T.STORE.QTY_ADD_FAILED');
           },
         });
       }
@@ -411,7 +483,7 @@ export class SaloonStore implements OnInit{
     {
       name: 'quantity',
       type: 'number',
-      placeholder: 'Enter Store Item Quantity',
+      placeholder: 'POS_T.STORE.ENTER_QUANTITY',
       readonly: true,
       required: false,
     },
@@ -425,8 +497,8 @@ export class SaloonStore implements OnInit{
         top: '350px',
       },
   data: {
-  formTitle: `1 quantity will be opened and made available (Current Qty: ${store.notUsedQuantity} AVL)`,
-  message: '1 quantity will be opened and made available for use.',
+  formTitle: this.translate.instant('POS_T.STORE.OPEN_TITLE', { qty: store.notUsedQuantity }),
+  message: this.translate.instant('POS_T.STORE.OPEN_MESSAGE'),
   fields: this.openStoreFields,
   formData: {
     ...store,
@@ -444,7 +516,7 @@ export class SaloonStore implements OnInit{
         this.saloonService.openStore(storeDTO).subscribe({
           next: (res) => {
             if (res.data) {
-              this.alert.show('success', 'Store opened successfully');
+              this.alert.show('success', 'POS_T.STORE.OPENED');
               const index = this.storeDataSource.findIndex((item) => item.uid === res.data.uid);
               if (index !== -1) {
                 this.storeDataSource[index].nameOfStore = res.data.nameOfStore;
@@ -463,7 +535,7 @@ export class SaloonStore implements OnInit{
           },
           error: (error) => {
             console.error('Error Occurred when opening store', error);
-            this.alert.show('error', 'Error Occurred When Opening Store');
+            this.alert.show('error', 'POS_T.STORE.OPEN_FAILED');
           },
         });
       }

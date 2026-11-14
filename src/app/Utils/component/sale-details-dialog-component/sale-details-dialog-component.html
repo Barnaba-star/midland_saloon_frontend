@@ -10,10 +10,10 @@
       </div>
 
       <div class="sale-title-text">
-        <span>SELECTED SALE</span>
+        <span>{{ 'UTIL_T.SALE_DETAILS.SELECTED_SALE' | translate }}</span>
 
         <h2>
-          {{ data.sale?.salesCode || 'N/A' }}
+          {{ data.sale?.salesCode || ('COMMON.NA' | translate) }}
         </h2>
       </div>
 
@@ -23,7 +23,7 @@
       type="button"
       class="close-btn"
       (click)="close()"
-      aria-label="Close dialog"
+      [attr.aria-label]="'COMMON.CLOSE' | translate"
     >
       <mat-icon>close</mat-icon>
     </button>
@@ -38,7 +38,7 @@
     <div class="summary-item">
 
       <span class="summary-label">
-        Payment Status
+        {{ 'UTIL_T.SALE_DETAILS.PAYMENT_STATUS' | translate }}
       </span>
 
       <strong
@@ -48,7 +48,7 @@
       >
         <span class="status-dot"></span>
 
-        {{ data.sale?.paymentStatus || 'PENDING' }}
+        {{ statusLabel(data.sale?.paymentStatus) | translate }}
       </strong>
 
     </div>
@@ -58,11 +58,11 @@
     <div class="summary-item">
 
       <span class="summary-label">
-        Payment Method
+        {{ 'SALES_PAGE.COL_PAYMENT_METHOD' | translate }}
       </span>
 
       <strong class="method-value">
-        {{ data.sale?.paymentMethod || 'Not selected' }}
+        {{ data.sale?.paymentMethod || ('COMMON.NOT_SELECTED' | translate) }}
       </strong>
 
     </div>
@@ -72,7 +72,7 @@
     <div class="summary-item">
 
       <span class="summary-label">
-        Bill Amount
+        {{ 'UTIL_T.SALE_DETAILS.BILL_AMOUNT' | translate }}
       </span>
 
       <strong class="amount-value">
@@ -86,7 +86,7 @@
     <div class="summary-item">
 
       <span class="summary-label">
-        Amount Paid
+        {{ 'SALES_PAGE.AMOUNT_PAID' | translate }}
       </span>
 
       <strong class="paid-value">
@@ -106,11 +106,11 @@
       <div class="section-heading">
 
         <span class="section-label">
-          SALE SERVICES
+          {{ 'UTIL_T.SALE_DETAILS.SALE_SERVICES' | translate }}
         </span>
 
         <h3>
-          Services
+          {{ 'MENU.SERVICE' | translate }}
         </h3>
 
       </div>
@@ -145,13 +145,13 @@
             <div class="service-info">
 
               <strong class="service-name">
-                {{ service.serviceName || 'Unnamed Service' }}
+                {{ service.serviceName || ('UTIL_T.SALE_DETAILS.UNNAMED_SERVICE' | translate) }}
               </strong>
 
               <span class="staff-name">
                 <mat-icon>person</mat-icon>
 
-                {{ service.firstName || 'Not assigned' }}
+                {{ service.firstName || ('UTIL_T.SALE_DETAILS.NOT_ASSIGNED' | translate) }}
               </span>
 
             </div>
@@ -161,7 +161,7 @@
             <div class="service-price">
 
               <span>
-                Price
+                {{ 'COMMON.PRICE' | translate }}
               </span>
 
               <strong>
@@ -192,11 +192,11 @@
 
         <div>
           <h4>
-            No Services
+            {{ 'UTIL_T.SALE_DETAILS.NO_SERVICES' | translate }}
           </h4>
 
           <p>
-            There are no services attached to this sale.
+            {{ 'UTIL_T.SALE_DETAILS.NO_SERVICES_TEXT' | translate }}
           </p>
         </div>
 
@@ -213,12 +213,12 @@
     <div class="total-label">
 
       <span>
-        SALE TOTAL
+        {{ 'UTIL_T.SALE_DETAILS.SALE_TOTAL' | translate }}
       </span>
 
       <small>
         {{ data.services.length || 0 }}
-        {{ data.services.length === 1 ? 'service' : 'services' }}
+        {{ (data.services.length === 1 ? 'UTIL_T.SALE_DETAILS.SERVICE_ONE' : 'POS_HOME.SERVICES_SHORT') | translate }}
       </small>
 
     </div>
@@ -269,11 +269,11 @@
 
         <div>
           <span class="payment-label">
-            PAYMENT
+            {{ 'UTIL_T.SALE_DETAILS.PAYMENT' | translate }}
           </span>
 
           <h3>
-            Payment Method
+            {{ 'SALES_PAGE.COL_PAYMENT_METHOD' | translate }}
           </h3>
         </div>
 
@@ -289,7 +289,7 @@
       <div class="payment-wrapper">
 
         <label for="paymentMethod">
-          Select Payment Method
+          {{ 'UTIL_T.SALE_DETAILS.SELECT_PAYMENT_METHOD' | translate }}
         </label>
 
         <select
@@ -302,11 +302,11 @@
             value=""
             disabled
           >
-            Select payment method
+            {{ 'UTIL_T.SALE_DETAILS.SELECT_PAYMENT_METHOD_PH' | translate }}
           </option>
 
           <option value="cash">
-            💵 Cash
+            💵 {{ 'PAY_BILL.METHOD_cash' | translate }}
           </option>
 
           <option value="mpesa">
@@ -326,7 +326,7 @@
           </option>
 
           <option value="bank">
-            🏦 Bank
+            🏦 {{ 'UTIL_T.SALE_DETAILS.BANK' | translate }}
           </option>
 
         </select>
@@ -353,7 +353,7 @@
           payments
         </mat-icon>
 
-        Proceed to Payment
+        {{ 'UTIL_T.SALE_DETAILS.PROCEED' | translate }}
 
       </button>
 

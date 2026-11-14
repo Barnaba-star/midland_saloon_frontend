@@ -162,7 +162,7 @@ export class PaymentSetting implements OnInit {
         this.reconcilingUid = null;
         this.alertService.show(
           'success',
-          response.data || response.message || 'Done'
+          response.data || response.message || 'PAGE_T.DONE'
         );
         // A reconciled payment leaves the unresolved list and joins the paid
         // one.
@@ -175,7 +175,7 @@ export class PaymentSetting implements OnInit {
         this.reconcilingUid = null;
         this.alertService.show(
           'error',
-          err?.error?.message || 'Failed to reconcile'
+          err?.error?.message || 'PAGE_T.RECONCILE_FAILED'
         );
         this.cdr.markForCheck();
       }

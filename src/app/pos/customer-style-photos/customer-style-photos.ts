@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, Component, OnChanges, SimpleChanges, inject, input, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { DatePipe } from '@angular/common';
@@ -23,7 +24,7 @@ interface StaffOption {
  */
 @Component({
   selector: 'app-customer-style-photos',
-  imports: [FormsModule, DatePipe, MatIconModule, TranslatePipe],
+  imports: [LangDatePipe, FormsModule, DatePipe, MatIconModule, TranslatePipe],
   templateUrl: './customer-style-photos.html',
   styleUrl: './customer-style-photos.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

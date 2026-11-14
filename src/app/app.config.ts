@@ -28,6 +28,8 @@ import { StatusInterceptor } from './Utils/inteceptor/status-interceptor';
 import { WakeRetryInterceptor } from './Utils/inteceptor/wake-retry-interceptor';
 import { FastReadsInterceptor } from './Utils/inteceptor/fast-reads-interceptor';
 import { GlobalErrorHandler } from './Utils/handlers/global-error-handler';
+import { MatPaginatorIntl } from '@angular/material/paginator';
+import { TranslatedPaginatorIntl } from './Utils/services/paginator-intl';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -39,6 +41,8 @@ export const appConfig: ApplicationConfig = {
 
     provideZonelessChangeDetection(),
     provideNativeDateAdapter(),
+    // paginator words follow the chosen language (sw/en)
+    { provide: MatPaginatorIntl, useClass: TranslatedPaginatorIntl },
 
     provideRouter(routes),
 

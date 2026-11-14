@@ -11,7 +11,7 @@ import { TranslatePipe } from '@ngx-translate/core';
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DeleteDialogComponent {
-  @Input() message: string = 'Are you sure you want to delete this item?';
+  @Input() message: string = 'COMMON.CONFIRM_DELETE_ITEM';
   @Input() icon?: string;
   @Input() data: any;
   @Output() confirm = new EventEmitter<void>();

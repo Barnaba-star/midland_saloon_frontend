@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../../pipes/lang-date.pipe';
 import { CommonModule, DatePipe } from '@angular/common';
 import { Component, Inject, ChangeDetectionStrategy } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
@@ -6,7 +7,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-user-profile-dialog-component',
-  imports: [MatIconModule, CommonModule, DatePipe, TranslatePipe],
+  imports: [LangDatePipe, MatIconModule, CommonModule, TranslatePipe],
   templateUrl: './user-profile-dialog-component.html',
   styleUrl: './user-profile-dialog-component.css',
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -64,7 +64,7 @@
           <img [src]="p.src" [alt]="p.caption || ''" loading="lazy" />
           <figcaption>
             <span>{{ p.caption || '' }}</span>
-            <small>{{ p.at | date: 'd MMM y' }}</small>
+            <small>{{ p.at | langDate: 'd MMM y' }}</small>
           </figcaption>
           <button type="button" class="spd-remove" [class.sure]="confirmRemove() === p.uid" [disabled]="removing() === p.uid" (click)="remove(p)" [attr.aria-label]="'STYLES.REMOVE' | translate">
             @if (confirmRemove() === p.uid) {
@@ -89,7 +89,7 @@
           @if (c.comment) {
             "{{ c.comment }}"
           }
-          <small>— {{ c.name || ('STYLIST.GUEST' | translate) }}, {{ c.at | date: 'd MMM' }}</small>
+          <small>— {{ c.name || ('STYLIST.GUEST' | translate) }}, {{ c.at | langDate: 'd MMM' }}</small>
         </p>
       }
     </section>

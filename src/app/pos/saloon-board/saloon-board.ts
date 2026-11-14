@@ -1,3 +1,4 @@
+import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { ChangeDetectionStrategy, Component, OnInit, inject, signal } from '@angular/core';
 import { DatePipe, DecimalPipe } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
@@ -13,7 +14,7 @@ import { photoUrl } from '../../public/public-api';
  */
 @Component({
   selector: 'app-saloon-board',
-  imports: [Title2, MatIconModule, TranslatePipe, DatePipe, DecimalPipe],
+  imports: [LangDatePipe, Title2, MatIconModule, TranslatePipe, DatePipe, DecimalPipe],
   templateUrl: './saloon-board.html',
   styleUrl: './saloon-board.css',
   changeDetection: ChangeDetectionStrategy.OnPush,

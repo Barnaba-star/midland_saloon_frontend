@@ -3,6 +3,20 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.28",
+    "date": "2026-11-14",
+    "sw": [
+      "Lugha: ukichagua Kiswahili, mfumo wote unaonyesha Kiswahili - fomu, vitufe, arifa, kurasa, tarehe na ujumbe wa mfumo.",
+      "Store: Hariri bidhaa (jina, idadi, bei, huduma) na Futa bidhaa; zilizofunguliwa zinabaki kwenye historia.",
+      "Store kwenye simu (website): taarifa zote zinaonekana, hazikatwi tena."
+    ],
+    "en": [
+      "Language: with Swahili chosen, the whole system shows Swahili - forms, buttons, alerts, pages, dates and system messages.",
+      "Store: edit an item (name, quantity, price, service) and delete an item; opened ones stay in the history.",
+      "Store on a phone (website): everything shows, nothing is cut off."
+    ]
+  },
+  {
     "v": "1.0.27",
     "date": "2026-11-14",
     "sw": [

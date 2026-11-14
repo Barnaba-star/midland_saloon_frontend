@@ -182,7 +182,7 @@
           <tbody>
             @for (t of takes; track t.uid) {
               <tr class="row" (click)="toggle(t)">
-                <td class="sx-card-title">{{ t.takenAt | date: 'dd MMM yyyy, HH:mm' }}</td>
+                <td class="sx-card-title">{{ t.takenAt | langDate: 'dd MMM yyyy, HH:mm' }}</td>
                 <td [attr.data-label]="'STOCK_TAKE.COL_BY' | translate">{{ t.takenByName || t.takenBy }}</td>
                 <td [attr.data-label]="'STOCK_TAKE.COL_ITEMS' | translate" class="num">{{ t.itemsDifferent }} / {{ t.itemsCounted }}</td>
                 <td [attr.data-label]="'STOCK_TAKE.LOSS' | translate" class="num"><span [class.neg]="t.lossValue < 0">{{ t.lossValue | number }}</span></td>

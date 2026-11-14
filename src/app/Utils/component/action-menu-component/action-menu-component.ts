@@ -1,9 +1,10 @@
+import { TranslatePipe } from '@ngx-translate/core';
 import { CommonModule } from '@angular/common';
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 
 @Component({
   selector: 'action-menu',
-  imports:[CommonModule],
+  imports: [TranslatePipe, CommonModule],
   standalone: true,
   templateUrl: './action-menu-component.html',
   styleUrls: ['./action-menu-component.css'],

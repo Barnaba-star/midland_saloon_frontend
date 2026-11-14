@@ -1037,3 +1037,26 @@
     max-width: none;
   }
 }
+
+/* Phones (owner 2026-11-14: "taarifa nyingine hazionekani"): the page box
+   was a fixed 80vh with overflow hidden, so the buttons and the item cards
+   below the fold were cut off. Let it grow and scroll with the page. */
+@media (max-width: 900px) {
+  .action-container {
+    height: auto;
+    min-height: 0;
+    overflow: visible;
+    padding-left: 6px;
+    padding-right: 6px;
+  }
+  .store-management-header {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .store-management-actions {
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+}
+
+.action-btn.delete-store-btn { color: var(--sx-danger); }
