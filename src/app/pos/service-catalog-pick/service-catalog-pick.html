@@ -4,9 +4,6 @@
       <h2>{{ 'SERVICE_CATALOG.PICK_TITLE' | translate }}</h2>
       <p>{{ (step() === 1 ? 'SERVICE_CATALOG.PICK_STEP1' : 'SERVICE_CATALOG.PICK_STEP2') | translate }}</p>
     </div>
-    @if (offerManual && step() === 1) {
-      <button type="button" class="ghost-btn" (click)="manual()">{{ 'SERVICE_CATALOG.TYPE_OTHER' | translate }}</button>
-    }
     <button type="button" class="icon-btn" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate">
       <mat-icon>close</mat-icon>
     </button>
@@ -23,8 +20,8 @@
     </div>
     <div class="list">
       @for (r of shown(); track r.uid) {
-        <label class="row" [class.on]="r.ticked">
-          <input type="checkbox" [checked]="r.ticked" (change)="toggle(r)" />
+        <label class="row" [class.on]="r.ticked || r.added" [class.locked]="r.added">
+          <input type="checkbox" [checked]="r.ticked || r.added" [disabled]="r.added" (change)="toggle(r)" />
           <span class="main">
             <strong>{{ r.name }}</strong>
             @if (r.description) { <span class="detail">{{ r.description }}</span> }
@@ -36,6 +33,11 @@
         </label>
       }
     </div>
+    @if (offerManual) {
+      <button type="button" class="manual-row" (click)="manual()">
+        <mat-icon>edit</mat-icon>{{ 'SERVICE_CATALOG.ADD_OWN' | translate }}
+      </button>
+    }
   } @else {
     <div class="list">
       @for (r of ticked(); track r.uid) {

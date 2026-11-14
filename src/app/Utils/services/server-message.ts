@@ -51,6 +51,7 @@ const EXACT: Record<string, string> = {
   "choose_branch": "CHOOSE_BRANCH",
   "branch_not_allowed": "BRANCH_NOT_ALLOWED",
   "not_your_bill": "NOT_YOUR_BILL",
+  "service_exists": "SERVICE_EXISTS",
   "subscription_expired": "SUBSCRIPTION_EXPIRED",
   "invalid signature": "INVALID_SIGNATURE",
   "provide staff ref uid": "PROVIDE_STAFF_REF_UID",

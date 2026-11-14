@@ -3,6 +3,20 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.33",
+    "date": "2026-11-14",
+    "sw": [
+      "Huduma: kitufe kimoja \"Ongeza Huduma\" - kinaonyesha huduma zote za mfumo, zilizopo tayari kwenye branch zinakuja zimetikiwa; chini yake \"Ongeza mwenyewe\".",
+      "Huduma haiwezi kurudiwa: jina lililopo tayari kwenye branch linakataliwa.",
+      "Logo ya menyu ya pembeni: kisanduku kirefu kidogo."
+    ],
+    "en": [
+      "Services: one \"Add Service\" button - it lists every system service, the branch's own come ticked; below it \"Add your own\".",
+      "No duplicate services: a name already in the branch is refused.",
+      "Side menu logo: a slightly taller box."
+    ]
+  },
+  {
     "v": "1.0.32",
     "date": "2026-11-14",
     "sw": [

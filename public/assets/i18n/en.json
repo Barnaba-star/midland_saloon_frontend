@@ -2186,7 +2186,8 @@
     "SOME_FAILED": "Not saved:",
     "NO_CATALOG": "The main office has not registered services yet",
     "TICK_HERE": "System services - tick the ones this branch offers",
-    "CONTINUE_PRICES": "Continue - set prices ({{n}})"
+    "CONTINUE_PRICES": "Continue - set prices ({{n}})",
+    "ADD_OWN": "Add your own (a service not on the list)"
   },
   "POS_T": {
     "SALES": {
@@ -2690,7 +2691,8 @@
     "REGION_HAS_BRANCHES_RENAME": "{{x}} branch(es) are registered in this region, so its name and code cannot change",
     "REGION_HAS_BRANCHES_REMOVE": "{{x}} branch(es) are registered in this region, so it cannot be removed",
     "ENTRIES_NEWER_THAN_DAYS": "Entries newer than {{x}} days cannot be removed",
-    "NOT_YOUR_BILL": "This is not your bill - only the one who opened it can add or remove services"
+    "NOT_YOUR_BILL": "This is not your bill - only the one who opened it can add or remove services",
+    "SERVICE_EXISTS": "A service with this name already exists in this branch"
   },
   "STAFF_CARD": {
     "BUTTON": "Commission QR",

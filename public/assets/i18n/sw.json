@@ -2186,7 +2186,8 @@
     "SOME_FAILED": "Hazikuhifadhiwa:",
     "NO_CATALOG": "Ofisi kuu bado haijasajili huduma",
     "TICK_HERE": "Huduma za mfumo - tiki zinazotolewa kwenye branch hii",
-    "CONTINUE_PRICES": "Endelea - weka bei ({{n}})"
+    "CONTINUE_PRICES": "Endelea - weka bei ({{n}})",
+    "ADD_OWN": "Ongeza mwenyewe (huduma isiyo kwenye orodha)"
   },
   "POS_T": {
     "SALES": {
@@ -2690,7 +2691,8 @@
     "REGION_HAS_BRANCHES_RENAME": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo jina na msimbo wake haviwezi kubadilika",
     "REGION_HAS_BRANCHES_REMOVE": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo hauwezi kuondolewa",
     "ENTRIES_NEWER_THAN_DAYS": "Kumbukumbu za chini ya siku {{x}} haziwezi kuondolewa",
-    "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza au kuondoa huduma"
+    "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza au kuondoa huduma",
+    "SERVICE_EXISTS": "Huduma yenye jina hili tayari ipo kwenye branch hii"
   },
   "STAFF_CARD": {
     "BUTTON": "QR ya kamisheni",

@@ -318,8 +318,26 @@ openServiceCatalog(preselected: string[] = []){
     });
 }
 
-/** Ongeza Huduma types a new one; the system's services are ticked above the list (owner, 2026-11-14, as BaronixTZ). */
+/**
+ * Ongeza Huduma (owner 2026-11-14): the system's services first - the ones
+ * this branch has come ticked, so nothing is added twice; "Ongeza mwenyewe"
+ * (or an empty list) opens the form for one that is not there.
+ */
 onAddService(){
+  this.saloonServiceInfo=false;
+  this.dialog.open(ServiceCatalogPick, { width: '760px', maxWidth: '96vw', autoFocus: false, data: { offerManual: true } })
+    .afterClosed().subscribe((r?: number | 'manual') => {
+      if (r === 'manual') this.onAddServiceManual();
+      else if (r) {
+        this.alertService.show('success', this.translate.instant('SERVICE_CATALOG.DONE', { n: r }));
+        this.findSaloonServicePage();
+      }
+      this.cdr.markForCheck();
+    });
+}
+
+/** The form for a service that is not in the system's list. */
+onAddServiceManual(){
   this.saloonServiceInfo=false;
   const dialogRef = this.dialog.open(DialogComponent, {
     width: '720px',
@@ -396,7 +414,6 @@ tableConfig = {
 };
 
 findSaloonServicePage() {
-  this.loadCatalogMissing();
   this.saloonServiceAddForm = false;
   this.saloonServiceInfo = false;
   this.saloonServiceEntity = {};

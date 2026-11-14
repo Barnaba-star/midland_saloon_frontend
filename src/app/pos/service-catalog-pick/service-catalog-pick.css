@@ -193,3 +193,8 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Already in the branch: ticked and locked (owner 2026-11-14) */
+.row.locked { cursor: default; opacity: .85; }
+.manual-row { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 10px; padding: 12px; border: 1.5px dashed var(--sx-gold-500); border-radius: 12px; background: var(--sx-gold-100); color: var(--sx-ink); font: inherit; font-size: 14px; font-weight: 700; cursor: pointer; }
+.manual-row mat-icon { width: 18px; height: 18px; font-size: 18px; color: var(--sx-gold-700); }

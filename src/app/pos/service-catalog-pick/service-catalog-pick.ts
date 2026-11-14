@@ -41,7 +41,8 @@ export class ServiceCatalogPick implements OnInit {
     const all = this.rows();
     return q ? all.filter((r) => [r.name, r.category, r.description].some((v) => (v || '').toLowerCase().includes(q))) : all;
   });
-  readonly ticked = computed(() => this.rows().filter((r) => r.ticked));
+  /** Newly ticked only: the branch's own (added) come ticked and stay as they are. */
+  readonly ticked = computed(() => this.rows().filter((r) => r.ticked && !r.added));
 
   constructor(
     private api: ServiceCatalogApi,
@@ -81,6 +82,7 @@ export class ServiceCatalogPick implements OnInit {
   }
 
   toggle(row: Row): void {
+    if (row.added) return;
     this.rows.set(this.rows().map((r) => (r.uid === row.uid ? { ...r, ticked: !r.ticked } : r)));
     this.error.set('');
   }
