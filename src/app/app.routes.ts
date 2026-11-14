@@ -16,6 +16,11 @@ export const routes: Routes = [
         canActivate: [settingsManageGuard],
         loadComponent: () =>import('./settings/users-setting/users-setting').then(m => m.UsersSetting)
       },
+      {
+        // Main office's service catalog (owner, 2026-11-14).
+        path: 'serviceCatalog',
+        loadComponent: () => import('./settings/service-catalog/service-catalog').then(m => m.ServiceCatalog)
+      },
        {
         path: 'node',
         loadComponent: () =>import('./settings/node-setting/node-setting').then(m => m.NodeSetting)

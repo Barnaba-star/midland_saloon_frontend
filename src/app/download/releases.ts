@@ -3,6 +3,20 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.27",
+    "date": "2026-11-14",
+    "sw": [
+      "Huduma za mfumo (Mipangilio ya ofisi kuu): huduma zinasajiliwa mara moja - jina, kundi, muda na maelezo.",
+      "Mipangilio > Huduma: huduma za mfumo ambazo branch haina zinaonekana juu - tiki, Endelea, weka bei tu.",
+      "Huduma iliyopo tayari kwa jina lilelile inaunganishwa, haiongezwi mara mbili."
+    ],
+    "en": [
+      "System services (main office Settings): each service is registered once - name, group, time and description.",
+      "Settings > Services: system services the branch lacks show on top - tick, Continue, just set the price.",
+      "A service already there under the same name is linked, not added twice."
+    ]
+  },
+  {
     "v": "1.0.26",
     "date": "2026-11-14",
     "sw": [

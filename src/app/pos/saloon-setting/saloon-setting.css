@@ -2258,3 +2258,13 @@ mat-paginator {
   font: inherit; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;
 }
 .set-commission-btn mat-icon { width: 18px; height: 18px; font-size: 18px; }
+
+/* System services this branch does not offer yet, ticked above its own list (owner, 2026-11-14). */
+.catalog-strip { margin: 0 0 14px; padding: 12px; border: 1px dashed var(--sx-gold-500); border-radius: 12px; background: var(--sx-gold-100); }
+.catalog-strip-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-bottom: 10px; font-size: 15px; color: var(--sx-ink); }
+.catalog-strip-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 8px; }
+.catalog-chip { display: flex; align-items: center; gap: 8px; padding: 8px 10px; border: 1px solid var(--sx-line); border-radius: 10px; background: var(--sx-surface); cursor: pointer; }
+.catalog-chip.on { border-color: var(--sx-gold-500); background: var(--sx-gold-100); }
+.catalog-chip span { display: flex; flex-direction: column; min-width: 0; }
+.catalog-chip strong { font-size: 13px; color: var(--sx-ink); }
+.catalog-chip small { font-size: 11px; color: var(--sx-muted); }

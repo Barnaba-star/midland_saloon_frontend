@@ -680,7 +680,8 @@
     "PAYMENTS": "Payments",
     "EXPIRING": "Expiring branches",
     "REGIONS": "Regions",
-    "PAYROLL": "Payroll"
+    "PAYROLL": "Payroll",
+    "SERVICE_CATALOG": "System services"
   },
   "SETTINGS_PAGE": {
     "TITLE": "System Settings",
@@ -2152,5 +2153,38 @@
     "SEARCH": "Search services...",
     "NO_MATCH": "No service matches.",
     "STAFF": "Our stylists"
+  },
+  "SERVICE_CATALOG": {
+    "TITLE": "System services",
+    "SUBTITLE": "Register each service once - name, group, time and description. Every branch ticks its services and sets its own prices.",
+    "ADD": "Add service",
+    "EDIT": "Edit service",
+    "NAME": "Service name",
+    "CATEGORY": "Group",
+    "CATEGORY_HINT": "Hair, Beard, Nails...",
+    "DURATION": "Time (minutes)",
+    "DESCRIPTION": "Description",
+    "SEARCH": "Search services",
+    "EMPTY": "No service registered yet",
+    "NAME_REQUIRED": "Type the service name",
+    "DELETE_TITLE": "Remove service?",
+    "DELETE_TEXT": "It leaves the list; branches that already offer it keep it.",
+    "PICK_TITLE": "System services",
+    "PICK_STEP1": "Tick the services this branch offers",
+    "PICK_STEP2": "Set this branch's prices",
+    "TYPE_OTHER": "Type another",
+    "NEXT": "Continue",
+    "BACK": "Back",
+    "SAVE": "Save",
+    "IN_BRANCH": "Already here",
+    "PRICE": "Price (TSh)",
+    "SELECTED": "{{n}} selected",
+    "NONE_SELECTED": "Tick at least one service",
+    "PRICE_REQUIRED": "Set a price for every service",
+    "DONE": "{{n}} services saved",
+    "SOME_FAILED": "Not saved:",
+    "NO_CATALOG": "The main office has not registered services yet",
+    "TICK_HERE": "System services - tick the ones this branch offers",
+    "CONTINUE_PRICES": "Continue - set prices ({{n}})"
   }
 }

@@ -1,0 +1,82 @@
+<div class="cat-container">
+  <div class="cat-header">
+    <div>
+      <h2>{{ 'SERVICE_CATALOG.TITLE' | translate }}</h2>
+      <p>{{ 'SERVICE_CATALOG.SUBTITLE' | translate }}</p>
+    </div>
+    @if (canEdit && !form()) {
+      <button type="button" class="primary-btn" (click)="add()">
+        <mat-icon>add</mat-icon> {{ 'SERVICE_CATALOG.ADD' | translate }}
+      </button>
+    }
+  </div>
+
+  @if (form(); as f) {
+    <div class="cat-form">
+      <h3>{{ (f.uid ? 'SERVICE_CATALOG.EDIT' : 'SERVICE_CATALOG.ADD') | translate }}</h3>
+      <div class="grid">
+        <label>{{ 'SERVICE_CATALOG.NAME' | translate }} *
+          <input [ngModel]="f.name" (ngModelChange)="patch('name', $event)" placeholder="KUNYOA" />
+        </label>
+        <label>{{ 'SERVICE_CATALOG.CATEGORY' | translate }}
+          <input [ngModel]="f.category" (ngModelChange)="patch('category', $event)" [placeholder]="'SERVICE_CATALOG.CATEGORY_HINT' | translate" list="sc-categories" />
+          <datalist id="sc-categories">
+            @for (c of ['Nywele', 'Ndevu', 'Kucha', 'Uso', 'Massage']; track c) { <option [value]="c"></option> }
+          </datalist>
+        </label>
+        <label>{{ 'SERVICE_CATALOG.DURATION' | translate }}
+          <input type="number" min="0" [ngModel]="f.duration" (ngModelChange)="patch('duration', $event)" placeholder="30" />
+        </label>
+        <label>{{ 'SERVICE_CATALOG.DESCRIPTION' | translate }}
+          <input [ngModel]="f.description" (ngModelChange)="patch('description', $event)" />
+        </label>
+      </div>
+      @if (error()) { <div class="err">{{ error() }}</div> }
+      <div class="form-actions">
+        <button type="button" class="ghost-btn" (click)="cancel()">{{ 'COMMON.CANCEL' | translate }}</button>
+        <button type="button" class="primary-btn" [disabled]="saving()" (click)="save()">{{ 'COMMON.SAVE' | translate }}</button>
+      </div>
+    </div>
+  }
+
+  <div class="search">
+    <mat-icon>search</mat-icon>
+    <input type="search" [ngModel]="search()" (ngModelChange)="search.set($event)" [placeholder]="'SERVICE_CATALOG.SEARCH' | translate" />
+    <span class="count">{{ items().length }}</span>
+  </div>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>{{ 'SERVICE_CATALOG.NAME' | translate }}</th>
+          <th>{{ 'SERVICE_CATALOG.CATEGORY' | translate }}</th>
+          <th>{{ 'SERVICE_CATALOG.DURATION' | translate }}</th>
+          @if (canEdit) { <th></th> }
+        </tr>
+      </thead>
+      <tbody>
+        @for (c of shown(); track c.uid; let i = $index) {
+          <tr>
+            <td>{{ i + 1 }}</td>
+            <td class="name">{{ c.name }}
+              @if (c.description) { <small>{{ c.description }}</small> }
+            </td>
+            <td>{{ c.category || '-' }}</td>
+            <td>{{ c.duration ? (c.duration + ' min') : '-' }}</td>
+            @if (canEdit) {
+              <td class="row-actions">
+                <button type="button" class="ghost-btn" (click)="edit(c)">{{ 'COMMON.EDIT' | translate }}</button>
+                <button type="button" class="ghost-btn danger" (click)="remove(c)">{{ 'COMMON.DELETE' | translate }}</button>
+              </td>
+            }
+          </tr>
+        }
+        @if (!loading() && shown().length === 0) {
+          <tr><td [attr.colspan]="canEdit ? 5 : 4" class="empty">{{ 'SERVICE_CATALOG.EMPTY' | translate }}</td></tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

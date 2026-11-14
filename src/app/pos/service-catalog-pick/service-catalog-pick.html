@@ -1,0 +1,75 @@
+<div class="pick">
+  <div class="pick-head">
+    <div>
+      <h2>{{ 'SERVICE_CATALOG.PICK_TITLE' | translate }}</h2>
+      <p>{{ (step() === 1 ? 'SERVICE_CATALOG.PICK_STEP1' : 'SERVICE_CATALOG.PICK_STEP2') | translate }}</p>
+    </div>
+    @if (offerManual && step() === 1) {
+      <button type="button" class="ghost-btn" (click)="manual()">{{ 'SERVICE_CATALOG.TYPE_OTHER' | translate }}</button>
+    }
+    <button type="button" class="icon-btn" (click)="close()" [attr.aria-label]="'COMMON.CLOSE' | translate">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  @if (loading()) {
+    <div class="empty">...</div>
+  } @else if (rows().length === 0) {
+    <div class="empty">{{ 'SERVICE_CATALOG.NO_CATALOG' | translate }}</div>
+  } @else if (step() === 1) {
+    <div class="search">
+      <mat-icon>search</mat-icon>
+      <input type="search" [ngModel]="search()" (ngModelChange)="search.set($event)" [placeholder]="'SERVICE_CATALOG.SEARCH' | translate" />
+    </div>
+    <div class="list">
+      @for (r of shown(); track r.uid) {
+        <label class="row" [class.on]="r.ticked">
+          <input type="checkbox" [checked]="r.ticked" (change)="toggle(r)" />
+          <span class="main">
+            <strong>{{ r.name }}</strong>
+            @if (r.description) { <span class="detail">{{ r.description }}</span> }
+            <small>{{ r.category || '' }}@if (r.duration) { @if (r.category) { · } {{ r.duration }} min }</small>
+          </span>
+          @if (r.added) {
+            <span class="badge">{{ 'SERVICE_CATALOG.IN_BRANCH' | translate }} · {{ r.price | number }}</span>
+          }
+        </label>
+      }
+    </div>
+  } @else {
+    <div class="list">
+      @for (r of ticked(); track r.uid) {
+        <div class="price-row">
+          <div class="main">
+            <strong>{{ r.name }}</strong>
+            @if (r.category) { <small>{{ r.category }}</small> }
+          </div>
+          <label>{{ 'SERVICE_CATALOG.PRICE' | translate }}
+            <input type="number" min="1" placeholder="TSh" [ngModel]="r.sell" (ngModelChange)="setField(r, 'sell', $event)" />
+          </label>
+          <label>{{ 'SERVICE_CATALOG.DURATION' | translate }}
+            <input type="number" min="0" placeholder="min" [ngModel]="r.minutes" (ngModelChange)="setField(r, 'minutes', $event)" />
+          </label>
+        </div>
+      }
+    </div>
+  }
+
+  @if (failed().length) {
+    <div class="err">
+      {{ 'SERVICE_CATALOG.SOME_FAILED' | translate }}
+      @for (f of failed(); track f.catalogUid) { <div>{{ f.name }}: {{ f.message }}</div> }
+    </div>
+  }
+  @if (error()) { <div class="err">{{ error() }}</div> }
+
+  <div class="pick-foot">
+    @if (step() === 1) {
+      <span class="count">{{ 'SERVICE_CATALOG.SELECTED' | translate: { n: ticked().length } }}</span>
+      <button type="button" class="primary-btn" [disabled]="rows().length === 0" (click)="next()">{{ 'SERVICE_CATALOG.NEXT' | translate }}</button>
+    } @else {
+      <button type="button" class="ghost-btn" (click)="step.set(1)">{{ 'SERVICE_CATALOG.BACK' | translate }}</button>
+      <button type="button" class="primary-btn" [disabled]="saving()" (click)="save()">{{ 'SERVICE_CATALOG.SAVE' | translate }}</button>
+    }
+  </div>
+</div>

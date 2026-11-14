@@ -680,7 +680,8 @@
     "PAYMENTS": "Malipo",
     "EXPIRING": "Matawi yanayoisha",
     "REGIONS": "Mikoa",
-    "PAYROLL": "Payroll"
+    "PAYROLL": "Payroll",
+    "SERVICE_CATALOG": "Huduma za mfumo"
   },
   "SETTINGS_PAGE": {
     "TITLE": "Mipangilio ya Mfumo",
@@ -2152,5 +2153,38 @@
     "SEARCH": "Tafuta huduma...",
     "NO_MATCH": "Hakuna huduma inayolingana.",
     "STAFF": "Wasusi wetu"
+  },
+  "SERVICE_CATALOG": {
+    "TITLE": "Huduma za mfumo",
+    "SUBTITLE": "Sajili huduma mara moja - jina, kundi, muda na maelezo. Kila branch inatiki huduma zake na kuweka bei zake.",
+    "ADD": "Ongeza huduma",
+    "EDIT": "Badilisha huduma",
+    "NAME": "Jina la huduma",
+    "CATEGORY": "Kundi",
+    "CATEGORY_HINT": "Nywele, Ndevu, Kucha...",
+    "DURATION": "Muda (dakika)",
+    "DESCRIPTION": "Maelezo",
+    "SEARCH": "Tafuta huduma",
+    "EMPTY": "Bado hakuna huduma iliyosajiliwa",
+    "NAME_REQUIRED": "Andika jina la huduma",
+    "DELETE_TITLE": "Ondoa huduma?",
+    "DELETE_TEXT": "Itaondoka kwenye orodha; branch zinazoitoa tayari zinabaki nayo.",
+    "PICK_TITLE": "Huduma za mfumo",
+    "PICK_STEP1": "Tiki huduma zinazotolewa kwenye branch hii",
+    "PICK_STEP2": "Weka bei za branch hii",
+    "TYPE_OTHER": "Andika nyingine",
+    "NEXT": "Endelea",
+    "BACK": "Rudi",
+    "SAVE": "Hifadhi",
+    "IN_BRANCH": "Ipo tayari",
+    "PRICE": "Bei (TSh)",
+    "SELECTED": "{{n}} zimechaguliwa",
+    "NONE_SELECTED": "Tiki angalau huduma moja",
+    "PRICE_REQUIRED": "Weka bei kwa kila huduma",
+    "DONE": "Huduma {{n}} zimehifadhiwa",
+    "SOME_FAILED": "Hazikuhifadhiwa:",
+    "NO_CATALOG": "Ofisi kuu bado haijasajili huduma",
+    "TICK_HERE": "Huduma za mfumo - tiki zinazotolewa kwenye branch hii",
+    "CONTINUE_PRICES": "Endelea - weka bei ({{n}})"
   }
 }

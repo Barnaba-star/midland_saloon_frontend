@@ -1,3 +1,5 @@
+import { ServiceCatalogPick } from '../service-catalog-pick/service-catalog-pick';
+import { BranchCatalogService, ServiceCatalogApi } from '../../settings/service-catalog/service-catalog-api';
 import { forkJoin, of } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 import { OtherSplit } from '../other-split/other-split';
@@ -75,7 +77,8 @@ throw new Error('Method not implemented.');
   constructor(
     private visibility: Authentication, private service: ServiceSaloonMethod, private alertService: AlertService, private cdr: ChangeDetectorRef,
     private dialog:MatDialog, private saloonService:ServiceSaloonMethod, private userService: UserService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private catalogApi: ServiceCatalogApi
   ) { }
   ngOnInit(): void {
     this.selectedSetting='SALON.SERVICE'
@@ -274,6 +277,47 @@ serviceColumns: {
     header: 'Status'
   }
 ];
+/** System services this branch does not offer yet - ticked above its own list (owner, 2026-11-14). */
+catalogMissing: BranchCatalogService[] = [];
+catalogTick = new Set<string>();
+
+loadCatalogMissing(){
+  this.catalogApi.forBranch().subscribe({
+    next: (r) => {
+      this.catalogMissing = (r.data || []).filter((c) => !c.added);
+      this.catalogTick = new Set([...this.catalogTick].filter((u) => this.catalogMissing.some((c) => c.uid === u)));
+      this.cdr.markForCheck();
+    },
+    error: () => {},
+  });
+}
+
+toggleCatalog(uid: string){
+  const next = new Set(this.catalogTick);
+  next.has(uid) ? next.delete(uid) : next.add(uid);
+  this.catalogTick = next;
+}
+
+/** Endelea: the ticked system services straight at their prices. */
+pricesForTicked(){
+  this.openServiceCatalog([...this.catalogTick]);
+}
+
+/** The main office's services, from the Huduma page's own button (or with the ticked ones). */
+openServiceCatalog(preselected: string[] = []){
+  this.saloonServiceInfo=false;
+  this.dialog.open(ServiceCatalogPick, { width: '760px', maxWidth: '96vw', autoFocus: false, data: { preselected } })
+    .afterClosed().subscribe((r?: number | 'manual') => {
+      if (r && r !== 'manual') {
+        this.alertService.show('success', this.translate.instant('SERVICE_CATALOG.DONE', { n: r }));
+        this.catalogTick = new Set();
+        this.findSaloonServicePage();
+      }
+      this.cdr.markForCheck();
+    });
+}
+
+/** Ongeza Huduma types a new one; the system's services are ticked above the list (owner, 2026-11-14, as BaronixTZ). */
 onAddService(){
   this.saloonServiceInfo=false;
   const dialogRef = this.dialog.open(DialogComponent, {
@@ -351,6 +395,7 @@ tableConfig = {
 };
 
 findSaloonServicePage() {
+  this.loadCatalogMissing();
   this.saloonServiceAddForm = false;
   this.saloonServiceInfo = false;
   this.saloonServiceEntity = {};

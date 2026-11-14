@@ -290,6 +290,31 @@
         </div>
       }
 
+     <!-- The system services this branch does not offer yet, ticked right here (owner, 2026-11-14). -->
+     @if (catalogMissing.length) {
+      <div class="catalog-strip">
+        <div class="catalog-strip-head">
+          <strong>{{ 'SERVICE_CATALOG.TICK_HERE' | translate }}</strong>
+          @if (catalogTick.size) {
+            <button type="button" class="add-service-btn" mat-flat-button (click)="pricesForTicked()">
+              {{ 'SERVICE_CATALOG.CONTINUE_PRICES' | translate: { n: catalogTick.size } }}
+            </button>
+          }
+        </div>
+        <div class="catalog-strip-list">
+          @for (c of catalogMissing; track c.uid) {
+            <label class="catalog-chip" [class.on]="catalogTick.has(c.uid)">
+              <input type="checkbox" [checked]="catalogTick.has(c.uid)" (change)="toggleCatalog(c.uid)" />
+              <span>
+                <strong>{{ c.name }}</strong>
+                <small>{{ c.category || '' }}@if (c.duration) { @if (c.category) { · } {{ c.duration }} min }</small>
+              </span>
+            </label>
+          }
+        </div>
+      </div>
+     }
+
      @if (serviceDataSource.data.length > 0) {
 
   <div class="service-table-card">
@@ -311,6 +336,15 @@
   </div>
 
  <div class="header-right">
+  <!-- The main office's services, ticked for this branch (owner, 2026-11-14). -->
+  <button
+    mat-stroked-button
+    class="add-service-btn secondary"
+    type="button"
+    (click)="openServiceCatalog()">
+    <mat-icon>playlist_add_check</mat-icon>
+    <span>{{ 'SERVICE_CATALOG.PICK_TITLE' | translate }}</span>
+  </button>
   <button
     mat-flat-button
     class="add-service-btn"

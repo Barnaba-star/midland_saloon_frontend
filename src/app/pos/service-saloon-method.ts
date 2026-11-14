@@ -48,7 +48,7 @@ findCommissionByUID(commissionUID:string):Observable<Response<any>>{
   return this.http.get<Response<any>>(`${this.saloonURL}/findCommissionByUID/${commissionUID}`);
 }
 findCommissionList():Observable<ResponseList<any>>{
-  return this.http.get<ResponseList<any>>(`${this.saloonURL}/findCommissionList`)
+  return this.http.post<ResponseList<any>>(`${this.saloonURL}/findCommissionList`, {})
 }
 findCommissionPage(params: PageableParam): Observable<ResponsePage<any>> {
     return this.http.post<ResponsePage<any>>(`${this.saloonURL}/findCommissionPage`, params);

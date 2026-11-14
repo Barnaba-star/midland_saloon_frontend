@@ -59,6 +59,13 @@ menuItems: SidenavItem[] = [
         roles: this.manageRoles
       },
       {
+        // Main office's service catalog (owner, 2026-11-14, as BaronixTZ's drinks).
+        label: 'SETTINGS_MENU.SERVICE_CATALOG',
+        icon: 'service',
+        route: '/settings/serviceCatalog',
+        roles: this.settingsRoles
+      },
+      {
         label: 'SETTINGS_MENU.COMMISSION',
         icon: 'commission',
         route: '/settings/commission',
