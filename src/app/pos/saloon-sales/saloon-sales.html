@@ -36,6 +36,9 @@
                 <div class="sale-header">
                   <div class="sale-code">
                     <strong>{{ sale.salesCode }}</strong>
+                    @if (sale.openedByName) {
+                      <small class="sale-opener" [class.not-mine]="!isMyBill(sale)">{{ 'POS_T.SALES.OPENED_BY' | translate: { name: sale.openedByName } }}</small>
+                    }
                   </div>
 
                   <!-- Only while the bill reads zero; once a service is on it there is nothing to delete. -->
@@ -94,8 +97,9 @@
   <button
     type="button"
     class="sale-action-btn add-btn"
-    [disabled]="(shiftState === 'NONE' || shiftState === 'CLOSED')"
-    (click)="saveSaloonSales(sale)"
+    [disabled]="(shiftState === 'NONE' || shiftState === 'CLOSED') || !isMyBill(sale)"
+    [title]="isMyBill(sale) ? '' : ('POS_T.SALES.NOT_YOUR_BILL' | translate: { name: sale.openedByName })"
+    (click)="isMyBill(sale) && saveSaloonSales(sale)"
   >
     <span class="action-icon">
       <mat-icon>add</mat-icon>

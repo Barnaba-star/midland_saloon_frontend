@@ -101,6 +101,9 @@ export interface SaleOpenedDTO {
     bill?:number;
 }
 export interface SalesOpened{
+  /** Who opened the bill - only they add services to it (2026-11-14). */
+  openedBy?: string | null;
+  openedByName?: string | null;
     uid?: string;
     salesCode?: string;
     paymentMethod?: string;

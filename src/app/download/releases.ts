@@ -3,6 +3,18 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.29",
+    "date": "2026-11-14",
+    "sw": [
+      "Bili: kila mtu (CEO, MANAGER, CASHIER) anaongeza huduma kwenye bili aliyoifungua yeye tu; bili inaonyesha \"Imefunguliwa na ...\".",
+      "Mauzo: anayeuza anaona orodha ya watumishi ili kuchagua mhudumu."
+    ],
+    "en": [
+      "Bills: each person (CEO, MANAGER, CASHIER) adds services only to bills they opened; a bill shows \"Opened by ...\".",
+      "Sales: whoever sells sees the staff list to pick the stylist."
+    ]
+  },
+  {
     "v": "1.0.28",
     "date": "2026-11-14",
     "sw": [

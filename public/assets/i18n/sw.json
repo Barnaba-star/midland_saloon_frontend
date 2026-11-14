@@ -2198,7 +2198,9 @@
       "CHOOSE_PAYMENT_METHOD": "Tafadhali chagua njia ya malipo.",
       "SALE_UPDATED": "Bili imesasishwa",
       "BILL_SAVED": "Bili imehifadhiwa",
-      "SELECTED_DATE": "Tarehe Uliyochagua"
+      "SELECTED_DATE": "Tarehe Uliyochagua",
+      "OPENED_BY": "Imefunguliwa na {{name}}",
+      "NOT_YOUR_BILL": "Bili hii imefunguliwa na {{name}} - ni yeye tu anayeweza kuongeza huduma"
     },
     "PAY": {
       "CASH": "Taslimu",
@@ -2687,6 +2689,7 @@
     "TOTAL_BELOW_MINIMUM": "Jumla iko chini ya kiwango cha chini cha TZS {{x}}, chagua miezi zaidi",
     "REGION_HAS_BRANCHES_RENAME": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo jina na msimbo wake haviwezi kubadilika",
     "REGION_HAS_BRANCHES_REMOVE": "Matawi {{x}} yamesajiliwa kwenye mkoa huu, kwa hiyo hauwezi kuondolewa",
-    "ENTRIES_NEWER_THAN_DAYS": "Kumbukumbu za chini ya siku {{x}} haziwezi kuondolewa"
+    "ENTRIES_NEWER_THAN_DAYS": "Kumbukumbu za chini ya siku {{x}} haziwezi kuondolewa",
+    "NOT_YOUR_BILL": "Bili hii si yako - ni aliyeifungua tu anayeweza kuongeza huduma"
   }
 }

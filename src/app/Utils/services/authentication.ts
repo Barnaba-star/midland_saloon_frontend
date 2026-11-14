@@ -63,6 +63,13 @@ getUsername(): string {
   return username;
 }
 
+/** The signed-in user's uid (token claim userUID). */
+getUserUid(): string {
+  const token = this.getToken();
+  if (!token) return '';
+  return this.jwtHelper.decodeToken(token)?.userUID ?? '';
+}
+
 getFullName(): string {
   const token = this.getToken();
   if (!token) {

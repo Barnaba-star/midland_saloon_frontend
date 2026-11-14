@@ -156,6 +156,11 @@ export class SaloonSales implements OnInit{
       ],
     },
   ];
+  /** Only the one who opened a bill adds services to it; older bills have no opener (owner 2026-11-14). */
+  isMyBill(sale: SalesOpened): boolean {
+    return !sale?.openedBy || sale.openedBy === this.visibility.getUserUid() || this.visibility.hasRole('ROOT');
+  }
+
   salesOpenedList: SalesOpened[] = [];
   openNewSales() {
     const dialogRef = this.dialog.open(DialogComponent, {
