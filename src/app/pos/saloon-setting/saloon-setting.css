@@ -2268,3 +2268,7 @@ mat-paginator {
 .catalog-chip span { display: flex; flex-direction: column; min-width: 0; }
 .catalog-chip strong { font-size: 13px; color: var(--sx-ink); }
 .catalog-chip small { font-size: 11px; color: var(--sx-muted); }
+
+.cancel-commission-btn { display: inline-flex; align-items: center; gap: 6px; height: 40px; padding: 0 16px; margin-right: 8px; border-radius: 10px; border: 1px solid var(--sx-line); background: var(--sx-surface); color: var(--sx-ink); font: inherit; font-weight: 600; cursor: pointer; }
+.cancel-commission-btn mat-icon { width: 18px; height: 18px; font-size: 18px; }
+.commission-layout { grid-template-columns: 1fr !important; }

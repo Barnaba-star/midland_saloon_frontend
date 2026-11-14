@@ -634,29 +634,11 @@
 
   @case ('SALON.COMMISSION') {
     <div class="action-container123">
-      <!-- TOP ACTIONS -->
-      <div class="top-actions">
-        <button class="action-btn back-btn" (click)="findSaloonServiceList()">
-          <mat-icon svgIcon="add"></mat-icon>
-          {{ 'SETTING_PAGE.ADD_COMMISSION_BTN' | translate }}
-        </button>
-
-        <button class="action-btn settings-btn" (click)="findCommissionPage()">
-          <mat-icon svgIcon="commission"></mat-icon>
-          {{ 'SETTING_PAGE.MANAGE_COMMISSIONS_BTN' | translate }}
-        </button>
-      </div>
+      <!-- No Ongeza / Simamia buttons (owner 2026-11-14): every service is listed below with Weka kamisheni or its split. -->
 
       <!-- COMMISSION LAYOUT -->
       @if (addCommission === true) {
         <div class="commission-layout">
-          <!-- LEFT COLUMN -->
-          <div class="commission-sidebar">
-            <button class="add-commission-btn" (click)="onAddCommission()">
-              <mat-icon svgIcon="add"></mat-icon>
-              {{ 'SETTING_PAGE.CHOOSE_SERVICE' | translate }}
-            </button>
-          </div>
 
           <!-- RIGHT COLUMN -->
           @if (selectedService === true) {
@@ -736,6 +718,11 @@
 
                 <!-- SAVE BUTTON -->
                 <div class="commission-action">
+                  <button type="button" class="cancel-commission-btn" (click)="findCommissionPage()">
+                    <mat-icon>close</mat-icon>
+                    {{ 'COMMON.CANCEL' | translate }}
+                  </button>
+
                   <button
                     mat-raised-button
                     color="primary"

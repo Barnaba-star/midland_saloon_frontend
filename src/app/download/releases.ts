@@ -3,6 +3,18 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.32",
+    "date": "2026-11-14",
+    "sw": [
+      "Kamisheni (website): vitufe vya Ongeza na Simamia vimeondolewa - huduma zote zinaonekana pamoja, kila moja na Weka kamisheni au mgawanyo wake.",
+      "Kamisheni yangu iliyowekwa kwenye simu inafunguka moja kwa moja kwenye kamisheni ya mhudumu, si login."
+    ],
+    "en": [
+      "Commission (website): the Add and Manage buttons are gone - every service shows together, each with Set commission or its split.",
+      "My commission added to the phone opens straight on the stylist's commission, not the login."
+    ]
+  },
+  {
     "v": "1.0.31",
     "date": "2026-11-14",
     "sw": [
