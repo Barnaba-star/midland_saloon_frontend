@@ -3,7 +3,7 @@ import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../Utils/enviroments/environment';
 
-export interface DoorService { uid: string; name: string; price: number; minutes: number; }
+export interface DoorService { uid: string; name: string; price: number; minutes: number; description?: string | null; }
 export interface DoorStaff { uid: string; name: string; waiting: number; }
 export interface DoorInfo {
   branchName: string;

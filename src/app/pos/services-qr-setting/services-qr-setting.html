@@ -1,0 +1,35 @@
+<div class="qc-page">
+  <section class="qc-card">
+    <h2 class="qc-title">{{ 'SERVICES_QR.TITLE' | translate }}</h2>
+    <p class="qc-text">{{ 'SERVICES_QR.TEXT' | translate }}</p>
+
+    @if (settings(); as s) {
+      <div class="qc-door">
+        <div class="qc-qr-box">
+          @if (qr()) {
+            <img class="qc-qr" [src]="qr()" alt="QR" />
+          }
+          <span class="qc-branch">{{ s.branchName }}</span>
+        </div>
+        <div class="qc-door-side">
+          <a class="qc-link" [href]="link()" target="_blank" rel="noopener">{{ link() }}</a>
+          <p class="qc-example">{{ 'SERVICES_QR.SHOWS' | translate }}</p>
+          <div class="qc-buttons">
+            <button type="button" class="qc-btn qc-btn-gold" (click)="print()">
+              <mat-icon>print</mat-icon><span>{{ 'QUEUE_SETTING.PRINT' | translate }}</span>
+            </button>
+            <a class="qc-btn" [href]="link()" target="_blank" rel="noopener">
+              <mat-icon>open_in_new</mat-icon><span>{{ 'SERVICES_QR.OPEN' | translate }}</span>
+            </a>
+            <button type="button" class="qc-btn" (click)="copy()">
+              <mat-icon>content_copy</mat-icon><span>{{ 'SERVICES_QR.COPY' | translate }}</span>
+            </button>
+          </div>
+          <p class="qc-example">{{ 'SERVICES_QR.NOTE' | translate }}</p>
+        </div>
+      </div>
+    } @else if (loadFailed()) {
+      <p class="qc-text">{{ 'PUBLIC.ERR_NETWORK' | translate }}</p>
+    }
+  </section>
+</div>

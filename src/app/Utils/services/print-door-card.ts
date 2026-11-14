@@ -5,6 +5,11 @@ export function doorLink(token: string): string {
   return `${location.origin}/foleni/${token}`;
 }
 
+/** The services QR: a guest sees the branch's services, prices and stylists. */
+export function servicesLink(token: string): string {
+  return `${location.origin}/huduma/${token}`;
+}
+
 /** The salon TV page for the same door. */
 export function tvLink(token: string): string {
   return `${location.origin}/tv/${token}`;
@@ -17,8 +22,8 @@ const esc = (s: string) =>
  * Prints the branch's door card on one A4 page, through a hidden iframe: the
  * SalonixTz logo, a big QR of the door link, what to do, the branch name.
  */
-export async function printDoorCard(opts: { token: string; branchName: string; heading: string; hint: string }): Promise<void> {
-  const link = doorLink(opts.token);
+export async function printDoorCard(opts: { token: string; branchName: string; heading: string; hint: string; link?: string }): Promise<void> {
+  const link = opts.link ?? doorLink(opts.token);
   const qr = await qrDataUrl(link, 1000);
   const logo = `${location.origin}/salonix-192.png`;
   const html = `<!doctype html><html><head><meta charset="utf-8"><title>${esc(opts.branchName)}</title>

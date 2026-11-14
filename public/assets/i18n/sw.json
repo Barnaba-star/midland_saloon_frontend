@@ -145,7 +145,8 @@
     "SERVICE": "Huduma",
     "COMMISSION": "Kamisheni",
     "OTHER_SPLIT": "Matumizi Mengineyo",
-    "QUEUE_CARD": "Foleni & Kadi"
+    "QUEUE_CARD": "Foleni & Kadi",
+    "SERVICES_QR": "QR ya Huduma"
   },
   "SERVICE": {
     "ADD": "Ongeza Huduma",
@@ -2121,5 +2122,24 @@
     "BONUS": "Zawadi ya mshindi wa wiki (TZS)",
     "BONUS_HINT": "Weka 0 kama hakuna zawadi. Ofa ikiwa tupu, TV haionyeshi mstari wa ofa.",
     "SAVED": "Mipangilio ya TV imehifadhiwa"
+  },
+  "SERVICES_QR": {
+    "TITLE": "QR ya huduma za branch",
+    "TEXT": "Chapisha QR hii ubandike mlangoni, ukutani au mezani. Mtu akiiscan kwa simu yake anaona huduma zote za branch hii, bei na muda, pamoja na wasusi - bila app wala kuingia kwenye mfumo.",
+    "SHOWS": "Inaonyesha: huduma, bei, muda, wasusi (picha na nyota) na kitufe cha kujiunga na foleni ikiwa foleni imewashwa.",
+    "OPEN": "Fungua ukurasa",
+    "COPY": "Nakili kiungo",
+    "COPIED": "Kiungo kimenakiliwa",
+    "PRINT_HEADING": "Huduma zetu",
+    "PRINT_HINT": "Scan QR uone huduma na bei zetu",
+    "NOTE": "Ukibonyeza \"Kadi mpya\" kwenye Foleni & Kadi, QR hii nayo inabadilika - chapisha upya."
+  },
+  "MENU_PAGE": {
+    "TITLE": "Huduma zetu",
+    "LEAD": "Huduma, bei na wasusi wa {{branch}}.",
+    "SERVICES": "Huduma",
+    "SEARCH": "Tafuta huduma...",
+    "NO_MATCH": "Hakuna huduma inayolingana.",
+    "STAFF": "Wasusi wetu"
   }
 }

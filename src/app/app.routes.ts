@@ -110,6 +110,11 @@ export const routes: Routes = [
 },
 // A walk-in's own phone: no login, no guard (door QR, their ticket, their card).
 {
+  // The services QR: what this branch offers, prices, stylists.
+  path: 'huduma/:token',
+  loadComponent: () => import('./public/services-menu/services-menu').then(m => m.ServicesMenu)
+},
+{
   path: 'foleni/:token',
   loadComponent: () => import('./public/queue-join/queue-join').then(m => m.QueueJoin)
 },

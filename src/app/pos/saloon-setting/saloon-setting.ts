@@ -1,4 +1,5 @@
 import { OtherSplit } from '../other-split/other-split';
+import { ServicesQrSetting } from '../services-qr-setting/services-qr-setting';
 import { QueueCardSetting } from '../queue-card-setting/queue-card-setting';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { TitleAction, Title2 } from "../../Utils/component/title2/title2";
@@ -50,7 +51,7 @@ export interface SaloonServiceEntity {
 @Component({
   selector: 'app-saloon-setting',
   imports: [
-    OtherSplit, QueueCardSetting, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
+    OtherSplit, QueueCardSetting, ServicesQrSetting, EmptyStateComponent,Title2, MatIconModule, RecordtableComponent, DecimalPipe, UpperCasePipe, CommonModule, FormsModule, MatMenuModule, MatPaginator, MatButtonModule, TranslatePipe, MatTooltipModule],
   templateUrl: './saloon-setting.html',
   styleUrl: './saloon-setting.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -110,6 +111,12 @@ throw new Error('Method not implemented.');
       // The door QR queue and the customer card's reward rule - the CEO's call.
       icon: 'team',
       title: 'SALON.QUEUE_CARD',
+      roles: ['ROOT', 'CEO']
+    },
+    {
+      // The services QR to print: guests scan it and see services + prices.
+      icon: 'service',
+      title: 'SALON.SERVICES_QR',
       roles: ['ROOT', 'CEO']
     }
   ];

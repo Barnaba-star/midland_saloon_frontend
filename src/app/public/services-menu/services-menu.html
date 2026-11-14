@@ -1,0 +1,91 @@
+<header class="pp-top">
+  <img class="pp-logo" src="assets/images/salonix-logo.png" alt="SalonixTz" />
+  @if (door(); as d) {
+    <p class="pp-branch">{{ d.branchName }}</p>
+  }
+</header>
+
+<main class="pp-main">
+  @if (loading()) {
+    <p class="pp-loading">{{ 'PUBLIC.LOADING' | translate }}</p>
+  } @else if (loadError()) {
+    <h1 class="pp-title">{{ 'MENU_PAGE.TITLE' | translate }}</h1>
+    <p class="pp-error">{{ ('PUBLIC.ERR_' + (loadError() === 'QUEUE_NOT_FOUND' || loadError() === 'NOT_FOUND' ? 'QUEUE_NOT_FOUND' : 'NETWORK')) | translate }}</p>
+    @if (loadError() === 'NETWORK' || loadError() === 'UNKNOWN') {
+      <button type="button" class="pp-btn pp-btn-ghost" (click)="load()">{{ 'PUBLIC.RETRY' | translate }}</button>
+    }
+  } @else if (door(); as d) {
+    <div>
+      <h1 class="pp-title">{{ 'MENU_PAGE.TITLE' | translate }}</h1>
+      <p class="pp-lead">{{ 'MENU_PAGE.LEAD' | translate: { branch: d.branchName } }}</p>
+    </div>
+
+    @if (d.enabled) {
+      <a class="pp-btn" [routerLink]="['/foleni', token]">{{ 'PUBLIC.JOIN' | translate }}</a>
+      <p class="pp-muted sm-center">
+        @if (d.waiting > 0) {
+          {{ 'PUBLIC.WAITING_NOW' | translate: { n: d.waiting } }}
+        } @else {
+          {{ 'PUBLIC.NO_ONE_WAITING' | translate }}
+        }
+      </p>
+    }
+
+    <section class="pp-card">
+      <h2 class="pp-card-title">{{ 'MENU_PAGE.SERVICES' | translate }} ({{ d.services.length }})</h2>
+      @if (d.services.length > 6) {
+        <input class="sm-search" type="search" [ngModel]="search()" (ngModelChange)="search.set($event)" name="q"
+          [placeholder]="'MENU_PAGE.SEARCH' | translate" />
+      }
+      <ul class="sm-list">
+        @for (s of services(); track s.uid) {
+          <li class="sm-item">
+            <div class="sm-text">
+              <span class="sm-name">{{ s.name }}</span>
+              @if (s.description) {
+                <span class="sm-desc">{{ s.description }}</span>
+              }
+            </div>
+            <div class="sm-side">
+              <strong>TZS {{ s.price | number: '1.0-0' }}</strong>
+              @if (s.minutes) {
+                <small>{{ 'PUBLIC.MINUTES' | translate: { n: s.minutes } }}</small>
+              }
+            </div>
+          </li>
+        } @empty {
+          <li class="pp-muted">{{ (search() ? 'MENU_PAGE.NO_MATCH' : 'PUBLIC.NO_SERVICES') | translate }}</li>
+        }
+      </ul>
+    </section>
+
+    @if (d.staff.length) {
+      <section class="pp-card">
+        <h2 class="pp-card-title">{{ 'MENU_PAGE.STAFF' | translate }}</h2>
+        <ul class="sm-staff">
+          @for (p of d.staff; track p.uid) {
+            <li>
+              <a class="sm-person" [routerLink]="['/mhudumu', token, p.uid]">
+                @if (badgePhoto(p.uid); as src) {
+                  <img class="sm-avatar" [src]="src" alt="" loading="lazy" />
+                } @else {
+                  <span class="sm-avatar sm-avatar-initial">{{ p.name.charAt(0) }}</span>
+                }
+                <span class="sm-text">
+                  <span class="sm-name">{{ p.name }}</span>
+                  @if (badges()[p.uid]; as b) {
+                    @if ((b.ratings ?? 0) > 0) {
+                      <small class="sm-stars"><b>&#9733; {{ b.stars | number: '1.1-1' }}</b> · {{ 'STYLIST.REVIEWS' | translate: { n: b.ratings } }}</small>
+                    }
+                  }
+                </span>
+                <span class="sm-more">{{ 'STYLIST.SEE_WORK' | translate }} &rsaquo;</span>
+              </a>
+            </li>
+          }
+        </ul>
+      </section>
+    }
+  }
+  <p class="pp-foot">SalonixTz</p>
+</main>
