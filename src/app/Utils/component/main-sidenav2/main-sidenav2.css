@@ -1590,13 +1590,27 @@
   }
 }
 
-/* Side menu logo taller (owner 2026-11-14): the wide SalonixTz logo now uses
-   the whole panel width - its height comes from that width. */
-.menu-item-logo:has(img[src*="salonix-logo"]) {
-  padding: 14px 0 10px;
+/* The logo in its own box, centred (owner 2026-11-14: "kitu kama ki box
+   halafu logo iwe katikati"): a cream tile with soft shadow on the dark
+   panel; the default SalonixTz logo uses its dark-lettered version here,
+   and a branch's own uploaded logo sits in the same tile. */
+.menu-item-logo {
+  padding: 14px 12px 10px;
 }
+.menu-item-logo img,
 .menu-item-logo img[src*="salonix-logo"] {
-  padding: 0;
+  display: block;
   width: 100%;
-  min-height: 40px;
+  height: 92px;
+  object-fit: contain;
+  padding: 12px 10px;
+  box-sizing: border-box;
+  background: #f6ecdc;
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+  min-height: 0;
+}
+.menu-item-logo img:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.45);
 }
