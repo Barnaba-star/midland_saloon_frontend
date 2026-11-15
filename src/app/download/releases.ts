@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.35",
+    "date": "2026-11-15",
+    "sw": [
+      "Ripoti > Ripoti ya Store: bidhaa zilizotumika kwa kipindi - zilizofunguliwa, zilizoisha, mara zilizotumika na kwa huduma gani, gharama dhidi ya kilichoingia, na kila kipimo kilichofunguliwa."
+    ],
+    "en": [
+      "Reports > Store Report: items used in the period - opened, finished, times used and for which services, cost against money in, and each opened item."
+    ]
+  },
+  {
     "v": "1.0.34",
     "date": "2026-11-14",
     "sw": [

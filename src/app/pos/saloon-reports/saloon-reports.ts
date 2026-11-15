@@ -5,6 +5,7 @@ import { Insights } from '../insights/insights';
 import { PotsLedger } from '../pots-ledger/pots-ledger';
 import { CashUp } from '../cash-up/cash-up';
 import { StockTake } from '../stock-take/stock-take';
+import { StoreUsage } from '../store-usage/store-usage';
 import { PotNamePipe } from '../../Utils/pipes/pot-name.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -42,7 +43,7 @@ import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-sta
   selector: 'app-saloon-reports',
   standalone: true,
   imports: [LangDatePipe, StatusKeyPipe, 
-    Insights, PotsLedger, CashUp, StockTake, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
+    Insights, PotsLedger, CashUp, StockTake, StoreUsage, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,

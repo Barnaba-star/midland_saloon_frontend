@@ -7680,3 +7680,7 @@
     grid-column: 1 / -1;
   }
 }
+
+/* Ripoti > Store: the per-unit commission table under the usage report. */
+.store-commission-title { margin: 22px 0 2px; font-size: 17px; font-weight: 800; color: var(--sx-navy-700); text-align: left; }
+.store-commission-sub { margin: 0 0 10px; font-size: 13px; color: var(--sx-muted); text-align: left; }

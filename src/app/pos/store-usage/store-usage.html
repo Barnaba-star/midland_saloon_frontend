@@ -1,0 +1,135 @@
+<section class="su">
+  <div class="su-head">
+    <div class="su-head-icon"><mat-icon svgIcon="store"></mat-icon></div>
+    <div>
+      <span class="su-label">{{ 'STORE_USAGE.LABEL' | translate }}</span>
+      <h2>{{ 'STORE_USAGE.TITLE' | translate }}</h2>
+      @if (report) {
+        <p class="muted">
+          {{ report.start | langDate: 'dd MMM yyyy' }}
+          @if (report.end !== report.start) { – {{ report.end | langDate: 'dd MMM yyyy' }} }
+        </p>
+      }
+    </div>
+  </div>
+
+  <div class="su-filters">
+    @for (f of filters; track f.key) {
+      <button type="button" [class.active]="period === f.key" (click)="pick(f.key)">{{ f.label | translate }}</button>
+    }
+    <button type="button" [class.active]="isCustom" (click)="pickDate()">
+      <mat-icon>event</mat-icon>{{ 'REPORTS_PAGE.CUSTOM_DATE_BTN' | translate }}
+    </button>
+    <input #dateInput type="date" class="su-date" (change)="pick(dateInput.value)" />
+  </div>
+
+  @if (loading && !report) {
+    <p class="muted">{{ 'OTHER_SPLIT.LOADING' | translate }}</p>
+  } @else if (failed) {
+    <p class="muted">{{ 'STORE_USAGE.FAILED' | translate }}</p>
+  } @else if (report) {
+    <div class="su-tiles">
+      <div class="tile"><span>{{ 'STORE_USAGE.T_ITEMS' | translate }}</span><strong>{{ report.totals.items }}</strong></div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_OPENED' | translate }}</span><strong>{{ report.totals.opened }}</strong></div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_FINISHED' | translate }}</span><strong>{{ report.totals.finished }}</strong></div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_USES' | translate }}</span><strong>{{ report.totals.uses | number }}</strong></div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_COST' | translate }}</span><strong><small>Tshs</small> {{ report.totals.cost | number }}</strong></div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_COLLECTED' | translate }}</span><strong><small>Tshs</small> {{ report.totals.collected | number }}</strong></div>
+      <div class="tile" [class.bad]="report.totals.balance < 0" [class.good]="report.totals.balance > 0">
+        <span>{{ 'STORE_USAGE.T_BALANCE' | translate }}</span><strong><small>Tshs</small> {{ report.totals.balance | number }}</strong>
+      </div>
+      <div class="tile"><span>{{ 'STORE_USAGE.T_STOCK_VALUE' | translate }}</span><strong><small>Tshs</small> {{ report.totals.stockValue | number }}</strong></div>
+    </div>
+
+    @if (report.items.length === 0) {
+      <div class="su-empty">
+        <mat-icon svgIcon="store"></mat-icon>
+        <h3>{{ 'STORE_USAGE.EMPTY_TITLE' | translate }}</h3>
+        <p class="muted">{{ 'STORE_USAGE.EMPTY_TEXT' | translate }}</p>
+      </div>
+    } @else {
+      @if (report.items.length > 5) {
+        <input class="su-search" type="search" [value]="search" (input)="search = $any($event.target).value"
+               [placeholder]="'STORE_USAGE.SEARCH' | translate" />
+      }
+      <div class="su-list">
+        @for (it of items; track it.storeUid) {
+          <article class="item" [class.open]="open.has(it.storeUid)">
+            <button type="button" class="item-top" (click)="toggle(it.storeUid)">
+              <div class="item-name">
+                <h3>{{ it.name }}</h3>
+                <span class="muted">{{ it.code }} · {{ it.services.join(', ') || '-' }}</span>
+              </div>
+              <div class="item-figs">
+                <div><span>{{ 'STORE_USAGE.OPENED' | translate }}</span><b>{{ it.opened }}</b></div>
+                <div><span>{{ 'STORE_USAGE.FINISHED' | translate }}</span><b>{{ it.finished }}</b></div>
+                <div><span>{{ 'STORE_USAGE.USES' | translate }}</span><b>{{ it.uses }}</b></div>
+                <div><span>{{ 'STORE_USAGE.IN_STORE' | translate }}</span><b>{{ it.inStore }}</b></div>
+              </div>
+              <mat-icon class="chev">expand_more</mat-icon>
+            </button>
+
+            <div class="item-money">
+              <div><span>{{ 'STORE_USAGE.COST' | translate }}</span><b><small>Tshs</small> {{ it.cost | number }}</b></div>
+              <div><span>{{ 'STORE_USAGE.COLLECTED' | translate }}</span><b><small>Tshs</small> {{ it.collected | number }}</b></div>
+              <div [class.bad]="it.balance < 0" [class.good]="it.balance > 0">
+                <span>{{ 'STORE_USAGE.BALANCE' | translate }}</span><b><small>Tshs</small> {{ it.balance | number }}</b>
+              </div>
+            </div>
+
+            @if (open.has(it.storeUid)) {
+              <div class="item-detail">
+                <h4>{{ 'STORE_USAGE.BY_SERVICE' | translate }}</h4>
+                @if (it.byService.length === 0) {
+                  <p class="muted">{{ 'STORE_USAGE.NO_USES' | translate }}</p>
+                } @else {
+                  @for (s of it.byService; track s.serviceName) {
+                    <div class="svc">
+                      <div class="svc-row">
+                        <span>{{ s.serviceName }}</span>
+                        <span class="num">{{ 'STORE_USAGE.TIMES' | translate: { n: s.uses } }} · <small>Tshs</small> {{ s.collected | number }}</span>
+                      </div>
+                      <div class="bar"><i [style.width.%]="share(it, s.uses)"></i></div>
+                    </div>
+                  }
+                }
+
+                <h4>{{ 'STORE_USAGE.UNITS' | translate }}</h4>
+                <p class="muted small">{{ 'STORE_USAGE.UNIT_PRICE' | translate: { p: (it.buyingPrice | number) } }}</p>
+                <div class="sx-table-wrap">
+                  <table class="units sx-cards">
+                    <thead>
+                      <tr>
+                        <th>{{ 'REPORTS_PAGE.COL_STORE_CODE' | translate }}</th>
+                        <th>{{ 'COMMON.STATUS' | translate }}</th>
+                        <th>{{ 'REPORTS_PAGE.COL_OPENED_DATE' | translate }}</th>
+                        <th>{{ 'REPORTS_PAGE.COL_CLOSED_DATE' | translate }}</th>
+                        <th class="num">{{ 'STORE_USAGE.USES' | translate }}</th>
+                        <th class="num">{{ 'STORE_USAGE.COLLECTED' | translate }}</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      @for (u of it.units; track u.code) {
+                        <tr>
+                          <td class="sx-card-title">{{ u.code }}</td>
+                          <td [attr.data-label]="'COMMON.STATUS' | translate">
+                            <span class="badge" [class.on]="u.status === 'OPEN'">{{ u.status | statusKey | translate }}</span>
+                          </td>
+                          <td [attr.data-label]="'REPORTS_PAGE.COL_OPENED_DATE' | translate">{{ u.openedDate | langDate: 'dd MMM yyyy' }}</td>
+                          <td [attr.data-label]="'REPORTS_PAGE.COL_CLOSED_DATE' | translate">{{ u.closedDate ? (u.closedDate | langDate: 'dd MMM yyyy') : '-' }}</td>
+                          <td class="num" [attr.data-label]="'STORE_USAGE.USES' | translate">{{ u.uses }}</td>
+                          <td class="num" [attr.data-label]="'STORE_USAGE.COLLECTED' | translate"><small>Tshs</small> {{ u.collected | number }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            }
+          </article>
+        }
+      </div>
+      <p class="muted small">{{ 'STORE_USAGE.NOTE' | translate }}</p>
+    }
+  }
+</section>
