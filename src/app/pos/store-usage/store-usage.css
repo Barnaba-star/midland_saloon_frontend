@@ -12,6 +12,15 @@
 }
 
 .su-head { display: flex; align-items: flex-start; gap: 14px; }
+.su-head > div:nth-child(2) { flex: 1; min-width: 0; }
+.su-refresh {
+  display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0;
+  padding: 8px 14px; border: 1px solid var(--color-primary); border-radius: 999px;
+  background: var(--sx-surface); color: var(--color-primary); font: inherit; font-size: 13px; font-weight: 700; cursor: pointer;
+}
+.su-refresh mat-icon { width: 18px; height: 18px; font-size: 18px; }
+.su-refresh .spin { animation: su-spin 1s linear infinite; }
+@keyframes su-spin { to { transform: rotate(360deg); } }
 .su-head-icon {
   display: grid; place-items: center; flex-shrink: 0;
   width: 48px; height: 48px; border-radius: 14px;

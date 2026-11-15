@@ -2761,6 +2761,7 @@
     "TRIP_TOTAL": "{{n}} trips in all",
     "TRIPS_OF": "Every trip of {{code}} ({{n}})",
     "NO_TRIPS": "This item has not been used in a sale yet.",
-    "TRIP_N": "Trip {{n}}"
+    "TRIP_N": "Trip {{n}}",
+    "REFRESH": "Refresh"
   }
 }

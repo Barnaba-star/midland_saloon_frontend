@@ -2761,6 +2761,7 @@
     "TRIP_TOTAL": "Safari {{n}} jumla",
     "TRIPS_OF": "Safari zote za {{code}} ({{n}})",
     "NO_TRIPS": "Kopo hili bado halijatumika kwenye mauzo.",
-    "TRIP_N": "Safari ya {{n}}"
+    "TRIP_N": "Safari ya {{n}}",
+    "REFRESH": "Onyesha upya"
   }
 }

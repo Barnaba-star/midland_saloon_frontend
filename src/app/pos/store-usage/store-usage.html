@@ -11,6 +11,9 @@
         </p>
       }
     </div>
+    <button type="button" class="su-refresh" (click)="load()" [disabled]="loading">
+      <mat-icon [class.spin]="loading">refresh</mat-icon>{{ 'STORE_USAGE.REFRESH' | translate }}
+    </button>
   </div>
 
   <div class="su-filters">
