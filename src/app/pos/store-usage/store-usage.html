@@ -105,21 +105,56 @@
                         <th>{{ 'REPORTS_PAGE.COL_OPENED_DATE' | translate }}</th>
                         <th>{{ 'REPORTS_PAGE.COL_CLOSED_DATE' | translate }}</th>
                         <th class="num">{{ 'STORE_USAGE.USES' | translate }}</th>
+                        <th>{{ 'STORE_USAGE.TRIPS' | translate }}</th>
                         <th class="num">{{ 'STORE_USAGE.COLLECTED' | translate }}</th>
                       </tr>
                     </thead>
                     <tbody>
-                      @for (u of it.units; track u.code) {
-                        <tr>
-                          <td class="sx-card-title">{{ u.code }}</td>
+                      @for (u of it.units; track u.uid) {
+                        <tr class="unit-row" [class.on]="openUnit === u.uid" (click)="toggleUnit(u)">
+                          <td class="sx-card-title">
+                            <span class="unit-code">{{ u.code }} <mat-icon>{{ openUnit === u.uid ? 'expand_less' : 'expand_more' }}</mat-icon></span>
+                          </td>
                           <td [attr.data-label]="'COMMON.STATUS' | translate">
                             <span class="badge" [class.on]="u.status === 'OPEN'">{{ u.status | statusKey | translate }}</span>
                           </td>
                           <td [attr.data-label]="'REPORTS_PAGE.COL_OPENED_DATE' | translate">{{ u.openedDate | langDate: 'dd MMM yyyy' }}</td>
                           <td [attr.data-label]="'REPORTS_PAGE.COL_CLOSED_DATE' | translate">{{ u.closedDate ? (u.closedDate | langDate: 'dd MMM yyyy') : '-' }}</td>
                           <td class="num" [attr.data-label]="'STORE_USAGE.USES' | translate">{{ u.uses }}</td>
+                          <td [attr.data-label]="'STORE_USAGE.TRIPS' | translate">
+                            @if (u.firstTrip) {
+                              <b>{{ (u.firstTrip === u.lastTrip ? 'STORE_USAGE.TRIP_ONE' : 'STORE_USAGE.TRIP_RANGE') | translate: { a: u.firstTrip, b: u.lastTrip, n: u.totalUses } }}</b>
+                            } @else {
+                              <span class="muted">{{ 'STORE_USAGE.TRIP_TOTAL' | translate: { n: u.totalUses } }}</span>
+                            }
+                          </td>
                           <td class="num" [attr.data-label]="'STORE_USAGE.COLLECTED' | translate"><small>Tshs</small> {{ u.collected | number }}</td>
                         </tr>
+                        @if (openUnit === u.uid) {
+                          <tr class="trips-row">
+                            <td colspan="7">
+                              <div class="trips">
+                                <h5>{{ 'STORE_USAGE.TRIPS_OF' | translate: { code: u.code, n: u.totalUses } }}</h5>
+                                @if (tripsLoading && !trips.has(u.uid)) {
+                                  <p class="muted">{{ 'OTHER_SPLIT.LOADING' | translate }}</p>
+                                } @else if ((trips.get(u.uid) ?? []).length === 0) {
+                                  <p class="muted">{{ 'STORE_USAGE.NO_TRIPS' | translate }}</p>
+                                } @else {
+                                  @for (t of trips.get(u.uid); track t.trip) {
+                                    <div class="trip" [class.now]="isPeriod(t, u)">
+                                      <span class="trip-no">{{ 'STORE_USAGE.TRIP_N' | translate: { n: t.trip } }}</span>
+                                      <span class="trip-main">
+                                        <b>{{ t.serviceName }}</b> · {{ t.staffName }}
+                                        <small>{{ t.date | langDate: 'dd MMM yyyy' }}{{ t.time ? ' ' + t.time : '' }}{{ t.billCode ? ' · ' + t.billCode : '' }}</small>
+                                      </span>
+                                      <span class="num"><small>Tshs</small> {{ t.amount | number }}</span>
+                                    </div>
+                                  }
+                                }
+                              </div>
+                            </td>
+                          </tr>
+                        }
                       }
                     </tbody>
                   </table>

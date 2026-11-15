@@ -2754,6 +2754,13 @@
     "UNIT_PRICE": "Buying price per item: Tshs {{p}}",
     "NOTE": "Cost = items opened in this period × buying price. Brought in = the share of the service price that fell on the item each time it was used.",
     "COMMISSION_TITLE": "Commission split of finished items",
-    "COMMISSION_SUB": "Each item closed in the period picked above, and how its money was split."
+    "COMMISSION_SUB": "Each item closed in the period picked above, and how its money was split.",
+    "TRIPS": "Trips",
+    "TRIP_ONE": "Trip {{a}} of {{n}}",
+    "TRIP_RANGE": "Trips {{a}}–{{b}} of {{n}}",
+    "TRIP_TOTAL": "{{n}} trips in all",
+    "TRIPS_OF": "Every trip of {{code}} ({{n}})",
+    "NO_TRIPS": "This item has not been used in a sale yet.",
+    "TRIP_N": "Trip {{n}}"
   }
 }

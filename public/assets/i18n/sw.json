@@ -2754,6 +2754,13 @@
     "UNIT_PRICE": "Bei ya kununua kwa kimoja: Tshs {{p}}",
     "NOTE": "Gharama = idadi iliyofunguliwa kwa muda huu × bei ya kununua. Kilichoingia = sehemu ya bei ya huduma iliyoangukia bidhaa hiyo kila ilipotumika.",
     "COMMISSION_TITLE": "Mgawanyo wa kamisheni kwa vipimo vilivyoisha",
-    "COMMISSION_SUB": "Kila kipimo kilichofungwa kwa muda uliochagua juu, na fedha zake zilivyogawanywa."
+    "COMMISSION_SUB": "Kila kipimo kilichofungwa kwa muda uliochagua juu, na fedha zake zilivyogawanywa.",
+    "TRIPS": "Safari",
+    "TRIP_ONE": "Safari ya {{a}} kati ya {{n}}",
+    "TRIP_RANGE": "Safari {{a}}–{{b}} kati ya {{n}}",
+    "TRIP_TOTAL": "Safari {{n}} jumla",
+    "TRIPS_OF": "Safari zote za {{code}} ({{n}})",
+    "NO_TRIPS": "Kopo hili bado halijatumika kwenye mauzo.",
+    "TRIP_N": "Safari ya {{n}}"
   }
 }

@@ -6,10 +6,12 @@ export const RELEASES: Release[] = [
     "v": "1.0.35",
     "date": "2026-11-15",
     "sw": [
-      "Ripoti > Ripoti ya Store: bidhaa zilizotumika kwa kipindi - zilizofunguliwa, zilizoisha, mara zilizotumika na kwa huduma gani, gharama dhidi ya kilichoingia, na kila kipimo kilichofunguliwa."
+      "Ripoti > Ripoti ya Store: bidhaa zilizotumika kwa kipindi - zilizofunguliwa, zilizoisha, mara zilizotumika na kwa huduma gani, gharama dhidi ya kilichoingia, na kila kipimo kilichofunguliwa.",
+      "Kila kopo (kipimo chenye code) linaonyesha ni safari ya ngapi: mfano \"Safari 10–12 kati ya 12\"; ukiligusa unaona safari zake zote - tarehe na saa, huduma, mhudumu, bili na pesa."
     ],
     "en": [
-      "Reports > Store Report: items used in the period - opened, finished, times used and for which services, cost against money in, and each opened item."
+      "Reports > Store Report: items used in the period - opened, finished, times used and for which services, cost against money in, and each opened item.",
+      "Each opened item (by its code) shows which trip it is on: e.g. \"Trips 10–12 of 12\"; tap it for every trip - date and time, service, stylist, bill and money."
     ]
   },
   {

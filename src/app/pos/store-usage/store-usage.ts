@@ -8,8 +8,12 @@ import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { StatusKeyPipe } from '../status-key.pipe';
 
 interface UsageUnit {
+  uid: string; totalUses: number; firstTrip: number | null; lastTrip: number | null;
   code: string; status: string; openedDate: string; closedDate: string | null;
   openedInPeriod: boolean; closedInPeriod: boolean; uses: number; collected: number;
+}
+interface Trip {
+  trip: number; date: string; time: string | null; serviceName: string; staffName: string; billCode: string | null; amount: number;
 }
 interface UsageItem {
   storeUid: string; name: string; code: string; services: string[]; buyingPrice: number; inStore: number;
@@ -86,7 +90,7 @@ export class StoreUsage implements OnInit {
     this.cdr.markForCheck();
     this.http.get<{ data: UsageReport }>(`${environment.baseApiUrl}/saloon/storeUsage`, { params: { period: this.period } })
       .subscribe({
-        next: (r) => { this.report = r.data; this.loading = false; this.cdr.markForCheck(); },
+        next: (r) => { this.report = r.data; this.trips.clear(); this.openUnit = null; this.loading = false; this.cdr.markForCheck(); },
         error: () => { this.report = null; this.failed = true; this.loading = false; this.cdr.markForCheck(); },
       });
   }
@@ -96,6 +100,27 @@ export class StoreUsage implements OnInit {
     const all = this.report?.items ?? [];
     if (!q) return all;
     return all.filter(i => (i.name + ' ' + i.code + ' ' + i.services.join(' ')).toLowerCase().includes(q));
+  }
+
+  /** The opened item (kopo) whose trips are showing, and the trips fetched so far. */
+  openUnit: string | null = null;
+  trips = new Map<string, Trip[]>();
+  tripsLoading = false;
+
+  toggleUnit(u: UsageUnit): void {
+    if (this.openUnit === u.uid) { this.openUnit = null; return; }
+    this.openUnit = u.uid;
+    if (this.trips.has(u.uid)) return;
+    this.tripsLoading = true;
+    this.http.get<{ data: { trips: Trip[] } }>(`${environment.baseApiUrl}/saloon/storeUsage/unit/${u.uid}`).subscribe({
+      next: (r) => { this.trips.set(u.uid, r.data?.trips ?? []); this.tripsLoading = false; this.cdr.markForCheck(); },
+      error: () => { this.trips.set(u.uid, []); this.tripsLoading = false; this.cdr.markForCheck(); },
+    });
+  }
+
+  /** "Safari 3-5 kati ya 12" for the period's uses. */
+  isPeriod(t: Trip, u: UsageUnit): boolean {
+    return u.firstTrip != null && u.lastTrip != null && t.trip >= u.firstTrip && t.trip <= u.lastTrip;
   }
 
   toggle(uid: string): void {
