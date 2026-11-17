@@ -42,7 +42,7 @@ export class StockTake implements OnInit {
 
   /** Who may count and correct the store (SAVE_STORE). */
   /** CASHIER too: they count at their shift's handover (the backend checks the shift). */
-  private static readonly COUNTERS = ['ROOT', 'CEO', 'MANAGER', 'CASHIER'];
+  private static readonly COUNTERS = ['ROOT', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'];
 
   canCount = false;
   counting = false;

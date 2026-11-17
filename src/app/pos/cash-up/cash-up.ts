@@ -43,7 +43,7 @@ export class CashUp implements OnInit {
   @Input() area = 'saloon';
 
   /** Who may close a shift: those who take payments. */
-  private static readonly TAKES_PAYMENTS = ['ROOT', 'CEO', 'MANAGER', 'CASHIER'];
+  private static readonly TAKES_PAYMENTS = ['ROOT', 'DIRECTOR', 'CEO', 'MANAGER', 'CASHIER'];
 
   canClose = false;
   loadingShift = true;

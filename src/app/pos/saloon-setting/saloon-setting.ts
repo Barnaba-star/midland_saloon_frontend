@@ -111,19 +111,19 @@ throw new Error('Method not implemented.');
       // Only the CEO decides what the Other commission pays for.
       icon: 'pay',
       title: 'SALON.OTHER_SPLIT',
-      roles: ['CEO']
+      roles: ['DIRECTOR', 'CEO']
     },
     {
       // The door QR queue and the customer card's reward rule - the CEO's call.
       icon: 'team',
       title: 'SALON.QUEUE_CARD',
-      roles: ['ROOT', 'CEO']
+      roles: ['ROOT', 'DIRECTOR', 'CEO']
     },
     {
       // The services QR to print: guests scan it and see services + prices.
       icon: 'service',
       title: 'SALON.SERVICES_QR',
-      roles: ['ROOT', 'CEO']
+      roles: ['ROOT', 'DIRECTOR', 'CEO']
     }
   ];
 

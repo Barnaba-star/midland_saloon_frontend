@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.36",
+    "date": "2026-11-17",
+    "sw": [
+      "Director (Mkurugenzi) anaona na kufanya kila kitu ndani ya POS kama CEO: mauzo, malipo, kufuta, ripoti, zamu na hesabu ya store, na Mipangilio ya POS (Mgawanyo wa Matumizi Mengineyo, QR ya Huduma)."
+    ],
+    "en": [
+      "The Director sees and does everything inside POS, like the CEO: sales, payments, deletes, reports, shifts and store count, and POS Setting (Other split, Services QR)."
+    ]
+  },
+  {
     "v": "1.0.35",
     "date": "2026-11-15",
     "sw": [
