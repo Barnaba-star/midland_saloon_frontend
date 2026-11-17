@@ -1055,6 +1055,7 @@
     "ROLE": "Role"
   },
   "SUBSCRIBE_DIALOG": {
+    "BRANCH": "Branch to pay for",
     "TITLE": "Subscribe",
     "SUBTITLE": "Pay with mobile money to keep this branch active",
     "NETWORK": "Mobile Network",

@@ -5,6 +5,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { TranslatePipe, TranslateService } from '@ngx-translate/core';
 import { Service } from '../../../../settings/service';
 import { AlertService } from '../../../services/alert';
+import { Authentication } from '../../../services/authentication';
 
 interface NetworkOption {
   value: string;
@@ -71,28 +72,68 @@ export class SubscribeDialogComponent {
     private alertService: AlertService,
     private translate: TranslateService,
     private cdr: ChangeDetectorRef,
+    private auth: Authentication,
     @Optional() @Inject(MAT_DIALOG_DATA) public data: SubscribeDialogData | null,
   ) {
-    // Signed in: the price is Configuration's plan price, asked for here so
-    // it is always the current one. From the login screen (expired, no
-    // token) the sign-in answer already carried it.
+    // Signed in: the price is asked for here so it is always the current one
+    // (Configuration's plan price, or the branch's own when that is 0). From
+    // the login screen (expired, no token) the sign-in answer carried it.
     if (!this.data?.credentials) {
-      this.service.subscriptionPrice().subscribe({
-        next: (res) => {
-          this.configMonthly = res?.data?.monthly ?? null;
-          this.cdr.markForCheck();
-        },
-        error: () => {},
-      });
+      this.ownBranchUID = this.auth.getBranchUID() || null;
+      this.selectedBranchUID = this.ownBranchUID;
+      this.loadPrice();
+      if (this.canPickBranch()) {
+        this.service.findPayableBranches().subscribe({
+          next: (res) => {
+            this.branches = (res?.data ?? []).filter((b) => !!b?.uid);
+            this.cdr.markForCheck();
+          },
+          error: () => {},
+        });
+      }
     }
+  }
+
+  /** Branches a ROOT/DIRECTOR/STAFF may pay for; empty for branch users. */
+  branches: { uid: string; name: string; branchCode: string }[] = [];
+  private ownBranchUID: string | null = null;
+  selectedBranchUID: string | null = null;
+
+  private canPickBranch(): boolean {
+    try {
+      return this.auth.hasRole('ROOT') || this.auth.hasRole('DIRECTOR') || this.auth.hasRole('STAFF')
+        || this.auth.getPermissions().split(',').includes('VIEW_ALL_BRANCHES');
+    } catch {
+      return false;
+    }
+  }
+
+  onBranchChange(uid: string): void {
+    this.selectedBranchUID = uid || this.ownBranchUID;
+    this.configMonthly = null;
+    this.errorMessage = null;
+    this.loadPrice();
+  }
+
+  private loadPrice(): void {
+    this.service.subscriptionPrice(this.selectedBranchUID).subscribe({
+      next: (res) => {
+        this.configMonthly = res?.data?.monthly ?? null;
+        this.cdr.markForCheck();
+      },
+      error: () => {},
+    });
   }
 
   /** Configuration's plan price, once fetched. */
   private configMonthly: number | null = null;
 
   // Null when no price is set, or not loaded yet - then the backend answers.
+  // A 0 from the server means "no price", so fall through to the one the
+  // opener passed rather than stopping there.
   get monthlyAmount(): number | null {
-    const m = this.configMonthly ?? this.data?.subscriptionAmount ?? null;
+    const m = (this.configMonthly && this.configMonthly > 0 ? this.configMonthly : null)
+      ?? this.data?.subscriptionAmount ?? null;
     return m && m > 0 ? m : null;
   }
 
@@ -159,6 +200,7 @@ export class SubscribeDialogComponent {
           mobileNetwork: this.mobileNetwork,
           phoneNumber: this.phoneNumber.trim(),
           months: this.months as number,
+          branchUID: this.selectedBranchUID !== this.ownBranchUID ? this.selectedBranchUID : null,
         });
 
     request$.subscribe({

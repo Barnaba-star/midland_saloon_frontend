@@ -10,6 +10,20 @@
 
   <p class="dialog-subtitle">{{ 'SUBSCRIBE_DIALOG.SUBTITLE' | translate }}</p>
 
+  @if (branches.length > 1) {
+    <div class="form-field">
+      <label>{{ 'SUBSCRIBE_DIALOG.BRANCH' | translate }}</label>
+      <div class="input-wrapper select-wrapper">
+        <select [ngModel]="selectedBranchUID" (ngModelChange)="onBranchChange($event)" name="branchUID">
+          @for (b of branches; track b.uid) {
+            <option [value]="b.uid">{{ b.name }}{{ b.branchCode ? ' (' + b.branchCode + ')' : '' }}</option>
+          }
+        </select>
+        <mat-icon>expand_more</mat-icon>
+      </div>
+    </div>
+  }
+
 
   <div class="form-field">
     <label>{{ 'SUBSCRIBE_DIALOG.NETWORK' | translate }}</label>

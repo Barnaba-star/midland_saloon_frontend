@@ -25,11 +25,17 @@ export class Service {
     }
 
     /** One month's subscription price - Configuration's plan price. */
-    subscriptionPrice():Observable<Response<{ monthly: number }>>{
-      return this.http.get<Response<{ monthly: number }>>(`${this.settingURL}/subscriptionPrice`)
+    subscriptionPrice(branchUID?: string | null):Observable<Response<{ monthly: number }>>{
+      const q = branchUID ? `?branchUID=${encodeURIComponent(branchUID)}` : '';
+      return this.http.get<Response<{ monthly: number }>>(`${this.settingURL}/subscriptionPrice${q}`)
     }
 
-    updateSubscription(payload: { mobileNetwork: string; phoneNumber: string; months: number }):Observable<Response<any>>{
+    /** Branches the signed-in user may manage (ROOT/DIRECTOR: all; STAFF: their own registrations). */
+    findPayableBranches():Observable<ResponseList<{ uid: string; name: string; branchCode: string }>>{
+      return this.http.get<ResponseList<{ uid: string; name: string; branchCode: string }>>(`${this.branchUrl}/findBranchList`)
+    }
+
+    updateSubscription(payload: { mobileNetwork: string; phoneNumber: string; months: number; branchUID?: string | null }):Observable<Response<any>>{
       return this.http.post<Response<any>>(`${this.settingURL}/updateSubscription`, payload)
     }
 
