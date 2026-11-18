@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.38",
+    "date": "2026-11-18",
+    "sw": [
+      "Sasisho la lazima: toleo jipya likiwekwa, app inaonyesha skrini ya \"Toleo jipya\", inapakua APK yenyewe na kufungua installer - unagusa Install tu. Mara ya kwanza Android inaomba ruhusa ya ku-install kutoka SalonixTz."
+    ],
+    "en": [
+      "Forced update: when a new version is out, the app shows a \"New version\" screen, downloads the APK itself and opens the installer - you only tap Install. The first time, Android asks you to allow installs from SalonixTz."
+    ]
+  },
+  {
     "v": "1.0.37",
     "date": "2026-11-18",
     "sw": [
