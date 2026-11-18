@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.37",
+    "date": "2026-11-18",
+    "sw": [
+      "Lipia usajili: ROOT, Director na Staff wanachagua branch ya kulipia (mfano MAJANI CUTTING SALOON), bei ni ya branch hiyo. Mipangilio > Tawi > branch > \"Lipia Branch Hii\"."
+    ],
+    "en": [
+      "Pay subscription: ROOT, Director and Staff pick the branch to pay for (e.g. MAJANI CUTTING SALOON), at that branch's price. Settings > Branch > a branch > \"Pay for This Branch\"."
+    ]
+  },
+  {
     "v": "1.0.36",
     "date": "2026-11-17",
     "sw": [
