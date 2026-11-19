@@ -6,6 +6,7 @@ import { PotsLedger } from '../pots-ledger/pots-ledger';
 import { CashUp } from '../cash-up/cash-up';
 import { StockTake } from '../stock-take/stock-take';
 import { StoreUsage } from '../store-usage/store-usage';
+import { DoorCheck } from '../door-check/door-check';
 import { PotNamePipe } from '../../Utils/pipes/pot-name.pipe';
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, OnInit, TemplateRef, ViewChild, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -43,7 +44,7 @@ import { EmptyStateComponent } from '../../Utils/component/empty-state/empty-sta
   selector: 'app-saloon-reports',
   standalone: true,
   imports: [LangDatePipe, StatusKeyPipe, 
-    Insights, PotsLedger, CashUp, StockTake, StoreUsage, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
+    Insights, PotsLedger, CashUp, StockTake, StoreUsage, DoorCheck, PotNamePipe, EmptyStateComponent,Title2, MatIcon, CommonModule, FormsModule, CdkConnectedOverlay, CdkOverlayOrigin, MatFormField, MatLabel, FormsModule,
     MatDatepickerModule,
     MatFormFieldModule,
     MatInputModule,
@@ -139,6 +140,13 @@ export class SaloonReports implements OnInit{
       // What each service brings in, what sells most, and when.
       icon: 'report',
       title: 'REPORTS.PROFIT',
+      roles: [...this.fullAccessRoles, 'MANAGER']
+    },
+    {
+      // Mlango dhidi ya Bili: people in at the door against bills (owner, 2026-11-18).
+      // Never the cashier - it checks the till's own bills.
+      icon: 'report',
+      title: 'REPORTS.DOOR',
       roles: [...this.fullAccessRoles, 'MANAGER']
     },
     {

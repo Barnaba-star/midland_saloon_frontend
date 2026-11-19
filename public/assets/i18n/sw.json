@@ -172,7 +172,8 @@
     "CASHUP": "Kufunga Zamu",
     "VARIANCE": "Upotevu wa Stock",
     "PROFIT": "Mauzo ya Huduma",
-    "LEDGER": "Salio la Mafungu"
+    "LEDGER": "Salio la Mafungu",
+    "DOOR": "Mlango"
   },
   "STORE": {
     "ADD": "Ongeza Kwenye Store",
@@ -921,7 +922,9 @@
     "WELCOME_TITLE": "Karibu",
     "WELCOME_MESSAGE": "Karibu kwenye SalonixTz. Hapa ndipo arifa za mfumo zitaonekana.",
     "NEW_SALE_TITLE": "Mauzo Mapya",
-    "NEW_SALE_MESSAGE": "Mauzo {{code}} yamekamilika — Tshs {{amount}}."
+    "NEW_SALE_MESSAGE": "Mauzo {{code}} yamekamilika — Tshs {{amount}}.",
+    "DOOR_GAP_TITLE": "Wateja bila bili",
+    "DOOR_GAP_MESSAGE": "Wateja {{customers}} wameingia leo lakini bili ni {{bills}} tu - {{gap}} hawana bili. Angalia Ripoti > Mlango."
   },
   "SEARCH": {
     "OPEN": "Tafuta",
@@ -2764,5 +2767,49 @@
     "NO_TRIPS": "Kopo hili bado halijatumika kwenye mauzo.",
     "TRIP_N": "Safari ya {{n}}",
     "REFRESH": "Onyesha upya"
+  },
+  "DOOR": {
+    "TITLE": "Mlango dhidi ya Bili",
+    "SUB": "Wateja walioingia mlangoni (kamera) dhidi ya bili zenye huduma. Pengo ni dalili ya kuangalia, si ushahidi.",
+    "REFRESH": "Onyesha upya",
+    "LAST_7": "Siku 7",
+    "LAST_14": "Siku 14",
+    "LAST_30": "Siku 30",
+    "SETUP": "Kamera za mlango",
+    "CAMERAS": "Kamera za mlango",
+    "CAMERAS_HELP": "Kwenye kamera (Hikvision: Configuration > Event > People Counting, kisha Network > Alarm Server / HTTP Listening) weka anwani hii na njia (URL) hii. Kamera itatuma idadi ya watu wanaoingia.",
+    "LAST_SEEN": "Imetuma mara ya mwisho",
+    "NEVER_SEEN": "Bado haijatuma chochote",
+    "REMOVE": "Ondoa",
+    "HOST": "Anwani",
+    "PATH": "Njia (URL)",
+    "COPY": "Nakili link",
+    "CAMERA_NAME": "Jina la kamera (mfano Mlango mkuu)",
+    "ADD_CAMERA": "Ongeza kamera",
+    "RULES": "Kanuni",
+    "STAFF_ENTRIES": "Kuingia kwa wafanyakazi kwa siku",
+    "STAFF_ENTRIES_HELP": "Mara ngapi wafanyakazi wenyewe huingia kwa siku (kufika, chakula...). Hizi zinatolewa kabla ya kulinganisha na bili.",
+    "ALERT_GAP": "Pengo la kutoa taarifa",
+    "ALERT_GAP_HELP": "Wateja wakizidi bili kwa idadi hii au zaidi, CEO na Meneja wanapata taarifa.",
+    "ALERTS_ON": "Tuma taarifa pengo likifika kiwango",
+    "SAVE": "Hifadhi",
+    "SAVED": "Imehifadhiwa",
+    "COPIED": "Link imenakiliwa",
+    "LOADING": "Inapakia...",
+    "FAILED": "Imeshindikana kupakia. Jaribu tena.",
+    "EMPTY_TITLE": "Hakuna kamera ya mlango bado",
+    "EMPTY_TEXT": "Ongeza kamera kwenye \"Kamera za mlango\", kisha iwekee anwani yake. Takwimu zitaanza ikituma idadi ya kwanza.",
+    "T_ENTRIES": "Walioingia",
+    "T_CUSTOMERS": "Wateja (makadirio)",
+    "T_BILLS": "Bili zenye huduma",
+    "T_GAP": "Wateja bila bili",
+    "HOW": "Wateja = walioingia ukitoa kuingia {{staff}} kwa wafanyakazi kila siku.",
+    "NO_CAMERA_YET": "Kamera haikuwepo",
+    "CUSTOMERS": "Wateja",
+    "BILLS": "Bili",
+    "GAP": "Pengo",
+    "TODAY_HOURS": "Leo kwa saa",
+    "LEGEND_IN": "Walioingia",
+    "LEGEND_BILLS": "Bili zilizoanza"
   }
 }

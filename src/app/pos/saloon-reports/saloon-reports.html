@@ -1160,6 +1160,12 @@
     </div>
   }
 
+  @case ('REPORTS.DOOR') {
+    <div class="action-container">
+      <app-door-check />
+    </div>
+  }
+
   @case ('REPORTS.STORE') {
     <div class="action-container">
       <app-store-usage (periodChange)="selectDateFilter($event)" />

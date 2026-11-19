@@ -1,0 +1,121 @@
+<section class="dc">
+  <div class="dc-head">
+    <div class="dc-head-icon"><mat-icon>sensor_door</mat-icon></div>
+    <div>
+      <h2>{{ 'DOOR.TITLE' | translate }}</h2>
+      <p class="muted">{{ 'DOOR.SUB' | translate }}</p>
+    </div>
+    <button type="button" class="dc-btn" (click)="load()" [disabled]="loading">
+      <mat-icon [class.spin]="loading">refresh</mat-icon>{{ 'DOOR.REFRESH' | translate }}
+    </button>
+  </div>
+
+  <div class="dc-filters">
+    @for (p of periods; track p.key) {
+      <button type="button" [class.active]="days === p.key" (click)="pick(p.key)">{{ p.label | translate }}</button>
+    }
+    <button type="button" class="setup-toggle" [class.active]="setupOpen" (click)="setupOpen = !setupOpen">
+      <mat-icon>videocam</mat-icon>{{ 'DOOR.SETUP' | translate }}
+    </button>
+  </div>
+
+  @if (setupOpen) {
+    <div class="dc-setup">
+      <h3>{{ 'DOOR.CAMERAS' | translate }}</h3>
+      <p class="muted">{{ 'DOOR.CAMERAS_HELP' | translate }}</p>
+      @for (c of counters; track c.uid) {
+        <div class="cam">
+          <div class="cam-top">
+            <h4>{{ c.name }}</h4>
+            <span class="muted">
+              @if (c.lastSeenAt) { {{ 'DOOR.LAST_SEEN' | translate }} {{ c.lastSeenAt | langDate: 'dd MMM HH:mm' }} }
+              @else { {{ 'DOOR.NEVER_SEEN' | translate }} }
+            </span>
+            <button type="button" class="link-btn danger" (click)="removeCounter(c)">{{ 'DOOR.REMOVE' | translate }}</button>
+          </div>
+          <div class="cam-row"><span>{{ 'DOOR.HOST' | translate }}</span><code>{{ c.host }}</code></div>
+          <div class="cam-row"><span>{{ 'DOOR.PATH' | translate }}</span><code>{{ c.path }}</code>
+            <button type="button" class="link-btn" (click)="copy(c.link)">{{ 'DOOR.COPY' | translate }}</button></div>
+        </div>
+      }
+      <div class="add-row">
+        <input type="text" [(ngModel)]="newName" [placeholder]="'DOOR.CAMERA_NAME' | translate" maxlength="60" />
+        <button type="button" class="dc-btn solid" (click)="addCounter()" [disabled]="saving">
+          <mat-icon>add</mat-icon>{{ 'DOOR.ADD_CAMERA' | translate }}
+        </button>
+      </div>
+
+      <h3>{{ 'DOOR.RULES' | translate }}</h3>
+      <label class="field">
+        <span>{{ 'DOOR.STAFF_ENTRIES' | translate }}</span>
+        <input type="number" min="0" [(ngModel)]="staffEntries" />
+        <small class="muted">{{ 'DOOR.STAFF_ENTRIES_HELP' | translate }}</small>
+      </label>
+      <label class="field">
+        <span>{{ 'DOOR.ALERT_GAP' | translate }}</span>
+        <input type="number" min="1" [(ngModel)]="alertGap" />
+        <small class="muted">{{ 'DOOR.ALERT_GAP_HELP' | translate }}</small>
+      </label>
+      <label class="check"><input type="checkbox" [(ngModel)]="alertsOn" /> {{ 'DOOR.ALERTS_ON' | translate }}</label>
+      <button type="button" class="dc-btn solid" (click)="saveSettings()" [disabled]="saving">{{ 'DOOR.SAVE' | translate }}</button>
+    </div>
+  }
+  @if (message) { <p class="note">{{ message | translate }}</p> }
+
+  @if (loading && !report) {
+    <p class="muted">{{ 'DOOR.LOADING' | translate }}</p>
+  } @else if (failed) {
+    <p class="muted">{{ 'DOOR.FAILED' | translate }}</p>
+  } @else if (report) {
+    @if (report.counters === 0) {
+      <div class="dc-empty">
+        <mat-icon>videocam_off</mat-icon>
+        <h3>{{ 'DOOR.EMPTY_TITLE' | translate }}</h3>
+        <p class="muted">{{ 'DOOR.EMPTY_TEXT' | translate }}</p>
+      </div>
+    } @else {
+      <div class="dc-tiles">
+        <div class="tile"><span>{{ 'DOOR.T_ENTRIES' | translate }}</span><strong>{{ report.totals.entries }}</strong></div>
+        <div class="tile"><span>{{ 'DOOR.T_CUSTOMERS' | translate }}</span><strong>{{ report.totals.customers }}</strong></div>
+        <div class="tile"><span>{{ 'DOOR.T_BILLS' | translate }}</span><strong>{{ report.totals.bills }}</strong></div>
+        <div class="tile" [class.bad]="report.totals.gap >= report.alertGap" [class.good]="report.totals.gap === 0">
+          <span>{{ 'DOOR.T_GAP' | translate }}</span><strong>{{ report.totals.gap }}</strong>
+        </div>
+      </div>
+      <p class="muted small">{{ 'DOOR.HOW' | translate: { staff: report.staffEntries } }}</p>
+
+      <div class="dc-days">
+        @for (d of report.days; track d.date) {
+          <div class="day" [class]="'day ' + level(d)">
+            <div class="day-date"><h4>{{ d.date | langDate: 'EEE dd MMM' }}</h4></div>
+            @if (d.entries == null) {
+              <span class="muted">{{ 'DOOR.NO_CAMERA_YET' | translate }}</span>
+            } @else {
+              <div class="day-figs">
+                <div><span>{{ 'DOOR.CUSTOMERS' | translate }}</span><b>{{ d.customers }}</b></div>
+                <div><span>{{ 'DOOR.BILLS' | translate }}</span><b>{{ d.bills }}</b></div>
+                <div class="gap"><span>{{ 'DOOR.GAP' | translate }}</span><b>{{ d.gap! > 0 ? '+' + d.gap : d.gap }}</b></div>
+              </div>
+            }
+          </div>
+        }
+      </div>
+
+      @if (report.todayHours.length) {
+        <h3>{{ 'DOOR.TODAY_HOURS' | translate }}</h3>
+        <div class="hours">
+          @for (h of report.todayHours; track h.hour) {
+            <div class="hour">
+              <span class="hr">{{ h.hour < 10 ? '0' + h.hour : h.hour }}:00</span>
+              <div class="bars">
+                <div class="bar in" [style.width.%]="width(h.entries)"><em>{{ h.entries }}</em></div>
+                <div class="bar bill" [style.width.%]="width(h.bills)"><em>{{ h.bills }}</em></div>
+              </div>
+            </div>
+          }
+          <div class="legend"><i class="in"></i>{{ 'DOOR.LEGEND_IN' | translate }} <i class="bill"></i>{{ 'DOOR.LEGEND_BILLS' | translate }}</div>
+        </div>
+      }
+    }
+  }
+</section>

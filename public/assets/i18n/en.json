@@ -172,7 +172,8 @@
     "CASHUP": "Cash-up",
     "VARIANCE": "Stock Variance",
     "PROFIT": "Service Sales",
-    "LEDGER": "Pots Ledger"
+    "LEDGER": "Pots Ledger",
+    "DOOR": "Door"
   },
   "STORE": {
     "ADD": "Add Store",
@@ -921,7 +922,9 @@
     "WELCOME_TITLE": "Welcome",
     "WELCOME_MESSAGE": "Welcome to SalonixTz. This is where system notifications will appear.",
     "NEW_SALE_TITLE": "New Sale",
-    "NEW_SALE_MESSAGE": "Sale {{code}} was completed — Tshs {{amount}}."
+    "NEW_SALE_MESSAGE": "Sale {{code}} was completed — Tshs {{amount}}.",
+    "DOOR_GAP_TITLE": "Customers without bills",
+    "DOOR_GAP_MESSAGE": "{{customers}} customers came in today but there are only {{bills}} bills - {{gap}} without a bill. See Reports > Door."
   },
   "SEARCH": {
     "OPEN": "Search",
@@ -2764,5 +2767,49 @@
     "NO_TRIPS": "This item has not been used in a sale yet.",
     "TRIP_N": "Trip {{n}}",
     "REFRESH": "Refresh"
+  },
+  "DOOR": {
+    "TITLE": "Door against Bills",
+    "SUB": "Customers who came in at the door (camera) against bills with services. A gap is a sign to look into, not proof.",
+    "REFRESH": "Refresh",
+    "LAST_7": "7 days",
+    "LAST_14": "14 days",
+    "LAST_30": "30 days",
+    "SETUP": "Door cameras",
+    "CAMERAS": "Door cameras",
+    "CAMERAS_HELP": "On the camera (Hikvision: Configuration > Event > People Counting, then Network > Alarm Server / HTTP Listening) enter this host and this path (URL). The camera will send the number of people coming in.",
+    "LAST_SEEN": "Last report",
+    "NEVER_SEEN": "Has not sent anything yet",
+    "REMOVE": "Remove",
+    "HOST": "Host",
+    "PATH": "Path (URL)",
+    "COPY": "Copy link",
+    "CAMERA_NAME": "Camera name (e.g. Main door)",
+    "ADD_CAMERA": "Add camera",
+    "RULES": "Rules",
+    "STAFF_ENTRIES": "Staff entries per day",
+    "STAFF_ENTRIES_HELP": "How many times the team itself comes in a day (arriving, lunch...). These are taken off before comparing with bills.",
+    "ALERT_GAP": "Gap that sends an alert",
+    "ALERT_GAP_HELP": "When customers exceed bills by this many or more, the CEO and Manager are told.",
+    "ALERTS_ON": "Send an alert when the gap reaches the limit",
+    "SAVE": "Save",
+    "SAVED": "Saved",
+    "COPIED": "Link copied",
+    "LOADING": "Loading...",
+    "FAILED": "Could not load. Try again.",
+    "EMPTY_TITLE": "No door camera yet",
+    "EMPTY_TEXT": "Add a camera under \"Door cameras\", then give it its address. Figures start when it sends its first count.",
+    "T_ENTRIES": "Came in",
+    "T_CUSTOMERS": "Customers (estimate)",
+    "T_BILLS": "Bills with services",
+    "T_GAP": "Customers without a bill",
+    "HOW": "Customers = people in less {{staff}} staff entries each day.",
+    "NO_CAMERA_YET": "No camera then",
+    "CUSTOMERS": "Customers",
+    "BILLS": "Bills",
+    "GAP": "Gap",
+    "TODAY_HOURS": "Today by hour",
+    "LEGEND_IN": "Came in",
+    "LEGEND_BILLS": "Bills started"
   }
 }
