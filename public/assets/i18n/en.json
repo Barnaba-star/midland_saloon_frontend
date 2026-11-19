@@ -2811,5 +2811,32 @@
     "TODAY_HOURS": "Today by hour",
     "LEGEND_IN": "Came in",
     "LEGEND_BILLS": "Bills started"
+  },
+  "FACES": {
+    "TITLE": "Team faces",
+    "SUB": "The door camera will recognise the team and count customers only. Each person agrees first, then take {{n}} or more pictures of them.",
+    "REGISTERED": "Registered",
+    "FAILED": "Failed. Try again.",
+    "NO_STAFF": "No team members in this branch yet.",
+    "NOT_AGREED": "Not agreed",
+    "READY": "Ready",
+    "PICTURES": "Pictures {{n}} of {{of}}",
+    "AGREED_BY": "Agreed - recorded by {{by}},",
+    "ASK": "Tell the team member their face will be registered so the door camera recognises them and does not count them as a customer. If they agree, tap \"Agreed\".",
+    "CONFIRM_YES": "Make sure {{name}} has agreed to have their face registered. Only the CEO and manager see the pictures, and they can change their mind at any time.",
+    "CONFIRM_NO": "Every face picture of {{name}} will be deleted for good.",
+    "YES_AGREED": "Yes, they agreed",
+    "DELETE_ALL": "Delete all pictures",
+    "CANCEL": "Cancel",
+    "WITHDRAW": "Declined - delete all pictures",
+    "AGREE": "Agreed",
+    "NEED": "At least {{n}} are needed for the camera to recognise them well.",
+    "REMOVE": "Remove",
+    "ADD": "Add picture",
+    "SAVED": "Picture saved",
+    "TIP1": "One face only in the picture, close to the camera.",
+    "TIP2": "Good light - no shadow, no window behind them.",
+    "TIP3": "One from the front, one from the left, one from the right.",
+    "TIP4": "No sunglasses or mask. If they wear a cap at work, take one with it on."
   }
 }

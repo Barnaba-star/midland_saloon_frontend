@@ -14,7 +14,10 @@
     @for (p of periods; track p.key) {
       <button type="button" [class.active]="days === p.key" (click)="pick(p.key)">{{ p.label | translate }}</button>
     }
-    <button type="button" class="setup-toggle" [class.active]="setupOpen" (click)="setupOpen = !setupOpen">
+    <button type="button" class="setup-toggle" [class.active]="facesOpen" (click)="facesOpen = !facesOpen">
+      <mat-icon>face_retouching_natural</mat-icon>{{ 'FACES.TITLE' | translate }}
+    </button>
+    <button type="button" [class.active]="setupOpen" (click)="setupOpen = !setupOpen">
       <mat-icon>videocam</mat-icon>{{ 'DOOR.SETUP' | translate }}
     </button>
   </div>
@@ -60,6 +63,7 @@
       <button type="button" class="dc-btn solid" (click)="saveSettings()" [disabled]="saving">{{ 'DOOR.SAVE' | translate }}</button>
     </div>
   }
+  @if (facesOpen) { <app-staff-faces /> }
   @if (message) { <p class="note">{{ message | translate }}</p> }
 
   @if (loading && !report) {

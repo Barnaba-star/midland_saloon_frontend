@@ -2811,5 +2811,32 @@
     "TODAY_HOURS": "Leo kwa saa",
     "LEGEND_IN": "Walioingia",
     "LEGEND_BILLS": "Bili zilizoanza"
+  },
+  "FACES": {
+    "TITLE": "Nyuso za wahudumu",
+    "SUB": "Kamera ya mlango itawatambua wahudumu na kuhesabu wateja peke yao. Kila mhudumu akubali kwanza, kisha mpige picha {{n}} au zaidi.",
+    "REGISTERED": "Wamesajiliwa",
+    "FAILED": "Imeshindwa. Jaribu tena.",
+    "NO_STAFF": "Hakuna wahudumu kwenye tawi hili bado.",
+    "NOT_AGREED": "Hajakubali",
+    "READY": "Tayari",
+    "PICTURES": "Picha {{n}} kati ya {{of}}",
+    "AGREED_BY": "Amekubali - imewekwa na {{by}},",
+    "ASK": "Mwambie mhudumu kwamba uso wake utasajiliwa ili kamera ya mlango imtambue na isimhesabu kama mteja. Akikubali, gusa \"Amekubali\".",
+    "CONFIRM_YES": "Hakikisha {{name}} mwenyewe amekubali picha za uso wake zisajiliwe. Picha zinaonekana kwa CEO na Meneja tu, na anaweza kubadili uamuzi wakati wowote.",
+    "CONFIRM_NO": "Picha zote za uso wa {{name}} zitafutwa kabisa.",
+    "YES_AGREED": "Ndiyo, amekubali",
+    "DELETE_ALL": "Futa picha zote",
+    "CANCEL": "Ghairi",
+    "WITHDRAW": "Amekataa - futa picha zote",
+    "AGREE": "Amekubali",
+    "NEED": "Zinahitajika angalau {{n}} ili kamera imtambue vizuri.",
+    "REMOVE": "Ondoa",
+    "ADD": "Ongeza picha",
+    "SAVED": "Picha imehifadhiwa",
+    "TIP1": "Uso mmoja tu kwenye picha, karibu na kamera.",
+    "TIP2": "Mwanga mzuri - si kivuli, si dirisha nyuma yake.",
+    "TIP3": "Moja ya mbele, moja upande wa kushoto, moja upande wa kulia.",
+    "TIP4": "Bila miwani ya jua wala barakoa. Kama huvaa kofia kazini, piga moja akiwa nayo."
   }
 }

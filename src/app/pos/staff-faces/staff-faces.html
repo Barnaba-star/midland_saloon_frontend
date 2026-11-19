@@ -1,0 +1,92 @@
+<div class="sf">
+  <div class="sf-top">
+    <div>
+      <h3>{{ 'FACES.TITLE' | translate }}</h3>
+      <p class="muted">{{ 'FACES.SUB' | translate: { n: data?.goodFaces ?? 3 } }}</p>
+    </div>
+    @if (data) {
+      <div class="sf-count"><span>{{ 'FACES.REGISTERED' | translate }}</span><strong>{{ data.ready }} / {{ data.total }}</strong></div>
+    }
+  </div>
+
+  @if (failed) {
+    <p class="muted">{{ 'FACES.FAILED' | translate }}</p>
+  } @else if (data && data.staff.length === 0) {
+    <p class="muted">{{ 'FACES.NO_STAFF' | translate }}</p>
+  }
+
+  @if (data) {
+    <div class="sf-list">
+      @for (s of data.staff; track s.staffUid) {
+        <button type="button" class="sf-row" [class.active]="open?.staffUid === s.staffUid" (click)="pick(s)">
+          <mat-icon>{{ s.ready ? 'verified_user' : 'face_retouching_natural' }}</mat-icon>
+          <span class="nm">{{ s.name }}@if (s.category) {<small>{{ s.category }}</small>}</span>
+          @if (!s.agreed) { <span class="pill neutral">{{ 'FACES.NOT_AGREED' | translate }}</span> }
+          @else if (s.ready) { <span class="pill ok">{{ 'FACES.READY' | translate }}</span> }
+          @else { <span class="pill warn">{{ 'FACES.PICTURES' | translate: { n: s.faces.length, of: data.goodFaces } }}</span> }
+        </button>
+
+        @if (open?.staffUid === s.staffUid) {
+          <div class="sf-detail">
+            @if (open!.agreed) {
+              <p class="ok-line"><mat-icon>check_circle</mat-icon>
+                {{ 'FACES.AGREED_BY' | translate: { by: open!.agreedBy ?? '-' } }} {{ open!.agreedAt | langDate: 'dd MMM yyyy HH:mm' }}</p>
+            } @else {
+              <p class="muted">{{ 'FACES.ASK' | translate }}</p>
+            }
+
+            @if (canManage) {
+              @if (confirm === 'yes') {
+                <div class="confirm">
+                  <p>{{ 'FACES.CONFIRM_YES' | translate: { name: open!.name } }}</p>
+                  <button type="button" class="dc-btn solid" (click)="consent(true)" [disabled]="busy">{{ 'FACES.YES_AGREED' | translate }}</button>
+                  <button type="button" class="link-btn" (click)="confirm = null">{{ 'FACES.CANCEL' | translate }}</button>
+                </div>
+              } @else if (confirm === 'no') {
+                <div class="confirm bad">
+                  <p>{{ 'FACES.CONFIRM_NO' | translate: { name: open!.name } }}</p>
+                  <button type="button" class="dc-btn danger" (click)="consent(false)" [disabled]="busy">{{ 'FACES.DELETE_ALL' | translate }}</button>
+                  <button type="button" class="link-btn" (click)="confirm = null">{{ 'FACES.CANCEL' | translate }}</button>
+                </div>
+              } @else if (open!.agreed) {
+                <button type="button" class="link-btn danger" (click)="confirm = 'no'">{{ 'FACES.WITHDRAW' | translate }}</button>
+              } @else {
+                <button type="button" class="dc-btn solid" (click)="confirm = 'yes'"><mat-icon>how_to_reg</mat-icon>{{ 'FACES.AGREE' | translate }}</button>
+              }
+            }
+
+            @if (open!.agreed) {
+              <h4>{{ 'FACES.PICTURES' | translate: { n: open!.faces.length, of: data.maxFaces } }}</h4>
+              @if (open!.faces.length < data.goodFaces) {
+                <p class="warn-line">{{ 'FACES.NEED' | translate: { n: data.goodFaces } }}</p>
+              }
+              <div class="grid">
+                @for (f of open!.faces; track f.uid) {
+                  <div class="pic">
+                    @if (pics[f.uid]) { <img [src]="pics[f.uid]" alt="" /> }
+                    @if (canManage) {
+                      <button type="button" class="x" (click)="remove(f)" [disabled]="busy" [title]="'FACES.REMOVE' | translate"><mat-icon>close</mat-icon></button>
+                    }
+                  </div>
+                }
+                @if (canManage && open!.faces.length < data.maxFaces) {
+                  <label class="pic add" [class.disabled]="busy">
+                    <mat-icon>add_a_photo</mat-icon><span>{{ 'FACES.ADD' | translate }}</span>
+                    <input type="file" accept="image/jpeg,image/png,image/webp" (change)="upload($event)" [disabled]="busy" hidden />
+                  </label>
+                }
+              </div>
+              <ul class="tips">
+                <li>{{ 'FACES.TIP1' | translate }}</li>
+                <li>{{ 'FACES.TIP2' | translate }}</li>
+                <li>{{ 'FACES.TIP3' | translate }}</li>
+                <li>{{ 'FACES.TIP4' | translate }}</li>
+              </ul>
+            }
+          </div>
+        }
+      }
+    </div>
+  }
+  @if (message) { <p class="note">{{ message | translate }}</p> }
+</div>

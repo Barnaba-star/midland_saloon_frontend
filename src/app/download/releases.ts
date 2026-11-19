@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.40",
+    "date": "2026-11-19",
+    "sw": [
+      "Nyuso za wahudumu (CEO na Meneja): Ripoti > Mlango > Nyuso za wahudumu. Kila mhudumu akubali kwanza, kisha mpige picha 3 hadi 5 za uso. Kamera ya mlango itawatambua wahudumu na kuhesabu wateja peke yao. Picha zinaonekana kwa CEO na Meneja tu; mhudumu akikataa, picha zake zote zinafutwa."
+    ],
+    "en": [
+      "Team faces (CEO and Manager): Reports > Door > Team faces. Each team member agrees first, then take 3 to 5 face pictures. The door camera will recognise the team and count customers only. Only the CEO and Manager see the pictures; if a team member declines, all their pictures are deleted."
+    ]
+  },
+  {
     "v": "1.0.39",
     "date": "2026-11-19",
     "sw": [

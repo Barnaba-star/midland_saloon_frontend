@@ -6,6 +6,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 import { environment } from '../../Utils/enviroments/environment';
 import { LangDatePipe } from '../../Utils/pipes/lang-date.pipe';
 import { localDate } from '../../Utils/services/local-date';
+import { StaffFaces } from '../staff-faces/staff-faces';
 
 interface DoorDay { date: string; entries: number | null; customers: number | null; bills: number; gap: number | null; }
 interface DoorHour { hour: number; entries: number; bills: number; }
@@ -24,7 +25,7 @@ interface DoorCounter { uid: string; name: string; key: string; link: string; ho
  */
 @Component({
   selector: 'app-door-check',
-  imports: [FormsModule, MatIconModule, TranslatePipe, LangDatePipe],
+  imports: [FormsModule, MatIconModule, TranslatePipe, LangDatePipe, StaffFaces],
   templateUrl: './door-check.html',
   styleUrl: './door-check.css',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -41,6 +42,7 @@ export class DoorCheck implements OnInit {
   report: DoorReport | null = null;
 
   setupOpen = false;
+  facesOpen = false;
   counters: DoorCounter[] = [];
   newName = '';
   staffEntries = 0;
