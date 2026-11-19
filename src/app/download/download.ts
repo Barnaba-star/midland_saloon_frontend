@@ -15,7 +15,7 @@ import { RELEASES } from './releases';
  * new (64-bit) - two separate downloads confused people. Bump APP_VERSION
  * and the size together with the file.
  */
-const APP_VERSION = '1.0.38';
+const APP_VERSION = '1.0.39';
 
 @Component({
   selector: 'app-download',
@@ -26,7 +26,7 @@ const APP_VERSION = '1.0.38';
 })
 export class Download {
   readonly version = APP_VERSION;
-  readonly main = { href: `/downloads/salonixtz-${APP_VERSION}.apk`, mb: 44.2 };
+  readonly main = { href: `/downloads/salonixtz-${APP_VERSION}.apk`, mb: 44.4 };
   /** Every version and what it brought, newest first (releases.ts - add each release at the top). */
   readonly releases = RELEASES;
   readonly lang: () => string;

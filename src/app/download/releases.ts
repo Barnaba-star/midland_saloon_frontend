@@ -3,6 +3,16 @@ export interface Release { v: string; date: string; sw: string[]; en: string[]; 
 
 export const RELEASES: Release[] = [
   {
+    "v": "1.0.39",
+    "date": "2026-11-19",
+    "sw": [
+      "Ripoti > Mlango dhidi ya Bili (CEO na Meneja): kamera ya mlango inahesabu wateja wanaoingia, mfumo unalinganisha na bili zenye huduma kila siku na kila saa. Pengo likifika kiwango, CEO na Meneja wanapata taarifa. Kamera za mlango: anwani ya kuweka kwenye kamera, kuingia kwa wafanyakazi kwa siku na pengo la taarifa."
+    ],
+    "en": [
+      "Reports > Door against Bills (CEO and Manager): the door camera counts customers coming in, and the system compares them with bills with services, each day and each hour. When the gap reaches the limit, the CEO and Manager are told. Door cameras: the address to enter on the camera, staff entries per day and the alert gap."
+    ]
+  },
+  {
     "v": "1.0.38",
     "date": "2026-11-18",
     "sw": [
